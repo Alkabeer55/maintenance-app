@@ -330,15 +330,34 @@ var PERM_LABELS={
 function isAdmin(){return userRole==='admin';}
 function canDo(perm){if(isAdmin())return true;return userPerms[perm]===true;}
 
+
+
 document.getElementById('google-signin-btn').addEventListener('click',function(){
   document.getElementById('login-loading').style.display='block';
   document.getElementById('login-error').style.display='none';
   var provider=new firebase.auth.GoogleAuthProvider();
-  auth.signInWithPopup(provider).catch(function(e){
+  provider.setCustomParameters({'prompt':'select_account'});
+  auth.signInWithPopup(provider).then(function(result){
+    // success handled by onAuthStateChanged
+  }).catch(function(e){
     document.getElementById('login-loading').style.display='none';
+    if(e.code==='auth/popup-blocked'||e.code==='auth/cancelled-popup-request'){
+      // fallback to redirect
+      auth.signInWithRedirect(provider);
+    } else {
+      document.getElementById('login-error').style.display='block';
+      document.getElementById('login-error').textContent='خطأ: '+e.message;
+    }
+  });
+});
+
+auth.getRedirectResult().then(function(result){
+  if(result && result.user){ /* handled by onAuthStateChanged */ }
+}).catch(function(e){
+  if(e.code && e.code!=='auth/no-current-user'){
     document.getElementById('login-error').style.display='block';
     document.getElementById('login-error').textContent='خطأ: '+e.message;
-  });
+  }
 });
 
 auth.onAuthStateChanged(async function(user){
