@@ -362,27 +362,23 @@ var PERM_LABELS={
 function isAdmin(){return userRole==='admin';}
 function canDo(p){if(isAdmin())return true;return userPerms[p]===true;}
 
-document.getElementById('google-signin-btn').addEventListener('click',function(){
-  document.getElementById('login-loading').style.display='block';
-  document.getElementById('login-error').style.display='none';
-  var provider=new firebase.auth.GoogleAuthProvider();
-  provider.setCustomParameters({'prompt':'select_account'});
-  auth.signInWithPopup(provider).catch(function(e){
-    document.getElementById('login-loading').style.display='none';
-    if(e.code==='auth/popup-blocked'||e.code==='auth/cancelled-popup-request'){
-      auth.signInWithRedirect(provider);
-    } else {
-      document.getElementById('login-error').style.display='block';
-      document.getElementById('login-error').textContent='خطأ: '+e.message;
-    }
-  });
-});
-
-auth.getRedirectResult().then(function(){}).catch(function(e){
-  if(e.code&&e.code!=='auth/no-current-user'){
+// Handle redirect result first
+auth.getRedirectResult().then(function(result){
+  // handled by onAuthStateChanged
+}).catch(function(e){
+  if(e.code&&e.code!=='auth/no-current-user'&&e.code!=='auth/null-user'){
     document.getElementById('login-error').style.display='block';
     document.getElementById('login-error').textContent='خطأ: '+e.message;
   }
+});
+
+document.getElementById('google-signin-btn').addEventListener('click',function(){
+  document.getElementById('login-loading').style.display='block';
+  document.getElementById('login-loading').textContent='⏳ جاري التحويل لصفحة Google...';
+  document.getElementById('login-error').style.display='none';
+  var provider=new firebase.auth.GoogleAuthProvider();
+  provider.setCustomParameters({'prompt':'select_account'});
+  auth.signInWithRedirect(provider);
 });
 
 auth.onAuthStateChanged(async function(user){
@@ -1347,4 +1343,5 @@ function renderSettingsScreen(){
     {label:'المنتجات',icon:'📦',val:DB.products.length},{label:'الفواتير',icon:'🧾',val:DB.sales.length},
     {label:'المشتريات',icon:'🛒',val:DB.purchases.length},{label:'الديون',icon:'💳',val:DB.debts.length},
     {label:'المصروفات',icon:'💸',val:DB.expenses.length},{label:'المهمات',icon:'📋',val:(DB.tasks||[]).length}
-  ].map(function(x){return '<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #f1f5f9"><span style="font-size:13px;color:#374151">'+x.icon+' '+x.label+'</span><span
+  ].map(function(x){return '<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #f1f5f9"><span style="font-size:13px;color:#374151">'+x.icon+' '+x.label+'</span><span style="font-weight:800">'+x.val+'</span></div>';}).join('');
+  document.getElementById('archive-content').innerHTML=Object.entries({customers:{label:'العملاء',icon:'👤'},suppliers:{
