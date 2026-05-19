@@ -364,22 +364,27 @@ function canDo(p){if(isAdmin())return true;return userPerms[p]===true;}
 
 function doGoogleSignIn(){
   document.getElementById('login-loading').style.display='block';
-  document.getElementById('login-loading').textContent='⏳ جاري التحويل لـ Google...';
+  document.getElementById('login-loading').textContent='⏳ جاري تسجيل الدخول...';
   document.getElementById('login-error').style.display='none';
-  document.getElementById('google-signin-btn').disabled=true;
   var provider=new firebase.auth.GoogleAuthProvider();
   provider.setCustomParameters({'prompt':'select_account'});
-  auth.signInWithRedirect(provider).catch(function(e){
+  auth.signInWithPopup(provider).then(function(){
     document.getElementById('login-loading').style.display='none';
-    document.getElementById('google-signin-btn').disabled=false;
-    document.getElementById('login-error').style.display='block';
-    document.getElementById('login-error').textContent='خطأ: '+e.message;
+  }).catch(function(e){
+    document.getElementById('login-loading').style.display='none';
+    if(e.code==='auth/popup-blocked'){
+      // fallback to redirect
+      document.getElementById('login-loading').style.display='block';
+      document.getElementById('login-loading').textContent='⏳ جاري التحويل...';
+      auth.signInWithRedirect(provider);
+    } else if(e.code!=='auth/popup-closed-by-user'&&e.code!=='auth/cancelled-popup-request'){
+      document.getElementById('login-error').style.display='block';
+      document.getElementById('login-error').textContent='خطأ: '+e.message;
+    }
   });
 }
 
-auth.getRedirectResult().then(function(result){
-  // handled by onAuthStateChanged
-}).catch(function(e){
+auth.getRedirectResult().then(function(){}).catch(function(e){
   if(e.code&&e.code!=='auth/no-current-user'&&e.code!=='auth/null-user'){
     document.getElementById('login-loading').style.display='none';
     document.getElementById('login-error').style.display='block';
@@ -1345,7 +1350,4 @@ function doReset(){
 function renderSettingsScreen(){
   var prefEl=document.getElementById('prefs-card');
   if(prefEl)prefEl.innerHTML=
-    '<div class="perm-row"><span class="perm-label">📅 التاريخ الهجري</span><label class="toggle"><input type="checkbox" '+(_useHijri?'checked':'')+' onchange="toggleHijri()"><span class="slider"></span></label></div>';
-  document.getElementById('settings-stats').innerHTML=[
-    {label:'المنتجات',icon:'📦',val:DB.products.length},{label:'الفواتير',icon:'🧾',val:DB.sales.length},
-    {label:'المشتريات',icon:'🛒',val:DB.purchases.length},{label:'الديون',icon:'💳',val:DB.debts.len
+    '<div class="perm-row"><span class="perm-label">📅 التاريخ الهجري</span><label class="toggle"><input type="checkbox" '+(_useHijri?'checked':'')+' onchange="toggleHijri()"><span class="slider"></span></l
