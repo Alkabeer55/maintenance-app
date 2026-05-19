@@ -193,11 +193,13 @@ input:checked+.slider:before{transform:translateX(-20px)}
         </div>
       </div>
       <div id="low-stock-alert"></div>
+      <div id="tasks-home"></div>
       <div class="quick-grid">
         <button class="quick-btn" style="background:#dbeafe;border:1.5px solid #2563eb22" onclick="navigate('inventory')"><div style="font-size:26px">📦</div><div style="font-size:12px;font-weight:800;color:#0f172a;margin-top:5px">المخزون</div></button>
         <button class="quick-btn" style="background:#dcfce7;border:1.5px solid #16a34a22" onclick="navigate('sales')"><div style="font-size:26px">🧾</div><div style="font-size:12px;font-weight:800;color:#0f172a;margin-top:5px">المبيعات</div></button>
         <button class="quick-btn" style="background:#fce7f3;border:1.5px solid #db277722" onclick="navigate('debts')"><div style="font-size:26px">💳</div><div style="font-size:12px;font-weight:800;color:#0f172a;margin-top:5px">الديون والسداد</div></button>
         <button class="quick-btn" style="background:#fef9c3;border:1.5px solid #ca8a0422" onclick="navigate('reports')"><div style="font-size:26px">📊</div><div style="font-size:12px;font-weight:800;color:#0f172a;margin-top:5px">التقارير</div></button>
+        <button class="quick-btn" style="background:#f0fdf4;border:1.5px solid #16a34a22;grid-column:span 2" onclick="navigate('tasks')"><div style="font-size:26px">📋</div><div style="font-size:12px;font-weight:800;color:#0f172a;margin-top:5px">المهمات <span id="tasks-badge" style="background:#dc2626;color:#fff;border-radius:10px;padding:1px 7px;font-size:11px;display:none"></span></div></button>
       </div>
     </div>
     <div id="screen-inventory" class="screen">
@@ -235,15 +237,34 @@ input:checked+.slider:before{transform:translateX(-20px)}
       <div id="tab-balance" style="display:none"></div>
       <div id="tab-expenses" style="display:none"></div>
     </div>
+    <div id="screen-tasks" class="screen">
+      <div class="screen-header">
+        <h2 class="screen-title">📋 المهمات</h2>
+        <button class="btn-add" style="background:#16a34a;display:none" id="btn-add-task" onclick="openTaskModal()">+ مهمة</button>
+      </div>
+      <div id="tasks-list"></div>
+    </div>
     <div id="screen-settings" class="screen">
       <h2 class="screen-title" style="margin-bottom:14px">⚙️ الإعدادات</h2>
       <div class="card" id="user-card"></div>
+      <div class="card">
+        <div class="card-header" style="border-color:#7c3aed"><span class="card-title">⚙️ التفضيلات</span></div>
+        <div id="prefs-card"></div>
+      </div>
+      <div class="card">
+        <div class="card-header" style="border-color:#7c3aed"><span class="card-title">👷 مصاريف الموظف</span></div>
+        <button class="settings-btn" style="background:#f3e8ff;color:#7c3aed" onclick="openEmployeeExpenseModal()">💰 تسجيل مصروف موظف</button>
+      </div>
       <!-- ADMIN ONLY -->
       <div id="admin-section" style="display:none">
         <div class="card">
           <div class="card-header" style="border-color:#dc2626"><span class="card-title">👑 لوحة الأدمن — إدارة المستخدمين</span></div>
           <div id="users-list"></div>
           <div style="font-size:12px;color:#94a3b8;margin-top:8px;text-align:center">اضغط على مستخدم لتعديل صلاحياته</div>
+        </div>
+        <div class="card">
+          <div class="card-header" style="border-color:#dc2626"><span class="card-title">🗑️ تصفير الحسابات</span></div>
+          <button class="settings-btn danger" onclick="openResetModal()">⚠️ تصفير حسابات موظف</button>
         </div>
       </div>
       <div class="card">
@@ -261,7 +282,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
     <button class="nav-btn active" data-screen="home" onclick="navigate('home')"><span class="nav-icon">🏠</span><span class="nav-label">الرئيسية</span><div class="nav-dot"></div></button>
     <button class="nav-btn" data-screen="inventory" onclick="navigate('inventory')"><span class="nav-icon">📦</span><span class="nav-label">مخزون</span><div class="nav-dot"></div></button>
     <button class="nav-btn" data-screen="sales" onclick="navigate('sales')"><span class="nav-icon">🧾</span><span class="nav-label">مبيعات</span><div class="nav-dot"></div></button>
-    <button class="nav-btn" data-screen="debts" onclick="navigate('debts')"><span class="nav-icon">💳</span><span class="nav-label">ديون</span><div class="nav-dot"></div></button>
+    <button class="nav-btn" data-screen="tasks" onclick="navigate('tasks')"><span class="nav-icon">📋</span><span class="nav-label">مهمات</span><div class="nav-dot"></div></button>
     <button class="nav-btn" data-screen="reports" onclick="navigate('reports')"><span class="nav-icon">📊</span><span class="nav-label">تقارير</span><div class="nav-dot"></div></button>
     <button class="nav-btn" data-screen="settings" onclick="navigate('settings')"><span class="nav-icon">⚙️</span><span class="nav-label">إعدادات</span><div class="nav-dot"></div></button>
   </div>
@@ -301,7 +322,7 @@ firebase.initializeApp({
 var auth=firebase.auth(), db=firebase.firestore();
 
 // ===== ADMIN EMAIL - غير الإيميل ده لإيميلك =====
-var ADMIN_EMAIL = 'alkabeer55@gmail.com'; // ← غير ده لإيميلك
+var ADMIN_EMAIL = 'hwdhalkbyr@gmail.com'; // ← غير ده لإيميلك
 
 var userId=null, userEmail=null, userRole=null, userPerms={};
 var currentUser=null;
@@ -330,15 +351,34 @@ var PERM_LABELS={
 function isAdmin(){return userRole==='admin';}
 function canDo(perm){if(isAdmin())return true;return userPerms[perm]===true;}
 
+
+
 document.getElementById('google-signin-btn').addEventListener('click',function(){
   document.getElementById('login-loading').style.display='block';
   document.getElementById('login-error').style.display='none';
   var provider=new firebase.auth.GoogleAuthProvider();
-  auth.signInWithPopup(provider).catch(function(e){
+  provider.setCustomParameters({'prompt':'select_account'});
+  auth.signInWithPopup(provider).then(function(result){
+    // success handled by onAuthStateChanged
+  }).catch(function(e){
     document.getElementById('login-loading').style.display='none';
+    if(e.code==='auth/popup-blocked'||e.code==='auth/cancelled-popup-request'){
+      // fallback to redirect
+      auth.signInWithRedirect(provider);
+    } else {
+      document.getElementById('login-error').style.display='block';
+      document.getElementById('login-error').textContent='خطأ: '+e.message;
+    }
+  });
+});
+
+auth.getRedirectResult().then(function(result){
+  if(result && result.user){ /* handled by onAuthStateChanged */ }
+}).catch(function(e){
+  if(e.code && e.code!=='auth/no-current-user'){
     document.getElementById('login-error').style.display='block';
     document.getElementById('login-error').textContent='خطأ: '+e.message;
-  });
+  }
 });
 
 auth.onAuthStateChanged(async function(user){
@@ -576,6 +616,7 @@ function renderScreen(s){
   else if(s==='sales') renderSales();
   else if(s==='purchases') renderPurchases();
   else if(s==='debts') renderDebts();
+  else if(s==='tasks') renderTasks();
   else if(s==='reports') renderReports();
   else if(s==='settings') renderSettingsScreen();
 }
@@ -606,6 +647,7 @@ function renderHome(){
   document.getElementById('low-stock-alert').innerHTML=low.length?
     '<div style="background:#fff7ed;border:1.5px solid #fed7aa;border-radius:14px;padding:13px 14px;margin-bottom:10px;cursor:pointer" onclick="navigate(\'inventory\')"><div style="font-weight:800;color:#c2410c;margin-bottom:7px">⚠️ مخزون منخفض</div>'+
     low.map(function(p){return '<div style="font-size:12px;color:#9a3412;padding:4px 0;border-bottom:1px solid #fed7aa;display:flex;justify-content:space-between"><span>'+p.name+'</span><b>'+p.qty+' '+p.unit+'</b></div>';}).join('')+'</div>':'';
+  renderTasksHome();
 }
 
 // ===== INVENTORY =====
@@ -616,7 +658,9 @@ function renderInventory(){
   var el=document.getElementById('inventory-list');
   if(!list.length){el.innerHTML='<div class="empty">لا توجد منتجات</div>';return;}
   el.innerHTML=list.map(function(p){
-    return '<div class="card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div style="flex:1"><div class="item-name">'+p.name+'</div><div class="item-sub">الكمية: <b style="color:'+(p.qty<=p.minQty?'#dc2626':'#16a34a')+'">'+p.qty+' '+p.unit+'</b>'+(p.qty<=p.minQty?' ⚠️':'')+'</div><div class="item-sub">شراء: <b>'+p.buyPrice+' ج</b> | بيع: <b>'+p.sellPrice+' ج</b></div></div>'+
+    return '<div class="card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div style="flex:1"><div class="item-name">'+p.name+'</div><div class="item-sub">الكمية: <b style="color:'+(p.qty<=p.minQty?'#dc2626':'#16a34a')+'">'+p.qty+' '+p.unit+'</b>'+(p.qty<=p.minQty?' ⚠️':'')+'</div>'+
+    (!_hidePrices||isAdmin()?'<div class="item-sub">شراء: <b>'+p.buyPrice+' ج</b> | بيع: <b>'+p.sellPrice+' ج</b></div>':'')+
+    '</div>'+
     '<div style="display:flex;gap:6px">'+
     (canDo('editInventory')?'<button class="btn-ic" style="background:#dbeafe" onclick="openProductModal('+p.id+')">✏️</button>':'')+
     (canDo('deleteInventory')?'<button class="btn-ic" style="background:#fee2e2" onclick="confirmAction(\'هتحذف المنتج ده؟\',function(){delItem(\'products\','+p.id+',renderInventory)})">🗑️</button>':'')+
@@ -659,7 +703,13 @@ function renderSales(){
   if(!list.length){el.innerHTML='<div class="empty">لا توجد فواتير</div>';return;}
   function sc(s){return s==='مدفوع'?'#16a34a':s==='جزئي'?'#ca8a04':'#dc2626';}
   el.innerHTML=list.map(function(s){
-    return '<div class="card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div style="flex:1"><div class="item-name">'+s.customer+'</div><div class="item-sub" style="color:#94a3b8;font-size:11px">'+s.date+'</div><div class="item-sub">'+s.items.map(function(i){return i.name+' × '+i.qty;}).join(' | ')+'</div><div style="margin-top:5px"><span class="badge" style="background:'+sc(s.status)+'22;color:'+sc(s.status)+'">'+s.status+'</span></div></div>'+
+    return '<div class="card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div style="flex:1">'+
+    '<div class="item-name">'+s.customer+'</div>'+
+    '<div class="item-sub" style="color:#94a3b8;font-size:11px">'+fmtDate(s.date)+'</div>'+
+    (s.counter?'<div class="item-sub">🖨️ عداد: <b style="background:#0f172a;color:#fff;padding:1px 7px;border-radius:5px;font-size:12px">'+s.counter+'</b>'+(s.printColor?' &nbsp;'+(s.printColor==='أسود'?'⚫':s.printColor==='ألوان'?'🌈':'⚫🌈')+' '+s.printColor:'')+'</div>':'')+
+    '<div class="item-sub">'+s.items.map(function(i){return i.name+' × '+i.qty;}).join(' | ')+'</div>'+
+    (s.image?'<div style="margin-top:6px"><img src="'+s.image+'" style="width:70px;height:50px;object-fit:cover;border-radius:7px;border:1px solid #e2e8f0" onclick="showImageModal(\''+s.id+'\')"></div>':'')+
+    '<div style="margin-top:5px"><span class="badge" style="background:'+sc(s.status)+'22;color:'+sc(s.status)+'">'+s.status+'</span></div></div>'+
     '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px"><div style="font-weight:900;font-size:16px">'+fmt(s.total)+'</div><div style="display:flex;gap:5px">'+
     (canDo('editSales')?'<button class="btn-ic" style="background:#dbeafe" onclick="openSaleModal('+s.id+')">✏️</button>':'')+
     (canDo('deleteSales')?'<button class="btn-ic" style="background:#fee2e2" onclick="confirmAction(\'هتحذف الفاتورة دي؟\',function(){delItem(\'sales\','+s.id+',renderSales)})">🗑️</button>':'')+
@@ -680,11 +730,26 @@ function renderSaleBody(s){
   var opts=DB.products.map(function(p){return '<option value="'+p.id+'">'+p.name+' ('+p.qty+') — '+p.sellPrice+' ج</option>';}).join('');
   var total=_saleItems.reduce(function(s,i){return s+i.qty*i.price;},0);
   var itemsHtml=_saleItems.length?'<div class="items-list">'+_saleItems.map(function(it,i){return '<div class="items-list-row"><span>'+it.name+' × '+it.qty+'</span><div style="display:flex;gap:7px;align-items:center"><b style="color:#16a34a">'+(it.qty*it.price)+' ج</b><button onclick="rmSaleItem('+i+')" style="background:#fee2e2;border:none;border-radius:5px;padding:2px 6px;cursor:pointer;font-size:11px;color:#dc2626">✕</button></div></div>';}).join('')+'<div class="total-row"><span>الإجمالي</span><span>'+fmt(total)+'</span></div></div>':'';
+  var imgPreview = s&&s.image?'<div style="margin-bottom:10px"><img src="'+s.image+'" style="width:100%;border-radius:10px;max-height:150px;object-fit:cover"></div>':'';
   document.getElementById('modal-body').innerHTML=
     acField('sale-customer','اسم العميل','text',s?s.customer:'','','customers',true)+
-    fld('sale-date','التاريخ','date',s?s.date:today())+
-    '<div class="field"><label>إضافة منتج</label><select id="sale-prod" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit;direction:rtl;background:#f8fafc;margin-bottom:7px"><option value="">-- اختر منتج --</option>'+opts+'</select><div style="display:flex;gap:7px"><input id="sale-qty" type="number" value="1" min="1" style="flex:1;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit;text-align:center;background:#f8fafc"><button class="btn btn-primary btn-sm" onclick="addSaleItem()">إضافة</button></div></div>'+
-    itemsHtml+fld('sale-paid','المبلغ المدفوع (ج)','number',s?s.paid:'')+
+    hijriDateField('sale-date','التاريخ',s?s.date:today())+
+    '<div style="display:flex;gap:8px;margin-bottom:12px">'+
+      '<div style="flex:1"><label style="display:block;font-size:12px;color:#64748b;margin-bottom:4px;font-weight:700">🖨️ عداد المكنة</label>'+
+      '<input id="sale-counter" type="number" value="'+(s&&s.counter?s.counter:'')+'" placeholder="مثال: 15230" style="width:100%;padding:10px 13px;border:2px solid #1e293b;border-radius:11px;font-size:15px;font-family:inherit;background:#0f172a;color:#fff;font-weight:900;text-align:center"></div>'+
+      '<div style="flex:1"><label style="display:block;font-size:12px;color:#64748b;margin-bottom:4px;font-weight:700">🎨 نوع الطباعة</label>'+
+      '<select id="sale-color" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit;direction:rtl;background:#f8fafc">'+
+      '<option value="أسود" '+(s&&s.printColor==='أسود'?'selected':'')+'>⚫ أسود فقط</option>'+
+      '<option value="ألوان" '+(s&&s.printColor==='ألوان'?'selected':'')+'>🌈 ألوان</option>'+
+      '<option value="الاتنين" '+(s&&s.printColor==='الاتنين'?'selected':'')+'>⚫🌈 الاتنين</option>'+
+      '</select></div>'+
+    '</div>'+
+    '<div class="field"><label>📸 صورة المكنة / المشكلة (اختياري)</label>'+
+    imgPreview+
+    '<input type="file" id="sale-image" accept="image/*" style="width:100%;padding:8px;border:2px solid #e2e8f0;border-radius:11px;font-size:13px;font-family:inherit;background:#f8fafc"></div>'+
+    '<div class="field"><label>إضافة منتج / خدمة</label><select id="sale-prod" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit;direction:rtl;background:#f8fafc;margin-bottom:7px"><option value="">-- اختر منتج --</option>'+opts+'</select><div style="display:flex;gap:7px"><input id="sale-qty" type="number" value="1" min="1" style="flex:1;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit;text-align:center;background:#f8fafc"><button class="btn btn-primary btn-sm" onclick="addSaleItem()">إضافة</button></div></div>'+
+    itemsHtml+
+    fld('sale-paid','المبلغ المدفوع (ج)','number',s?s.paid:'')+
     '<div class="modal-actions"><button class="btn btn-green btn-full" onclick="saveSale()">'+(s?'حفظ التعديل':'حفظ الفاتورة')+'</button><button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
   initAC('sale-customer','customers');
 }
@@ -692,10 +757,29 @@ function renderSaleBody(s){
 function addSaleItem(){
   var pid=+document.getElementById('sale-prod').value,qty=+document.getElementById('sale-qty').value||1;
   var p=DB.products.find(function(x){return x.id===pid;});if(!p)return;
+  // Save current values before re-render
+  var savedCustomer=v('sale-customer');
+  var savedDate=v('sale-date');
+  var savedPaid=v('sale-paid');
   _saleItems.push({productId:p.id,name:p.name,qty:qty,price:p.sellPrice});
-  renderSaleBody(_saleId?DB.sales.find(function(x){return x.id===_saleId;}):null);
+  var s=_saleId?DB.sales.find(function(x){return x.id===_saleId;}):null;
+  renderSaleBody(s);
+  // Restore saved values
+  if(document.getElementById('sale-customer')) document.getElementById('sale-customer').value=savedCustomer;
+  if(document.getElementById('sale-date')) document.getElementById('sale-date').value=savedDate;
+  if(document.getElementById('sale-paid')) document.getElementById('sale-paid').value=savedPaid;
 }
-function rmSaleItem(idx){_saleItems.splice(idx,1);renderSaleBody(_saleId?DB.sales.find(function(x){return x.id===_saleId;}):null);}
+function rmSaleItem(idx){
+  var savedCustomer=v('sale-customer');
+  var savedDate=v('sale-date');
+  var savedPaid=v('sale-paid');
+  _saleItems.splice(idx,1);
+  var s=_saleId?DB.sales.find(function(x){return x.id===_saleId;}):null;
+  renderSaleBody(s);
+  if(document.getElementById('sale-customer')) document.getElementById('sale-customer').value=savedCustomer;
+  if(document.getElementById('sale-date')) document.getElementById('sale-date').value=savedDate;
+  if(document.getElementById('sale-paid')) document.getElementById('sale-paid').value=savedPaid;
+}
 
 function saveSale(){
   var customer=v('sale-customer');
@@ -703,15 +787,27 @@ function saveSale(){
   var total=_saleItems.reduce(function(s,i){return s+i.qty*i.price;},0);
   var paid=+v('sale-paid')||0;
   var status=paid>=total?'مدفوع':paid>0?'جزئي':'غير مدفوع';
-  if(_saleId){
-    DB.sales=DB.sales.map(function(s){return s.id===_saleId?Object.assign({},s,{customer:customer,date:v('sale-date'),items:_saleItems.slice(),total:total,paid:paid,status:status}):s;});
-  }else{
-    DB.sales.push({id:Date.now(),customer:customer,date:v('sale-date'),items:_saleItems.slice(),total:total,paid:paid,status:status,addedBy:userEmail});
-    _saleItems.forEach(function(item){DB.products=DB.products.map(function(p){return p.id===item.productId?Object.assign({},p,{qty:Math.max(0,p.qty-item.qty)}):p;});});
-    if(paid<total) DB.debts.push({id:Date.now()+1,type:'customer',name:customer,desc:'فاتورة',total:total-paid,paid:0,date:v('sale-date'),payments:[]});
+  var counter=v('sale-counter')||'';
+  var printColor=v('sale-color')||'أسود';
+
+  function doSave(imageData){
+    if(_saleId){
+      DB.sales=DB.sales.map(function(s){return s.id===_saleId?Object.assign({},s,{customer:customer,date:v('sale-date'),items:_saleItems.slice(),total:total,paid:paid,status:status,counter:counter,printColor:printColor,image:imageData||s.image}):s;});
+    }else{
+      DB.sales.push({id:Date.now(),customer:customer,date:v('sale-date'),items:_saleItems.slice(),total:total,paid:paid,status:status,counter:counter,printColor:printColor,image:imageData||'',addedBy:userEmail});
+      _saleItems.forEach(function(item){DB.products=DB.products.map(function(p){return p.id===item.productId?Object.assign({},p,{qty:Math.max(0,p.qty-item.qty)}):p;});});
+      if(paid<total) DB.debts.push({id:Date.now()+1,type:'customer',name:customer,desc:'فاتورة',total:total-paid,paid:0,date:v('sale-date'),payments:[]});
+    }
+    addArchive('customers',customer);persist();closeModal();renderSales();renderHome();
+    showToast(_saleId?'✅ تم تعديل الفاتورة':'✅ تم حفظ الفاتورة','#16a34a');
   }
-  addArchive('customers',customer);persist();closeModal();renderSales();renderHome();
-  showToast(_saleId?'✅ تم تعديل الفاتورة':'✅ تم حفظ الفاتورة','#16a34a');
+
+  var imgInput=document.getElementById('sale-image');
+  if(imgInput&&imgInput.files&&imgInput.files[0]){
+    var reader=new FileReader();
+    reader.onload=function(e){ doSave(e.target.result); };
+    reader.readAsDataURL(imgInput.files[0]);
+  } else { doSave(''); }
 }
 
 // ===== PURCHASES =====
@@ -721,7 +817,7 @@ function renderPurchases(){
   var el=document.getElementById('purchases-list');
   if(!list.length){el.innerHTML='<div class="empty">لا توجد مشتريات</div>';return;}
   el.innerHTML=list.map(function(p){
-    return '<div class="card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div style="flex:1"><div class="item-name">'+p.supplier+'</div><div class="item-sub" style="color:#94a3b8;font-size:11px">'+p.date+'</div><div class="item-sub">'+p.items.map(function(i){return i.name+' × '+i.qty;}).join(' | ')+'</div></div>'+
+    return '<div class="card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div style="flex:1"><div class="item-name">'+p.supplier+'</div><div class="item-sub" style="color:#94a3b8;font-size:11px">'+fmtDate(p.date)+'</div><div class="item-sub">'+p.items.map(function(i){return i.name+' × '+i.qty;}).join(' | ')+'</div></div>'+
     '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px"><div style="font-weight:900;font-size:16px;color:#7c3aed">'+fmt(p.total)+'</div><div style="display:flex;gap:5px">'+
     (canDo('editPurchases')?'<button class="btn-ic" style="background:#ede9fe" onclick="openPurchaseModal('+p.id+')">✏️</button>':'')+
     (canDo('deletePurchases')?'<button class="btn-ic" style="background:#fee2e2" onclick="confirmAction(\'هتحذف المشترى ده؟\',function(){delItem(\'purchases\','+p.id+',renderPurchases)})">🗑️</button>':'')+
@@ -736,7 +832,7 @@ function openPurchaseModal(id){
   document.getElementById('modal-title').textContent=p?'تعديل المشتريات':'تسجيل مشتريات جديدة';
   document.getElementById('modal-body').innerHTML=
     acField('pur-supplier','اسم المورد','text',p?p.supplier:'','','suppliers',true)+
-    fld('pur-date','التاريخ','date',p?p.date:today())+
+    hijriDateField('pur-date','التاريخ',p?p.date:today())+
     acField('pur-name','اسم المنتج','text',it.name||'','','products',true)+
     fld('pur-qty','الكمية','number',it.qty||'')+fld('pur-price','سعر الوحدة (ج)','number',it.price||'')+
     '<div id="pur-total-box" style="display:none" class="total-hl"><span style="font-size:13px;color:#374151">الإجمالي</span><span id="pur-total-val" style="font-weight:900;font-size:17px;color:#16a34a">0 ج</span></div>'+
@@ -779,8 +875,8 @@ function renderDebts(){
   function debtCard(d){
     var remaining=d.total-(d.paid||0),pct=Math.min(100,Math.round((d.paid||0)/d.total*100)),isPaid=remaining<=0;
     var pmHtml='';
-    if(d.payments&&d.payments.length) pmHtml='<div style="margin-top:8px;border-top:1px solid #f1f5f9;padding-top:7px"><div style="font-size:11px;font-weight:700;color:#64748b;margin-bottom:5px">سجل الدفعات</div>'+d.payments.slice(-3).map(function(p){var m=PMETHODS.find(function(x){return x.id===p.method;})||{icon:'💰',label:p.method};return '<div class="payment-row"><span>'+p.date+'</span><span>'+m.icon+' '+m.label+'</span>'+(p.note?'<span style="color:#94a3b8;font-size:10px">'+p.note+'</span>':'<span></span>')+'<b style="color:#16a34a">'+fmt(p.amount)+'</b></div>';}).join('')+'</div>';
-    return '<div class="debt-card'+(d.type==='supplier'?' supplier':'')+(isPaid?' paid':'')+'"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:9px"><div style="flex:1"><div style="font-weight:800;font-size:15px">'+d.name+'</div><div style="font-size:11px;color:#94a3b8;margin-top:2px">'+d.date+' — '+(d.desc||'')+'</div></div><div style="display:flex;gap:5px">'+(!isPaid&&canDo('payDebts')?'<button class="btn-ic" style="background:#d1fae5;color:#065f46;font-size:11px" onclick="openPaymentModal('+d.id+')">💳 سداد</button>':'')+(canDo('deleteDebts')?'<button class="btn-ic" style="background:#fee2e2" onclick="confirmAction(\'هتحذف الدين ده؟\',function(){delItem(\'debts\','+d.id+',renderDebts)})">🗑️</button>':'')+'</div></div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:7px"><span>إجمالي: <b>'+fmt(d.total)+'</b></span><span>مدفوع: <b style="color:#16a34a">'+fmt(d.paid||0)+'</b></span></div><div style="background:#f1f5f9;border-radius:7px;height:7px;overflow:hidden;margin-bottom:5px"><div style="height:100%;width:'+pct+'%;background:'+(isPaid?'#16a34a':'#2563eb')+';border-radius:7px"></div></div><div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px;color:#64748b">'+pct+'% مسدّد</span><span style="font-weight:900;font-size:14px;color:'+(isPaid?'#16a34a':'#dc2626')+'">'+(isPaid?'✅ مسدّد':'متبقي '+fmt(remaining))+'</span></div>'+pmHtml+'</div>';
+    if(d.payments&&d.payments.length) pmHtml='<div style="margin-top:8px;border-top:1px solid #f1f5f9;padding-top:7px"><div style="font-size:11px;font-weight:700;color:#64748b;margin-bottom:5px">سجل الدفعات</div>'+d.payments.slice(-3).map(function(p){var m=PMETHODS.find(function(x){return x.id===p.method;})||{icon:'💰',label:p.method};return '<div class="payment-row"><span>'+fmtDate(p.date)+'</span><span>'+m.icon+' '+m.label+'</span>'+(p.note?'<span style="color:#94a3b8;font-size:10px">'+p.note+'</span>':'<span></span>')+'<b style="color:#16a34a">'+fmt(p.amount)+'</b></div>';}).join('')+'</div>';
+    return '<div class="debt-card'+(d.type==='supplier'?' supplier':'')+(isPaid?' paid':'')+'"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:9px"><div style="flex:1"><div style="font-weight:800;font-size:15px">'+d.name+'</div><div style="font-size:11px;color:#94a3b8;margin-top:2px">'+fmtDate(d.date)+' — '+(d.desc||'')+'</div></div><div style="display:flex;gap:5px">'+(!isPaid&&canDo('payDebts')?'<button class="btn-ic" style="background:#d1fae5;color:#065f46;font-size:11px" onclick="openPaymentModal('+d.id+')">💳 سداد</button>':'')+(canDo('deleteDebts')?'<button class="btn-ic" style="background:#fee2e2" onclick="confirmAction(\'هتحذف الدين ده؟\',function(){delItem(\'debts\','+d.id+',renderDebts)})">🗑️</button>':'')+'</div></div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:7px"><span>إجمالي: <b>'+fmt(d.total)+'</b></span><span>مدفوع: <b style="color:#16a34a">'+fmt(d.paid||0)+'</b></span></div><div style="background:#f1f5f9;border-radius:7px;height:7px;overflow:hidden;margin-bottom:5px"><div style="height:100%;width:'+pct+'%;background:'+(isPaid?'#16a34a':'#2563eb')+';border-radius:7px"></div></div><div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px;color:#64748b">'+pct+'% مسدّد</span><span style="font-weight:900;font-size:14px;color:'+(isPaid?'#16a34a':'#dc2626')+'">'+(isPaid?'✅ مسدّد':'متبقي '+fmt(remaining))+'</span></div>'+pmHtml+'</div>';
   }
   el.innerHTML=(pending.length?pending.map(debtCard).join(''):'<div class="empty" style="padding:14px 0">✅ لا توجد ديون معلقة</div>')+(done.length?'<div style="font-size:11px;font-weight:700;color:#94a3b8;margin:9px 0 7px;text-align:center">— ديون مسدّدة —</div>'+done.map(debtCard).join(''):'');
 }
@@ -791,7 +887,8 @@ function openPaymentModal(id){
   document.getElementById('modal-title').textContent='سداد دين — '+d.name;
   document.getElementById('modal-body').innerHTML=
     '<div style="background:#fef2f2;border-radius:11px;padding:11px 13px;margin-bottom:12px;display:flex;justify-content:space-between"><span style="font-size:13px;color:#374151">المتبقي</span><span style="font-weight:900;font-size:19px;color:#dc2626">'+fmt(remaining)+'</span></div>'+
-    fld('pay-amount','مبلغ الدفعة (ج)','number',remaining)+fld('pay-date','تاريخ الدفعة','date',today())+
+    fld('pay-amount','مبلغ الدفعة (ج)','number',remaining)+
+    hijriDateField('pay-date','تاريخ الدفعة',today())+
     '<div class="field"><label>طريقة السداد <span class="required">*</span></label><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:4px" id="method-grid">'+PMETHODS.map(function(m){return '<button class="payment-method-btn" id="mth-'+m.id+'" onclick="selectMethod(\''+m.id+'\')">'+m.icon+'<br>'+m.label+'</button>';}).join('')+'</div></div>'+
     '<input type="hidden" id="pay-method" value="">'+fld('pay-note','ملاحظة (اختياري)','text','')+
     '<div class="modal-actions"><button class="btn btn-green btn-full" onclick="savePayment()">تسجيل الدفعة</button><button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
@@ -818,7 +915,7 @@ function openDebtModal(id){
     fld('debt-desc','البيان / السبب','text',d?d.desc:'','مثال: قرض - سلفة')+
     fld('debt-total','إجمالي المبلغ (ج)','number',d?d.total:'')+
     fld('debt-paid','المدفوع حتى الآن (ج)','number',d?d.paid:0)+
-    fld('debt-date','التاريخ','date',d?d.date:today())+
+    hijriDateField('debt-date','التاريخ',d?d.date:today())+
     '<div class="modal-actions"><button class="btn btn-teal btn-full" onclick="saveDebt()">'+(d?'حفظ التعديل':'إضافة')+'</button><button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
   initAC('debt-name','customers');openModal();
 }
@@ -936,7 +1033,7 @@ function renderExpensesTab(){
   var tF=fixed.reduce(function(s,e){return s+e.amount;},0);
   var tInc=DB.sales.reduce(function(s,x){return s+(x.paid||0);},0);
   var aF=tInc-tF,aA=tInc-tF-variable.reduce(function(s,e){return s+e.amount;},0);
-  function expRow(e){return '<div class="payment-row"><div><b>'+e.desc+'</b></div><div style="display:flex;gap:5px;align-items:center"><b style="color:#ea580c">'+e.amount+' ج</b>'+(canDo('addExpenses')||isAdmin()?'<button class="btn-ic" style="background:#ffedd5;font-size:12px" onclick="openExpenseModal('+e.id+')">✏️</button>':'')+(isAdmin()?'<button class="btn-ic" style="background:#fee2e2;font-size:12px" onclick="confirmAction(\'هتحذف المصروف ده؟\',function(){delItem(\'expenses\','+e.id+',renderReports)})">🗑️</button>':'')+'</div></div>';}
+  function expRow(e){return '<div class="payment-row"><div><b>'+e.desc+'</b><span style="color:#94a3b8;font-size:11px;margin-right:6px">'+fmtDate(e.date)+'</span></div><div style="display:flex;gap:5px;align-items:center"><b style="color:#ea580c">'+e.amount+' ج</b>'+(canDo('addExpenses')||isAdmin()?'<button class="btn-ic" style="background:#ffedd5;font-size:12px" onclick="openExpenseModal('+e.id+')">✏️</button>':'')+(isAdmin()?'<button class="btn-ic" style="background:#fee2e2;font-size:12px" onclick="confirmAction(\'هتحذف المصروف ده؟\',function(){delItem(\'expenses\','+e.id+',renderReports)})">🗑️</button>':'')+'</div></div>';}
   document.getElementById('tab-expenses').innerHTML=
     '<div class="card"><div class="card-header" style="border-color:#ea580c"><span class="card-title">المصروفات الثابتة</span>'+(canDo('addExpenses')||isAdmin()?'<button class="btn btn-sm btn-orange" onclick="openExpenseModal(null,\'fixed\')">+ إضافة</button>':'')+'</div>'+(fixed.length===0?'<div class="empty" style="padding:14px 0">لا توجد مصروفات ثابتة</div>':'')+fixed.map(expRow).join('')+(fixed.length?'<div style="display:flex;justify-content:space-between;padding:9px 0 3px;font-weight:900;font-size:14px;border-top:2px solid #f1f5f9;margin-top:5px"><span>الإجمالي</span><span style="color:#dc2626">'+fmt(tF)+'</span></div>':'')+'</div>'+
     '<div class="card" style="background:#f0fdf4;border:1.5px solid #bbf7d0"><div style="font-weight:900;font-size:14px;color:#166534;margin-bottom:9px">💡 المتبقي بعد المصروفات الثابتة</div><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px"><span>الإيرادات المحصّلة</span><span style="font-weight:800;color:#16a34a">'+fmt(tInc)+'</span></div><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:7px"><span>المصروفات الثابتة</span><span style="font-weight:800;color:#dc2626">− '+fmt(tF)+'</span></div><div style="display:flex;justify-content:space-between;font-size:17px;font-weight:900;border-top:2px solid #bbf7d0;padding-top:7px"><span>المتبقي</span><span style="color:'+(aF>=0?'#16a34a':'#dc2626')+'">'+fmt(aF)+'</span></div></div>'+
@@ -953,7 +1050,8 @@ function openExpenseModal(id,defType){
   document.getElementById('modal-title').textContent=e?'تعديل مصروف':'إضافة مصروف';
   document.getElementById('modal-body').innerHTML=
     acField('exp-desc','البيان','text',e?e.desc:'','مثال: إيجار - كهرباء','expDescs',true)+
-    fld('exp-amount','المبلغ (ج)','number',e?e.amount:'')+fld('exp-date','التاريخ','date',e?e.date:today())+
+    fld('exp-amount','المبلغ (ج)','number',e?e.amount:'')+
+    hijriDateField('exp-date','التاريخ',e?e.date:today())+
     '<div class="field"><label>النوع</label><select id="exp-type" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit;direction:rtl;background:#f8fafc"><option value="fixed"'+(type==='fixed'?' selected':'')+'>ثابت (إيجار، كهرباء...)</option><option value="variable"'+(type!=='fixed'?' selected':'')+'>متغير (طارئ، صيانة...)</option></select></div>'+
     '<div class="modal-actions"><button class="btn btn-orange btn-full" onclick="saveExpense()">'+(e?'حفظ التعديل':'إضافة')+'</button><button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
   initAC('exp-desc','expDescs');openModal();
@@ -973,6 +1071,13 @@ function saveExpense(){
 function renderSettingsScreen(){
   document.getElementById('settings-stats').innerHTML=[{label:'المنتجات',icon:'📦',val:DB.products.length},{label:'الفواتير',icon:'🧾',val:DB.sales.length},{label:'المشتريات',icon:'🛒',val:DB.purchases.length},{label:'الديون',icon:'💳',val:DB.debts.length},{label:'المصروفات',icon:'💸',val:DB.expenses.length}].map(function(x){return '<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #f1f5f9"><span style="font-size:13px;color:#374151">'+x.icon+' '+x.label+'</span><span style="font-weight:800">'+x.val+'</span></div>';}).join('');
   document.getElementById('archive-content').innerHTML=Object.entries({customers:{label:'العملاء',icon:'👤'},suppliers:{label:'الموردين',icon:'🏭'},products:{label:'المنتجات',icon:'📦'},expDescs:{label:'المصروفات',icon:'💸'}}).map(function(e){var k=e[0],info=e[1],items=DB.archive[k];return '<div style="margin-bottom:11px"><div style="font-size:12px;font-weight:700;color:#64748b;margin-bottom:5px">'+info.icon+' '+info.label+' ('+items.length+')</div>'+(items.length===0?'<div style="color:#94a3b8;font-size:12px">لا يوجد بعد</div>':'<div style="display:flex;flex-wrap:wrap;gap:5px">'+items.slice(0,20).map(function(i){return '<span style="background:#f1f5f9;border-radius:7px;padding:3px 9px;font-size:12px">'+i+'</span>';}).join('')+'</div>')+'</div>';}).join('');
+
+  // Preferences card
+  var prefEl = document.getElementById('prefs-card');
+  if(prefEl) prefEl.innerHTML =
+    '<div class="perm-row"><span class="perm-label">📅 التاريخ الهجري</span><label class="toggle"><input type="checkbox" '+(_useHijri?'checked':'')+' onchange="toggleHijri()"><span class="slider"></span></label></div>'+
+    '<div class="perm-row"><span class="perm-label">🙈 إخفاء الأسعار عن الموظفين</span><label class="toggle"><input type="checkbox" '+(_hidePrices&&!isAdmin()?'checked':isAdmin()&&_hidePrices?'checked':_hidePrices?'checked':'')+' onchange="toggleHidePrices()"><span class="slider"></span></label></div>';
+
   if(isAdmin()) loadUsers();
 }
 
@@ -1004,8 +1109,259 @@ function initAC(id,archiveKey){var input=document.getElementById(id);if(!input)r
 function selAC(id,value){document.getElementById(id).value=value;var l=document.getElementById('ac-'+id);if(l)l.style.display='none';}
 function fld(id,label,type,value,placeholder,required){value=value===undefined||value===null?'':value;placeholder=placeholder||'';return '<div class="field"><label>'+label+(required?'<span class="required">*</span>':'')+'</label><input id="'+id+'" type="'+type+'" value="'+value+'" placeholder="'+placeholder+'"></div>';}
 function v(id){var el=document.getElementById(id);return el?el.value:'';}
-function today(){return new Date().toISOString().split('T')[0];}
+
+// ===== HIJRI DATE ENGINE =====
+var _useHijri = false;
+try { _useHijri = localStorage.getItem('mc_hijri')==='1'; } catch(e){}
+
+// Convert Gregorian to Hijri string
+function toHijri(dateStr){
+  try {
+    var d = dateStr ? new Date(dateStr) : new Date();
+    if(isNaN(d)) return dateStr;
+    return new Intl.DateTimeFormat('ar-SA-u-ca-islamic-umalqura', {
+      year:'numeric', month:'2-digit', day:'2-digit'
+    }).format(d);
+  } catch(e){ return dateStr; }
+}
+
+// Get today as ISO string
+function today(){ return new Date().toISOString().split('T')[0]; }
+
+// Display date — hijri or gregorian
+function fmtDate(d){
+  if(!d) return '';
+  if(!_useHijri) return d;
+  return toHijri(d);
+}
+
+// Hijri date field — shows text input with hijri display + hidden ISO value
+function hijriDateField(id, label, value, required){
+  var display = value ? (_useHijri ? toHijri(value) : value) : '';
+  if(!_useHijri){
+    return fld(id, label, 'date', value, '', required);
+  }
+  return '<div class="field"><label>'+label+(required?'<span class="required">*</span>':'')+
+    '</label><div style="position:relative">'+
+    '<input id="'+id+'_display" type="text" value="'+display+'" placeholder="مثال: 1446/09/15" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit;direction:rtl;background:#f8fafc;outline:none" oninput="syncHijriDate(\''+id+'\')">'+
+    '<input id="'+id+'" type="hidden" value="'+value+'">'+
+    '<div style="font-size:11px;color:#94a3b8;margin-top:3px">أدخل التاريخ الهجري (سنة/شهر/يوم) أو الميلادي</div>'+
+    '</div></div>';
+}
+
+function syncHijriDate(id){
+  var display = v(id+'_display');
+  var hidden = document.getElementById(id);
+  if(!hidden) return;
+  // Try to parse as gregorian first
+  var d = new Date(display);
+  if(!isNaN(d)){
+    hidden.value = d.toISOString().split('T')[0];
+  } else {
+    // Store as-is for hijri
+    hidden.value = display;
+  }
+}
+
+function toggleHijri(){
+  _useHijri = !_useHijri;
+  try{ localStorage.setItem('mc_hijri', _useHijri?'1':'0'); }catch(e){}
+  renderSettingsScreen();
+  renderSales(); renderPurchases();
+  showToast(_useHijri?'✅ تم التبديل للتاريخ الهجري':'✅ تم التبديل للتاريخ الميلادي','#16a34a');
+}
+
+// ===== HIDE PRICES SETTING =====
+var _hidePrices = false;
+try { _hidePrices = localStorage.getItem('mc_hideprices')==='1'; } catch(e){}
+
+function toggleHidePrices(){
+  _hidePrices = !_hidePrices;
+  try{ localStorage.setItem('mc_hideprices', _hidePrices?'1':'0'); }catch(e){}
+  renderSettingsScreen(); renderInventory();
+  showToast(_hidePrices?'✅ تم إخفاء الأسعار':'✅ تم إظهار الأسعار','#16a34a');
+}
+
+function fmtPrice(n){ return _hidePrices && !isAdmin() ? '••••' : fmt(n); }
+
+// ===== EMPLOYEE EXPENSES =====
+function openEmployeeExpenseModal(){
+  document.getElementById('modal-title').textContent = 'مصاريف الموظف';
+  var emp = DB.employeeExpenses || [];
+  var total = emp.reduce(function(s,e){return s+e.amount;},0);
+  var html = '<div class="field"><label>البيان</label><select id="emp-type" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit;direction:rtl;background:#f8fafc">'+
+    '<option value="مواصلات">🚗 مواصلات</option>'+
+    '<option value="عدة وأدوات">🔧 عدة وأدوات</option>'+
+    '<option value="سلفة من الراتب">💵 سلفة من الراتب</option>'+
+    '<option value="أخرى">📝 أخرى</option>'+
+    '</select></div>'+
+    fld('emp-desc','تفاصيل (اختياري)','text','','')+
+    fld('emp-amount','المبلغ (ج)','number','','',true)+
+    hijriDateField('emp-date','التاريخ',today())+
+    '<div class="modal-actions">'+
+    '<button class="btn btn-purple btn-full" onclick="saveEmployeeExpense()">إضافة</button>'+
+    '<button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>'+
+    (emp.length?'<div style="margin-top:14px;border-top:2px solid #f1f5f9;padding-top:12px"><div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:8px">السجل (إجمالي: '+fmt(total)+')</div>'+
+    emp.slice(-10).reverse().map(function(e,i){return '<div class="payment-row"><span>'+e.date+'</span><span style="font-weight:700">'+e.type+(e.desc?' — '+e.desc:'')+'</span><b style="color:#7c3aed">'+fmt(e.amount)+'</b></div>';}).join('')+'</div>':'');
+  document.getElementById('modal-body').innerHTML = html;
+  openModal();
+}
+
+function saveEmployeeExpense(){
+  var type=v('emp-type'), amount=+v('emp-amount'), date=v('emp-date');
+  if(!amount) return showToast('⚠️ أدخل المبلغ','#dc2626');
+  if(!DB.employeeExpenses) DB.employeeExpenses=[];
+  DB.employeeExpenses.push({id:Date.now(),type:type,desc:v('emp-desc'),amount:amount,date:date,addedBy:userEmail});
+  persist(); closeModal();
+  showToast('✅ تم تسجيل المصروف','#16a34a');
+}
+
+// ===== SHOW IMAGE =====
+function showImageModal(saleId){
+  var s=DB.sales.find(function(x){return x.id===+saleId;});
+  if(!s||!s.image)return;
+  document.getElementById('modal-title').textContent='صورة المكنة — '+s.customer;
+  document.getElementById('modal-body').innerHTML='<img src="'+s.image+'" style="width:100%;border-radius:12px"><div style="margin-top:10px;text-align:center;color:#64748b;font-size:13px">عداد: <b>'+(s.counter||'—')+'</b> | '+(s.printColor||'')+'</div>';
+  openModal();
+}
+
+// ===== TASKS =====
+function renderTasks(){
+  var el=document.getElementById('tasks-list');if(!el)return;
+  var addBtn=document.getElementById('btn-add-task');
+  if(addBtn) addBtn.style.display=isAdmin()?'':'none';
+  var tasks=DB.tasks||[];
+  var myTasks=isAdmin()?tasks:tasks.filter(function(t){return t.assignedTo===userEmail||t.assignedTo==='all';});
+  var pending=myTasks.filter(function(t){return t.status!=='done';});
+  var done=myTasks.filter(function(t){return t.status==='done';});
+  updateTasksBadge(pending.length);
+  if(!myTasks.length){el.innerHTML='<div class="empty">لا توجد مهمات</div>';return;}
+  function taskCard(t){
+    var isDone=t.status==='done';
+    var pc=t.priority==='عاجل'?'#dc2626':t.priority==='متوسط'?'#ca8a04':'#16a34a';
+    return '<div class="card" style="border-right:4px solid '+(isDone?'#16a34a':pc)+'">'+
+      '<div style="display:flex;justify-content:space-between;align-items:flex-start">'+
+      '<div style="flex:1"><div style="font-weight:800;font-size:15px;color:'+(isDone?'#94a3b8':'#0f172a')+';text-decoration:'+(isDone?'line-through':'none')+'">'+t.title+'</div>'+
+      (t.desc?'<div class="item-sub">'+t.desc+'</div>':'')+
+      '<div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap">'+
+      '<span class="badge" style="background:'+pc+'22;color:'+pc+'">'+t.priority+'</span>'+
+      (t.assignedTo==='all'?'<span class="badge" style="background:#dbeafe;color:#2563eb">للجميع</span>':'<span class="badge" style="background:#f3e8ff;color:#7c3aed">'+t.assignedTo+'</span>')+
+      (t.dueDate?'<span class="badge" style="background:#f1f5f9;color:#64748b">📅 '+t.dueDate+'</span>':'')+
+      '</div>'+
+      (isDone&&t.note?'<div style="margin-top:5px;background:#f0fdf4;border-radius:8px;padding:5px 9px;font-size:12px;color:#166534">✅ '+t.note+'</div>':'')+
+      '</div>'+
+      '<div style="display:flex;gap:5px;flex-direction:column;align-items:flex-end">'+
+      (!isDone?'<button class="btn-ic" style="background:#dcfce7;color:#16a34a;font-size:11px" onclick="openMarkDoneModal('+t.id+')">✅ تم</button>':'')+
+      (isAdmin()?'<button class="btn-ic" style="background:#fee2e2" onclick="confirmAction(\'هتحذف المهمة؟\',function(){deleteTask('+t.id+')})">🗑️</button>':'')+
+      '</div></div></div>';
+  }
+  el.innerHTML=pending.map(taskCard).join('')+(done.length?'<div style="font-size:11px;font-weight:700;color:#94a3b8;margin:9px 0 7px;text-align:center">— منجزة —</div>'+done.map(taskCard).join(''):'');
+}
+
+function updateTasksBadge(count){
+  var b=document.getElementById('tasks-badge');
+  if(b){if(count>0){b.textContent=count;b.style.display='';}else b.style.display='none';}
+}
+
+function renderTasksHome(){
+  var tasks=DB.tasks||[];
+  var myTasks=isAdmin()?tasks:tasks.filter(function(t){return t.assignedTo===userEmail||t.assignedTo==='all';});
+  var pending=myTasks.filter(function(t){return t.status!=='done';});
+  updateTasksBadge(pending.length);
+  var el=document.getElementById('tasks-home');if(!el)return;
+  if(!pending.length){el.innerHTML='';return;}
+  var pc=function(p){return p==='عاجل'?'#dc2626':p==='متوسط'?'#ca8a04':'#16a34a';};
+  el.innerHTML='<div style="background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:14px;padding:13px 14px;margin-bottom:10px;cursor:pointer" onclick="navigate(\'tasks\')">'+
+    '<div style="font-weight:800;color:#166534;margin-bottom:8px">📋 مهماتك ('+pending.length+')</div>'+
+    pending.slice(0,3).map(function(t){return '<div style="font-size:13px;color:#14532d;padding:4px 0;border-bottom:1px solid #bbf7d0;display:flex;justify-content:space-between"><span>'+t.title+'</span><span style="background:'+pc(t.priority)+'22;color:'+pc(t.priority)+';border-radius:6px;padding:1px 6px;font-size:10px">'+t.priority+'</span></div>';}).join('')+
+    (pending.length>3?'<div style="font-size:12px;color:#94a3b8;text-align:center;padding-top:4px">+ '+(pending.length-3)+' أخرى</div>':'')+
+    '</div>';
+}
+
+function openTaskModal(){
+  if(!isAdmin()){showToast('⚠️ الأدمن بس يضيف مهمات','#dc2626');return;}
+  document.getElementById('modal-title').textContent='إضافة مهمة جديدة';
+  db.collection('appUsers').get().then(function(snap){
+    var users=[];snap.forEach(function(doc){var d=doc.data();if(d.role==='approved'||d.role==='admin')users.push(d);});
+    var assignOpts='<option value="all">للجميع</option>'+users.map(function(u){return '<option value="'+u.email+'">'+u.name+'</option>';}).join('');
+    document.getElementById('modal-body').innerHTML=
+      fld('task-title','عنوان المهمة','text','','مثال: صيانة طابعة الاستقبال',true)+
+      fld('task-desc','التفاصيل','text','','')+
+      fld('task-due','الموعد النهائي','date','')+
+      '<div class="field"><label>الأولوية</label><select id="task-priority" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit;direction:rtl;background:#f8fafc"><option value="عاجل">🔴 عاجل</option><option value="متوسط" selected>🟡 متوسط</option><option value="عادي">🟢 عادي</option></select></div>'+
+      '<div class="field"><label>تعيين إلى</label><select id="task-assign" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit;direction:rtl;background:#f8fafc">'+assignOpts+'</select></div>'+
+      '<div class="modal-actions"><button class="btn btn-green btn-full" onclick="saveTask()">إضافة</button><button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
+    openModal();
+  });
+}
+
+function saveTask(){
+  var title=v('task-title');if(!title)return showToast('⚠️ عنوان المهمة مطلوب','#dc2626');
+  if(!DB.tasks)DB.tasks=[];
+  DB.tasks.push({id:Date.now(),title:title,desc:v('task-desc'),dueDate:v('task-due'),priority:v('task-priority')||'متوسط',assignedTo:v('task-assign')||'all',status:'pending',createdBy:userEmail,createdAt:today()});
+  persist();closeModal();renderTasks();renderTasksHome();
+  showToast('✅ تم إضافة المهمة','#16a34a');
+}
+
+function openMarkDoneModal(id){
+  document.getElementById('modal-title').textContent='تسجيل إنجاز المهمة';
+  document.getElementById('modal-body').innerHTML=
+    fld('done-note','ملاحظة (اختياري)','text','','مثال: تم إصلاح الطابعة')+
+    '<div class="modal-actions"><button class="btn btn-green btn-full" onclick="markTaskDone('+id+')">✅ تم الإنجاز</button><button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
+  openModal();
+}
+
+function markTaskDone(id){
+  if(!DB.tasks)return;
+  DB.tasks=DB.tasks.map(function(t){return t.id===id?Object.assign({},t,{status:'done',note:v('done-note'),doneBy:userEmail,doneAt:today()}):t;});
+  persist();closeModal();renderTasks();renderTasksHome();
+  showToast('✅ تم تسجيل الإنجاز','#16a34a');
+}
+
+function deleteTask(id){
+  DB.tasks=(DB.tasks||[]).filter(function(t){return t.id!==id;});
+  persist();renderTasks();renderTasksHome();
+  showToast('🗑️ تم الحذف','#64748b');
+}
+
+// ===== RESET ACCOUNTS =====
+function openResetModal(){
+  if(!isAdmin()){showToast('⚠️ الأدمن بس يقدر يصفّر','#dc2626');return;}
+  document.getElementById('modal-title').textContent='⚠️ تصفير الحسابات';
+  db.collection('appUsers').get().then(function(snap){
+    var users=[];snap.forEach(function(doc){var d=doc.data();if(d.role!=='admin')users.push(d);});
+    document.getElementById('modal-body').innerHTML=
+      '<div style="background:#fef2f2;border-radius:11px;padding:12px;margin-bottom:14px;font-size:13px;color:#dc2626;font-weight:700">⚠️ التصفير مش هينفع يترجع!</div>'+
+      '<div class="field"><label>اختر الموظف</label><select id="reset-user" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit;direction:rtl;background:#f8fafc"><option value="all">الكل</option>'+users.map(function(u){return '<option value="'+u.email+'">'+u.name+'</option>';}).join('')+'</select></div>'+
+      '<div class="field"><label>ماذا تصفّر؟</label><div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">'+
+      '<label style="display:flex;align-items:center;gap:8px;font-size:14px"><input type="checkbox" id="rst-sales" checked> المبيعات والفواتير</label>'+
+      '<label style="display:flex;align-items:center;gap:8px;font-size:14px"><input type="checkbox" id="rst-debts" checked> الديون</label>'+
+      '<label style="display:flex;align-items:center;gap:8px;font-size:14px"><input type="checkbox" id="rst-expenses"> المصروفات</label>'+
+      '<label style="display:flex;align-items:center;gap:8px;font-size:14px"><input type="checkbox" id="rst-tasks"> المهمات</label>'+
+      '</div></div>'+
+      fld('reset-pin','كود التأكيد (اكتب: RESET)','text','','')+
+      '<div class="modal-actions"><button class="btn btn-red btn-full" onclick="doReset()">تصفير</button><button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
+    openModal();
+  });
+}
+
+function doReset(){
+  if(v('reset-pin')!=='RESET')return showToast('⚠️ اكتب RESET للتأكيد','#dc2626');
+  var who=v('reset-user');
+  var rstSales=document.getElementById('rst-sales').checked;
+  var rstDebts=document.getElementById('rst-debts').checked;
+  var rstExp=document.getElementById('rst-expenses').checked;
+  var rstTasks=document.getElementById('rst-tasks').checked;
+  if(rstSales) DB.sales=who==='all'?[]:DB.sales.filter(function(s){return s.addedBy!==who;});
+  if(rstDebts) DB.debts=who==='all'?[]:DB.debts.filter(function(d){return d.addedBy!==who;});
+  if(rstExp) DB.expenses=who==='all'?[]:DB.expenses.filter(function(e){return e.addedBy!==who;});
+  if(rstTasks) DB.tasks=who==='all'?[]:(DB.tasks||[]).filter(function(t){return t.assignedTo!==who;});
+  persist();closeModal();renderHome();renderScreen(currentScreen);
+  showToast('✅ تم التصفير بنجاح','#16a34a');
+}
+
 function fmt(n){return(n||0).toLocaleString('ar-EG')+' ج';}
+
 </script>
 </body>
 </html>
