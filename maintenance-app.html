@@ -138,7 +138,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
     <div style="font-size:44px;margin-bottom:10px">🖨️</div>
     <div style="font-size:20px;font-weight:900;color:#0f172a;margin-bottom:4px">مركز الصيانة</div>
     <div style="font-size:13px;color:#64748b;margin-bottom:24px">سجل دخول للمتابعة</div>
-    <button id="google-signin-btn" onclick="doGoogleSignIn()" style="width:100%;padding:13px;background:#0f172a;color:#fff;border:none;border-radius:13px;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px">
+    <button id="google-signin-btn" style="width:100%;padding:13px;background:#0f172a;color:#fff;border:none;border-radius:13px;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px">
       <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20H24v8h11.3C33.7 33.3 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3 0 5.8 1.1 7.9 3l5.7-5.7C34.1 6.5 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20c11 0 20-9 20-20 0-1.3-.1-2.7-.4-4z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.5 15.1 18.9 12 24 12c3 0 5.8 1.1 7.9 3l5.7-5.7C34.1 6.5 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-1.9 13.5-5l-6.2-5.2C29.5 35.5 26.9 36 24 36c-5.2 0-9.6-2.6-11.2-6.7l-6.5 5C9.6 39.6 16.3 44 24 44z"/><path fill="#1976D2" d="M43.6 20H24v8h11.3c-.8 2.3-2.3 4.2-4.3 5.5l6.2 5.2C40.9 35.3 44 30 44 24c0-1.3-.1-2.7-.4-4z"/></svg>
       تسجيل الدخول بـ Google
     </button>
@@ -154,7 +154,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
   <button onclick="doSignOut()" style="background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);color:#fff;border-radius:12px;padding:12px 24px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer">تسجيل الخروج</button>
 </div>
 
-<div id="app" style="height:100%;display:none;flex-direction:column;max-width:480px;margin:0 auto;background:#f1f5f9">
+<div id="app">
   <div id="header" class="hidden">
     <button id="back-btn" onclick="navigate('home')">←</button>
     <span id="header-title" style="flex:1"></span>
@@ -362,31 +362,24 @@ var PERM_LABELS={
 function isAdmin(){return userRole==='admin';}
 function canDo(p){if(isAdmin())return true;return userPerms[p]===true;}
 
-function doGoogleSignIn(){
+document.getElementById('google-signin-btn').addEventListener('click',function(){
   document.getElementById('login-loading').style.display='block';
-  document.getElementById('login-loading').textContent='⏳ جاري تسجيل الدخول...';
   document.getElementById('login-error').style.display='none';
   var provider=new firebase.auth.GoogleAuthProvider();
   provider.setCustomParameters({'prompt':'select_account'});
-  auth.signInWithPopup(provider).then(function(){
+  auth.signInWithPopup(provider).catch(function(e){
     document.getElementById('login-loading').style.display='none';
-  }).catch(function(e){
-    document.getElementById('login-loading').style.display='none';
-    if(e.code==='auth/popup-blocked'){
-      // fallback to redirect
-      document.getElementById('login-loading').style.display='block';
-      document.getElementById('login-loading').textContent='⏳ جاري التحويل...';
+    if(e.code==='auth/popup-blocked'||e.code==='auth/cancelled-popup-request'){
       auth.signInWithRedirect(provider);
-    } else if(e.code!=='auth/popup-closed-by-user'&&e.code!=='auth/cancelled-popup-request'){
+    } else {
       document.getElementById('login-error').style.display='block';
       document.getElementById('login-error').textContent='خطأ: '+e.message;
     }
   });
-}
+});
 
 auth.getRedirectResult().then(function(){}).catch(function(e){
-  if(e.code&&e.code!=='auth/no-current-user'&&e.code!=='auth/null-user'){
-    document.getElementById('login-loading').style.display='none';
+  if(e.code&&e.code!=='auth/no-current-user'){
     document.getElementById('login-error').style.display='block';
     document.getElementById('login-error').textContent='خطأ: '+e.message;
   }
@@ -425,7 +418,6 @@ auth.onAuthStateChanged(async function(user){
   document.getElementById('login-screen').classList.add('hidden');
   document.getElementById('pending-screen').classList.remove('show');
   document.getElementById('app').style.display='flex';
-  sessionStorage.removeItem('signingIn');
   setSyncIcon('⏳');
   try{
     var snap2=await db.collection('users').doc('shared').collection('data').doc('main').get();
@@ -1350,4 +1342,9 @@ function doReset(){
 function renderSettingsScreen(){
   var prefEl=document.getElementById('prefs-card');
   if(prefEl)prefEl.innerHTML=
-    '<div class="perm-row"><span class="perm-label">📅 التاريخ الهجري</span><label class="toggle"><input type="checkbox" '+(_useHijri?'checked':'')+' onchange="toggleHijri()"><span class="slider"></span></l
+    '<div class="perm-row"><span class="perm-label">📅 التاريخ الهجري</span><label class="toggle"><input type="checkbox" '+(_useHijri?'checked':'')+' onchange="toggleHijri()"><span class="slider"></span></label></div>';
+  document.getElementById('settings-stats').innerHTML=[
+    {label:'المنتجات',icon:'📦',val:DB.products.length},{label:'الفواتير',icon:'🧾',val:DB.sales.length},
+    {label:'المشتريات',icon:'🛒',val:DB.purchases.length},{label:'الديون',icon:'💳',val:DB.debts.length},
+    {label:'المصروفات',icon:'💸',val:DB.expenses.length},{label:'المهمات',icon:'📋',val:(DB.tasks||[]).length}
+  ].map(function(x){return '<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #f1f5f9"><span style="font-size:13px;color:#374151">'+x.icon+' '+x.label+'</span><span
