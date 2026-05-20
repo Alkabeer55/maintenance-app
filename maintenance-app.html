@@ -154,7 +154,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
   <button onclick="doSignOut()" style="background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);color:#fff;border-radius:12px;padding:12px 24px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer">تسجيل الخروج</button>
 </div>
 
-<div id="app" style="height:100%;display:none;flex-direction:column;max-width:480px;margin:0 auto;background:#f1f5f9">
+<div id="app">
   <div id="header" class="hidden">
     <button id="back-btn" onclick="navigate('home')">←</button>
     <span id="header-title" style="flex:1"></span>
@@ -362,31 +362,28 @@ var PERM_LABELS={
 function isAdmin(){return userRole==='admin';}
 function canDo(p){if(isAdmin())return true;return userPerms[p]===true;}
 
-function doGoogleSignIn(){
+document.getElementById('google-signin-btn').addEventListener('click',function(){
   document.getElementById('login-loading').style.display='block';
-  document.getElementById('login-loading').textContent='⏳ جاري تسجيل الدخول...';
   document.getElementById('login-error').style.display='none';
   var provider=new firebase.auth.GoogleAuthProvider();
   provider.setCustomParameters({'prompt':'select_account'});
   auth.signInWithPopup(provider).catch(function(e){
     document.getElementById('login-loading').style.display='none';
-    if(e.code==='auth/popup-blocked'){
+    if(e.code==='auth/popup-blocked'||e.code==='auth/cancelled-popup-request'){
       auth.signInWithRedirect(provider);
-    } else if(e.code!=='auth/popup-closed-by-user'&&e.code!=='auth/cancelled-popup-request'){
+    } else {
       document.getElementById('login-error').style.display='block';
       document.getElementById('login-error').textContent='خطأ: '+e.message;
     }
   });
-}
+});
 
 auth.getRedirectResult().then(function(){}).catch(function(e){
-  if(e.code&&e.code!=='auth/no-current-user'&&e.code!=='auth/null-user'){
+  if(e.code&&e.code!=='auth/no-current-user'){
     document.getElementById('login-error').style.display='block';
     document.getElementById('login-error').textContent='خطأ: '+e.message;
   }
 });
-
-document.getElementById('google-signin-btn').addEventListener('click', doGoogleSignIn);
 
 auth.onAuthStateChanged(async function(user){
   document.getElementById('login-loading').style.display='none';
@@ -421,7 +418,6 @@ auth.onAuthStateChanged(async function(user){
   document.getElementById('login-screen').classList.add('hidden');
   document.getElementById('pending-screen').classList.remove('show');
   document.getElementById('app').style.display='flex';
-  sessionStorage.removeItem('signingIn');
   setSyncIcon('⏳');
   try{
     var snap2=await db.collection('users').doc('shared').collection('data').doc('main').get();
@@ -1349,4 +1345,6 @@ function renderSettingsScreen(){
     '<div class="perm-row"><span class="perm-label">📅 التاريخ الهجري</span><label class="toggle"><input type="checkbox" '+(_useHijri?'checked':'')+' onchange="toggleHijri()"><span class="slider"></span></label></div>';
   document.getElementById('settings-stats').innerHTML=[
     {label:'المنتجات',icon:'📦',val:DB.products.length},{label:'الفواتير',icon:'🧾',val:DB.sales.length},
-    {label:'المشتريات',icon:'🛒',val:DB.purchases.length},{label:'الديون',icon:'💳',val:DB.debts.l
+    {label:'المشتريات',icon:'🛒',val:DB.purchases.length},{label:'الديون',icon:'💳',val:DB.debts.length},
+    {label:'المصروفات',icon:'💸',val:DB.expenses.length},{label:'المهمات',icon:'📋',val:(DB.tasks||[]).length}
+  ].map(function(x){return '<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #f1f5f9"><span style="font-size:13px;color:#374151">'+x.icon+' '+x.label+'</span><span
