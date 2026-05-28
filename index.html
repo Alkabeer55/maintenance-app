@@ -1680,4 +1680,1749 @@ function openMarkDoneModal(id){
   document.getElementById('modal-body').innerHTML=
     '<div style="text-align:center;padding:12px 0">'+
     '<div style="font-size:36px;margin-bottom:10px">✅</div>'+
-    '<div style="font-weight:800;font-size:15px;margin-bottom:6px">'+esc(t.title)+'</d
+    '<div style="font-weight:800;font-size:15px;margin-bottom:6px">'+esc(t.title)+'</div></div>'+
+    '<div class="field"><label>ملاحظة الإنجاز <span style="font-size:11px;color:#94a3b8">(اختياري)</span></label>'+
+    '<textarea id="done-note" rows="2" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit;direction:rtl;resize:none;background:#f8fafc;outline:none"></textarea></div>'+
+    '<div class="modal-actions"><button class="btn btn-green btn-full" onclick="markDone(\''+id+'\')">✅ تأكيد</button><button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
+  openModal();
+}
+
+async function markDone(id){
+  var note=v('done-note')||'';
+  var update={status:'done',done_at:new Date().toISOString(),done_note:note};
+  DB.tasks=DB.tasks.map(function(t){return t.id===id?Object.assign({},t,update):t;});
+  await dbUpdate('tasks',id,update);
+  closeModal();renderTasks();renderHome();
+  showToast('🎉 أحسنت! تم الإنجاز','#16a34a');
+}
+
+// تقرير المهمات
+function renderTasksReport(){
+  var el=document.getElementById('tasks-report-body');if(!el)return;
+  var list=DB.tasks||[];
+  if(!list.length){el.innerHTML='<div style="padding:14px 12px"><div class="empty">لا توجد مهمات</div></div>';return;}
+  var todayStr=today(),monthStr=todayStr.slice(0,7),yearStr=todayStr.slice(0,4);
+  var doneTasks=list.filter(function(t){return t.status==='done';});
+  var pendingTasks=list.filter(function(t){return t.status!=='done';});
+  var todayDone=doneTasks.filter(function(t){return t.done_at&&t.done_at.slice(0,10)===todayStr;});
+  var monthDone=doneTasks.filter(function(t){return t.done_at&&t.done_at.slice(0,7)===monthStr;});
+  var yearDone=doneTasks.filter(function(t){return t.done_at&&t.done_at.slice(0,4)===yearStr;});
+  function pCard(title,arr,color){
+    var pc={عاجل:0,متوسط:0,عادي:0};
+    arr.forEach(function(t){if(pc[t.priority]!==undefined)pc[t.priority]++;});
+    return '<div class="card" style="margin-bottom:10px">'+
+      '<div style="font-weight:900;font-size:14px;color:'+color+';margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid '+color+'">'+title+'</div>'+
+      '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px">'+
+      movMini('منجزة',arr.length,'#15803d','#dcfce7')+
+      movMini('معلقة',pendingTasks.length,'#ca8a04','#fef9c3')+
+      movMini('الكل',list.length,color,'#f8fafc')+
+      '</div>'+
+      (arr.length?arr.slice(-3).reverse().map(function(t){
+        return '<div style="padding:7px 0;border-bottom:1px solid #f1f5f9">'+
+          '<div style="font-size:13px;font-weight:700">✅ '+esc(t.title)+'</div>'+
+          (t.done_note?'<div style="font-size:11px;color:#64748b">'+esc(t.done_note)+'</div>':'')+
+          '</div>';
+      }).join(''):'<div style="color:#94a3b8;font-size:13px">لا توجد منجزات</div>')+
+      '</div>';
+  }
+  el.innerHTML='<div style="padding:14px 12px 88px">'+
+    pCard('📅 اليوم',todayDone,'#2563eb')+
+    pCard('📆 هذا الشهر',monthDone,'#7c3aed')+
+    pCard('🗓️ هذا العام',yearDone,'#ea580c')+
+    '</div>';
+}
+
+function updateTasksBadge(){
+  var pending=DB.tasks.filter(function(t){return t.status!=='done';});
+  var b=document.getElementById('tasks-badge');
+  if(b){if(pending.length>0){b.textContent=pending.length;b.style.display='flex';}else b.style.display='none';}
+}
+
+
+// ===== EXPENSES =====
+// ===== QUICK EXPENSE =====
+var DEFAULT_EXP_TYPES = ['انتقالات','تشغيل','إيجار','رواتب','أخرى'];
+
+function getExpTypes(){
+  var custom = LS.get('mc8_exp_types',[]);
+  var all = DEFAULT_EXP_TYPES.slice();
+  custom.forEach(function(t){ if(all.indexOf(t)===-1) all.push(t); });
+  return all;
+}
+
+function openExpenseModal(){
+  document.getElementById('modal-title').textContent='💸 مصروف سريع';
+  var types = getExpTypes();
+  document.getElementById('modal-body').innerHTML=
+    fld('exp-amount','المبلغ (ج)','number','','',true)+
+    '<div class="field"><label>النوع<span class="required">*</span></label>'+
+    '<select id="exp-type" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit">'+
+    types.map(function(t){return '<option>'+t+'</option>';}).join('')+
+    '</select></div>'+
+    '<div style="display:flex;gap:6px;margin-bottom:12px">'+
+    '<input id="exp-new-type" type="text" placeholder="نوع جديد..." style="flex:1;padding:9px 12px;border:2px solid #e2e8f0;border-radius:9px;font-size:13px;font-family:inherit;background:#f8fafc;outline:none;direction:rtl">'+
+    '<button onclick="addExpType()" style="background:#64748b;color:#fff;border:none;border-radius:9px;padding:9px 13px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer">+ إضافة</button>'+
+    '</div>'+
+    '<div class="field"><label>ملاحظات <span style="font-size:11px;color:#94a3b8">(اختياري)</span></label>'+
+    '<textarea id="exp-note" rows="2" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit;direction:rtl;resize:none;background:#f8fafc;outline:none"></textarea></div>'+
+    dateField('exp-date','📅 التاريخ',null)+
+    '<div class="modal-actions">'+
+    '<button class="btn btn-orange btn-full" onclick="saveExpense()">تسجيل</button>'+
+    '<button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
+  openModal();
+}
+
+function addExpType(){
+  var val=v('exp-new-type').trim();
+  if(!val)return showToast('⚠️ اكتب اسم النوع','#dc2626');
+  var custom=LS.get('mc8_exp_types',[]);
+  if(custom.indexOf(val)===-1){custom.push(val);LS.set('mc8_exp_types',custom);}
+  var sel=document.getElementById('exp-type');
+  if(sel){var opt=document.createElement('option');opt.value=val;opt.textContent=val;sel.appendChild(opt);sel.value=val;}
+  document.getElementById('exp-new-type').value='';
+  showToast('✅ تم إضافة النوع','#16a34a');
+}
+
+async function saveExpense(){
+  var amount=+v('exp-amount');
+  if(!amount||amount<=0)return showToast('⚠️ المبلغ مطلوب','#dc2626');
+  var type=v('exp-type');
+  var note=v('exp-note')||'';
+  var obj={id:genId(),label:type+(note?' — '+note:''),amount:amount,type:type,note:note,date:v('exp-date')};
+  DB.expenses.unshift(obj);
+  await dbUpsert('expenses',obj);
+  closeModal();renderHome();
+  showToast('✅ تم تسجيل المصروف','#16a34a');
+}
+
+// ===== عرض وتعديل المصاريف =====
+function renderExpensesList(){
+  var el=document.getElementById('expenses-list');if(!el)return;
+  var list=[].concat(DB.expenses).sort(function(a,b){return b.id>a.id?1:-1;});
+  if(!list.length){el.innerHTML='<div class="empty">لا توجد مصاريف</div>';return;}
+  el.innerHTML=list.slice(0,50).map(function(e){
+    return '<div class="card" style="margin-bottom:8px">'+
+      '<div style="display:flex;justify-content:space-between;align-items:center">'+
+      '<div><div style="font-weight:800;font-size:14px">'+esc(e.type)+'</div>'+
+      '<div style="font-size:11px;color:#94a3b8">'+esc(fmtDate(e.date))+(e.note?' — '+esc(e.note):'')+'</div></div>'+
+      '<div style="display:flex;align-items:center;gap:8px">'+
+      '<b style="color:#ea580c;font-size:15px">'+fmt(e.amount)+'</b>'+
+      '<button onclick="openEditExpenseModal(\"'+e.id+'\")" style="background:#dbeafe;border:none;border-radius:7px;padding:5px 9px;cursor:pointer;font-size:12px">✏️</button>'+
+      '<button onclick="confirmAction(\"هتحذف؟\",function(){delItem(\"expenses\",\"'+e.id+'\",renderExpensesList)})" style="background:#fee2e2;border:none;border-radius:7px;padding:5px 9px;cursor:pointer;font-size:12px">🗑️</button>'+
+      '</div></div></div>';
+  }).join('');
+}
+
+function openEditExpenseModal(id){
+  var e=DB.expenses.find(function(x){return x.id===id;});if(!e)return;
+  var types=getExpTypes();
+  document.getElementById('modal-title').textContent='✏️ تعديل المصروف';
+  document.getElementById('modal-body').innerHTML=
+    fld('edit-exp-amount','المبلغ (ج)','number',e.amount,'',true)+
+    '<div class="field"><label>النوع</label>'+
+    '<select id="edit-exp-type" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit">'+
+    types.map(function(t){return '<option'+(e.type===t?' selected':'')+'>'+t+'</option>';}).join('')+
+    '</select></div>'+
+    '<div class="field"><label>ملاحظات <span style="font-size:11px;color:#94a3b8">(اختياري)</span></label>'+
+    '<textarea id="edit-exp-note" rows="2" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit;direction:rtl;resize:none;background:#f8fafc;outline:none">'+esc(e.note||'')+'</textarea></div>'+
+    dateField('edit-exp-date','📅 التاريخ',e.date)+
+    '<div class="modal-actions">'+
+    '<button class="btn btn-orange btn-full" onclick="saveEditExpense(\"'+id+'\")">حفظ</button>'+
+    '<button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
+  openModal();
+}
+
+async function saveEditExpense(id){
+  var amount=+v('edit-exp-amount');
+  if(!amount||amount<=0)return showToast('⚠️ المبلغ غير صحيح','#dc2626');
+  var type=v('edit-exp-type');
+  var note=v('edit-exp-note')||'';
+  var update={amount:amount,type:type,note:note,date:v('edit-exp-date'),label:type+(note?' — '+note:'')};
+  DB.expenses=DB.expenses.map(function(e){return e.id===id?Object.assign({},e,update):e;});
+  await dbUpdate('expenses',id,update);
+  closeModal();renderHome();
+  showToast('✅ تم التعديل','#16a34a');
+}
+
+
+// ===== MOVEMENTS =====
+// ===== MOVEMENTS =====
+if(!DB.movements)DB.movements=[];
+if(!DB.schedule)DB.schedule=LS.get('mc8_schedule',{});
+if(!DB.movCounter)DB.movCounter=0;
+
+var FAULT_TYPES=[];// فاضية — المستخدم يضيف
+
+var DAYS_AR=['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+
+function movMini(label,val,color,bg){
+  return '<div style="background:'+bg+';border-radius:10px;padding:9px 6px;text-align:center">'+
+    '<div style="font-size:9px;color:'+color+';font-weight:700;margin-bottom:2px">'+label+'</div>'+
+    '<div style="font-size:20px;font-weight:900;color:'+color+'">'+val+'</div></div>';
+}
+
+function daysBetween(a,b){
+  if(!a||!b)return 0;
+  return Math.max(0,Math.round((new Date(b)-new Date(a))/(1000*60*60*24)));
+}
+
+function getFaultTypes(){
+  var saved=LS.get('mc8_fault_types',[]);
+  return saved;
+}
+
+function sortedMovements(){
+  var list=[].concat(DB.movements||[]);
+  var schedOrder={};
+  var week=getWeekDates();
+  week.forEach(function(dateStr,dayIdx){
+    (DB.schedule[dateStr]||[]).forEach(function(id,pos){
+      if(!schedOrder[id])schedOrder[id]={dayIdx:dayIdx,pos:pos};
+    });
+  });
+  list.sort(function(a,b){
+    var aDone=a.status==='منتهي',bDone=b.status==='منتهي';
+    if(aDone&&!bDone)return 1;
+    if(!aDone&&bDone)return -1;
+    var sa=schedOrder[a.id],sb=schedOrder[b.id];
+    if(sa&&sb){if(sa.dayIdx!==sb.dayIdx)return sa.dayIdx-sb.dayIdx;return sa.pos-sb.pos;}
+    if(sa&&!sb)return -1;
+    if(!sa&&sb)return 1;
+    return b.id>a.id?1:-1;
+  });
+  return list;
+}
+
+// ===== RENDER LIST =====
+function renderMovements(){
+  var el=document.getElementById('movements-list');if(!el)return;
+  var list=sortedMovements();
+  var total=list.length,open=list.filter(function(m){return m.status!=='منتهي';}).length;
+  var done=list.filter(function(m){return m.status==='منتهي';}).length;
+  var todayDone=list.filter(function(m){return m.status==='منتهي'&&m.closed_at===today();}).length;
+  var summary='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px">'+
+    movMini('الكل',total,'#1e40af','#dbeafe')+movMini('جاري',open,'#ca8a04','#fef9c3')+
+    movMini('منتهي',done,'#15803d','#dcfce7')+movMini('اليوم',todayDone,'#86198f','#fdf2f8')+'</div>';
+  if(!list.length){el.innerHTML=summary+'<div class="empty">لا توجد أعطال</div>';return;}
+  var sc=function(s){return s==='منتهي'?'#15803d':s==='جاري'?'#ca8a04':'#2563eb';};
+  el.innerHTML=summary+list.map(function(m){
+    var days=m.status==='منتهي'&&m.opened_at&&m.closed_at?' <span style="font-size:11px;color:#64748b">⏱️ '+daysBetween(m.opened_at,m.closed_at)+' يوم</span>':'';
+    var lastLog=m.log&&m.log.length?m.log[m.log.length-1]:null;
+    var num=m.seq_num?'<span style="background:#0f172a;color:#fff;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:900;margin-left:6px">#'+m.seq_num+'</span>':'';
+    return '<div style="background:#fff;border-radius:14px;padding:13px 14px;box-shadow:0 2px 10px rgba(0,0,0,.06);margin-bottom:10px;border-right:4px solid '+sc(m.status)+'">'+
+      '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">'+
+      '<div style="flex:1"><div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px">'+
+      '<div style="font-weight:900;font-size:15px">'+esc(m.customer)+'</div>'+num+'</div>'+
+      '<div style="font-size:11px;color:#94a3b8;margin-top:1px">'+esc(fmtDate(m.opened_at||m.date))+days+'</div></div>'+
+      '<span style="background:'+sc(m.status)+'22;color:'+sc(m.status)+';border-radius:8px;padding:3px 9px;font-size:11px;font-weight:800">'+esc(m.status)+'</span></div>'+
+      '<div style="background:#f8fafc;border-radius:9px;padding:9px 11px;margin-bottom:8px;font-size:12px;display:grid;grid-template-columns:1fr 1fr;gap:4px">'+
+      '<div><span style="color:#94a3b8">الجهاز: </span><b>'+esc(m.device||'—')+'</b></div>'+
+      '<div><span style="color:#94a3b8">السيريال: </span><b>'+esc(m.serial||'—')+'</b></div>'+
+      '<div style="grid-column:1/-1"><span style="color:#94a3b8">نوع العطل: </span><b>'+esc(m.fault_type||'—')+'</b></div>'+
+      (m.fault_desc?'<div style="grid-column:1/-1"><span style="color:#94a3b8">وصف: </span>'+esc(m.fault_desc)+'</div>':'')+
+      '</div>'+
+      (m.parts&&m.parts.length?'<div style="background:#fff7ed;border-radius:9px;padding:8px 11px;margin-bottom:8px">'+
+        '<div style="font-size:11px;font-weight:700;color:#ea580c;margin-bottom:4px">🔩 قطع غيار</div>'+
+        m.parts.map(function(p){return '<div style="font-size:12px;padding:2px 0">• '+esc(p.name)+(p.qty>1?' × '+p.qty:'')+'</div>';}).join('')+'</div>':'')+
+      (lastLog?'<div style="background:#f0fdf4;border-radius:9px;padding:8px 11px;margin-bottom:8px;font-size:12px">'+
+        '<span style="color:#94a3b8">آخر تحديث ('+esc(fmtDate(lastLog.date))+'): </span>'+esc(lastLog.note)+
+        (m.log.length>1?' <span style="color:#94a3b8;font-size:10px">(+'+(m.log.length-1)+')</span>':'')+
+        '</div>':'')+
+      '<div style="display:flex;gap:6px;flex-wrap:wrap">'+
+      (m.status!=='منتهي'?'<button class="btn btn-sm" style="background:#f0fdf4;color:#15803d;border:1.5px solid #86efac;flex:1" onclick="openAddLogModal(\''+m.id+'\')">📝 تحديث</button>':'')+
+      (m.status!=='منتهي'?'<button class="btn btn-green btn-sm" onclick="closeMovement(\''+m.id+'\')">✅ إنهاء</button>':'')+
+      (m.status==='منتهي'?'<button class="btn btn-sm" style="background:#f0fdf4;color:#15803d;border:1.5px solid #86efac;flex:1" onclick="openMovementDetail(\''+m.id+'\')">📋 تفاصيل</button>':'')+
+      '<button class="btn-ic" style="background:#dbeafe" onclick="openMovementModal(\''+m.id+'\')">✏️</button>'+
+      '<button class="btn-ic" style="background:#fee2e2" onclick="confirmAction(\'هتحذف العطل ده؟\',function(){delMovement(\''+m.id+'\')})">🗑️</button>'+
+      '</div></div>';
+  }).join('');
+}
+
+// ===== ADD / EDIT =====
+var _movId=null,_movParts=[];
+
+function openMovementModal(id){
+  _movId=id||null;
+  var m=id?(DB.movements||[]).find(function(x){return x.id===id;}):null;
+  _movParts=m&&m.parts?m.parts.map(function(p){return Object.assign({},p);}):[];
+  document.getElementById('modal-title').textContent=m?'تعديل العطل':'تسجيل عطل جديد';
+  renderMovementBody(m);openModal();
+}
+
+function renderMovementBody(m){
+  var faultTypes=getFaultTypes();
+  var partsHtml='';
+  if(_movParts.length){
+    partsHtml='<div style="background:#fff7ed;border-radius:9px;padding:9px 11px;margin-bottom:10px">'+
+      '<div style="font-size:11px;font-weight:700;color:#ea580c;margin-bottom:6px">🔩 القطع</div>'+
+      _movParts.map(function(p,i){
+        return '<div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:4px 0;border-bottom:1px solid #fed7aa">'+
+          '<span>'+esc(p.name)+'</span>'+
+          '<div style="display:flex;align-items:center;gap:5px">'+
+          '<button onclick="chgMovPartQty('+i+',-1)" style="background:#fee2e2;border:none;border-radius:5px;width:22px;height:22px;cursor:pointer;font-weight:900;color:#dc2626">−</button>'+
+          '<b style="min-width:16px;text-align:center">'+p.qty+'</b>'+
+          '<button onclick="chgMovPartQty('+i+',1)" style="background:#dcfce7;border:none;border-radius:5px;width:22px;height:22px;cursor:pointer;font-weight:900;color:#15803d">+</button>'+
+          '<button onclick="removeMovPart('+i+')" style="background:#fee2e2;border:none;border-radius:5px;padding:2px 6px;cursor:pointer;font-size:10px;color:#dc2626">✕</button>'+
+          '</div></div>';
+      }).join('')+'</div>';
+  }
+  document.getElementById('modal-body').innerHTML=
+    acField('mov-customer','اسم العميل','text',m?m.customer:'','','customers',true)+
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">'+
+    '<div class="field" style="margin:0"><label>🖨️ الجهاز</label>'+
+    '<input id="mov-device" type="text" value="'+esc(m?m.device||'':'')+'" placeholder="LBP3000" autocomplete="off" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit;background:#f8fafc;outline:none"></div>'+
+    '<div class="field" style="margin:0"><label>🔢 السيريال</label>'+
+    '<input id="mov-serial" type="text" value="'+esc(m?m.serial||'':'')+'" placeholder="SN-..." autocomplete="off" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit;background:#f8fafc;outline:none"></div></div>'+
+    '<div class="field"><label>نوع العطل</label>'+
+    '<div style="display:flex;gap:6px;margin-bottom:6px">'+
+    '<input id="mov-fault-input" type="text" value="'+esc(m?m.fault_type||'':'')+'" placeholder="اكتب نوع العطل..." list="fault-types-list" autocomplete="off" style="flex:1;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit;background:#f8fafc;outline:none">'+
+    '<button onclick="saveFaultType()" style="background:#86198f;color:#fff;border:none;border-radius:9px;padding:9px 12px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer">+ حفظ</button>'+
+    '</div>'+
+    '<datalist id="fault-types-list">'+faultTypes.map(function(t){return '<option value="'+esc(t)+'"></option>';}).join('')+'</datalist>'+
+    (faultTypes.length?'<div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px">'+
+      faultTypes.map(function(t){return '<button onclick="selectFaultType(\''+esc(t)+'\')" style="background:#f5f3ff;color:#6d28d9;border:1.5px solid #ddd6fe;border-radius:8px;padding:4px 10px;font-size:11px;font-family:inherit;cursor:pointer">'+esc(t)+'</button>';}).join('')+'</div>':'<div style="font-size:12px;color:#94a3b8;margin-bottom:8px">اكتب نوع العطل واضغط "حفظ" لإضافته للقائمة</div>')+
+    '</div>'+
+    '<div class="field"><label>وصف العطل <span style="font-size:11px;color:#94a3b8">(اختياري)</span></label>'+
+    '<textarea id="mov-desc" rows="2" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit;direction:rtl;resize:none;background:#f8fafc;outline:none" placeholder="تفاصيل العطل...">'+esc(m?m.fault_desc||'':'')+'</textarea></div>'+
+    '<div class="field"><label>🔩 قطع الغيار <span style="font-size:11px;color:#94a3b8">(اختياري)</span></label>'+
+    '<div style="display:flex;gap:6px;margin-bottom:6px">'+
+    '<input id="mov-part-name" type="text" placeholder="اسم القطعة..." autocomplete="off" style="flex:1;padding:9px 12px;border:2px solid #e2e8f0;border-radius:9px;font-size:13px;font-family:inherit;background:#f8fafc;outline:none">'+
+    '<button onclick="addMovPartManual()" style="background:#ea580c;color:#fff;border:none;border-radius:9px;padding:9px 13px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer">+</button>'+
+    '</div></div>'+
+    partsHtml+
+    '<div class="field"><label>الحالة</label>'+
+    '<select id="mov-status" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit">'+
+    ['جديد','جاري','منتهي'].map(function(s){return '<option'+(m?m.status===s?' selected':'':s==='جديد'?' selected':'')+'>'+s+'</option>';}).join('')+
+    '</select></div>'+
+    dateField('mov-date','📅 تاريخ الاستلام',m?m.opened_at||m.date:null)+
+    '<div class="modal-actions">'+
+    '<button class="btn btn-primary btn-full" onclick="saveMovement()">'+(m?'حفظ التعديل':'تسجيل')+'</button>'+
+    '<button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
+  initAC('mov-customer','customers');
+}
+
+function selectFaultType(t){
+  var inp=document.getElementById('mov-fault-input');if(inp)inp.value=t;
+}
+
+function saveFaultType(){
+  var val=v('mov-fault-input').trim();
+  if(!val)return;
+  var types=getFaultTypes();
+  if(types.indexOf(val)===-1){types.push(val);LS.set('mc8_fault_types',types);}
+  showToast('✅ تم حفظ نوع العطل','#16a34a');
+  var m=_movId?(DB.movements||[]).find(function(x){return x.id===_movId;}):null;
+  renderMovementBody(m);
+  var inp=document.getElementById('mov-fault-input');if(inp)inp.value=val;
+}
+
+function _restoreMovFields(){
+  var saved={cust:v('mov-customer'),dev:v('mov-device'),ser:v('mov-serial'),fault:v('mov-fault-input'),desc:v('mov-desc'),stat:v('mov-status')};
+  var m=_movId?(DB.movements||[]).find(function(x){return x.id===_movId;}):null;
+  renderMovementBody(m);
+  if(document.getElementById('mov-customer'))document.getElementById('mov-customer').value=saved.cust;
+  if(document.getElementById('mov-device'))document.getElementById('mov-device').value=saved.dev;
+  if(document.getElementById('mov-serial'))document.getElementById('mov-serial').value=saved.ser;
+  if(document.getElementById('mov-fault-input'))document.getElementById('mov-fault-input').value=saved.fault;
+  if(document.getElementById('mov-desc'))document.getElementById('mov-desc').value=saved.desc;
+  if(document.getElementById('mov-status'))document.getElementById('mov-status').value=saved.stat;
+}
+
+function addMovPartManual(){
+  var name=v('mov-part-name');if(!name.trim())return showToast('⚠️ اكتب اسم القطعة','#dc2626');
+  var ex=_movParts.find(function(p){return normalizeAr(p.name)===normalizeAr(name);});
+  if(ex)ex.qty++;else _movParts.push({name:name.trim(),qty:1});
+  _restoreMovFields();
+}
+function chgMovPartQty(idx,delta){_movParts[idx].qty=Math.max(1,_movParts[idx].qty+delta);_restoreMovFields();}
+function removeMovPart(idx){_movParts.splice(idx,1);_restoreMovFields();}
+
+async function saveMovement(){
+  var customer=v('mov-customer');
+  if(!customer)return showToast('⚠️ اسم العميل مطلوب','#dc2626');
+  var status=v('mov-status');
+  var isNewlyDone=status==='منتهي'&&(!_movId||(DB.movements.find(function(m){return m.id===_movId;})||{}).status!=='منتهي');
+  var obj={customer:customer,device:v('mov-device'),serial:v('mov-serial'),
+    fault_type:v('mov-fault-input'),fault_desc:v('mov-desc'),
+    status:status,parts:_movParts.slice(),opened_at:v('mov-date')||today()};
+  if(isNewlyDone){obj.closed_at=today();obj.closed_order=Date.now();}
+  if(_movId){
+    DB.movements=DB.movements.map(function(m){return m.id===_movId?Object.assign({},m,obj):m;});
+    await dbUpdate('movements',_movId,obj);
+  }else{
+    DB.movCounter=(DB.movCounter||0)+1;
+    obj.id=genId();obj.log=[];obj.seq_num=DB.movCounter;
+    DB.movements.unshift(obj);
+    await dbUpsert('movements',obj);
+    await persist();
+  }
+  addArchive('customers',customer);
+  closeModal();renderMovements();renderHome();
+  showToast(_movId?'✅ تم التعديل':'✅ تم تسجيل العطل #'+DB.movCounter,'#16a34a');
+}
+
+// ===== DAILY LOG =====
+function openAddLogModal(id){
+  var m=(DB.movements||[]).find(function(x){return x.id===id;});if(!m)return;
+  document.getElementById('modal-title').textContent='📝 تحديث يومي'+(m.seq_num?' #'+m.seq_num:'');
+  document.getElementById('modal-body').innerHTML=
+    '<div style="background:#f8fafc;border-radius:10px;padding:10px 12px;margin-bottom:10px;font-size:13px">'+
+    '<b>'+esc(m.customer)+'</b>'+(m.fault_type?' — '+esc(m.fault_type):'')+(m.device?' — '+esc(m.device):'')+
+    '</div>'+
+    (m.log&&m.log.length?'<div style="max-height:150px;overflow-y:auto;margin-bottom:10px;background:#f8fafc;border-radius:9px;padding:8px 10px">'+
+      '<div style="font-size:11px;font-weight:700;color:#64748b;margin-bottom:6px">📋 السجل السابق:</div>'+
+      m.log.slice().reverse().map(function(l){
+        return '<div style="margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid #e2e8f0">'+
+          '<div style="font-size:10px;color:#94a3b8">'+esc(fmtDate(l.date))+'</div>'+
+          '<div style="font-size:12px;margin-top:2px">'+esc(l.note)+'</div></div>';
+      }).join('')+'</div>':'')+
+    '<div class="field"><label>ماذا عملت اليوم؟<span class="required">*</span></label>'+
+    '<textarea id="log-note" rows="3" style="width:100%;padding:10px 13px;border:2px solid #3b82f6;border-radius:11px;font-size:14px;font-family:inherit;direction:rtl;resize:none;background:#f8fafc;outline:none" placeholder="فككت الجهاز... لسه ناقص..."></textarea></div>'+
+    '<div class="field"><label>الحالة بعد اليوم</label>'+
+    '<select id="log-status" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit">'+
+    ['جاري','منتهي'].map(function(s){return '<option'+(m.status===s?' selected':'')+'>'+s+'</option>';}).join('')+
+    '</select></div>'+
+    '<div class="modal-actions">'+
+    '<button class="btn btn-primary btn-full" onclick="saveLog(\''+id+'\')">حفظ</button>'+
+    '<button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
+  setTimeout(function(){var t=document.getElementById('log-note');if(t)t.focus();},80);
+  openModal();
+}
+
+async function saveLog(id){
+  var note=v('log-note');if(!note.trim())return showToast('⚠️ اكتب ملاحظة','#dc2626');
+  var newStatus=v('log-status');
+  var update={};
+  DB.movements=DB.movements.map(function(m){
+    if(m.id!==id)return m;
+    var log=(m.log||[]).concat([{date:today(),note:note}]);
+    update={log:log,status:newStatus};
+    if(newStatus==='منتهي'&&m.status!=='منتهي'){update.closed_at=today();update.closed_order=Date.now();}
+    return Object.assign({},m,update);
+  });
+  await dbUpdate('movements',id,update);
+  closeModal();renderMovements();renderHome();
+  showToast(newStatus==='منتهي'?'🎉 تم إنهاء العطل':'✅ تم التحديث','#16a34a');
+}
+
+function closeMovement(id){
+  openAddLogModal(id);
+  setTimeout(function(){
+    var t=document.getElementById('modal-title');if(t)t.textContent='✅ إنهاء العطل';
+    var s=document.getElementById('log-status');if(s)s.value='منتهي';
+  },60);
+}
+
+async function delMovement(id){
+  DB.movements=DB.movements.filter(function(m){return m.id!==id;});
+  Object.keys(DB.schedule).forEach(function(d){
+    DB.schedule[d]=(DB.schedule[d]||[]).filter(function(x){return x!==id;});
+  });
+  await dbDelete('movements',id);
+  await persist();
+  renderMovements();showToast('🗑️ تم الحذف','#64748b');
+}
+
+// ===== DETAIL =====
+function openMovementDetail(id){
+  var m=(DB.movements||[]).find(function(x){return x.id===id;});if(!m)return;
+  var days=daysBetween(m.opened_at,m.closed_at);
+  var relSales=DB.sales.filter(function(s){return normalizeAr(s.customer)===normalizeAr(m.customer);}).sort(function(a,b){return b.id>a.id?1:-1;});
+  document.getElementById('modal-title').textContent='📋 تفاصيل العطل'+(m.seq_num?' #'+m.seq_num:'');
+  document.getElementById('modal-body').innerHTML=
+    '<div style="background:linear-gradient(135deg,#0f172a,#1e3a5f);border-radius:14px;padding:14px;color:#fff;margin-bottom:12px">'+
+    '<div style="font-size:16px;font-weight:900;margin-bottom:8px">'+esc(m.customer)+(m.seq_num?' <span style="background:rgba(255,255,255,.2);border-radius:6px;padding:2px 8px;font-size:12px">#'+m.seq_num+'</span>':'')+
+    '</div>'+
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px">'+
+    '<div><span style="opacity:.6">الجهاز</span><div style="font-weight:700">'+esc(m.device||'—')+'</div></div>'+
+    '<div><span style="opacity:.6">السيريال</span><div style="font-weight:700">'+esc(m.serial||'—')+'</div></div>'+
+    '<div><span style="opacity:.6">استلام</span><div style="font-weight:700">'+esc(fmtDate(m.opened_at))+'</div></div>'+
+    '<div><span style="opacity:.6">تسليم</span><div style="font-weight:700">'+esc(fmtDate(m.closed_at))+'</div></div>'+
+    '</div>'+
+    '<div style="background:rgba(255,255,255,.15);border-radius:9px;padding:10px;margin-top:10px;text-align:center">'+
+    '<div style="font-size:11px;opacity:.7">مدة الإصلاح</div>'+
+    '<div style="font-size:24px;font-weight:900">'+days+' يوم</div></div></div>'+
+    '<div class="card" style="margin-bottom:10px">'+
+    '<div style="font-weight:700;font-size:13px;margin-bottom:8px">🔧 '+esc(m.fault_type||'—')+'</div>'+
+    (m.fault_desc?'<div style="font-size:12px;color:#64748b;margin-bottom:8px">'+esc(m.fault_desc)+'</div>':'')+
+    (m.parts&&m.parts.length?'<div style="font-size:12px;font-weight:700;color:#ea580c;margin-bottom:4px">🔩 قطع الغيار:</div>'+
+      m.parts.map(function(p){return '<div style="font-size:12px">• '+esc(p.name)+(p.qty>1?' × '+p.qty:'')+'</div>';}).join(''):'')+'</div>'+
+    (m.log&&m.log.length?'<div class="card" style="margin-bottom:10px"><div style="font-weight:700;font-size:13px;margin-bottom:10px">📋 سجل العمل ('+m.log.length+')</div>'+
+      m.log.map(function(l,i){return '<div style="padding:8px 0;border-bottom:1px solid #f1f5f9">'+
+        '<div style="font-size:10px;color:#94a3b8">اليوم '+(i+1)+' — '+esc(fmtDate(l.date))+'</div>'+
+        '<div style="font-size:13px">'+esc(l.note)+'</div></div>';}).join('')+'</div>':'')+
+    (relSales.length?'<div class="card" style="margin-bottom:10px"><div style="font-weight:700;font-size:13px;margin-bottom:10px">🧾 فواتير '+esc(m.customer)+' ('+relSales.length+')</div>'+
+      relSales.slice(0,5).map(function(s){return '<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #f1f5f9;font-size:12px">'+
+        '<div><div style="font-weight:700">'+esc(fmtDate(s.date))+'</div></div>'+
+        '<div style="text-align:left"><b>'+fmt(s.total)+'</b><div style="font-size:10px;color:'+(s.status==='مدفوع'?'#15803d':'#dc2626')+'">'+esc(s.status)+'</div></div></div>';}).join('')+'</div>':'')+
+    '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+  openModal();
+}
+
+// ===== ARCHIVE =====
+function renderMovementsArchive(){
+  var el=document.getElementById('movements-archive-body');if(!el)return;
+  var done=(DB.movements||[]).filter(function(m){return m.status==='منتهي';})
+    .sort(function(a,b){return (b.closed_order||0)-(a.closed_order||0);});
+  if(!done.length){el.innerHTML='<div style="padding:14px 12px"><div class="empty">لا توجد أعطال منتهية</div></div>';return;}
+  el.innerHTML='<div style="padding:14px 12px 88px">'+
+    '<div style="font-size:13px;color:#64748b;margin-bottom:12px">إجمالي المنتهية: <b>'+done.length+'</b></div>'+
+    done.map(function(m){
+      var days=daysBetween(m.opened_at,m.closed_at);
+      return '<div style="background:#fff;border-radius:14px;padding:12px 14px;margin-bottom:8px;box-shadow:0 2px 8px rgba(0,0,0,.05);border-right:4px solid #15803d;cursor:pointer" onclick="openMovementDetail(\''+m.id+'\')">'+
+        '<div style="display:flex;justify-content:space-between;align-items:flex-start">'+
+        '<div style="flex:1">'+
+        '<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">'+
+        (m.seq_num?'<span style="background:#0f172a;color:#fff;border-radius:6px;padding:1px 7px;font-size:11px;font-weight:900">#'+m.seq_num+'</span>':'')+
+        '<span style="font-weight:800;font-size:14px">'+esc(m.customer)+'</span></div>'+
+        '<div style="font-size:12px;color:#64748b">'+esc(m.fault_type||'—')+(m.device?' — '+esc(m.device):'')+'</div>'+
+        '<div style="font-size:11px;color:#94a3b8;margin-top:2px">'+esc(fmtDate(m.opened_at))+' ← '+esc(fmtDate(m.closed_at))+'</div>'+
+        '</div>'+
+        '<div style="text-align:left"><div style="font-size:18px;font-weight:900;color:#15803d">'+days+'</div>'+
+        '<div style="font-size:10px;color:#94a3b8">يوم</div></div></div></div>';
+    }).join('')+'</div>';
+}
+
+// ===== REPORTS =====
+function renderMovementsReport(){
+  var el=document.getElementById('movements-report-body');if(!el)return;
+  var list=DB.movements||[];
+  if(!list.length){el.innerHTML='<div style="padding:14px 12px"><div class="empty">لا توجد بيانات</div></div>';return;}
+  var todayStr=today(),monthStr=todayStr.slice(0,7),yearStr=todayStr.slice(0,4);
+  var todayList=list.filter(function(m){return m.opened_at===todayStr||m.closed_at===todayStr;});
+  var monthList=list.filter(function(m){return(m.opened_at||'').slice(0,7)===monthStr;});
+  var yearList=list.filter(function(m){return(m.opened_at||'').slice(0,4)===yearStr;});
+  function avgDays(arr){
+    var done=arr.filter(function(m){return m.status==='منتهي'&&m.opened_at&&m.closed_at;});
+    if(!done.length)return null;
+    return Math.round(done.reduce(function(s,m){return s+daysBetween(m.opened_at,m.closed_at);},0)/done.length*10)/10;
+  }
+  function topFaults(arr){
+    var map={};arr.forEach(function(m){if(m.fault_type)map[m.fault_type]=(map[m.fault_type]||0)+1;});
+    var colors=['#86198f','#2563eb','#ea580c','#15803d','#ca8a04'];
+    return Object.keys(map).sort(function(a,b){return map[b]-map[a];}).map(function(k,i){
+      return{name:k,count:map[k],pct:arr.length?Math.round(map[k]/arr.length*100):0,color:colors[i%5]};
+    });
+  }
+  function topList(arr,key,label){
+    var map={};arr.forEach(function(m){var v=m[key];if(v)map[v]=(map[v]||0)+1;});
+    var sorted=Object.keys(map).sort(function(a,b){return map[b]-map[a];}).slice(0,5);
+    if(!sorted.length)return '';
+    return '<div style="margin-bottom:10px"><div style="font-size:12px;font-weight:700;color:#374151;margin-bottom:6px">'+label+'</div>'+
+      sorted.map(function(k,i){return '<div style="display:flex;justify-content:space-between;font-size:12px;padding:5px 0;border-bottom:1px solid #f1f5f9">'+
+        '<span>'+(i===0?'🥇':i===1?'🥈':i===2?'🥉':'  ')+' '+esc(k)+'</span><b>'+map[k]+'</b></div>';}).join('')+'</div>';
+  }
+  function periodSection(title,arr,color){
+    if(!arr.length)return '';
+    var done=arr.filter(function(m){return m.status==='منتهي';}).length;
+    var open=arr.filter(function(m){return m.status!=='منتهي';}).length;
+    var avg=avgDays(arr);var faults=topFaults(arr);var top=faults[0];
+    return '<div class="card" style="margin-bottom:12px">'+
+      '<div style="font-weight:900;font-size:15px;color:'+color+';margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid '+color+'">'+title+'</div>'+
+      '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:12px">'+
+      movMini('إجمالي',arr.length,color,'#f8fafc')+movMini('منتهي',done,'#15803d','#dcfce7')+movMini('جاري',open,'#ca8a04','#fef9c3')+
+      '</div>'+
+      (avg!==null?'<div style="background:#f8fafc;border-radius:9px;padding:10px 12px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center"><span style="font-size:12px;font-weight:700">⏱️ متوسط وقت الإصلاح</span><span style="font-size:20px;font-weight:900;color:'+color+'">'+avg+' <span style="font-size:12px">يوم</span></span></div>':'')+
+      (top?'<div style="background:'+top.color+'11;border:1.5px solid '+top.color+'33;border-radius:9px;padding:10px 12px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:11px;color:#64748b;font-weight:700">🏆 أكثر عطل</div><div style="font-size:14px;font-weight:900;color:'+top.color+';margin-top:3px">'+esc(top.name)+'</div></div><div style="text-align:left"><div style="font-size:22px;font-weight:900;color:'+top.color+'">'+top.count+'</div><div style="font-size:10px;color:#94a3b8">'+top.pct+'%</div></div></div>':'')+
+      '<div style="margin-bottom:10px"><div style="font-size:12px;font-weight:700;margin-bottom:8px">📊 توزيع الأعطال:</div>'+
+      faults.map(function(f){return '<div style="margin-bottom:6px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:2px"><span>'+esc(f.name)+'</span><b style="color:'+f.color+'">'+f.count+' ('+f.pct+'%)</b></div><div style="height:6px;background:#e2e8f0;border-radius:3px;overflow:hidden"><div style="height:100%;width:'+f.pct+'%;background:'+f.color+';border-radius:3px"></div></div></div>';}).join('')+'</div>'+
+      topList(arr,'device','🖨️ أكثر أجهزة:')+topList(arr,'customer','👤 أكثر عملاء:')+
+      '</div>';
+  }
+  el.innerHTML='<div style="padding:14px 12px 88px">'+
+    periodSection('📅 اليوم — '+fmtDate(todayStr),todayList,'#2563eb')+
+    periodSection('📆 هذا الشهر',monthList,'#86198f')+
+    periodSection('🗓️ هذا العام',yearList,'#ea580c')+'</div>';
+}
+
+// ===== RESET COUNTER =====
+async function resetMovCounter(){
+  confirmAction('هتصفّر عداد الأعطال؟',async function(){
+    DB.movCounter=0;await persist();
+    showToast('✅ تم التصفير — التالي هيبدأ من #1','#16a34a');
+  });
+}
+
+// ===== SCHEDULE =====
+function getWeekDates(){
+  var now=new Date(),day=now.getDay(),diff=(day-6+7)%7,dates=[];
+  for(var i=0;i<7;i++){var d=new Date(now);d.setDate(now.getDate()-diff+i);dates.push(d.toISOString().split('T')[0]);}
+  return dates;
+}
+
+function renderSchedule(){
+  var el=document.getElementById('schedule-body');if(!el)return;
+  var week=getWeekDates(),todayStr=today();
+
+  // تحويل الأعطال الغير منتهية من الأمس لليوم
+  autoRollOver();
+
+  el.innerHTML=week.map(function(dateStr){
+    var isToday=dateStr===todayStr,isPast=dateStr<todayStr;
+    var dayName=DAYS_AR[new Date(dateStr).getDay()];
+    var ids=DB.schedule[dateStr]||[];
+    var movs=ids.map(function(id){return(DB.movements||[]).find(function(m){return m.id===id;});}).filter(Boolean);
+    return '<div style="background:#fff;border-radius:14px;margin-bottom:10px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.06);border-right:4px solid '+(isToday?'#2563eb':isPast?'#e2e8f0':'#94a3b8')+'">'+
+      '<div style="display:flex;justify-content:space-between;align-items:center;padding:11px 14px;background:'+(isToday?'#eff6ff':isPast?'#f8fafc':'#fff')+';border-bottom:1px solid #f1f5f9">'+
+      '<div><span style="font-weight:900;font-size:14px;color:'+(isToday?'#2563eb':isPast?'#94a3b8':'#0f172a')+'">'+dayName+(isToday?' — اليوم':'')+'</span>'+
+      '<span style="font-size:11px;color:#94a3b8;margin-right:6px">'+esc(fmtDate(dateStr))+'</span></div>'+
+      '<button onclick="openAddToSchedule(\''+dateStr+'\')" style="background:#2563eb;color:#fff;border:none;border-radius:8px;padding:5px 10px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer">+ إضافة</button>'+
+      '</div>'+
+      (movs.length?'<div style="padding:8px 10px">'+
+        movs.map(function(m,i){
+          var sc=m.status==='منتهي'?'#15803d':m.status==='جاري'?'#ca8a04':'#2563eb';
+          return '<div draggable="true" ondragstart="schedDragStart(event,\''+dateStr+'\',\''+m.id+'\')" ondragover="schedDragOver(event)" ondrop="schedDrop(event,\''+dateStr+'\','+i+')" ondragend="schedDragEnd(event)" style="display:flex;align-items:center;gap:8px;padding:9px 10px;margin-bottom:6px;background:#f8fafc;border-radius:10px;border:1.5px solid #e2e8f0;cursor:grab">'+
+            '<span style="color:#94a3b8;font-size:16px">☰</span>'+
+            '<div style="background:'+sc+';color:#fff;border-radius:6px;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;flex-shrink:0">'+(i+1)+'</div>'+
+            '<div style="flex:1;min-width:0">'+
+            (m.seq_num?'<span style="background:#0f172a;color:#fff;border-radius:4px;padding:1px 5px;font-size:10px;margin-left:4px">#'+m.seq_num+'</span>':'')+
+            '<span style="font-weight:800;font-size:13px">'+esc(m.customer)+'</span>'+
+            '<div style="font-size:11px;color:#64748b">'+esc(m.fault_type||'—')+(m.device?' — '+esc(m.device):'')+'</div></div>'+
+            // تغيير الحالة من الجدول
+            '<select onchange="changeMovStatusFromSchedule(\''+m.id+'\',this.value)" style="border:1.5px solid '+sc+';background:'+sc+'22;color:'+sc+';border-radius:7px;padding:3px 6px;font-size:10px;font-family:inherit;font-weight:700;cursor:pointer;outline:none">'+
+            ['جديد','جاري','منتهي'].map(function(s){return '<option value="'+s+'"'+(m.status===s?' selected':'')+'>'+s+'</option>';}).join('')+
+            '</select>'+
+            '<button onclick="removeFromSchedule(\''+dateStr+'\',\''+m.id+'\')" style="background:#fee2e2;border:none;border-radius:6px;padding:3px 7px;cursor:pointer;font-size:11px;color:#dc2626;flex-shrink:0">✕</button>'+
+            '</div>';
+        }).join('')+'</div>'
+      :'<div style="padding:12px 14px;font-size:13px;color:#94a3b8;text-align:center">'+(isPast?'لم يتم تحديد عمل':'اضغط + لإضافة أعطال')+'</div>')+
+      '</div>';
+  }).join('');
+}
+
+async function changeMovStatusFromSchedule(id, newStatus){
+  var m=DB.movements.find(function(x){return x.id===id;});if(!m)return;
+  if(m.status===newStatus)return;
+  var update={status:newStatus};
+  if(newStatus==='منتهي'&&m.status!=='منتهي'){update.closed_at=today();update.closed_order=Date.now();}
+  DB.movements=DB.movements.map(function(x){return x.id===id?Object.assign({},x,update):x;});
+  await dbUpdate('movements',id,update);
+  renderSchedule();renderHome();
+  showToast('✅ تم تحديث الحالة','#16a34a');
+}
+
+// تحويل الأعطال الغير منتهية لليوم التالي
+function autoRollOver(){
+  var todayStr=today();
+  var week=getWeekDates();
+  week.forEach(function(dateStr){
+    if(dateStr>=todayStr)return; // الماضي فقط
+    var ids=DB.schedule[dateStr]||[];
+    ids.forEach(function(id){
+      var m=(DB.movements||[]).find(function(x){return x.id===id;});
+      if(!m||m.status==='منتهي')return;
+      // ابحث عن اليوم التالي في الجدول
+      var nextDay=getNextDay(dateStr);
+      if(!nextDay||nextDay>todayStr)return;
+      var nextIds=DB.schedule[nextDay]||[];
+      if(nextIds.indexOf(id)===-1){
+        nextIds.push(id);
+        DB.schedule[nextDay]=nextIds;
+        LS.set('mc8_schedule',DB.schedule);
+        persist();
+      }
+    });
+  });
+}
+
+function getNextDay(dateStr){
+  var d=new Date(dateStr);d.setDate(d.getDate()+1);return d.toISOString().split('T')[0];
+}
+
+function openAddToSchedule(dateStr){
+  _schedChecked=[];
+  var existing=DB.schedule[dateStr]||[];
+  var available=(DB.movements||[]).filter(function(m){return m.status!=='منتهي'&&existing.indexOf(m.id)===-1;});
+  document.getElementById('modal-title').textContent='+ إضافة للجدول — '+esc(fmtDate(dateStr));
+  if(!available.length){
+    document.getElementById('modal-body').innerHTML='<div class="empty">لا توجد أعطال جارية</div>'+
+      '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+    openModal();return;
+  }
+  document.getElementById('modal-body').innerHTML=
+    '<div style="font-size:12px;color:#64748b;margin-bottom:10px">اختار الأعطال:</div>'+
+    available.map(function(m){
+      var sc=m.status==='جاري'?'#ca8a04':'#2563eb';
+      return '<div style="display:flex;align-items:center;gap:10px;padding:10px;background:#f8fafc;border-radius:10px;margin-bottom:7px;cursor:pointer" onclick="toggleSchedCheck(\''+m.id+'\',this)">'+
+        '<div id="schk-'+m.id+'" style="width:20px;height:20px;border:2px solid #e2e8f0;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#fff"></div>'+
+        '<div style="flex:1">'+
+        (m.seq_num?'<span style="background:#0f172a;color:#fff;border-radius:5px;padding:1px 6px;font-size:10px;margin-left:4px">#'+m.seq_num+'</span>':'')+
+        '<span style="font-weight:700;font-size:13px">'+esc(m.customer)+'</span>'+
+        '<div style="font-size:11px;color:#64748b">'+esc(m.fault_type||'—')+(m.device?' — '+esc(m.device):'')+'</div></div>'+
+        '<span style="font-size:10px;background:'+sc+'22;color:'+sc+';border-radius:6px;padding:2px 6px;font-weight:700">'+esc(m.status)+'</span></div>';
+    }).join('')+
+    '<div class="modal-actions">'+
+    '<button class="btn btn-primary btn-full" onclick="confirmAddToSchedule(\''+dateStr+'\')">إضافة</button>'+
+    '<button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
+  openModal();
+}
+
+var _schedChecked=[];
+function toggleSchedCheck(id,el){
+  var chk=document.getElementById('schk-'+id);
+  var idx=_schedChecked.indexOf(id);
+  if(idx===-1){_schedChecked.push(id);chk.style.background='#2563eb';chk.style.borderColor='#2563eb';chk.innerHTML='<span style="color:#fff;font-size:12px">✓</span>';el.style.background='#eff6ff';el.style.border='1.5px solid #bfdbfe';}
+  else{_schedChecked.splice(idx,1);chk.style.background='#fff';chk.style.borderColor='#e2e8f0';chk.innerHTML='';el.style.background='#f8fafc';el.style.border='none';}
+}
+
+async function confirmAddToSchedule(dateStr){
+  if(!_schedChecked.length)return showToast('⚠️ اختار عطل واحد على الأقل','#dc2626');
+  var cur=DB.schedule[dateStr]||[];
+  _schedChecked.forEach(function(id){if(cur.indexOf(id)===-1)cur.push(id);});
+  DB.schedule[dateStr]=cur;_schedChecked=[];
+  await persist();
+  closeModal();renderSchedule();showToast('✅ تم الإضافة','#16a34a');
+}
+
+async function removeFromSchedule(dateStr,id){
+  if(!DB.schedule||!DB.schedule[dateStr])return;
+  DB.schedule[dateStr]=DB.schedule[dateStr].filter(function(x){return x!==id;});
+  await persist();renderSchedule();
+}
+
+var _dragDate=null,_dragId=null,_dragEl=null;
+function schedDragStart(e,dateStr,id){_dragDate=dateStr;_dragId=id;_dragEl=e.target.closest('[draggable]');e.dataTransfer.effectAllowed='move';setTimeout(function(){if(_dragEl)_dragEl.style.opacity='0.4';},0);}
+function schedDragOver(e){e.preventDefault();e.dataTransfer.dropEffect='move';}
+async function schedDrop(e,dateStr,targetIdx){
+  e.preventDefault();if(!_dragDate||_dragDate!==dateStr)return;
+  var ids=DB.schedule[dateStr]||[];
+  var fromIdx=ids.indexOf(_dragId);if(fromIdx===-1||fromIdx===targetIdx)return;
+  ids.splice(fromIdx,1);ids.splice(targetIdx,0,_dragId);
+  DB.schedule[dateStr]=ids;await persist();renderSchedule();
+}
+function schedDragEnd(e){if(_dragEl)_dragEl.style.opacity='1';_dragDate=null;_dragId=null;_dragEl=null;}
+
+function updateMovementsBadge(){
+  var open=(DB.movements||[]).filter(function(m){return m.status!=='منتهي';}).length;
+  var b=document.getElementById('movements-badge');
+  if(b){if(open>0){b.textContent=open;b.style.display='flex';}else b.style.display='none';}
+}
+
+
+// ===== ACCOUNTING =====
+// ===== ACCOUNTING MODULE =====
+// DB.accounts = { capital: [], fixed_assets: [], fixed_expenses: [], receivables: [] }
+// capital: [{id, name, amount, date, note}]
+// fixed_assets: [{id, name, value, depreciation_rate, purchase_date, note}]
+// fixed_expenses: [{id, name, amount, frequency, type:'fixed'|'variable', category, active}]
+// receivables: [{id, name, amount, due_date, status:'pending'|'received', note}]
+
+if(!DB.accounts) DB.accounts = LS.get('mc8_accounts', {
+  capital: [],
+  fixed_assets: [],
+  fixed_expenses: [],
+  receivables: []
+});
+
+// ===== RENDER ACCOUNTING SCREEN =====
+function renderAccounting(){
+  var el=document.getElementById('accounting-body');if(!el)return;
+  var tab=_accountingTab||'overview';
+  document.querySelectorAll('#screen-accounting .acc-tab').forEach(function(t){t.classList.remove('active');});
+  var activeTab=document.getElementById('acc-tab-'+tab);
+  if(activeTab)activeTab.classList.add('active');
+  if(tab==='overview')renderAccountingOverview();
+  else if(tab==='capital')renderCapital();
+  else if(tab==='assets')renderFixedAssets();
+  else if(tab==='fixed_exp')renderFixedExpenses();
+  else if(tab==='receivables')renderReceivables();
+}
+
+var _accountingTab='overview';
+function switchAccTab(tab,el){
+  _accountingTab=tab;
+  document.querySelectorAll('#screen-accounting .acc-tab').forEach(function(t){t.classList.remove('active');});
+  if(el)el.classList.add('active');
+  renderAccounting();
+}
+
+// ===== OVERVIEW =====
+function renderAccountingOverview(){
+  var el=document.getElementById('accounting-body');if(!el)return;
+  var acc=DB.accounts||{capital:[],fixed_assets:[],fixed_expenses:[],receivables:[]};
+
+  var totalCapital=acc.capital.reduce(function(s,c){return s+c.amount;},0);
+  var totalAssets=acc.fixed_assets.reduce(function(s,a){return s+a.value;},0);
+  var totalFixedExp=acc.fixed_expenses.filter(function(e){return e.active!==false&&e.type==='fixed';}).reduce(function(s,e){return s+e.amount;},0);
+  var totalVarExp=acc.fixed_expenses.filter(function(e){return e.active!==false&&e.type==='variable';}).reduce(function(s,e){return s+e.amount;},0);
+  var totalReceivables=acc.receivables.filter(function(r){return r.status==='pending';}).reduce(function(s,r){return s+r.amount;},0);
+  var inventory=DB.products.reduce(function(s,p){return s+p.qty*(p.buy_price||0);},0);
+  var custDebts=DB.debts.filter(function(d){return d.type==='customer';}).reduce(function(s,d){return s+(d.total-(d.paid||0));},0);
+  var suppDebts=DB.debts.filter(function(d){return d.type==='supplier';}).reduce(function(s,d){return s+(d.total-(d.paid||0));},0);
+
+  var totalAssetsAll=totalCapital+totalAssets+inventory+custDebts+totalReceivables;
+  var netPosition=totalAssetsAll-suppDebts;
+  var breakEven=totalFixedExp;
+
+  el.innerHTML=
+    '<div class="card" style="margin-bottom:10px">'+
+    '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #0f172a">📊 المركز المالي الشامل</div>'+
+
+    '<div style="font-weight:800;font-size:11px;color:#2563eb;margin-bottom:8px;margin-top:4px">💰 الأصول والموجودات</div>'+
+    accRow('رأس المال المستثمر',fmt(totalCapital),'#2563eb')+
+    accRow('الأصول الثابتة (قيمة دفترية)',fmt(totalAssets),'#7c3aed')+
+    accRow('قيمة المخزون',fmt(inventory),'#0d9488')+
+    accRow('ديون العملاء',fmt(custDebts),'#2563eb')+
+    accRow('مستحقات أخرى',fmt(totalReceivables),'#ca8a04')+
+    '<div style="display:flex;justify-content:space-between;padding:10px 0;font-weight:900;font-size:14px;border-top:2px solid #2563eb;margin-top:4px"><span>إجمالي الأصول</span><b style="color:#2563eb">'+fmt(totalAssetsAll)+'</b></div>'+
+
+    '<div style="height:10px"></div>'+
+    '<div style="font-weight:800;font-size:11px;color:#dc2626;margin-bottom:8px">📤 الالتزامات</div>'+
+    accRow('ديون الموردين',fmt(suppDebts),'#dc2626')+
+    '<div style="display:flex;justify-content:space-between;padding:10px 0;font-weight:900;font-size:14px;border-top:2px solid #dc2626;margin-top:4px"><span>إجمالي الالتزامات</span><b style="color:#dc2626">'+fmt(suppDebts)+'</b></div>'+
+
+    '<div style="background:'+(netPosition>=0?'#f0fdf4':'#fef2f2')+';border-radius:12px;padding:14px;margin-top:12px">'+
+    '<div style="display:flex;justify-content:space-between;align-items:center">'+
+    '<span style="font-weight:900;font-size:15px">صافي المركز المالي</span>'+
+    '<span style="font-weight:900;font-size:20px;color:'+(netPosition>=0?'#15803d':'#dc2626')+'">'+fmt(netPosition)+'</span></div></div>'+
+    '</div>'+
+
+    '<div class="card" style="margin-bottom:10px">'+
+    '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #ea580c">💸 هيكل التكاليف الشهرية</div>'+
+    accRow('مصاريف ثابتة / شهر',fmt(totalFixedExp),'#dc2626')+
+    accRow('مصاريف متغيرة مقدّرة',fmt(totalVarExp),'#ea580c')+
+    '<div style="display:flex;justify-content:space-between;padding:10px 0;font-weight:900;font-size:14px;border-top:2px solid #ea580c;margin-top:4px"><span>إجمالي التكاليف الشهرية</span><b style="color:#ea580c">'+fmt(totalFixedExp+totalVarExp)+'</b></div>'+
+    '<div style="background:#fff7ed;border-radius:10px;padding:12px;margin-top:8px">'+
+    '<div style="font-size:12px;color:#64748b;margin-bottom:4px">🎯 نقطة التعادل (Break-even)</div>'+
+    '<div style="font-size:16px;font-weight:900;color:#ea580c">'+fmt(breakEven)+' / شهر</div>'+
+    '<div style="font-size:11px;color:#94a3b8;margin-top:3px">يجب تجاوز هذا الرقم في المبيعات لتحقيق ربح</div>'+
+    '</div></div>';
+}
+
+function accRow(label,val,color){
+  return '<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #f1f5f9;font-size:13px">'+
+    '<span style="color:#374151">'+label+'</span><b style="color:'+color+'">'+val+'</b></div>';
+}
+
+// ===== CAPITAL =====
+function renderCapital(){
+  var el=document.getElementById('accounting-body');if(!el)return;
+  var items=(DB.accounts.capital||[]).sort(function(a,b){return b.id>a.id?1:-1;});
+  var total=items.reduce(function(s,c){return s+c.amount;},0);
+  el.innerHTML=
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">'+
+    '<div><div style="font-size:11px;color:#64748b">إجمالي رأس المال</div><div style="font-size:20px;font-weight:900;color:#2563eb">'+fmt(total)+'</div></div>'+
+    '<button class="btn-add" style="background:#2563eb" onclick="openCapitalModal()">+ إضافة</button></div>'+
+    (items.length?items.map(function(c){
+      return '<div class="card" style="margin-bottom:8px">'+
+        '<div style="display:flex;justify-content:space-between;align-items:flex-start">'+
+        '<div><div style="font-weight:800;font-size:14px">'+esc(c.name)+'</div>'+
+        '<div style="font-size:11px;color:#94a3b8">'+esc(fmtDate(c.date))+(c.note?' — '+esc(c.note):'')+'</div></div>'+
+        '<div style="text-align:left"><b style="font-size:16px;color:#2563eb">'+fmt(c.amount)+'</b>'+
+        '<div style="display:flex;gap:5px;margin-top:5px">'+
+        '<button class="btn-ic" style="background:#fee2e2" onclick="confirmAction(\'حذف؟\',function(){delCapital(\''+c.id+'\')})">🗑️</button>'+
+        '</div></div></div></div>';
+    }).join(''):'<div class="empty">لا يوجد رأس مال مسجّل</div>');
+}
+
+function openCapitalModal(){
+  document.getElementById('modal-title').textContent='💰 إضافة رأس مال';
+  document.getElementById('modal-body').innerHTML=
+    fld('cap-name','المصدر / الوصف','text','','مثال: رأس مال أساسي، قرض، شريك',true)+
+    fld('cap-amount','المبلغ (ج)','number','','',true)+
+    fld('cap-note','ملاحظة (اختياري)','text','')+
+    dateField('cap-date','📅 التاريخ',null)+
+    '<div class="modal-actions"><button class="btn btn-primary btn-full" onclick="saveCapital()">إضافة</button><button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
+  openModal();
+}
+
+async function saveCapital(){
+  var name=v('cap-name'),amount=+v('cap-amount');
+  if(!name)return showToast('⚠️ الوصف مطلوب','#dc2626');
+  if(!amount||amount<=0)return showToast('⚠️ المبلغ غير صحيح','#dc2626');
+  var obj={id:genId(),name:name,amount:amount,note:v('cap-note'),date:v('cap-date')};
+  if(!DB.accounts.capital)DB.accounts.capital=[];
+  DB.accounts.capital.push(obj);
+  await persist();closeModal();renderAccounting();
+  showToast('✅ تم إضافة رأس المال','#16a34a');
+}
+
+async function delCapital(id){
+  DB.accounts.capital=DB.accounts.capital.filter(function(c){return c.id!==id;});
+  await persist();renderAccounting();showToast('🗑️ تم الحذف','#64748b');
+}
+
+// ===== FIXED ASSETS =====
+function renderFixedAssets(){
+  var el=document.getElementById('accounting-body');if(!el)return;
+  var items=(DB.accounts.fixed_assets||[]).sort(function(a,b){return b.id>a.id?1:-1;});
+  var total=items.reduce(function(s,a){return s+a.value;},0);
+  el.innerHTML=
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">'+
+    '<div><div style="font-size:11px;color:#64748b">إجمالي الأصول الثابتة</div><div style="font-size:20px;font-weight:900;color:#7c3aed">'+fmt(total)+'</div></div>'+
+    '<button class="btn-add" style="background:#7c3aed" onclick="openAssetModal()">+ إضافة</button></div>'+
+    (items.length?items.map(function(a){
+      return '<div class="card" style="margin-bottom:8px">'+
+        '<div style="display:flex;justify-content:space-between;align-items:flex-start">'+
+        '<div><div style="font-weight:800;font-size:14px">'+esc(a.name)+'</div>'+
+        '<div style="font-size:11px;color:#94a3b8">'+esc(fmtDate(a.purchase_date))+(a.depreciation_rate?' — إهلاك '+a.depreciation_rate+'%/سنة':'')+'</div>'+
+        (a.note?'<div style="font-size:12px;color:#64748b">'+esc(a.note)+'</div>':'')+
+        '</div>'+
+        '<div style="text-align:left"><b style="font-size:16px;color:#7c3aed">'+fmt(a.value)+'</b>'+
+        '<div style="display:flex;gap:5px;margin-top:5px">'+
+        '<button class="btn-ic" style="background:#fee2e2" onclick="confirmAction(\'حذف؟\',function(){delAsset(\''+a.id+'\')})">🗑️</button>'+
+        '</div></div></div></div>';
+    }).join(''):'<div class="empty">لا توجد أصول ثابتة مسجّلة</div>');
+}
+
+function openAssetModal(){
+  document.getElementById('modal-title').textContent='🏢 إضافة أصل ثابت';
+  document.getElementById('modal-body').innerHTML=
+    fld('ast-name','اسم الأصل','text','','مثال: أجهزة كمبيوتر، سيارة، معدات',true)+
+    fld('ast-value','القيمة الدفترية (ج)','number','','',true)+
+    fld('ast-dep','معدل الإهلاك % / سنة','number','0')+
+    fld('ast-note','ملاحظة (اختياري)','text','')+
+    dateField('ast-date','📅 تاريخ الشراء',null)+
+    '<div class="modal-actions"><button class="btn btn-purple btn-full" onclick="saveAsset()">إضافة</button><button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
+  openModal();
+}
+
+async function saveAsset(){
+  var name=v('ast-name'),value=+v('ast-value');
+  if(!name)return showToast('⚠️ اسم الأصل مطلوب','#dc2626');
+  if(!value||value<=0)return showToast('⚠️ القيمة غير صحيحة','#dc2626');
+  var obj={id:genId(),name:name,value:value,depreciation_rate:+v('ast-dep')||0,note:v('ast-note'),purchase_date:v('ast-date')};
+  if(!DB.accounts.fixed_assets)DB.accounts.fixed_assets=[];
+  DB.accounts.fixed_assets.push(obj);
+  await persist();closeModal();renderAccounting();
+  showToast('✅ تم إضافة الأصل','#16a34a');
+}
+
+async function delAsset(id){
+  DB.accounts.fixed_assets=DB.accounts.fixed_assets.filter(function(a){return a.id!==id;});
+  await persist();renderAccounting();showToast('🗑️ تم الحذف','#64748b');
+}
+
+// ===== FIXED / VARIABLE EXPENSES =====
+function renderFixedExpenses(){
+  var el=document.getElementById('accounting-body');if(!el)return;
+  var items=(DB.accounts.fixed_expenses||[]).sort(function(a,b){return b.id>a.id?1:-1;});
+  var fixed=items.filter(function(e){return e.type==='fixed'&&e.active!==false;}).reduce(function(s,e){return s+e.amount;},0);
+  var variable=items.filter(function(e){return e.type==='variable'&&e.active!==false;}).reduce(function(s,e){return s+e.amount;},0);
+  el.innerHTML=
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">'+
+    '<div style="background:#fee2e2;border-radius:12px;padding:12px;text-align:center">'+
+    '<div style="font-size:10px;color:#dc2626;font-weight:700;margin-bottom:4px">ثابتة / شهر</div>'+
+    '<div style="font-size:18px;font-weight:900;color:#dc2626">'+fmt(fixed)+'</div></div>'+
+    '<div style="background:#fff7ed;border-radius:12px;padding:12px;text-align:center">'+
+    '<div style="font-size:10px;color:#ea580c;font-weight:700;margin-bottom:4px">متغيرة / شهر</div>'+
+    '<div style="font-size:18px;font-weight:900;color:#ea580c">'+fmt(variable)+'</div></div></div>'+
+    '<button class="btn btn-orange btn-full btn-sm" onclick="openFixedExpModal()" style="margin-bottom:12px">+ إضافة مصروف</button>'+
+    (items.length?items.map(function(e){
+      var color=e.type==='fixed'?'#dc2626':'#ea580c';
+      var bg=e.type==='fixed'?'#fee2e2':'#fff7ed';
+      return '<div class="card" style="margin-bottom:8px;opacity:'+(e.active===false?'0.5':'1')+'">'+
+        '<div style="display:flex;justify-content:space-between;align-items:flex-start">'+
+        '<div style="flex:1"><div style="font-weight:800;font-size:14px">'+esc(e.name)+'</div>'+
+        '<div style="display:flex;gap:6px;margin-top:5px">'+
+        '<span style="background:'+bg+';color:'+color+';border-radius:6px;padding:2px 8px;font-size:11px;font-weight:700">'+(e.type==='fixed'?'ثابت':'متغير')+'</span>'+
+        (e.category?'<span style="background:#f1f5f9;color:#64748b;border-radius:6px;padding:2px 8px;font-size:11px">'+esc(e.category)+'</span>':'')+
+        (e.active===false?'<span style="background:#f1f5f9;color:#94a3b8;border-radius:6px;padding:2px 8px;font-size:11px">متوقف</span>':'')+
+        '</div></div>'+
+        '<div style="text-align:left"><b style="font-size:15px;color:'+color+'">'+fmt(e.amount)+'</b>'+
+        '<div style="font-size:10px;color:#94a3b8">/ شهر</div>'+
+        '<div style="display:flex;gap:5px;margin-top:5px">'+
+        '<button class="btn-ic" style="background:'+(e.active===false?'#dcfce7':'#fef9c3')+'" onclick="toggleExpActive(\''+e.id+'\')">'+(e.active===false?'▶️':'⏸️')+'</button>'+
+        '<button class="btn-ic" style="background:#fee2e2" onclick="confirmAction(\'حذف؟\',function(){delFixedExp(\''+e.id+'\')})">🗑️</button>'+
+        '</div></div></div></div>';
+    }).join(''):'<div class="empty">لا توجد مصاريف دورية مسجّلة</div>');
+}
+
+function openFixedExpModal(){
+  document.getElementById('modal-title').textContent='💸 إضافة مصروف دوري';
+  document.getElementById('modal-body').innerHTML=
+    fld('fexp-name','اسم المصروف','text','','مثال: إيجار، راتب، إنترنت',true)+
+    fld('fexp-amount','المبلغ / شهر (ج)','number','','',true)+
+    '<div class="field"><label>النوع</label>'+
+    '<div style="display:flex;gap:8px">'+
+    '<button id="fexp-fixed-btn" onclick="selectExpType(\'fixed\')" style="flex:1;padding:10px;border:2px solid #dc2626;border-radius:11px;background:#fee2e2;color:#dc2626;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer">🔴 ثابت</button>'+
+    '<button id="fexp-var-btn" onclick="selectExpType(\'variable\')" style="flex:1;padding:10px;border:2px solid #e2e8f0;border-radius:11px;background:#fff;color:#64748b;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer">🟡 متغير</button>'+
+    '</div><input type="hidden" id="fexp-type" value="fixed"></div>'+
+    fld('fexp-category','التصنيف (اختياري)','text','','مثال: إيجارات، رواتب، مرافق')+
+    '<div class="modal-actions"><button class="btn btn-orange btn-full" onclick="saveFixedExp()">إضافة</button><button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
+  openModal();
+}
+
+function selectExpType(type){
+  document.getElementById('fexp-type').value=type;
+  var fixedBtn=document.getElementById('fexp-fixed-btn');
+  var varBtn=document.getElementById('fexp-var-btn');
+  if(type==='fixed'){
+    fixedBtn.style.borderColor='#dc2626';fixedBtn.style.background='#fee2e2';fixedBtn.style.color='#dc2626';
+    varBtn.style.borderColor='#e2e8f0';varBtn.style.background='#fff';varBtn.style.color='#64748b';
+  }else{
+    varBtn.style.borderColor='#ea580c';varBtn.style.background='#fff7ed';varBtn.style.color='#ea580c';
+    fixedBtn.style.borderColor='#e2e8f0';fixedBtn.style.background='#fff';fixedBtn.style.color='#64748b';
+  }
+}
+
+async function saveFixedExp(){
+  var name=v('fexp-name'),amount=+v('fexp-amount');
+  if(!name)return showToast('⚠️ اسم المصروف مطلوب','#dc2626');
+  if(!amount||amount<=0)return showToast('⚠️ المبلغ غير صحيح','#dc2626');
+  var obj={id:genId(),name:name,amount:amount,type:v('fexp-type'),category:v('fexp-category'),active:true};
+  if(!DB.accounts.fixed_expenses)DB.accounts.fixed_expenses=[];
+  DB.accounts.fixed_expenses.push(obj);
+  await persist();closeModal();renderAccounting();
+  showToast('✅ تم إضافة المصروف','#16a34a');
+}
+
+async function toggleExpActive(id){
+  DB.accounts.fixed_expenses=DB.accounts.fixed_expenses.map(function(e){
+    return e.id===id?Object.assign({},e,{active:e.active===false}):e;
+  });
+  await persist();renderAccounting();
+}
+
+async function delFixedExp(id){
+  DB.accounts.fixed_expenses=DB.accounts.fixed_expenses.filter(function(e){return e.id!==id;});
+  await persist();renderAccounting();showToast('🗑️ تم الحذف','#64748b');
+}
+
+// ===== RECEIVABLES =====
+function renderReceivables(){
+  var el=document.getElementById('accounting-body');if(!el)return;
+  var items=(DB.accounts.receivables||[]).sort(function(a,b){return b.id>a.id?1:-1;});
+  var pending=items.filter(function(r){return r.status==='pending';}).reduce(function(s,r){return s+r.amount;},0);
+  el.innerHTML=
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">'+
+    '<div><div style="font-size:11px;color:#64748b">إجمالي المستحقات</div><div style="font-size:20px;font-weight:900;color:#ca8a04">'+fmt(pending)+'</div></div>'+
+    '<button class="btn-add" style="background:#ca8a04" onclick="openReceivableModal()">+ إضافة</button></div>'+
+    (items.length?items.map(function(r){
+      var done=r.status==='received';
+      return '<div class="card" style="margin-bottom:8px;opacity:'+(done?'0.6':'1')+'">'+
+        '<div style="display:flex;justify-content:space-between;align-items:flex-start">'+
+        '<div><div style="font-weight:800;font-size:14px">'+esc(r.name)+'</div>'+
+        (r.due_date?'<div style="font-size:11px;color:#ea580c">⏰ استحقاق: '+esc(fmtDate(r.due_date))+'</div>':'')+
+        (r.note?'<div style="font-size:12px;color:#64748b">'+esc(r.note)+'</div>':'')+
+        '</div>'+
+        '<div style="text-align:left"><b style="font-size:15px;color:'+(done?'#16a34a':'#ca8a04')+'">'+fmt(r.amount)+'</b>'+
+        '<div style="display:flex;gap:5px;margin-top:5px">'+
+        (!done?'<button class="btn-ic" style="background:#dcfce7;color:#15803d" onclick="markReceivableReceived(\''+r.id+'\')">✅</button>':'')+
+        '<button class="btn-ic" style="background:#fee2e2" onclick="confirmAction(\'حذف؟\',function(){delReceivable(\''+r.id+'\')})">🗑️</button>'+
+        '</div></div></div></div>';
+    }).join(''):'<div class="empty">لا توجد مستحقات</div>');
+}
+
+function openReceivableModal(){
+  document.getElementById('modal-title').textContent='📋 إضافة مستحق';
+  document.getElementById('modal-body').innerHTML=
+    fld('rec-name','الوصف / المصدر','text','','مثال: عمولة، خدمة مؤجلة',true)+
+    fld('rec-amount','المبلغ (ج)','number','','',true)+
+    fld('rec-note','ملاحظة (اختياري)','text','')+
+    dateField('rec-due','📅 تاريخ الاستحقاق',null)+
+    '<div class="modal-actions"><button class="btn btn-full" style="background:#ca8a04;color:#fff" onclick="saveReceivable()">إضافة</button><button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
+  openModal();
+}
+
+async function saveReceivable(){
+  var name=v('rec-name'),amount=+v('rec-amount');
+  if(!name)return showToast('⚠️ الوصف مطلوب','#dc2626');
+  if(!amount||amount<=0)return showToast('⚠️ المبلغ غير صحيح','#dc2626');
+  var obj={id:genId(),name:name,amount:amount,note:v('rec-note'),due_date:v('rec-due'),status:'pending'};
+  if(!DB.accounts.receivables)DB.accounts.receivables=[];
+  DB.accounts.receivables.push(obj);
+  await persist();closeModal();renderAccounting();
+  showToast('✅ تم إضافة المستحق','#16a34a');
+}
+
+async function markReceivableReceived(id){
+  DB.accounts.receivables=DB.accounts.receivables.map(function(r){return r.id===id?Object.assign({},r,{status:'received'}):r;});
+  await persist();renderAccounting();showToast('✅ تم تسجيل الاستلام','#16a34a');
+}
+
+async function delReceivable(id){
+  DB.accounts.receivables=DB.accounts.receivables.filter(function(r){return r.id!==id;});
+  await persist();renderAccounting();showToast('🗑️ تم الحذف','#64748b');
+}
+
+
+// ===== REPORTS =====
+// ===== REPORTS =====
+var _reportFrom='',_reportTo='';
+
+function renderReports(){
+  if(!_reportFrom){var d=new Date();_reportFrom=new Date(d.getFullYear(),d.getMonth(),1).toISOString().split('T')[0];_reportTo=today();}
+  var tab=currentReportTab||'period';
+  ['period','income','balance','expenses','analysis'].forEach(function(t){
+    var el=document.getElementById('tab-'+t);if(el)el.style.display=t===tab?'block':'none';
+  });
+  if(tab==='period')renderPeriodReport();
+  else if(tab==='income')renderIncomeReport();
+  else if(tab==='balance')renderBalanceReport();
+  else if(tab==='expenses')renderExpensesReport();
+  else if(tab==='analysis')renderFullAnalysis();
+}
+
+function setDateFilter(from,to,el){
+  _reportFrom=from;_reportTo=to;
+  document.querySelectorAll('.df-btn').forEach(function(b){b.classList.remove('active');});
+  if(el)el.classList.add('active');
+  renderReports();
+}
+
+function filterSalesByPeriod(){return DB.sales.filter(function(s){return(!_reportFrom||s.date>=_reportFrom)&&(!_reportTo||s.date<=_reportTo);});}
+function filterPurchByPeriod(){return DB.purchases.filter(function(p){return(!_reportFrom||p.date>=_reportFrom)&&(!_reportTo||p.date<=_reportTo);});}
+function filterExpByPeriod(){return DB.expenses.filter(function(e){return(!_reportFrom||e.date>=_reportFrom)&&(!_reportTo||e.date<=_reportTo);});}
+
+function kpiCard(label,val,color,bg){
+  return '<div style="background:'+bg+';border-radius:12px;padding:12px 10px;text-align:center">'+
+    '<div style="font-size:10px;font-weight:700;color:'+color+';margin-bottom:4px">'+label+'</div>'+
+    '<div style="font-size:13px;font-weight:900;color:'+color+'">'+val+'</div></div>';
+}
+
+function accountRow(label,sub,total,type){
+  var isTitle=type&&type.includes('title'),isTotal=type&&type.includes('total');
+  var isIndent=type&&type.includes('indent'),isRed=type&&type.includes('red'),isGreen=type&&type.includes('green');
+  return '<div style="display:flex;justify-content:space-between;align-items:center;padding:'+(isTitle?'8px 0 4px':'6px 0')+';'+(isTotal?'border-top:1.5px solid #e2e8f0;margin-top:2px;':'')+(isIndent?'padding-right:14px;':'')+'border-bottom:'+(isTitle||isTotal?'none':'1px solid #f8fafc')+'">'+
+    '<span style="font-size:'+(isTitle?'11':'13')+'px;font-weight:'+(isTitle?'800':isTotal?'900':'400')+';color:'+(isTitle?'#94a3b8':'#374151')+'">'+label+(sub?'<span style="font-size:11px;color:#94a3b8;margin-right:4px">'+sub+'</span>':'')+'</span>'+
+    (total?'<span style="font-size:'+(isTotal?'14':'13')+'px;font-weight:900;color:'+(isRed?'#dc2626':isGreen?'#15803d':'#0f172a')+'">'+total+'</span>':'<span></span>')+
+    '</div>';
+}
+
+function statRow(label,val,color){
+  return '<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #f1f5f9;font-size:13px">'+
+    '<span style="color:#64748b">'+label+'</span><b style="color:'+(color||'#0f172a')+'">'+val+'</b></div>';
+}
+
+// ===== قائمة الدخل =====
+function renderPeriodReport(){
+  var ps=filterSalesByPeriod(),pe=filterExpByPeriod();
+  var rev=ps.reduce(function(s,x){return s+x.total;},0);
+  var cos=ps.reduce(function(s,sale){return s+(sale.items||[]).reduce(function(ss,item){return ss+item.qty*(item.buyPrice||item.buy_price||0);},0);},0);
+  var srvRev=ps.reduce(function(s,sale){return s+(sale.services||[]).reduce(function(ss,sv){return ss+sv.price;},0);},0);
+  var grossProfit=rev-cos,grossPct=rev>0?Math.round(grossProfit/rev*100):0;
+  var expByType={};pe.forEach(function(e){expByType[e.type]=(expByType[e.type]||0)+e.amount;});
+  var exp=pe.reduce(function(s,x){return s+x.amount;},0);
+  var netProfit=grossProfit-exp,netPct=rev>0?Math.round(netProfit/rev*100):0;
+  var el=document.getElementById('tab-period');if(!el)return;
+  el.innerHTML=
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px">'+
+    kpiCard('💰 الإيرادات',fmt(rev),'#2563eb','#dbeafe')+
+    kpiCard('🛒 تكلفة البضاعة',fmt(cos),'#7c3aed','#ede9fe')+
+    kpiCard('📈 مجمل الربح',fmt(grossProfit)+' ('+grossPct+'%)',grossProfit>=0?'#15803d':'#dc2626',grossProfit>=0?'#dcfce7':'#fee2e2')+
+    kpiCard('💸 المصروفات',fmt(exp),'#ea580c','#fff7ed')+
+    '</div>'+
+    '<div class="card">'+
+    '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #0f172a">📊 قائمة الدخل</div>'+
+    accountRow('الإيرادات','','','title')+
+    accountRow('إيرادات المبيعات',fmt(rev-srvRev),'','indent')+
+    (srvRev>0?accountRow('إيرادات الخدمات',fmt(srvRev),'','indent'):'')+
+    accountRow('إجمالي الإيرادات','',fmt(rev),'total')+
+    '<div style="height:8px"></div>'+
+    accountRow('تكلفة المبيعات','','','title')+
+    accountRow('تكلفة البضاعة المباعة','('+fmt(cos)+')','','indent red')+
+    accountRow('مجمل الربح','',fmt(grossProfit),'total '+(grossProfit>=0?'green':'red'))+
+    '<div style="font-size:11px;color:#64748b;text-align:left;margin:-4px 0 10px 4px">نسبة المجمل: '+grossPct+'%</div>'+
+    '<div style="height:8px"></div>'+
+    accountRow('المصروفات التشغيلية','','','title')+
+    Object.keys(expByType).map(function(k){
+      return accountRow(k,'('+fmt(expByType[k])+')','','indent red');
+    }).join('')+
+    accountRow('إجمالي المصروفات','('+fmt(exp)+')','','total red')+
+    '<div style="height:8px"></div>'+
+    '<div style="background:'+(netProfit>=0?'#f0fdf4':'#fef2f2')+';border-radius:11px;padding:14px;margin-top:4px">'+
+    '<div style="display:flex;justify-content:space-between;align-items:center">'+
+    '<div><div style="font-weight:900;font-size:15px">صافي الربح</div>'+
+    '<div style="font-size:11px;color:#64748b">نسبة الصافي: '+netPct+'%</div></div>'+
+    '<div style="font-size:20px;font-weight:900;color:'+(netProfit>=0?'#15803d':'#dc2626')+'">'+fmt(netProfit)+'</div></div></div>'+
+    '</div>'+
+    // تعديل سريع
+    '<div class="card" style="margin-top:8px">'+
+    '<div style="font-weight:900;font-size:13px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center">'+
+    '<span>📋 إحصائيات</span></div>'+
+    statRow('عدد الفواتير',ps.length+' فاتورة')+
+    statRow('متوسط الفاتورة',ps.length?fmt(Math.round(rev/ps.length)):fmt(0))+
+    statRow('إجمالي المشتريات',fmt(filterPurchByPeriod().reduce(function(s,x){return s+x.total;},0)))+
+    '</div>';
+}
+
+// ===== التحصيل =====
+function renderIncomeReport(){
+  var ps=filterSalesByPeriod();
+  var byStatus={'مدفوع':0,'جزئي':0,'غير مدفوع':0};
+  ps.forEach(function(s){byStatus[s.status]=(byStatus[s.status]||0)+s.total;});
+  var totalCollected=ps.reduce(function(s,x){return s+(x.paid||0);},0);
+  var totalPending=ps.reduce(function(s,x){return s+(x.total-(x.paid||0));},0);
+  var el=document.getElementById('tab-income');if(!el)return;
+  el.innerHTML='<div class="card">'+
+    '<div style="font-weight:900;font-size:14px;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #0f172a">💰 تحليل التحصيل</div>'+
+    '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:12px">'+
+    '<div style="background:#dcfce7;border-radius:10px;padding:10px;text-align:center"><div style="font-size:9px;color:#15803d;font-weight:700">مدفوع</div><div style="font-weight:900;color:#15803d;font-size:13px">'+fmt(byStatus['مدفوع'])+'</div></div>'+
+    '<div style="background:#fef9c3;border-radius:10px;padding:10px;text-align:center"><div style="font-size:9px;color:#ca8a04;font-weight:700">جزئي</div><div style="font-weight:900;color:#ca8a04;font-size:13px">'+fmt(byStatus['جزئي'])+'</div></div>'+
+    '<div style="background:#fee2e2;border-radius:10px;padding:10px;text-align:center"><div style="font-size:9px;color:#dc2626;font-weight:700">غير مدفوع</div><div style="font-weight:900;color:#dc2626;font-size:13px">'+fmt(byStatus['غير مدفوع'])+'</div></div>'+
+    '</div>'+
+    statRow('إجمالي المحصّل',fmt(totalCollected),'#15803d')+
+    statRow('إجمالي المعلّق',fmt(totalPending),'#dc2626')+
+    statRow('معدل التحصيل',(ps.length?(Math.round(totalCollected/Math.max(1,totalCollected+totalPending)*100)||0)+'%':'0%'))+
+    '</div>'+
+    '<div class="card">'+
+    '<div style="font-weight:900;font-size:13px;margin-bottom:10px;display:flex;justify-content:space-between">'+
+    '<span>🧾 الفواتير ('+ps.length+')</span>'+
+    '</div>'+
+    ps.slice(0,50).map(function(s){
+      var sc=s.status==='مدفوع'?'#15803d':s.status==='جزئي'?'#ca8a04':'#dc2626';
+      var bg=s.status==='مدفوع'?'#dcfce7':s.status==='جزئي'?'#fef9c3':'#fee2e2';
+      return '<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #f1f5f9">'+
+        '<div><div style="font-size:13px;font-weight:700">'+esc(s.customer)+'</div>'+
+        '<div style="font-size:11px;color:#94a3b8">'+esc(fmtDate(s.date))+'</div></div>'+
+        '<div style="text-align:left;display:flex;align-items:center;gap:6px">'+
+        '<div style="font-weight:700;font-size:13px">'+fmt(s.total)+'</div>'+
+        '<span style="background:'+bg+';color:'+sc+';border-radius:6px;padding:2px 7px;font-size:10px;font-weight:700">'+s.status+'</span>'+
+        '<button onclick="openSaleModal(\''+s.id+'\')" style="background:#dbeafe;border:none;border-radius:6px;padding:3px 7px;cursor:pointer;font-size:11px">✏️</button>'+
+        '</div></div>';
+    }).join('')+'</div>';
+}
+
+// ===== المركز المالي =====
+function renderBalanceReport(){
+  var assets=DB.products.reduce(function(s,p){return s+p.qty*(p.buy_price||0);},0);
+  var custDebt=DB.debts.filter(function(d){return d.type==='customer';}).reduce(function(s,d){return s+(d.total-(d.paid||0));},0);
+  var suppDebt=DB.debts.filter(function(d){return d.type==='supplier';}).reduce(function(s,d){return s+(d.total-(d.paid||0));},0);
+  var capital=(DB.accounts&&DB.accounts.capital||[]).reduce(function(s,c){return s+c.amount;},0);
+  var fixedAssets=(DB.accounts&&DB.accounts.fixed_assets||[]).reduce(function(s,a){return s+a.value;},0);
+  var receivables=(DB.accounts&&DB.accounts.receivables||[]).filter(function(r){return r.status==='pending';}).reduce(function(s,r){return s+r.amount;},0);
+  var net=assets+custDebt+capital+fixedAssets+receivables-suppDebt;
+  var el=document.getElementById('tab-balance');if(!el)return;
+  el.innerHTML='<div class="card">'+
+    '<div style="font-weight:900;font-size:14px;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #0f172a">📊 قائمة المركز المالي</div>'+
+    '<div style="font-weight:800;font-size:11px;color:#2563eb;margin-bottom:6px;margin-top:4px">الأصول</div>'+
+    statRow('رأس المال المستثمر',fmt(capital),'#2563eb')+
+    statRow('الأصول الثابتة',fmt(fixedAssets),'#7c3aed')+
+    statRow('قيمة المخزون',fmt(assets),'#0d9488')+
+    statRow('ديون العملاء (لي)',fmt(custDebt),'#2563eb')+
+    statRow('مستحقات',fmt(receivables),'#ca8a04')+
+    '<div style="display:flex;justify-content:space-between;padding:9px 0;font-weight:900;font-size:14px;border-top:2px solid #2563eb;margin-top:4px"><span>إجمالي الأصول</span><span style="color:#2563eb">'+fmt(assets+custDebt+capital+fixedAssets+receivables)+'</span></div>'+
+    '<div style="height:10px"></div>'+
+    '<div style="font-weight:800;font-size:11px;color:#dc2626;margin-bottom:6px">الالتزامات</div>'+
+    statRow('ديون الموردين (علي)',fmt(suppDebt),'#dc2626')+
+    '<div style="display:flex;justify-content:space-between;padding:9px 0;font-weight:900;font-size:14px;border-top:2px solid #dc2626;margin-top:4px"><span>إجمالي الالتزامات</span><span style="color:#dc2626">'+fmt(suppDebt)+'</span></div>'+
+    '<div style="background:'+(net>=0?'#f0fdf4':'#fef2f2')+';border-radius:12px;padding:14px;margin-top:12px">'+
+    '<div style="display:flex;justify-content:space-between;align-items:center"><span style="font-weight:900;font-size:15px">صافي المركز</span>'+
+    '<span style="font-weight:900;font-size:20px;color:'+(net>=0?'#15803d':'#dc2626')+'">'+fmt(net)+'</span></div></div></div>'+
+    '<div class="card" style="margin-top:8px">'+
+    '<div style="font-weight:900;font-size:13px;margin-bottom:10px">📦 تفاصيل المخزون</div>'+
+    (DB.products.length?DB.products.map(function(p){
+      var low=p.qty<=(p.min_qty||0);
+      return '<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #f1f5f9">'+
+        '<div><div style="font-size:13px;font-weight:700">'+esc(p.name)+'</div>'+
+        '<div style="font-size:11px;color:'+(low?'#dc2626':'#94a3b8')+'">'+p.qty+' | '+esc(p.unit||'')+(low?' ⚠️':'')+'</div></div>'+
+        '<div style="text-align:left"><b style="font-size:13px">'+fmt(p.qty*(p.buy_price||0))+'</b>'+
+        '<div style="font-size:10px;color:#94a3b8">'+p.buy_price+' ج</div></div></div>';
+    }).join(''):'<div class="empty">لا يوجد مخزون</div>')+
+    '</div>';
+}
+
+// ===== المصروفات =====
+function renderExpensesReport(){
+  var pe=filterExpByPeriod();
+  var byType={};pe.forEach(function(e){byType[e.type]=(byType[e.type]||0)+e.amount;});
+  var total=pe.reduce(function(s,e){return s+e.amount;},0);
+  var el=document.getElementById('tab-expenses');if(!el)return;
+  el.innerHTML='<div class="card">'+
+    '<div style="font-weight:900;font-size:14px;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #0f172a">💸 تحليل المصروفات</div>'+
+    statRow('إجمالي المصروفات',fmt(total),'#ea580c')+
+    '<div style="height:8px"></div>'+
+    Object.keys(byType).map(function(k){
+      var pct=total>0?Math.round(byType[k]/total*100):0;
+      return '<div style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:3px"><span>'+esc(k)+'</span><b>'+fmt(byType[k])+' ('+pct+'%)</b></div>'+
+        '<div style="height:6px;background:#f1f5f9;border-radius:3px;overflow:hidden"><div style="height:100%;width:'+pct+'%;background:#ea580c;border-radius:3px"></div></div></div>';
+    }).join('')+'</div>'+
+    '<div class="card" style="margin-top:8px">'+
+    '<div style="font-weight:900;font-size:13px;margin-bottom:10px;display:flex;justify-content:space-between">'+
+    '<span>📋 تفاصيل ('+pe.length+')</span>'+
+    '</div>'+
+    pe.slice(0,50).map(function(e){
+      return '<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #f1f5f9">'+
+        '<div><div style="font-size:13px;font-weight:700">'+esc(e.type)+'</div>'+
+        '<div style="font-size:11px;color:#94a3b8">'+esc(fmtDate(e.date))+(e.note?' — '+esc(e.note):'')+'</div></div>'+
+        '<div style="display:flex;align-items:center;gap:6px">'+
+        '<b style="color:#ea580c">'+fmt(e.amount)+'</b>'+
+        '</div></div>';
+    }).join('')+'</div>';
+}
+
+// ===== التحليل المالي الكامل =====
+function renderFullAnalysis(){
+  var ps=DB.sales, pe=DB.expenses, pp=DB.purchases;
+  var el=document.getElementById('tab-analysis');if(!el)return;
+
+  var rev=ps.reduce(function(s,x){return s+x.total;},0);
+  var cos=ps.reduce(function(s,sale){return s+(sale.items||[]).reduce(function(ss,i){return ss+i.qty*(i.buyPrice||i.buy_price||0);},0);},0);
+  var exp=pe.reduce(function(s,x){return s+x.amount;},0);
+  var grossProfit=rev-cos;
+  var netProfit=grossProfit-exp;
+  var grossMargin=rev>0?Math.round(grossProfit/rev*100):0;
+  var netMargin=rev>0?Math.round(netProfit/rev*100):0;
+
+  // نقطة التعادل
+  var fixedExp=(DB.accounts&&DB.accounts.fixed_expenses||[]).filter(function(e){return e.active!==false&&e.type==='fixed';}).reduce(function(s,e){return s+e.amount;},0);
+  var breakEven=grossMargin>0?Math.round(fixedExp/(grossMargin/100)):0;
+
+  // التدفق النقدي
+  var collected=ps.reduce(function(s,x){return s+(x.paid||0);},0);
+  var paid=pp.reduce(function(s,x){return s+(x.paid||0);},0)+exp;
+  var cashFlow=collected-paid;
+
+  // مؤشرات الأداء
+  var avgTicket=ps.length?Math.round(rev/ps.length):0;
+  var repeatCustomers={};
+  ps.forEach(function(s){repeatCustomers[s.customer]=(repeatCustomers[s.customer]||0)+1;});
+  var repeats=Object.values(repeatCustomers).filter(function(v){return v>1;}).length;
+
+  // شهري
+  var monthlyRev={};
+  ps.forEach(function(s){
+    if(!s.date)return;
+    var m=s.date.slice(0,7);
+    monthlyRev[m]=(monthlyRev[m]||0)+s.total;
+  });
+  var months=Object.keys(monthlyRev).sort();
+  var maxMonth=months.reduce(function(a,b){return monthlyRev[a]>monthlyRev[b]?a:b;},'');
+
+  el.innerHTML=
+    // مؤشرات الأداء الرئيسية
+    '<div class="card" style="margin-bottom:10px">'+
+    '<div style="font-weight:900;font-size:14px;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #0f172a">🎯 مؤشرات الأداء الرئيسية</div>'+
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">'+
+    kpiCard('هامش المجمل',grossMargin+'%',grossMargin>=30?'#15803d':'#ca8a04',grossMargin>=30?'#dcfce7':'#fef9c3')+
+    kpiCard('هامش الصافي',netMargin+'%',netMargin>=15?'#15803d':netMargin>=0?'#ca8a04':'#dc2626',netMargin>=15?'#dcfce7':netMargin>=0?'#fef9c3':'#fee2e2')+
+    kpiCard('متوسط الفاتورة',fmt(avgTicket),'#2563eb','#dbeafe')+
+    kpiCard('عملاء متكررون',repeats,'#7c3aed','#ede9fe')+
+    '</div>'+
+    '</div>'+
+
+    // نقطة التعادل
+    '<div class="card" style="margin-bottom:10px">'+
+    '<div style="font-weight:900;font-size:14px;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #ea580c">⚖️ نقطة التعادل</div>'+
+    '<div style="background:#fff7ed;border-radius:11px;padding:14px;margin-bottom:10px">'+
+    '<div style="font-size:11px;color:#ea580c;font-weight:700;margin-bottom:4px">المبيعات المطلوبة للتعادل / شهر</div>'+
+    '<div style="font-size:24px;font-weight:900;color:#ea580c">'+fmt(breakEven)+'</div>'+
+    '<div style="font-size:11px;color:#94a3b8;margin-top:3px">بناءً على المصاريف الثابتة '+fmt(fixedExp)+' وهامش '+grossMargin+'%</div></div>'+
+    statRow('المبيعات الفعلية',fmt(rev),rev>=breakEven?'#15803d':'#dc2626')+
+    '<div style="background:'+(rev>=breakEven?'#dcfce7':'#fee2e2')+';border-radius:9px;padding:10px;margin-top:8px;display:flex;justify-content:space-between;align-items:center">'+
+    '<span style="font-size:13px;font-weight:700">'+(rev>=breakEven?'✅ تجاوزت نقطة التعادل':'⚠️ لم تصل لنقطة التعادل')+'</span>'+
+    '<span style="font-weight:900;font-size:14px;color:'+(rev>=breakEven?'#15803d':'#dc2626')+'">'+fmt(Math.abs(rev-breakEven))+'</span></div>'+
+    '</div>'+
+
+    // التدفق النقدي
+    '<div class="card" style="margin-bottom:10px">'+
+    '<div style="font-weight:900;font-size:14px;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #2563eb">💧 التدفق النقدي</div>'+
+    statRow('إجمالي المحصّل',fmt(collected),'#15803d')+
+    statRow('إجمالي المدفوع',fmt(paid),'#dc2626')+
+    '<div style="background:'+(cashFlow>=0?'#f0fdf4':'#fef2f2')+';border-radius:10px;padding:12px;margin-top:8px;display:flex;justify-content:space-between;align-items:center">'+
+    '<span style="font-weight:900">صافي التدفق النقدي</span>'+
+    '<span style="font-weight:900;font-size:18px;color:'+(cashFlow>=0?'#15803d':'#dc2626')+'">'+fmt(cashFlow)+'</span></div>'+
+    '</div>'+
+
+    // الأداء الشهري
+    (months.length?'<div class="card" style="margin-bottom:10px">'+
+    '<div style="font-weight:900;font-size:14px;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #7c3aed">📅 الأداء الشهري</div>'+
+    (maxMonth?'<div style="background:#ede9fe;border-radius:10px;padding:10px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center">'+
+    '<div><div style="font-size:11px;color:#7c3aed;font-weight:700">🏆 أفضل شهر</div>'+
+    '<div style="font-size:14px;font-weight:900;color:#7c3aed">'+maxMonth+'</div></div>'+
+    '<div style="font-size:18px;font-weight:900;color:#7c3aed">'+fmt(monthlyRev[maxMonth])+'</div></div>':'')+
+    months.slice(-6).reverse().map(function(m){
+      var pct=monthlyRev[maxMonth]>0?Math.round(monthlyRev[m]/monthlyRev[maxMonth]*100):0;
+      return '<div style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:2px"><span>'+m+'</span><b>'+fmt(monthlyRev[m])+'</b></div>'+
+        '<div style="height:6px;background:#e2e8f0;border-radius:3px;overflow:hidden"><div style="height:100%;width:'+pct+'%;background:#7c3aed;border-radius:3px"></div></div></div>';
+    }).join('')+'</div>':'');
+}
+
+
+// ===== SETTINGS =====
+// ===== SETTINGS =====
+function renderSettings(){
+  var el=document.getElementById('settings-body');if(!el)return;
+  var lastBackup=LS.get('mc8_last_backup','');
+  var backupInterval=LS.get('mc8_backup_interval',60);
+  el.innerHTML=
+    '<div class="card">'+
+    '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #e2e8f0">⚙️ إعدادات عامة</div>'+
+    '<div class="perm-row"><div><div class="perm-label">📅 التاريخ الهجري</div>'+
+    '<div style="font-size:11px;color:#94a3b8;margin-top:2px">عرض التواريخ بالتقويم الهجري</div></div>'+
+    '<label class="toggle"><input type="checkbox" id="hijri-toggle" '+(_hijri?'checked':'')+' onchange="toggleHijri()"><span class="slider"></span></label></div>'+
+    '</div>'+
+
+    '<div class="card">'+
+    '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #e2e8f0">☁️ Supabase</div>'+
+    '<div style="background:#f0fdf4;border-radius:10px;padding:11px 13px;margin-bottom:12px;border:1.5px solid #86efac">'+
+    '<div style="font-size:12px;font-weight:700;color:#15803d;margin-bottom:4px">✅ متصل بالسحابة</div>'+
+    '<div style="font-size:11px;color:#64748b">البيانات تتحفظ تلقائياً على Supabase</div></div>'+
+    '<button class="settings-btn" onclick="loadDB();showToast(\'جاري المزامنة...\',\'#2563eb\')">🔄 مزامنة يدوية</button>'+
+    '</div>'+
+
+    '<div class="card">'+
+    '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #e2e8f0">💾 نسخة احتياطية JSON</div>'+
+    (lastBackup?'<div style="background:#f0fdf4;border-radius:10px;padding:10px 12px;margin-bottom:12px;border:1.5px solid #86efac">'+
+      '<div style="font-size:11px;color:#64748b;margin-bottom:3px">⏱️ آخر نسخة</div>'+
+      '<div style="font-weight:800;color:#15803d;font-size:13px">'+formatBackupDate(lastBackup)+'</div></div>':''+
+      '<div style="background:#fff7ed;border-radius:10px;padding:10px 12px;margin-bottom:12px;border:1.5px solid #fed7aa">'+
+      '<div style="font-weight:700;color:#ea580c;font-size:13px">لم يتم عمل نسخة بعد</div></div>')+
+    '<div style="margin-bottom:12px"><div style="font-size:12px;font-weight:700;color:#374151;margin-bottom:8px">🔄 تلقائي كل:</div>'+
+    '<div style="display:flex;gap:6px;flex-wrap:wrap">'+
+    [['بدون',0],['30 د',30],['ساعة',60],['3 ساعات',180],['يومياً',1440]].map(function(opt){
+      var active=backupInterval===opt[1];
+      return '<button onclick="setBackupInterval('+opt[1]+');renderSettings()" style="padding:8px 12px;border:2px solid '+(active?'#2563eb':'#e2e8f0')+';border-radius:9px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer;background:'+(active?'#dbeafe':'#fff')+';color:'+(active?'#1e40af':'#64748b')+'">'+opt[0]+'</button>';
+    }).join('')+'</div></div>'+
+    '<div style="background:#f8fafc;border-radius:10px;padding:11px 13px;margin-bottom:12px;border:1.5px solid #e2e8f0">'+
+    '<div style="font-size:12px;font-weight:700;color:#374151;margin-bottom:4px">📁 مكان الحفظ</div>'+
+    '<div style="font-size:12px;color:#64748b">مجلد Downloads على جهازك تلقائياً</div></div>'+
+    '<button class="settings-btn success" onclick="exportBackup()">📤 تصدير نسخة الآن</button>'+
+    '<button class="settings-btn" onclick="document.getElementById(\'import-file\').click()" style="margin-top:8px">📥 استيراد نسخة</button>'+
+    '<input type="file" id="import-file" accept=".json" style="display:none" onchange="importBackup(this)">'+
+    '</div>'+
+
+    '<div class="card">'+
+    '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #e2e8f0">🗂️ البيانات</div>'+
+    '<button class="settings-btn" onclick="exportCSV()">📊 تصدير للإكسيل (CSV)</button>'+
+    '<button class="settings-btn danger" style="margin-top:8px" onclick="confirmAction(\'هتمسح كل البيانات؟\',clearAllData)">🗑️ مسح كل البيانات</button>'+
+    '</div>'+
+
+    '<div class="card">'+
+    '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #e2e8f0">🔢 عداد الأعطال</div>'+
+    '<div style="font-size:13px;color:#64748b;margin-bottom:10px">الرقم الحالي: <b style="color:#0f172a">'+(DB.movCounter||0)+'</b></div>'+
+    '<button class="settings-btn danger" onclick="resetMovCounter()">🔄 تصفير العداد</button>'+
+    '</div>';
+}
+
+function formatBackupDate(iso){
+  try{
+    var d=new Date(iso);
+    var days=['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+    return days[d.getDay()]+' '+d.toLocaleDateString('ar-EG',{year:'numeric',month:'long',day:'numeric'})+' الساعة '+d.toLocaleTimeString('ar-EG',{hour:'2-digit',minute:'2-digit'});
+  }catch(e){return iso;}
+}
+
+function setBackupInterval(minutes){
+  AUTO_BACKUP_MINUTES=minutes;
+  LS.set('mc8_backup_interval',minutes);
+  startAutoBackup();
+}
+
+function exportBackup(){
+  try{
+    var data=Object.assign({},DB,{exportedAt:new Date().toISOString(),version:'9.0'});
+    var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement('a');a.href=url;a.download='mc-backup-'+today()+'.json';
+    a.click();URL.revokeObjectURL(url);
+    LS.set('mc8_last_backup',new Date().toISOString());
+    showToast('✅ تم التصدير — تحقق من Downloads','#16a34a');
+    renderSettings();
+  }catch(e){showToast('❌ فشل التصدير','#dc2626');}
+}
+
+function importBackup(input){
+  var file=input.files[0];if(!file)return;
+  var r=new FileReader();
+  r.onload=function(e){
+    try{
+      var data=JSON.parse(e.target.result);
+      if(!data.sales&&!data.products)return showToast('❌ ملف غير صحيح','#dc2626');
+      confirmAction('هتستبدل كل البيانات بالنسخة دي؟',function(){
+        if(data.products)DB.products=data.products;
+        if(data.sales)DB.sales=data.sales;
+        if(data.purchases)DB.purchases=data.purchases;
+        if(data.expenses)DB.expenses=data.expenses;
+        if(data.debts)DB.debts=data.debts;
+        if(data.tasks)DB.tasks=data.tasks;
+        if(data.movements)DB.movements=data.movements;
+        if(data.archive)DB.archive=data.archive;
+        renderHome();renderSettings();
+        showToast('✅ تم الاستيراد','#16a34a');
+      });
+    }catch(ex){showToast('❌ خطأ في الملف','#dc2626');}
+  };
+  r.readAsText(file);input.value='';
+}
+
+function exportCSV(){
+  try{
+    var rows=[['التاريخ','العميل','الموديل','السيريال','العداد','الإجمالي','المدفوع','الحالة','ملاحظة']];
+    DB.sales.forEach(function(s){rows.push([s.date,s.customer,s.model||'',s.serial||'',s.counter||'',s.total,s.paid||0,s.status,s.note||'']);});
+    var csv=rows.map(function(r){return r.map(function(c){return'"'+String(c).replace(/"/g,'""')+'"';}).join(',');}).join('\n');
+    var blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'});
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement('a');a.href=url;a.download='sales-'+today()+'.csv';
+    a.click();URL.revokeObjectURL(url);
+    showToast('✅ تم التصدير للإكسيل','#16a34a');
+  }catch(e){showToast('❌ فشل التصدير','#dc2626');}
+}
+
+async function clearAllData(){
+  DB.products=[];DB.sales=[];DB.purchases=[];DB.expenses=[];
+  DB.debts=[];DB.tasks=[];DB.movements=[];
+  DB.archive={customers:[],suppliers:[],products:[],expDescs:[],serials:[],models:[]};
+  DB.schedule={};DB.movCounter=0;
+  await persist();renderHome();navigate('home');
+  showToast('🗑️ تم مسح كل البيانات','#64748b');
+}
+
+
+// ===== PRINT =====
+// ===== PRINT INVOICE =====
+function printInvoice(id){
+  var s=DB.sales.find(function(x){return x.id===id;});if(!s)return;
+  var w=window.open('','_blank','width=420,height=650');
+  var rows=s.items.map(function(i){
+    return '<tr><td style="padding:6px 8px;border-bottom:1px solid #eee">'+esc(i.name)+'</td>'+
+      '<td style="padding:6px 8px;border-bottom:1px solid #eee;text-align:center">'+i.qty+'</td>'+
+      '<td style="padding:6px 8px;border-bottom:1px solid #eee;text-align:left">'+i.price+' ج</td>'+
+      '<td style="padding:6px 8px;border-bottom:1px solid #eee;text-align:left">'+(i.qty*i.price)+' ج</td></tr>';
+  }).join('');
+  var srvRows=s.services&&s.services.length?s.services.map(function(sv){
+    return '<tr style="background:#fff7ed"><td colspan="3" style="padding:6px 8px;border-bottom:1px solid #eee">🔧 '+esc(sv.name)+'</td>'+
+      '<td style="padding:6px 8px;border-bottom:1px solid #eee;text-align:left">'+sv.price+' ج</td></tr>';
+  }).join(''):'';
+  var shopName=LS.get('mc8_shop_name','مركز الصيانة');
+  w.document.write(
+    '<html dir="rtl"><head><meta charset="UTF-8"><title>فاتورة</title>'+
+    '<style>body{font-family:Tahoma,sans-serif;padding:20px;max-width:400px;margin:0 auto;font-size:14px}'+
+    'h2{text-align:center;border-bottom:2px solid #000;padding-bottom:10px;margin-bottom:14px}'+
+    'table{width:100%;border-collapse:collapse}th{background:#f1f5f9;padding:7px 8px;text-align:right;font-size:13px}'+
+    '.info-row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f1f5f9;font-size:13px}'+
+    '@media print{button{display:none}}</style></head><body>'+
+    '<h2>'+esc(shopName)+'</h2>'+
+    '<div class="info-row"><span><b>العميل:</b></span><span>'+esc(s.customer)+'</span></div>'+
+    '<div class="info-row"><span><b>التاريخ:</b></span><span>'+esc(s.date)+'</span></div>'+
+    (s.serial?'<div class="info-row"><span><b>السيريال:</b></span><span>'+esc(s.serial)+'</span></div>':'')+
+    (s.model?'<div class="info-row"><span><b>الموديل:</b></span><span>'+esc(s.model)+'</span></div>':'')+
+    (s.counter?'<div class="info-row"><span><b>العداد:</b></span><span>'+esc(s.counter)+(s.colorCounter?' | ألوان: '+esc(s.colorCounter):'')+'</span></div>':'')+
+    '<br>'+
+    (rows||srvRows?
+      '<table><thead><tr><th>البند</th><th>الكمية</th><th>السعر</th><th>الإجمالي</th></tr></thead>'+
+      '<tbody>'+rows+srvRows+'</tbody></table>':'')+'<hr>'+
+    '<div class="info-row" style="font-size:16px;font-weight:900"><span>الإجمالي</span><span>'+s.total+' ج</span></div>'+
+    '<div class="info-row"><span>المدفوع</span><span style="color:green">'+( s.paid||0)+' ج</span></div>'+
+    ((s.total-(s.paid||0))>0?'<div class="info-row"><span>المتبقي</span><span style="color:red">'+(s.total-(s.paid||0))+' ج</span></div>':'')+
+    (s.note?'<div style="margin-top:10px;padding:8px;background:#f8fafc;border-radius:8px;font-size:12px"><b>ملاحظة:</b> '+esc(s.note)+'</div>':'')+
+    '<br><button onclick="window.print()" style="width:100%;padding:12px;background:#0f172a;color:#fff;border:none;border-radius:8px;font-size:15px;cursor:pointer;font-family:Tahoma">🖨️ طباعة</button>'+
+    '</body></html>'
+  );
+  w.document.close();
+}
+
+
+// ===== MULTISELECT =====
+// ===== MULTI SELECT =====
+var _multiSelect = false;
+var _multiTable = '';
+var _selected = {};
+
+function startMultiSelect(table){
+  _multiSelect = true;
+  _multiTable = table;
+  _selected = {};
+  renderScreen(currentScreen);
+}
+
+function cancelMultiSelect(){
+  _multiSelect = false;
+  _selected = {};
+  renderScreen(currentScreen);
+}
+
+function toggleSelect(id){
+  if(_selected[id]) delete _selected[id];
+  else _selected[id] = true;
+  updateMsToolbar();
+  // re-render just the selected state visually
+  document.querySelectorAll('[data-id]').forEach(function(el){
+    var isSelected = _selected[el.dataset.id];
+    var chk = el.querySelector('.ms-check');
+    if(chk){
+      chk.style.background = isSelected ? '#2563eb' : '#fff';
+      chk.style.borderColor = isSelected ? '#2563eb' : '#e2e8f0';
+      chk.innerHTML = isSelected ? '<span style="color:#fff;font-size:12px">✓</span>' : '';
+      el.style.border = isSelected ? '2px solid #2563eb' : '';
+      el.style.background = isSelected ? '#eff6ff' : '';
+    }
+  });
+}
+
+function updateMsToolbar(){
+  var bar = document.getElementById('ms-toolbar');
+  if(!bar) return;
+  var count = Object.keys(_selected).length;
+  bar.innerHTML =
+    '<span style="font-size:13px;font-weight:700">تم تحديد '+count+'</span>'+
+    '<div style="display:flex;gap:6px;margin-right:auto">'+
+    (count>0?'<button class="btn btn-sm btn-red" onclick="deleteSelected()">🗑️ حذف ('+count+')</button>':'')+ 
+    (count>0?'<button class="btn btn-sm" style="background:#dcfce7;color:#15803d" onclick="exportSelected()">📤 تصدير</button>':'')+
+    '<button class="btn btn-sm btn-outline" onclick="cancelMultiSelect()">إلغاء</button>'+
+    '</div>';
+  bar.style.display = 'flex';
+}
+
+async function deleteSelected(){
+  var ids = Object.keys(_selected);
+  if(!ids.length) return;
+  confirmAction('هتحذف '+ids.length+' عنصر؟', async function(){
+    for(var i=0;i<ids.length;i++){
+      DB[_multiTable] = DB[_multiTable].filter(function(x){return x.id!==ids[i];});
+      await dbDelete(_multiTable, ids[i]);
+    }
+    cancelMultiSelect();
+    renderHome();
+    showToast('🗑️ تم حذف '+ids.length+' عنصر','#64748b');
+  });
+}
+
+function exportSelected(){
+  var ids = Object.keys(_selected);
+  if(!ids.length) return;
+  var items = DB[_multiTable].filter(function(x){return ids.indexOf(x.id)!==-1;});
+  var blob = new Blob([JSON.stringify(items,null,2)],{type:'application/json'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href=url; a.download=_multiTable+'-export-'+today()+'.json';
+  a.click(); URL.revokeObjectURL(url);
+  showToast('✅ تم تصدير '+items.length+' عنصر','#16a34a');
+}
+
+// Multi-select card wrapper helper
+function msCard(id, innerHTML){
+  var isSelected = _selected[id];
+  return '<div class="card" data-id="'+id+'" style="'+(isSelected?'border:2px solid #2563eb !important;background:#eff6ff;':'')+';margin-bottom:10px">'+
+    (_multiSelect?
+      '<div style="display:flex;align-items:flex-start;gap:10px">'+
+      '<div class="ms-check" onclick="toggleSelect(\''+id+'\')" style="width:22px;height:22px;border:2px solid '+(isSelected?'#2563eb':'#e2e8f0')+';border-radius:6px;flex-shrink:0;margin-top:2px;background:'+(isSelected?'#2563eb':'#fff')+';display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none">'+
+      (isSelected?'<span style="color:#fff;font-size:12px">✓</span>':'')+
+      '</div><div style="flex:1">'+innerHTML+'</div></div>'
+    : innerHTML)+
+    '</div>';
+}
+
+
+// ===== MORE =====
+// ===== MORE SCREEN =====
+function renderMore(){
+  var el=document.getElementById('more-body');if(!el)return;
+
+  var sections=[
+    {
+      title:'💼 العمليات',
+      items:[
+        {icon:'🧾',label:'المبيعات',screen:'sales',color:'#dbeafe',tc:'#1e40af'},
+        {icon:'🛒',label:'المشتريات',screen:'purchases',color:'#ede9fe',tc:'#5b21b6'},
+        {icon:'📦',label:'المخزون',screen:'inventory',color:'#dcfce7',tc:'#15803d'},
+        {icon:'💳',label:'الديون',screen:'debts',color:'#fee2e2',tc:'#dc2626'},
+      ]
+    },
+    {
+      title:'📊 التحليل والتقارير',
+      items:[
+        {icon:'📊',label:'التقارير المالية',screen:'reports',color:'#fff7ed',tc:'#c2410c'},
+        {icon:'📒',label:'الحسابات',screen:'accounting',color:'#fdf2f8',tc:'#86198f'},
+        {icon:'🔧',label:'تقرير التحركات',screen:'movements-report',color:'#fdf2f8',tc:'#86198f'},
+        {icon:'📋',label:'تقرير المهمات',screen:'tasks-report',color:'#f0fdf4',tc:'#15803d'},
+      ]
+    },
+    {
+      title:'⚙️ الإدارة',
+      items:[
+        {icon:'⚙️',label:'الإعدادات',screen:'settings',color:'#f8fafc',tc:'#374151'},
+        {icon:'🔍',label:'البحث الشامل',action:'openGlobalSearch()',color:'#f5f3ff',tc:'#6d28d9'},
+        {icon:'📤',label:'تصدير نسخة',action:'exportBackup()',color:'#f0fdf4',tc:'#15803d'},
+        {icon:'🔄',label:'مزامنة',action:'loadDB().then(function(){renderHome();showToast(\'✅ تم التحديث\',\'#16a34a\')})',color:'#eff6ff',tc:'#2563eb'},
+      ]
+    }
+  ];
+
+  el.innerHTML=sections.map(function(sec){
+    return '<div style="margin-bottom:18px">'+
+      '<div style="font-size:13px;font-weight:800;color:#64748b;margin-bottom:10px;padding-right:4px">'+sec.title+'</div>'+
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">'+
+      sec.items.map(function(item){
+        var onclick=item.screen?'navigate(\''+item.screen+'\')':item.action;
+        return '<button onclick="'+onclick+'" style="background:'+item.color+';border:none;border-radius:16px;padding:16px 12px;cursor:pointer;font-family:inherit;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px;transition:transform .1s" onmousedown="this.style.transform=\'scale(.95)\'" onmouseup="this.style.transform=\'\'" ontouchstart="this.style.transform=\'scale(.95)\'" ontouchend="this.style.transform=\'\'">'+
+          '<span style="font-size:28px">'+item.icon+'</span>'+
+          '<span style="font-size:12px;font-weight:800;color:'+item.tc+'">'+item.label+'</span>'+
+          '</button>';
+      }).join('')+
+      '</div></div>';
+  }).join('');
+}
+
+
+// ===== INV TAB =====
+var _invTab='list';
+function switchInvTab(tab){
+  _invTab=tab;
+  document.getElementById('inv-main').style.display=tab==='list'?'block':'none';
+  document.getElementById('inv-stats').style.display=tab==='stats'?'block':'none';
+  if(tab==='stats')renderInventoryStats();else renderInventory();
+}
+
+// ===== REPORT TAB =====
+switchReportTab=function(tab,el){
+  currentReportTab=tab;
+  document.querySelectorAll('#screen-reports .tab').forEach(function(t){t.classList.remove('active');});
+  if(el)el.classList.add('active');
+  ['period','income','balance','expenses','analysis'].forEach(function(t){
+    var d=document.getElementById('tab-'+t);if(d)d.style.display=t===tab?'block':'none';
+  });
+  renderReports();
+};
+
+// ===== MOV TAB =====
+var _movTab='list';
+function switchMovTab(tab,el){
+  _movTab=tab;
+  document.querySelectorAll('#screen-movements .tab').forEach(function(t){t.classList.remove('active');});
+  if(el)el.classList.add('active');
+  document.getElementById('movements-list').style.display=tab==='list'?'block':'none';
+  document.getElementById('schedule-body').style.display=tab==='sched'?'block':'none';
+  document.getElementById('movements-archive-body').style.display=tab==='archive'?'block':'none';
+  if(tab==='sched'){_schedChecked=[];renderSchedule();}
+  else if(tab==='archive')renderMovementsArchive();
+  else renderMovements();
+}
+
+// ===== NAV =====
+navLabels['more']='المزيد';navLabels['movements']='التحركات';
+navLabels['movements-report']='تقرير التحركات';navLabels['tasks-report']='تقرير المهمات';
+navLabels['ledger']='سجل العميل';navLabels['accounting']='الحسابات';
+navLabels['purchases']='المشتريات';navLabels['inventory']='المخزون';
+navLabels['expenses']='المصاريف';
+navIcons['more']='☰';navIcons['movements']='🔧';navIcons['movements-report']='📊';
+navIcons['tasks-report']='📊';navIcons['ledger']='👤';navIcons['accounting']='📒';
+navIcons['purchases']='🛒';navIcons['inventory']='📦';navIcons['expenses']='💸';
+
+var _baseRS=renderScreen;
+renderScreen=function(s){
+  if(s==='more'){renderMore();return;}
+  if(s==='expenses'){renderExpensesList();return;}
+  if(s==='movements'){if(_movTab==='list')renderMovements();else if(_movTab==='sched')renderSchedule();else renderMovementsArchive();return;}
+  if(s==='movements-report'){renderMovementsReport();return;}
+  if(s==='tasks-report'){renderTasksReport();return;}
+  if(s==='ledger'){renderLedger(_currentLedgerCustomer);return;}
+  if(s==='accounting'){renderAccounting();return;}
+  if(s==='inventory'){if(_invTab==='stats')renderInventoryStats();else renderInventory();return;}
+  _baseRS(s);
+};
+
+function updateAllBadges(){updateTasksBadge();updateMovementsBadge();}
+var _origRH=renderHome;
+renderHome=function(){_origRH();updateAllBadges();};
+
+window.addEventListener('DOMContentLoaded',function(){
+  var el=document.getElementById('today-date');
+  if(el){var now=new Date();
+    try{el.textContent=_hijri?new Intl.DateTimeFormat('ar-SA-u-ca-islamic-umalqura',{weekday:'long',year:'numeric',month:'long',day:'numeric'}).format(now):now.toLocaleDateString('ar-EG',{weekday:'long',year:'numeric',month:'long',day:'numeric'});}
+    catch(e){el.textContent=now.toLocaleDateString();}
+  }
+  window.addEventListener('beforeunload',function(){
+    try{localStorage.setItem('mc9_schedule',JSON.stringify(DB.schedule));}catch(e){}
+    try{localStorage.setItem('mc9_movCounter',JSON.stringify(DB.movCounter));}catch(e){}
+  });
+  if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js').catch(function(){});}
+  setSyncStatus('⏳','#ca8a04');
+  loadDB().then(function(){navigate('home');startAutoBackup();})
+    .catch(function(e){console.error(e);navigate('home');showToast('⚠️ لا اتصال','#ea580c');});
+});
+
+</script>
+</body>
+</html>
