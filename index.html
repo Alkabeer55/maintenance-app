@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v150</title>
+<title>ابو حوده الحلو الجميل v153</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="2026-09-08 — v150";
+<script>var BUILD_STAMP="2026-09-08 — v153";
 /* ===== سجل التعديلات (Changelog) =====
 v81: نسخة احتياطية طارئة تلقائية لو localStorage اتعطب.
 v82: بوابة تسجيل دخول + ربط Supabase.
@@ -190,6 +190,32 @@ v106: [إصلاح جذري] "النقدية غلط بسبب مخزون/ديون 
      الطباعة، تصدير Excel). ⚠️ ملحوظة لو شايف تسميات قديمة رغم التحديث: امسح الكاش/أعد
      تحميل الملف بالكامل (الملف اسمه لازم يختلف عن أي نسخة سابقة نزّلتها قبل كده حتى
      يتجنّب متصفح الموبايل استخدام نسخة مخزّنة قديمة).
+v153: [📡 أول خطوة أوفلاين حقيقية: طابور مزامنة تلقائي + تخزين شكل التطبيق]
+     1) طابور مزامنة (localStorage): أي حفظ/تعديل/حذف يفشل (نت مقطوع أو أي سبب) بيتسجل
+     في طابور بدل ما يضيع بصمت. محاولة إعادة إرسال تلقائية: لحظة رجوع النت (حدث
+     'online')، كل 30 ثانية لو النت متصل، ولحظة فتح التطبيق. مؤشر عائم أسفل الشاشة
+     "🔄 N بانتظار المزامنة" يوضح العدد وتقدر تدوس عليه لمحاولة فورية.
+     2) Service Worker (ملف sw.js جديد، لازم يترفع بجانب index.html في نفس المجلد على
+     GitHub): بيخزن شكل التطبيق نفسه (الصفحة + مكتبة Supabase) عشان يفتح حتى لو مفيش
+     نت خالص وقت الفتح، مش بس أثناء الاستخدام. طلبات API الحية (Supabase) بتتسيب من
+     غير كاش عشان البيانات تفضل حديثة لما يكون فيه نت.
+     ملحوظة: البيانات نفسها كانت أصلاً بتتخزن محليًا (localStorage) وتتعرض حتى أوفلاين؛
+     الجديد هنا هو ضمان إن الكتابة (مش بس القراءة) توصل للسيرفر لاحقًا بشكل موثوق، وإن
+     الصفحة نفسها تقدر "تفتح" من الأساس من غير نت.
+v152: [🔧 تحسينات بناءً على أول رفع ناجح فعليًا]
+     1) عداد الرفع الشامل كان بيتاكل فورًا لأن كل سجل ناجح بيكتب "☁️ متزامن مع السيرفر"
+     فوق شريط الحالة بنفسه — دلوقتي بنكتب العداد بعد كل سجل (مش كل 5) عشان يفضل ظاهر.
+     2) زرار "رفع البيانات المحلية" اتنقل من قسم "⚠️ خطر" لقسم "💾 النسخ الاحتياطي
+     والتصدير" (مكانه الصح تنظيميًا)، ونص الوصف بقى يوضح إنه مش مطلوب في الاستخدام
+     العادي (المزامنة بقت أوتوماتيك بالكامل) — بس لاحتياط لاحق زي استيراد نسخة قديمة.
+v151: [🐛 معرّفات قديمة (mc_...) + البنر كان بيغطي هيدر التطبيق]
+     1) بعض المصاريف القديمة فيها employee_id بصيغة IDs قديمة (mc_...) قبل ما نتقل
+     لـ UUID حقيقي، فـ Supabase كان بيرفضها (22P02) من غير ما يقول اسم العمود في رسالة
+     الخطأ. دلوقتي أي حقل معرّف (زي employee_id, assigned_to, supplier_id...) بيتفحص
+     قبل الإرسال، ولو مش UUID صحيح بيتشال (يفضل محليًا بس) بدل ما يوقف السجل كله.
+     2) البنر كان position:fixed عند top:0 فوق هيدر التطبيق نفسه (شريط "متصل بالسيرفر"
+     والعنوان)، فكان بيغطيه بالكامل. دلوقتي بيتحط تحت الهيدر بالظبط (بيقيس ارتفاعه
+     الفعلي)، ويعيد حساب مكانه بعد أي تنقل بين الشاشات (لو الهيدر بيظهر/يختفي).
 v150: [📶 الرفع الشامل بقى يصمد قدام نت الموبايل الضعيف]
      أول رفع حقيقي لمئات السجلات (100+ في كل قسم تقريبًا) كشف إن نت الموبايل مش مستقر
      كفاية لرفع كل حاجة متتالي بسرعة من غير فواصل — كان بيحصل "Failed to fetch" لعشرات
@@ -1923,12 +1949,15 @@ input:checked+.slider:before{transform:translateX(-20px)}
         console.warn('فشل مزامنة الحسابات مع السيرفر:', res.error.message);
         setSyncStatus('⚠️ فشل مزامنة الحسابات','#dc2626');
         __reportError('فشل مزامنة الحسابات', res.error.message+(res.error.code?' (كود: '+res.error.code+')':''));
+        __queueForSync('__accounts__', 'accounts', 'accounts');
         return;
       }
+      __dequeueSync('__accounts__', 'accounts');
       setSyncStatus('☁️ الحسابات متزامنة','#16a34a');
     }catch(e){
       console.warn('خطأ في مزامنة الحسابات:', e);
       __reportError('خطأ اتصال أثناء مزامنة الحسابات', (e&&e.message)?e.message:String(e));
+      __queueForSync('__accounts__', 'accounts', 'accounts');
     }
   }
 
@@ -1957,7 +1986,9 @@ input:checked+.slider:before{transform:translateX(-20px)}
         var ok = await __pushRowToServer(pending[i].t, pending[i].row);
         if(!ok) stillFailed.push(pending[i]);
         done++;
-        if(done % 5 === 0) setSyncStatus('⏳ جولة '+round+': ('+done+'/'+pending.length+')','#64748b');
+        // v152 — كل سجل بينجح بيكتب "☁️ متزامن مع السيرفر" فوق شريط الحالة بنفسه، فكان
+        // بياكل رقم العداد فورًا. بنكتب العداد بعد كل سجل (مش كل 5) عشان يفضل الظاهر.
+        setSyncStatus('⏳ جولة '+round+': ('+done+'/'+pending.length+')','#64748b');
         await __sleep(40);
       }
       pending = stillFailed;
@@ -2663,9 +2694,15 @@ function __renderErrorBanner(){
   if(!el){
     el = document.createElement('div');
     el.id='__err-banner';
-    el.style.cssText='position:fixed;top:0;left:0;right:0;z-index:999999;box-shadow:0 4px 14px rgba(0,0,0,.4)';
+    el.style.cssText='position:fixed;left:0;right:0;z-index:99998;box-shadow:0 4px 14px rgba(0,0,0,.4)';
     document.body.appendChild(el);
   }
+  // v151 — البنر كان بيغطي هيدر التطبيق نفسه (شريط "متصل بالسيرفر" والعنوان) لأنه كان
+  // ثابت عند top:0 فوق كل حاجة. دلوقتي بنقيس ارتفاع الهيدر الفعلي (لو ظاهر) ونحط
+  // البنر تحته بالظبط، مش فوقه.
+  var headerEl = document.getElementById('header');
+  var headerH = (headerEl && !headerEl.classList.contains('hidden')) ? headerEl.getBoundingClientRect().height : 0;
+  el.style.top = headerH+'px';
   if(!__errLog.length){ el.innerHTML=''; el.style.display='none'; return; }
   el.style.display='block';
   var esc2 = (typeof esc==='function') ? esc : function(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});};
@@ -2683,6 +2720,76 @@ function __renderErrorBanner(){
     }).join('') + '</div>';
 }
 if(__errLog.length){ if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', __renderErrorBanner); } else { setTimeout(__renderErrorBanner, 300); } }
+
+// ===== v153 — طابور مزامنة أوفلاين =====
+// أي عملية حفظ/تعديل/حذف تفشل تتبعت (نت مقطوع، أو أي خطأ تاني) بتتسجل هنا، ومحاولة
+// إعادة الإرسال بتحصل تلقائيًا: (1) لحظة ما النت يرجع (حدث 'online')، (2) كل 30 ثانية
+// لو النت متصل، (3) لحظة فتح التطبيق. الطابور متخزن في localStorage فبيفضل موجود حتى
+// لو قفلت المتصفح والنت لسه مقطوع.
+var __syncQueue = (function(){ try{ return JSON.parse(localStorage.getItem('mc8_sync_queue')||'[]'); }catch(e){ return []; } })();
+function __saveSyncQueue(){ try{ localStorage.setItem('mc8_sync_queue', JSON.stringify(__syncQueue)); }catch(e){} __renderQueueBadge(); }
+function __queueKey(table,id){ return table+'::'+id; }
+function __queueForSync(table, id, op){
+  op = op || 'upsert';
+  var key = __queueKey(table,id);
+  var existing = __syncQueue.find(function(q){ return __queueKey(q.table,q.id)===key; });
+  if(existing){ existing.op = op; existing.ts = Date.now(); }
+  else __syncQueue.push({table:table, id:id, op:op, ts:Date.now()});
+  __saveSyncQueue();
+}
+function __dequeueSync(table, id){
+  var key = __queueKey(table,id);
+  var idx = __syncQueue.findIndex(function(q){ return __queueKey(q.table,q.id)===key; });
+  if(idx>-1){ __syncQueue.splice(idx,1); __saveSyncQueue(); }
+}
+function __renderQueueBadge(){
+  var el = document.getElementById('__sync-queue-badge');
+  var n = __syncQueue.length;
+  if(!n){ if(el) el.style.display='none'; return; }
+  if(!el){
+    el = document.createElement('div');
+    el.id='__sync-queue-badge';
+    el.style.cssText='position:fixed;left:10px;bottom:74px;z-index:99997;background:#1e293b;color:#fbbf24;font-size:11px;font-weight:800;padding:6px 10px;border-radius:20px;box-shadow:0 2px 8px rgba(0,0,0,.3);cursor:pointer;font-family:inherit';
+    el.onclick = function(){ __drainSyncQueue(true); };
+    document.body.appendChild(el);
+  }
+  el.style.display='block';
+  el.textContent = '🔄 '+n+' بانتظار المزامنة — دوس للمحاولة';
+}
+var __draining = false;
+async function __drainSyncQueue(manual){
+  if(__draining || !__syncQueue.length) return;
+  if(typeof sb === 'undefined' || !window.__currentProfile) return;
+  if(typeof navigator!=='undefined' && navigator.onLine===false && !manual) return;
+  __draining = true;
+  var items = __syncQueue.slice();
+  for(var i=0;i<items.length;i++){
+    var q = items[i];
+    var ok;
+    if(q.op==='accounts'){
+      await __pushAccountsToServer();
+      continue; // __pushAccountsToServer بتتعامل مع الطابور بنفسها (queue/dequeue)
+    }else if(q.op==='delete'){
+      try{
+        var res = await sb.from(q.table).delete().eq('id', q.id);
+        ok = !res.error;
+      }catch(e){ ok=false; }
+    }else{
+      var row = (DB[q.table]||[]).find(function(r){ return r && r.id===q.id; });
+      if(!row){ ok = true; } // اتمسح محليًا بعدين، مفيش داعي نبعته
+      else ok = await __pushRowToServer(q.table, row);
+    }
+    if(ok) __dequeueSync(q.table, q.id);
+    await __sleep(60);
+  }
+  __draining = false;
+}
+if(typeof window!=='undefined'){
+  window.addEventListener('online', function(){ __drainSyncQueue(); });
+  setInterval(function(){ __drainSyncQueue(); }, 30000);
+  setTimeout(function(){ __drainSyncQueue(); }, 3000);
+}
+if(__syncQueue.length){ setTimeout(__renderQueueBadge, 300); }
 
 // ===== Stubs بسيطة — كل عملية بتعمل persist تلقائي =====
 // جداول مسموح مزامنتها فعليًا مع السيرفر (بيتزاد فيها جدول جديد كل ما نوصل قسم جديد)
@@ -2711,7 +2818,11 @@ async function dbUpsert(table, row){
     __logActivity('insert', table, row.id, __activitySummary(row));
   }
   await persist();
-  __pushRowToServer(table, row);
+  var __ok = await __pushRowToServer(table, row);
+  if(__SYNCED_TABLES[table]){
+    if(__ok) __dequeueSync(table, row.id);
+    else __queueForSync(table, row.id, 'upsert');
+  }
   return row;
 }
 async function dbUpdate(table, id, data){
@@ -2723,7 +2834,11 @@ async function dbUpdate(table, id, data){
     __logActivity('update', table, id, __activitySummary(data));
   }
   await persist();
-  __pushRowToServer(table, Object.assign({id:id}, data));
+  var __ok2 = await __pushRowToServer(table, Object.assign({id:id}, data));
+  if(__SYNCED_TABLES[table]){
+    if(__ok2) __dequeueSync(table, id);
+    else __queueForSync(table, id, 'upsert');
+  }
   return data;
 }
 async function dbDelete(table, id, oldRow){
@@ -2742,11 +2857,15 @@ async function dbDelete(table, id, oldRow){
         console.warn('فشل حذف من السيرفر ('+table+'):', res.error.message);
         showToast('⚠️ اتمسح محليًا بس، فشل حذفه من السيرفر — هيرجع تاني لما تتزامن. راجع صلاحياتك','#dc2626');
         __reportError('فشل حذف من قسم "'+table+'"', res.error.message+(res.error.code?' (كود: '+res.error.code+')':''));
+        __queueForSync(table, id, 'delete');
+      }else{
+        __dequeueSync(table, id);
       }
     }catch(e){
       console.warn('خطأ حذف من السيرفر:', e);
       showToast('⚠️ اتمسح محليًا بس، فشل الاتصال بالسيرفر','#dc2626');
       __reportError('خطأ اتصال أثناء حذف من "'+table+'"', (e&&e.message)?e.message:String(e));
+      __queueForSync(table, id, 'delete');
     }
   }
   return null;
@@ -2764,6 +2883,26 @@ async function __pushRowToServer(table, row){
     // في السيرفر، فبنشيله على طول من غير ما ننتظر خطأ.
     var __LOCAL_ONLY_FIELDS = ['image'];
     __LOCAL_ONLY_FIELDS.forEach(function(f){ delete payload[f]; });
+
+    // v151 — بعض السجلات القديمة جدًا فيها معرّفات (زي employee_id) بصيغة قديمة
+    // (mc_...) من قبل ما نتقل لـ UUID حقيقي. الأعمدة دي نوعها uuid على السيرفر،
+    // فأي قيمة مش UUID صحيح بترفض الصف كله (كود 22P02) بدون ما تحدد اسم العمود في
+    // رسالة الخطأ. بدل ما نستنى الخطأ، بنتأكد قبل الإرسال إن أي حقل معرّف (بينتهي
+    // بـ_id أو من المعرّفات المعروفة) قيمته UUID حقيقي، ولو لأ بنمسحها (تفضل محليًا).
+    var __UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    var __ID_LIKE_FIELDS = ['employee_id','assigned_to','supplier_id','source_sale_id','scrap_source','scrap_machine_id','product_id','branch_id','created_by','updated_by'];
+    var clearedIdFields=[];
+    Object.keys(payload).forEach(function(k){
+      if((k.slice(-3)==='_id' || __ID_LIKE_FIELDS.indexOf(k)>-1) && payload[k]!=null && payload[k]!==''){
+        if(typeof payload[k]!=='string' || !__UUID_RE.test(payload[k])){
+          clearedIdFields.push(k+'="'+payload[k]+'"');
+          payload[k]=null;
+        }
+      }
+    });
+    if(clearedIdFields.length){
+      console.warn('معرّفات قديمة غير صالحة اتشالت من '+table+':', clearedIdFields.join('، '));
+    }
 
     // v145 — إصلاح عام: لو فيه أي عمود تاني (غير معروف مسبقًا) موجود محليًا بس مش
     // موجود فعليًا في جدول السيرفر، Supabase كان بيرفض الصف كله (خطأ PGRST204) وكل
@@ -2787,6 +2926,9 @@ async function __pushRowToServer(table, row){
     if(strippedFields.length){
       console.warn('أعمدة اتشالت تلقائيًا من '+table+' (مش موجودة في السيرفر):', strippedFields.join('، '));
       __reportError('تنبيه: عمود ناقص في جدول "'+table+'"', 'الأعمدة دي محفوظة على جهازك بس ومش بتوصل للسيرفر: '+strippedFields.join('، ')+'. لو دي بيانات مهمة، لازم تتضاف كأعمدة في قاعدة البيانات.');
+    }
+    if(clearedIdFields.length){
+      __reportError('تنبيه: معرّف قديم غير صالح في "'+table+'"', 'الحقول دي كانت بصيغة قديمة (قبل نظام UUID) فاتشالت عشان السجل يتزامن: '+clearedIdFields.join('، ')+'.');
     }
     if(res.error){
       console.warn('فشل مزامنة السجل مع السيرفر ('+table+'):', res.error.message);
@@ -3249,6 +3391,7 @@ function renderScreen(s){
   else if(s==='reports')renderReports();
   else if(s==='settings')renderSettings();
   else if(s==='ledger')renderLedger(_currentLedgerCustomer);
+  if(typeof __renderErrorBanner==='function' && __errLog.length) setTimeout(__renderErrorBanner, 0);
 }
 
 // ===== BADGES =====
@@ -12889,7 +13032,14 @@ function renderSettings(){
     '<div class="card">'+
     '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #e2e8f0">🗂️ تصدير للإكسيل</div>'+
     '<button class="settings-btn" onclick="exportCSV()">📊 تصدير للإكسيل (CSV)</button>'+
-    '</div>';
+    '</div>'+
+    (window.__isOwner?(
+      '<div class="card">'+
+      '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #e2e8f0">📤 رفع البيانات المحلية للسيرفر</div>'+
+      '<div style="font-size:11px;color:#94a3b8;margin-bottom:10px">مش محتاجه في الاستخدام العادي — كل حركة بتتزامن أوتوماتيك لحظة ما تحفظها. استخدمه بس لو مشكوك إن جهاز معيّن فيه بيانات محلية قديمة مكملتش تتزامن (زي بعد استيراد نسخة احتياطية، أو نقل من جهاز تاني). آمن يتعمل أكتر من مرة (upsert بالـ id، مش بيكرر بيانات).</div>'+
+      '<button class="settings-btn" style="background:#dbeafe;color:#1d4ed8" onclick="confirmAction(\'هيرفع كل البيانات المحفوظة على الجهاز ده للسيرفر، ده ممكن ياخد شوية دقايق حسب حجم البيانات. تكمل؟\',__forceFullUploadToServer)">📤 رفع كل البيانات المحلية دلوقتي</button>'+
+      '</div>'
+    ):'');
 
   // ===== قسم 6 (جديد): مسح قسم محدد =====
   var clearSectionSection =
@@ -12910,13 +13060,6 @@ function renderSettings(){
   // ===== قسم 7: خطر =====
   var dangerSection =
     __settingsSectionHeader('⚠️ خطر')+
-    (window.__isOwner?(
-      '<div class="card">'+
-      '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #e2e8f0">📤 رفع البيانات المحلية للسيرفر</div>'+
-      '<div style="font-size:11px;color:#94a3b8;margin-bottom:10px">v146 — لو فيه بيانات قديمة على الجهاز ده اتسجلت قبل ما المزامنة تتصلح ومكملتش توصل للسيرفر، الزرار ده بيرفعها كلها دفعة واحدة (منتجات، فواتير، أعطال، مهام، مصاريف، ديون، مشتريات، سحب قطع). البيانات المتزامنة بالفعل مش هتتأثر، وده آمن تعمله أكتر من مرة.</div>'+
-      '<button class="settings-btn" style="background:#dbeafe;color:#1d4ed8" onclick="confirmAction(\'هيرفع كل البيانات المحفوظة على الجهاز ده للسيرفر، ده ممكن ياخد شوية دقايق حسب حجم البيانات. تكمل؟\',__forceFullUploadToServer)">📤 رفع كل البيانات المحلية دلوقتي</button>'+
-      '</div>'
-    ):'')+
     '<div class="card">'+
     '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #e2e8f0">🔢 عداد الأعطال</div>'+
     '<div style="font-size:13px;color:#64748b;margin-bottom:10px">الرقم الحالي: <b style="color:#0f172a">'+(DB.movCounter||0)+'</b></div>'+
@@ -15974,6 +16117,16 @@ function switchMovTab(tab,el){
     document.head.appendChild(link);
   }catch(e){console.warn('manifest setup failed', e);}
 })();
+
+// v153 — تسجيل Service Worker لتخزين شكل التطبيق نفسه، عشان يفتح حتى لو مفيش نت خالص.
+// لازم ملف sw.js يكون مرفوع في نفس مجلد index.html على GitHub (نفس المستوى بالظبط).
+if('serviceWorker' in navigator){
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(e){
+      console.warn('تسجيل Service Worker فشل (التطبيق هيشتغل عادي أونلاين، بس الأوفلاين الكامل مش هيتوفر):', e);
+    });
+  });
+}
 </script>
 
 </body>
