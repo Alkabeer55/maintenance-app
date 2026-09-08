@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v144</title>
+<title>ابو حوده الحلو الجميل v145</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="2026-09-08 — v144";
+<script>var BUILD_STAMP="2026-09-08 — v145";
 /* ===== سجل التعديلات (Changelog) =====
 v81: نسخة احتياطية طارئة تلقائية لو localStorage اتعطب.
 v82: بوابة تسجيل دخول + ربط Supabase.
@@ -190,6 +190,16 @@ v106: [إصلاح جذري] "النقدية غلط بسبب مخزون/ديون 
      الطباعة، تصدير Excel). ⚠️ ملحوظة لو شايف تسميات قديمة رغم التحديث: امسح الكاش/أعد
      تحميل الملف بالكامل (الملف اسمه لازم يختلف عن أي نسخة سابقة نزّلتها قبل كده حتى
      يتجنّب متصفح الموبايل استخدام نسخة مخزّنة قديمة).
+v145: [🐛 إصلاح عام لأي عمود ناقص — مش بس 'image']
+     v144 حلّت مشكلة 'image' في الأعطال، لكن اتضح إن أقسام تانية كتير (المنتجات، المهام،
+     المبيعات، المصاريف، الديون، المشتريات) كانت بتفشل تتزامن **بالكامل من الأساس** بنفس
+     الطريقة بالظبط — كل قسم فيه حقل محلي مختلف مش موجود كعمود في جدول السيرفر، وكان بيوقف
+     الصف كله بصمت من زمان (قبل ما يبقى عندنا بنر الأخطاء أصلاً نشوف بيه المشكلة).
+     دلوقتي __pushRowToServer بيتصرف بذكاء: لو Supabase رفض الصف بسبب عمود ناقص (PGRST204)،
+     بيقرا اسم العمود من رسالة الخطأ نفسها، يشيله من الصف المُرسل، ويعيد المحاولة تلقائيًا
+     (لحد 5 أعمدة ناقصة في نفس الصف). كمان بيظهرلك تنبيه (مش خطأ حرج) في البنر يقولك بالظبط
+     أي عمود اتشال، عشان لو كان فيه بيانات مهمة فعلاً محتاجة عمود جديد في القاعدة، تعرف
+     وتطلب إضافته بدل ما يضيع صامت.
 v144: [🐛 إصلاح جذري لمزامنة الأعطال/الفواتير + بنر أخطاء دائم]
      1) السبب الحقيقي وراء اختفاء بيانات المهندسين/الأعطال: أي صف فيه حقل 'image' (صورة
      العطل/الفاتورة) كان بيتبعت كامل لـ Supabase، لكن عمود 'image' مش موجود في الجداول
@@ -2656,12 +2666,34 @@ async function __pushRowToServer(table, row){
       updated_at: new Date().toISOString()
     });
     if(!payload.branch_id) payload.branch_id = window.__currentProfile.branch_id || null;
-    // v144 — إصلاح جذري: 'image' (وحقول محلية تانية مستقبلاً) مقصود إنها تفضل على
-    // الجهاز بس ومش موجودة كعمود في السيرفر أصلاً. كانت بتتبعت مع باقي الصف فيرفض
-    // Supabase الصف كله بسببها (PGRST204)، فالسجل كله كان بيفشل يتزامن مش بس الصورة.
+    // v144 — 'image' معروف مسبقًا إنه محلي بس (صورة العطل/الفاتورة) ومش عمود موجود
+    // في السيرفر، فبنشيله على طول من غير ما ننتظر خطأ.
     var __LOCAL_ONLY_FIELDS = ['image'];
     __LOCAL_ONLY_FIELDS.forEach(function(f){ delete payload[f]; });
-    var res = await sb.from(table).upsert(payload);
+
+    // v145 — إصلاح عام: لو فيه أي عمود تاني (غير معروف مسبقًا) موجود محليًا بس مش
+    // موجود فعليًا في جدول السيرفر، Supabase كان بيرفض الصف كله (خطأ PGRST204) وكل
+    // القسم ده كان بيفشل يتزامن بصمت من غير أي تفسير. دلوقتي: لو حصل الخطأ ده، بنقرا
+    // اسم العمود من نص رسالة الخطأ نفسها، نشيله من البيانات المُرسلة، ونعيد المحاولة —
+    // لحد 5 مرات (في حالة أكتر من عمود ناقص في نفس الصف).
+    var res, attempts=0, strippedFields=[];
+    while(true){
+      res = await sb.from(table).upsert(payload);
+      if(res.error && res.error.code === 'PGRST204' && attempts < 5){
+        var m = /Could not find the '([^']+)' column/.exec(res.error.message||'');
+        if(m && payload.hasOwnProperty(m[1])){
+          delete payload[m[1]];
+          strippedFields.push(m[1]);
+          attempts++;
+          continue;
+        }
+      }
+      break;
+    }
+    if(strippedFields.length){
+      console.warn('أعمدة اتشالت تلقائيًا من '+table+' (مش موجودة في السيرفر):', strippedFields.join('، '));
+      __reportError('تنبيه: عمود ناقص في جدول "'+table+'"', 'الأعمدة دي محفوظة على جهازك بس ومش بتوصل للسيرفر: '+strippedFields.join('، ')+'. لو دي بيانات مهمة، لازم تتضاف كأعمدة في قاعدة البيانات.');
+    }
     if(res.error){
       console.warn('فشل مزامنة السجل مع السيرفر ('+table+'):', res.error.message);
       setSyncStatus('⚠️ لم تتم المزامنة مع السيرفر','#dc2626');
