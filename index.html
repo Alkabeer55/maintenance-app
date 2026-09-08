@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v153</title>
+<title>ابو حوده الحلو الجميل v154</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="2026-09-08 — v153";
+<script>var BUILD_STAMP="2026-09-08 — v154";
 /* ===== سجل التعديلات (Changelog) =====
 v81: نسخة احتياطية طارئة تلقائية لو localStorage اتعطب.
 v82: بوابة تسجيل دخول + ربط Supabase.
@@ -190,6 +190,13 @@ v106: [إصلاح جذري] "النقدية غلط بسبب مخزون/ديون 
      الطباعة، تصدير Excel). ⚠️ ملحوظة لو شايف تسميات قديمة رغم التحديث: امسح الكاش/أعد
      تحميل الملف بالكامل (الملف اسمه لازم يختلف عن أي نسخة سابقة نزّلتها قبل كده حتى
      يتجنّب متصفح الموبايل استخدام نسخة مخزّنة قديمة).
+v154: [🐛 الدخول الأوفلاين كان بيفشل فعليًا بسبب getSession() نفسها]
+     أول اختبار حقيقي للأوفلاين (وضع الطيران) كشف إن آلية "ادخل بآخر بيانات محفوظة لو
+     مفيش نت" (v113) كانت موجودة، لكن `sb.auth.getSession()` نفسها أحيانًا بتحاول تجدد
+     التوكن بطلب شبكة، ولو فشل الطلب ده بيوقف الدالة كلها قبل ما توصل لمنطق الأوفلاين
+     خالص — فبترجع لشاشة تسجيل الدخول اليدوي (اللي هي كمان محتاجة نت، فتفشل). دلوقتي
+     getSession() في try منفصلة، ولو فشلت بنستخدم آخر مستخدم كان داخل من الجهاز ده
+     (محفوظ في mc8_last_user_id) وندخله بالبيانات المحفوظة محليًا مباشرة.
 v153: [📡 أول خطوة أوفلاين حقيقية: طابور مزامنة تلقائي + تخزين شكل التطبيق]
      1) طابور مزامنة (localStorage): أي حفظ/تعديل/حذف يفشل (نت مقطوع أو أي سبب) بيتسجل
      في طابور بدل ما يضيع بصمت. محاولة إعادة إرسال تلقائية: لحظة رجوع النت (حدث
@@ -1682,6 +1689,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
       }
       window.__currentProfile = Object.assign({id:userId}, profRes.data);
       LS.set('mc8_cached_profile_'+userId,profRes.data); // ⚠️ v113 — حفظ نسخة للاستخدام الأوفلاين لاحقًا
+      LS.set('mc8_last_user_id', userId); // v154 — عشان الدخول الأوفلاين يلاقي المستخدم حتى لو getSession فشلت
       await __loadEngineersList();
       window.__isOwner = (profRes.data.role_id === 'owner');
       await __loadMyPermissions(profRes.data.role_id, userId);
@@ -2029,10 +2037,22 @@ input:checked+.slider:before{transform:translateX(-20px)}
   }
 
   async function __checkExistingSession(){
+    var userId = null;
     try{
+      // v154 — getSession() نفسها أحيانًا بتحاول تجدد التوكن بطلب شبكة، ولو النت مقطوع
+      // بترفض/تفشل قبل ما توصل لمنطق "استخدم آخر بيانات محفوظة" تحت خالص. بنحطها في
+      // try منفصلة، ولو فشلت بنرجع لآخر مستخدم كان داخل من الجهاز ده (محفوظ محليًا)
+      // بدل ما نوقف كل حاولة الدخول الأوفلاين من الأساس.
       var s = await sb.auth.getSession();
-      if(s.data && s.data.session){
-        var userId = s.data.session.user.id;
+      if(s.data && s.data.session) userId = s.data.session.user.id;
+    }catch(e){
+      console.warn('getSession فشلت (غالبًا نت مقطوع أثناء تجديد التوكن):', e);
+    }
+    if(!userId){
+      try{ userId = LS.get('mc8_last_user_id', null); }catch(e2){}
+    }
+    if(!userId) return;
+    try{
         var profRes;
         var networkFailed=false;
         try{
@@ -2063,6 +2083,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
         if(!profRes.error && profRes.data && profRes.data.is_active !== false){
           window.__currentProfile = Object.assign({id:userId}, profRes.data);
           LS.set('mc8_cached_profile_'+userId,profRes.data); // ⚠️ v113 — حفظ نسخة للاستخدام الأوفلاين لاحقًا
+          LS.set('mc8_last_user_id', userId); // v154 — عشان نلاقي المستخدم حتى لو getSession فشلت تاني
           await __loadEngineersList();
           window.__isOwner = (profRes.data.role_id === 'owner');
           await __loadMyPermissions(profRes.data.role_id, userId);
@@ -2073,7 +2094,6 @@ input:checked+.slider:before{transform:translateX(-20px)}
           document.getElementById('sync-badge').style.display = 'block';
           await __pullAllFromServer();
         }
-      }
     }catch(e){ console.warn('session check failed', e); }
   }
   // v97: [إصلاح جذري] __checkExistingSession (وبالتالي سحب بيانات السيرفر ودمجها) كان بيتنادى
