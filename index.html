@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v145</title>
+<title>ابو حوده الحلو الجميل v146</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="2026-09-08 — v145";
+<script>var BUILD_STAMP="2026-09-08 — v146";
 /* ===== سجل التعديلات (Changelog) =====
 v81: نسخة احتياطية طارئة تلقائية لو localStorage اتعطب.
 v82: بوابة تسجيل دخول + ربط Supabase.
@@ -190,6 +190,13 @@ v106: [إصلاح جذري] "النقدية غلط بسبب مخزون/ديون 
      الطباعة، تصدير Excel). ⚠️ ملحوظة لو شايف تسميات قديمة رغم التحديث: امسح الكاش/أعد
      تحميل الملف بالكامل (الملف اسمه لازم يختلف عن أي نسخة سابقة نزّلتها قبل كده حتى
      يتجنّب متصفح الموبايل استخدام نسخة مخزّنة قديمة).
+v146: [🐛 عمود assigned_to الناقص في tasks — كان بيعطّل فلترة "مهام المهندس" كليًا]
+     بمقارنة كود v143 بأعمدة الجداول الفعلية على السيرفر، طلع إن tasks كان ناقصه عمود
+     'assigned_to' خالص (نفس نوع مشكلة 'image' في v144، بس هنا العمود ده جوهري لميزة
+     "المهندس يشوف مهامه المعيّنة له بس"). لازم يتضاف يدويًا في Supabase (SQL منفصل
+     اتبعت للمالك)، الكود مش قادر يعمل ALTER TABLE بنفسه. كمان صلّحت باج: تسجيل دين من
+     فاتورة مش متسددة بالكامل كان بيحط الوصف في حقل 'desc' (مش موجود كعمود) بدل
+     'details' (اسم العمود الصح)، فالوصف كان بيضيع حتى لو العمود موجود.
 v145: [🐛 إصلاح عام لأي عمود ناقص — مش بس 'image']
      v144 حلّت مشكلة 'image' في الأعطال، لكن اتضح إن أقسام تانية كتير (المنتجات، المهام،
      المبيعات، المصاريف، الديون، المشتريات) كانت بتفشل تتزامن **بالكامل من الأساس** بنفس
@@ -5185,6 +5192,7 @@ async function saveSale(){
         // مكانش فيه دين (كانت متسددة بالكامل) وبقى فيه متبقي بعد التعديل — سجّل دين جديد
         var newDebt={id:genId(),type:'customer',name:customer,
           desc:'فاتورة'+(v('sale-serial')?' — '+v('sale-serial'):''),
+          details:'فاتورة'+(v('sale-serial')?' — '+v('sale-serial'):''),
           total:newRemaining,paid:0,date:v('sale-date'),payments:[],source_sale_id:_saleId};
         DB.debts.unshift(newDebt);
         await dbUpsert('debts',newDebt);
@@ -5211,6 +5219,7 @@ async function saveSale(){
       if(total>0&&paid<total){
         var debt={id:genId(),type:'customer',name:customer,
           desc:'فاتورة'+(v('sale-serial')?' — '+v('sale-serial'):''),
+          details:'فاتورة'+(v('sale-serial')?' — '+v('sale-serial'):''),
           total:total-paid,paid:0,date:v('sale-date'),payments:[],source_sale_id:obj.id};
         DB.debts.unshift(debt);
         await dbUpsert('debts',debt);
