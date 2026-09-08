@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v146</title>
+<title>ابو حوده الحلو الجميل v150</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="2026-09-08 — v146";
+<script>var BUILD_STAMP="2026-09-08 — v150";
 /* ===== سجل التعديلات (Changelog) =====
 v81: نسخة احتياطية طارئة تلقائية لو localStorage اتعطب.
 v82: بوابة تسجيل دخول + ربط Supabase.
@@ -190,6 +190,41 @@ v106: [إصلاح جذري] "النقدية غلط بسبب مخزون/ديون 
      الطباعة، تصدير Excel). ⚠️ ملحوظة لو شايف تسميات قديمة رغم التحديث: امسح الكاش/أعد
      تحميل الملف بالكامل (الملف اسمه لازم يختلف عن أي نسخة سابقة نزّلتها قبل كده حتى
      يتجنّب متصفح الموبايل استخدام نسخة مخزّنة قديمة).
+v150: [📶 الرفع الشامل بقى يصمد قدام نت الموبايل الضعيف]
+     أول رفع حقيقي لمئات السجلات (100+ في كل قسم تقريبًا) كشف إن نت الموبايل مش مستقر
+     كفاية لرفع كل حاجة متتالي بسرعة من غير فواصل — كان بيحصل "Failed to fetch" لعشرات
+     السجلات مع بعض. دلوقتي: (1) فاصل 40ms بين كل طلب وطلب، (2) لو سجل فشل، الجولة
+     الجاية بتحاول بس السجلات اللي فشلت (مش كل حاجة تاني من الأول)، (3) لحد 3 جولات
+     محاولة مع فاصل ثانية ونص بينهم عشان النت ياخد فرصة يستقر، (4) رسالة نهاية دقيقة
+     بعدد اللي نجح فعليًا من إجمالي العدد.
+     كمان اتضاف: branch_id/updated_at/updated_by لكل الجداول المتزامنة (أعمدة الكود
+     نفسه بيحقنها مع كل حفظة)، وأعمدة تانية ظهرت من الاستخدام الفعلي: landed_cost/
+     scrap_source/scrap_machine_id (منتجات)، cancel_reason (تحركات — مهم لإحصائيات
+     الأعطال الملغية).
+v149: [🐛 إصلاح حرج: بنر الأخطاء كان بيمنع استخدام التطبيق كليًا]
+     بعد أول رفع شامل حقيقي، ظهر إن البنر (لو فيه رسائل كتير) كان بياخد لحد 45% من
+     الشاشة ومايتقفلش غير لو المستخدم لقى زرار "مسح الكل" وسط الزحمة — عمليًا كان بيمنع
+     استخدام التطبيق. دلوقتي البنر **مطوي افتراضيًا** (سطر تحذير واحد بس فوق، بارتفاع
+     بسيط جدًا)، وبيتفتح بالتفاصيل بس لو المستخدم دوس عليه، والعنوان (فيه زرار "مسح
+     الكل") ثابت دايمًا فوق التفاصيل مش بيتحرك مع التمرير — يعني التطبيق شغال عادي تحته
+     في كل الأحوال.
+v148: [🔧 تحسينات بعد أول رفع شامل فعلي: تكرار الأخطاء في البنر + دقة رسالة النجاح]
+     أول استخدام حقيقي لزرار "الرفع الشامل" (v147) كشف مشكلتين تصميم:
+     1) انقطاع نت لحظي أثناء الرفع سبب 30 رسالة خطأ متطابقة (كل واحدة لمهمة مختلفة)،
+     غطت الشاشة كلها. البنر دلوقتي بيجمّع نفس رسالة الخطأ المتكررة في سطر واحد بعدد
+     التكرار (×30) بدل ما يكررها، وبيحدّث وقت آخر مرة حصلت.
+     2) رسالة "تم الرفع بنجاح" كانت بتظهر حتى لو فشل جزء كبير من السجلات. دلوقتي
+     __pushRowToServer بترجع true/false صريحة، والرفع الشامل بيعدّ الفاشل فعليًا،
+     يعيد محاولة تلقائية مرة واحدة للفاشل (يفيد في انقطاع نت مؤقت)، وبعدين يقول
+     نتيجة صادقة: "تم بنجاح" أو "فيه سجلات لسه فاشلة" بوضوح.
+v147: [📤 رفع شامل لأول مرة — للبيانات القديمة اللي أصلاً ما وصلتش للسيرفر خالص]
+     اتضح إن كل البيانات الحقيقية القديمة (منتجات، فواتير، أعطال، مهام...) كانت متسجلة
+     على الجهاز بس من الأساس ومحملتش تتزامن قبل كده — والكود ماكانش فيه أي وسيلة "ترفع
+     كل حاجة موجودة عندك دلوقتي" غير إنك تعيد حفظ كل سجل يدوي واحد واحد. زرار جديد في
+     الإعدادات ← ⚠️ خطر (المالك بس): "📤 رفع كل البيانات المحلية دلوقتي" — بيمشي على كل
+     سجل في كل قسم متزامن ويبعته للسيرفر بنفس منطق __pushRowToServer (بإصلاحاته كاملة:
+     شيل الحقول المحلية غير الموجودة كأعمدة + إعادة محاولة تلقائية). آمن يتعمل أكتر من
+     مرة من غير ما يكرر بيانات (upsert بالـ id).
 v146: [🐛 عمود assigned_to الناقص في tasks — كان بيعطّل فلترة "مهام المهندس" كليًا]
      بمقارنة كود v143 بأعمدة الجداول الفعلية على السيرفر، طلع إن tasks كان ناقصه عمود
      'assigned_to' خالص (نفس نوع مشكلة 'image' في v144، بس هنا العمود ده جوهري لميزة
@@ -1897,6 +1932,46 @@ input:checked+.slider:before{transform:translateX(-20px)}
     }
   }
 
+  // ===== v146 — رفع شامل لأول مرة: بيمشي على كل السجلات المحلية في الجداول المتزامنة
+  // ويبعتها للسيرفر واحدة واحدة عن طريق __pushRowToServer نفسها (بكل إصلاحاتها: شيل
+  // الحقول المحلية، وإعادة المحاولة التلقائية لو عمود ناقص). ده بيغطي بيانات قديمة
+  // كانت اتسجلت قبل ما يبقى عندنا الإصلاحات دي، ومكملتش توصل للسيرفر أبدًا =====
+  function __sleep(ms){ return new Promise(function(res){ setTimeout(res, ms); }); }
+  async function __forceFullUploadToServer(){
+    if(!window.__isOwner){ showToast('🚫 المالك بس يقدر يعمل الرفع الشامل','#dc2626'); return; }
+    if(typeof sb === 'undefined' || !window.__currentProfile){ showToast('🚫 لازم تكون متصل بالنت ومسجّل دخول','#dc2626'); return; }
+    var pending = [];
+    Object.keys(__SYNCED_TABLES).forEach(function(t){
+      (DB[t]||[]).forEach(function(row){ pending.push({t:t, row:row}); });
+    });
+    var total = pending.length;
+    if(!total){ showToast('مفيش بيانات محلية أصلاً لرفعها','#64748b'); return; }
+    // v150 — بدل ما نعيد رفع كل حاجة تاني لو فشل جزء (وده بطيء وبيرهق نت ضعيف)، بنسيب
+    // بس اللي فشل فعليًا لجولة المحاولة الجاية، وبنسيب فاصل بسيط بين كل طلب وطلب عشان
+    // نديله فرصة ينفس (خصوصًا مع مئات السجلات على نت موبايل غير مستقر).
+    for(var round=1; round<=3 && pending.length; round++){
+      var stillFailed = [];
+      var done=0;
+      if(round>1){ setSyncStatus('⏳ محاولة '+round+' — باقي '+pending.length+' سجل...','#ea580c'); await __sleep(1500); }
+      for(var i=0;i<pending.length;i++){
+        var ok = await __pushRowToServer(pending[i].t, pending[i].row);
+        if(!ok) stillFailed.push(pending[i]);
+        done++;
+        if(done % 5 === 0) setSyncStatus('⏳ جولة '+round+': ('+done+'/'+pending.length+')','#64748b');
+        await __sleep(40);
+      }
+      pending = stillFailed;
+    }
+    await __pushAccountsToServer();
+    if(pending.length>0){
+      setSyncStatus('⚠️ الرفع خلص لكن فيه '+pending.length+' سجل فشل','#dc2626');
+      showToast('⚠️ اتبعت '+(total-pending.length)+' من '+total+' — '+pending.length+' لسه فاشلين حتى بعد 3 محاولات (على الأغلب النت مش مستقر). جرب تاني لما يستقر','#dc2626');
+    }else{
+      setSyncStatus('✅ تم رفع كل البيانات المحلية للسيرفر','#16a34a');
+      showToast('✅ خلصنا رفع كل البيانات ('+total+' سجل) بنجاح','#16a34a');
+    }
+  }
+
   async function __doLogout(){
     if(window.__currentProfile){ try{ await __logActivity('logout', 'auth', window.__currentProfile.id, null); }catch(e){} } // v129 — لازم قبل ما نمسح الحساب من الذاكرة
     try{ await sb.auth.signOut(); }catch(e){}
@@ -2567,33 +2642,45 @@ var __errLog = (function(){ try{ return JSON.parse(localStorage.getItem('mc8_err
 function __saveErrLog(){ try{ localStorage.setItem('mc8_error_log', JSON.stringify(__errLog)); }catch(e){} }
 function __reportError(context, message){
   try{
-    __errLog.unshift({t:new Date().toLocaleString('ar-EG'), context:String(context), message:String(message)});
-    if(__errLog.length>30) __errLog.length=30;
+    var existing = __errLog[0];
+    if(existing && existing.context===String(context) && existing.message===String(message)){
+      existing.count = (existing.count||1)+1;
+      existing.t = new Date().toLocaleString('ar-EG');
+    }else{
+      __errLog.unshift({t:new Date().toLocaleString('ar-EG'), context:String(context), message:String(message), count:1});
+      if(__errLog.length>30) __errLog.length=30;
+    }
     __saveErrLog();
   }catch(e){}
   __renderErrorBanner();
 }
+var __errBannerExpanded = false;
+function __toggleErrBanner(){ __errBannerExpanded = !__errBannerExpanded; __renderErrorBanner(); }
 function __dismissError(idx){ __errLog.splice(idx,1); __saveErrLog(); __renderErrorBanner(); }
-function __clearAllErrors(){ __errLog.length=0; __saveErrLog(); __renderErrorBanner(); }
+function __clearAllErrors(){ __errLog.length=0; __errBannerExpanded=false; __saveErrLog(); __renderErrorBanner(); }
 function __renderErrorBanner(){
   var el = document.getElementById('__err-banner');
   if(!el){
     el = document.createElement('div');
     el.id='__err-banner';
-    el.style.cssText='position:fixed;top:0;left:0;right:0;z-index:999999;max-height:45vh;overflow-y:auto;box-shadow:0 4px 14px rgba(0,0,0,.4)';
+    el.style.cssText='position:fixed;top:0;left:0;right:0;z-index:999999;box-shadow:0 4px 14px rgba(0,0,0,.4)';
     document.body.appendChild(el);
   }
   if(!__errLog.length){ el.innerHTML=''; el.style.display='none'; return; }
   el.style.display='block';
   var esc2 = (typeof esc==='function') ? esc : function(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});};
-  el.innerHTML = '<div style="background:#7f1d1d;color:#fff;padding:7px 10px;font-size:12px;font-weight:800;display:flex;justify-content:space-between;align-items:center;font-family:inherit">'+
-    '<span>⚠️ فيه '+__errLog.length+' خطأ محتاج تراجعه</span>'+
-    '<button onclick="__clearAllErrors()" style="background:#fff;color:#7f1d1d;border:none;border-radius:6px;padding:4px 10px;font-weight:800;font-size:12px">مسح الكل</button></div>'+
+  // v149 — البنر مطوي افتراضيًا (سطر واحد بس)، عشان ما يمنعش استخدام التطبيق تحته.
+  // المستخدم بيفتحه بنفسه لو حب يشوف/يمسح التفاصيل.
+  var header = '<div style="background:#7f1d1d;color:#fff;padding:7px 10px;font-size:12px;font-weight:800;display:flex;justify-content:space-between;align-items:center;font-family:inherit;cursor:pointer" onclick="__toggleErrBanner()">'+
+    '<span>⚠️ فيه '+__errLog.length+' خطأ محتاج تراجعه '+(__errBannerExpanded?'▲':'▼ (دوس هنا)')+'</span>'+
+    '<button onclick="event.stopPropagation();__clearAllErrors()" style="background:#fff;color:#7f1d1d;border:none;border-radius:6px;padding:4px 10px;font-weight:800;font-size:12px">مسح الكل</button></div>';
+  if(!__errBannerExpanded){ el.innerHTML = header; return; }
+  el.innerHTML = header + '<div style="max-height:40vh;overflow-y:auto">'+
     __errLog.map(function(e,i){
       return '<div style="background:#450a0a;color:#fecaca;padding:9px 10px;font-size:11.5px;border-top:1px solid rgba(255,255,255,.15);display:flex;justify-content:space-between;gap:8px;align-items:flex-start;font-family:inherit">'+
-        '<span style="flex:1;line-height:1.5"><b>'+esc2(e.context)+'</b> — '+esc2(e.t)+'<br>'+esc2(e.message)+'</span>'+
+        '<span style="flex:1;line-height:1.5"><b>'+esc2(e.context)+(e.count>1?' <span style="opacity:.75">(×'+e.count+')</span>':'')+'</b> — '+esc2(e.t)+'<br>'+esc2(e.message)+'</span>'+
         '<button onclick="__dismissError('+i+')" style="background:none;border:none;color:#fecaca;font-size:16px;cursor:pointer;flex-shrink:0">✕</button></div>';
-    }).join('');
+    }).join('') + '</div>';
 }
 if(__errLog.length){ if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', __renderErrorBanner); } else { setTimeout(__renderErrorBanner, 300); } }
 
@@ -2705,12 +2792,14 @@ async function __pushRowToServer(table, row){
       console.warn('فشل مزامنة السجل مع السيرفر ('+table+'):', res.error.message);
       setSyncStatus('⚠️ لم تتم المزامنة مع السيرفر','#dc2626');
       __reportError('فشل مزامنة قسم "'+table+'"', res.error.message+(res.error.code?' (كود: '+res.error.code+')':''));
-      return;
+      return false;
     }
     setSyncStatus('☁️ متزامن مع السيرفر','#16a34a');
+    return true;
   }catch(e){
     console.warn('خطأ في مزامنة السجل:', e);
     __reportError('خطأ اتصال أثناء مزامنة "'+table+'"', (e&&e.message)?e.message:String(e));
+    return false;
   }
 }
 
@@ -12821,6 +12910,13 @@ function renderSettings(){
   // ===== قسم 7: خطر =====
   var dangerSection =
     __settingsSectionHeader('⚠️ خطر')+
+    (window.__isOwner?(
+      '<div class="card">'+
+      '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #e2e8f0">📤 رفع البيانات المحلية للسيرفر</div>'+
+      '<div style="font-size:11px;color:#94a3b8;margin-bottom:10px">v146 — لو فيه بيانات قديمة على الجهاز ده اتسجلت قبل ما المزامنة تتصلح ومكملتش توصل للسيرفر، الزرار ده بيرفعها كلها دفعة واحدة (منتجات، فواتير، أعطال، مهام، مصاريف، ديون، مشتريات، سحب قطع). البيانات المتزامنة بالفعل مش هتتأثر، وده آمن تعمله أكتر من مرة.</div>'+
+      '<button class="settings-btn" style="background:#dbeafe;color:#1d4ed8" onclick="confirmAction(\'هيرفع كل البيانات المحفوظة على الجهاز ده للسيرفر، ده ممكن ياخد شوية دقايق حسب حجم البيانات. تكمل؟\',__forceFullUploadToServer)">📤 رفع كل البيانات المحلية دلوقتي</button>'+
+      '</div>'
+    ):'')+
     '<div class="card">'+
     '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #e2e8f0">🔢 عداد الأعطال</div>'+
     '<div style="font-size:13px;color:#64748b;margin-bottom:10px">الرقم الحالي: <b style="color:#0f172a">'+(DB.movCounter||0)+'</b></div>'+
