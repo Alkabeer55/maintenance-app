@@ -4,7 +4,7 @@
 // البيانات نفسها (المنتجات، الفواتير...) متخزنة أصلاً في localStorage جوه التطبيق،
 // مش هنا — الكاش ده بس لملفات التطبيق (الشكل/الكود) عشان الصفحة "تفتح" أصلاً أوفلاين.
 
-var CACHE_NAME = 'maintenance-app-shell-v1';
+var CACHE_NAME = 'maintenance-app-shell-v2';
 var URLS_TO_CACHE = [
   './',
   './index.html',
@@ -36,7 +36,10 @@ self.addEventListener('fetch', function(event){
   if(url.indexOf('supabase.co') > -1) return; // اتصالات API الحية — من غير كاش
 
   event.respondWith(
-    fetch(event.request).then(function(response){
+    // v2 — cache:'no-store' يجبر المتصفح يبعت طلب حقيقي للسيرفر كل مرة، ومايرجّعش
+    // نسخة قديمة من كاش HTTP الداخلي بتاعه هو (طبقة تانية غير كاش الـ Service Worker).
+    // ده اللي كان بيخلي التحديثات محتاجة "مسح بيانات الموقع" يدوي عشان تبان.
+    fetch(event.request, {cache:'no-store'}).then(function(response){
       if(response && response.status===200){
         var clone = response.clone();
         caches.open(CACHE_NAME).then(function(cache){ cache.put(event.request, clone); });
