@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v156</title>
+<title>ابو حوده الحلو الجميل v158</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="2026-09-09 — v156";
+<script>var BUILD_STAMP="2026-09-09 — v158";
 /* ===== سجل التعديلات (Changelog) =====
 v81: نسخة احتياطية طارئة تلقائية لو localStorage اتعطب.
 v82: بوابة تسجيل دخول + ربط Supabase.
@@ -190,6 +190,28 @@ v106: [إصلاح جذري] "النقدية غلط بسبب مخزون/ديون 
      الطباعة، تصدير Excel). ⚠️ ملحوظة لو شايف تسميات قديمة رغم التحديث: امسح الكاش/أعد
      تحميل الملف بالكامل (الملف اسمه لازم يختلف عن أي نسخة سابقة نزّلتها قبل كده حتى
      يتجنّب متصفح الموبايل استخدام نسخة مخزّنة قديمة).
+v158: [🐛 آخر الأقسام الناقصة من المزامنة + رجوع اختصارات المبلغ]
+     راجعت كل حقل DB متبقي ولقيت 3 حاجات كانت لسه محلية بس: الإعدادات كاملة (ومنها
+     "حزم قطع الغيار" اللي كانت بتظهر فاضية من رابط تاني)، أرشيف اقتراحات البحث
+     التلقائي (أسماء عملاء/موردين/موديلات سابقة)، وعداد ترقيم التحركات (كان ممكن
+     يتكرر نفس الرقم لو دخلت من جهازين). التلاتة بقوا يتزامنوا زي باقي الأقسام.
+     `schedule` القديم استُثنى عمدًا — متبقى فعليًا مش مستخدم بعد الترحيل لنظام
+     الجدولة الجديد (scheduled_map) اللي أصلاً بيتزامن من v156.
+     كمان رجّعت أزرار "مبالغ جاهزة" (اختصار سريع) تحت خانة مبلغ الصيانة في الفاتورة،
+     قابلة للتعديل من نفس مكان "الخدمات السريعة" مستقبلاً لو حبيت تغيّرها.
+     ⚠️ خطوة واحدة زي المرة اللي فاتت: "📤 رفع كل البيانات المحلية دلوقتي".
+v157: [🐛 3 إصلاحات مهمة: قفل العطل المبكر، ترتيب التحركات، رسالة أوفلاين مخيفة]
+     1) كان العطل بيتقفل "منتهي" فورًا لما تضغط "إنهاء + تحويل لفاتورة" — قبل حتى ما
+     تفتح شاشة الفاتورة أو تحفظ فيها حاجة. دلوقتي العطل بيفضل زي ما هو لحد ما الفاتورة
+     تتحفظ فعلاً بنجاح؛ لو خرجت من غير حفظ، العطل يفضل مفتوح.
+     2) ترتيب "كل التحركات" كان بيعتمد على ترتيب جدولة قديم مش مستخدم أصلاً في شاشة
+     الجدولة نفسها (بتاخد ترتيبها من مكان تاني)، فكان يطلع عشوائي الشكل. دلوقتي بيترتب
+     فعليًا بالأحدث فوق كافتراضي، مع زرار ظاهر للتبديل لترتيب أبجدي بالاسم.
+     3) رسالة "Failed to fetch" كانت بتظهر كخطأ مخيف لما تكون أوفلاين عمدًا (وده كان
+     متوقع تمامًا). دلوقتي لو الجهاز أوفلاين، المزامنة بتتأجل بهدوء لطابور الأوفلاين
+     من غير ما تظهر كخطأ، وترجع تتزامن تلقائي لما النت يرجع.
+     ⚠️ كمان لقيت ثغرة في طابور المزامنة الأوفلاين كانت ممكن تضيع بيانات العملاء/
+     الموردين لو اتبعتت وهي أوفلاين — اتصلحت في نفس النسخة دي.
 v156: [🐛 إصلاح جذري تاني: باقي الأقسام اللي كانت محلية بس ومش بتتزامن]
      بعد إصلاح دفتر العملاء والسكراب في v155، راجعت كل حقول البيانات في التطبيق ولقيت
      7 أقسام تانية بنفس المشكلة بالظبط (محلية بس، مش بتوصل للسيرفر خالص): دفتر الموردين،
@@ -2009,6 +2031,23 @@ input:checked+.slider:before{transform:translateX(-20px)}
         hasDiff = true;
       }
     }
+    // v158 — الإعدادات/الأرشيف/العداد: مقارنة مبسطة (موجود على السيرفر ولا لا + تطابق القيمة)
+    try{
+      var setChk = await sb.from('business_state').select('data').eq('id','settings').maybeSingle();
+      lines.push(setChk.error?'❌ الإعدادات: فشل التحقق':(setChk.data&&setChk.data.data?'✅ الإعدادات: موجودة على السيرفر':'⚠️ الإعدادات: لسه مش موجودة على السيرفر')); 
+      if(!setChk.data||!setChk.data.data) hasDiff=true;
+    }catch(e){ lines.push('❌ الإعدادات: خطأ اتصال'); hasDiff=true; }
+    try{
+      var arcChk = await sb.from('business_state').select('data').eq('id','archive').maybeSingle();
+      lines.push(arcChk.error?'❌ الأرشيف: فشل التحقق':(arcChk.data&&arcChk.data.data?'✅ الأرشيف: موجود على السيرفر':'⚠️ الأرشيف: لسه مش موجود على السيرفر'));
+      if(!arcChk.data||!arcChk.data.data) hasDiff=true;
+    }catch(e){ lines.push('❌ الأرشيف: خطأ اتصال'); hasDiff=true; }
+    try{
+      var cntChk = await sb.from('business_state').select('data').eq('id','mov_counter').maybeSingle();
+      var srvCnt=(cntChk.data&&cntChk.data.data&&typeof cntChk.data.data.value==='number')?cntChk.data.data.value:null;
+      lines.push(cntChk.error?'❌ عداد التحركات: فشل التحقق':'📟 عداد التحركات: جهاز '+(DB.movCounter||0)+' / سيرفر '+(srvCnt===null?'—':srvCnt));
+      if(srvCnt!==null && srvCnt!==(DB.movCounter||0)) hasDiff=true;
+    }catch(e){ lines.push('❌ عداد التحركات: خطأ اتصال'); hasDiff=true; }
     var html = '<div style="font-family:inherit;text-align:right">'+
       '<div style="font-weight:900;font-size:15px;margin-bottom:10px">'+(hasDiff?'⚠️ فيه فروق':'✅ كل الأقسام متطابقة')+'</div>'+
       lines.map(function(l){return '<div style="font-size:13px;padding:6px 0;border-bottom:1px solid #f1f5f9">'+esc(l)+'</div>';}).join('')+
@@ -2041,6 +2080,10 @@ input:checked+.slider:before{transform:translateX(-20px)}
   }
   async function __pushBizBlobsToServer(){
     if(!window.__currentProfile || typeof sb === 'undefined') return;
+    if(typeof navigator!=='undefined' && navigator.onLine===false){
+      __BIZ_BLOBS.forEach(function(b){ __queueForSync('__bizblob__', b.id, b.id); });
+      return;
+    }
     for(var i=0;i<__BIZ_BLOBS.length;i++){
       var b = __BIZ_BLOBS[i];
       try{
@@ -2084,6 +2127,96 @@ input:checked+.slider:before{transform:translateX(-20px)}
         __reportError('فشل تحميل "'+b.key+'"', (e&&e.message)?e.message:String(e));
       }
     }
+    // v158 — الإعدادات، الأرشيف، وعداد التحركات (دمج مخصص لكل واحد)
+    try{
+      var setRes = await sb.from('business_state').select('data').eq('id','settings').maybeSingle();
+      if(!setRes.error && setRes.data && setRes.data.data){
+        DB.settings = __mergeSettingsObj(DB.settings||{}, setRes.data.data);
+      }
+    }catch(eSet){ console.warn('فشل سحب الإعدادات:', eSet); __reportError('فشل تحميل "الإعدادات"', (eSet&&eSet.message)?eSet.message:String(eSet)); }
+    try{
+      var arcRes = await sb.from('business_state').select('data').eq('id','archive').maybeSingle();
+      if(!arcRes.error && arcRes.data && arcRes.data.data){
+        DB.archive = __mergeArchiveObj(DB.archive||{}, arcRes.data.data);
+      }
+    }catch(eArc){ console.warn('فشل سحب الأرشيف:', eArc); __reportError('فشل تحميل "الأرشيف"', (eArc&&eArc.message)?eArc.message:String(eArc)); }
+    try{
+      var cntRes = await sb.from('business_state').select('data').eq('id','mov_counter').maybeSingle();
+      if(!cntRes.error && cntRes.data && cntRes.data.data && typeof cntRes.data.data.value==='number'){
+        DB.movCounter = Math.max(DB.movCounter||0, cntRes.data.data.value);
+      }
+    }catch(eCnt){ console.warn('فشل سحب عداد التحركات:', eCnt); }
+  }
+  var __settingsPushTimer=null;
+  function __scheduleSettingsPush(){
+    if(!window.__currentProfile || typeof sb === 'undefined') return;
+    if(__settingsPushTimer) clearTimeout(__settingsPushTimer);
+    __settingsPushTimer = setTimeout(__pushSettingsToServer, 1200);
+  }
+  async function __pushSettingsToServer(){
+    if(!window.__currentProfile || typeof sb === 'undefined') return;
+    if(typeof navigator!=='undefined' && navigator.onLine===false){ __queueForSync('__settings__','settings','settings'); return; }
+    try{
+      var res = await sb.from('business_state').upsert({id:'settings', data:DB.settings||{}, updated_by:window.__currentProfile.id, updated_at:new Date().toISOString()});
+      if(res.error){ __reportError('فشل مزامنة الإعدادات', res.error.message); __queueForSync('__settings__','settings','settings'); }
+      else __dequeueSync('__settings__','settings');
+    }catch(e){ __reportError('خطأ اتصال أثناء مزامنة الإعدادات', (e&&e.message)?e.message:String(e)); __queueForSync('__settings__','settings','settings'); }
+  }
+  var __archivePushTimer=null;
+  function __scheduleArchivePush(){
+    if(!window.__currentProfile || typeof sb === 'undefined') return;
+    if(__archivePushTimer) clearTimeout(__archivePushTimer);
+    __archivePushTimer = setTimeout(__pushArchiveToServer, 1200);
+  }
+  async function __pushArchiveToServer(){
+    if(!window.__currentProfile || typeof sb === 'undefined') return;
+    if(typeof navigator!=='undefined' && navigator.onLine===false){ __queueForSync('__archive__','archive','archive'); return; }
+    try{
+      var res = await sb.from('business_state').upsert({id:'archive', data:DB.archive||{}, updated_by:window.__currentProfile.id, updated_at:new Date().toISOString()});
+      if(res.error){ __reportError('فشل مزامنة الأرشيف', res.error.message); __queueForSync('__archive__','archive','archive'); }
+      else __dequeueSync('__archive__','archive');
+    }catch(e){ __reportError('خطأ اتصال أثناء مزامنة الأرشيف', (e&&e.message)?e.message:String(e)); __queueForSync('__archive__','archive','archive'); }
+  }
+  var __movCounterPushTimer=null;
+  function __scheduleMovCounterPush(){
+    if(!window.__currentProfile || typeof sb === 'undefined') return;
+    if(__movCounterPushTimer) clearTimeout(__movCounterPushTimer);
+    __movCounterPushTimer = setTimeout(__pushMovCounterToServer, 1200);
+  }
+  async function __pushMovCounterToServer(){
+    if(!window.__currentProfile || typeof sb === 'undefined') return;
+    if(typeof navigator!=='undefined' && navigator.onLine===false){ __queueForSync('__mov_counter__','mov_counter','mov_counter'); return; }
+    try{
+      var res = await sb.from('business_state').upsert({id:'mov_counter', data:{value:DB.movCounter||0}, updated_by:window.__currentProfile.id, updated_at:new Date().toISOString()});
+      if(res.error){ __reportError('فشل مزامنة عداد التحركات', res.error.message); __queueForSync('__mov_counter__','mov_counter','mov_counter'); }
+      else __dequeueSync('__mov_counter__','mov_counter');
+    }catch(e){ __reportError('خطأ اتصال أثناء مزامنة عداد التحركات', (e&&e.message)?e.message:String(e)); __queueForSync('__mov_counter__','mov_counter','mov_counter'); }
+  }
+
+  // v158 — دمج مخصص لكائن "الإعدادات" (فيه مصفوفات بمفاتيح مختلفة: id أو name أو نص عادي)
+  function __mergeSettingsObj(local, server){
+    local = local||{}; server = server||{};
+    var result = Object.assign({}, local);
+    var byIdArrays = ['modelGroups','modelFamilies'];
+    var byNameArrays = ['bundles','quickServices','expenseTemplates'];
+    var stringArrays = ['partTypes','machineTypes'];
+    byIdArrays.forEach(function(k){ result[k]=__mergeServerRows(local[k]||[], server[k]||[], null, 'id'); });
+    byNameArrays.forEach(function(k){ result[k]=__mergeServerRows(local[k]||[], server[k]||[], null, 'name'); });
+    stringArrays.forEach(function(k){ result[k]=__mergeIdList(local[k]||[], server[k]||[]); });
+    Object.keys(server).forEach(function(k){
+      if(byIdArrays.indexOf(k)===-1 && byNameArrays.indexOf(k)===-1 && stringArrays.indexOf(k)===-1){
+        result[k]=server[k];
+      }
+    });
+    return result;
+  }
+  // v158 — دمج أرشيف الاقتراحات (autocomplete): اتحاد بدون تكرار لكل قسم
+  function __mergeArchiveObj(local, server){
+    local = local||{}; server = server||{};
+    var keys=['customers','suppliers','products','expDescs','serials','models'];
+    var result={};
+    keys.forEach(function(k){ result[k]=__mergeIdList(local[k]||[], server[k]||[]); });
+    return result;
   }
 
   // ===== v97: دمج "الحسابات" (كائن واحد فيه مصفوفات فرعية) بين النسخة المحلية والسيرفر.
@@ -2126,6 +2259,13 @@ input:checked+.slider:before{transform:translateX(-20px)}
   }
   async function __pushAccountsToServer(){
     if(!window.__currentProfile || typeof sb === 'undefined') return;
+    // v157 — لو الجهاز أوفلاين أصلاً، منحاولش نبعت للسيرفر خالص (كان بيظهر خطأ
+    // "Failed to fetch" مخيف وهو أوفلاين عمدًا). بس نضيفها لطابور المزامنة بهدوء
+    // وهتترفع تلقائي لما النت يرجع (نفس آلية طابور الأوفلاين).
+    if(typeof navigator!=='undefined' && navigator.onLine===false){
+      __queueForSync('__accounts__', 'accounts', 'accounts');
+      return;
+    }
     try{
       var payload = {
         id: 'accounts',
@@ -2163,6 +2303,10 @@ input:checked+.slider:before{transform:translateX(-20px)}
   }
   async function __pushClientsToServer(){
     if(!window.__currentProfile || typeof sb === 'undefined') return;
+    if(typeof navigator!=='undefined' && navigator.onLine===false){
+      __queueForSync('__clients__', 'clients', 'clients');
+      return;
+    }
     try{
       var payload = {
         id: 'clients',
@@ -2195,6 +2339,10 @@ input:checked+.slider:before{transform:translateX(-20px)}
   }
   async function __pushScrapToServer(){
     if(!window.__currentProfile || typeof sb === 'undefined') return;
+    if(typeof navigator!=='undefined' && navigator.onLine===false){
+      __queueForSync('__scrap__', 'scrap_machines', 'scrap_machines');
+      return;
+    }
     try{
       var payload = {
         id: 'scrap_machines',
@@ -2255,6 +2403,9 @@ input:checked+.slider:before{transform:translateX(-20px)}
     await __pushClientsToServer();
     await __pushScrapToServer();
     await __pushBizBlobsToServer();
+    await __pushSettingsToServer();
+    await __pushArchiveToServer();
+    await __pushMovCounterToServer();
     if(pending.length>0){
       setSyncStatus('⚠️ الرفع خلص لكن فيه '+pending.length+' سجل فشل','#dc2626');
       showToast('⚠️ اتبعت '+(total-pending.length)+' من '+total+' — '+pending.length+' لسه فاشلين حتى بعد 3 محاولات (على الأغلب النت مش مستقر). جرب تاني لما يستقر','#dc2626');
@@ -2803,6 +2954,7 @@ function loadDB(){
     if(!DB.settings.partTypes||!DB.settings.partTypes.length) DB.settings.partTypes=['جديد','مع انك','ليزر','استعمال خارجي','استعمال داخلي'];
     if(!DB.settings.machineTypes||!DB.settings.machineTypes.length) DB.settings.machineTypes=['جديد','استعمال خارجي','عرض للبيع','اسكراب'];
     if(!DB.settings.quickServices||!DB.settings.quickServices.length) DB.settings.quickServices=[{name:'تسليك',price:600},{name:'زيارة صيانة',price:0},{name:'تنظيف',price:0},{name:'فحص',price:0}];
+    if(!DB.settings.quickAmounts||!DB.settings.quickAmounts.length) DB.settings.quickAmounts=[50,100,150,200,300,500]; // v158 — اختصارات إدخال مبلغ سريع
     if(!DB.settings.bundles) DB.settings.bundles=[];
     if(!DB.settings.deadStockDays) DB.settings.deadStockDays=30;
     if(DB.settings.activity_log_retention_days===undefined) DB.settings.activity_log_retention_days=null; // v129 — null = للأبد
@@ -2911,6 +3063,9 @@ function persist(){
     if(typeof __scheduleClientsPush === 'function') __scheduleClientsPush();
     if(typeof __scheduleScrapPush === 'function') __scheduleScrapPush();
     if(typeof __scheduleBizBlobPush === 'function') __scheduleBizBlobPush();
+    if(typeof __scheduleSettingsPush === 'function') __scheduleSettingsPush();
+    if(typeof __scheduleArchivePush === 'function') __scheduleArchivePush();
+    if(typeof __scheduleMovCounterPush === 'function') __scheduleMovCounterPush();
     // تحذير لو المساحة كبرت
     var size = localStorage.getItem(DB_KEY).length * 2 / 1024;
     if(size > 4000) showToast('⚠️ المساحة '+ Math.round(size) +'KB — صدّر نسخة!','#ea580c');
@@ -3046,6 +3201,24 @@ async function __drainSyncQueue(manual){
     if(q.op==='accounts'){
       await __pushAccountsToServer();
       continue; // __pushAccountsToServer بتتعامل مع الطابور بنفسها (queue/dequeue)
+    }else if(q.op==='clients'){
+      await __pushClientsToServer();
+      continue;
+    }else if(q.op==='scrap_machines'){
+      await __pushScrapToServer();
+      continue;
+    }else if(__BIZ_BLOBS.some(function(b){return b.id===q.op;})){
+      await __pushBizBlobsToServer();
+      continue;
+    }else if(q.op==='settings'){
+      await __pushSettingsToServer();
+      continue;
+    }else if(q.op==='archive'){
+      await __pushArchiveToServer();
+      continue;
+    }else if(q.op==='mov_counter'){
+      await __pushMovCounterToServer();
+      continue;
     }else if(q.op==='delete'){
       try{
         var res = await sb.from(q.table).delete().eq('id', q.id);
@@ -5070,6 +5243,10 @@ function renderSales(){
 
 // ===== فتح فاتورة =====
 var _saleId=null,_saleItems=[],_saleServices=[];
+// v157 — لو الفاتورة دي جاية من "إنهاء عطل وتحويله لفاتورة"، بنحتفظ بمعرف العطل هنا
+// عشان نقفله بس لما الفاتورة تتحفظ فعلاً بنجاح (مش قبل كده). لو المستخدم خرج من
+// غير حفظ، العطل يفضل زي ما هو (مش منتهي).
+var _saleFromMovementId=null;
 var _salePayMethod='كاش'; // الافتراضي كاش
 
 function openSaleModal(id){
@@ -5186,6 +5363,12 @@ function renderSaleBody(s){
     '<input id="srv-name-inline" type="text" placeholder="وصف (اختياري — افتراضي: صيانة)" style="flex:2;min-width:120px;padding:9px 11px;border:2px solid #e2e8f0;border-radius:9px;font-size:13px;font-family:inherit;background:#fff;outline:none;direction:rtl">'+
     '<button onclick="addServiceInline()" style="background:#ea580c;color:#fff;border:none;border-radius:9px;padding:9px 16px;font-family:inherit;font-size:15px;font-weight:900;cursor:pointer;flex-shrink:0">+</button>'+
     '</div>'+
+    // v158 — أزرار مبالغ جاهزة (اختصار كان موجود قبل كده) بتملى خانة المبلغ بضغطة واحدة
+    '<div style="display:flex;gap:5px;margin-top:6px;flex-wrap:wrap">'+
+    (DB.settings.quickAmounts||[]).map(function(amt){
+      return '<button type="button" onclick="setSrvQuickAmount('+amt+')" style="padding:4px 10px;background:#fff;border:1.5px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:11px;cursor:pointer;color:#374151;font-weight:700">'+amt+'</button>';
+    }).join('')+
+    '</div>'+
     '<div style="display:flex;gap:5px;margin-top:7px;flex-wrap:wrap">'+
     (DB.settings.quickServices||[]).map(function(q){
       var hasPrice=q.price>0;
@@ -5259,6 +5442,11 @@ function selectPayMethod(pm){
 }
 
 // ===== إضافة خدمة مباشرة (بدون modal) — لو الاسم فاضي يُسجَّل تلقائياً "صيانة" =====
+function setSrvQuickAmount(amt){
+  var el=document.getElementById('srv-price-inline');if(!el)return;
+  el.value=amt;
+  el.focus();
+}
 function addServiceInline(){
   var name=v('srv-name-inline').trim();
   var price=+v('srv-price-inline')||0;
@@ -5739,6 +5927,14 @@ async function saveSale(){
     addArchive('customers',customer);
     if(v('sale-serial'))addArchive('serials',v('sale-serial'));
     if(v('sale-model'))addArchive('models',v('sale-model'));
+    // v157 — دلوقتي بس، بعد ما الفاتورة اتحفظت فعلاً بنجاح، نقفل العطل المرتبط (لو موجود)
+    if(_saleFromMovementId){
+      var mvId=_saleFromMovementId;
+      var mvUpdate={status:'منتهي',closed_at:today(),closed_order:Date.now()};
+      DB.movements=(DB.movements||[]).map(function(x){return x.id===mvId?Object.assign({},x,mvUpdate):x;});
+      await dbUpdate('movements',mvId,mvUpdate);
+      _saleFromMovementId=null;
+    }
     await persist();
     closeModal();renderSales();renderHome();
     if(syncResult&&syncResult.isNew&&syncResult.phoneEmpty){
@@ -8791,6 +8987,7 @@ function getFaultTypes(){
 }
 
 var _movSort='newest';
+function setMovSort(s){ _movSort=s; renderMovements(); }
 var _movPeriod=_makePeriodState();
 var _movSearch=''; // ⚠️ v108 — بحث داخل التحركات (اسم عميل/موديل/سيريال/نوع عطل)
 
@@ -8818,14 +9015,8 @@ function sortedMovements(){
   }
   var pr=_periodToRange(_movPeriod);
   if(pr.from||pr.to)list=list.filter(function(m){var d=m.opened_at||m.date||'';return(!pr.from||d>=pr.from)&&(!pr.to||d<=pr.to);});
-  var schedOrder={};
-  var week=getWeekDates();
-  week.forEach(function(dateStr,dayIdx){
-    (DB.schedule[dateStr]||[]).forEach(function(id,pos){
-      if(!schedOrder[id])schedOrder[id]={dayIdx:dayIdx,pos:pos};
-    });
-  });
   var statusRank=function(s){return s==='جديد'?0:s==='جاري'?1:2;}; // جديد فوق دايماً، منتهي في الأسفل
+  function _movDateVal(m){return m.opened_at||m.date||m.created_at||'';}
   if(_movSort==='alpha'){
     list.sort(function(a,b){
       var ra=statusRank(a.status),rb=statusRank(b.status);
@@ -8833,15 +9024,14 @@ function sortedMovements(){
       return (a.customer||'').localeCompare(b.customer||'','ar');
     });
   } else {
+    // v157 — ترتيب فعلي بالأحدث فوق كافتراضي (بدل الاعتماد على ترتيب الجدولة اللي
+    // شاشة الجدولة أصلاً بتاخد ترتيبها من مصدر تاني DB.scheduled_map مش من هنا)
     list.sort(function(a,b){
       var ra=statusRank(a.status),rb=statusRank(b.status);
       if(ra!==rb)return ra-rb;
-      // الجديد: الأحدث (seq_num الأكبر) فوق
-      if(a.status==='جديد'&&b.status==='جديد')return (b.seq_num||0)-(a.seq_num||0);
-      var sa=schedOrder[a.id],sb=schedOrder[b.id];
-      if(sa&&sb){if(sa.dayIdx!==sb.dayIdx)return sa.dayIdx-sb.dayIdx;return sa.pos-sb.pos;}
-      if(sa&&!sb)return -1;if(!sa&&sb)return 1;
-      return (b.date||b.created_at||'')>(a.date||a.created_at||'')?1:(b.date||b.created_at||'')<(a.date||a.created_at||'')?-1:0;
+      var da=_movDateVal(a),db=_movDateVal(b);
+      if(da!==db)return da>db?-1:1;
+      return (b.seq_num||0)-(a.seq_num||0);
     });
   }
   return list;
@@ -8930,7 +9120,10 @@ function renderMovements(){
   var filterLabel=_movFilter==='نشط'?'⚡ نشط (جديد+جاري)':_movFilter==='جاري'?'جاري فقط':_movFilter==='جديد'?'جديد فقط':_movFilter==='منتهي'?'منتهي':_movFilter==='today'?'اليوم':'الكل';
   var countBar='<div style="font-size:11px;color:#64748b;margin-bottom:8px">🔎 معروض الآن: <b style="color:#0f172a">'+filterLabel+'</b> — <b>'+list.length+'</b> عنصر</div>';
 
-  var movSortBar='';
+  var movSortBar='<div style="display:flex;gap:6px;margin-bottom:8px">'+
+    '<button onclick="setMovSort(\'newest\')" style="flex:1;padding:7px;border-radius:8px;border:1.5px solid '+(_movSort!=='alpha'?'#2563eb;background:#dbeafe;color:#1e40af':'#e2e8f0;background:#fff;color:#64748b')+';font-family:inherit;font-size:11.5px;font-weight:800;cursor:pointer">📅 الأحدث أولاً</button>'+
+    '<button onclick="setMovSort(\'alpha\')" style="flex:1;padding:7px;border-radius:8px;border:1.5px solid '+(_movSort==='alpha'?'#2563eb;background:#dbeafe;color:#1e40af':'#e2e8f0;background:#fff;color:#64748b')+';font-family:inherit;font-size:11.5px;font-weight:800;cursor:pointer">🔤 بالاسم</button>'+
+    '</div>';
 
   if(!list.length){el.innerHTML=summary+countBar+movSortBar+'<div class="empty">لا توجد أعطال بهذا الفلتر</div>';return;}
   var sc=function(s){return s==='منتهي'?'#15803d':s==='جاري'?'#ca8a04':s==='في الاستوك'?'#0891b2':s==='ملغي'?'#dc2626':'#2563eb';};
@@ -9902,10 +10095,17 @@ async function confirmCloseMovement(id,addInvoice){
   // إضافة log الإنهاء
   var logEntry={date:today(),note:note||'تم الإنهاء',status:'منتهي'};
   var update={};
+  // ⚠️ v157 — لو هيتحول لفاتورة، متقفلش العطل دلوقتي؛ سيبها تتقفل بس لما الفاتورة
+  // تتحفظ فعلاً بنجاح (شوف saveSale). قبل كده كان بيتقفل فورًا حتى لو المستخدم
+  // خرج من شاشة الفاتورة من غير ما يحفظ حاجة.
   DB.movements=DB.movements.map(function(x){
     if(x.id!==id)return x;
     var logs=(x.log||[]).concat([logEntry]);
-    update={status:'منتهي',closed_at:today(),closed_order:Date.now(),log:logs,customer:x.customer}; // ⚠️ v128 — مزامنة سيرفر ناقصة + حماية اسم العميل
+    if(addInvoice){
+      update={log:logs,customer:x.customer};
+    }else{
+      update={status:'منتهي',closed_at:today(),closed_order:Date.now(),log:logs,customer:x.customer}; // ⚠️ v128 — مزامنة سيرفر ناقصة + حماية اسم العميل
+    }
     return Object.assign({},x,update);
   });
   // لا نزيل من القائمة المرتبة — تفضل في الجدول بحالتها
@@ -9913,7 +10113,11 @@ async function confirmCloseMovement(id,addInvoice){
   await dbUpdate('movements',id,update);
   closeModal();
   if(_movTab==='scheduled')renderScheduledList();else renderMovements();
-  showToast('✅ تم إنهاء العطل','#16a34a');
+  if(addInvoice){
+    _saleFromMovementId=id;
+  }else{
+    showToast('✅ تم إنهاء العطل','#16a34a');
+  }
   if(addInvoice){
     // بناء ملاحظات الفاتورة من بيانات العطل
     var saleNote=[
@@ -10328,7 +10532,11 @@ async function confirmSchedDone(id){
   var toSale=document.getElementById('sd-to-sale').value==='true';
   var m=DB.movements.find(function(x){return x.id===id;});if(!m)return;
   // إنهاء العطل — closed_at = today (لا يغير الأيام الماضية)
-  var update={status:'منتهي',closed_at:today(),closed_order:Date.now(),customer:m.customer}; // ⚠️ v128 — مزامنة سيرفر ناقصة + حماية اسم العميل
+  var update={closed_order:Date.now(),customer:m.customer}; // ⚠️ v128 — مزامنة سيرفر ناقصة + حماية اسم العميل
+  // ⚠️ v157 — لو هيتحول لفاتورة، متقفلش العطل دلوقتي؛ سيبها تتقفل بس لما الفاتورة
+  // تتحفظ فعلاً بنجاح (شوف saveSale). لو "إنهاء فقط"، اقفلها فورًا زي ما كان.
+  if(!toSale){ update.status='منتهي'; update.closed_at=today(); }
+  else{ _saleFromMovementId=id; }
   DB.movements=DB.movements.map(function(x){return x.id===id?Object.assign({},x,update):x;});
   await persist();
   await dbUpdate('movements',id,update);
