@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v154</title>
+<title>ابو حوده الحلو الجميل v156</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="2026-09-08 — v154";
+<script>var BUILD_STAMP="2026-09-09 — v156";
 /* ===== سجل التعديلات (Changelog) =====
 v81: نسخة احتياطية طارئة تلقائية لو localStorage اتعطب.
 v82: بوابة تسجيل دخول + ربط Supabase.
@@ -190,6 +190,20 @@ v106: [إصلاح جذري] "النقدية غلط بسبب مخزون/ديون 
      الطباعة، تصدير Excel). ⚠️ ملحوظة لو شايف تسميات قديمة رغم التحديث: امسح الكاش/أعد
      تحميل الملف بالكامل (الملف اسمه لازم يختلف عن أي نسخة سابقة نزّلتها قبل كده حتى
      يتجنّب متصفح الموبايل استخدام نسخة مخزّنة قديمة).
+v156: [🐛 إصلاح جذري تاني: باقي الأقسام اللي كانت محلية بس ومش بتتزامن]
+     بعد إصلاح دفتر العملاء والسكراب في v155، راجعت كل حقول البيانات في التطبيق ولقيت
+     7 أقسام تانية بنفس المشكلة بالظبط (محلية بس، مش بتوصل للسيرفر خالص): دفتر الموردين،
+     عمليات الجرد، لقطات المخزون، الأرشيف اليومي، وكل نظام الجدولة/الطابور (القائمة +
+     الخريطة + المرحّل). دلوقتي كلهم بيتزامنوا تلقائيًا زي باقي الأقسام، وبينضافوا لزرار
+     "رفع البيانات المحلية للسيرفر" ولزرار "تحقق من تطابق البيانات". ⚠️ لازم نفس خطوة
+     v155: من النسخة اللي فيها البيانات الكاملة → "📤 رفع كل البيانات المحلية دلوقتي".
+v155: [🐛 إصلاح جذري: دفتر العملاء والسكراب كانوا محليين بس ومش بيتزامنوا خالص]
+     السبب اللي كان بيخلي "دفتر العملاء" و"تفكيك السكراب" يختفوا تمامًا لما التطبيق
+     يتفتح من رابط/جهاز تاني: الجدولين دول أصلًا مكانوش جزء من نظام المزامنة خالص (لا في
+     الرفع ولا في السحب)، بعكس باقي الأقسام. دلوقتي بيتزامنوا تلقائيًا مع كل تعديل (زي
+     "الحسابات" بالظبط)، وبينضافوا لزرار "رفع البيانات المحلية للسيرفر" وللتحميل عند
+     الدخول. ⚠️ لازم تعمل مرة واحدة: افتح النسخة اللي فيها بيانات العملاء/السكراب
+     الكاملة → ⚙️ الإعدادات → "📤 رفع كل البيانات المحلية دلوقتي" عشان ترفعهم أول مرة.
 v154: [🐛 الدخول الأوفلاين كان بيفشل فعليًا بسبب getSession() نفسها]
      أول اختبار حقيقي للأوفلاين (وضع الطيران) كشف إن آلية "ادخل بآخر بيانات محفوظة لو
      مفيش نت" (v113) كانت موجودة، لكن `sb.auth.getSession()` نفسها أحيانًا بتحاول تجدد
@@ -1819,19 +1833,32 @@ input:checked+.slider:before{transform:translateX(-20px)}
   // دلوقتي: أي حقل حرج (زي اسم العميل/المورد) فاضي جاي من السيرفر ما بيغلبش على قيمة محلية
   // موجودة فعلاً — بيتم تجاهله والاحتفاظ بالقيمة المحلية بس لحد ما تتحدث بقيمة حقيقية.
   var __PROTECTED_NONEMPTY_FIELDS = {movements:['customer'],purchases:['supplier'],sales:['customer']};
-  function __mergeServerRows(localArr, serverRows, tableName){
+  function __mergeServerRows(localArr, serverRows, tableName, keyField){
+    keyField = keyField || 'id';
     var byId = {};
-    (localArr||[]).forEach(function(r){ byId[r.id] = r; });
+    (localArr||[]).forEach(function(r){ byId[r[keyField]] = r; });
     var protectedFields = __PROTECTED_NONEMPTY_FIELDS[tableName]||[];
     (serverRows||[]).forEach(function(r){
-      var localRow = byId[r.id];
+      var localRow = byId[r[keyField]];
       var merged = Object.assign({}, localRow||{}, r);
       protectedFields.forEach(function(f){
         if(localRow && localRow[f] && !r[f]) merged[f]=localRow[f];
       });
-      byId[r.id] = merged;
+      byId[r[keyField]] = merged;
     });
     return Object.values(byId);
+  }
+  // v156 — دمج بسيط لمصفوفة IDs (زي scheduled_list): اتحاد بدون تكرار
+  function __mergeIdList(localArr, serverArr){
+    var seen = {}; var result = [];
+    (localArr||[]).concat(serverArr||[]).forEach(function(x){
+      if(!seen[x]){ seen[x]=true; result.push(x); }
+    });
+    return result;
+  }
+  // v156 — دمج كائن/خريطة (زي scheduled_map): يفضّل قيمة السيرفر لو موجودة لنفس المفتاح
+  function __mergeMap(localObj, serverObj){
+    return Object.assign({}, localObj||{}, serverObj||{});
   }
 
   async function __pullAllFromServer(){
@@ -1888,6 +1915,29 @@ input:checked+.slider:before{transform:translateX(-20px)}
         __reportError('فشل تحميل الحسابات', (eAcc&&eAcc.message)?eAcc.message:String(eAcc));
       }
 
+      // ===== v155: سحب ودمج دفتر العملاء والسكراب (كانوا محليين بس قبل كده) =====
+      try{
+        var clientsRes = await sb.from('business_state').select('data, updated_at').eq('id','clients').maybeSingle();
+        if(!clientsRes.error && clientsRes.data && clientsRes.data.data){
+          DB.clients = __mergeServerRows(DB.clients||[], clientsRes.data.data, 'clients');
+        }
+      }catch(eCl){
+        console.warn('فشل سحب دفتر العملاء من السيرفر:', eCl);
+        __reportError('فشل تحميل دفتر العملاء', (eCl&&eCl.message)?eCl.message:String(eCl));
+      }
+      try{
+        var scrapRes = await sb.from('business_state').select('data, updated_at').eq('id','scrap_machines').maybeSingle();
+        if(!scrapRes.error && scrapRes.data && scrapRes.data.data){
+          DB.scrap_machines = __mergeServerRows(DB.scrap_machines||[], scrapRes.data.data, 'scrap_machines');
+        }
+      }catch(eSc){
+        console.warn('فشل سحب السكراب من السيرفر:', eSc);
+        __reportError('فشل تحميل السكراب', (eSc&&eSc.message)?eSc.message:String(eSc));
+      }
+
+      // v156 — سحب باقي الأقسام (موردين، جرد، لقطات مخزون، أرشيف يومي، جدولة)
+      await __pullBizBlobsFromServer();
+
       if(window.__isOwner) await __loadStorageUsage();
 
       await persist();
@@ -1902,6 +1952,137 @@ input:checked+.slider:before{transform:translateX(-20px)}
     }catch(e){
       console.warn('فشل سحب البيانات من السيرفر:', e);
       setSyncStatus('⚠️ فشل تحميل التحديثات من السيرفر','#dc2626');
+    }
+  }
+
+  // ===== v155 — زرار "تحقق من تطابق البيانات": بيعدّ كل قسم محليًا وعلى السيرفر
+  // ويوريك فرق العدد فورًا (من غير ما يلمس أو يعدّل أي بيانات)، عشان تتطمن إن الرفع
+  // فعلاً وصل ومفيش سجلات لسه عالقة على جهاز واحد بس =====
+  async function __verifySyncCounts(){
+    if(typeof sb === 'undefined' || !window.__currentProfile){ showToast('🚫 لازم تكون متصل بالنت ومسجّل دخول','#dc2626'); return; }
+    showToast('🔍 جاري المقارنة...','#7c3aed');
+    var rowsTables = Object.keys(__SYNCED_TABLES);
+    var blobTables = [
+      {key:'clients', label:'دفتر العملاء', id:'clients'},
+      {key:'scrap_machines', label:'السكراب', id:'scrap_machines'},
+      {key:'suppliers', label:'دفتر الموردين', id:'suppliers'},
+      {key:'stocktakes', label:'عمليات الجرد', id:'stocktakes'},
+      {key:'inventory_snapshots', label:'لقطات المخزون', id:'inventory_snapshots'},
+      {key:'daily_archive', label:'الأرشيف اليومي', id:'daily_archive'},
+      {key:'scheduled_list', label:'قائمة الجدولة', id:'scheduled_list'}
+    ];
+    var lines = [];
+    var hasDiff = false;
+    for(var i=0;i<rowsTables.length;i++){
+      var t = rowsTables[i];
+      var localCount = (DB[t]||[]).length;
+      try{
+        var res = await sb.from(t).select('id', {count:'exact', head:true});
+        if(res.error){
+          lines.push('❌ '+t+': فشل التحقق ('+res.error.message+')');
+          hasDiff = true;
+        }else{
+          var serverCount = res.count||0;
+          if(serverCount!==localCount) hasDiff = true;
+          lines.push((serverCount===localCount?'✅ ':'⚠️ ')+t+': جهاز '+localCount+' / سيرفر '+serverCount);
+        }
+      }catch(e){
+        lines.push('❌ '+t+': خطأ اتصال');
+        hasDiff = true;
+      }
+    }
+    for(var j=0;j<blobTables.length;j++){
+      var bt = blobTables[j];
+      var localBCount = (DB[bt.key]||[]).length;
+      try{
+        var bres = await sb.from('business_state').select('data').eq('id',bt.id).maybeSingle();
+        if(bres.error){
+          lines.push('❌ '+bt.label+': فشل التحقق ('+bres.error.message+')');
+          hasDiff = true;
+        }else{
+          var serverBCount = (bres.data && bres.data.data)?bres.data.data.length:0;
+          if(serverBCount!==localBCount) hasDiff = true;
+          lines.push((serverBCount===localBCount?'✅ ':'⚠️ ')+bt.label+': جهاز '+localBCount+' / سيرفر '+serverBCount);
+        }
+      }catch(e){
+        lines.push('❌ '+bt.label+': خطأ اتصال');
+        hasDiff = true;
+      }
+    }
+    var html = '<div style="font-family:inherit;text-align:right">'+
+      '<div style="font-weight:900;font-size:15px;margin-bottom:10px">'+(hasDiff?'⚠️ فيه فروق':'✅ كل الأقسام متطابقة')+'</div>'+
+      lines.map(function(l){return '<div style="font-size:13px;padding:6px 0;border-bottom:1px solid #f1f5f9">'+esc(l)+'</div>';}).join('')+
+      (hasDiff?'<div style="font-size:11px;color:#94a3b8;margin-top:10px">لو "جهاز" أكبر من "سيرفر": اضغط "📤 رفع كل البيانات المحلية دلوقتي". لو "سيرفر" أكبر من "جهاز": افتح التطبيق من نفس الرابط تاني عشان يسحب الناقص.</div>':'')+
+      '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">تمام</button></div>'+
+      '</div>';
+    document.getElementById('modal-title').textContent='🔍 تطابق البيانات';
+    document.getElementById('modal-body').innerHTML=html;
+    openModal();
+  }
+
+  // ===== v156 — نفس مبدأ العملاء والسكراب، بس دلوقتي بشكل عام لـ 4 أنواع بيانات:
+  // suppliers (دفتر الموردين), stocktakes (الجرد), inventory_snapshots (لقطات المخزون),
+  // daily_archive (الأرشيف اليومي), وكمان نظام الجدولة الكامل (scheduled_list/map/carried).
+  // كل ده كان محلي بس زي العملاء والسكراب بالظبط قبل الإصلاح ده =====
+  var __BIZ_BLOBS = [
+    {key:'suppliers',           id:'suppliers',           type:'idArr',  keyField:'id'},
+    {key:'stocktakes',          id:'stocktakes',          type:'idArr',  keyField:'id'},
+    {key:'inventory_snapshots', id:'inventory_snapshots', type:'idArr',  keyField:'asOf'},
+    {key:'daily_archive',       id:'daily_archive',       type:'idArr',  keyField:'work_date'},
+    {key:'scheduled_list',      id:'scheduled_list',      type:'idList'},
+    {key:'scheduled_map',       id:'scheduled_map',       type:'map'},
+    {key:'scheduled_carried',   id:'scheduled_carried',   type:'map'}
+  ];
+  var __bizBlobPushTimer = null;
+  function __scheduleBizBlobPush(){
+    if(!window.__currentProfile || typeof sb === 'undefined') return;
+    if(__bizBlobPushTimer) clearTimeout(__bizBlobPushTimer);
+    __bizBlobPushTimer = setTimeout(__pushBizBlobsToServer, 1200);
+  }
+  async function __pushBizBlobsToServer(){
+    if(!window.__currentProfile || typeof sb === 'undefined') return;
+    for(var i=0;i<__BIZ_BLOBS.length;i++){
+      var b = __BIZ_BLOBS[i];
+      try{
+        var payload = {
+          id: b.id,
+          data: DB[b.key] || (b.type==='map'?{}:[]),
+          updated_by: window.__currentProfile.id,
+          updated_at: new Date().toISOString()
+        };
+        var res = await sb.from('business_state').upsert(payload);
+        if(res.error){
+          console.warn('فشل مزامنة '+b.key+':', res.error.message);
+          __reportError('فشل مزامنة "'+b.key+'"', res.error.message+(res.error.code?' (كود: '+res.error.code+')':''));
+          __queueForSync('__bizblob__', b.id, b.id);
+        }else{
+          __dequeueSync('__bizblob__', b.id);
+        }
+      }catch(e){
+        console.warn('خطأ في مزامنة '+b.key+':', e);
+        __reportError('خطأ اتصال أثناء مزامنة "'+b.key+'"', (e&&e.message)?e.message:String(e));
+        __queueForSync('__bizblob__', b.id, b.id);
+      }
+    }
+  }
+  async function __pullBizBlobsFromServer(){
+    for(var i=0;i<__BIZ_BLOBS.length;i++){
+      var b = __BIZ_BLOBS[i];
+      try{
+        var res = await sb.from('business_state').select('data, updated_at').eq('id',b.id).maybeSingle();
+        if(res.error || !res.data || res.data.data===undefined || res.data.data===null) continue;
+        var serverData = res.data.data;
+        if(b.type==='idArr'){
+          DB[b.key] = __mergeServerRows(DB[b.key]||[], serverData, null, b.keyField);
+        }else if(b.type==='idList'){
+          DB[b.key] = __mergeIdList(DB[b.key]||[], serverData);
+        }else if(b.type==='map'){
+          DB[b.key] = __mergeMap(DB[b.key]||{}, serverData);
+        }
+      }catch(e){
+        console.warn('فشل سحب '+b.key+' من السيرفر:', e);
+        __reportError('فشل تحميل "'+b.key+'"', (e&&e.message)?e.message:String(e));
+      }
     }
   }
 
@@ -1969,6 +2150,75 @@ input:checked+.slider:before{transform:translateX(-20px)}
     }
   }
 
+  // ===== v155 — دفتر العملاء (clients) وسكراب الماكينات (scrap_machines) كانوا محليين
+  // بس تمامًا ومش بيتزامنوا مع السيرفر خالص (مش حتى جزء من __SYNCED_TABLES)، فكانوا
+  // بيختفوا كليًا لما التطبيق يتفتح من رابط/جهاز تاني. بنستخدم نفس أسلوب "الحسابات"
+  // بالظبط (نسخة JSON واحدة في جدول business_state الموجود بالفعل)، من غير ما نحتاج
+  // جدول Supabase جديد أو تعديل صلاحيات RLS =====
+  var __clientsPushTimer = null;
+  function __scheduleClientsPush(){
+    if(!window.__currentProfile || typeof sb === 'undefined') return;
+    if(__clientsPushTimer) clearTimeout(__clientsPushTimer);
+    __clientsPushTimer = setTimeout(__pushClientsToServer, 1200);
+  }
+  async function __pushClientsToServer(){
+    if(!window.__currentProfile || typeof sb === 'undefined') return;
+    try{
+      var payload = {
+        id: 'clients',
+        data: DB.clients||[],
+        updated_by: window.__currentProfile.id,
+        updated_at: new Date().toISOString()
+      };
+      var res = await sb.from('business_state').upsert(payload);
+      if(res.error){
+        console.warn('فشل مزامنة دفتر العملاء مع السيرفر:', res.error.message);
+        setSyncStatus('⚠️ فشل مزامنة دفتر العملاء','#dc2626');
+        __reportError('فشل مزامنة دفتر العملاء', res.error.message+(res.error.code?' (كود: '+res.error.code+')':''));
+        __queueForSync('__clients__', 'clients', 'clients');
+        return;
+      }
+      __dequeueSync('__clients__', 'clients');
+      setSyncStatus('☁️ دفتر العملاء متزامن','#16a34a');
+    }catch(e){
+      console.warn('خطأ في مزامنة دفتر العملاء:', e);
+      __reportError('خطأ اتصال أثناء مزامنة دفتر العملاء', (e&&e.message)?e.message:String(e));
+      __queueForSync('__clients__', 'clients', 'clients');
+    }
+  }
+
+  var __scrapPushTimer = null;
+  function __scheduleScrapPush(){
+    if(!window.__currentProfile || typeof sb === 'undefined') return;
+    if(__scrapPushTimer) clearTimeout(__scrapPushTimer);
+    __scrapPushTimer = setTimeout(__pushScrapToServer, 1200);
+  }
+  async function __pushScrapToServer(){
+    if(!window.__currentProfile || typeof sb === 'undefined') return;
+    try{
+      var payload = {
+        id: 'scrap_machines',
+        data: DB.scrap_machines||[],
+        updated_by: window.__currentProfile.id,
+        updated_at: new Date().toISOString()
+      };
+      var res = await sb.from('business_state').upsert(payload);
+      if(res.error){
+        console.warn('فشل مزامنة السكراب مع السيرفر:', res.error.message);
+        setSyncStatus('⚠️ فشل مزامنة السكراب','#dc2626');
+        __reportError('فشل مزامنة السكراب', res.error.message+(res.error.code?' (كود: '+res.error.code+')':''));
+        __queueForSync('__scrap__', 'scrap_machines', 'scrap_machines');
+        return;
+      }
+      __dequeueSync('__scrap__', 'scrap_machines');
+      setSyncStatus('☁️ السكراب متزامن','#16a34a');
+    }catch(e){
+      console.warn('خطأ في مزامنة السكراب:', e);
+      __reportError('خطأ اتصال أثناء مزامنة السكراب', (e&&e.message)?e.message:String(e));
+      __queueForSync('__scrap__', 'scrap_machines', 'scrap_machines');
+    }
+  }
+
   // ===== v146 — رفع شامل لأول مرة: بيمشي على كل السجلات المحلية في الجداول المتزامنة
   // ويبعتها للسيرفر واحدة واحدة عن طريق __pushRowToServer نفسها (بكل إصلاحاتها: شيل
   // الحقول المحلية، وإعادة المحاولة التلقائية لو عمود ناقص). ده بيغطي بيانات قديمة
@@ -2002,6 +2252,9 @@ input:checked+.slider:before{transform:translateX(-20px)}
       pending = stillFailed;
     }
     await __pushAccountsToServer();
+    await __pushClientsToServer();
+    await __pushScrapToServer();
+    await __pushBizBlobsToServer();
     if(pending.length>0){
       setSyncStatus('⚠️ الرفع خلص لكن فيه '+pending.length+' سجل فشل','#dc2626');
       showToast('⚠️ اتبعت '+(total-pending.length)+' من '+total+' — '+pending.length+' لسه فاشلين حتى بعد 3 محاولات (على الأغلب النت مش مستقر). جرب تاني لما يستقر','#dc2626');
@@ -2654,6 +2907,10 @@ function persist(){
     // v97: أي تعديل في DB.accounts (موظفين، مستثمرين، رأس مال...) بيتبعت للسيرفر تلقائيًا
     // من هنا (مركزيًا) عشان مافيش داعي نلمس كل دالة حفظ على حدة
     if(typeof __scheduleAccountsPush === 'function') __scheduleAccountsPush();
+    // v155: نفس الفكرة لدفتر العملاء والسكراب، كانوا ناقصين من هنا خالص
+    if(typeof __scheduleClientsPush === 'function') __scheduleClientsPush();
+    if(typeof __scheduleScrapPush === 'function') __scheduleScrapPush();
+    if(typeof __scheduleBizBlobPush === 'function') __scheduleBizBlobPush();
     // تحذير لو المساحة كبرت
     var size = localStorage.getItem(DB_KEY).length * 2 / 1024;
     if(size > 4000) showToast('⚠️ المساحة '+ Math.round(size) +'KB — صدّر نسخة!','#ea580c');
@@ -13058,6 +13315,7 @@ function renderSettings(){
       '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #e2e8f0">📤 رفع البيانات المحلية للسيرفر</div>'+
       '<div style="font-size:11px;color:#94a3b8;margin-bottom:10px">مش محتاجه في الاستخدام العادي — كل حركة بتتزامن أوتوماتيك لحظة ما تحفظها. استخدمه بس لو مشكوك إن جهاز معيّن فيه بيانات محلية قديمة مكملتش تتزامن (زي بعد استيراد نسخة احتياطية، أو نقل من جهاز تاني). آمن يتعمل أكتر من مرة (upsert بالـ id، مش بيكرر بيانات).</div>'+
       '<button class="settings-btn" style="background:#dbeafe;color:#1d4ed8" onclick="confirmAction(\'هيرفع كل البيانات المحفوظة على الجهاز ده للسيرفر، ده ممكن ياخد شوية دقايق حسب حجم البيانات. تكمل؟\',__forceFullUploadToServer)">📤 رفع كل البيانات المحلية دلوقتي</button>'+
+      '<button class="settings-btn" style="background:#f3e8ff;color:#7c3aed;margin-top:8px" onclick="__verifySyncCounts()">🔍 تحقق من تطابق البيانات مع السيرفر</button>'+
       '</div>'
     ):'');
 
