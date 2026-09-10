@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v163</title>
+<title>ابو حوده الحلو الجميل v164</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="2026-09-09 — v163";
+<script>var BUILD_STAMP="2026-09-10 — v164";
 /* ===== سجل التعديلات (Changelog) =====
 v81: نسخة احتياطية طارئة تلقائية لو localStorage اتعطب.
 v82: بوابة تسجيل دخول + ربط Supabase.
@@ -190,6 +190,22 @@ v106: [إصلاح جذري] "النقدية غلط بسبب مخزون/ديون 
      الطباعة، تصدير Excel). ⚠️ ملحوظة لو شايف تسميات قديمة رغم التحديث: امسح الكاش/أعد
      تحميل الملف بالكامل (الملف اسمه لازم يختلف عن أي نسخة سابقة نزّلتها قبل كده حتى
      يتجنّب متصفح الموبايل استخدام نسخة مخزّنة قديمة).
+v164: [🐛 باج جوهري: الفواتير والمصاريف مكانش بيتسجل فيها "مين عملها" خالص!]
+     ده أخطر حاجة لقيتها لحد دلوقتي — عمود created_by كان فاضي دايمًا في كل فاتورة
+     ومصروف جديد (سواء المالك أو أي موظف اللي عمله)، رغم إن كل تقارير المهندسين
+     ورصيد الأمانة (2.4/2.5/2.7/2.8) بتعتمد عليه بالكامل! يعني كانت هتطلع صفر لأي
+     حد. اتصلح دلوقتي — أي فاتورة أو مصروف جديد بيتسجل بيه مين عمله فعليًا، والفواتير
+     القديمة اللي اتعدلت بعد كده هتاخد created_by صاحبها الأصلي مش اللي عدّلها.
+     ⚠️ الفواتير/المصاريف القديمة (قبل v164) هتفضل من غير created_by، فمش هتتحسب في
+     رصيد أي حد بأثر رجعي.
+     🎛️ رتّبت شاشة صلاحيات الموظف (إعدادات ← الموظفون ← صلاحيات ← حسب الموظف) في
+     طبقتين واضحتين بدل الخلط: "🔑 الطبقة 1 — صلاحيات الوصول العامة" (جداول/شاشات)
+     فوق، و"🎛️ الطبقة 2 — صلاحيات وإعدادات خاصة" (خصوصية، تقارير، أجهزة، عمولة،
+     محفظة) تحتها. التبويب التاني "👔 حسب الدور" فاضل زي ما هو للإعدادات العامة
+     الافتراضية لكل الدور.
+     📦 دمجت أقسام الإعدادات زي ما طلبت: "المزامنة والتخزين" + "النسخ الاحتياطي"
+     بقوا قسم واحد، و"مسح قسم محدد" + "خطر" بقوا قسم واحد ("🧹 مسح البيانات") —
+     وبالمناسبة قفلته على المالك بس، كان أي موظف يقدر يمسح فواتير/مشتريات كاملة!
 v163: [🚀 بند 3: تقييد عدد الأجهزة + تراجع عن غلطة في العهدة]
      اخترت الحل الأسهل والأعملي (عدد أجهزة مسموح بدل تحديد جهاز واحد بعينه، زي ما
      اتفقنا). من صلاحيات كل موظف مربوط بسجل راتب، تقدر تحدد له كام جهاز مسموح يدخل
@@ -1138,15 +1154,23 @@ input:checked+.slider:before{transform:translateX(-20px)}
         '<div id="emp-perm-table">'+(_permSelectedEmp?'جاري التحميل...':'')+'</div>';
       if(_permSelectedEmp){
         var emp=emps.find(function(e){return e.id===_permSelectedEmp;});
-        await __renderEmpManageBlock(emp);
+        // v164 — إعادة ترتيب وتسمية واضحة لطبقتين منفصلتين بدل ما يكونوا مختلطين:
+        // 1) صلاحيات الوصول العامة (جداول/شاشات — نفس النوع سواء افتراضية للدور أو
+        //    مخصصة لشخص) 2) صلاحيات خاصة تفصيلية (خصوصية، تقارير، أجهزة، عمولة، محفظة)
+        document.getElementById('emp-perm-table').innerHTML=
+          '<div style="font-weight:900;font-size:13px;color:#1e40af;margin:6px 0 8px">🔑 الطبقة 1 — صلاحيات الوصول العامة</div>'+
+          '<div id="emp-perm-table-2"></div>'+
+          '<div style="font-weight:900;font-size:13px;color:#7c3aed;margin:18px 0 8px;padding-top:10px;border-top:2px dashed #e2e8f0">🎛️ الطبقة 2 — صلاحيات وإعدادات خاصة بالموظف ده</div>'+
+          '<div id="emp-manage-block"></div>';
         await __renderEmpPermTable(_permSelectedEmp, emp.role_id);
+        await __renderEmpManageBlock(emp);
       }
     }catch(e){ sub.innerHTML='⚠️ فشل تحميل الموظفين: '+e.message; }
   }
 
   // زرار تغيير الوظيفة + حظر/تفعيل الدخول — بيتحطوا فوق جدول الصلاحيات
   async function __renderEmpManageBlock(emp){
-    var el=document.getElementById('emp-perm-table');if(!el)return;
+    var el=document.getElementById('emp-manage-block');if(!el)return;
     var roleOpts=__PERM_ROLES.map(function(r){return '<option value="'+r.id+'"'+(emp.role_id===r.id?' selected':'')+'>'+r.name+'</option>';}).join('');
     var linkedRec=(DB.accounts&&DB.accounts.employees||[]).find(function(e){return e.linked_profile_id===emp.id;});
     var unlinkedOpts=(DB.accounts&&DB.accounts.employees||[]).filter(function(e){return e.active!==false&&!e.linked_profile_id;})
@@ -6005,6 +6029,15 @@ async function saveSale(){
       note:v('sale-note'),serial:v('sale-serial'),model:v('sale-model'),
       image:img||'',payment_method:pm
     };
+    // ⚠️ v164 — باج جوهري: مكانش بيتسجل مين عمل الفاتورة خالص (created_by فاضي دايمًا)،
+    // فتجميع بيانات كل مهندس ورصيد أمانته (2.4/2.5/2.7/2.8) كانوا هيطلعوا صفر لأي
+    // حد. دلوقتي بيتسجل عند الإنشاء لأول مرة، ومابيتغيرش لما الفاتورة تتعدّل بعد كده.
+    if(_saleId){
+      var existingForCreator=DB.sales.find(function(s){return s.id===_saleId;});
+      obj.created_by=(existingForCreator&&existingForCreator.created_by)||(window.__currentProfile?window.__currentProfile.id:null);
+    }else{
+      obj.created_by=window.__currentProfile?window.__currentProfile.id:null;
+    }
     var syncResult=null;
     if(_saleId){
       var oldSale=DB.sales.find(function(s){return s.id===_saleId;});
@@ -8494,7 +8527,8 @@ async function saveExpense(){
     if(emp){
       var label='رواتب — '+esc(emp.name)+(sub?' ('+sub+')':'');
       obj={id:genId(),label:label,amount:amount,type:'رواتب',subcategory:sub,
-        note:(note?note+' — ':'')+esc(emp.name),date:v('exp-date'),source:'salary',employee_id:empId};
+        note:(note?note+' — ':'')+esc(emp.name),date:v('exp-date'),source:'salary',employee_id:empId,
+        created_by:window.__currentProfile?window.__currentProfile.id:null}; // v164
       // مصروف يدوي بفئة رواتب (مكافأة/بدل/حافز/عمولة) — يتسجل كمصروف عادي فقط
       // ولا يُعتبر دفع للراتب الأساسي؛ الدفع الرسمي فقط من زر "صرف راتب" في تبويب الموظفين
       DB.expenses.unshift(obj);
@@ -8510,7 +8544,8 @@ async function saveExpense(){
     }
   }
   var label=type+(sub?' — '+sub:'')+(note?' ('+note+')':'');
-  obj={id:genId(),label:label,amount:amount,type:type,subcategory:sub,note:note,date:v('exp-date'),source:'manual'};
+  obj={id:genId(),label:label,amount:amount,type:type,subcategory:sub,note:note,date:v('exp-date'),source:'manual',
+    created_by:window.__currentProfile?window.__currentProfile.id:null}; // v164
   DB.expenses.unshift(obj);
   await persist();
   await dbUpsert('expenses',obj);
@@ -13267,13 +13302,11 @@ var SETTINGS_CATEGORIES=[
   {key:'account',icon:'👤',label:'حسابي',desc:'بيانات جلستك، سجل النشاط، تسجيل الخروج'},
   {key:'general',icon:'📱',label:'عام',desc:'اسم التطبيق، الفلاتر الافتراضية، التصنيفات'},
   {key:'finance',icon:'💰',label:'المالية',desc:'التقارير، الحسابات، عرض المصروفات'},
-  {key:'sync',icon:'☁️',label:'المزامنة والتخزين',desc:'مساحة السيرفر، وضع Offline'},
-  {key:'backup',icon:'💾',label:'النسخ الاحتياطي والتصدير',desc:'نسخة JSON، تصدير PDF/Excel'},
-  {key:'clearSection',icon:'🧹',label:'مسح قسم محدد',desc:'امسح بيانات قسم واحد بس (فواتير، مشتريات...)'},
-  {key:'danger',icon:'⚠️',label:'خطر',desc:'تصفير العداد، مسح كل البيانات'}
+  {key:'sync',icon:'☁️',label:'المزامنة والتخزين والنسخ الاحتياطي',desc:'مساحة السيرفر، Offline، نسخة JSON، تصدير PDF/Excel'},
+  {key:'clearSection',icon:'🧹',label:'مسح البيانات',desc:'مسح قسم محدد، أو تصفير العداد، أو مسح كل البيانات'}
 ];
 function openSettingsSection(key){
-  if((key==='employees'||key==='danger')&&!window.__isOwner){showToast('🚫 القسم ده للمالك بس','#dc2626');return;}
+  if((key==='employees'||key==='clearSection')&&!window.__isOwner){showToast('🚫 القسم ده للمالك بس','#dc2626');return;}
   _settingsSection=key;renderSettings();window.scrollTo(0,0);var sb=document.getElementById('settings-body');if(sb)sb.scrollTop=0;
 }
 function backToSettingsMenu(){_settingsSection=null;renderSettings();}
@@ -13650,8 +13683,9 @@ function renderSettings(){
     '</div>';
 
   // ===== قسم 4: المزامنة والتخزين =====
+  // ===== v164 — دمج "المزامنة والتخزين" + "النسخ الاحتياطي والتصدير" في قسم واحد =====
   var syncSection =
-    __settingsSectionHeader('☁️ المزامنة والتخزين')+
+    __settingsSectionHeader('☁️ المزامنة والتخزين والنسخ الاحتياطي')+
     (window.__isOwner?(
       '<div class="card">'+
       '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid #e2e8f0">📊 مساحة السيرفر المستخدمة</div>'+
@@ -13674,11 +13708,8 @@ function renderSettings(){
     '<div style="background:#f0fdf4;border-radius:10px;padding:11px 13px;border:1.5px solid #86efac">'+
     '<div style="font-size:12px;font-weight:700;color:#15803d;margin-bottom:4px">✅ يعمل بدون إنترنت</div>'+
     '<div style="font-size:11px;color:#64748b">البيانات محفوظة على الجهاز، وبتتزامن مع السيرفر أول ما النت يرجع</div></div>'+
-    '</div>';
-
-  // ===== قسم 5: النسخ الاحتياطي والتصدير =====
-  var backupSection =
-    __settingsSectionHeader('💾 النسخ الاحتياطي والتصدير')+
+    '</div>'+
+    // ===== v164 — كان قسم منفصل "💾 النسخ الاحتياطي والتصدير"، دُمج هنا =====
     '<div class="card">'+
     '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #e2e8f0">💾 نسخة احتياطية JSON</div>'+
     (lastBackup?'<div style="background:#f0fdf4;border-radius:10px;padding:10px 12px;margin-bottom:12px;border:1.5px solid #86efac">'+
@@ -13719,9 +13750,9 @@ function renderSettings(){
       '</div>'
     ):'');
 
-  // ===== قسم 6 (جديد): مسح قسم محدد =====
+  // ===== v164 — دمج "مسح قسم محدد" + "خطر" في قسم واحد =====
   var clearSectionSection =
-    __settingsSectionHeader('🧹 مسح قسم محدد')+
+    __settingsSectionHeader('🧹 مسح البيانات')+
     '<div class="card">'+
     '<div style="font-weight:900;font-size:14px;color:#dc2626;margin-bottom:6px;padding-bottom:8px;border-bottom:2px solid #fecaca">🧹 مسح بيانات قسم واحد بس</div>'+
     '<div style="font-size:11px;color:#94a3b8;margin-bottom:12px">امسح كل بيانات قسم معيّن (من الجهاز والسيرفر مع بعض) من غير ما تأثر على باقي الأقسام. الإجراء ده نهائي ومايتراجعش — يُفضّل عمل نسخة احتياطية (💾 النسخ الاحتياطي) قبل ما تمسح.</div>'+
@@ -13733,11 +13764,8 @@ function renderSettings(){
         '<button '+(count?'':'disabled')+' onclick="confirmClearSection(\''+s.table+'\',\''+s.label.replace(/'/g,"")+'\')" style="background:'+(count?'#fee2e2':'#f1f5f9')+';color:'+(count?'#dc2626':'#94a3b8')+';border:none;border-radius:8px;padding:8px 14px;font-family:inherit;font-size:12px;font-weight:800;cursor:'+(count?'pointer':'default')+'">🗑️ مسح</button>'+
         '</div>';
     }).join('')+
-    '</div>';
-
-  // ===== قسم 7: خطر =====
-  var dangerSection =
-    __settingsSectionHeader('⚠️ خطر')+
+    '</div>'+
+    // ===== v164 — كان قسم منفصل "⚠️ خطر"، دُمج هنا =====
     '<div class="card">'+
     '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #e2e8f0">🔢 عداد الأعطال</div>'+
     '<div style="font-size:13px;color:#64748b;margin-bottom:10px">الرقم الحالي: <b style="color:#0f172a">'+(DB.movCounter||0)+'</b></div>'+
@@ -13753,7 +13781,7 @@ function renderSettings(){
     ):'')+
     '</div>';
 
-  var sectionsMap={employees:employeesSection,privacy:privacySection,account:accountSection,general:generalSection,finance:financeSection,sync:syncSection,backup:backupSection,clearSection:clearSectionSection,danger:dangerSection};
+  var sectionsMap={employees:employeesSection,privacy:privacySection,account:accountSection,general:generalSection,finance:financeSection,sync:syncSection,clearSection:clearSectionSection};
   if(_settingsSection&&sectionsMap[_settingsSection]){
     var catMeta=SETTINGS_CATEGORIES.find(function(c){return c.key===_settingsSection;});
     el.innerHTML=
@@ -13769,7 +13797,7 @@ function SETTING_S_CATS_HTML(){
   // v161 — قسم "👥 الموظفون" (فيه رواتب/صلاحيات/تقارير كل الموظفين) وقسم "⚠️ خطر"
   // (تصفير/مسح بيانات) كانوا ظاهرين لأي حد بيدخل الإعدادات، مش المالك بس — ثغرة
   // خصوصية مباشرة بخصوص نفس اللي بنشتغل عليه في نظام صلاحيات المهندسين.
-  var cats=window.__isOwner?SETTINGS_CATEGORIES:SETTINGS_CATEGORIES.filter(function(c){return c.key!=='employees'&&c.key!=='danger';});
+  var cats=window.__isOwner?SETTINGS_CATEGORIES:SETTINGS_CATEGORIES.filter(function(c){return c.key!=='employees'&&c.key!=='clearSection';});
   return cats.map(function(c){
     return '<div onclick="openSettingsSection(\''+c.key+'\')" style="cursor:pointer;display:flex;align-items:center;gap:12px;background:#fff;border:1.5px solid '+(c.key==='danger'?'#fecaca':'#e2e8f0')+';border-radius:14px;padding:14px 16px;margin-bottom:9px;box-shadow:0 1px 4px rgba(0,0,0,.04)">'+
       '<div style="font-size:24px">'+c.icon+'</div>'+
