@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v158</title>
+<title>ابو حوده الحلو الجميل v163</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="2026-09-09 — v158";
+<script>var BUILD_STAMP="2026-09-09 — v163";
 /* ===== سجل التعديلات (Changelog) =====
 v81: نسخة احتياطية طارئة تلقائية لو localStorage اتعطب.
 v82: بوابة تسجيل دخول + ربط Supabase.
@@ -190,6 +190,56 @@ v106: [إصلاح جذري] "النقدية غلط بسبب مخزون/ديون 
      الطباعة، تصدير Excel). ⚠️ ملحوظة لو شايف تسميات قديمة رغم التحديث: امسح الكاش/أعد
      تحميل الملف بالكامل (الملف اسمه لازم يختلف عن أي نسخة سابقة نزّلتها قبل كده حتى
      يتجنّب متصفح الموبايل استخدام نسخة مخزّنة قديمة).
+v163: [🚀 بند 3: تقييد عدد الأجهزة + تراجع عن غلطة في العهدة]
+     اخترت الحل الأسهل والأعملي (عدد أجهزة مسموح بدل تحديد جهاز واحد بعينه، زي ما
+     اتفقنا). من صلاحيات كل موظف مربوط بسجل راتب، تقدر تحدد له كام جهاز مسموح يدخل
+     بيهم (0 = بدون تقييد، الافتراضي، عشان محدش يتفاجئ). لو عدّى الحد، هيوصله رسالة
+     واضحة يكلمك بدل ما يدخل. تقدر تشوف/تمسح أي جهاز مسجّل من نفس الشاشة. المالك
+     مش متأثر بالتقييد ده أبدًا.
+     كمان: زرار "↩️ تراجع عن آخر عهدة" لو غلطت في رقم عهدة سلّمتها لموظف.
+v162: [🐛 عهدة/تصفية الرصيد بقوا مسجلين في سجل النشاط]
+     كانوا بيتغيّروا من غير أي أثر — دلوقتي أي "تسليم عهدة" أو "تصفية رصيد" بيتسجل في
+     سجل النشاط زي أي عملية مالية تانية (مين عملها وإمتى وبقد إيه).
+v161: [🚀 راجعت نظام المهندسين بالكامل — تلاقى إن معظمه شغال أصلًا، وكملت الناقص]
+     قبل ما أبني حاجة من الصفر، راجعت الكود كله. النتيجة:
+     ✅ 2.4 (تجميع بيانات كل مهندس بعمود "مين دخلها"): موجود وشغال من زمان (assigned_to).
+     ✅ 2.9 (عمولة/خصومات): موجود بالكامل (ثابت/نسبة/لكل عطل + خصم غياب تلقائي).
+     ✅ 2.6 (حضور): موجود (تسجيل تلقائي + تأكيد المهندس بضغطة واحدة).
+     🆕 2.5 (محفظة/رصيد أمانة المهندس): كان موجود جزء كبير منه بالفعل ("رصيد الأمانة" =
+     مبيعاته − مصاريفه − راتبه المصروف)، بس ناقصه حاجتين أضفتهم دلوقتي:
+       • سدادات ديون العملاء اللي المهندس نفسه بيحصّلها بقت بتتحسب في رصيده (تنفيذ
+       قرار 2.10: المهندس يسجل السداد، وبيتسجل تلقائي في رصيده كـ"استلمها من عميل")
+       • زرار جديد للمالك "💵 تسليم عهدة" — لو سلّمت المهندس فلوس تشتغل بيها، تتسجل
+       وتزوّد رصيده (تفضل معاه لحد ما يسلّمها/تتخصم من مصاريفه)
+     🆕 2.7+2.8 (إحصائيات ومقارنة المهندسين): لقيت لوحة "📊 تقارير المهندسين" أصلًا
+     موجودة (إعدادات ← الموظفون) بس بسيطة وبتستعلم السيرفر لايف من غير أوفلاين ولا
+     فلتر فترة. طوّرتها: بقت بتقرا من بياناتك المحلية (تشتغل أوفلاين)، فلتر فترة
+     (الشهر/الأسبوع/من الأول)، كروت قابلة للضغط بتوديك لصلاحيات المهندس مباشرة، وتحتها
+     جدول مقارنة سريع (إيراد، أعطال، نسبة إنجاز، متوسط وقت إصلاح، حضور) — من غير تقييم
+     نهائي أوتوماتيكي بمقياس واحد زي ما اتفقنا.
+     ⚠️ ثغرة خصوصية لقيتها بالصدفة وأصلحتها: قسمي "👥 الموظفون" (فيه رواتب/صلاحيات/
+     رصيد أمانة كل الموظفين) و"⚠️ خطر" (تصفير/مسح بيانات) في الإعدادات كانوا ظاهرين
+     لأي حد بيدخل التطبيق، مش المالك بس! دلوقتي مقفولين تمامًا على غير المالك.
+v160: [🚀 بداية نظام صلاحيات المهندسين (2.1): دفتر العملاء بقى صلاحية مستقلة]
+     كانت شاشة "دفتر العملاء" مربوطة بنفس صلاحية "الفواتير" بالظبط — يعني أي مهندس
+     عنده صلاحية يعمل فاتورة (لازم تبقى مفعّلة له) كان يقدر يفتح دفتر العملاء ويشوف
+     كل العملاء وتفاصيلهم من غير قصد. دلوقتي بقت صلاحية منفصلة تمامًا "📒 دفتر
+     العملاء" (تظهر في شاشة تعديل صلاحيات كل دور/موظف)، مطفية افتراضيًا للكل ما عدا
+     المالك، وإنت اللي تفعّلها يدويًا لمين ما تحب. مش محتاجة أي تعديل SQL — نفس جدول
+     الصلاحيات الموجود.
+     ✅ بالنسبة لـ2.2 و2.3 (سعر التكلفة/هامش الربح): اتأكدت إن شاشة الفاتورة أصلاً
+     مابتعرضش تكلفة ولا هامش ربح لحد (حتى المالك) — بس سعر البيع، وشاشة المخزون
+     أصلاً فيها آلية إخفاء سعر الشراء عن غير المالك من قبل كده. التنين شغالين صح
+     من غير تعديل.
+     📝 قرار 2.10 (سداد الدين الآجل): هيتطبّق مع بناء "محفظة المهندس" (2.5) — المهندس
+     يسجل السداد لو هو اللي استلم الفلوس (بيتسجل تلقائي في محفظته كحركة "استلام من
+     عميل")، والمالك يقدر يعدّل/يلغي أي سداد من عنده.
+v159: [🐛 إصلاح: عمل حزمة كان بيمسح الفاتورة الجاري كتابتها]
+     زرار "إدارة/تعديل الحزم" و"الخدمات السريعة" لما كان بيتضغط من جوه الفاتورة، كان
+     بيستبدل شاشة الفاتورة بالكامل (نفس نافذة العرض)، فيضيع كل اللي كنت كاتبه لحد
+     ساعتها. دلوقتي جوه الفاتورة فاضل بس زراير "استخدام" الحزمة الجاهزة (آمنة، مجرد
+     بتضيف قطع). إدارة/تعديل/إنشاء الحزم والخدمات السريعة بقت من مكان تاني وآمن:
+     ⚙️ الإعدادات ← 🧾 اختصارات الفاتورة.
 v158: [🐛 آخر الأقسام الناقصة من المزامنة + رجوع اختصارات المبلغ]
      راجعت كل حقل DB متبقي ولقيت 3 حاجات كانت لسه محلية بس: الإعدادات كاملة (ومنها
      "حزم قطع الغيار" اللي كانت بتظهر فاضية من رابط تاني)، أرشيف اقتراحات البحث
@@ -744,6 +794,11 @@ input:checked+.slider:before{transform:translateX(-20px)}
       <h3 style="margin:0;font-size:17px">📊 تقارير المهندسين</h3>
       <button onclick="document.getElementById('report-panel').style.display='none'" style="background:#f1f5f9;border:none;border-radius:8px;padding:6px 12px;font-size:14px;cursor:pointer">✕</button>
     </div>
+    <div style="display:flex;gap:6px;margin-bottom:10px" id="eng-report-period">
+      <button onclick="__setEngReportPeriod('month')" class="tab" style="flex:1;padding:7px 4px">الشهر ده</button>
+      <button onclick="__setEngReportPeriod('week')" class="tab" style="flex:1;padding:7px 4px">الأسبوع ده</button>
+      <button onclick="__setEngReportPeriod('all')" class="tab" style="flex:1;padding:7px 4px">من الأول</button>
+    </div>
     <div id="report-body" style="font-size:13px">جاري التحميل...</div>
   </div>
 </div>
@@ -949,7 +1004,8 @@ input:checked+.slider:before{transform:translateX(-20px)}
     {id:'purchases', name:'المشتريات'},
     {id:'tasks', name:'المهام'},
     {id:'reports', name:'التقارير المالية (مبيعات/أرباح/تحركات)'},
-    {id:'accounting', name:'الحسابات (رواتب موظفين، رأس مال، مستثمرين)'}
+    {id:'accounting', name:'الحسابات (رواتب موظفين، رأس مال، مستثمرين)'},
+    {id:'clients_ledger', name:'📒 دفتر العملاء (قائمة كل عميل وتفاصيله)'} // v160 — 2.1
   ];
   var __PERM_ACTIONS = [
     {id:'can_select', name:'عرض 👁️'},
@@ -1146,6 +1202,22 @@ input:checked+.slider:before{transform:translateX(-20px)}
         :'')+
         '</div>'
       :'')+
+      // ===== v163 — بند 3: تقييد عدد الأجهزة المسموح بيها للموظف ده =====
+      (linkedRec?
+        '<div style="background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:10px;padding:12px;margin-bottom:12px">'+
+        '<div style="font-size:11px;color:#64748b;margin-bottom:5px">📱 عدد الأجهزة المسموح يدخل بيها (0 = بدون تقييد)</div>'+
+        '<div style="display:flex;gap:6px;margin-bottom:8px"><input id="emp-maxdev-'+linkedRec.id+'" type="number" min="0" value="'+(linkedRec.max_devices||0)+'" style="flex:1;padding:8px;border:1.5px solid #e2e8f0;border-radius:8px;font-family:inherit">'+
+        '<button class="btn btn-primary btn-sm" onclick="__saveEmpMaxDevices('+jsStr(linkedRec.id)+')">💾 حفظ</button></div>'+
+        ((linkedRec.devices||[]).length?
+          '<div style="font-size:11px;color:#64748b;margin-bottom:6px">الأجهزة المسجّلة حاليًا:</div>'+
+          linkedRec.devices.map(function(d){
+            return '<div style="display:flex;justify-content:space-between;align-items:center;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:7px 9px;margin-bottom:5px;font-size:11px">'+
+              '<span>📱 '+esc(d.label||'جهاز')+' — آخر دخول '+esc(fmtDate((d.last_seen||'').split('T')[0]))+'</span>'+
+              '<button onclick="__removeEmpDevice('+jsStr(linkedRec.id)+','+jsStr(d.id)+')" style="background:#fee2e2;border:none;border-radius:6px;padding:3px 8px;color:#dc2626;cursor:pointer;font-size:11px">حذف</button></div>';
+          }).join('')
+        :'<div style="font-size:11px;color:#94a3b8">لسه مفيش أجهزة مسجّلة</div>')+
+        '</div>'
+      :'')+
       // ===== v135 — خصوصية بيانات الموظفين: استثناء لكل موظف على حدة =====
       '<div style="background:'+(emp.full_visibility?'#eff6ff':'#fff')+';border:1.5px solid '+(emp.full_visibility?'#bfdbfe':'#e2e8f0')+';border-radius:10px;padding:12px;margin-bottom:12px">'+
       '<div style="font-size:11px;color:#64748b;margin-bottom:5px">👁️ نطاق رؤية البيانات (مبيعات/مشتريات/أعطال/مصاريف/مهام)</div>'+
@@ -1217,6 +1289,23 @@ input:checked+.slider:before{transform:translateX(-20px)}
   // v140 — بناءً على طلب صريح: نسبة % العمولة بتتحسب من "صافي الربح" (بعد خصم تكلفة
   // القطع/الخدمات) مش من إجمالي قيمة الفاتورة زي ما كان قبل كده — أعدل وأدق.
   // + إضافة: مبلغ ثابت مستقل "لكل عطل يخلص بنجاح" (منفصل عن نوع العمولة، بيتجمع فوقه).
+  // v163 — بند 3: حفظ حد الأجهزة وحذف جهاز مسجّل (لو الموظف غيّر تليفونه مثلًا)
+  async function __saveEmpMaxDevices(recId){
+    var val=+(document.getElementById('emp-maxdev-'+recId).value||0);
+    DB.accounts.employees=DB.accounts.employees.map(function(e){return e.id===recId?Object.assign({},e,{max_devices:val}):e;});
+    await persist();
+    showToast('✅ اتحفظ','#16a34a');
+  }
+  async function __removeEmpDevice(recId,devId){
+    DB.accounts.employees=DB.accounts.employees.map(function(e){
+      if(e.id!==recId)return e;
+      return Object.assign({},e,{devices:(e.devices||[]).filter(function(d){return d.id!==devId;})});
+    });
+    await persist();
+    showToast('✅ اتشال الجهاز — لو هيدخل تاني هيتحسب كجهاز جديد','#16a34a');
+    __loadEmployeePermsUI();
+  }
+
   async function __calcApproveCommission(recId){
     var rec=(DB.accounts.employees||[]).find(function(e){return e.id===recId;});
     if(!rec||!rec.linked_profile_id)return;
@@ -1622,44 +1711,94 @@ input:checked+.slider:before{transform:translateX(-20px)}
     }catch(e){ if(manual) showToast('❌ خطأ: '+e.message,'#dc2626'); }
   }
 
+  var _engReportPeriod='month';
+  function __setEngReportPeriod(p){ _engReportPeriod=p; __openReportPanel(); }
+  function __engReportRange(){
+    var t=today();
+    if(_engReportPeriod==='all')return {from:'2000-01-01',to:t};
+    if(_engReportPeriod==='week'){
+      var d=new Date(t); var day=d.getDay(); d.setDate(d.getDate()-day);
+      return {from:d.toISOString().split('T')[0],to:t};
+    }
+    return {from:t.slice(0,7)+'-01',to:t};
+  }
   async function __openReportPanel(){
     document.getElementById('report-panel').style.display = 'flex';
     document.getElementById('report-body').innerHTML = 'جاري التحميل...';
+    document.querySelectorAll('#eng-report-period .tab').forEach(function(b,i){
+      var order=['month','week','all'];
+      b.classList.toggle('active', order[i]===_engReportPeriod);
+    });
     try{
-      var engRes = await sb.from('profiles').select('id, full_name').eq('role_id','engineer');
-      var engineers = engRes.data || [];
+      // v161 — بقت بتقرا من البيانات المحلية (DB) بدل ما تعمل 5 استعلامات لايف لكل
+      // مهندس على السيرفر: أسرع وأخف على النت، وبتشتغل أوفلاين كمان.
+      var r=__engReportRange();
+      var engineers=(DB.accounts.employees||[]).filter(function(e){return e.active!==false&&e.linked_profile_id;});
       if(!engineers.length){
-        document.getElementById('report-body').innerHTML = '<div style="color:#94a3b8;text-align:center;padding:20px">لسه مفيش مهندسين مضافين.</div>';
+        document.getElementById('report-body').innerHTML = '<div style="color:#94a3b8;text-align:center;padding:20px">لسه مفيش موظفين مربوطين بحساب دخول. اربطهم من ⚙️ الإعدادات ← الموظفين.</div>';
         return;
       }
-      var html = '';
-      for(var i=0;i<engineers.length;i++){
-        var eng = engineers[i];
-        var movRes = await sb.from('movements').select('id, status').eq('assigned_to', eng.id);
-        var wdRes = await sb.from('part_withdrawals').select('qty, product_name').eq('employee_id', eng.id);
-        var salesRes = await sb.from('sales').select('id, total').eq('updated_by', eng.id);
-        var expRes = await sb.from('expenses').select('id, amount').eq('updated_by', eng.id);
+      var rows=[]; // لجدول المقارنة (2.8)
+      var html='';
+      engineers.forEach(function(emp){
+        var pid=emp.linked_profile_id;
+        var movs=(DB.movements||[]).filter(function(m){return m.assigned_to===pid&&(m.opened_at||m.date||'')>=r.from&&(m.opened_at||m.date||'')<=r.to;});
+        var doneMovs=movs.filter(function(m){return m.status==='منتهي';});
+        var cancelledMovs=movs.filter(function(m){return m.status==='ملغي';});
+        var revenue=(DB.sales||[]).filter(function(s){return s.created_by===pid&&(s.date||'')>=r.from&&(s.date||'')<=r.to;}).reduce(function(s,x){return s+(x.total||0);},0);
+        var debtPay=0;(DB.debts||[]).forEach(function(d){(d.payments||[]).forEach(function(p){if(p.collected_by===pid&&(p.date||'')>=r.from&&(p.date||'')<=r.to)debtPay+=(p.amount||0);});});
+        var exp=(DB.expenses||[]).filter(function(e){return e.created_by===pid&&(e.date||'')>=r.from&&(e.date||'')<=r.to;}).reduce(function(s,x){return s+(x.amount||0);},0);
+        var daysPresent=(DB.accounts.attendance||[]).filter(function(a){return a.profile_id===pid&&a.date>=r.from&&a.date<=r.to;}).length;
+        var totalDays=Math.max(1,Math.round((new Date(r.to)-new Date(r.from))/86400000)+1);
+        var completionRate=movs.length?Math.round(doneMovs.length/movs.length*100):0;
+        // متوسط وقت الإصلاح بالساعات (من فتح العطل لحد قفله)
+        var repairTimes=doneMovs.filter(function(m){return m.opened_at&&m.closed_at;}).map(function(m){return (new Date(m.closed_at)-new Date(m.opened_at))/3600000;});
+        var avgRepairH=repairTimes.length?Math.round(repairTimes.reduce(function(s,x){return s+x;},0)/repairTimes.length):null;
 
-        var movs = movRes.data || [], wds = wdRes.data || [], sales = salesRes.data || [], exps = expRes.data || [];
-        var doneCount = movs.filter(function(m){return m.status==='منتهي';}).length;
-        var totalParts = wds.reduce(function(s,w){return s+(w.qty||0);},0);
-        var totalSales = sales.reduce(function(s,x){return s+(x.total||0);},0);
-        var totalExp = exps.reduce(function(s,x){return s+(x.amount||0);},0);
+        rows.push({name:emp.name,revenue:revenue,movCount:movs.length,doneCount:doneMovs.length,completionRate:completionRate,avgRepairH:avgRepairH,daysPresent:daysPresent});
 
-        html += '<div style="border:1.5px solid #e2e8f0;border-radius:12px;padding:12px;margin-bottom:10px">'+
-          '<div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#0f172a">👷 '+eng.full_name+'</div>'+
+        html += '<div class="card" style="margin-bottom:10px;cursor:pointer" onclick="__openEmpFromReport('+jsStr(emp.id)+')">'+
+          '<div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#0f172a">👷 '+esc(emp.name)+'</div>'+
           '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:12px">'+
-          '<div style="background:#f8fafc;border-radius:8px;padding:7px">🔧 أعطال معيّنة: <b>'+movs.length+'</b></div>'+
-          '<div style="background:#f0fdf4;border-radius:8px;padding:7px">✅ منتهية: <b>'+doneCount+'</b></div>'+
-          '<div style="background:#fff7ed;border-radius:8px;padding:7px">📦 قطع مسحوبة: <b>'+totalParts+'</b></div>'+
-          '<div style="background:#eff6ff;border-radius:8px;padding:7px">🧾 مبيعات: <b>'+totalSales.toFixed(0)+'</b></div>'+
-          '<div style="background:#fef2f2;border-radius:8px;padding:7px;grid-column:1/3">💸 مصاريف سجّلها: <b>'+totalExp.toFixed(0)+'</b></div>'+
+          '<div style="background:#f8fafc;border-radius:8px;padding:7px">🔧 أعطال: <b>'+movs.length+'</b></div>'+
+          '<div style="background:#f0fdf4;border-radius:8px;padding:7px">✅ منتهية: <b>'+doneMovs.length+'</b> ('+completionRate+'%)</div>'+
+          '<div style="background:#fef2f2;border-radius:8px;padding:7px">🚫 ملغية: <b>'+cancelledMovs.length+'</b></div>'+
+          '<div style="background:#eff6ff;border-radius:8px;padding:7px">🧾 إيراد: <b>'+fmt(revenue)+'</b></div>'+
+          '<div style="background:#fef9c3;border-radius:8px;padding:7px">💳 سداد ديون حصّلها: <b>'+fmt(debtPay)+'</b></div>'+
+          '<div style="background:#fdf2f8;border-radius:8px;padding:7px">💸 مصاريف: <b>'+fmt(exp)+'</b></div>'+
+          '<div style="background:#f5f3ff;border-radius:8px;padding:7px">📅 حضور: <b>'+daysPresent+'</b> / '+totalDays+' يوم</div>'+
+          '<div style="background:#ecfeff;border-radius:8px;padding:7px">⏱️ متوسط وقت الإصلاح: <b>'+(avgRepairH!==null?avgRepairH+' س':'—')+'</b></div>'+
           '</div></div>';
-      }
-      document.getElementById('report-body').innerHTML = html;
+      });
+      // v161 — 2.8: جدول مقارنة بين المهندسين (بدون تقييم نهائي أوتوماتيكي بمقياس واحد)
+      rows.sort(function(a,b){return b.revenue-a.revenue;});
+      var cmpHtml='<div class="card" style="margin-top:4px;overflow-x:auto">'+
+        '<div style="font-weight:800;font-size:13px;margin-bottom:8px;color:#0f172a">📊 مقارنة سريعة</div>'+
+        '<table style="width:100%;border-collapse:collapse;font-size:11px;white-space:nowrap">'+
+        '<tr style="border-bottom:1.5px solid #e2e8f0;color:#64748b;text-align:right">'+
+        '<th style="padding:4px 6px">المهندس</th><th style="padding:4px 6px">إيراد</th><th style="padding:4px 6px">أعطال</th>'+
+        '<th style="padding:4px 6px">إنجاز%</th><th style="padding:4px 6px">م.وقت إصلاح</th><th style="padding:4px 6px">حضور</th></tr>'+
+        rows.map(function(row){
+          return '<tr style="border-bottom:1px solid #f1f5f9"><td style="padding:4px 6px;font-weight:700">'+esc(row.name)+'</td>'+
+            '<td style="padding:4px 6px">'+fmt(row.revenue)+'</td><td style="padding:4px 6px">'+row.movCount+'</td>'+
+            '<td style="padding:4px 6px">'+row.completionRate+'%</td><td style="padding:4px 6px">'+(row.avgRepairH!==null?row.avgRepairH+'س':'—')+'</td>'+
+            '<td style="padding:4px 6px">'+row.daysPresent+'</td></tr>';
+        }).join('')+
+        '</table></div>';
+      document.getElementById('report-body').innerHTML = html+cmpHtml;
     }catch(e){
       document.getElementById('report-body').innerHTML = '⚠️ فشل تحميل التقارير: '+e.message;
     }
+  }
+  // v161 — الضغط على كارت المهندس (قاعدة: كل كارت قابل للضغط) يوديك لصلاحياته مباشرة
+  function __openEmpFromReport(empId){
+    document.getElementById('report-panel').style.display='none';
+    var emp=(DB.accounts.employees||[]).find(function(e){return e.id===empId;});
+    if(!emp||!emp.linked_profile_id){ showToast('⚠️ الموظف ده لسه مش مربوط بحساب دخول','#ea580c'); return; }
+    _permPanelMode='emp';
+    _permSelectedEmp=emp.linked_profile_id;
+    document.getElementById('perm-panel').style.display='flex';
+    __renderPermPanelShell();
   }
 </script>
 
@@ -1683,6 +1822,36 @@ input:checked+.slider:before{transform:translateX(-20px)}
     document.getElementById('login-btn').textContent = (__loginMode==='signup') ? 'إنشاء الحساب' : 'دخول';
     document.getElementById('login-toggle').textContent = (__loginMode==='signup') ? 'عندك حساب؟ سجّل دخول' : 'مفيش حساب؟ اعمل حساب جديد';
     __showLoginMsg('','');
+  }
+
+  // v163 — بند 3: تقييد عدد الأجهزة المسموح بيها لكل حساب موظف. معرف جهاز ثابت
+  // (مش مرتبط بحساب معيّن) بيتولّد مرة واحدة ويتخزن محليًا.
+  function __getDeviceId(){
+    var id = LS.get('mc8_device_id', null);
+    if(!id){ id = 'dev_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,10); LS.set('mc8_device_id', id); }
+    return id;
+  }
+  function __deviceLabel(){
+    var ua = navigator.userAgent||'';
+    var os = /Android/i.test(ua)?'Android':/iPhone|iPad/i.test(ua)?'iOS':/Windows/i.test(ua)?'Windows':/Mac/i.test(ua)?'Mac':'جهاز';
+    var br = /Chrome/i.test(ua)?'Chrome':/Safari/i.test(ua)?'Safari':/Firefox/i.test(ua)?'Firefox':'متصفح';
+    return os+' — '+br;
+  }
+  // بترجع {allowed:true} أو {allowed:false} لو الجهاز ده جديد وعدّى الحد المسموح للموظف
+  function __checkDeviceLimit(role, userId){
+    if(!role||role==='owner')return {allowed:true}; // المالك مقيّدش أبدًا
+    var emp=(DB.accounts&&DB.accounts.employees||[]).find(function(e){return e.linked_profile_id===userId;});
+    if(!emp)return {allowed:true}; // لسه مش مربوط بسجل موظف — الميزة اختيارية، منمنعش
+    var maxDev=emp.max_devices; // undefined/0 = بدون تقييد (افتراضي)
+    if(!maxDev)return {allowed:true};
+    var devId=__getDeviceId();
+    var devices=(emp.devices||[]).slice();
+    var existing=devices.find(function(d){return d.id===devId;});
+    if(existing){ existing.last_seen=new Date().toISOString(); }
+    else if(devices.length<maxDev){ devices.push({id:devId,label:__deviceLabel(),first_seen:new Date().toISOString(),last_seen:new Date().toISOString()}); }
+    else{ return {allowed:false}; }
+    DB.accounts.employees=DB.accounts.employees.map(function(e){return e.id===emp.id?Object.assign({},e,{devices:devices}):e;});
+    return {allowed:true};
   }
 
   async function __doLogin(){
@@ -1724,7 +1893,18 @@ input:checked+.slider:before{transform:translateX(-20px)}
         return;
       }
       window.__currentProfile = Object.assign({id:userId}, profRes.data);
+      // v163 — فحص حد الأجهزة (بند 3) قبل ما نكمل — بيستخدم DB.accounts اللي محمّلة
+      // محليًا من الكاش من قبل ما ندخل أصلًا (offline-first)
+      var devCheck=__checkDeviceLimit(profRes.data.role_id, userId);
+      if(!devCheck.allowed){
+        window.__currentProfile=null;
+        await sb.auth.signOut();
+        __showLoginMsg('🚫 عدد الأجهزة المسموح بيها لحسابك خلص. كلم المالك يشيل جهاز قديم من ⚙️ الإعدادات ← الموظفين ← صلاحيات هذا الموظف.', 'err');
+        btn.disabled = false; btn.textContent = 'دخول';
+        return;
+      }
       LS.set('mc8_cached_profile_'+userId,profRes.data); // ⚠️ v113 — حفظ نسخة للاستخدام الأوفلاين لاحقًا
+      await persist(); // v163 — يحفظ ويزامن قائمة الأجهزة المحدّثة (لو اتضاف جهاز جديد)
       LS.set('mc8_last_user_id', userId); // v154 — عشان الدخول الأوفلاين يلاقي المستخدم حتى لو getSession فشلت
       await __loadEngineersList();
       window.__isOwner = (profRes.data.role_id === 'owner');
@@ -3756,7 +3936,7 @@ var navIcons={home:'🏠',inventory:'📦',sales:'🧾',purchases:'🛒',debts:'
 var __SCREEN_PERM_MAP={
   inventory:'products', sales:'sales', purchases:'purchases', debts:'debts',
   reports:'reports', tasks:'tasks', 'tasks-report':'tasks', movements:'movements',
-  'movements-report':'movements', accounting:'accounting', ledger:'sales'
+  'movements-report':'movements', accounting:'accounting', ledger:'clients_ledger' // v160 — 2.1: كانت 'sales'، فأي حد عنده صلاحية فواتير كان يشوف دفتر العملاء تلقائي
 };
 function __canOpenScreen(screen){
   if(window.__isOwner) return true;
@@ -3860,7 +4040,7 @@ function switchReportTab(tab,el){
   currentReportTab=tab;
   document.querySelectorAll('#screen-reports .tab').forEach(function(t){t.classList.remove('active');});
   if(el)el.classList.add('active');
-  ['period','income','balance','expenses','analysis'].forEach(function(t){
+  ['period','income','balance','cashflow','expenses','analysis','parts_sold','models'].forEach(function(t){
     var d=document.getElementById('tab-'+t);if(d)d.style.display=t===tab?'block':'none';
   });
   renderReports();
@@ -5338,15 +5518,17 @@ function renderSaleBody(s){
     '<div id="serial-hint" style="display:none;background:#dcfce7;border-radius:8px;padding:6px 10px;font-size:12px;color:#15803d;font-weight:700;margin-bottom:8px"></div>'+
 
     // حزم قطع الغيار (مجموعات بتتباع مع بعض)
+    // ⚠️ v159 — شيلنا زرار "إدارة/تعديل الحزم" من جوه الفاتورة لأنه كان بيستبدل شاشة
+    // الفاتورة بالكامل (نفس المودال) فيضيع كل اللي المستخدم كاتبه لحد دلوقتي. زرار
+    // "استخدام" الحزمة الجاهزة (addBundleToSale) آمن وفاضل زي ما هو — بس بيضيف قطع.
     ((DB.settings.bundles||[]).length?
     '<div class="field"><label>📦 حزم جاهزة</label>'+
     '<div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:4px">'+
     DB.settings.bundles.map(function(b,i){
       return '<button onclick="addBundleToSale('+i+')" style="padding:6px 11px;background:#eff6ff;border:1.5px solid #bfdbfe;border-radius:8px;font-family:inherit;font-size:11px;cursor:pointer;color:#1e40af;font-weight:700">📦 '+esc(b.name)+'</button>';
     }).join('')+
-    '<button onclick="openBundlesSettings()" style="padding:6px 11px;background:#fff;border:1.5px dashed #cbd5e1;border-radius:8px;font-family:inherit;font-size:11px;cursor:pointer;color:#64748b;font-weight:700">⚙️ تعديل</button>'+
     '</div></div>'
-    :'<button onclick="openBundlesSettings()" style="width:100%;padding:8px;background:#f8fafc;color:#64748b;border:1.5px dashed #cbd5e1;border-radius:9px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer;margin-bottom:10px">📦 + عمل حزمة قطع بتتباع مع بعض</button>')+
+    :'<div style="font-size:11px;color:#94a3b8;margin-bottom:10px">💡 تقدر تعمل "حزمة قطع بتتباع مع بعض" من: ⚙️ الإعدادات ← حزم قطع الغيار — وهتظهر هنا جاهزة لأي فاتورة جاية.</div>')+
 
     // قطع الغيار
     '<div class="field"><label>🔍 إضافة قطع غيار من المخزون</label>'+
@@ -7656,7 +7838,7 @@ async function payDebt(id){
   if(!amount||amount<=0)return showToast('⚠️ المبلغ غير صحيح','#dc2626');
   var d=DB.debts.find(function(x){return x.id===id;});if(!d)return;
   var newPaid=Math.min((d.paid||0)+amount,d.total);
-  var payments=(d.payments||[]).concat([{amount:amount,date:v('pay-date')}]);
+  var payments=(d.payments||[]).concat([{amount:amount,date:v('pay-date'),collected_by:(window.__currentProfile?window.__currentProfile.id:null)}]); // v161 — 2.10: مين حصّل السداد
   var update={paid:newPaid,payments:payments};
   DB.debts=DB.debts.map(function(x){return x.id===id?Object.assign({},x,update):x;});
   await persist();
@@ -13090,7 +13272,10 @@ var SETTINGS_CATEGORIES=[
   {key:'clearSection',icon:'🧹',label:'مسح قسم محدد',desc:'امسح بيانات قسم واحد بس (فواتير، مشتريات...)'},
   {key:'danger',icon:'⚠️',label:'خطر',desc:'تصفير العداد، مسح كل البيانات'}
 ];
-function openSettingsSection(key){_settingsSection=key;renderSettings();window.scrollTo(0,0);var sb=document.getElementById('settings-body');if(sb)sb.scrollTop=0;}
+function openSettingsSection(key){
+  if((key==='employees'||key==='danger')&&!window.__isOwner){showToast('🚫 القسم ده للمالك بس','#dc2626');return;}
+  _settingsSection=key;renderSettings();window.scrollTo(0,0);var sb=document.getElementById('settings-body');if(sb)sb.scrollTop=0;
+}
 function backToSettingsMenu(){_settingsSection=null;renderSettings();}
 // ⚠️ v111 — تحويل "المخزون اليدوي" (opening_inventory_value) لمشترى حقيقي واحد،
 // عشان يدخل ضمن تقارير المخزون/الموردين، من غير ما يتغير رقم الكاش خالص (نفس القيمة،
@@ -13425,6 +13610,13 @@ function renderSettings(){
     '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #e2e8f0">🏷️ أنواع/تصنيفات المخزون</div>'+
     settingsTypesEditor('partTypes','🔩 أنواع قطع الغيار','#2563eb')+
     settingsTypesEditor('machineTypes','🖨️ أنواع الماكينات','#7c3aed')+
+    '</div>'+
+    // ⚠️ v159 — مدخل رسمي وآمن لإدارة الحزم/الخدمات السريعة من هنا، بدل ما تكون
+    // متاحة بس من جوه الفاتورة (كان بيمسح بيانات الفاتورة الجاري كتابتها لو دخلت منه)
+    '<div class="card">'+
+    '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #e2e8f0">🧾 اختصارات الفاتورة</div>'+
+    '<button class="settings-btn" style="background:#eff6ff;color:#1e40af;margin-bottom:8px" onclick="openBundlesSettings()">📦 حزم قطع الغيار</button>'+
+    '<button class="settings-btn" style="background:#fff7ed;color:#ea580c" onclick="openQuickServicesSettings()">🔧 الخدمات السريعة</button>'+
     '</div>';
 
   // ===== قسم 3: المالية =====
@@ -13574,7 +13766,11 @@ function renderSettings(){
   }
 }
 function SETTING_S_CATS_HTML(){
-  return SETTINGS_CATEGORIES.map(function(c){
+  // v161 — قسم "👥 الموظفون" (فيه رواتب/صلاحيات/تقارير كل الموظفين) وقسم "⚠️ خطر"
+  // (تصفير/مسح بيانات) كانوا ظاهرين لأي حد بيدخل الإعدادات، مش المالك بس — ثغرة
+  // خصوصية مباشرة بخصوص نفس اللي بنشتغل عليه في نظام صلاحيات المهندسين.
+  var cats=window.__isOwner?SETTINGS_CATEGORIES:SETTINGS_CATEGORIES.filter(function(c){return c.key!=='employees'&&c.key!=='danger';});
+  return cats.map(function(c){
     return '<div onclick="openSettingsSection(\''+c.key+'\')" style="cursor:pointer;display:flex;align-items:center;gap:12px;background:#fff;border:1.5px solid '+(c.key==='danger'?'#fecaca':'#e2e8f0')+';border-radius:14px;padding:14px 16px;margin-bottom:9px;box-shadow:0 1px 4px rgba(0,0,0,.04)">'+
       '<div style="font-size:24px">'+c.icon+'</div>'+
       '<div style="flex:1"><div style="font-weight:900;font-size:14px;color:'+(c.key==='danger'?'#dc2626':'#0f172a')+'">'+c.label+'</div>'+
@@ -16326,14 +16522,64 @@ function _computeEmpCashBalance(emp){
   var since=emp.cash_balance_since||emp.hire_date||'2000-01-01';
   var pid=emp.linked_profile_id;
   var salesSum=(DB.sales||[]).filter(function(s){return s.created_by===pid&&(s.date||'')>=since;}).reduce(function(s,x){return s+(x.total||0);},0);
+  // v161 — سدادات ديون العملاء اللي حصّلها هو بنفسه (قرار 2.10): بتزوّد اللي معاه من فلوس
+  var debtPaySum=0;
+  (DB.debts||[]).forEach(function(d){
+    if(d.type!=='customer')return;
+    (d.payments||[]).forEach(function(p){
+      if(p.collected_by===pid&&(p.date||'')>=since)debtPaySum+=(p.amount||0);
+    });
+  });
   var expSum=(DB.expenses||[]).filter(function(e){return e.created_by===pid&&(e.date||'')>=since;}).reduce(function(s,x){return s+(x.amount||0);},0);
   var salarySum=(DB.accounts.salary_payments||[]).filter(function(p){return p.emp_id===emp.id&&(p.date||'')>=since;}).reduce(function(s,x){return s+(x.amount||0);},0);
-  return {since:since,salesSum:salesSum,expSum:expSum,salarySum:salarySum,balance:salesSum-expSum-salarySum};
+  // v161 — عهدة/فلوس سلّمهاله المالك يدويًا (زودت اللي معاه بدون ما تيجي من بيع)
+  var advSum=((emp.cash_advances||[]).filter(function(a){return (a.date||'')>=since;}).reduce(function(s,x){return s+(x.amount||0);},0));
+  return {since:since,salesSum:salesSum,debtPaySum:debtPaySum,advSum:advSum,expSum:expSum,salarySum:salarySum,balance:salesSum+debtPaySum+advSum-expSum-salarySum};
+}
+async function __undoLastCashAdvance(empId){
+  confirmAction('هتشيل آخر عهدة اتسجلت (لو غلطة). متأكد؟',async function(){
+    var empName='',removed=null;
+    DB.accounts.employees=DB.accounts.employees.map(function(e){
+      if(e.id!==empId)return e;
+      empName=e.name;
+      var advs=(e.cash_advances||[]).slice();
+      removed=advs.pop();
+      return Object.assign({},e,{cash_advances:advs});
+    });
+    await persist();
+    if(removed)__logActivity('delete','employees',empId,{label:'تراجع عن عهدة '+empName,amount:removed.amount});
+    showToast('✅ اتشالت','#16a34a');
+    __loadEmployeePermsUI();
+    renderHome();
+  });
+}
+async function __giveEmpCashAdvance(empId){
+  var amount=+prompt('💵 قد إيه هتسلّمه له؟ (هيتضاف لرصيد الأمانة اللي معاه)');
+  if(!amount||amount<=0)return;
+  var empName='';
+  DB.accounts.employees=DB.accounts.employees.map(function(e){
+    if(e.id!==empId)return e;
+    empName=e.name;
+    var advances=(e.cash_advances||[]).concat([{id:genId(),amount:amount,date:today(),by:(window.__currentProfile?window.__currentProfile.id:null)}]);
+    return Object.assign({},e,{cash_advances:advances});
+  });
+  await persist();
+  __logActivity('update','employees',empId,{label:'تسليم عهدة لـ'+empName,amount:amount}); // v161 — كانت من غير أي أثر في سجل النشاط
+  showToast('✅ اتسجلت العهدة','#16a34a');
+  __loadEmployeePermsUI();
+  renderHome();
 }
 async function __settleEmpCashBalance(empId){
   confirmAction('هيتصفّر رصيد الأمانة من دلوقتي (يعني هتقول إنك استلمت/اتسوّيت الحساب لحد النهارده). العمليات الجاية هتتحسب من جديد. تكمل؟',async function(){
-    DB.accounts.employees=DB.accounts.employees.map(function(e){return e.id===empId?Object.assign({},e,{cash_balance_since:today()}):e;});
+    var empName='',prevBalance=0;
+    DB.accounts.employees=DB.accounts.employees.map(function(e){
+      if(e.id!==empId)return e;
+      empName=e.name;
+      var b=_computeEmpCashBalance(e);prevBalance=b?b.balance:0;
+      return Object.assign({},e,{cash_balance_since:today()});
+    });
     await persist();
+    __logActivity('update','employees',empId,{label:'تصفية رصيد أمانة '+empName,amount:prevBalance}); // v161
     showToast('✅ اتصفّى الرصيد','#16a34a');
     __loadEmployeePermsUI();
     renderHome();
@@ -16347,8 +16593,10 @@ function _buildCashBalanceCardHTML(emp, forOwner){
   return '<div class="card" style="background:'+(pos?'#f0fdf4':'#fef2f2')+';border:1.5px solid '+(pos?'#bbf7d0':'#fecaca')+';margin-bottom:14px">'+
     '<div style="font-size:13px;font-weight:800;color:'+(pos?'#15803d':'#dc2626')+';margin-bottom:6px">💼 رصيد الأمانة '+(forOwner?'مع '+esc(emp.name):'معايا')+'</div>'+
     '<div style="font-size:22px;font-weight:900;color:'+(pos?'#15803d':'#dc2626')+'">'+(pos?'':'-')+fmt(Math.abs(b.balance))+'</div>'+
-    '<div style="font-size:11px;color:#64748b;margin-top:6px">من '+esc(fmtDate(b.since))+': مبيعات '+fmt(b.salesSum)+' − مصاريف '+fmt(b.expSum)+' − راتب مصروف '+fmt(b.salarySum)+'</div>'+
-    (forOwner?'<button class="btn btn-full btn-sm" style="background:#dbeafe;color:#2563eb;margin-top:8px" onclick="__settleEmpCashBalance('+jsStr(emp.id)+')">✅ تصفية/تسوية الرصيد (استلمت الفلوس)</button>':'')+
+    '<div style="font-size:11px;color:#64748b;margin-top:6px">من '+esc(fmtDate(b.since))+': مبيعات '+fmt(b.salesSum)+' + سداد ديون حصّلها '+fmt(b.debtPaySum)+' + عهدة استلمها '+fmt(b.advSum)+' − مصاريف '+fmt(b.expSum)+' − راتب مصروف '+fmt(b.salarySum)+'</div>'+
+    (forOwner?'<div style="display:flex;gap:6px;margin-top:8px"><button class="btn btn-sm" style="flex:1;background:#dbeafe;color:#2563eb" onclick="__settleEmpCashBalance('+jsStr(emp.id)+')">✅ تصفية الرصيد</button><button class="btn btn-sm" style="flex:1;background:#fef9c3;color:#a16207" onclick="__giveEmpCashAdvance('+jsStr(emp.id)+')">💵 تسليم عهدة</button></div>'+
+      ((emp.cash_advances||[]).length?'<button class="btn btn-sm btn-full" style="margin-top:6px;background:#fee2e2;color:#dc2626" onclick="__undoLastCashAdvance('+jsStr(emp.id)+')">↩️ تراجع عن آخر عهدة ('+fmt(emp.cash_advances[emp.cash_advances.length-1].amount)+')</button>':'')
+    :'')+
     '</div>';
 }
 async function confirmMyAttendance(){
