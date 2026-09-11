@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v171</title>
+<title>ابو حوده الحلو الجميل v172</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,8 +13,17 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="2026-09-12 — v171";
+<script>var BUILD_STAMP="2026-09-12 — v172";
 /* ===== سجل التعديلات (Changelog) =====
+v172: [🐛 إصلاح حلقة تسجيل الخروج/الدخول المتكررة كل شوية — سببها v171] فيه سببين
+     مركّبين: 1) التطبيق مصمم أصلاً يدعم "دخول أوفلاين بحساب محفوظ محليًا" كوضع طبيعي
+     ومقبول (من غير جلسة سيرفر حقيقية دايمًا) — إصلاح v171 كان بيعتبر "مفيش جلسة" خطأ
+     ويعمل تسجيل خروج قسري، وده كان بيكسر الوضع الطبيعي ده. اتصلح: "مفيش جلسة" دلوقتي
+     بيأجل المزامنة بهدوء من غير أي تسجيل خروج. 2) لما فعلاً الجلسة كانت تالفة (خطأ
+     42501 حقيقي من السيرفر)، كنا بنمسح جلسة السيرفر بس، والتطبيق كان بيرجع يدخل
+     تلقائي بنفس الحساب المحفوظ محليًا فورًا (نفس وضع الأوفلاين المذكور فوق)، فيحصل
+     نفس الخطأ تاني ويلف في حلقة. اتصلح: بنمسح الحساب المحفوظ محليًا كمان في الحالة
+     دي (مش بس جلسة السيرفر)، ومرة واحدة بس مش مع كل سجل فاشل.
 v171: [🐛 كسر حلقة فشل الجلسة اللي كانت بتتكرر للأبد من غير ما تتصلح لوحدها] كانت
      الرسائل بتتكرر (فشل تجديد الجلسة / RLS 42501) من غير ما التطبيق يتصرف — دلوقتي:
      1) لو حصل خطأ 42501 وقت رفع سجل، بيتجرب تجديد الجلسة تلقائيًا مرة واحدة وإعادة
@@ -3681,13 +3690,12 @@ async function __drainSyncQueue(manual){
   if(typeof navigator!=='undefined' && navigator.onLine===false && !manual) return;
   var sessionOk = await __ensureFreshSession();
   if(!sessionOk){
-    // v171 — لو مفيش جلسة أصلاً محليًا خالص (مش مجرد 42501 من السيرفر)، منسيبهاش تتكرر
-    // بصمت للأبد — نعمل تسجيل خروج تلقائي فورًا عشان يدخل ببياناته من جديد.
-    __reportError('جلسة الدخول غير موجودة — تم تسجيل الخروج تلقائيًا', 'محتاج تدخل ببياناتك تاني عشان تكمل المزامنة.');
-    showToast('⚠️ الجلسة غير صالحة، هيتم تسجيل الخروج تلقائيًا','#dc2626');
-    try{ await sb.auth.signOut(); }catch(e0){}
-    window.__currentProfile = null;
-    setTimeout(function(){ location.reload(); }, 1500);
+    // v172 — [🐛 إصلاح: كان بيعمل تسجيل خروج/دخول تلقائي متكرر كل شوية] "مفيش جلسة"
+    // مش بالضرورة خطأ — دي نفس حالة "الدخول الأوفلاين بحساب محفوظ" اللي التطبيق مصمم
+    // يدعمها أصلاً (المستخدم شغال ببيانات محلية لحد ما النت/الجلسة ترجع). إجبار تسجيل
+    // خروج هنا كان بيكسر الوضع ده ويعمل حلقة لا نهائية. دلوقتي بس بنأجل المزامنة بهدوء
+    // لحد ما فيه جلسة حقيقية، من غير ما نعمل أي تسجيل خروج قسري.
+    if(manual) showToast('⚠️ لسه مفيش جلسة دخول فعّالة، هتتزامن تلقائيًا لما الجلسة ترجع','#ea580c');
     return;
   }
   __draining = true;
@@ -3894,11 +3902,24 @@ async function __pushRowToServer(table, row){
             res = res2;
           }
         }catch(e5){}
-        // لو وصلنا هنا يبقى التجديد فشل أو المحاولة التانية فشلت برضو — الجلسة تالفة فعلاً
-        __reportError('جلسة الدخول تالفة — تم تسجيل الخروج تلقائيًا', 'محتاج تدخل ببياناتك تاني عشان تكمل المزامنة.');
-        try{ await sb.auth.signOut(); }catch(e6){}
-        window.__currentProfile = null;
-        setTimeout(function(){ location.reload(); }, 1500);
+        // لو وصلنا هنا يبقى التجديد فشل أو المحاولة التانية فشلت برضو — الجلسة تالفة فعلاً.
+        // v172 — [🐛 إصلاح حلقة تسجيل الخروج/الدخول المتكررة] كنا بنمسح جلسة السيرفر
+        // بس، وكان التطبيق بيرجع يدخل تلقائي بنفس الحساب المحفوظ محليًا (وضع الأوفلاين
+        // المصمم أصلاً)، فيحصل نفس الخطأ تاني فورًا ويلف في حلقة. دلوقتي بنمسح الحساب
+        // المحفوظ محليًا كمان (مش بس جلسة السيرفر) عشان بوابة الدخول تفضل ظاهرة فعليًا
+        // وتستنى دخول حقيقي، وبنعمل ده مرة واحدة بس مش مع كل سجل فاشل.
+        if(!window.__forcedLogoutTriggered){
+          window.__forcedLogoutTriggered = true;
+          __reportError('جلسة الدخول تالفة — تم تسجيل الخروج تلقائيًا', 'محتاج تدخل ببياناتك تاني عشان تكمل المزامنة.');
+          try{ await sb.auth.signOut(); }catch(e6){}
+          try{
+            var _uid = window.__currentProfile && window.__currentProfile.id;
+            if(_uid) localStorage.removeItem('mc8_cached_profile_'+_uid);
+            localStorage.removeItem('mc8_last_user_id');
+          }catch(e7){}
+          window.__currentProfile = null;
+          setTimeout(function(){ location.reload(); }, 1500);
+        }
         return false;
       }
       console.warn('فشل مزامنة السجل مع السيرفر ('+table+'):', res.error.message);
