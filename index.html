@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v168</title>
+<title>ابو حوده الحلو الجميل v169</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,8 +13,15 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="2026-09-11 — v168";
+<script>var BUILD_STAMP="2026-09-11 — v169";
 /* ===== سجل التعديلات (Changelog) =====
+v169: [🐛 إصلاح فوري لباج خطير سببه v168] الإصدار اللي فات كان بيعمل تجديد يدوي للجلسة
+     (refreshSession) قبل كل دفعة مزامنة، وده اتعارض مع التجديد التلقائي اللي أصلاً
+     شغال جوه مكتبة Supabase في الخلفية — تعارض التوكنين كان بيسقط الجلسة فعليًا،
+     وده اللي كسّر تحميل الموظفين وكل البيانات تمامًا. اتشال التجديد اليدوي خالص،
+     وبقينا بس بنتأكد إن فيه جلسة موجودة من غير ما نتدخل في تجديدها — المكتبة بتعمل
+     ده لوحدها صح. لو السؤال عن الجلسة فشل لأي سبب (نت متقطع لحظيًا)، بقينا "نفشل
+     بأمان" (نسيب المحاولة تحصل عادي) بدل ما نمنع المزامنة بالغلط.
 v168: [🐛 إصلاح جذري: فشل مزامنة جماعي بـ RLS حتى للمالك] السبب الحقيقي: جلسة الدخول
      (JWT) بتنتهي أثناء دفعة مزامنة كبيرة (زرار "رفع كل البيانات" أو "المحاولة" بعد
      تراكم عشرات/مئات السجلات)، فـ auth.uid() بيرجع فاضي وقت الإرسال، وSupabase بيرفض
@@ -3613,23 +3620,23 @@ function __renderQueueBadge(){
   el.textContent = '🔄 '+n+' بانتظار المزامنة — دوس للمحاولة';
 }
 var __draining = false;
-// v168 — [إصلاح جذري: فشل مزامنة جماعي بـ RLS رغم إن المستخدم مالك/عنده صلاحية]
-// السبب: جلسة الدخول (JWT) بتنتهي صلاحيتها بعد فترة، ولو حصلت دفعة كبيرة من المزامنة
-// (زي فتح التطبيق بعد انقطاع نت طويل)، كانت الصفوف بترفض من Supabase (auth.uid() فاضي
-// وقت التنفيذ) من غير أي رسالة واضحة — بيبان "RLS policy" بس السبب الحقيقي جلسة منتهية.
-// دلوقتي قبل أي دفعة مزامنة، بنتأكد إن الجلسة لسه صالحة ونجددها لو لأ، قبل ما نبعت أي صف.
+// v169 — [🐛 إصلاح فوري لباج خطير حصل في v168] النسخة اللي فاتت كانت بتنادي
+// sb.auth.refreshSession() يدويًا، وده بيتعارض (race condition) مع نظام تجديد
+// التوكن التلقائي اللي شغال جوه مكتبة Supabase نفسها في الخلفية (autoRefreshToken
+// مفعّل افتراضيًا). لو الاتنين حاولوا يجددوا في نفس اللحظة، السيرفر بيرفض واحد
+// منهم كـ"توكن معاد استخدامه" ويسقط الجلسة فعليًا — وده اللي كسر تحميل الموظفين
+// وكل البيانات تمامًا. الحل الصح: نكتفي بالتأكد إن فيه جلسة موجودة من غير ما
+// نجبر تجديدها يدويًا؛ التجديد التلقائي بتاع المكتبة كافي وبيشتغل لوحده.
 async function __ensureFreshSession(){
   try{
     var s = await sb.auth.getSession();
-    var session = s && s.data && s.data.session;
-    if(!session) return false;
-    var expiresAt = session.expires_at ? session.expires_at*1000 : 0;
-    if(expiresAt && expiresAt - Date.now() < 120000){ // أقل من دقيقتين متبقية
-      var r = await sb.auth.refreshSession();
-      if(r.error || !(r.data && r.data.session)) return false;
-    }
+    return !!(s && s.data && s.data.session);
+  }catch(e){
+    // لو السؤال عن الجلسة فشل (غالبًا نت متقطع لحظيًا)، منمنعش المزامنة بسبب
+    // كده — نسيب المحاولة الفعلية تحصل وتفشل لوحدها برسالة واضحة لو المشكلة حقيقية
+    console.warn('تعذر التأكد من الجلسة (هنكمل عادي):', e);
     return true;
-  }catch(e){ console.warn('فشل التأكد من الجلسة:', e); return false; }
+  }
 }
 async function __drainSyncQueue(manual){
   if(__draining || !__syncQueue.length) return;
