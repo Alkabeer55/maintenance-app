@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v169</title>
+<title>ابو حوده الحلو الجميل v170</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,8 +13,18 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="2026-09-11 — v169";
+<script>var BUILD_STAMP="2026-09-12 — v170";
 /* ===== سجل التعديلات (Changelog) =====
+v170: [🐛 إصلاح سبب ظهور "أوفلاين" غلط بعد الخروج والدخول من جديد] كود التحقق من
+     الجلسة عند فتح التطبيق كان بيحط أي خطأ في خانة "مشكلة نت" حتى لو كان فعليًا توكن
+     تالف/منتهي (زي اللي حصل من باج v168) — فكان النتيجة إنه يستخدم بيانات محفوظة قديمة
+     ويدخل "أوفلاين" حتى لو النت شغال فعلاً، وممكن يفضل عالق في الحلقة دي للأبد حتى بعد
+     خروج/دخول. دلوقتي بنفرّق بوضوح: خطأ شبكة حقيقي (Failed to fetch) → وضع أوفلاين
+     عادي. أي خطأ تاني (توكن تالف/منتهي فعليًا) → تسجيل خروج تلقائي وطلب دخول جديد
+     ببيانات صحيحة، بدل التعليق في أوفلاين وهمي.
+     ⚠️ لو لسه ظاهرلك "أوفلاين" بعد التحديث ده، جرّب تمسح بيانات الموقع/الكاش من
+     المتصفح تمامًا (مش زرار تسجيل الخروج بس) عشان تتأكد إن مفيش جلسة تالفة قديمة
+     متخزنة محليًا من قبل الإصلاح، وبعدين ادخل من جديد.
 v169: [🐛 إصلاح فوري لباج خطير سببه v168] الإصدار اللي فات كان بيعمل تجديد يدوي للجلسة
      (refreshSession) قبل كل دفعة مزامنة، وده اتعارض مع التجديد التلقائي اللي أصلاً
      شغال جوه مكتبة Supabase في الخلفية — تعارض التوكنين كان بيسقط الجلسة فعليًا،
@@ -2886,11 +2896,28 @@ input:checked+.slider:before{transform:translateX(-20px)}
     if(!userId) return;
     try{
         var profRes;
-        var networkFailed=false;
+        var networkFailed=false, authFailed=false;
         try{
           profRes = await sb.from('profiles').select('full_name, role_id, branch_id, is_active, full_visibility').eq('id', userId).single();
         }catch(netErr){
-          networkFailed=true;
+          // v169 — [🐛 إصلاح: كل خطأ كان بيتحط في خانة "مشكلة نت" حتى لو كان فعليًا
+          // جلسة/توكن تالف] بنفرّق دلوقتي: خطأ الشبكة الحقيقي (Failed to fetch) وحده
+          // اللي بيروح لوضع الأوفلاين. أي خطأ تاني (توكن منتهي/تالف فعليًا) بيتعامل
+          // معاه كجلسة تالفة ويطلب دخول جديد، بدل ما يعلّق المستخدم في أوفلاين للأبد.
+          if(netErr instanceof TypeError || /fetch/i.test((netErr&&netErr.message)||'')) networkFailed=true;
+          else authFailed=true;
+        }
+        if(profRes && profRes.error){
+          var _emsg=((profRes.error.message||'')+' '+(profRes.error.code||''));
+          if(/jwt|token|expired|401|403/i.test(_emsg)) authFailed=true;
+          else networkFailed=true;
+        }
+        if(authFailed){
+          // الجلسة تالفة فعليًا (مش مجرد نت مقطوع) — أفضل حل نمسحها ونسيب بوابة الدخول
+          // ظاهرة عشان يدخل ببياناته من جديد، بدل ما يفضل عالق في أوفلاين للأبد
+          try{ await sb.auth.signOut(); }catch(e3){}
+          try{ localStorage.removeItem('mc8_last_user_id'); }catch(e4){}
+          return;
         }
         // ⚠️ v113 — إصلاح جذري: لو مفيش نت، طلب بيانات الملف الشخصي من السيرفر كان بيفشل
         // بصمت وتفضل بوابة تسجيل الدخول ظاهرة للأبد حتى لو المستخدم عنده جلسة صحيحة محفوظة
