@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v170</title>
+<title>ابو حوده الحلو الجميل v171</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,8 +13,18 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="2026-09-12 — v170";
+<script>var BUILD_STAMP="2026-09-12 — v171";
 /* ===== سجل التعديلات (Changelog) =====
+v171: [🐛 كسر حلقة فشل الجلسة اللي كانت بتتكرر للأبد من غير ما تتصلح لوحدها] كانت
+     الرسائل بتتكرر (فشل تجديد الجلسة / RLS 42501) من غير ما التطبيق يتصرف — دلوقتي:
+     1) لو حصل خطأ 42501 وقت رفع سجل، بيتجرب تجديد الجلسة تلقائيًا مرة واحدة وإعادة
+        المحاولة فورًا (من غير ما تحتاج تعمل حاجة).
+     2) لو فشلت المحاولة برضو، أو لو الجلسة مش موجودة خالص وقت المزامنة، بيتم تسجيل
+        خروج تلقائي فوري وتحديث الصفحة عشان تدخل ببياناتك من جديد — بدل ما الرسالة
+        تتكرر للأبد بلا حل.
+     ⚠️ ملحوظة: التعديلات دي في كود الجلسة/المزامنة فقط، ومالهاش أي علاقة بميزة
+     "الطبقة 2 — إخفاء الحقول" اللي اتضافت قبل كده؛ دي كود منفصل تمامًا ومفيش داعي
+     نرجعها، المشكلة كانت دايمًا في الجلسة مش في الصلاحيات.
 v170: [🐛 إصلاح سبب ظهور "أوفلاين" غلط بعد الخروج والدخول من جديد] كود التحقق من
      الجلسة عند فتح التطبيق كان بيحط أي خطأ في خانة "مشكلة نت" حتى لو كان فعليًا توكن
      تالف/منتهي (زي اللي حصل من باج v168) — فكان النتيجة إنه يستخدم بيانات محفوظة قديمة
@@ -3671,8 +3681,13 @@ async function __drainSyncQueue(manual){
   if(typeof navigator!=='undefined' && navigator.onLine===false && !manual) return;
   var sessionOk = await __ensureFreshSession();
   if(!sessionOk){
-    __reportError('فشل تجديد جلسة الدخول قبل المزامنة', 'الجلسة منتهية والتجديد فشل — يُنصح بتسجيل الخروج والدخول تاني.');
-    if(manual) showToast('⚠️ جلسة الدخول منتهية، سجّل خروج ودخول تاني','#dc2626');
+    // v171 — لو مفيش جلسة أصلاً محليًا خالص (مش مجرد 42501 من السيرفر)، منسيبهاش تتكرر
+    // بصمت للأبد — نعمل تسجيل خروج تلقائي فورًا عشان يدخل ببياناته من جديد.
+    __reportError('جلسة الدخول غير موجودة — تم تسجيل الخروج تلقائيًا', 'محتاج تدخل ببياناتك تاني عشان تكمل المزامنة.');
+    showToast('⚠️ الجلسة غير صالحة، هيتم تسجيل الخروج تلقائيًا','#dc2626');
+    try{ await sb.auth.signOut(); }catch(e0){}
+    window.__currentProfile = null;
+    setTimeout(function(){ location.reload(); }, 1500);
     return;
   }
   __draining = true;
@@ -3863,6 +3878,29 @@ async function __pushRowToServer(table, row){
       __reportError('تنبيه: معرّف قديم غير صالح في "'+table+'"', 'الحقول دي كانت بصيغة قديمة (قبل نظام UUID) فاتشالت عشان السجل يتزامن: '+clearedIdFields.join('، ')+'.');
     }
     if(res.error){
+      // v171 — [🐛 كسر حلقة فشل RLS 42501 اللي كانت بتتكرر للأبد] الكود 42501 هنا معناه
+      // عمليًا إن auth.uid() رجع فاضي وقت التنفيذ (توكن تالف/منتهي فعليًا على السيرفر)
+      // حتى لو الجلسة شكلها موجودة محليًا. بدل ما نسيبها تتكرر بلا نهاية، بمجرد ما
+      // نلاقي 42501 بنجرب تجديد الجلسة مرة واحدة وإعادة المحاولة، ولو فشل كمان
+      // بنعمل تسجيل خروج تلقائي فورًا عشان نكسر الحلقة ونطلب دخول جديد نضيف.
+      if(res.error.code === '42501' && !payload.__retriedAfterRefresh){
+        try{
+          var _rf = await sb.auth.refreshSession();
+          if(!_rf.error && _rf.data && _rf.data.session){
+            payload.__retriedAfterRefresh = true; // منع تكرار لا نهائي
+            var payload2 = Object.assign({}, payload); delete payload2.__retriedAfterRefresh;
+            var res2 = await sb.from(table).upsert(payload2);
+            if(!res2.error) return true;
+            res = res2;
+          }
+        }catch(e5){}
+        // لو وصلنا هنا يبقى التجديد فشل أو المحاولة التانية فشلت برضو — الجلسة تالفة فعلاً
+        __reportError('جلسة الدخول تالفة — تم تسجيل الخروج تلقائيًا', 'محتاج تدخل ببياناتك تاني عشان تكمل المزامنة.');
+        try{ await sb.auth.signOut(); }catch(e6){}
+        window.__currentProfile = null;
+        setTimeout(function(){ location.reload(); }, 1500);
+        return false;
+      }
       console.warn('فشل مزامنة السجل مع السيرفر ('+table+'):', res.error.message);
       setSyncStatus('⚠️ لم تتم المزامنة مع السيرفر','#dc2626');
       __reportError('فشل مزامنة قسم "'+table+'"', res.error.message+(res.error.code?' (كود: '+res.error.code+')':''));
