@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v165</title>
+<title>ابو حوده الحلو الجميل v167</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="2026-09-10 — v165";
+<script>var BUILD_STAMP="2026-09-11 — v167";
 /* ===== سجل التعديلات (Changelog) =====
 v81: نسخة احتياطية طارئة تلقائية لو localStorage اتعطب.
 v82: بوابة تسجيل دخول + ربط Supabase.
@@ -190,6 +190,24 @@ v106: [إصلاح جذري] "النقدية غلط بسبب مخزون/ديون 
      الطباعة، تصدير Excel). ⚠️ ملحوظة لو شايف تسميات قديمة رغم التحديث: امسح الكاش/أعد
      تحميل الملف بالكامل (الملف اسمه لازم يختلف عن أي نسخة سابقة نزّلتها قبل كده حتى
      يتجنّب متصفح الموبايل استخدام نسخة مخزّنة قديمة).
+v167: [🐛 إصلاح تجميع الأخطاء المتكررة — كانت بتملي السجل بسرعة]
+     كانت مقارنة التكرار بتتم مع آخر خطأ بس (index 0). لو الأخطاء بتيجي متبادلة بين
+     أقسام مختلفة (زي فشل مزامنة كذا جدول ورا بعض بالتتابع)، كانت بتتسجل كلها صفوف
+     منفصلة بدل ما تتجمع في صف واحد بعداد (×2, ×3...)، فسجل الأخطاء كان يمتلي بسرعة
+     من نفس المشكلة. دلوقتي بيدور في السجل كله مش أول صف بس.
+     ⚠️ السبب الجذري لكل "فشل مزامنة" اللي ظهرتلك (suppliers, stocktakes, scheduled_*,
+     daily_archive, inventory_snapshots, clients) مش في الكود — قاعدة بيانات Supabase
+     عندها RLS Policy مقفولة غالبًا على id='accounts' بس، ومش مسموح بأي id تاني في
+     جدول business_state. لازم تتعدل من Supabase Dashboard (مش حاجة أقدر أصلحها من
+     الكود). التفاصيل في رد الشات.
+v166: [🎨 إعادة تصميم شاشة صلاحيات الموظف بالكامل — أكورديون بدل العمود الطويل]
+     بعد نقاش قبل التنفيذ: قسّمت الشاشة لـ5 كروت قابلة للطي (اضغط العنوان يفتح/يقفل)
+     بدل عمود واحد طويل فيه كل حاجة تحت بعض. الأقسام: 📋 الأساسيات (دور/حظر/أرشفة/
+     ربط براتب) — 🔑 الصلاحيات (الطبقة 1 العامة فوق، والطبقة 2 التفصيلية للحقول
+     تحتها، مع بعض زي ما طلبت) — 💰 المالي (عمولة + رصيد أمانة) — 🔒 الخصوصية (نطاق
+     الرؤية + إخفاء تبويبات تقارير) — 📱 الأمان (الأجهزة). "الأساسيات" مفتوح
+     افتراضيًا، والباقي مقفول لحد ما تحتاجه. القسم اللي بتشتغل فيه بيفضل مفتوح حتى
+     بعد أي حفظ (مش بيقفل لوحده). نظّفت كمان كود قديم كان فيه حاوية مكررة بالغلط.
 v165: [🚀 دفعة كبيرة: تنقل طبيعي، مزامنة سحب لتحت، تعدد مكن العميل، صلاحيات تفصيلية]
      📱 زرار/سحبة الرجوع الفعلية بتاعة الجهاز بقت زي أي تطبيق موبايل عادي — بترجعك
      خطوة جوه التطبيق الأول، ولو وصلت للرئيسية بتوريك "اضغط تاني للخروج" بدل ما تقفل
@@ -1177,16 +1195,20 @@ input:checked+.slider:before{transform:translateX(-20px)}
         '<div id="emp-perm-table">'+(_permSelectedEmp?'جاري التحميل...':'')+'</div>';
       if(_permSelectedEmp){
         var emp=emps.find(function(e){return e.id===_permSelectedEmp;});
-        // v164 — إعادة ترتيب وتسمية واضحة لطبقتين منفصلتين بدل ما يكونوا مختلطين:
-        // 1) صلاحيات الوصول العامة (جداول/شاشات — نفس النوع سواء افتراضية للدور أو
-        //    مخصصة لشخص) 2) صلاحيات خاصة تفصيلية (خصوصية، تقارير، أجهزة، عمولة، محفظة)
+        // v166 — بدل العمود الطويل، الشاشة بقت أكورديون 5 أقسام قابلة للطي: افتح بس
+        // اللي محتاج تعدله. "الأساسيات" مفتوح افتراضيًا، والباقي مقفول ومختصر.
         document.getElementById('emp-perm-table').innerHTML=
-          '<div style="font-weight:900;font-size:13px;color:#1e40af;margin:6px 0 8px">🔑 الطبقة 1 — صلاحيات الوصول العامة</div>'+
-          '<div id="emp-perm-table-2"></div>'+
-          '<div style="font-weight:900;font-size:13px;color:#7c3aed;margin:18px 0 8px;padding-top:10px;border-top:2px dashed #e2e8f0">🎛️ الطبقة 2 — صلاحيات وإعدادات خاصة بالموظف ده</div>'+
-          '<div id="emp-manage-block"></div>';
+          __accSection('basics','📋 الأساسيات',true)+
+          __accSection('perms','🔑 الصلاحيات (عامة + تفصيلية)',false)+
+          __accSection('finance','💰 المالي (عمولة ورصيد أمانة)',false)+
+          __accSection('privacy','🔒 الخصوصية',false)+
+          __accSection('devices','📱 الأمان (الأجهزة)',false);
+        __renderEmpBasics(emp);
+        __renderEmpFieldPerms(emp);
         await __renderEmpPermTable(_permSelectedEmp, emp.role_id);
-        await __renderEmpManageBlock(emp);
+        __renderEmpFinance(emp);
+        __renderEmpPrivacy(emp);
+        __renderEmpDevices(emp);
       }
     }catch(e){ sub.innerHTML='⚠️ فشل تحميل الموظفين: '+e.message; }
   }
@@ -1215,10 +1237,32 @@ input:checked+.slider:before{transform:translateX(-20px)}
   }
   function __isFieldHidden(table,field){ return __getMyHiddenFields(table).indexOf(field)!==-1; }
 
-  async function __renderEmpManageBlock(emp){
-    var el=document.getElementById('emp-manage-block');if(!el)return;
+  // v166 — أدوات الأكورديون العامة (تتستخدم في شاشة صلاحيات الموظف بس دلوقتي)
+  var _accOpenState={basics:true}; // بيفضل محفوظ بين كل إعادة تحميل، عشان القسم اللي شغال عليه ميقفلش لوحده
+  function __accSection(key,title,openDefault){
+    var open=_accOpenState[key]!==undefined?_accOpenState[key]:!!openDefault;
+    return '<div style="border:1.5px solid #e2e8f0;border-radius:12px;margin-bottom:10px;overflow:hidden">'+
+      '<div onclick="__toggleAcc(\''+key+'\')" style="padding:12px 14px;background:#f8fafc;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-weight:800;font-size:13px;color:#0f172a">'+
+      '<span>'+title+'</span><span id="acc-arrow-'+key+'" style="font-size:12px;color:#64748b">'+(open?'▾':'▸')+'</span></div>'+
+      '<div id="acc-'+key+'" style="padding:12px;display:'+(open?'block':'none')+'">جاري التحميل...</div>'+
+      '</div>';
+  }
+  function __toggleAcc(key){
+    var body=document.getElementById('acc-'+key);
+    var arrow=document.getElementById('acc-arrow-'+key);
+    if(!body)return;
+    var opening=body.style.display==='none';
+    body.style.display=opening?'block':'none';
+    if(arrow)arrow.textContent=opening?'▾':'▸';
+    _accOpenState[key]=opening;
+  }
+  function __getLinkedRec(emp){ return (DB.accounts&&DB.accounts.employees||[]).find(function(e){return e.linked_profile_id===emp.id;}); }
+
+  // ===== قسم 1: 📋 الأساسيات (دور/حظر/أرشفة/ربط بسجل راتب) =====
+  function __renderEmpBasics(emp){
+    var el=document.getElementById('acc-basics');if(!el)return;
+    var linkedRec=__getLinkedRec(emp);
     var roleOpts=__PERM_ROLES.map(function(r){return '<option value="'+r.id+'"'+(emp.role_id===r.id?' selected':'')+'>'+r.name+'</option>';}).join('');
-    var linkedRec=(DB.accounts&&DB.accounts.employees||[]).find(function(e){return e.linked_profile_id===emp.id;});
     var unlinkedOpts=(DB.accounts&&DB.accounts.employees||[]).filter(function(e){return e.active!==false&&!e.linked_profile_id;})
       .map(function(e){return '<option value="'+e.id+'">'+esc(e.name)+' ('+fmt(e.salary)+'/شهر)</option>';}).join('');
     el.innerHTML=
@@ -1233,7 +1277,6 @@ input:checked+.slider:before{transform:translateX(-20px)}
         '<button class="btn btn-full btn-sm" style="background:#fee2e2;color:#dc2626;margin-bottom:8px" onclick="__toggleEmpBlock('+jsStr(emp.id)+',false)">🚫 حظر دخول الموظف ده</button>'
       )+
       '</div>'+
-      // ===== v132 — أرشفة الموظف المستقيل (منفصلة تمامًا عن الحظر) =====
       '<div style="background:'+(emp.archived_at?'#fff7ed':'#fff')+';border:1.5px solid '+(emp.archived_at?'#fed7aa':'#e2e8f0')+';border-radius:10px;padding:12px;margin-bottom:12px">'+
       '<div style="font-size:11px;color:#64748b;margin-bottom:5px">🗃️ حالة الموظف (استقالة/أرشفة)</div>'+
       (emp.archived_at?
@@ -1243,8 +1286,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
         '<button class="btn btn-full btn-sm" style="background:#ffedd5;color:#c2410c" onclick="__toggleEmpArchive('+jsStr(emp.id)+',false)">🗃️ أرشفة الموظف (استقال نهائيًا)</button>'
       )+
       '</div>'+
-      // ===== v132 — ربط حساب الدخول بسجل الراتب =====
-      '<div style="background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:10px;padding:12px;margin-bottom:12px">'+
+      '<div style="background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:10px;padding:12px">'+
       '<div style="font-size:11px;color:#64748b;margin-bottom:5px">🔗 الربط بسجل الراتب (الحسابات)</div>'+
       (linkedRec?
         '<div style="font-size:13px;font-weight:800;color:#15803d;margin-bottom:8px">مربوط بسجل: '+esc(linkedRec.name)+' — '+fmt(linkedRec.salary)+'/شهر</div>'+
@@ -1255,42 +1297,19 @@ input:checked+.slider:before{transform:translateX(-20px)}
         '<button class="btn btn-primary btn-full btn-sm" onclick="__linkEmpToSalary('+jsStr(emp.id)+')">🔗 اربط</button>'
         :'<div style="font-size:12px;color:#94a3b8">مفيش سجلات رواتب غير مربوطة حاليًا (كل السجلات مربوطة، أو محتاج تضيف سجل راتب جديد من "الحسابات ← موظفون")</div>'
       ))+
-      '</div>'+
-      // ===== v133 — بند 4: عمولة/حافز الأداء (لكل موظف على حدة، محتاج يكون مربوط بسجل راتب) =====
+      '</div>';
+  }
+
+  // ===== قسم 2: 🔑 الصلاحيات — الطبقة 1 (جداول) فوق، والطبقة 2 التفصيلية (حقول) تحتها =====
+  function __renderEmpFieldPerms(emp){
+    var el=document.getElementById('acc-perms');if(!el)return;
+    var linkedRec=__getLinkedRec(emp);
+    el.innerHTML=
+      '<div style="font-weight:800;font-size:12px;color:#1e40af;margin-bottom:8px">صلاحيات الوصول العامة (الجداول/الشاشات)</div>'+
+      '<div id="acc-perms-layer1">جاري التحميل...</div>'+
+      '<div style="font-weight:800;font-size:12px;color:#a21caf;margin:16px 0 8px;padding-top:10px;border-top:2px dashed #e2e8f0">تفصيل الحقول داخل كل قسم</div>'+
       (linkedRec?
-        '<div style="background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:10px;padding:12px;margin-bottom:12px">'+
-        '<div style="font-size:11px;color:#64748b;margin-bottom:5px">💰 عمولة / حافز الأداء</div>'+
-        '<select id="comm-type-'+linkedRec.id+'" style="width:100%;padding:8px;border:1.5px solid #e2e8f0;border-radius:8px;font-family:inherit;margin-bottom:8px" onchange="__renderCommInputs('+jsStr(linkedRec.id)+',this.value)">'+
-        ['none:بدون عمولة','fixed:مبلغ ثابت','percent:نسبة % من صافي الربح','both:الاثنين مع بعض'].map(function(o){var kv=o.split(':');return '<option value="'+kv[0]+'"'+((linkedRec.commission_type||'none')===kv[0]?' selected':'')+'>'+kv[1]+'</option>';}).join('')+
-        '</select>'+
-        '<div id="comm-inputs-'+linkedRec.id+'">'+__commInputsHTML(linkedRec)+'</div>'+
-        '<div class="field" style="margin-bottom:8px;background:#f0fdf4;border-radius:8px;padding:8px"><label style="font-size:11px;color:#15803d">💵 (إضافي، بيتجمع فوق أي اختيار فوق) مبلغ ثابت لكل عطل يخلص "منتهي" بنجاح</label><input id="comm-perjob-'+linkedRec.id+'" type="number" value="'+(linkedRec.commission_per_job||0)+'" style="width:100%;padding:8px;border:1.5px solid #bbf7d0;border-radius:8px;font-family:inherit"></div>'+
-        '<button class="btn btn-primary btn-full btn-sm" style="margin-bottom:8px" onclick="__saveCommissionConfig('+jsStr(linkedRec.id)+')">💾 حفظ إعداد العمولة</button>'+
-        '<div style="font-size:12px;color:#374151;background:#eff6ff;border-radius:8px;padding:8px;margin-bottom:8px">رصيد عمولة معتمدة لسه ما اتصرفتش: <b>'+fmt(linkedRec.commission_pending||0)+'</b></div>'+
-        ((linkedRec.commission_type&&linkedRec.commission_type!=='none')||(+linkedRec.commission_per_job||0)>0?
-          '<button class="btn btn-full btn-sm" style="background:#ede9fe;color:#6d28d9" onclick="__calcApproveCommission('+jsStr(linkedRec.id)+')">📊 احسب واعتمد عمولة الفترة (من '+esc(fmtDate(linkedRec.commission_calc_since||linkedRec.hire_date||today()))+' لحد النهارده)</button>'
-        :'')+
-        '</div>'
-      :'')+
-      // ===== v163 — بند 3: تقييد عدد الأجهزة المسموح بيها للموظف ده =====
-      (linkedRec?
-        '<div style="background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:10px;padding:12px;margin-bottom:12px">'+
-        '<div style="font-size:11px;color:#64748b;margin-bottom:5px">📱 عدد الأجهزة المسموح يدخل بيها (0 = بدون تقييد)</div>'+
-        '<div style="display:flex;gap:6px;margin-bottom:8px"><input id="emp-maxdev-'+linkedRec.id+'" type="number" min="0" value="'+(linkedRec.max_devices||0)+'" style="flex:1;padding:8px;border:1.5px solid #e2e8f0;border-radius:8px;font-family:inherit">'+
-        '<button class="btn btn-primary btn-sm" onclick="__saveEmpMaxDevices('+jsStr(linkedRec.id)+')">💾 حفظ</button></div>'+
-        ((linkedRec.devices||[]).length?
-          '<div style="font-size:11px;color:#64748b;margin-bottom:6px">الأجهزة المسجّلة حاليًا:</div>'+
-          linkedRec.devices.map(function(d){
-            return '<div style="display:flex;justify-content:space-between;align-items:center;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:7px 9px;margin-bottom:5px;font-size:11px">'+
-              '<span>📱 '+esc(d.label||'جهاز')+' — آخر دخول '+esc(fmtDate((d.last_seen||'').split('T')[0]))+'</span>'+
-              '<button onclick="__removeEmpDevice('+jsStr(linkedRec.id)+','+jsStr(d.id)+')" style="background:#fee2e2;border:none;border-radius:6px;padding:3px 8px;color:#dc2626;cursor:pointer;font-size:11px">حذف</button></div>';
-          }).join('')
-        :'<div style="font-size:11px;color:#94a3b8">لسه مفيش أجهزة مسجّلة</div>')+
-        '</div>'
-      :'')+
-      // v165 — الطبقة 2 التفصيلية: تحكم في حقول محددة داخل كل جدول (بدأنا بالمخزون)
-      (linkedRec?
-        '<div style="background:#fdf4ff;border:1.5px solid #f0abfc;border-radius:10px;padding:12px;margin-bottom:12px">'+
+        '<div style="background:#fdf4ff;border:1.5px solid #f0abfc;border-radius:10px;padding:12px">'+
         '<div style="font-size:12px;font-weight:800;color:#a21caf;margin-bottom:8px">📦 تفاصيل ظاهرة/مخفية — المخزون</div>'+
         __FIELD_PERMS_CONFIG.products.map(function(f){
           var hf=linkedRec.hidden_fields&&linkedRec.hidden_fields.products;
@@ -1298,27 +1317,73 @@ input:checked+.slider:before{transform:translateX(-20px)}
           return '<label style="display:flex;align-items:center;gap:7px;padding:5px 0;font-size:12px;color:#4a044e"><input type="checkbox" data-field="'+f.key+'" class="emp-field-toggle-products" '+(hidden?'':'checked')+' style="width:16px;height:16px">'+esc(f.label)+'</label>';
         }).join('')+
         '<button class="btn btn-sm btn-full" style="background:#f0abfc;color:#701a75;margin-top:8px" onclick="__saveEmpFieldPerms('+jsStr(linkedRec.id)+',\'products\')">💾 حفظ</button>'+
+        '<div style="font-size:11px;color:#94a3b8;margin-top:8px">لسه بس جدول المخزون — لو عاجبك هنمد نفس الفكرة لباقي الجداول</div>'+
         '</div>'
+      :'<div style="font-size:12px;color:#94a3b8">الموظف ده لازم يتربط بسجل راتب الأول من قسم "الأساسيات" عشان تظبط تفاصيله</div>');
+  }
+
+  // ===== قسم 3: 💰 المالي (عمولة + رصيد أمانة) =====
+  function __renderEmpFinance(emp){
+    var el=document.getElementById('acc-finance');if(!el)return;
+    var linkedRec=__getLinkedRec(emp);
+    if(!linkedRec){ el.innerHTML='<div style="font-size:12px;color:#94a3b8">الموظف ده لازم يتربط بسجل راتب الأول (من "الأساسيات")</div>'; return; }
+    el.innerHTML=
+      '<div style="background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:10px;padding:12px;margin-bottom:12px">'+
+      '<div style="font-size:11px;color:#64748b;margin-bottom:5px">💰 عمولة / حافز الأداء</div>'+
+      '<select id="comm-type-'+linkedRec.id+'" style="width:100%;padding:8px;border:1.5px solid #e2e8f0;border-radius:8px;font-family:inherit;margin-bottom:8px" onchange="__renderCommInputs('+jsStr(linkedRec.id)+',this.value)">'+
+      ['none:بدون عمولة','fixed:مبلغ ثابت','percent:نسبة % من صافي الربح','both:الاثنين مع بعض'].map(function(o){var kv=o.split(':');return '<option value="'+kv[0]+'"'+((linkedRec.commission_type||'none')===kv[0]?' selected':'')+'>'+kv[1]+'</option>';}).join('')+
+      '</select>'+
+      '<div id="comm-inputs-'+linkedRec.id+'">'+__commInputsHTML(linkedRec)+'</div>'+
+      '<div class="field" style="margin-bottom:8px;background:#f0fdf4;border-radius:8px;padding:8px"><label style="font-size:11px;color:#15803d">💵 (إضافي، بيتجمع فوق أي اختيار فوق) مبلغ ثابت لكل عطل يخلص "منتهي" بنجاح</label><input id="comm-perjob-'+linkedRec.id+'" type="number" value="'+(linkedRec.commission_per_job||0)+'" style="width:100%;padding:8px;border:1.5px solid #bbf7d0;border-radius:8px;font-family:inherit"></div>'+
+      '<button class="btn btn-primary btn-full btn-sm" style="margin-bottom:8px" onclick="__saveCommissionConfig('+jsStr(linkedRec.id)+')">💾 حفظ إعداد العمولة</button>'+
+      '<div style="font-size:12px;color:#374151;background:#eff6ff;border-radius:8px;padding:8px;margin-bottom:8px">رصيد عمولة معتمدة لسه ما اتصرفتش: <b>'+fmt(linkedRec.commission_pending||0)+'</b></div>'+
+      ((linkedRec.commission_type&&linkedRec.commission_type!=='none')||(+linkedRec.commission_per_job||0)>0?
+        '<button class="btn btn-full btn-sm" style="background:#ede9fe;color:#6d28d9" onclick="__calcApproveCommission('+jsStr(linkedRec.id)+')">📊 احسب واعتمد عمولة الفترة (من '+esc(fmtDate(linkedRec.commission_calc_since||linkedRec.hire_date||today()))+' لحد النهارده)</button>'
       :'')+
-      // ===== v135 — خصوصية بيانات الموظفين: استثناء لكل موظف على حدة =====
+      '</div>'+
+      _buildCashBalanceCardHTML(linkedRec,true);
+  }
+
+  // ===== قسم 4: 🔒 الخصوصية (نطاق الرؤية + إخفاء تبويبات تقارير) =====
+  function __renderEmpPrivacy(emp){
+    var el=document.getElementById('acc-privacy');if(!el)return;
+    var linkedRec=__getLinkedRec(emp);
+    el.innerHTML=
       '<div style="background:'+(emp.full_visibility?'#eff6ff':'#fff')+';border:1.5px solid '+(emp.full_visibility?'#bfdbfe':'#e2e8f0')+';border-radius:10px;padding:12px;margin-bottom:12px">'+
       '<div style="font-size:11px;color:#64748b;margin-bottom:5px">👁️ نطاق رؤية البيانات (مبيعات/مشتريات/أعطال/مصاريف/مهام)</div>'+
       '<div style="font-size:12px;font-weight:800;margin-bottom:8px;color:'+(emp.full_visibility?'#2563eb':'#374151')+'">'+(emp.full_visibility?'👁️ استثناء: يشوف كل حاجة (مش بس بتاعته)':'🔒 الوضع الافتراضي: يشوف بتاعته هو بس')+'</div>'+
       '<button class="btn btn-full btn-sm" style="background:'+(emp.full_visibility?'#fee2e2;color:#dc2626':'#dbeafe;color:#2563eb')+'" onclick="__toggleEmpFullVisibility('+jsStr(emp.id)+','+(emp.full_visibility?'true':'false')+')">'+(emp.full_visibility?'🔒 رجّعه يشوف بتاعته بس':'👁️ استثناء: خليه يشوف كل حاجة')+'</button>'+
       '</div>'+
-      (linkedRec?_buildCashBalanceCardHTML(linkedRec,true):'')+
-      // ===== v139 — تحكم دقيق: إخفاء تبويبات معينة من التقارير عن الموظف ده تحديدًا =====
       (linkedRec?
-        '<div style="background:#fff;border:1.5px solid #e2e8f0;border-radius:10px;padding:12px;margin-bottom:12px">'+
+        '<div style="background:#fff;border:1.5px solid #e2e8f0;border-radius:10px;padding:12px">'+
         '<div style="font-size:11px;color:#64748b;margin-bottom:8px">📊 لو فاتح له شاشة "التقارير" (بالاستثناء الفردي)، تقدر تخفي عنه تبويبات بعينها:</div>'+
         [['balance','المركز المالي'],['cashflow','التدفق النقدي']].map(function(r){
           var hidden=(linkedRec.hidden_reports||[]).indexOf(r[0])!==-1;
           return '<button class="btn btn-full btn-sm" style="margin-bottom:6px;background:'+(hidden?'#fee2e2;color:#dc2626':'#f1f5f9;color:#374151')+'" onclick="__toggleHiddenReport('+jsStr(linkedRec.id)+','+jsStr(r[0])+')">'+(hidden?'🚫 مخفي: '+r[1]+' (اضغط للإظهار)':'👁️ ظاهر: '+r[1]+' (اضغط للإخفاء)')+'</button>';
         }).join('')+
         '</div>'
-      :'')+
-      '<div id="emp-perm-table-2">جاري التحميل...</div>';
+      :'');
   }
+
+  // ===== قسم 5: 📱 الأمان (عدد الأجهزة) =====
+  function __renderEmpDevices(emp){
+    var el=document.getElementById('acc-devices');if(!el)return;
+    var linkedRec=__getLinkedRec(emp);
+    if(!linkedRec){ el.innerHTML='<div style="font-size:12px;color:#94a3b8">الموظف ده لازم يتربط بسجل راتب الأول (من "الأساسيات")</div>'; return; }
+    el.innerHTML=
+      '<div style="font-size:11px;color:#64748b;margin-bottom:5px">📱 عدد الأجهزة المسموح يدخل بيها (0 = بدون تقييد)</div>'+
+      '<div style="display:flex;gap:6px;margin-bottom:8px"><input id="emp-maxdev-'+linkedRec.id+'" type="number" min="0" value="'+(linkedRec.max_devices||0)+'" style="flex:1;padding:8px;border:1.5px solid #e2e8f0;border-radius:8px;font-family:inherit">'+
+      '<button class="btn btn-primary btn-sm" onclick="__saveEmpMaxDevices('+jsStr(linkedRec.id)+')">💾 حفظ</button></div>'+
+      ((linkedRec.devices||[]).length?
+        '<div style="font-size:11px;color:#64748b;margin-bottom:6px">الأجهزة المسجّلة حاليًا:</div>'+
+        linkedRec.devices.map(function(d){
+          return '<div style="display:flex;justify-content:space-between;align-items:center;background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:7px 9px;margin-bottom:5px;font-size:11px">'+
+            '<span>📱 '+esc(d.label||'جهاز')+' — آخر دخول '+esc(fmtDate((d.last_seen||'').split('T')[0]))+'</span>'+
+            '<button onclick="__removeEmpDevice('+jsStr(linkedRec.id)+','+jsStr(d.id)+')" style="background:#fee2e2;border:none;border-radius:6px;padding:3px 8px;color:#dc2626;cursor:pointer;font-size:11px">حذف</button></div>';
+        }).join('')
+      :'<div style="font-size:11px;color:#94a3b8">لسه مفيش أجهزة مسجّلة</div>');
+  }
+
   async function __toggleHiddenReport(recId, tabKey){
     DB.accounts.employees=DB.accounts.employees.map(function(e){
       if(e.id!==recId)return e;
@@ -1489,7 +1554,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
   }
 
   async function __renderEmpPermTable(userId, roleId){
-    var el=document.getElementById('emp-perm-table-2');if(!el)return;
+    var el=document.getElementById('acc-perms-layer1');if(!el)return;
     el.innerHTML='جاري التحميل...';
     try{
       var roleRes = await sb.from('role_permissions').select('*').eq('role_id', roleId);
@@ -3381,8 +3446,11 @@ var __errLog = (function(){ try{ return JSON.parse(localStorage.getItem('mc8_err
 function __saveErrLog(){ try{ localStorage.setItem('mc8_error_log', JSON.stringify(__errLog)); }catch(e){} }
 function __reportError(context, message){
   try{
-    var existing = __errLog[0];
-    if(existing && existing.context===String(context) && existing.message===String(message)){
+    // v167 — كان بيقارن بآخر خطأ (index 0) بس. لو الأخطاء بتيجي متبادلة بين أقسام
+    // مختلفة (زي فشل مزامنة كذا جدول ورا بعض بالتتابع)، كانت بتتسجل كلها صفوف
+    // منفصلة بدل ما تتجمع، فالسجل يمتلي بسرعة. دلوقتي بندور في كل السجل مش أول صف بس.
+    var existing = __errLog.find(function(e){return e.context===String(context)&&e.message===String(message);});
+    if(existing){
       existing.count = (existing.count||1)+1;
       existing.t = new Date().toLocaleString('ar-EG');
     }else{
