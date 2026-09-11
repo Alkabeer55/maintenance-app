@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v167</title>
+<title>ابو حوده الحلو الجميل v168</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,8 +13,24 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="2026-09-11 — v167";
+<script>var BUILD_STAMP="2026-09-11 — v168";
 /* ===== سجل التعديلات (Changelog) =====
+v168: [🐛 إصلاح جذري: فشل مزامنة جماعي بـ RLS حتى للمالك] السبب الحقيقي: جلسة الدخول
+     (JWT) بتنتهي أثناء دفعة مزامنة كبيرة (زرار "رفع كل البيانات" أو "المحاولة" بعد
+     تراكم عشرات/مئات السجلات)، فـ auth.uid() بيرجع فاضي وقت الإرسال، وSupabase بيرفض
+     كل الصفوف بـ RLS من غير ما السبب الحقيقي يبان (رسالة الخطأ كانت بتوحي إن المشكلة
+     في الصلاحيات مش في الجلسة). دلوقتي قبل أي دفعة مزامنة (تلقائية أو يدوية أو رفع
+     شامل) بيتم التأكد من صلاحية الجلسة وتجديدها لو قربت تنتهي، ومع الرفع الشامل الكبير
+     بيتجدد كل 200 سجل كمان.
+     [🚀 ميزة كبيرة] طبقة الصلاحيات التفصيلية (Layer 2 — إخفاء حقول بعينها عن موظف
+     معين) كانت مقتصرة على "المخزون" بس كنموذج، دلوقتي بقت شاملة لكل الأقسام (الفواتير،
+     المشتريات، التحركات، المصاريف، الديون، المهام) بنفس الطريقة بالظبط — تقدر تختار
+     لكل موظف أي حقل يشوفه وأي حقل يتخفي عنه في كل قسم، من "الحسابات → صلاحيات → 🔑
+     الصلاحيات → تفصيل الحقول داخل كل قسم".
+     ⚠️ ملحوظة نطاق مهمة: الإخفاء ده اتفعّل فعليًا في الكروت الرئيسية لكل قسم (القوائم
+     اللي بتظهر في الشاشة الأساسية). شاشات تانية زي تفاصيل الفاتورة المفتوحة، الطباعة/
+     الفواتير المطبوعة، وتصدير Excel لسه مش بتحترم الإخفاء ده — محتاجة دفعة تعديلات
+     منفصلة تباعًا لو عايز الإخفاء يغطيها كمان (قولّي لو ده أولوية).
 v81: نسخة احتياطية طارئة تلقائية لو localStorage اتعطب.
 v82: بوابة تسجيل دخول + ربط Supabase.
 v88: [إصلاح جذري] التحديثات السابقة كانت بتتحفظ في وسم <script> بيتجاهله المتصفح.
@@ -1225,7 +1241,56 @@ input:checked+.slider:before{transform:translateX(-20px)}
       {key:'price',label:'سعر البيع'},
       {key:'buy_price',label:'سعر التكلفة/الشراء'},
       {key:'min_qty',label:'الحد الأدنى للتنبيه'}
+    ],
+    sales: [
+      {key:'customer',label:'اسم العميل'},
+      {key:'total',label:'إجمالي الفاتورة'},
+      {key:'discount',label:'الخصم'},
+      {key:'paid',label:'المدفوع'},
+      {key:'status',label:'حالة السداد'},
+      {key:'payment_method',label:'طريقة الدفع'},
+      {key:'items_cost',label:'تكلفة/ربح الأصناف داخل الفاتورة'},
+      {key:'note',label:'الملاحظات'},
+      {key:'serial',label:'السيريال/الموديل'}
+    ],
+    purchases: [
+      {key:'supplier',label:'اسم المورد'},
+      {key:'total',label:'إجمالي المشترى'},
+      {key:'extra_cost',label:'مصاريف إضافية'},
+      {key:'paid',label:'المدفوع'},
+      {key:'items',label:'أسعار الأصناف داخل المشترى'}
+    ],
+    movements: [
+      {key:'customer',label:'اسم العميل'},
+      {key:'device',label:'نوع الجهاز'},
+      {key:'serial',label:'السيريال'},
+      {key:'fault_desc',label:'وصف العطل'},
+      {key:'status',label:'الحالة'},
+      {key:'parts',label:'قطع الغيار وتكلفتها'},
+      {key:'assigned_to',label:'المهندس المسؤول'}
+    ],
+    expenses: [
+      {key:'label',label:'البيان'},
+      {key:'amount',label:'المبلغ'},
+      {key:'type',label:'نوع المصروف'},
+      {key:'note',label:'الملاحظات'}
+    ],
+    debts: [
+      {key:'name',label:'الاسم'},
+      {key:'total',label:'المبلغ الكلي'},
+      {key:'paid',label:'المدفوع'},
+      {key:'desc',label:'البيان'}
+    ],
+    tasks: [
+      {key:'title',label:'عنوان المهمة'},
+      {key:'desc',label:'تفاصيل المهمة'},
+      {key:'assigned_to',label:'المسؤول عن المهمة'},
+      {key:'priority',label:'الأولوية'}
     ]
+  };
+  var __FIELD_PERMS_TABLE_NAMES = {
+    products:'📦 المخزون', sales:'🧾 الفواتير', purchases:'🛒 المشتريات',
+    movements:'🔧 التحركات/الأعطال', expenses:'💵 المصاريف', debts:'💳 الديون', tasks:'📋 المهام'
   };
   function __getMyHiddenFields(table){
     if(window.__isOwner)return [];
@@ -1301,25 +1366,35 @@ input:checked+.slider:before{transform:translateX(-20px)}
   }
 
   // ===== قسم 2: 🔑 الصلاحيات — الطبقة 1 (جداول) فوق، والطبقة 2 التفصيلية (حقول) تحتها =====
+  // v168 — بعد ما كانت مقتصرة على "المخزون" بس كنموذج (v165)، دلوقتي بتغطي كل الأقسام
+  // الموجودة في __FIELD_PERMS_CONFIG بنفس الطريقة والشكل، من غير ما تحتاج تعديل يدوي
+  // لكل قسم على حدة.
   function __renderEmpFieldPerms(emp){
     var el=document.getElementById('acc-perms');if(!el)return;
     var linkedRec=__getLinkedRec(emp);
-    el.innerHTML=
+    var html=
       '<div style="font-weight:800;font-size:12px;color:#1e40af;margin-bottom:8px">صلاحيات الوصول العامة (الجداول/الشاشات)</div>'+
       '<div id="acc-perms-layer1">جاري التحميل...</div>'+
-      '<div style="font-weight:800;font-size:12px;color:#a21caf;margin:16px 0 8px;padding-top:10px;border-top:2px dashed #e2e8f0">تفصيل الحقول داخل كل قسم</div>'+
-      (linkedRec?
-        '<div style="background:#fdf4ff;border:1.5px solid #f0abfc;border-radius:10px;padding:12px">'+
-        '<div style="font-size:12px;font-weight:800;color:#a21caf;margin-bottom:8px">📦 تفاصيل ظاهرة/مخفية — المخزون</div>'+
-        __FIELD_PERMS_CONFIG.products.map(function(f){
-          var hf=linkedRec.hidden_fields&&linkedRec.hidden_fields.products;
-          var hidden=(hf!==undefined?hf:['buy_price']).indexOf(f.key)!==-1;
-          return '<label style="display:flex;align-items:center;gap:7px;padding:5px 0;font-size:12px;color:#4a044e"><input type="checkbox" data-field="'+f.key+'" class="emp-field-toggle-products" '+(hidden?'':'checked')+' style="width:16px;height:16px">'+esc(f.label)+'</label>';
-        }).join('')+
-        '<button class="btn btn-sm btn-full" style="background:#f0abfc;color:#701a75;margin-top:8px" onclick="__saveEmpFieldPerms('+jsStr(linkedRec.id)+',\'products\')">💾 حفظ</button>'+
-        '<div style="font-size:11px;color:#94a3b8;margin-top:8px">لسه بس جدول المخزون — لو عاجبك هنمد نفس الفكرة لباقي الجداول</div>'+
-        '</div>'
-      :'<div style="font-size:12px;color:#94a3b8">الموظف ده لازم يتربط بسجل راتب الأول من قسم "الأساسيات" عشان تظبط تفاصيله</div>');
+      '<div style="font-weight:800;font-size:12px;color:#a21caf;margin:16px 0 8px;padding-top:10px;border-top:2px dashed #e2e8f0">تفصيل الحقول داخل كل قسم (الطبقة 2)</div>';
+    if(!linkedRec){
+      html+='<div style="font-size:12px;color:#94a3b8">الموظف ده لازم يتربط بسجل راتب الأول من قسم "الأساسيات" عشان تظبط تفاصيله</div>';
+    }else{
+      Object.keys(__FIELD_PERMS_CONFIG).forEach(function(table){
+        var fields=__FIELD_PERMS_CONFIG[table];
+        var hf=linkedRec.hidden_fields&&linkedRec.hidden_fields[table];
+        var defaultHidden=table==='products'?['buy_price']:[];
+        var hiddenList=hf!==undefined?hf:defaultHidden;
+        html+='<div style="background:#fdf4ff;border:1.5px solid #f0abfc;border-radius:10px;padding:12px;margin-bottom:10px">'+
+          '<div style="font-size:12px;font-weight:800;color:#a21caf;margin-bottom:8px">'+(__FIELD_PERMS_TABLE_NAMES[table]||table)+'</div>'+
+          fields.map(function(f){
+            var hidden=hiddenList.indexOf(f.key)!==-1;
+            return '<label style="display:flex;align-items:center;gap:7px;padding:5px 0;font-size:12px;color:#4a044e"><input type="checkbox" data-field="'+f.key+'" class="emp-field-toggle-'+table+'" '+(hidden?'':'checked')+' style="width:16px;height:16px">'+esc(f.label)+'</label>';
+          }).join('')+
+          '<button class="btn btn-sm btn-full" style="background:#f0abfc;color:#701a75;margin-top:8px" onclick="__saveEmpFieldPerms('+jsStr(linkedRec.id)+','+jsStr(table)+')">💾 حفظ</button>'+
+          '</div>';
+      });
+    }
+    el.innerHTML=html;
   }
 
   // ===== قسم 3: 💰 المالي (عمولة + رصيد أمانة) =====
@@ -2716,6 +2791,10 @@ input:checked+.slider:before{transform:translateX(-20px)}
   async function __forceFullUploadToServer(){
     if(!window.__isOwner){ showToast('🚫 المالك بس يقدر يعمل الرفع الشامل','#dc2626'); return; }
     if(typeof sb === 'undefined' || !window.__currentProfile){ showToast('🚫 لازم تكون متصل بالنت ومسجّل دخول','#dc2626'); return; }
+    // v168 — نفس إصلاح الجلسة: رفع مئات السجلات ممكن ياخد وقت كافي إن الجلسة تنتهي في
+    // نصه، فكل الباقي كان بيترفض بـ RLS بصمت. نتأكد الجلسة سليمة قبل ما نبدأ.
+    var __sessOk = await __ensureFreshSession();
+    if(!__sessOk){ showToast('⚠️ جلسة الدخول منتهية، سجّل خروج ودخول تاني قبل الرفع','#dc2626'); return; }
     var pending = [];
     Object.keys(__SYNCED_TABLES).forEach(function(t){
       (DB[t]||[]).forEach(function(row){ pending.push({t:t, row:row}); });
@@ -2730,6 +2809,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
       var done=0;
       if(round>1){ setSyncStatus('⏳ محاولة '+round+' — باقي '+pending.length+' سجل...','#ea580c'); await __sleep(1500); }
       for(var i=0;i<pending.length;i++){
+        if(i>0 && i%200===0) await __ensureFreshSession(); // v168 — تجديد دوري أثناء رفع كبير طويل
         var ok = await __pushRowToServer(pending[i].t, pending[i].row);
         if(!ok) stillFailed.push(pending[i]);
         done++;
@@ -3533,10 +3613,34 @@ function __renderQueueBadge(){
   el.textContent = '🔄 '+n+' بانتظار المزامنة — دوس للمحاولة';
 }
 var __draining = false;
+// v168 — [إصلاح جذري: فشل مزامنة جماعي بـ RLS رغم إن المستخدم مالك/عنده صلاحية]
+// السبب: جلسة الدخول (JWT) بتنتهي صلاحيتها بعد فترة، ولو حصلت دفعة كبيرة من المزامنة
+// (زي فتح التطبيق بعد انقطاع نت طويل)، كانت الصفوف بترفض من Supabase (auth.uid() فاضي
+// وقت التنفيذ) من غير أي رسالة واضحة — بيبان "RLS policy" بس السبب الحقيقي جلسة منتهية.
+// دلوقتي قبل أي دفعة مزامنة، بنتأكد إن الجلسة لسه صالحة ونجددها لو لأ، قبل ما نبعت أي صف.
+async function __ensureFreshSession(){
+  try{
+    var s = await sb.auth.getSession();
+    var session = s && s.data && s.data.session;
+    if(!session) return false;
+    var expiresAt = session.expires_at ? session.expires_at*1000 : 0;
+    if(expiresAt && expiresAt - Date.now() < 120000){ // أقل من دقيقتين متبقية
+      var r = await sb.auth.refreshSession();
+      if(r.error || !(r.data && r.data.session)) return false;
+    }
+    return true;
+  }catch(e){ console.warn('فشل التأكد من الجلسة:', e); return false; }
+}
 async function __drainSyncQueue(manual){
   if(__draining || !__syncQueue.length) return;
   if(typeof sb === 'undefined' || !window.__currentProfile) return;
   if(typeof navigator!=='undefined' && navigator.onLine===false && !manual) return;
+  var sessionOk = await __ensureFreshSession();
+  if(!sessionOk){
+    __reportError('فشل تجديد جلسة الدخول قبل المزامنة', 'الجلسة منتهية والتجديد فشل — يُنصح بتسجيل الخروج والدخول تاني.');
+    if(manual) showToast('⚠️ جلسة الدخول منتهية، سجّل خروج ودخول تاني','#dc2626');
+    return;
+  }
   __draining = true;
   var items = __syncQueue.slice();
   for(var i=0;i<items.length;i++){
@@ -5550,18 +5654,22 @@ function renderSales(){
     var sc=statusColor(s.status),sb=statusBg(s.status);
     var rem=s.total-(s.paid||0);
     var pm=s.payment_method||'كاش';
+    var __hC=__isFieldHidden('sales','customer'), __hSt=__isFieldHidden('sales','status'),
+        __hPm=__isFieldHidden('sales','payment_method'), __hSer=__isFieldHidden('sales','serial'),
+        __hTot=__isFieldHidden('sales','total'), __hDisc=__isFieldHidden('sales','discount'),
+        __hCost=__isFieldHidden('sales','items_cost'), __hNote=__isFieldHidden('sales','note');
     var inner=
       '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">'+
       '<div style="flex:1;min-width:0">'+
       '<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:3px">'+
-      '<span style="font-weight:900;font-size:14px;cursor:pointer;color:#0f172a" onclick="openLedger(\''+esc(s.customer)+'\')">'+esc(s.customer)+'</span>'+
-      '<span style="font-size:10px;background:'+sb+';color:'+sc+';border-radius:6px;padding:2px 8px;font-weight:700">'+s.status+'</span>'+
-      '<span style="font-size:10px;background:#f1f5f9;color:#374151;border-radius:6px;padding:2px 6px">'+pmIcon(pm)+' '+pm+'</span>'+
+      (__hC?'<span style="font-weight:900;font-size:14px;color:#94a3b8">🔒 عميل</span>':'<span style="font-weight:900;font-size:14px;cursor:pointer;color:#0f172a" onclick="openLedger(\''+esc(s.customer)+'\')">'+esc(s.customer)+'</span>')+
+      (__hSt?'':'<span style="font-size:10px;background:'+sb+';color:'+sc+';border-radius:6px;padding:2px 8px;font-weight:700">'+s.status+'</span>')+
+      (__hPm?'':'<span style="font-size:10px;background:#f1f5f9;color:#374151;border-radius:6px;padding:2px 6px">'+pmIcon(pm)+' '+pm+'</span>')+
       '</div>'+
       '<div style="font-size:11px;color:#94a3b8;margin-bottom:4px">'+esc(fmtDate(s.date))+
       (window.__isOwner&&s.created_by&&s.created_by!==window.__currentProfile.id?' <span style="background:#ede9fe;color:#6d28d9;border-radius:6px;padding:1px 6px;font-weight:700">👤 '+esc(_employeeNameById(s.created_by)||'موظف')+'</span>':'')+
       '</div>'+
-      ((s.serial||s.model)?
+      ((s.serial||s.model)&&!__hSer?
         '<div style="background:#f8fafc;border-radius:7px;padding:4px 8px;margin-bottom:4px;font-size:12px;display:flex;gap:8px;flex-wrap:wrap">'+
         (s.serial?'<span>🔢 <b>'+esc(s.serial)+'</b></span>':'')+
         (s.model?'<span>🖨️ '+esc(s.model)+'</span>':'')+
@@ -5572,11 +5680,12 @@ function renderSales(){
         (s.items||[]).map(function(i){return '<span style="background:#f1f5f9;border-radius:5px;padding:1px 6px">'+esc(i.name)+' ×'+i.qty+'</span>';}).join('')+
         (s.services||[]).map(function(sv){return '<span style="background:#fff7ed;border-radius:5px;padding:1px 6px;color:#ea580c">🔧 '+esc(sv.name)+'</span>';}).join('')+
         '</div>':'')+
+      (s.note&&!__hNote?'<div style="font-size:11px;color:#94a3b8;margin-top:2px">📝 '+esc(s.note)+'</div>':'')+
       '</div>'+
       '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0">'+
-      '<div style="font-weight:900;font-size:16px;color:#0f172a">'+fmt(s.total)+'</div>'+
-      (rem>0?'<div style="font-size:11px;color:#dc2626;font-weight:700">متبقي: '+fmt(rem)+'</div>':'')+
-      (s.discount?'<div style="font-size:10px;color:#ca8a04">خصم: '+fmt(s.discount)+'</div>':'')+
+      (__hTot?'':'<div style="font-weight:900;font-size:16px;color:#0f172a">'+fmt(s.total)+'</div>')+
+      (rem>0&&!__hTot?'<div style="font-size:11px;color:#dc2626;font-weight:700">متبقي: '+fmt(rem)+'</div>':'')+
+      (s.discount&&!__hDisc?'<div style="font-size:10px;color:#ca8a04">خصم: '+fmt(s.discount)+'</div>':'')+
       '<div style="display:flex;gap:4px;margin-top:2px">'+
       '<button class="btn-ic" style="background:#dbeafe;padding:5px 8px" onclick="openSaleModal(\''+s.id+'\')">✏️</button>'+
       '<button class="btn-ic" style="background:#f0fdf4;padding:5px 8px" onclick="printInvoice(\''+s.id+'\')">🖨️</button>'+
@@ -7082,19 +7191,23 @@ function _supplierGroupCard(g){
   var key=normalizeAr(g.supplier);
   var expanded=_purchExpanded[key];
   var count=g.purchases.length;
+  var __hSup=__isFieldHidden('purchases','supplier'), __hTot=__isFieldHidden('purchases','total'),
+      __hPaid=__isFieldHidden('purchases','paid'), __hExtra=__isFieldHidden('purchases','extra_cost'),
+      __hItems=__isFieldHidden('purchases','items');
+  var supDisp=__hSup?'🔒 مورد':esc(g.supplier);
 
   return '<div class="card" style="margin-bottom:10px">'+
     '<div onclick="togglePurchGroup(\''+key.replace(/'/g,"\\'")+'\')" style="cursor:pointer">'+
     '<div style="display:flex;justify-content:space-between;align-items:flex-start">'+
     '<div style="flex:1">'+
-    '<div class="item-name">'+esc(g.supplier)+(function(){var s=(DB.suppliers||[]).find(function(x){return normalizeAr(x.name)===key;});return s?' <span style="font-size:10px;color:#7c3aed;font-weight:800">🆔 '+esc(s.code)+'</span>':'';})()+'</div>'+
+    '<div class="item-name">'+supDisp+(function(){var s=(DB.suppliers||[]).find(function(x){return normalizeAr(x.name)===key;});return (s&&!__hSup)?' <span style="font-size:10px;color:#7c3aed;font-weight:800">🆔 '+esc(s.code)+'</span>':'';})()+'</div>'+
     '<div style="display:flex;gap:6px;margin-top:4px;flex-wrap:wrap">'+
     '<span style="background:#ede9fe;color:#7c3aed;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:700">'+count+' معاملة</span>'+
-    (debtAmt>0?'<span style="background:#fee2e2;color:#dc2626;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:700">💳 دين '+fmt(debtAmt)+'</span>':'<span style="background:#dcfce7;color:#15803d;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:700">✅ مسدّد</span>')+
+    (__hTot?'':(debtAmt>0?'<span style="background:#fee2e2;color:#dc2626;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:700">💳 دين '+fmt(debtAmt)+'</span>':'<span style="background:#dcfce7;color:#15803d;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:700">✅ مسدّد</span>'))+
     '</div></div>'+
     '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">'+
-    '<div style="font-weight:900;font-size:16px;color:#7c3aed">'+fmt(g.totalAmount)+'</div>'+
-    '<div style="font-size:11px;color:#16a34a">مدفوع: '+fmt(g.totalPaid)+'</div>'+
+    (__hTot?'':'<div style="font-weight:900;font-size:16px;color:#7c3aed">'+fmt(g.totalAmount)+'</div>')+
+    (__hPaid?'':'<div style="font-size:11px;color:#16a34a">مدفوع: '+fmt(g.totalPaid)+'</div>')+
     '<span style="font-size:11px;color:#94a3b8">'+(expanded?'▲ إخفاء':'▼ التفاصيل')+'</span>'+
     '</div></div></div>'+
 
@@ -7109,11 +7222,11 @@ function _supplierGroupCard(g){
           '<button class="btn-ic" style="background:#ede9fe;padding:4px 7px" onclick="openPurchaseModal(\''+p.id+'\')">✏️</button>'+
           '<button class="btn-ic" style="background:#fee2e2;padding:4px 7px" onclick="confirmAction(\'هتحذف المشترى ده؟\',function(){delItem(\'purchases\',\''+p.id+'\',renderPurchases)})">🗑️</button>'+
           '</div></div>'+
-          '<div style="font-size:12px;color:#374151;margin-bottom:5px">'+(p.items||[]).map(function(i){return esc(i.name)+' ×'+i.qty;}).join(' | ')+'</div>'+
-          (p.extra_cost?'<div style="font-size:11px;color:#ea580c;margin-bottom:4px">📦 تكاليف إضافية: '+fmt(p.extra_cost)+'</div>':'')+
+          (__hItems?'':'<div style="font-size:12px;color:#374151;margin-bottom:5px">'+(p.items||[]).map(function(i){return esc(i.name)+' ×'+i.qty;}).join(' | ')+'</div>')+
+          (p.extra_cost&&!__hExtra?'<div style="font-size:11px;color:#ea580c;margin-bottom:4px">📦 تكاليف إضافية: '+fmt(p.extra_cost)+'</div>':'')+
           '<div style="display:flex;justify-content:space-between;align-items:center">'+
-          '<span style="font-size:11px;color:#64748b">إجمالي: <b style="color:#7c3aed">'+fmt((p.total||0)+(p.extra_cost||0))+'</b> | مدفوع: <b style="color:#16a34a">'+fmt(p.paid||0)+'</b></span>'+
-          (pDebt>0?'<span style="font-size:11px;color:#dc2626;font-weight:700">باقي '+fmt(pDebt)+'</span>':'')+
+          '<span style="font-size:11px;color:#64748b">'+(__hTot?'':'إجمالي: <b style="color:#7c3aed">'+fmt((p.total||0)+(p.extra_cost||0))+'</b> ')+(__hPaid?'':'| مدفوع: <b style="color:#16a34a">'+fmt(p.paid||0)+'</b>')+'</span>'+
+          (pDebt>0&&!__hTot&&!__hPaid?'<span style="font-size:11px;color:#dc2626;font-weight:700">باقي '+fmt(pDebt)+'</span>':'')+
           '</div></div>';
       }).join('')+
       '</div>':'')+
@@ -7817,6 +7930,8 @@ function renderDebts(){
     var color=isPaid?'#16a34a':isSupplier?'#dc2626':'#2563eb';
     var hasMultiple=g.debts.length>1;
     var detailsId='dg-'+gIdx;
+    var __hName=__isFieldHidden('debts','name'), __hTot=__isFieldHidden('debts','total'), __hPaid=__isFieldHidden('debts','paid');
+    var nameDisp=__hName?'🔒 اسم':esc(g.name);
     var mixedNote=g.isMixed?
       '<div style="background:#fffbeb;border:1px solid #fde68a;border-radius:9px;padding:8px 10px;margin-bottom:8px">'+
       '<table style="width:100%;border-collapse:collapse;font-size:12px">'+
@@ -7828,7 +7943,7 @@ function renderDebts(){
       // رأس البطاقة — الاسم والإجمالي
       '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">'+
       '<div style="flex:1">'+
-      '<div style="font-weight:900;font-size:15px;color:#0f172a">'+esc(g.name)+'</div>'+
+      '<div style="font-weight:900;font-size:15px;color:#0f172a">'+nameDisp+'</div>'+
       '<div style="margin-top:4px;display:flex;gap:5px;flex-wrap:wrap">'+
       (g.isMixed?'<span style="background:#fffbeb;color:#92400e;border-radius:8px;padding:3px 9px;font-size:11px;font-weight:800">⚖️ عليه وله</span>'
       :isSupplier
@@ -7837,17 +7952,17 @@ function renderDebts(){
       (hasMultiple?'<span style="background:#f5f3ff;color:#7c3aed;border-radius:8px;padding:3px 9px;font-size:11px;font-weight:800">'+g.debts.length+' معاملة</span>':'')+
       (isPaid?'<span style="background:#dcfce7;color:#15803d;border-radius:8px;padding:3px 9px;font-size:11px;font-weight:800">✅ مسدّد</span>':'')+
       '</div></div>'+
-      '<div style="text-align:left">'+
+      (__hTot?'':'<div style="text-align:left">'+
       '<div style="font-size:11px;color:#94a3b8">'+(g.isMixed?'الصافي':'إجمالي الدين')+'</div>'+
       '<div style="font-size:18px;font-weight:900;color:'+color+'">'+fmt(rem>0?rem:0)+'</div>'+
-      '</div></div>'+
+      '</div>')+'</div>'+
       mixedNote+
 
       // ملخص
-      '<div style="background:#f8fafc;border-radius:10px;padding:9px 12px;margin-bottom:8px">'+
-      '<div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span style="color:#64748b">إجمالي المبالغ</span><b>'+fmt(g.totalDebt)+'</b></div>'+
-      '<div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:#64748b">تم سداد</span><b style="color:#16a34a">'+fmt(g.totalPaid)+'</b></div>'+
-      '</div>'+
+      (__hTot&&__hPaid?'':'<div style="background:#f8fafc;border-radius:10px;padding:9px 12px;margin-bottom:8px">'+
+      (__hTot?'':'<div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span style="color:#64748b">إجمالي المبالغ</span><b>'+fmt(g.totalDebt)+'</b></div>')+
+      (__hPaid?'':'<div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:#64748b">تم سداد</span><b style="color:#16a34a">'+fmt(g.totalPaid)+'</b></div>')+
+      '</div>')+
 
       // تفاصيل المعاملات (قابلة للطي)
       (hasMultiple?
@@ -8187,12 +8302,12 @@ function renderTasks(){
     return '<div class="task-card" style="border-right:4px solid '+(isDone?'#94a3b8':pc(t.priority))+'">'+
       '<div style="display:flex;justify-content:space-between;align-items:flex-start">'+
       '<div style="flex:1">'+
-      '<div style="font-weight:800;font-size:15px;color:'+(isDone?'#94a3b8':'#0f172a')+';text-decoration:'+(isDone?'line-through':'none')+'">'+esc(t.title)+'</div>'+
-      ((t.desc||t.details)?'<div class="item-sub">'+esc(t.desc||t.details)+'</div>':'')+
+      '<div style="font-weight:800;font-size:15px;color:'+(isDone?'#94a3b8':'#0f172a')+';text-decoration:'+(isDone?'line-through':'none')+'">'+(__isFieldHidden('tasks','title')?'🔒 مهمة':esc(t.title))+'</div>'+
+      ((t.desc||t.details)&&!__isFieldHidden('tasks','desc')?'<div class="item-sub">'+esc(t.desc||t.details)+'</div>':'')+
       (t.due_date?'<div class="item-sub" style="color:#ea580c">📅 '+esc(fmtDate(t.due_date))+'</div>':'')+
       (isDone&&t.done_at?'<div class="item-sub" style="color:#16a34a">✅ أُنجزت: '+esc(fmtDate(t.done_at.slice(0,10)))+'</div>':'')+
       '<div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap">'+
-      '<span class="badge" style="background:'+pc(t.priority)+'22;color:'+pc(t.priority)+'">'+esc(t.priority)+'</span>'+
+      (__isFieldHidden('tasks','priority')?'':'<span class="badge" style="background:'+pc(t.priority)+'22;color:'+pc(t.priority)+'">'+esc(t.priority)+'</span>')+
       (isDone?'<span class="badge" style="background:#dcfce7;color:#16a34a">✅ منجزة</span>':'')+
       (isDone&&t.auto_done?'<span class="badge" style="background:#ede9fe;color:#7c3aed">🔗 اكتملت تلقائياً</span>':'')+
       '</div></div>'+
@@ -9070,19 +9185,21 @@ function renderExpensesList(){
       var sc=e.source==='salary'?'#15803d':e.source==='fixed_exp'?'#7c3aed':'#ea580c';
       var sb=e.source==='salary'?'#dcfce7':e.source==='fixed_exp'?'#ede9fe':'#fff7ed';
       var sl=e.source==='salary'?'راتب':e.source==='fixed_exp'?'دوري':'يدوي';
+      var __hLbl=__isFieldHidden('expenses','label'), __hAmt=__isFieldHidden('expenses','amount'),
+          __hType=__isFieldHidden('expenses','type'), __hNote=__isFieldHidden('expenses','note');
       return '<div class="card" style="margin-bottom:16px">'+
         '<div style="display:flex;justify-content:space-between;align-items:center">'+
         '<div style="flex:1;min-width:0">'+
         '<div style="display:flex;align-items:center;gap:6px;margin-bottom:2px">'+
-        '<span style="font-weight:800;font-size:13px">'+esc(e.type)+(e.subcategory?' <span style="color:#94a3b8;font-weight:600">— '+esc(e.subcategory)+'</span>':'')+'</span>'+
+        (__hType?'<span style="font-weight:800;font-size:13px">🔒 مصروف</span>':'<span style="font-weight:800;font-size:13px">'+esc(e.type)+(e.subcategory?' <span style="color:#94a3b8;font-weight:600">— '+esc(e.subcategory)+'</span>':'')+'</span>')+
         '<span style="background:'+sb+';color:'+sc+';border-radius:5px;padding:1px 6px;font-size:10px;font-weight:700">'+sl+'</span>'+
         '</div>'+
-        '<div style="font-size:11px;color:#94a3b8">'+esc(fmtDate(e.date))+(e.note?' — '+esc(e.note):'')+
+        '<div style="font-size:11px;color:#94a3b8">'+esc(fmtDate(e.date))+(e.note&&!__hNote?' — '+esc(e.note):'')+
         (window.__isOwner&&e.created_by&&e.created_by!==window.__currentProfile.id?' <span style="background:#ede9fe;color:#6d28d9;border-radius:6px;padding:1px 6px;font-weight:700">👤 '+esc(_employeeNameById(e.created_by)||'موظف')+'</span>':'')+
         '</div>'+
         '</div>'+
         '<div style="display:flex;align-items:center;gap:6px;flex-shrink:0">'+
-        '<b style="color:#ea580c;font-size:14px">'+fmt(e.amount)+'</b>'+
+        (__hAmt?'':'<b style="color:#ea580c;font-size:14px">'+fmt(e.amount)+'</b>')+
         '<button onclick="openEditExpenseModal(\''+e.id+'\')" style="background:#dbeafe;border:none;border-radius:7px;padding:5px 9px;cursor:pointer;font-size:12px">✏️</button>'+
         '<button onclick="confirmAction(\'هتحذف؟\',function(){delItem(\'expenses\',\''+e.id+'\',renderExpensesList)})" style="background:#fee2e2;border:none;border-radius:7px;padding:5px 9px;cursor:pointer;font-size:12px">🗑️</button>'+
         '</div></div></div>';
@@ -9504,23 +9621,26 @@ function renderMovements(){
     var lastLog=m.log&&m.log.length?m.log[m.log.length-1]:null;
     var isOpenState=m.status!=='منتهي'&&m.status!=='ملغي';
     var num=m.seq_num?'<span style="background:#0f172a;color:#fff;border-radius:4px;padding:0 5px;font-size:10px;font-weight:900">#'+m.seq_num+'</span> ':'';
+    var __hC=__isFieldHidden('movements','customer'), __hSt=__isFieldHidden('movements','status'),
+        __hDev=__isFieldHidden('movements','device'), __hDesc=__isFieldHidden('movements','fault_desc');
+    var custDisp=__hC?'🔒 عميل':esc(m.customer);
     if(_movPrintSelectMode){
       return '<div onclick="toggleMovPrintSelect(\''+m.id+'\')" style="background:'+(_movPrintSelected[m.id]?'#eff6ff':'#fff')+';border-radius:9px;padding:9px;box-shadow:0 1px 4px rgba(0,0,0,.06);margin-bottom:5px;border-right:3px solid '+sc(m.status)+';display:flex;align-items:center;gap:10px;cursor:pointer">'+
         '<span id="mp-chk-'+m.id+'" style="font-size:18px;flex-shrink:0">'+(_movPrintSelected[m.id]?'✅':'⬜')+'</span>'+
         '<div style="min-width:0;flex:1">'+
-        '<div>'+num+'<b style="font-size:14px">'+esc(m.customer)+'</b></div>'+
-        '<div style="font-size:11px;color:#64748b">'+(m.device?esc(m.device):'')+(m.fault_type?(m.device?' — ':'')+esc(m.fault_type):'')+'</div>'+
+        '<div>'+num+'<b style="font-size:14px">'+custDisp+'</b></div>'+
+        '<div style="font-size:11px;color:#64748b">'+(m.device&&!__hDev?esc(m.device):'')+(m.fault_type&&!__hDesc?(m.device&&!__hDev?' — ':'')+esc(m.fault_type):'')+'</div>'+
         '</div></div>';
     }
     return '<div style="background:#fff;border-radius:9px;padding:6px 9px;box-shadow:0 1px 4px rgba(0,0,0,.06);margin-bottom:5px;border-right:3px solid '+sc(m.status)+'">'+
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px">'+
-      '<div>'+num+'<b style="font-size:14px">'+esc(m.customer)+'</b></div>'+
-      '<span style="background:'+sc(m.status)+'22;color:'+sc(m.status)+';border-radius:5px;padding:1px 6px;font-size:10px;font-weight:800">'+esc(m.status)+'</span>'+
+      '<div>'+num+'<b style="font-size:14px">'+custDisp+'</b></div>'+
+      (__hSt?'':'<span style="background:'+sc(m.status)+'22;color:'+sc(m.status)+';border-radius:5px;padding:1px 6px;font-size:10px;font-weight:800">'+esc(m.status)+'</span>')+
       '</div>'+
       '<div style="font-size:11px;color:#64748b;margin-bottom:3px">'+
-      (m.device?esc(m.device):'')+
-      (m.fault_type?(m.device?' — ':'')+esc(m.fault_type):'')+
-      (lastLog?' | <span style="color:#94a3b8">'+esc(lastLog.note.substring(0,30))+(lastLog.note.length>30?'...':'')+'</span>':'')+
+      (m.device&&!__hDev?esc(m.device):'')+
+      (m.fault_type&&!__hDesc?(m.device&&!__hDev?' — ':'')+esc(m.fault_type):'')+
+      (lastLog&&!__hDesc?' | <span style="color:#94a3b8">'+esc(lastLog.note.substring(0,30))+(lastLog.note.length>30?'...':'')+'</span>':'')+
       '</div>'+
       (m.status==='ملغي'&&m.cancel_reason?'<div style="font-size:11px;color:#dc2626;background:#fef2f2;border-radius:6px;padding:4px 7px;margin-bottom:4px">🚫 سبب الإلغاء: '+esc(m.cancel_reason)+'</div>':'')+
       '<div style="display:flex;gap:3px">'+
