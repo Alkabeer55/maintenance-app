@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v176</title>
+<title>ابو حوده الحلو الجميل v179</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,8 +13,50 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="2026-09-12 — v176";
+<script>var BUILD_STAMP="2026-09-12 — v179";
 /* ===== سجل التعديلات (Changelog) =====
+v179: [📜 سجل العمليات المالية الموحّد — تبويب جديد في التقارير + تشخيص مشكلة نزول الربح]
+     🔍 التشخيص: راجعت كود توزيع الأرباح (saveProfitCycle) ودالة قائمة الدخل الحقيقية
+     (renderPeriodReport) سطر بسطر — تأكدت 100% إنهم مش مرتبطين ببعض خالص برمجيًا؛ توزيع
+     الأرباح بيأثر بس على "الأرباح المحتجزة" (رصيد منفصل)، ومستحيل رياضيًا يغيّر رقم صافي
+     الربح في قائمة الدخل (اللي = مبيعات - تكلفة بضاعة - مصاريف بس). لو الرقم لسه بينزل رغم
+     كده، محتاج أشوف الأرقام الفعلية بنفسي — استخدم السجل الجديد تحت يساعدك تحدد بالظبط
+     امتى وليه.
+     ✨ تبويب "📜 السجل" الجديد في التقارير: يجمع كل حركة فلوس فعلية (بيع، شراء، مصروف،
+     راتب، سلفة، سداد دين من/لـ عميل أو مورد، رأس مال، سحب أرباح) في تسلسل زمني واحد —
+     كل عملية موضّح جنبها المبلغ (+داخل / −خارج)، وللمبيعات بالذات موضّح كمان تكلفة البضاعة
+     المباعة وإجمالي ربح الفاتورة نفسها بجانب بعض. فيه فلتر بالنوع وبالفترة (نفس فلتر باقي
+     التقارير). ده بالظبط اللي طلبته — تقدر تتبع أي قرش دخل أو خرج وتكتشف أي اختلاف فورًا.
+v178: [🐛 إصلاح جذري لمشكلة "Failed to fetch" في شاشة الدخول أوفلاين]
+     السبب الحقيقي: لما تحاول تسجّل دخول (بزرار "دخول" يدويًا) وانت أوفلاين، Supabase مش
+     دايمًا بيرمي استثناء (exception) يتلقطه try/catch الموجود — أحيانًا بيرجّع الخطأ عادي
+     جوه الرد (res.error.message) بالنص الإنجليزي الخام "Failed to fetch"، وده مكنش من ضمن
+     الحالات اللي بتتترجم (كان بس بيترجم "Invalid login credentials")، فكان بيظهرلك النص
+     الأجنبي المخيف زي ما بعتّه بالظبط. دلوقتي أي خطأ فيه كلمة fetch/network/connection
+     بيتترجم لنفس الرسالة الواضحة "❌ فشل الاتصال بالسيرفر. تأكد من النت." — في شاشتي
+     تسجيل الدخول وإنشاء حساب جديد.
+     ⚠️ ملحوظة مهمة: الرسالة دي كانت بتظهر بس لما تضغط زرار "دخول" فعليًا وانت أوفلاين —
+     لو عندك جلسة دخول سابقة على الجهاز، التطبيق أصلاً بيتخطى شاشة الدخول ويدخلك أوفلاين
+     تلقائيًا (مفروض متشوفش الشاشة دي خالص في الحالة دي). لو لسه بيحصل معاك بعد التحديث ده
+     رغم إنك مسجّل دخول قبل كده على نفس الجهاز، قولّي بالظبط الجهاز عمل إيه قبلها (خروج
+     يدوي؟ مسح بيانات المتصفح؟ تحديث المتصفح؟) عشان أدوّر في السبب الأعمق.
+v177: [✨ نظام الراتب اليومي + السلفة + الإجازات + تصحيح مكن العميل من v176]
+     🔧 تصحيح فهم خاطئ في v176: مكن العميل الغير نشطة لازم تختفي بس وقت اختيار مكنة
+     لفاتورة جديدة (وده أصلاً شغال صح من زمان)، أما في بروفايل/دفتر العميل فلازم تفضل
+     ظاهرة كأرشيف مع حالتها وتاريخ إغلاقها (status_date) — رجّعت العرض ده تاني.
+     ✨ نظام الراتب اليومي الكامل: أي موظف تقدر تحدده "أجر يومي" بدل شهري (سعر لليوم).
+     التطبيق بيجمع المستحق تلقائيًا = سعر اليوم × أيام الحضور الفعلية (من نظام الحضور)،
+     وبيوريك "مستحق / اتصرف / الرصيد" بوضوح — لو دفعتله أكتر من المستحق يبان "سلفة" بالسالب
+     بالظبط زي مثالك (100/يوم × 5 أيام = 500، دفعت 600 = سالب 100).
+     ✨ الإجازة: زرار "📅 إجازة" لأي موظف مربوط بحساب دخول — يوم الإجازة مبيتحسبش غياب
+     (مفيش خصم راتب شهري) ولا يوم شغل (مفيش استحقاق راتب يومي).
+     ✨ السلفة (منفصلة عن المكافأة): زرار "💵 سلفة" للموظف الشهري — أي سلفة بتتخصم أوتوماتيك
+     من صرفة راتب آخر الشهر (تظهر واضحة في شاشة الصرف)، من غير ما تتلخبط مع المكافآت
+     اللي بتتضاف لوحدها.
+     🐛 إصلاح: دالة حساب أيام الغياب كانت بتستخدم الشهر الميلادي بدل الهجري (مخالفة لقاعدتك
+     الأولى) — بقت هجرية زي كل حاجة تانية بالتطبيق.
+     🐛 إصلاح: صرف الراتب الشهري ودفع المصروف الدوري كانوا ناقصين حارس الإقفال الشهري
+     (v175) — بقى موجود فيهم.
 v176: [من قائمة طلباتك بتاريخ ٢٩/٠٣/١٤٤٨ هـ — نفّذت الاتنين الواضحين، والباقي محتاج توضيح منك]
      ✅ "المصروفات المجمعة تبقي زي مجمع زي الرواتب": في المصروفات ← عرض مجمّع، الرواتب كانت
      الوحيدة اللي بتتجمع لكل موظف لوحده (بدل ما تتكرر كل شهر كسطر منفصل). دلوقتي أي التزام
@@ -2183,7 +2225,15 @@ input:checked+.slider:before{transform:translateX(-20px)}
     try{
       var res = await sb.auth.signInWithPassword({ email: email, password: pass });
       if(res.error){
-        __showLoginMsg('❌ '+ (res.error.message === 'Invalid login credentials' ? 'الإيميل أو كلمة السر غلط' : res.error.message), 'err');
+        // ⚠️ v178 — إصلاح جذري: لما يكون النت مقطوع، Supabase مش دايمًا بيرمي استثناء
+        // يتلقطه catch تحت — أحيانًا بيرجّع الخطأ عادي في res.error.message بالنص
+        // الإنجليزي الخام "Failed to fetch"، وكان بيظهر زي ما هو للمستخدم من غير ترجمة
+        // (رسالة مخيفة وغير مفهومة). دلوقتي أي خطأ شبكة (fetch/network/connection)
+        // بيتترجم لنفس الرسالة الواضحة اللي بتظهر لو حصل استثناء فعلي.
+        var _emsg=String(res.error.message||'');
+        var _isNetErr=/fetch|network|connection/i.test(_emsg);
+        __showLoginMsg(_isNetErr?'❌ فشل الاتصال بالسيرفر. تأكد من النت.':
+          '❌ '+ (_emsg === 'Invalid login credentials' ? 'الإيميل أو كلمة السر غلط' : _emsg), 'err');
         btn.disabled = false; btn.textContent = 'دخول';
         return;
       }
@@ -2263,10 +2313,11 @@ input:checked+.slider:before{transform:translateX(-20px)}
       var res = await sb.auth.signUp({ email: email, password: pass });
       if(res.error){
         var isDup = /already registered|already exists|already been registered/i.test(res.error.message);
+        var _isNetErr2=/fetch|network|connection/i.test(String(res.error.message||''));
         __showLoginMsg(
           isDup
             ? '⚠️ الإيميل ده كان اتسجل بيه قبل كده (يمكن من محاولة سابقة). دوس "عندك حساب؟ سجّل دخول" وجرب تدخل بنفس الإيميل وكلمة السر دي — لو صح، هيتظبط تلقائيًا ويبقى مستني موافقة المالك.'
-            : '❌ '+res.error.message,
+            : (_isNetErr2?'❌ فشل الاتصال بالسيرفر. تأكد من النت.':'❌ '+res.error.message),
           'err'
         );
         btn.disabled = false; btn.textContent = 'إنشاء الحساب';
@@ -3256,6 +3307,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
         <button class="tab" onclick="switchReportTab('analysis',this)">📈 تحليل</button>
         <button class="tab" onclick="switchReportTab('parts_sold',this)">🔩 الأكثر مبيعًا</button>
         <button class="tab" onclick="switchReportTab('models',this)">🖨️ الموديلات</button>
+        <button class="tab" onclick="switchReportTab('ledger',this)">📜 السجل</button>
       </div>
       <div id="tab-period"></div>
       <div id="tab-income" style="display:none"></div>
@@ -3265,6 +3317,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
       <div id="tab-analysis" style="display:none"></div>
       <div id="tab-parts_sold" style="display:none"></div>
       <div id="tab-models" style="display:none"></div>
+      <div id="tab-ledger" style="display:none"></div>
     </div>
 
     <div id="screen-settings" class="screen">
@@ -3402,7 +3455,7 @@ var APP_TITLE='ابو حوده الحلو الجميل';
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=176;
+var APP_VERSION=179;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -3517,6 +3570,10 @@ function loadDB(){
     // hKey = 'hYear-hMonth' هجري. لما شهر يتقفل، أي تعديل/إضافة/حذف بتاريخ داخل الشهر ده يتمنع
     // لغير المالك، والمالك لازم "يفتح" الشهر الأول من شاشة الحسابات قبل ما يقدر يعدّل فيه.
     if(!DB.accounts.closed_months) DB.accounts.closed_months=[];
+    // ⚠️ v177 — سجل أيام إجازة معتمدة لكل موظف (مرتبط بـprofile_id زي سجل الحضور بالظبط):
+    // [{id, profile_id, employee_id, date, note}] — يوم الإجازة ميتحسبش غياب (خصم راتب شهري)
+    // ولا يوم شغل (استحقاق راتب يومي).
+    if(!DB.accounts.employee_leaves) DB.accounts.employee_leaves=[];
     if(!DB.accounts.inventory_adjustments) DB.accounts.inventory_adjustments=[];
     if(DB.accounts.opening_balance===undefined) DB.accounts.opening_balance=0; // إيرادات تسوية مخزون (زيادة الجرد)
     if(DB.accounts.opening_inventory_value===undefined) DB.accounts.opening_inventory_value=0;
@@ -4460,7 +4517,7 @@ function switchReportTab(tab,el){
   currentReportTab=tab;
   document.querySelectorAll('#screen-reports .tab').forEach(function(t){t.classList.remove('active');});
   if(el)el.classList.add('active');
-  ['period','income','balance','cashflow','expenses','analysis','parts_sold','models'].forEach(function(t){
+  ['period','income','balance','cashflow','expenses','analysis','parts_sold','models','ledger'].forEach(function(t){
     var d=document.getElementById('tab-'+t);if(d)d.style.display=t===tab?'block':'none';
   });
   renderReports();
@@ -6836,19 +6893,22 @@ function renderLedger(customerName){
       }).join('')+'</div>';
   }
 
-  // ماكينات العميل — ⚠️ v176: بقينا نعرض النشطة بس (زي كل الأماكن التانية اللي بتعرض
-  // مكن العميل)، بدل ما نعرض كل المكن بما فيها المتوقفة/الملغية
-  var activeClientMachines=(client&&client.machines||[]).filter(function(m){return(m.status||'active')==='active';});
-  if(client&&activeClientMachines.length){
+  // ماكينات العميل — ⚠️ v177: تصحيح لفهم v176 الخاطئ. المطلوب الفعلي: إخفاء المكنة
+  // الغير نشطة بس وقت *اختيار مكنة لفاتورة جديدة* (ده أصلاً شغال صح من قبل — دالة
+  // renderClientMachines بتفلتر النشطة بس). أما هنا (بروفايل/دفتر العميل) فهو أرشيف
+  // ولازم يفضل يعرض كل مكنة حتى المتوقفة، مع توضيح حالتها وتاريخ إغلاقها (status_date).
+  if(client&&(client.machines||[]).length){
     ensureModelGroupsDefaults();
     content+='<div class="card" style="margin-bottom:12px">'+
-      '<div style="font-weight:800;font-size:13px;margin-bottom:8px;color:#374151">🖨️ ماكيناته ('+activeClientMachines.length+')</div>'+
-      activeClientMachines.map(function(m){
+      '<div style="font-weight:800;font-size:13px;margin-bottom:8px;color:#374151">🖨️ ماكيناته ('+client.machines.length+')</div>'+
+      client.machines.map(function(m){
         var fam=canonicalModelFamily(m.model||'');
         var famTag=(fam&&fam!==m.model)?' <span style="color:#7c3aed;font-size:10px">('+esc(fam)+')</span>':'';
+        var st=MACHINE_STATUSES[m.status||'active']||MACHINE_STATUSES.active;
+        var closedNote=(m.status!=='active'&&m.status_date)?' — '+esc(fmtDate(m.status_date)):'';
         return '<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #f1f5f9;font-size:12px">'+
           '<div><b>'+esc(m.model||'—')+'</b>'+famTag+(m.serial?'<span style="color:#94a3b8;margin-right:6px;font-size:11px">'+esc(m.serial)+'</span>':'')+'</div>'+
-          '<span style="font-size:10px;color:#15803d">✅ نشطة</span></div>';
+          '<span style="font-size:10px;color:'+st.color+'">'+st.icon+' '+esc(st.label)+closedNote+'</span></div>';
       }).join('')+
       '<button onclick="navigate(\'reports\');setTimeout(function(){switchReportTab(\'models\',document.querySelector(\'.tab\'))},50)" style="margin-top:8px;width:100%;padding:7px;background:#ede9fe;border:none;border-radius:8px;font-family:inherit;font-size:11px;font-weight:700;color:#7c3aed;cursor:pointer">🖨️ إحصائيات الموديلات (كل العملاء)</button>'+
       '</div>';
@@ -9026,7 +9086,10 @@ function openPaySalaryModal(empId){
   var showDeduction=emp.linked_profile_id&&deduction>0;
   // v133 — بند 4: عمولة معتمدة لسه ما اتصرفتش (المالك يختار يشملها في الصرفة دي أو لأ)
   var pendingCommission=emp.commission_pending||0;
-  var suggested=Math.max(0,emp.salary-(showDeduction?deduction:0));
+  // ⚠️ v177 — أي سلفة اتصرفت للموظف ده الشهر ده تتخصم أوتوماتيك من صرفة الراتب هنا
+  // (منفصلة تمامًا عن المكافأة اللي بتتضاف لوحدها فوق)
+  var advThisMonth=_advancesPaidThisMonth(empId);
+  var suggested=Math.max(0,emp.salary-(showDeduction?deduction:0)-advThisMonth);
   document.getElementById('modal-title').textContent='💰 صرف راتب — '+esc(emp.name);
   document.getElementById('modal-body').innerHTML=
     '<div style="background:#f0fdf4;border-radius:10px;padding:10px 12px;margin-bottom:12px">'+
@@ -9034,6 +9097,7 @@ function openPaySalaryModal(empId){
     '<div style="font-size:22px;font-weight:900;color:#15803d">'+fmt(emp.salary)+' / شهر</div></div>'+
     (willIncrease?'<div style="background:#ede9fe;border-radius:10px;padding:10px 12px;margin-bottom:12px;font-size:12px;color:#7c3aed;border:1.5px solid #ddd6fe">📈 <b>تنبيه:</b> هذه الصرفة سيُطبق فيها الزيادة الدورية — الراتب القادم سيكون '+fmt(nextSalary)+'</div>':'')+
     (showDeduction?'<div style="background:#fef2f2;border-radius:10px;padding:10px 12px;margin-bottom:12px;font-size:12px;color:#dc2626;border:1.5px solid #fecaca">⚠️ غياب هذا الشهر: '+absenceDays+' يوم × '+fmt(perDay)+' = خصم '+fmt(deduction)+' (اتخصم مبدئيًا من الخانة تحت، وتقدر تعدّلها زي ما تحب)</div>':'')+
+    (advThisMonth>0?'<div style="background:#fff7ed;border-radius:10px;padding:10px 12px;margin-bottom:12px;font-size:12px;color:#92400e;border:1.5px solid #fde68a">💵 سلفة اتصرفت هذا الشهر: '+fmt(advThisMonth)+' (اتخصمت أوتوماتيك من الخانة تحت)</div>':'')+
     (pendingCommission>0?'<div style="background:#eff6ff;border-radius:10px;padding:10px 12px;margin-bottom:12px;font-size:12px;color:#2563eb;border:1.5px solid #bfdbfe">💰 عمولة معتمدة لسه ما اتصرفتش: '+fmt(pendingCommission)+' — <label style="cursor:pointer"><input type="checkbox" id="sal-inc-comm" onchange="_toggleCommInSalary('+jsStr(String(pendingCommission))+')" style="width:14px;height:14px;vertical-align:middle"> اضمّها في الصرفة دي</label></div>':'')+
     fld('sal-amount','المبلغ المصروف (ج)','number',suggested,'',true)+
     fld('sal-note','ملاحظة','text','','مثال: راتب يناير 2025')+
@@ -9060,6 +9124,9 @@ async function confirmPaySalary(empId){
   if(!emp)return;
   var amount=+v('sal-amount');
   if(!amount||amount<=0)return showToast('⚠️ المبلغ مطلوب','#dc2626');
+  // ⚠️ v177 — كانت الدالة دي ناقصة حارس الإقفال الشهري من v175 (بتحط في DB.expenses
+  // مباشرة من غير ما تعدي على saveExpense)
+  if(_blockIfClosedMonth(v('sal-date')))return;
   var note=v('sal-note')||'راتب '+esc(emp.name);
   var commWasIncluded=!!window._commIncludedInSalary;
   window._commIncludedInSalary=false;
@@ -9115,6 +9182,8 @@ async function confirmPayFixedExp(fexpId){
   if(!fexp)return;
   var amount=+v('fexp-pay-amount');
   if(!amount||amount<=0)return showToast('⚠️ المبلغ مطلوب','#dc2626');
+  // ⚠️ v177 — نفس فجوة confirmPaySalary
+  if(_blockIfClosedMonth(v('fexp-pay-date')))return;
   var note=v('fexp-pay-note')||fexp.name;
 
   // تطبيق الزيادة الدورية لو موجودة
@@ -11428,7 +11497,7 @@ function renderReports(){
     if(m&&hiddenTabs.indexOf(m[1])!==-1)btn.style.display='none';else if(m)btn.style.display='';
   });
   if(hiddenTabs.indexOf(tab)!==-1)tab=currentReportTab='period';
-  ['period','income','balance','cashflow','expenses','analysis','parts_sold','models'].forEach(function(t){
+  ['period','income','balance','cashflow','expenses','analysis','parts_sold','models','ledger'].forEach(function(t){
     var el=document.getElementById('tab-'+t);if(el)el.style.display=t===tab?'block':'none';
   });
   if(tab==='period')renderPeriodReport();
@@ -11439,6 +11508,7 @@ function renderReports(){
   else if(tab==='analysis')renderFullAnalysis();
   else if(tab==='parts_sold')renderPartsSoldReport();
   else if(tab==='models')renderModelsReport();
+  else if(tab==='ledger')renderFinancialLedger();
 }
 
 // ⚠️ v111 — إحصائيات موديلات المكن: كام مكنة من كل موديل مسجلة عند عملاءك، وكام عطل جالها
@@ -11570,6 +11640,87 @@ function rKpi(label,val,sub,color,bg){
     (sub?'<div style="font-size:10px;color:'+color+';opacity:.7;margin-top:2px">'+sub+'</div>':'')+
     '</div>';
 }
+
+// ===== v178: سجل العمليات المالية الموحّد (📜 السجل) =====
+// بيجمع كل حركة فلوس فعلية (بيع/شراء/مصروف/سداد دين/سلفة/راتب/رأس مال/توزيع أرباح) في تسلسل
+// زمني واحد، كل حركة موضّح فيها: التاريخ، النوع، الوصف، المبلغ (+داخل/−خارج)، وللمبيعات كمان
+// تكلفة البضاعة المباعة (COGS) بجانب الإيراد — عشان تقدر تتبع أي فرق في صافي الربح لحظة بلحظة.
+function renderFinancialLedger(){
+  var el=document.getElementById('tab-ledger');if(!el)return;
+  var r=_periodToRange(_reportPeriod);
+  var inRange=function(d){return(!r.from||d>=r.from)&&(!r.to||d<=r.to);};
+  var events=[];
+
+  // مبيعات (إيراد + تكلفة البضاعة المباعة معًا)
+  DB.sales.forEach(function(s){
+    if(!s.date||!inRange(s.date))return;
+    var cost=(s.items||[]).reduce(function(ss,i){return ss+i.qty*(i.buyPrice||i.buy_price||0);},0);
+    events.push({date:s.date,icon:'🧾',type:'بيع',desc:'فاتورة — '+(s.customer||'—'),amount:s.total,sign:1,cost:cost,sub:'تكلفة البضاعة: '+fmt(cost)+' — إجمالي ربح الفاتورة: '+fmt(s.total-cost)});
+  });
+  // مشتريات
+  DB.purchases.forEach(function(p){
+    if(!p.date||!inRange(p.date))return;
+    events.push({date:p.date,icon:'📦',type:'شراء',desc:'مشترى — '+(p.supplier||'—'),amount:p.total,sign:-1});
+  });
+  // مصروفات (فيها الرواتب والسلف والالتزامات الدورية كلها لأنها بتتسجل كمصروف)
+  DB.expenses.forEach(function(e){
+    if(!e.date||!inRange(e.date))return;
+    var lbl=e.is_advance?'سلفة':(e.type==='رواتب'?'راتب':'مصروف');
+    events.push({date:e.date,icon:e.is_advance?'💵':(e.type==='رواتب'?'👤':'💸'),type:lbl,desc:(e.note||e.label||e.type||'—'),amount:e.amount,sign:-1});
+  });
+  // سداد ديون (عميل بيدفع = فلوس داخلة / إحنا بندفع مورد = فلوس خارجة)
+  (DB.debts||[]).forEach(function(d){
+    (d.payments||[]).forEach(function(p){
+      if(!p.date||!inRange(p.date))return;
+      var isSupplier=d.type==='supplier';
+      events.push({date:p.date,icon:isSupplier?'📤':'📥',type:isSupplier?'سداد لمورد':'تحصيل من عميل',desc:(d.name||'—'),amount:p.amount,sign:isSupplier?-1:1});
+    });
+  });
+  // رأس مال (ضخ فلوس في المشروع)
+  (DB.accounts.capital||[]).forEach(function(c){
+    if(!c.date||!inRange(c.date))return;
+    events.push({date:c.date,icon:'🏦',type:'رأس مال',desc:(c.name||'—')+(c.note?' — '+c.note:''),amount:c.amount,sign:1});
+  });
+  // توزيع أرباح (سحب فعلي بس — ده اللي بيخرج فلوس فعلي من الكاش، مش معاملة قائمة دخل)
+  (DB.accounts.profit_cycles||[]).forEach(function(cy){
+    if(!cy.date_created||!inRange(cy.date_created))return;
+    if(cy.owner_draw)events.push({date:cy.date_created,icon:'📊',type:'سحب أرباح (مالك)',desc:'دورة توزيع '+esc(fmtDate(cy.date_from))+' ← '+esc(fmtDate(cy.date_to)),amount:cy.owner_draw,sign:-1,note:'⚠️ ده سحب فعلي من الكاش، مش مصروف — ما بيأثرش على صافي الربح في قائمة الدخل'});
+  });
+
+  events.sort(function(a,b){return a.date<b.date?1:a.date>b.date?-1:0;});
+  var totalIn=events.filter(function(e){return e.sign>0;}).reduce(function(s,e){return s+e.amount;},0);
+  var totalOut=events.filter(function(e){return e.sign<0;}).reduce(function(s,e){return s+e.amount;},0);
+
+  var filterHtml='<div style="display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap">'+
+    ['all','بيع','شراء','مصروف','راتب','سلفة','سداد لمورد','تحصيل من عميل','رأس مال','سحب أرباح (مالك)'].map(function(t){
+      var active=(_ledgerTypeFilter||'all')===t;
+      return '<button onclick="_ledgerTypeFilter='+jsStr(t)+';renderFinancialLedger()" style="padding:5px 10px;border-radius:8px;border:1.5px solid '+(active?'#0f172a':'#e2e8f0')+';background:'+(active?'#0f172a':'#fff')+';color:'+(active?'#fff':'#64748b')+';font-size:11px;font-weight:700;font-family:inherit;cursor:pointer">'+(t==='all'?'الكل':t)+'</button>';
+    }).join('')+'</div>';
+
+  var filtered=events.filter(function(e){return!_ledgerTypeFilter||_ledgerTypeFilter==='all'||e.type===_ledgerTypeFilter;});
+
+  el.innerHTML=
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">'+
+    rKpi('📥 إجمالي الداخل',fmt(totalIn),events.filter(function(e){return e.sign>0;}).length+' عملية','#15803d','#dcfce7')+
+    rKpi('📤 إجمالي الخارج',fmt(totalOut),events.filter(function(e){return e.sign<0;}).length+' عملية','#dc2626','#fee2e2')+
+    '</div>'+
+    filterHtml+
+    rCard('📜 السجل الزمني الكامل ('+filtered.length+' عملية)','#0f172a',
+      filtered.length?filtered.slice(0,150).map(function(e){
+        return '<div style="padding:9px 0;border-bottom:1px solid #f1f5f9">'+
+          '<div style="display:flex;justify-content:space-between;align-items:center">'+
+          '<div style="min-width:0;flex:1"><span style="font-size:13px;font-weight:700">'+e.icon+' '+esc(e.type)+'</span>'+
+          '<div style="font-size:11px;color:#64748b;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(e.desc)+' — '+esc(fmtDate(e.date))+'</div></div>'+
+          '<b style="font-size:14px;color:'+(e.sign>0?'#15803d':'#dc2626')+';flex-shrink:0;margin-right:8px">'+(e.sign>0?'+':'−')+fmt(e.amount)+'</b>'+
+          '</div>'+
+          (e.sub?'<div style="font-size:10.5px;color:#94a3b8;margin-top:2px">'+esc(e.sub)+'</div>':'')+
+          (e.note?'<div style="font-size:10.5px;color:#ca8a04;margin-top:2px">'+esc(e.note)+'</div>':'')+
+          '</div>';
+      }).join(''):'<div class="empty">مفيش عمليات في الفترة دي</div>'
+    )+
+    (filtered.length>150?'<div style="text-align:center;font-size:11px;color:#94a3b8;margin-top:6px">بيعرض آخر 150 عملية بس — ضيّق الفترة لو عايز تشوف أقل من كده</div>':'');
+}
+var _ledgerTypeFilter='all';
 
 // ===== قائمة الدخل =====
 function _activeInvestorsExist(){
@@ -12238,6 +12389,7 @@ if(!DB.accounts.retained_earnings) DB.accounts.retained_earnings={owner:0,invest
 
 if(!DB.accounts.balance_snapshots) DB.accounts.balance_snapshots=[]; // [{id, asOf:'2026-06-01', label, data:{...}, createdAt}]
 if(!DB.accounts.closed_months) DB.accounts.closed_months=[]; // v175
+if(!DB.accounts.employee_leaves) DB.accounts.employee_leaves=[]; // v177
 
 // ===== حساب أرقام المركز المالي عند تاريخ معيّن (يُستخدم في العرض الحالي وفي اللقطات) =====
 // asOfDate: 'YYYY-MM-DD' أو null = حتى الآن (كل البيانات بدون فلترة تاريخ)
@@ -13509,11 +13661,16 @@ function renderEmployees(){
     '<button class="btn btn-primary btn-full btn-sm" onclick="openAddEmployeeModal()" style="margin-bottom:12px">+ إضافة موظف</button>'+
     (items.length?items.map(function(e){
       var isActive=e.active!==false;
+      var isDaily=e.wage_type==='daily';
+      var dailyEarned=isDaily?_dailyWageEarnedThisMonth(e):0;
+      var dailyPaid=isDaily?_dailyWagePaidThisMonth(e.id):0;
+      var dailyBalance=dailyEarned-dailyPaid;
+      var advThisMonth=!isDaily?_advancesPaidThisMonth(e.id):0;
       return '<div class="card" style="margin-bottom:8px;opacity:'+(isActive?'1':'0.6')+'">'+
         // السطر الأول: الاسم + الراتب
         '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">'+
         '<div style="font-weight:800;font-size:14px">'+esc(e.name)+'</div>'+
-        '<b style="font-size:16px;color:#15803d">'+fmt(e.salary)+'/ش</b>'+
+        (isDaily?'<b style="font-size:14px;color:#7c3aed">'+fmt(e.daily_rate||0)+'/يوم</b>':'<b style="font-size:16px;color:#15803d">'+fmt(e.salary)+'/ش</b>')+
         '</div>'+
         // السطر الثاني: الدور والوسوم
         '<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:8px">'+
@@ -13522,9 +13679,18 @@ function renderEmployees(){
         (!isActive?'<span style="background:#f1f5f9;color:#94a3b8;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:700">متوقف</span>':'')+
         (e.increment?'<span style="background:#ede9fe;color:#7c3aed;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:700">📈 '+e.increment.value+(e.increment.type==='pct'?'%':' ج')+' كل '+e.increment.every+' '+(e.increment.period==='year'?'سنة':'صرف')+'</span>':'')+
         '</div>'+
+        // ⚠️ v177 — شريط استحقاق/مدفوع/رصيد للراتب اليومي
+        (isDaily?'<div style="background:#faf5ff;border-radius:9px;padding:7px 9px;margin-bottom:8px;font-size:11px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px">'+
+          '<span>مستحق: <b style="color:#7c3aed">'+fmt(dailyEarned)+'</b></span>'+
+          '<span>اتصرف: <b style="color:#2563eb">'+fmt(dailyPaid)+'</b></span>'+
+          '<span>الرصيد: <b style="color:'+(dailyBalance>=0?'#15803d':'#dc2626')+'">'+(dailyBalance<0?'−':'')+fmt(Math.abs(dailyBalance))+(dailyBalance<0?' سلفة':'')+'</b></span>'+
+          '</div>':'')+
+        (!isDaily&&advThisMonth>0?'<div style="background:#fff7ed;border-radius:9px;padding:6px 9px;margin-bottom:8px;font-size:11px;color:#92400e">💵 سلفة هذا الشهر: <b>'+fmt(advThisMonth)+'</b> — هتتخصم من صرفة الراتب</div>':'')+
         // السطر الثالث: الأزرار — صف مستقل بمساحة كافية
         '<div style="display:flex;gap:6px;flex-wrap:wrap;border-top:1px solid #f1f5f9;padding-top:8px">'+
-          _paySalBtn(e.id)+
+          (isDaily?'<button class="btn-ic" style="background:#f5f3ff" onclick="openPayDailyWageModal(\''+e.id+'\')">💰 دفعة</button>':_paySalBtn(e.id))+
+          (!isDaily?'<button class="btn-ic" style="background:#fff7ed" onclick="openPayAdvanceModal(\''+e.id+'\')">💵 سلفة</button>':'')+
+          (e.linked_profile_id?'<button class="btn-ic" style="background:#eff6ff" onclick="openMarkLeaveModal(\''+e.id+'\')">📅 إجازة</button>':'')+
         '<button class="btn-ic" style="background:#ede9fe" onclick="openSalaryIncrementModal(\''+e.id+'\')" title="زيادة دورية">📈 زيادة</button>'+
         '<button class="btn-ic" style="background:'+(isActive?'#fef9c3':'#dcfce7')+'" onclick="toggleEmployee(\''+e.id+'\')">'+(isActive?'⏸️ إيقاف':'▶️ تفعيل')+'</button>'+
         '<button class="btn-ic" style="background:#dbeafe" onclick="openEditEmployeeModal(\''+e.id+'\')">✏️ تعديل</button>'+
@@ -13538,39 +13704,67 @@ function openAddEmployeeModal(){
   document.getElementById('modal-body').innerHTML=
     fld('emp-name','اسم الموظف','text','','',true)+
     fld('emp-role','الوظيفة / الدور','text','','مثال: فني، محاسب، سائق')+
-    fld('emp-salary','الراتب / شهر (ج)','number','','',true)+
+    '<div class="field"><label>نوع الأجر</label><select id="emp-wage-type" onchange="_toggleWageFields()" style="width:100%;padding:10px;border:1.5px solid #e2e8f0;border-radius:9px;font-family:inherit">'+
+    '<option value="monthly">شهري (راتب ثابت)</option><option value="daily">يومي (سعر اليوم × أيام الحضور)</option></select></div>'+
+    '<div id="emp-monthly-field">'+fld('emp-salary','الراتب / شهر (ج)','number','','',true)+'</div>'+
+    '<div id="emp-daily-field" style="display:none">'+fld('emp-daily-rate','سعر اليوم (ج)','number','','')+'</div>'+
     dateField('emp-hire','📅 تاريخ التعيين',null)+
     fld('emp-note','ملاحظات','text','')+
     '<div class="modal-actions"><button class="btn btn-primary btn-full" onclick="__runOnce(this,saveEmployee)">إضافة</button><button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
   openModal();
 }
+// ⚠️ v177 — إظهار خانة "الراتب الشهري" أو "سعر اليوم" حسب نوع الأجر المختار
+function _toggleWageFields(){
+  var type=document.getElementById('emp-wage-type').value;
+  document.getElementById('emp-monthly-field').style.display=type==='monthly'?'':'none';
+  document.getElementById('emp-daily-field').style.display=type==='daily'?'':'none';
+}
 
 function openEditEmployeeModal(id){
   var e=(DB.accounts.employees||[]).find(function(x){return x.id===id;});if(!e)return;
+  var wageType=e.wage_type||'monthly';
   document.getElementById('modal-title').textContent='✏️ تعديل — '+esc(e.name);
   document.getElementById('modal-body').innerHTML=
     fld('eemp-name','الاسم','text',e.name,'',true)+
     fld('eemp-role','الوظيفة','text',e.role||'')+
-    fld('eemp-salary','الراتب / شهر (ج)','number',e.salary,'',true)+
+    '<div class="field"><label>نوع الأجر</label><select id="eemp-wage-type" onchange="_toggleWageFieldsEdit()" style="width:100%;padding:10px;border:1.5px solid #e2e8f0;border-radius:9px;font-family:inherit">'+
+    '<option value="monthly"'+(wageType==='monthly'?' selected':'')+'>شهري (راتب ثابت)</option>'+
+    '<option value="daily"'+(wageType==='daily'?' selected':'')+'>يومي (سعر اليوم × أيام الحضور)</option></select></div>'+
+    '<div id="eemp-monthly-field" style="display:'+(wageType==='monthly'?'':'none')+'">'+fld('eemp-salary','الراتب / شهر (ج)','number',e.salary||'','',wageType==='monthly')+'</div>'+
+    '<div id="eemp-daily-field" style="display:'+(wageType==='daily'?'':'none')+'">'+fld('eemp-daily-rate','سعر اليوم (ج)','number',e.daily_rate||'')+'</div>'+
     fld('eemp-note','ملاحظات','text',e.note||'')+
     '<div class="modal-actions"><button class="btn btn-green btn-full" onclick="saveEditEmployee(\''+id+'\')">حفظ</button><button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
   openModal();
 }
+function _toggleWageFieldsEdit(){
+  var type=document.getElementById('eemp-wage-type').value;
+  document.getElementById('eemp-monthly-field').style.display=type==='monthly'?'':'none';
+  document.getElementById('eemp-daily-field').style.display=type==='daily'?'':'none';
+}
 
 async function saveEmployee(){
-  var name=v('emp-name'),salary=+v('emp-salary');
+  var name=v('emp-name');
+  var wageType=document.getElementById('emp-wage-type')?document.getElementById('emp-wage-type').value:'monthly';
+  var salary=wageType==='monthly'?+v('emp-salary'):0;
+  var dailyRate=wageType==='daily'?+v('emp-daily-rate'):0;
   if(!name)return showToast('⚠️ الاسم مطلوب','#dc2626');
-  if(!salary||salary<=0)return showToast('⚠️ الراتب غير صحيح','#dc2626');
+  if(wageType==='monthly'&&(!salary||salary<=0))return showToast('⚠️ الراتب غير صحيح','#dc2626');
+  if(wageType==='daily'&&(!dailyRate||dailyRate<=0))return showToast('⚠️ سعر اليوم غير صحيح','#dc2626');
   if(!DB.accounts.employees)DB.accounts.employees=[];
-  DB.accounts.employees.push({id:genId(),name:name,role:v('emp-role'),salary:salary,hire_date:v('emp-hire'),note:v('emp-note'),active:true});
+  DB.accounts.employees.push({id:genId(),name:name,role:v('emp-role'),wage_type:wageType,salary:salary,daily_rate:dailyRate,hire_date:v('emp-hire'),note:v('emp-note'),active:true});
   await persist();closeModal();renderAccounting();showToast('✅ تم إضافة الموظف','#16a34a');
 }
 
 async function saveEditEmployee(id){
-  var name=v('eemp-name'),salary=+v('eemp-salary');
-  if(!name||!salary||salary<=0)return showToast('⚠️ تحقق من البيانات','#dc2626');
+  var name=v('eemp-name');
+  var wageType=document.getElementById('eemp-wage-type')?document.getElementById('eemp-wage-type').value:'monthly';
+  var salary=wageType==='monthly'?+v('eemp-salary'):0;
+  var dailyRate=wageType==='daily'?+v('eemp-daily-rate'):0;
+  if(!name)return showToast('⚠️ الاسم مطلوب','#dc2626');
+  if(wageType==='monthly'&&(!salary||salary<=0))return showToast('⚠️ الراتب غير صحيح','#dc2626');
+  if(wageType==='daily'&&(!dailyRate||dailyRate<=0))return showToast('⚠️ سعر اليوم غير صحيح','#dc2626');
   DB.accounts.employees=DB.accounts.employees.map(function(e){
-    return e.id!==id?e:Object.assign({},e,{name:name,role:v('eemp-role'),salary:salary,note:v('eemp-note')});
+    return e.id!==id?e:Object.assign({},e,{name:name,role:v('eemp-role'),wage_type:wageType,salary:salary,daily_rate:dailyRate,note:v('eemp-note')});
   });
   await persist();closeModal();renderAccounting();showToast('✅ تم التعديل','#16a34a');
 }
@@ -17238,6 +17432,165 @@ async function confirmMyAttendance(){
   renderMyAccount();
 }
 // v133 — عدد أيام الغياب هذا الشهر لموظف معيّن (بدون تفرقة عطلات أسبوعية — أبسط طريقة ممكنة)
+// ⚠️ v177 — إصلاحين: (1) كانت الدالة دي بتحسب "الشهر الحالي" بالتقويم الميلادي
+// (t.slice(0,7)) مخالفة لقاعدتك إن كل حاجة بالتطبيق تتحسب بالهجري — دلوقتي بتستخدم
+// hijriMonthRange زي كل مكان تاني في التطبيق. (2) أي يوم مسجّل كـ"إجازة معتمدة" في
+// employee_leaves مبقاش بيتحسب غياب خالص (مش لازم الموظف يسجّل حضور فيه).
+function _countAbsenceDaysThisMonth(profileId){
+  if(!profileId||!DB.settings||DB.settings.attendanceDeductionEnabled===false)return 0;
+  var t=today();
+  var h=currentHijri();
+  var hRange=hijriMonthRange(h.year,h.month);
+  var trackStart=DB.settings.attendanceTrackingStartDate||t;
+  var from=hRange.start>trackStart?hRange.start:trackStart;
+  var present={};
+  (DB.accounts.attendance||[]).forEach(function(a){if(a.profile_id===profileId)present[a.date]=true;});
+  var onLeave={};
+  (DB.accounts.employee_leaves||[]).forEach(function(l){if(l.profile_id===profileId)onLeave[l.date]=true;});
+  var count=0,d=new Date(from),end=new Date(t);
+  while(d<=end){
+    var ds=d.toISOString().split('T')[0];
+    if(!present[ds]&&!onLeave[ds])count++;
+    d.setDate(d.getDate()+1);
+  }
+  return count;
+}
+
+// ⚠️ v177 — عدد أيام الحضور الفعلية هذا الشهر الهجري (مُستخدمة لحساب استحقاق الراتب اليومي)
+function _countPresentDaysThisMonth(profileId){
+  if(!profileId)return 0;
+  var h=currentHijri();
+  var r=hijriMonthRange(h.year,h.month);
+  return (DB.accounts.attendance||[]).filter(function(a){return a.profile_id===profileId&&a.date>=r.start&&a.date<=r.end;}).length;
+}
+
+// ===== v177: نظام الراتب اليومي =====
+// المستحق هذا الشهر = سعر اليوم × أيام الحضور الفعلية (الإجازة مالهاش استحقاق ولا خصم)
+function _dailyWageEarnedThisMonth(emp){
+  return (emp.daily_rate||0)*_countPresentDaysThisMonth(emp.linked_profile_id);
+}
+// المدفوع فعليًا هذا الشهر (كل مصروف رواتب مسجّل لهذا الموظف، بغض النظر عن official_pay،
+// عشان الراتب اليومي بيتدفع على دفعات مش صرفة واحدة زي الشهري)
+function _dailyWagePaidThisMonth(empId){
+  return DB.expenses.filter(function(ex){return isInCurrentHijriMonth(ex.date)&&ex.source==='salary'&&ex.employee_id===empId;})
+    .reduce(function(s,ex){return s+(ex.amount||0);},0);
+}
+
+function openPayDailyWageModal(empId){
+  var emp=(DB.accounts.employees||[]).find(function(e){return e.id===empId;});if(!emp)return;
+  var earned=_dailyWageEarnedThisMonth(emp);
+  var paid=_dailyWagePaidThisMonth(empId);
+  var balance=earned-paid; // موجب = لسه ليه فلوس، سالب = اتسحب أكتر من المستحق (سلفة)
+  document.getElementById('modal-title').textContent='💰 دفعة راتب يومي — '+esc(emp.name);
+  document.getElementById('modal-body').innerHTML=
+    '<div style="background:#f0fdf4;border-radius:10px;padding:10px 12px;margin-bottom:12px;font-size:12px;line-height:2">'+
+    '<div style="display:flex;justify-content:space-between"><span>سعر اليوم</span><b>'+fmt(emp.daily_rate||0)+'</b></div>'+
+    '<div style="display:flex;justify-content:space-between"><span>أيام حضور هذا الشهر</span><b>'+_countPresentDaysThisMonth(emp.linked_profile_id)+' يوم</b></div>'+
+    '<div style="display:flex;justify-content:space-between"><span>المستحق هذا الشهر</span><b style="color:#15803d">'+fmt(earned)+'</b></div>'+
+    '<div style="display:flex;justify-content:space-between"><span>اتصرف فعلاً</span><b style="color:#2563eb">'+fmt(paid)+'</b></div>'+
+    '<div style="display:flex;justify-content:space-between;border-top:1px solid #bbf7d0;padding-top:4px;margin-top:2px"><span>الرصيد</span><b style="color:'+(balance>=0?'#15803d':'#dc2626')+'">'+(balance<0?'−':'')+fmt(Math.abs(balance))+(balance<0?' (سلفة)':'')+'</b></div>'+
+    '</div>'+
+    fld('dw-amount','المبلغ المصروف دلوقتي (ج)','number',Math.max(0,balance),'',true)+
+    fld('dw-note','ملاحظة','text','')+
+    dateField('dw-date','📅 تاريخ الصرف',null)+
+    '<div class="modal-actions">'+
+    '<button class="btn btn-green btn-full" onclick="confirmPayDailyWage(\''+empId+'\')">✅ تسجيل الدفعة</button>'+
+    '<button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
+  openModal();
+}
+
+async function confirmPayDailyWage(empId){
+  var emp=(DB.accounts.employees||[]).find(function(e){return e.id===empId;});if(!emp)return;
+  var amount=+v('dw-amount');
+  if(!amount||amount<=0)return showToast('⚠️ المبلغ مطلوب','#dc2626');
+  var dateVal=v('dw-date');
+  if(_blockIfClosedMonth(dateVal))return;
+  var note=v('dw-note')||'راتب يومي '+esc(emp.name);
+  DB.accounts.employees=DB.accounts.employees.map(function(e){return e.id===empId?Object.assign({},e,{last_paid:dateVal}):e;});
+  var obj={id:genId(),label:'رواتب — '+note,amount:amount,type:'رواتب',
+    note:note+' ('+esc(emp.name)+')',date:dateVal,source:'salary',employee_id:empId,official_pay:false,wage_type:'daily'};
+  DB.expenses.unshift(obj);
+  await persist();
+  await dbUpsert('expenses',obj);
+  closeModal();
+  _refreshExpensesView();
+  if(_accountingTab==='employees')renderAccounting();
+  renderHome();
+  showToast('✅ تم تسجيل دفعة الراتب اليومي','#16a34a');
+}
+
+// ===== v177: السلفة (منفصلة عن المكافأة) — بتتخصم أوتوماتيك من صرفة الراتب الشهري =====
+function _advancesPaidThisMonth(empId){
+  return DB.expenses.filter(function(ex){return isInCurrentHijriMonth(ex.date)&&ex.source==='salary'&&ex.employee_id===empId&&ex.is_advance===true;})
+    .reduce(function(s,ex){return s+(ex.amount||0);},0);
+}
+
+function openPayAdvanceModal(empId){
+  var emp=(DB.accounts.employees||[]).find(function(e){return e.id===empId;});if(!emp)return;
+  document.getElementById('modal-title').textContent='💵 سلفة — '+esc(emp.name);
+  document.getElementById('modal-body').innerHTML=
+    '<div style="background:#fff7ed;border-radius:10px;padding:10px 12px;margin-bottom:12px;font-size:12px;color:#92400e">'+
+    'السلفة هتتخصم أوتوماتيك من صرفة راتب '+esc(emp.name)+' آخر الشهر (مش زي المكافأة اللي بتتضاف لوحدها)</div>'+
+    fld('adv-amount','مبلغ السلفة (ج)','number','','',true)+
+    fld('adv-note','ملاحظة','text','')+
+    dateField('adv-date','📅 تاريخ الصرف',null)+
+    '<div class="modal-actions">'+
+    '<button class="btn btn-red btn-full" onclick="confirmPayAdvance(\''+empId+'\')">✅ تسجيل السلفة</button>'+
+    '<button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
+  openModal();
+}
+
+async function confirmPayAdvance(empId){
+  var emp=(DB.accounts.employees||[]).find(function(e){return e.id===empId;});if(!emp)return;
+  var amount=+v('adv-amount');
+  if(!amount||amount<=0)return showToast('⚠️ المبلغ مطلوب','#dc2626');
+  var dateVal=v('adv-date');
+  if(_blockIfClosedMonth(dateVal))return;
+  var note=v('adv-note')||'سلفة '+esc(emp.name);
+  var obj={id:genId(),label:'رواتب — '+note,amount:amount,type:'رواتب',
+    note:note+' ('+esc(emp.name)+')',date:dateVal,source:'salary',employee_id:empId,official_pay:false,is_advance:true};
+  DB.expenses.unshift(obj);
+  await persist();
+  await dbUpsert('expenses',obj);
+  closeModal();
+  _refreshExpensesView();
+  if(_accountingTab==='employees')renderAccounting();
+  renderHome();
+  showToast('✅ تم تسجيل السلفة — هتتخصم أوتوماتيك من الراتب آخر الشهر','#16a34a');
+}
+
+// ===== v177: تسجيل يوم إجازة معتمدة لموظف =====
+function openMarkLeaveModal(empId){
+  var emp=(DB.accounts.employees||[]).find(function(e){return e.id===empId;});if(!emp)return;
+  if(!emp.linked_profile_id)return showToast('⚠️ الموظف ده لسه مش مربوط بحساب دخول — مينفعش نسجّل حضور/إجازة له','#dc2626');
+  document.getElementById('modal-title').textContent='📅 تسجيل إجازة — '+esc(emp.name);
+  document.getElementById('modal-body').innerHTML=
+    dateField('leave-date','تاريخ الإجازة',null)+
+    fld('leave-note','السبب (اختياري)','text','')+
+    '<div class="modal-actions">'+
+    '<button class="btn btn-primary btn-full" onclick="confirmMarkLeave(\''+empId+'\')">✅ تسجيل</button>'+
+    '<button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
+  openModal();
+}
+
+async function confirmMarkLeave(empId){
+  var emp=(DB.accounts.employees||[]).find(function(e){return e.id===empId;});if(!emp)return;
+  var dateVal=v('leave-date');
+  if(!dateVal)return showToast('⚠️ اختار التاريخ','#dc2626');
+  if(!DB.accounts.employee_leaves)DB.accounts.employee_leaves=[];
+  var exists=DB.accounts.employee_leaves.some(function(l){return l.profile_id===emp.linked_profile_id&&l.date===dateVal;});
+  if(exists)return showToast('⚠️ اليوم ده متسجل إجازة بالفعل','#ca8a04');
+  var obj={id:genId(),profile_id:emp.linked_profile_id,employee_id:empId,date:dateVal,note:v('leave-note')||''};
+  DB.accounts.employee_leaves.push(obj);
+  // ⚠️ v177 — employee_leaves جزء من DB.accounts، وده بيتزامن تلقائيًا كـ"بلوك" واحد
+  // من داخل persist() (زي closed_months بالظبط) — مفيش جدول منفصل ليه في Supabase
+  // فمينفعش نستخدم dbUpsert هنا (كان غلط مني).
+  await persist();
+  closeModal();
+  if(_accountingTab==='employees')renderAccounting();
+  showToast('✅ اتسجلت إجازة '+esc(fmtDate(dateVal)),'#16a34a');
+}
+
 function _countAbsenceDaysThisMonth(profileId){
   if(!profileId||!DB.settings||DB.settings.attendanceDeductionEnabled===false)return 0;
   var t=today();
