@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v172</title>
+<title>ابو حوده الحلو الجميل v176</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,8 +13,54 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="2026-09-12 — v172";
+<script>var BUILD_STAMP="2026-09-12 — v176";
 /* ===== سجل التعديلات (Changelog) =====
+v176: [من قائمة طلباتك بتاريخ ٢٩/٠٣/١٤٤٨ هـ — نفّذت الاتنين الواضحين، والباقي محتاج توضيح منك]
+     ✅ "المصروفات المجمعة تبقي زي مجمع زي الرواتب": في المصروفات ← عرض مجمّع، الرواتب كانت
+     الوحيدة اللي بتتجمع لكل موظف لوحده (بدل ما تتكرر كل شهر كسطر منفصل). دلوقتي أي التزام
+     دوري تاني (إيجار، اشتراك إنترنت، فواتير كهربا...) بقى ليه نفس المعاملة — مجموعة قابلة
+     للطي لوحده بإجمالي وعدد المرات، بدل ما يبان كسطور متكررة تحت نوعه العام.
+     ✅ "أي مكنة غير نشطة لا تظهر": صفحة بروفايل العميل (اللي بتفتح من داخل فاتورة/تحرك)
+     كانت بتعرض كل مكن العميل حتى المتوقفة (بعلامة ⏸️ بس). دلوقتي بتعرض النشطة بس، زي كل
+     الأماكن التانية في التطبيق (اختيار مكنة لفاتورة جديدة، مثلاً).
+     ⏳ باقي 7 طلبات من نفس القائمة محتاجة توضيح منك قبل ما ألمسهم (اتفاصيل في الرسالة).
+v175: [🔒 نظام الإقفال الشهري — دفعة 3 من مراجعة المنطق المحاسبي، بند 12 من طلبك]
+     كان مفيش أي حماية تمنع تعديل/حذف فاتورة أو مصروف أو دين بتاريخ قديم — أي حد يقدر
+     يغيّر رقم شهر مقفول خلاص ويقلب كل الأرقام التاريخية. دلوقتي في شاشة الحسابات ← نظرة
+     عامة زرار "🔒 إقفال الشهر الحالي" (المالك بس)، بيثبّت لقطة رصيد نهاية الشهر تلقائيًا
+     ويمنع أي إضافة/تعديل/حذف (فاتورة بيع، مشترى، مصروف، دين، سداد دين) بتاريخ داخل الشهر
+     ده — لغير المالك خالص، وحتى المالك لازم "يفتح" الشهر بزرار صريح الأول قبل ما يعدّل فيه.
+     الحارس بيتحقق من التاريخ الجديد المُدخل *و*التاريخ القديم للسجل لو بتعدّل، عشان محدش
+     يقدر "ينقل" حركة بره شهر مقفول بمجرد تغيير تاريخها. الحذف الجماعي (تحديد متعدد) بقى
+     برضه بيتحقق من كل عنصر قبل الحذف. الشهور المقفولة اللي فاتت ظاهرة في قائمة تحت الزرار
+     مع إمكانية فتح أي واحدة فيها لو المالك محتاج يصحح حاجة قديمة.
+     ⚠️ ملحوظة: الإقفال الشهري ده اختياري بالكامل — التطبيق شغال عادي بدونه، وميقفلش أي
+     شهر تلقائيًا؛ المالك هو اللي يقرر يقفل الشهر لما يكون مطمّن للأرقام.
+v174: [🔗 ربط ديون الموردين بالـID الحقيقي بدل النص — دفعة 2 من مراجعة المنطق المحاسبي]
+     كان ربط دين المورد بفاتورة الشراء بيعتمد بالكامل على مطابقة نصية للوصف
+     ("مشترى — <تاريخ>") — هش جدًا: أي اختلاف بسيط في الصياغة أو التاريخ يكسر الربط
+     ويسيب دين "يتيم" أو يمنع تحديثه الصحيح لما تعدّل المشترى. دلوقتي كل دين مورد جديد
+     بيتسجل ومعاه source_purchase_id (معرّف المشترى الحقيقي)، وكل الأماكن اللي كانت بتتحقق
+     من الربط (savePurchase, _isDebtLinked, _isPurchaseLinkedSupplierDebt) بقت تفحص
+     source_purchase_id الأول، والنص القديم فاضل بس fallback للديون اللي اتسجلت قبل
+     الإصلاح ده — من غير ما تتحذف أو تتلمس. ⚠️ السجلات القديمة مش هتترقّم بأثر رجعي
+     (محتاجة migration فعلي لو عايز تربطهم كمان — قولّي لو حابب أعملها كخطوة منفصلة).
+     ⚠️ SQL مطلوب في Supabase: عمود source_purchase_id (نوعه uuid، nullable) لازم
+     يتضاف لجدول debts، وإلا الحقل ده هيتشال تلقائيًا قبل الرفع (زي أي عمود ناقص) ويفضل
+     محلي بس على الجهاز ده — يعني الربط الجديد مش هيتزامن لباقي الأجهزة لحد ما تضيف
+     العمود. SQL المطلوب: ALTER TABLE debts ADD COLUMN IF NOT EXISTS source_purchase_id uuid;
+v173: [🐛 إصلاح تضارب الأرقام بين التقارير — أول مرحلة من مراجعة شاملة للمنطق المحاسبي]
+     (1) شاشة "📊 التحليل الشامل" (تقارير ← تحليل) كانت بتحسب هامش الربح/التدفق النقدي/
+     متوسط الفاتورة من *كل* المبيعات والمصاريف منذ أول يوم للتطبيق، بدون فلتر فترة وبدون
+     توضيح إنها أرقام "كل الوقت" — فكانت بتختلف تمامًا عن رقم الشهر في "قائمة الدخل" جنبها
+     وتوهم إن فيه خطأ حسابي. بقى عندها فلتر فترة موحّد (شهر/سنة/مخصّص) زي باقي التبويبات،
+     وكل الأرقام بقت محسوبة على الفترة المختارة. قسم "الأداء الشهري" اتوضّح إنه (كل الوقت)
+     لأنه أصلاً مقارنة بين شهور مختلفة بطبيعته. ⚠️ ده إصلاح أول خطوة بس — لسه هناك مراجعة
+     أعمق مطلوبة (مصدر بيانات موحّد للتقارير كلها، نظام إقفال شهري، source_purchase_id
+     بدل النص) هتتنفذ في دفعات تالية.
+     (2) رقم الإصدار الظاهر فعليًا في الواجهة (APP_VERSION) كان مجمّد على 143 من فترة
+     طويلة، بينما عنوان الصفحة والـ Changelog وصلوا لـ v172 — يعني رقمين مختلفين للإصدار
+     في نفس التطبيق. اتوحّدوا دلوقتي على نفس الرقم مع كل تحديث.
 v172: [🐛 إصلاح حلقة تسجيل الخروج/الدخول المتكررة كل شوية — سببها v171] فيه سببين
      مركّبين: 1) التطبيق مصمم أصلاً يدعم "دخول أوفلاين بحساب محفوظ محليًا" كوضع طبيعي
      ومقبول (من غير جلسة سيرفر حقيقية دايمًا) — إصلاح v171 كان بيعتبر "مفيش جلسة" خطأ
@@ -3353,7 +3399,10 @@ input:checked+.slider:before{transform:translateX(-20px)}
 // ========== MODULE: DB ==========
 // ===== اسم التطبيق ورقم الإصدار — يزيد 1 يدوياً مع كل تحديث =====
 var APP_TITLE='ابو حوده الحلو الجميل';
-var APP_VERSION=143;
+// ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
+// (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
+// مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
+var APP_VERSION=176;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -3464,6 +3513,10 @@ function loadDB(){
     if(!DB.accounts.profit_cycles) DB.accounts.profit_cycles=[];
     if(!DB.accounts.retained_earnings) DB.accounts.retained_earnings={owner:0,investors:{}};
     if(!DB.accounts.balance_snapshots) DB.accounts.balance_snapshots=[];
+    // ⚠️ v175 — نظام الإقفال الشهري: [{hKey:'1447-03', hLabel:'ربيع الآخر 1447 هـ', closedAt, closedBy, asOf:'2026-08-30'}]
+    // hKey = 'hYear-hMonth' هجري. لما شهر يتقفل، أي تعديل/إضافة/حذف بتاريخ داخل الشهر ده يتمنع
+    // لغير المالك، والمالك لازم "يفتح" الشهر الأول من شاشة الحسابات قبل ما يقدر يعدّل فيه.
+    if(!DB.accounts.closed_months) DB.accounts.closed_months=[];
     if(!DB.accounts.inventory_adjustments) DB.accounts.inventory_adjustments=[];
     if(DB.accounts.opening_balance===undefined) DB.accounts.opening_balance=0; // إيرادات تسوية مخزون (زيادة الجرد)
     if(DB.accounts.opening_inventory_value===undefined) DB.accounts.opening_inventory_value=0;
@@ -6357,6 +6410,15 @@ async function saveSale(){
   }
   var customer=v('sale-customer');
   if(!customer)return showToast('⚠️ اسم العميل مطلوب','#dc2626');
+  // ⚠️ v175 — منع إضافة/تعديل فاتورة بتاريخ داخل شهر مقفول محاسبيًا (نتحقق من التاريخ
+  // الجديد المُدخل، وكمان التاريخ القديم للفاتورة لو بنعدّل، عشان محدش يقدر "ينقل" فاتورة
+  // بره شهر مقفول بمجرد تغيير التاريخ)
+  var __saleNewDate=v('sale-date');
+  if(_blockIfClosedMonth(__saleNewDate))return;
+  if(__editingSale){
+    var __oldSaleForGuard=DB.sales.find(function(x){return x.id===_saleId;});
+    if(__oldSaleForGuard&&_blockIfClosedMonth(__oldSaleForGuard.date))return;
+  }
   var subtotal=_saleItems.reduce(function(t,i){return t+i.qty*i.price;},0)+
     _saleServices.reduce(function(t,sv){return t+sv.price;},0);
   var disc=+v('sale-discount')||0;
@@ -6774,17 +6836,19 @@ function renderLedger(customerName){
       }).join('')+'</div>';
   }
 
-  // ماكينات العميل
-  if(client&&(client.machines||[]).length){
+  // ماكينات العميل — ⚠️ v176: بقينا نعرض النشطة بس (زي كل الأماكن التانية اللي بتعرض
+  // مكن العميل)، بدل ما نعرض كل المكن بما فيها المتوقفة/الملغية
+  var activeClientMachines=(client&&client.machines||[]).filter(function(m){return(m.status||'active')==='active';});
+  if(client&&activeClientMachines.length){
     ensureModelGroupsDefaults();
     content+='<div class="card" style="margin-bottom:12px">'+
-      '<div style="font-weight:800;font-size:13px;margin-bottom:8px;color:#374151">🖨️ ماكيناته ('+client.machines.length+')</div>'+
-      client.machines.map(function(m){
+      '<div style="font-weight:800;font-size:13px;margin-bottom:8px;color:#374151">🖨️ ماكيناته ('+activeClientMachines.length+')</div>'+
+      activeClientMachines.map(function(m){
         var fam=canonicalModelFamily(m.model||'');
         var famTag=(fam&&fam!==m.model)?' <span style="color:#7c3aed;font-size:10px">('+esc(fam)+')</span>':'';
         return '<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #f1f5f9;font-size:12px">'+
           '<div><b>'+esc(m.model||'—')+'</b>'+famTag+(m.serial?'<span style="color:#94a3b8;margin-right:6px;font-size:11px">'+esc(m.serial)+'</span>':'')+'</div>'+
-          '<span style="font-size:10px;color:'+((m.status||'active')==='active'?'#15803d':'#94a3b8')+'">'+((m.status||'active')==='active'?'✅ نشطة':'⏸️')+'</span></div>';
+          '<span style="font-size:10px;color:#15803d">✅ نشطة</span></div>';
       }).join('')+
       '<button onclick="navigate(\'reports\');setTimeout(function(){switchReportTab(\'models\',document.querySelector(\'.tab\'))},50)" style="margin-top:8px;width:100%;padding:7px;background:#ede9fe;border:none;border-radius:8px;font-family:inherit;font-size:11px;font-weight:700;color:#7c3aed;cursor:pointer">🖨️ إحصائيات الموديلات (كل العملاء)</button>'+
       '</div>';
@@ -7203,6 +7267,7 @@ function openDeleteSaleModal(saleId){
 
 async function deleteSaleAndDebt(saleId,debtId){
   var s=DB.sales.find(function(x){return x.id===saleId;});
+  if(s&&_blockIfClosedMonth(s.date))return; // v175
   await _restoreStockFromSale(s);
   DB.sales=DB.sales.filter(function(x){return x.id!==saleId;});
   DB.debts=DB.debts.filter(function(x){return x.id!==debtId;});
@@ -7212,6 +7277,7 @@ async function deleteSaleAndDebt(saleId,debtId){
 
 async function deleteSaleOnly(saleId){
   var s=DB.sales.find(function(x){return x.id===saleId;});
+  if(s&&_blockIfClosedMonth(s.date))return; // v175
   await _restoreStockFromSale(s);
   DB.sales=DB.sales.filter(function(x){return x.id!==saleId;});
   await persist();closeModal();renderSales();renderInventory();renderHome();
@@ -7528,6 +7594,13 @@ async function savePurchase(){
   var supplier=v('purch-supplier');
   if(!supplier)return showToast('⚠️ اسم المورد مطلوب','#dc2626');
   if(!_purchItems.length)return showToast('⚠️ أضف منتجاً واحداً على الأقل','#dc2626');
+  // ⚠️ v175 — نفس حارس الإقفال الشهري المستخدم في saveSale
+  var __purchNewDate=v('purch-date');
+  if(_blockIfClosedMonth(__purchNewDate))return;
+  if(_purchId){
+    var __oldPurchForGuard=DB.purchases.find(function(x){return x.id===_purchId;});
+    if(__oldPurchForGuard&&_blockIfClosedMonth(__oldPurchForGuard.date))return;
+  }
 
   var subtotal=_purchItems.reduce(function(s,i){return s+i.qty*i.price;},0);
   var extraCost=+v('purch-extra-cost')||0;
@@ -7581,7 +7654,10 @@ async function savePurchase(){
     var oldDebtAmount=Math.max(0,oldGrandTotal-oldPaidAtPurchase);
     var newDebtAmount=Math.max(0,grandTotal-paid);
     var oldDetailsStr='مشترى — '+((oldP&&oldP.date)||'');
-    var linkedDebt=DB.debts.find(function(d){return d.type==='supplier'&&d.name===(oldP&&oldP.supplier)&&(d.details||d.desc)===oldDetailsStr;});
+    // ⚠️ v174 — الأولوية للربط بـsource_purchase_id (دقيق ومايتأثرش بتغيير التاريخ/الوصف)،
+    // وفحص النص القديم فاضل بس fallback لو الدين اتسجل قبل إضافة الحقل ده.
+    var linkedDebt=DB.debts.find(function(d){return d.type==='supplier'&&d.source_purchase_id===_purchId;})||
+      DB.debts.find(function(d){return d.type==='supplier'&&d.name===(oldP&&oldP.supplier)&&(d.details||d.desc)===oldDetailsStr;});
     // ⚠️ v109 — ربط المشترى المُعدّل بكود مورد ثابت
     var supObj=getOrCreateSupplier(supplier);
     if(supObj){
@@ -7590,11 +7666,11 @@ async function savePurchase(){
     }
     if(linkedDebt){
       var newTotal=Math.max(newDebtAmount,linkedDebt.paid||0);
-      var updDebt=Object.assign({},linkedDebt,{name:supplier,supplier_id:supObj?supObj.id:linkedDebt.supplier_id,total:newTotal,date:v('purch-date'),details:'مشترى — '+v('purch-date'),desc:'مشترى — '+v('purch-date')});
+      var updDebt=Object.assign({},linkedDebt,{name:supplier,supplier_id:supObj?supObj.id:linkedDebt.supplier_id,source_purchase_id:_purchId,total:newTotal,date:v('purch-date'),details:'مشترى — '+v('purch-date'),desc:'مشترى — '+v('purch-date')});
       DB.debts=DB.debts.map(function(d){return d.id===linkedDebt.id?updDebt:d;});
       await dbUpdate('debts',linkedDebt.id,updDebt);
     }else if(newDebtAmount>0){
-      var newDebt={id:genId(),type:'supplier',name:supplier,supplier_id:supObj?supObj.id:null,
+      var newDebt={id:genId(),type:'supplier',name:supplier,supplier_id:supObj?supObj.id:null,source_purchase_id:_purchId,
         desc:'مشترى — '+v('purch-date'),details:'مشترى — '+v('purch-date'),
         total:newDebtAmount,paid:0,date:v('purch-date'),payments:[]};
       DB.debts.unshift(newDebt);
@@ -7632,7 +7708,7 @@ async function savePurchase(){
     }
     if(paid<grandTotal){
       var debtAmount=grandTotal-paid;
-      var debt={id:genId(),type:'supplier',name:supplier,supplier_id:supObj?supObj.id:null,
+      var debt={id:genId(),type:'supplier',name:supplier,supplier_id:supObj?supObj.id:null,source_purchase_id:obj.id,
         desc:'مشترى — '+v('purch-date'),
         details:'مشترى — '+v('purch-date'),
         total:debtAmount,paid:0,date:v('purch-date'),payments:[]};
@@ -7899,7 +7975,9 @@ function toggleDebtManualOnly(){
   renderDebts();
 }
 function _isDebtLinked(d){
-  return !!d.source_sale_id||String(d.details||d.desc||'').indexOf('مشترى — ')===0;
+  // ⚠️ v174 — بعد إضافة source_purchase_id، بقينا نتحقق منه أولاً (الأدق)، وفحص النص
+  // "مشترى — " فاضل بس fallback للديون القديمة اللي اتسجلت قبل الإصلاح ومفيهاش الحقل ده.
+  return !!d.source_sale_id||!!d.source_purchase_id||String(d.details||d.desc||'').indexOf('مشترى — ')===0;
 }
 function onDebtSearchInput(val){
   _debtSearch=val;
@@ -8164,6 +8242,8 @@ async function saveDebt(type){
   var name=v('debt-name'),total=+v('debt-total');
   if(!name)return showToast('⚠️ الاسم مطلوب','#dc2626');
   if(!total||total<=0)return showToast('⚠️ المبلغ غير صحيح','#dc2626');
+  // ⚠️ v175 — حارس الإقفال الشهري
+  if(_blockIfClosedMonth(v('debt-date')))return;
   var paid=+v('debt-paid')||0;
   var descVal=v('debt-desc');
   var obj={id:genId(),type:type,name:name,desc:descVal,details:descVal,total:total,paid:paid,date:v('debt-date'),payments:paid>0?[{amount:paid,date:v('debt-date')}]:[]};
@@ -8191,6 +8271,8 @@ function openEditDebtModal(id){
 }
 
 async function saveEditDebt(id){
+  var __oldDebtForGuard=DB.debts.find(function(x){return x.id===id;});
+  if(__oldDebtForGuard&&_blockIfClosedMonth(__oldDebtForGuard.date))return;
   var update={name:v('debt-name-e'),desc:v('debt-desc-e'),details:v('debt-desc-e'),total:+v('debt-total-e')};
   DB.debts=DB.debts.map(function(d){return d.id===id?Object.assign({},d,update):d;});
   await persist();
@@ -8223,6 +8305,8 @@ async function payDebt(id){
   }
   var amount=+v('pay-amount');
   if(!amount||amount<=0)return showToast('⚠️ المبلغ غير صحيح','#dc2626');
+  // ⚠️ v175 — سداد بتاريخ داخل شهر مقفول بيغيّر رصيد الكاش المقفول تاريخيًا، فممنوع برضه
+  if(_blockIfClosedMonth(v('pay-date')))return;
   var d=DB.debts.find(function(x){return x.id===id;});if(!d)return;
   var newPaid=Math.min((d.paid||0)+amount,d.total);
   var payments=(d.payments||[]).concat([{amount:amount,date:v('pay-date'),collected_by:(window.__currentProfile?window.__currentProfile.id:null)}]); // v161 — 2.10: مين حصّل السداد
@@ -8871,6 +8955,8 @@ async function saveExpense(){
   }
   var amount=+v('exp-amount');
   if(!amount||amount<=0)return showToast('⚠️ المبلغ مطلوب','#dc2626');
+  // ⚠️ v175 — حارس الإقفال الشهري
+  if(_blockIfClosedMonth(v('exp-date')))return;
   var type=v('exp-type'),sub=v('exp-sub').trim(),note=v('exp-note')||'';
   // حفظ الفرع الجديد لو مكتوب لأول مرة
   if(sub)addExpSubcategory(type,sub);
@@ -11808,15 +11894,32 @@ function renderExpensesReport(){
 
   // مستوى ثاني داخل نوع "رواتب" — كل موظف صف لوحده، عشان "الراتب يظهر إجمالي كل موظف وهكذا"
   function subGroupsFor(type,items){
-    if(type!=='رواتب')return null;
-    var byEmp={};
-    items.forEach(function(e){
-      var key=e.employee_id||e.note||'—';
-      var label=e.note?e.note.replace(/^.*—\s*/,''):'—';
-      if(!byEmp[key])byEmp[key]={label:label,items:[],total:0};
-      byEmp[key].items.push(e);byEmp[key].total+=e.amount;
+    if(type==='رواتب'){
+      var byEmp={};
+      items.forEach(function(e){
+        var key=e.employee_id||e.note||'—';
+        var label=e.note?e.note.replace(/^.*—\s*/,''):'—';
+        if(!byEmp[key])byEmp[key]={label:label,items:[],total:0,icon:'👤'};
+        byEmp[key].items.push(e);byEmp[key].total+=e.amount;
+      });
+      return byEmp;
+    }
+    // ⚠️ v176 — نفس فكرة تجميع الرواتب بالضبط، بس للالتزامات الدورية (fixed_exp): كل التزام
+    // (زي "إيجار المحل" أو "اشتراك الإنترنت") بقى ليه مجموعة قابلة للطي لوحده، بدل ما يبان
+    // كسطر منفصل مكرر كل شهر تحت نوعه العام من غير أي تجميع (عكس الرواتب اللي كانت مجمّعة أصلاً).
+    var fixedItems=items.filter(function(e){return e.source==='fixed_exp'&&e.fixed_exp_id;});
+    if(!fixedItems.length)return null;
+    var byCommitment={};
+    fixedItems.forEach(function(e){
+      var key=e.fixed_exp_id;
+      var label=e.subcategory||e.label||e.type;
+      if(!byCommitment[key])byCommitment[key]={label:label,items:[],total:0,icon:'📌'};
+      byCommitment[key].items.push(e);byCommitment[key].total+=e.amount;
     });
-    return byEmp;
+    // مصاريف يدوية عادية بنفس النوع (مش مرتبطة بالتزام دوري) تتجمع في مجموعة واحدة بره التزامات الدورية
+    var manualItems=items.filter(function(e){return!(e.source==='fixed_exp'&&e.fixed_exp_id);});
+    if(manualItems.length)byCommitment['__manual__']={label:'مصاريف يدوية أخرى',items:manualItems,total:manualItems.reduce(function(s,e){return s+e.amount;},0),icon:'✍️'};
+    return byCommitment;
   }
 
   function settleBtn(e){
@@ -11886,7 +11989,7 @@ function renderExpensesReport(){
               var empOpen=_expTableOpenType==='emp:'+k;
               return '<div style="margin-bottom:6px;background:#f0fdf4;border-radius:9px;padding:8px 9px">'+
                 '<div onclick="toggleExpTableType(\'emp:'+k+'\')" style="display:flex;justify-content:space-between;align-items:center;cursor:pointer">'+
-                '<span style="font-weight:800;font-size:12.5px;color:#15803d">👤 '+esc(sg.label)+' <span style="color:#94a3b8;font-weight:600">('+sg.items.length+')</span></span>'+
+                '<span style="font-weight:800;font-size:12.5px;color:#15803d">'+(sg.icon||'👤')+' '+esc(sg.label)+' <span style="color:#94a3b8;font-weight:600">('+sg.items.length+')</span></span>'+
                 '<b style="color:#15803d;font-size:13px">'+fmt(sg.total)+'</b></div>'+
                 (empOpen?'<div style="margin-top:6px">'+sg.items.map(itemRow).join('')+'</div>':'')+
                 '</div>';
@@ -11921,7 +12024,7 @@ function renderExpensesReport(){
                 var empOpen=_expTableOpenType==='emp:'+k;
                 return '<div style="margin-bottom:6px;background:#f0fdf4;border-radius:9px;padding:8px 9px">'+
                   '<div onclick="toggleExpTableType(\'emp:'+k+'\')" style="display:flex;justify-content:space-between;align-items:center;cursor:pointer">'+
-                  '<span style="font-weight:800;font-size:12.5px;color:#15803d">👤 '+esc(sg.label)+' <span style="color:#94a3b8;font-weight:600">('+sg.items.length+')</span></span>'+
+                  '<span style="font-weight:800;font-size:12.5px;color:#15803d">'+(sg.icon||'👤')+' '+esc(sg.label)+' <span style="color:#94a3b8;font-weight:600">('+sg.items.length+')</span></span>'+
                   '<b style="color:#15803d;font-size:13px">'+fmt(sg.total)+'</b></div>'+
                   (empOpen?'<div style="margin-top:6px">'+sg.items.map(itemRow).join('')+'</div>':'')+
                   '</div>';
@@ -11965,7 +12068,7 @@ function renderExpensesReport(){
               var empOpen=_expTableOpenType==='emp:'+k;
               return '<div style="margin-bottom:6px;background:#f0fdf4;border-radius:9px;padding:8px 9px">'+
                 '<div onclick="toggleExpTableType(\'emp:'+k+'\')" style="display:flex;justify-content:space-between;align-items:center;cursor:pointer">'+
-                '<span style="font-weight:800;font-size:12.5px;color:#15803d">👤 '+esc(sg.label)+' <span style="color:#94a3b8;font-weight:600">('+sg.items.length+')</span></span>'+
+                '<span style="font-weight:800;font-size:12.5px;color:#15803d">'+(sg.icon||'👤')+' '+esc(sg.label)+' <span style="color:#94a3b8;font-weight:600">('+sg.items.length+')</span></span>'+
                 '<b style="color:#15803d;font-size:13px">'+fmt(sg.total)+'</b></div>'+
                 (empOpen?'<div style="margin-top:6px">'+sg.items.map(itemRow).join('')+'</div>':'')+
                 '</div>';
@@ -11999,9 +12102,20 @@ function renderExpensesReport(){
 }
 
 // ===== التحليل المالي الكامل =====
+// ⚠️ v173 — إصلاح جذري: الشاشة دي كانت بتحسب هامش الربح/التدفق النقدي/متوسط الفاتورة من
+// *كل* المبيعات والمصاريف منذ بداية استخدام التطبيق (بدون أي فلتر تاريخ)، من غير ما توضح
+// إنها أرقام "كل الوقت"، بينما التبويبات التانية (قائمة الدخل، التدفق النقدي) جنبها بتستخدم
+// فلتر شهر/سنة — فكان المستخدم بيشوف "هامش ربح" هنا مختلف تمامًا عن رقم الشهر في التبويب
+// التاني، ويفتكر إن فيه تضارب/خطأ في الحسابات. الحل: نفس مكوّن فلتر الفترة الموحّد المستخدم
+// في باقي التقارير (شهر هجري افتراضيًا)، وكل الأرقام هنا بقت محسوبة على الفترة المختارة.
+var _analysisPeriod=_makePeriodState({mode:'month'});
 function renderFullAnalysis(){
-  var ps=DB.sales,pe=DB.expenses,pp=DB.purchases;
   var el=document.getElementById('tab-analysis');if(!el)return;
+  var filterHtml=renderPeriodFilterHTML('_analysisPeriod','renderFullAnalysis');
+  var r=_periodToRange(_analysisPeriod);
+  var ps=DB.sales.filter(function(s){return(!r.from||s.date>=r.from)&&(!r.to||s.date<=r.to);});
+  var pe=DB.expenses.filter(function(e){return(!r.from||e.date>=r.from)&&(!r.to||e.date<=r.to);});
+  var pp=DB.purchases.filter(function(p){return(!r.from||p.date>=r.from)&&(!r.to||p.date<=r.to);});
   var rev=ps.reduce(function(s,x){return s+x.total;},0);
   var cos=ps.reduce(function(s,sale){return s+(sale.items||[]).reduce(function(ss,i){return ss+i.qty*(i.buyPrice||i.buy_price||0);},0);},0);
   var exp=pe.reduce(function(s,x){return s+x.amount;},0);
@@ -12022,14 +12136,20 @@ function renderFullAnalysis(){
   var avgTicket=ps.length?Math.round(rev/ps.length):0;
   var custMap={};ps.forEach(function(s){custMap[s.customer]=(custMap[s.customer]||0)+1;});
   var repeats=Object.values(custMap).filter(function(v){return v>1;}).length;
+  // ⚠️ v173 — قسم "الأداء الشهري"/"متوسط المبيعات الشهري" ده بطبيعته مقارنة عبر شهور
+  // مختلفة، فلازم يفضل مبني على *كل* المبيعات (DB.sales) بغض النظر عن الفلتر المختار فوق،
+  // مش على ps (الفترة المفلترة) — وإلا هيبان شهر واحد بس أو يختفي تمامًا. بنوضحه في العنوان.
+  var allSalesForTrend=DB.sales;
   var monthlyRev={};
-  ps.forEach(function(s){if(!s.date)return;var m=s.date.slice(0,7);monthlyRev[m]=(monthlyRev[m]||0)+s.total;});
+  allSalesForTrend.forEach(function(s){if(!s.date)return;var m=s.date.slice(0,7);monthlyRev[m]=(monthlyRev[m]||0)+s.total;});
   var months=Object.keys(monthlyRev).sort();
   var maxMonthVal=months.reduce(function(a,b){return monthlyRev[a]>monthlyRev[b]?a:b;},'');
+  var allTimeRevForAvg=allSalesForTrend.reduce(function(s,x){return s+x.total;},0);
+  var monthlyAvgAllTime=months.length?Math.round(allTimeRevForAvg/months.length):0;
 
-  el.innerHTML=
+  el.innerHTML=filterHtml+
     // مؤشرات الأداء
-    rCard('🎯 مؤشرات الأداء','#0f172a',
+    rCard('🎯 مؤشرات الأداء (للفترة المختارة)','#0f172a',
       '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">'+
       rKpi('هامش المجمل',gm+'%',gm>=30?'ممتاز':gm>=15?'جيد':'منخفض',gm>=30?'#15803d':gm>=15?'#ca8a04':'#dc2626',gm>=30?'#dcfce7':gm>=15?'#fef9c3':'#fee2e2')+
       rKpi('هامش الصافي',nm+'%',nm>=15?'ممتاز':nm>=5?'جيد':'منخفض',nm>=15?'#15803d':nm>=5?'#ca8a04':'#dc2626',nm>=15?'#dcfce7':nm>=5?'#fef9c3':'#fee2e2')+
@@ -12049,18 +12169,18 @@ function renderFullAnalysis(){
       rRow('مصاريف متغيرة / شهر','('+fmt(varExpAmt)+')','#ea580c')+
       rTotal('إجمالي التكاليف الثابتة الشهرية',fmt(totalMonthlyFixed),'#ea580c')+
       '<div style="height:8px"></div>'+
-      rRow('متوسط مبيعاتك الشهرية',fmt(months.length?Math.round(rev/months.length):0),months.length&&Math.round(rev/months.length)>=breakEven?'#15803d':'#dc2626',true)+
-      '<div style="background:'+(months.length&&Math.round(rev/months.length)>=breakEven?'#dcfce7':'#fee2e2')+';border-radius:9px;padding:10px;margin-top:8px">'+
+      rRow('متوسط مبيعاتك الشهرية (كل الوقت)',fmt(monthlyAvgAllTime),monthlyAvgAllTime>=breakEven?'#15803d':'#dc2626',true)+
+      '<div style="background:'+(monthlyAvgAllTime>=breakEven?'#dcfce7':'#fee2e2')+';border-radius:9px;padding:10px;margin-top:8px">'+
       '<div style="display:flex;justify-content:space-between;align-items:center">'+
-      '<b style="font-size:12px">'+(months.length&&Math.round(rev/months.length)>=breakEven?'✅ فوق نقطة التعادل':'⚠️ تحت نقطة التعادل')+'</b>'+
-      '<b style="color:'+(months.length&&Math.round(rev/months.length)>=breakEven?'#15803d':'#dc2626')+'">'+fmt(Math.abs((months.length?Math.round(rev/months.length):0)-breakEven))+'</b>'+
+      '<b style="font-size:12px">'+(monthlyAvgAllTime>=breakEven?'✅ فوق نقطة التعادل':'⚠️ تحت نقطة التعادل')+'</b>'+
+      '<b style="color:'+(monthlyAvgAllTime>=breakEven?'#15803d':'#dc2626')+'">'+fmt(Math.abs(monthlyAvgAllTime-breakEven))+'</b>'+
       '</div>'+
-      '<div style="font-size:11px;color:#64748b;margin-top:4px">الفرق عن نقطة التعادل شهرياً</div>'+
+      '<div style="font-size:11px;color:#64748b;margin-top:4px">الفرق عن نقطة التعادل شهرياً (بناءً على متوسط كل الشهور)</div>'+
       '</div>'
     )+
 
     // التدفق النقدي
-    rCard('💧 التدفق النقدي','#2563eb',
+    rCard('💧 التدفق النقدي (للفترة المختارة)','#2563eb',
       '<div style="font-size:11px;font-weight:700;color:#15803d;margin-bottom:6px">📥 تدفقات داخلة</div>'+
       rRow('محصّل من العملاء',fmt(collected),'#15803d',true)+
       '<div style="font-size:11px;font-weight:700;color:#dc2626;margin:8px 0 6px">📤 تدفقات خارجة</div>'+
@@ -12081,7 +12201,7 @@ function renderFullAnalysis(){
 
     // الأداء الشهري
     (months.length?
-      rCard('📅 الأداء الشهري','#7c3aed',
+      rCard('📅 الأداء الشهري (كل الوقت — لكل الشهور المسجّلة)','#7c3aed',
         (maxMonthVal?'<div style="background:#ede9fe;border-radius:9px;padding:9px 11px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center">'+
         '<div><div style="font-size:10px;color:#7c3aed;font-weight:700">🏆 أفضل شهر</div>'+
         '<div style="font-size:14px;font-weight:900;color:#7c3aed">'+maxMonthVal+'</div></div>'+
@@ -12117,6 +12237,7 @@ if(!DB.accounts.profit_cycles) DB.accounts.profit_cycles=[];
 if(!DB.accounts.retained_earnings) DB.accounts.retained_earnings={owner:0,investors:{}};
 
 if(!DB.accounts.balance_snapshots) DB.accounts.balance_snapshots=[]; // [{id, asOf:'2026-06-01', label, data:{...}, createdAt}]
+if(!DB.accounts.closed_months) DB.accounts.closed_months=[]; // v175
 
 // ===== حساب أرقام المركز المالي عند تاريخ معيّن (يُستخدم في العرض الحالي وفي اللقطات) =====
 // asOfDate: 'YYYY-MM-DD' أو null = حتى الآن (كل البيانات بدون فلترة تاريخ)
@@ -12195,7 +12316,11 @@ function _computeBalanceSheet(asOfDate){
   var suppDebt=debts.filter(function(d){return d.type==='supplier';}).reduce(function(s,d){return s+debtRemainingAt(d);},0);
   // البادئة الثابتة "مشترى — " بتتحط تلقائياً في وصف كل دين مورد طالع من شاشة المشتريات
   // (savePurchase) — بنستخدمها للتفرقة بين دين مورد "مرتبط بمشترى فعلي" ودين "يدوي".
+  // ⚠️ v174 — كان الاعتماد بالكامل على البادئة النصية "مشترى — " للربط (هشّة: أي تعديل
+  // بسيط في صياغة الوصف يكسر الربط). دلوقتي source_purchase_id هو المصدر الأساسي للربط،
+  // والنص فاضل بس fallback للسجلات القديمة اللي اتسجلت قبل إضافة الحقل ده.
   function _isPurchaseLinkedSupplierDebt(d){
+    if(d.source_purchase_id)return true;
     var t=String(d.details||d.desc||'');
     return t.indexOf('مشترى — ')===0;
   }
@@ -12382,6 +12507,51 @@ async function ensureMonthlyInventorySnapshot(){
   if(!has)await saveInventorySnapshot(monthStart,'بداية '+HIJRI_MONTH_NAMES[h.month-1]+' '+h.year+' هـ');
 }
 
+// ===== v175: نظام الإقفال الشهري =====
+// يحوّل تاريخ ميلادي (YYYY-MM-DD) إلى مفتاح الشهر الهجري بتاعه 'hYear-hMonth'
+function _hKeyOfDate(dateStr){
+  if(!dateStr)return null;
+  var h=hijriParts(new Date(dateStr));
+  return h.year+'-'+h.month;
+}
+// بيرجع سجل الإقفال لو التاريخ ده واقع في شهر مقفول، وإلا null
+function getClosedMonthFor(dateStr){
+  var key=_hKeyOfDate(dateStr);
+  if(!key)return null;
+  return (DB.accounts.closed_months||[]).find(function(c){return c.hKey===key;})||null;
+}
+// ⚠️ الحارس الأساسي: يُستدعى في أول أي دالة حفظ/حذف مالية (بيع، شراء، مصروف، دفعة دين).
+// بيرجع true (ويعرض تحذير) لو التاريخ داخل شهر مقفول، عشان الدالة المستدعية توقف فورًا.
+function _blockIfClosedMonth(dateStr){
+  var c=getClosedMonthFor(dateStr);
+  if(c){
+    showToast('🔒 شهر '+(c.hLabel||c.hKey)+' مقفول محاسبيًا — افتحه الأول من شاشة الحسابات لو محتاج تعدّل بتاريخ فيه','#dc2626');
+    return true;
+  }
+  return false;
+}
+async function closeCurrentHijriMonth(){
+  if(!window.__isOwner)return showToast('🚫 إقفال الشهر متاح للمالك بس','#dc2626');
+  var h=currentHijri();
+  var key=h.year+'-'+h.month;
+  if((DB.accounts.closed_months||[]).some(function(c){return c.hKey===key;}))return showToast('⚠️ الشهر ده مقفول بالفعل','#ca8a04');
+  var r=hijriMonthRange(h.year,h.month);
+  // نثبّت لقطة نهاية الشهر (حتى النهارده) عشان تبقى رصيد إقفال موثّق قبل المنع
+  var snap=await saveBalanceSnapshot(today(),'إقفال '+HIJRI_MONTH_NAMES[h.month-1]+' '+h.year+' هـ');
+  DB.accounts.closed_months.push({hKey:key,hLabel:HIJRI_MONTH_NAMES[h.month-1]+' '+h.year+' هـ',
+    closedAt:new Date().toISOString(),closedBy:(window.__currentProfile&&window.__currentProfile.name)||'',asOf:today(),snapshotId:snap.id});
+  await persist();
+  showToast('🔒 تم إقفال '+HIJRI_MONTH_NAMES[h.month-1]+' '+h.year+' هـ محاسبيًا','#16a34a');
+  try{renderAccounting();}catch(e){}
+}
+async function reopenHijriMonth(hKey){
+  if(!window.__isOwner)return showToast('🚫 فتح الشهر متاح للمالك بس','#dc2626');
+  DB.accounts.closed_months=(DB.accounts.closed_months||[]).filter(function(c){return c.hKey!==hKey;});
+  await persist();
+  showToast('🔓 اتفتح الشهر — تقدر تعدّل بيانات بتاريخ فيه دلوقتي','#ca8a04');
+  try{renderAccounting();}catch(e){}
+}
+
 // التأكد من وجود لقطة لبداية الشهر الحالي (تُستدعى عند تحميل التطبيق)
 async function ensureMonthlySnapshot(){
   var h=currentHijri();
@@ -12538,6 +12708,9 @@ function renderAccountingOverview(){
   var acc=DB.accounts||{};
   ensureMonthlySnapshot();
 
+  // ⚠️ v175 — ودجت الإقفال الشهري: يظهر فوق أي وضع عرض (الحالي/كما في تاريخ/مقارنة)
+  var closeWidget=_renderMonthCloseWidget();
+
   // شريط اختيار طريقة العرض
   var modeBar='<div style="display:flex;gap:5px;margin-bottom:12px">'+
     [['current','📊 الحالي'],['asof','📅 كما في تاريخ'],['compare','🔀 مقارنة شهور']].map(function(m){
@@ -12546,7 +12719,7 @@ function renderAccountingOverview(){
     }).join('')+'</div>';
 
   if(_bsViewMode==='compare'){
-    el.innerHTML=modeBar+_renderBalanceCompare();
+    el.innerHTML=closeWidget+modeBar+_renderBalanceCompare();
     return;
   }
 
@@ -12555,14 +12728,46 @@ function renderAccountingOverview(){
     var r=_periodToRange(_bsPeriod);
     var asOfDate=r.to||today();
     var data=_computeBalanceSheet(asOfDate);
-    el.innerHTML=modeBar+filterHtml+
+    el.innerHTML=closeWidget+modeBar+filterHtml+
       '<div style="background:#eff6ff;border-radius:10px;padding:9px 12px;margin-bottom:12px;font-size:12px;color:#1e40af;font-weight:700">📅 المركز المالي كما كان في '+esc(fmtDate(asOfDate))+'</div>'+
       _renderBalanceSheetHTML(data,acc);
     return;
   }
 
   var data=_computeBalanceSheet(null);
-  el.innerHTML=modeBar+_renderBalanceSheetHTML(data,acc);
+  el.innerHTML=closeWidget+modeBar+_renderBalanceSheetHTML(data,acc);
+}
+
+// ===== v175: ودجت الإقفال الشهري — حالة الشهر الهجري الحالي + قائمة الشهور المقفولة =====
+function _renderMonthCloseWidget(){
+  var h=currentHijri();
+  var key=h.year+'-'+h.month;
+  var curLabel=HIJRI_MONTH_NAMES[h.month-1]+' '+h.year+' هـ';
+  var closedNow=(DB.accounts.closed_months||[]).find(function(c){return c.hKey===key;});
+  var isOwner=!!window.__isOwner;
+  var statusCard=closedNow?
+    '<div style="background:#f1f5f9;border-radius:11px;padding:11px 13px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center">'+
+    '<div><div style="font-size:12px;font-weight:800;color:#334155">🔒 '+curLabel+' — مقفول محاسبيًا</div>'+
+    '<div style="font-size:10px;color:#94a3b8">اتقفل بتاريخ '+esc(fmtDate(closedNow.asOf))+(closedNow.closedBy?' — بواسطة '+esc(closedNow.closedBy):'')+'</div></div>'+
+    (isOwner?'<button onclick="reopenHijriMonth(\''+key+'\')" style="background:#fef3c7;color:#92400e;border:none;border-radius:8px;padding:7px 12px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit">🔓 فتح</button>':'')+
+    '</div>':
+    '<div style="background:#f0fdf4;border-radius:11px;padding:11px 13px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center">'+
+    '<div><div style="font-size:12px;font-weight:800;color:#15803d">🔓 '+curLabel+' — لسه مفتوح</div>'+
+    '<div style="font-size:10px;color:#64748b">إقفال الشهر يمنع تعديل أي حركة بتاريخ فيه بعد كده</div></div>'+
+    (isOwner?'<button onclick="confirmAction(\'هتقفل '+curLabel+' محاسبيًا؟ مش هتقدر تعدّل/تحذف حركات بتاريخ فيه إلا لو تفتحه تاني.\',closeCurrentHijriMonth)" style="background:#0f172a;color:#fff;border:none;border-radius:8px;padding:7px 12px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit">🔒 إقفال الشهر</button>':'')+
+    '</div>';
+  var otherClosed=(DB.accounts.closed_months||[]).filter(function(c){return c.hKey!==key;}).sort(function(a,b){return a.hKey<b.hKey?1:-1;});
+  var listHtml=otherClosed.length?
+    '<div style="background:#f8fafc;border-radius:10px;padding:9px 12px;margin-bottom:12px">'+
+    '<div style="font-size:11px;font-weight:700;color:#64748b;margin-bottom:6px">🗄️ شهور مقفولة سابقًا ('+otherClosed.length+')</div>'+
+    otherClosed.slice(0,6).map(function(c){
+      return '<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;font-size:11px">'+
+        '<span>🔒 '+esc(c.hLabel||c.hKey)+'</span>'+
+        (isOwner?'<button onclick="reopenHijriMonth(\''+c.hKey+'\')" style="background:none;border:none;color:#2563eb;font-size:10px;font-weight:700;cursor:pointer;font-family:inherit">فتح</button>':'')+
+        '</div>';
+    }).join('')+
+    '</div>':'';
+  return statusCard+listHtml;
 }
 
 // ===== توليد HTML للميزانية من بيانات محسوبة (تُستخدم للعرض الحالي وللقطات) =====
@@ -14729,6 +14934,18 @@ async function deleteSelected(){
     return;
   }
   confirmAction('هتحذف '+ids.length+' عنصر؟', async function(){
+    // ⚠️ v175 — حارس الإقفال الشهري: للأقسام المالية (مبيعات/مشتريات/مصاريف/ديون) فقط،
+    // بنمنع حذف أي عنصر بتاريخ داخل شهر مقفول محاسبيًا. باقي الأقسام (منتجات، عملاء...)
+    // مالهاش علاقة بالإقفال الشهري فمش بنفحصها.
+    var __financialTables=['sales','purchases','expenses','debts'];
+    if(__financialTables.indexOf(_multiTable)!==-1){
+      var __blockedCount=0;
+      for(var bi=0;bi<ids.length;bi++){
+        var __rec=DB[_multiTable].find(function(x){return x.id===ids[bi];});
+        if(__rec&&getClosedMonthFor(__rec.date))__blockedCount++;
+      }
+      if(__blockedCount>0)return showToast('🔒 '+__blockedCount+' عنصر بتاريخ داخل شهر مقفول — لازم تفتح الشهر الأول من شاشة الحسابات','#dc2626');
+    }
     for(var i=0;i<ids.length;i++){
       var __oldSel = DB[_multiTable].find(function(x){return x.id===ids[i];});
       DB[_multiTable] = DB[_multiTable].filter(function(x){return x.id!==ids[i];});
