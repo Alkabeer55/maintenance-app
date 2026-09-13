@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v179</title>
+<title>ابو حوده الحلو الجميل v182</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,8 +13,43 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="2026-09-12 — v179";
+<script>var BUILD_STAMP="2026-09-12 — v182";
 /* ===== سجل التعديلات (Changelog) =====
+v182: [📡 مزامنة بيانات الموظفين — استخدمنا شاشة موجودة + مؤشر لحظي جديد]
+     لقيت إن شاشة "📥 مدخلات الموظفين" (الإعدادات ← 👥 الموظفون) أصلاً بتعمل بالظبط اللي
+     طلبته — بتقرا مباشرة من السيرفر، فأي صف ظاهر فيها معناه وصل فعليًا. أضفت جملة توضيح
+     مباشرة فوقها بالظبط بترد على سؤالك.
+     ✨ كمان أضفت مؤشر "⚠️ محفوظ محليًا لسه" يظهر جنب أي تحرك/عطل على *جهازك إنت* لو لسه
+     في طابور الانتظار (يختفي تلقائيًا أول ما يتزامن فعليًا مع السيرفر).
+     ⚠️ ملحوظة تقنية مهمة أوضحها بصراحة: تقنيًا مستحيل تشوف من جهازك طابور الانتظار بتاع
+     جهاز موظف تاني — البيانات اللي لسه ما وصلتش السيرفر مش موجودة في أي مكان تقدر تسأله
+     عنه. لكن شاشة "مدخلات الموظفين" هي أقرب حل عملي: لو موظف قال دخل حاجة ومش لاقيها
+     هناك، معناها أكيد لسه ما وصلتش (محتاج يتأكد من النت عنده).
+v181: [🔑 صلاحيات الطبقة 2 (جرد+عملاء) + إعادة تنظيم أكورديون + 🐛 إصلاح جذري لباج 47 مقابل 37]
+     ✨ الجرد ودفتر العملاء بقوا جزء من صلاحيات الطبقة 2 (تفصيل الحقول): تقدر تخفي عن أي
+     موظف "الكمية المسجّلة في النظام" و/أو "تفاصيل الفروق والقيم المالية" في الجرد، وتخفي
+     تليفون/عنوان العميل في دفتر العملاء — وده مش مجرد خانة توضيح، اتطبّق فعليًا في شاشة
+     الجرد وقائمة العملاء وبروفايل العميل.
+     ✨ إعادة تنظيم صلاحيات الطبقة 2 بالكامل: بدل ما الأقسام التسعة كلها مفرودة تحت بعض
+     وتاخد مساحة رأسية ضخمة، كل قسم بقى أكورديون مطوي لوحده (يوريك بسرعة كام حقل مخفي
+     فيه)، وبيتفتح بضغطة عليه بس.
+     🐛 إصلاح جذري (السبب الحقيقي وراء "أنا شايف 47 وهو شايف 37"): خانة "يشوف كل حاجة"
+     (full_visibility) كانت بتتحمّل مرة واحدة بس وقت دخول الموظف، ومش بتتحدّث في التحديث
+     الدوري كل 3 دقايق. يعني لو فعّلتها لموظف فاتح التطبيق بالفعل من قبل، هو يفضل شايف
+     "بتاعته بس" (عدد أقل) لحد ما يقفل التطبيق قفل كامل ويفتحه تاني — مش مجرد يرجعله من
+     الخلفية. دلوقتي بتتحدّث تلقائيًا مع كل تحديث دوري، والشاشة بترجع ترسم نفسها فورًا.
+     ✨ فلتر "👷 لكل مهندس لوحده" جديد (للمالك بس) في شاشتي التحركات والمهام — تقدر تشوف
+     بس الأعطال/المهام المعيّنة على مهندس معيّن بضغطة واحدة، بدل ما تكون كلها مخلوطة.
+v180: [🐛 إصلاح جذري: إنذارات "Failed to fetch" الكتير اللي بتظهر عند ضعف/انقطاع النت]
+     السبب: نفس جذر مشكلة شاشة الدخول (v178) بس منتشر في كل عمليات المزامنة الخلفية —
+     أي فشل مزامنة سببه النت (ضعيف أو مقطوع) كان بيتسجل كـ"خطأ" أحمر منفصل بنص إنجليزي
+     خام لكل جدول لوحده. لو النت قطع لحظة واحدة وانت شغال، كنت بتشوف 6-10 إنذارات حمراء
+     ورا بعض ("scheduled_carried"، "scheduled_map"، "stocktakes"...) رغم إن مفيش أي بيانات
+     بتضيع فعليًا — كل حاجة متأجلة ومتزامنة تلقائيًا تاني لما النت يرجع (الطابور ده كان
+     شغال صح من زمان، بس العرض كان مرعب من غير داعي).
+     دلوقتي: كل فشل مزامنة سببه النت بيتجمع في تنبيه هادئ واحد بس ("📴 مفيش نت — التغييرات
+     هتتزامن تلقائيًا") بلون أزرق هادئ، بدل إنذار أحمر متكرر بالإنجليزي. الأخطاء الحقيقية
+     (مشاكل صلاحيات/بيانات فعلية) لسه بتظهر بالتنبيه الأحمر زي الأول عشان محدش يفوّتها.
 v179: [📜 سجل العمليات المالية الموحّد — تبويب جديد في التقارير + تشخيص مشكلة نزول الربح]
      🔍 التشخيص: راجعت كود توزيع الأرباح (saveProfitCycle) ودالة قائمة الدخل الحقيقية
      (renderPeriodReport) سطر بسطر — تأكدت 100% إنهم مش مرتبطين ببعض خالص برمجيًا؛ توزيع
@@ -1410,11 +1445,23 @@ input:checked+.slider:before{transform:translateX(-20px)}
       {key:'desc',label:'تفاصيل المهمة'},
       {key:'assigned_to',label:'المسؤول عن المهمة'},
       {key:'priority',label:'الأولوية'}
+    ],
+    // ⚠️ v181 — إضافتين مطلوبتين: الجرد ودفتر العملاء بقوا جزء من صلاحيات الطبقة 2
+    stocktakes: [
+      {key:'system_qty',label:'الكمية المسجّلة في النظام'},
+      {key:'diff',label:'الفرق (النقص/الزيادة) وتقرير الجرد النهائي'}
+    ],
+    clients: [
+      {key:'phone',label:'رقم التليفون'},
+      {key:'address',label:'العنوان'},
+      {key:'machines',label:'مكن العميل (الموديل/السيريال)'},
+      {key:'debt',label:'رصيد الدين على العميل'}
     ]
   };
   var __FIELD_PERMS_TABLE_NAMES = {
     products:'📦 المخزون', sales:'🧾 الفواتير', purchases:'🛒 المشتريات',
-    movements:'🔧 التحركات/الأعطال', expenses:'💵 المصاريف', debts:'💳 الديون', tasks:'📋 المهام'
+    movements:'🔧 التحركات/الأعطال', expenses:'💵 المصاريف', debts:'💳 الديون', tasks:'📋 المهام',
+    stocktakes:'📊 الجرد', clients:'📇 دفتر العملاء'
   };
   function __getMyHiddenFields(table){
     if(window.__isOwner)return [];
@@ -1503,20 +1550,33 @@ input:checked+.slider:before{transform:translateX(-20px)}
     if(!linkedRec){
       html+='<div style="font-size:12px;color:#94a3b8">الموظف ده لازم يتربط بسجل راتب الأول من قسم "الأساسيات" عشان تظبط تفاصيله</div>';
     }else{
+      // ⚠️ v181 — كانت كل الأقسام السبعة (وبقت 9 دلوقتي) بتتعرض كأكونتات مفرودة كاملة
+      // تحت بعض، فالشاشة بتاخد مساحة رأسية كبيرة جدًا وصعب توصل لقسم معيّن بسرعة.
+      // دلوقتي كل قسم مطوي افتراضيًا (اسم القسم + عدد الحقول المخفية لو فيه)، وبيتفتح
+      // بضغطة عليه بس، زي أكوردليون الأقسام الرئيسية بالظبط.
+      html+='<div id="field-perms-accordion-'+emp.id+'">';
       Object.keys(__FIELD_PERMS_CONFIG).forEach(function(table){
         var fields=__FIELD_PERMS_CONFIG[table];
         var hf=linkedRec.hidden_fields&&linkedRec.hidden_fields[table];
         var defaultHidden=table==='products'?['buy_price']:[];
         var hiddenList=hf!==undefined?hf:defaultHidden;
-        html+='<div style="background:#fdf4ff;border:1.5px solid #f0abfc;border-radius:10px;padding:12px;margin-bottom:10px">'+
-          '<div style="font-size:12px;font-weight:800;color:#a21caf;margin-bottom:8px">'+(__FIELD_PERMS_TABLE_NAMES[table]||table)+'</div>'+
+        var hiddenCount=hiddenList.length;
+        var accKey='fp_'+table+'_'+emp.id;
+        var isOpen=!!_accOpenState[accKey];
+        html+='<div style="border:1.5px solid #f0abfc;border-radius:10px;margin-bottom:8px;overflow:hidden">'+
+          '<div onclick="__toggleAcc('+jsStr(accKey)+')" style="padding:10px 12px;background:#fdf4ff;display:flex;justify-content:space-between;align-items:center;cursor:pointer">'+
+          '<span style="font-size:12.5px;font-weight:800;color:#a21caf">'+(__FIELD_PERMS_TABLE_NAMES[table]||table)+(hiddenCount?' <span style="background:#f0abfc;color:#701a75;border-radius:6px;padding:1px 7px;font-size:10px;margin-right:4px">'+hiddenCount+' مخفي</span>':'')+'</span>'+
+          '<span id="acc-arrow-'+accKey+'" style="font-size:11px;color:#a21caf">'+(isOpen?'▾':'▸')+'</span></div>'+
+          '<div id="acc-'+accKey+'" style="padding:'+(isOpen?'12px':'0')+';display:'+(isOpen?'block':'none')+';background:#fdf4ff">'+
           fields.map(function(f){
             var hidden=hiddenList.indexOf(f.key)!==-1;
             return '<label style="display:flex;align-items:center;gap:7px;padding:5px 0;font-size:12px;color:#4a044e"><input type="checkbox" data-field="'+f.key+'" class="emp-field-toggle-'+table+'" '+(hidden?'':'checked')+' style="width:16px;height:16px">'+esc(f.label)+'</label>';
           }).join('')+
           '<button class="btn btn-sm btn-full" style="background:#f0abfc;color:#701a75;margin-top:8px" onclick="__saveEmpFieldPerms('+jsStr(linkedRec.id)+','+jsStr(table)+')">💾 حفظ</button>'+
+          '</div>'+
           '</div>';
       });
+      html+='</div>';
     }
     el.innerHTML=html;
   }
@@ -1993,6 +2053,11 @@ input:checked+.slider:before{transform:translateX(-20px)}
         (empsRes.data||[]).map(function(p){return '<option value="'+p.id+'"'+(__empReviewFilters.employee===p.id?' selected':'')+'>'+esc(p.full_name)+'</option>';}).join('');
       el.innerHTML=
         '<div style="font-size:11px;color:#64748b;margin-bottom:10px">كل حاجة بيدخلها أي موظف بتفضل شغالة عادي في مكانها فورًا — القائمة دي بس عشان تعرف مين دخل إيه وتأكّد عليه. "التأكيد" علامة وعي بس، مش شرط لتشتغل، ومش بيمنعك من التعديل بعد كده.</div>'+
+        // ⚠️ v181 — رد مباشر على سؤال "أعرف بيانات الموظف بتدخل عندي ولا لأ": كل صف ظاهر
+        // في القائمة دي معناه وصل فعليًا لسيرفرك (بيتقرا مباشرة من السيرفر، مش من جهاز
+        // الموظف) — يعني وجوده هنا هو التأكيد نفسه. لو موظف قالك "دخلت كذا حاجة النهارده"
+        // ومش لاقيها هنا، معناها لسه ما وصلتش (محتاج يتأكد إن عنده نت ويفتح التطبيق تاني).
+        '<div style="background:#eff6ff;border-radius:9px;padding:8px 10px;margin-bottom:10px;font-size:11px;color:#1e40af">✅ كل صف هنا وصل فعليًا لسيرفرك (بيتقرا من السيرفر مباشرة). لو موظف قال دخل حاجة ومش لاقيها هنا، يبقى لسه ما وصلتش — خليه يتأكد إن عنده نت.</div>'+
         '<select id="emprev-filter-emp" onchange="__empReviewFilters.employee=this.value;__loadEmpReviewPanel()" style="width:100%;padding:7px;border:1.5px solid #e2e8f0;border-radius:8px;font-family:inherit;font-size:12px;margin-bottom:6px">'+empOptions+'</select>'+
         '<div style="display:flex;gap:6px;margin-bottom:10px;align-items:center">'+
         '<span style="font-size:11px;color:#64748b">من</span>'+
@@ -3092,10 +3157,27 @@ input:checked+.slider:before{transform:translateX(-20px)}
     if(window.__isOwner) return;
     try{
       await __loadMyPermissions(window.__currentProfile.role_id, window.__currentProfile.id);
+      // ⚠️ v181 — إصلاح جذري: __loadMyPermissions بيحدّث بس صلاحيات القسم (Layer 1/2)،
+      // لكن "full_visibility" (خانة "يشوف كل حاجة" مش بتاعته بس) حقل في جدول profiles
+      // نفسه ومكنش بيتحدّث خالص هنا — فكان لو المالك يفعّلها لموظف فاتح التطبيق بالفعل،
+      // الموظف يفضل شايف "بتاعته بس" (عدد أقل) لحد ما يقفل التطبيق قفل كامل ويفتحه تاني،
+      // مش مجرد يرجعله من الخلفية. دلوقتي بنعيد جلب full_visibility مع كل تحديث دوري.
+      var pv=await sb.from('profiles').select('full_visibility').eq('id',window.__currentProfile.id).maybeSingle();
+      if(pv&&!pv.error&&pv.data&&window.__currentProfile.full_visibility!==pv.data.full_visibility){
+        window.__currentProfile.full_visibility=pv.data.full_visibility;
+        try{if(typeof renderReports==='function')renderReports();}catch(e2){}
+      }
       __applyPermVisibility();
       if(typeof currentScreen!=='undefined' && currentScreen && !__canOpenScreen(currentScreen)){
         showToast('⚠️ صلاحياتك اتغيّرت — رجعناك للرئيسية','#ea580c');
         navigate('home');
+      }else if(typeof currentScreen!=='undefined'){
+        // إعادة رسم الشاشة الحالية عشان أي تغيير في نطاق الرؤية (full_visibility) يبان فورًا
+        try{
+          if(currentScreen==='movements'&&typeof renderMovements==='function')renderMovements();
+          if(currentScreen==='tasks'&&typeof renderTasks==='function')renderTasks();
+          if(currentScreen==='home'&&typeof renderHome==='function')renderHome();
+        }catch(e3){}
       }
     }catch(e){ /* صامت — مفيش داعي نزعج المستخدم لو فشل تحديث دوري */ }
   }
@@ -3455,7 +3537,7 @@ var APP_TITLE='ابو حوده الحلو الجميل';
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=179;
+var APP_VERSION=182;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -3689,6 +3771,28 @@ var __errLog = (function(){ try{ return JSON.parse(localStorage.getItem('mc8_err
 function __saveErrLog(){ try{ localStorage.setItem('mc8_error_log', JSON.stringify(__errLog)); }catch(e){} }
 function __reportError(context, message){
   try{
+    // ⚠️ v180 — إصلاح جذري: أي فشل مزامنة سببه ضعف/انقطاع النت (TypeError: Failed to
+    // fetch) كان بيتسجل كإنذار أحمر منفصل بنص إنجليزي مخيف لكل جدول لوحده — لو النت
+    // قطع لحظة واحدة، كنت بتشوف 6-10 إنذارات حمراء ورا بعض رغم إن البيانات أصلاً
+    // متأجلة ومتزامنة تلقائيًا تاني لما النت يرجع (مفيش أي فقدان بيانات فعلي). دلوقتي
+    // كل أخطاء النت دي بتتجمع في تنبيه هادئ واحد بس ("📴 مؤجل للمزامنة")، ومصدره الحقيقي
+    // (فشل الاتصال) بيتحفظ للمراجعة التقنية بس من غير ما يزعجك بإنذار أحمر متكرر.
+    var isNetErr=/fetch|network|connection/i.test(String(message||''));
+    if(isNetErr){
+      var pending=__errLog.find(function(e){return e.context==='__offline_pending__';});
+      if(pending){
+        if(pending.tables.indexOf(context)===-1)pending.tables.push(context);
+        pending.count=(pending.count||1)+1;
+        pending.t=new Date().toLocaleString('ar-EG');
+      }else{
+        __errLog.unshift({t:new Date().toLocaleString('ar-EG'),context:'__offline_pending__',
+          message:'📴 مفيش نت دلوقتي — التغييرات محفوظة عندك وهتتزامن تلقائيًا أول ما النت يرجع، مفيش أي بيانات هتضيع.',
+          tables:[context],count:1,soft:true});
+      }
+      __saveErrLog();
+      __renderErrorBanner();
+      return;
+    }
     // v167 — كان بيقارن بآخر خطأ (index 0) بس. لو الأخطاء بتيجي متبادلة بين أقسام
     // مختلفة (زي فشل مزامنة كذا جدول ورا بعض بالتتابع)، كانت بتتسجل كلها صفوف
     // منفصلة بدل ما تتجمع، فالسجل يمتلي بسرعة. دلوقتي بندور في كل السجل مش أول صف بس.
@@ -3725,14 +3829,29 @@ function __renderErrorBanner(){
   if(!__errLog.length){ el.innerHTML=''; el.style.display='none'; return; }
   el.style.display='block';
   var esc2 = (typeof esc==='function') ? esc : function(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});};
+  // ⚠️ v180 — الأخطاء الحقيقية (RLS، بيانات ناقصة...) لسه بتظهر بلون أحمر منبّه زي الأول.
+  // تنبيه النت الهادئ (soft) بقى لوحده بلون أزرق هادئ وعنوان مختلف تمامًا، عشان محدش
+  // يتلخبط ويفتكر إن مجرد انقطاع نت لحظي هو "خطأ" فعلي يستاهل قلق.
+  var hardErrors=__errLog.filter(function(e){return!e.soft;});
+  var softEntry=__errLog.find(function(e){return e.soft;});
+  var isOnlySoft=softEntry&&!hardErrors.length;
   // v149 — البنر مطوي افتراضيًا (سطر واحد بس)، عشان ما يمنعش استخدام التطبيق تحته.
   // المستخدم بيفتحه بنفسه لو حب يشوف/يمسح التفاصيل.
-  var header = '<div style="background:#7f1d1d;color:#fff;padding:7px 10px;font-size:12px;font-weight:800;display:flex;justify-content:space-between;align-items:center;font-family:inherit;cursor:pointer" onclick="__toggleErrBanner()">'+
-    '<span>⚠️ فيه '+__errLog.length+' خطأ محتاج تراجعه '+(__errBannerExpanded?'▲':'▼ (دوس هنا)')+'</span>'+
+  var header = isOnlySoft?
+    '<div style="background:#1e3a5f;color:#fff;padding:7px 10px;font-size:12px;font-weight:800;display:flex;justify-content:space-between;align-items:center;font-family:inherit;cursor:pointer" onclick="__toggleErrBanner()">'+
+    '<span>📴 مفيش نت — التغييرات هتتزامن تلقائيًا '+(__errBannerExpanded?'▲':'▼')+'</span>'+
+    '<button onclick="event.stopPropagation();__clearAllErrors()" style="background:#fff;color:#1e3a5f;border:none;border-radius:6px;padding:4px 10px;font-weight:800;font-size:12px">إخفاء</button></div>':
+    '<div style="background:#7f1d1d;color:#fff;padding:7px 10px;font-size:12px;font-weight:800;display:flex;justify-content:space-between;align-items:center;font-family:inherit;cursor:pointer" onclick="__toggleErrBanner()">'+
+    '<span>⚠️ فيه '+hardErrors.length+' خطأ محتاج تراجعه '+(__errBannerExpanded?'▲':'▼ (دوس هنا)')+'</span>'+
     '<button onclick="event.stopPropagation();__clearAllErrors()" style="background:#fff;color:#7f1d1d;border:none;border-radius:6px;padding:4px 10px;font-weight:800;font-size:12px">مسح الكل</button></div>';
   if(!__errBannerExpanded){ el.innerHTML = header; return; }
   el.innerHTML = header + '<div style="max-height:40vh;overflow-y:auto">'+
     __errLog.map(function(e,i){
+      if(e.soft){
+        return '<div style="background:#0f2942;color:#bfdbfe;padding:9px 10px;font-size:11.5px;border-top:1px solid rgba(255,255,255,.15);display:flex;justify-content:space-between;gap:8px;align-items:flex-start;font-family:inherit">'+
+          '<span style="flex:1;line-height:1.5">'+esc2(e.message)+'<br><span style="opacity:.7">آخر محاولة: '+esc2(e.t)+' — '+(e.tables?e.tables.length:0)+' عنصر مؤجّل</span></span>'+
+          '<button onclick="__dismissError('+i+')" style="background:none;border:none;color:#bfdbfe;font-size:16px;cursor:pointer;flex-shrink:0">✕</button></div>';
+      }
       return '<div style="background:#450a0a;color:#fecaca;padding:9px 10px;font-size:11.5px;border-top:1px solid rgba(255,255,255,.15);display:flex;justify-content:space-between;gap:8px;align-items:flex-start;font-family:inherit">'+
         '<span style="flex:1;line-height:1.5"><b>'+esc2(e.context)+(e.count>1?' <span style="opacity:.75">(×'+e.count+')</span>':'')+'</b> — '+esc2(e.t)+'<br>'+esc2(e.message)+'</span>'+
         '<button onclick="__dismissError('+i+')" style="background:none;border:none;color:#fecaca;font-size:16px;cursor:pointer;flex-shrink:0">✕</button></div>';
@@ -3748,6 +3867,13 @@ if(__errLog.length){ if(document.readyState==='loading'){ document.addEventListe
 var __syncQueue = (function(){ try{ return JSON.parse(localStorage.getItem('mc8_sync_queue')||'[]'); }catch(e){ return []; } })();
 function __saveSyncQueue(){ try{ localStorage.setItem('mc8_sync_queue', JSON.stringify(__syncQueue)); }catch(e){} __renderQueueBadge(); }
 function __queueKey(table,id){ return table+'::'+id; }
+// ⚠️ v181 — مؤشر مزامنة لحظي لسجل معيّن: بيقول لو السجل ده لسه في طابور المزامنة على
+// *الجهاز الحالي بس* (مش عندك مقدرة تشوف طابور جهاز موظف تاني — ده قيد تقني حقيقي،
+// البيانات اللي لسه ما اتزامنتش أصلاً مش موجودة على أي سيرفر تقدر تسأله عنها).
+function _localSyncBadgeHTML(table,id){
+  var pending=__syncQueue.some(function(q){return q.table===table&&String(q.id)===String(id);});
+  return pending?'<span style="background:#fef9c3;color:#92400e;border-radius:6px;padding:1px 7px;font-size:9.5px;font-weight:800">⚠️ محفوظ محليًا لسه</span>':'';
+}
 function __queueForSync(table, id, op){
   op = op || 'upsert';
   var key = __queueKey(table,id);
@@ -5462,10 +5588,11 @@ function renderStocktake(){
   var itemsHtml=filtered.map(function(item){
     var diff=item.counted_qty-item.system_qty;
     var isConfirmed=!!item.confirmed;
+    var showSystemQty=!__isFieldHidden('stocktakes','system_qty');
     return '<div style="background:#fff;border-radius:11px;padding:10px 12px;margin-bottom:7px;box-shadow:0 1px 4px rgba(0,0,0,.05);border-right:3px solid '+(isConfirmed?(diff===0?'#15803d':'#ea580c'):'#e2e8f0')+'">'+
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">'+
       '<div><b style="font-size:13px">'+esc(item.name)+'</b>'+(item.unit?' <span style="font-size:10px;color:#94a3b8">('+esc(item.unit)+')</span>':'')+'</div>'+
-      '<span style="font-size:11px;color:#64748b">مسجل: <b>'+item.system_qty+'</b></span>'+
+      (showSystemQty?'<span style="font-size:11px;color:#64748b">مسجل: <b>'+item.system_qty+'</b></span>':'')+
       '</div>'+
       '<div style="display:flex;gap:6px;align-items:center">'+
       '<input type="number" inputmode="numeric" value="'+item.counted_qty+'" '+
@@ -5549,6 +5676,16 @@ function _renderStocktakeReport(st){
   var shortages=diffs.filter(function(i){return i.counted_qty<i.system_qty;});
   var surplus=diffs.filter(function(i){return i.counted_qty>i.system_qty;});
   var matched=st.items.length-diffs.length;
+  // ⚠️ v181 — لو الموظف ملوش صلاحية "الفرق" في الجرد (الطبقة 2)، نعرضله ملخص بسيط بس
+  // (عدد الأصناف المطابقة/الناقصة) من غير القيم المالية والتفاصيل الدقيقة لكل صنف
+  var showDiffDetails=!__isFieldHidden('stocktakes','diff');
+  if(!showDiffDetails){
+    return '<div style="background:#fff;border-radius:12px;padding:14px;text-align:center">'+
+      '<div style="font-size:13px;color:#64748b;margin-bottom:8px">📊 نتيجة الجرد</div>'+
+      '<div style="font-size:14px;font-weight:800">✅ '+matched+' صنف مطابق — ⚠️ '+diffs.length+' صنف فيه فرق</div>'+
+      '<div style="font-size:11px;color:#94a3b8;margin-top:8px">تفاصيل الفروق والقيم المالية متاحة للمالك بس</div>'+
+      '</div>';
+  }
 
   var totalShortageVal=shortages.reduce(function(s,i){return s+_stItemUnitCost(i.productId)*(i.system_qty-i.counted_qty);},0);
   var totalSurplusVal=surplus.reduce(function(s,i){return s+_stItemUnitCost(i.productId)*(i.counted_qty-i.system_qty);},0);
@@ -6783,7 +6920,7 @@ function renderLedger(customerName){
   // الهيدر الرئيسي
   content+='<div class="card" style="background:linear-gradient(135deg,#0f172a,#1e3a5f);color:#fff;margin-bottom:12px">'+
     '<div style="font-size:16px;font-weight:900;margin-bottom:10px">👤 '+esc(customerName)+'</div>'+
-    (client&&client.phone?'<div style="font-size:12px;opacity:.8;margin-bottom:8px">📱 '+esc(client.phone)+'</div>':'')+
+    (client&&client.phone&&!__isFieldHidden('clients','phone')?'<div style="font-size:12px;opacity:.8;margin-bottom:8px">📱 '+esc(client.phone)+'</div>':'')+
     '<div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="opacity:.7">إجمالي المبيعات</span><b>'+fmt(totalSales)+'</b></div>'+
     '<div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="opacity:.7">المدفوع فعلاً</span><b style="color:#86efac">'+fmt(totalPaid)+'</b></div>'+
     '<div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="opacity:.7">الديون المتبقية</span><b style="color:'+(totalDebt>0?'#fca5a5':'#86efac')+'">'+fmt(totalDebt)+'</b></div>'+
@@ -8477,6 +8614,8 @@ function renderTasks(){
     var d=t.done_at?t.done_at.slice(0,10):'';
     return(!pr.from||d>=pr.from)&&(!pr.to||d<=pr.to);
   });
+  // ⚠️ v181 — فلتر المهندس (للمالك بس)، نفس فكرة التحركات بالظبط
+  if(window.__isOwner&&_tasksEngineerFilter)list=list.filter(function(t){return t.assigned_to===_tasksEngineerFilter;});
   // المنتهية دائماً في الأسفل
   if(_tasksSort==='alpha'){
     list.sort(function(a,b){
@@ -8502,6 +8641,7 @@ function renderTasks(){
     });
   }
   var el=document.getElementById('tasks-list');if(!el)return;
+  var engFilterHtml=window.__isOwner?_engineerFilterDropdownHTML(_tasksEngineerFilter,'setTasksEngineerFilter'):'';
   var sortBar=_sortBar(_tasksSort,'setTasksSort',['priority','newest','alpha']).replace('priority','⚡ الأولوية').replace('newest','🕐 الأحدث').replace('alpha','أ-ي');
   // إصلاح labels
   var tBar='<div style="display:flex;gap:5px;margin-bottom:10px">'+
@@ -9680,6 +9820,19 @@ if(!DB.movCounter)DB.movCounter=0;
 
 var FAULT_TYPES=[];
 var _movFilter='جديد';
+var _movEngineerFilter=''; // v181 — '' = الكل، وإلا profile_id المهندس المختار
+function setMovEngineerFilter(id){ _movEngineerFilter=id; renderMovements(); }
+var _tasksEngineerFilter=''; // v181 — نفس الفكرة بس للمهام
+function setTasksEngineerFilter(id){ _tasksEngineerFilter=id; renderTasks(); }
+// ⚠️ v181 — دروب داون موحّد "لكل مهندس لوحده" (للمالك بس) — يتستخدم في التحركات والمهام
+function _engineerFilterDropdownHTML(currentVal,setterFnName){
+  var list=window.__engineersActiveList||window.__engineersList||[];
+  if(!list.length)return '';
+  return '<select onchange="'+setterFnName+'(this.value)" style="width:100%;padding:8px 10px;border:1.5px solid #e2e8f0;border-radius:9px;font-family:inherit;font-size:12.5px;margin-bottom:8px;background:'+(currentVal?'#eff6ff':'#fff')+';color:'+(currentVal?'#1e40af':'#374151')+';font-weight:'+(currentVal?'800':'400')+'">'+
+    '<option value="">👥 كل المهندسين</option>'+
+    list.map(function(e){return '<option value="'+e.id+'"'+(currentVal===e.id?' selected':'')+'>👷 '+esc(e.full_name)+'</option>';}).join('')+
+    '</select>';
+}
 function filterMovements(f){_movFilter=f;renderMovements();}
 
 var DAYS_AR=['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
@@ -9743,6 +9896,8 @@ function sortedMovements(){
   }
   var pr=_periodToRange(_movPeriod);
   if(pr.from||pr.to)list=list.filter(function(m){var d=m.opened_at||m.date||'';return(!pr.from||d>=pr.from)&&(!pr.to||d<=pr.to);});
+  // ⚠️ v181 — فلتر المهندس (للمالك بس): يوريه بس الأعطال المعيّنة على مهندس معيّن
+  if(_movEngineerFilter)list=list.filter(function(m){return m.assigned_to===_movEngineerFilter;});
   var statusRank=function(s){return s==='جديد'?0:s==='جاري'?1:2;}; // جديد فوق دايماً، منتهي في الأسفل
   function _movDateVal(m){return m.opened_at||m.date||m.created_at||'';}
   if(_movSort==='alpha'){
@@ -9796,7 +9951,9 @@ function renderMovements(){
   // ⚠️ v108 — خانة بحث داخل التحركات
   var searchEl=document.getElementById('movements-search-box');
   if(searchEl&&document.activeElement!==document.getElementById('mov-search-input')){
-    searchEl.innerHTML='<input id="mov-search-input" type="text" placeholder="🔍 دوّر بالاسم/الموديل/السيريال/نوع العطل..." value="'+esc(_movSearch)+'" oninput="setMovSearch(this.value)" style="width:100%;padding:9px 12px;border:1.5px solid #e2e8f0;border-radius:10px;font-family:inherit;font-size:13px;margin-bottom:8px;box-sizing:border-box">';
+    searchEl.innerHTML='<input id="mov-search-input" type="text" placeholder="🔍 دوّر بالاسم/الموديل/السيريال/نوع العطل..." value="'+esc(_movSearch)+'" oninput="setMovSearch(this.value)" style="width:100%;padding:9px 12px;border:1.5px solid #e2e8f0;border-radius:10px;font-family:inherit;font-size:13px;margin-bottom:8px;box-sizing:border-box">'+
+      // ⚠️ v181 — فلتر "لكل مهندس لوحده" للمالك: يقدر يشوف بس أعطال مهندس معيّن بضغطة
+      (window.__isOwner?_engineerFilterDropdownHTML(_movEngineerFilter,'setMovEngineerFilter'):'');
   }
   var list=_visFilterAssigned(sortedMovements());
   // الكروت الإحصائية بتحترم فلتر الفترة الزمنية المختار (مش إجمالي كل الوقت دايماً)
@@ -9882,7 +10039,7 @@ function renderMovements(){
     }
     return '<div style="background:#fff;border-radius:9px;padding:6px 9px;box-shadow:0 1px 4px rgba(0,0,0,.06);margin-bottom:5px;border-right:3px solid '+sc(m.status)+'">'+
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px">'+
-      '<div>'+num+'<b style="font-size:14px">'+custDisp+'</b></div>'+
+      '<div>'+num+'<b style="font-size:14px">'+custDisp+'</b> '+_localSyncBadgeHTML('movements',m.id)+'</div>'+
       (__hSt?'':'<span style="background:'+sc(m.status)+'22;color:'+sc(m.status)+';border-radius:5px;padding:1px 6px;font-size:10px;font-weight:800">'+esc(m.status)+'</span>')+
       '</div>'+
       '<div style="font-size:11px;color:#64748b;margin-bottom:3px">'+
@@ -16047,8 +16204,8 @@ function _clientCard(c){
     '<span style="background:'+cSt.bg+';color:'+cSt.color+';border-radius:6px;padding:2px 8px;font-size:10px;font-weight:700">'+cSt.icon+' '+cSt.label+'</span>'+
     (isStale?'<span style="background:#fee2e2;color:#dc2626;border-radius:6px;padding:2px 8px;font-size:10px;font-weight:700">⏰ غير مستخدم</span>':'')+
     '</div>'+
-    (c.phone?'<div style="font-size:12px;color:#374151;margin-bottom:2px">📱 <a href="tel:'+esc(c.phone)+'" style="color:#2563eb;text-decoration:none;font-weight:700">'+esc(c.phone)+'</a></div>':'')+
-    (c.address?'<div style="font-size:11px;color:#94a3b8">📍 '+esc(c.address.slice(0,45))+(c.address.length>45?'…':'')+'</div>':'')+
+    (c.phone&&!__isFieldHidden('clients','phone')?'<div style="font-size:12px;color:#374151;margin-bottom:2px">📱 <a href="tel:'+esc(c.phone)+'" style="color:#2563eb;text-decoration:none;font-weight:700">'+esc(c.phone)+'</a></div>':'')+
+    (c.address&&!__isFieldHidden('clients','address')?'<div style="font-size:11px;color:#94a3b8">📍 '+esc(c.address.slice(0,45))+(c.address.length>45?'…':'')+'</div>':'')+
     '<div style="font-size:11px;color:'+(isStale?'#dc2626':'#64748b')+';margin-top:2px;cursor:pointer" onclick="openLedger(decodeURIComponent(\''+encodeURIComponent(c.name)+'\'))">'+
     (lastMovDate?'🔧 آخر صيانة: '+esc(fmtDate(lastMovDate))+' — من '+daysSince+' يوم':'🔧 لا يوجد سجل صيانة')+
     '</div>'+
