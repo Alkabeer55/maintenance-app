@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v194</title>
+<title>ابو حوده الحلو الجميل v196</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,8 +13,35 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="2026-09-16 — v194";
+<script>var BUILD_STAMP="2026-09-16 — v196";
 /* ===== سجل التعديلات (Changelog) =====
+v196: [✨ دمج المنتجات المكررة — ميزة جديدة كاملة]
+     زرار جديد "🔗 دمج منتجات مكررة" في شاشة المخزون: (أ) اقتراحات تلقائية لمنتجات
+     أسماءها متشابهة، (ب) دمج يدوي عن طريق "☑️ تحديد" الموجود أصلاً ثم زرار "🔗 دمج".
+     عند التأكيد: الكمية بتتجمع، سعر الشراء/التكلفة بيتحسب كمتوسط مرجّح بالكمية (نفس
+     منطق تحديث التكلفة الموجود في المشتريات)، الأسماء القديمة بتتحفظ كـaliases للبحث،
+     وكل الفواتير/المشتريات/الجرد/سحب القطع القديم بتاع المنتجات المدموجة بيترابط
+     بالمنتج الناتج (قرار متفق عليه: تاريخ موحد، مفيش رجوع بعد التأكيد). المنتجات
+     المكررة بتتحذف فعليًا (محليًا وسيرفر) بعد الدمج.
+     ⚠️ محتاج مايجريشن SQL جديد قبل ما يشتغل يزامن كويس على السيرفر (نفس وضع
+     source_purchase_id المعلّق من v174):
+     ALTER TABLE products ADD COLUMN IF NOT EXISTS aliases jsonb DEFAULT '[]'::jsonb;
+     من غيره الحفظ المحلي هيشتغل عادي بس مزامنة aliases للسيرفر هتفضل تفشل وتعيد المحاولة.
+v195: [🐛🐛 إصلاح جذري: حذف/تعديل بيانات كان بيرجع لوحده بعد شوية أو بعد تحديث الصفحة]
+     سببين مختلفين لنفس العرض:
+     (أ) حذف الفاتورة (3 مسارات: بدون دين مرتبط، مع حذف الدين، حذف الفاتورة بس) وحذف
+     المصاريف الجماعي (مسح الكل/مسح حسب النوع) كانوا بيشيلوا السجل من الشاشة والتخزين
+     المحلي بس (persist) من غير ما ينادوا dbDelete خالص — يعني السيرفر فاضل عنده نسخة
+     زي ما هي، وأول مزامنة (أوتوماتيك أو بعد تحديث الصفحة) بترجعها تاني. ده كان بيحصل
+     كل مرة تقريبًا مش نادرًا. اتصلح بإضافة نداء dbDelete الناقص في الأربع أماكن.
+     (ب) المشكلة الأعمق والأشمل (بتفسر رجوع تعديلات/إضافات كمان، مش بس حذف): دالة دمج
+     بيانات السيرفر مع المحلي (__mergeServerRows) كانت بتغلّب نسخة السيرفر على أي سجل
+     محلي دايمًا، حتى لو السجل ده لسه معلّق في طابور المزامنة (يعني لسه مستني يتبعت،
+     والسيرفر عنده نسخة قديمة أو أصلاً محذوفة). اتصلح بفحص طابور المزامنة (__syncQueue)
+     قبل الدمج: لو فيه حذف معلّق، السجل ميترجعش من السيرفر؛ لو فيه تعديل/إضافة معلّقة،
+     النسخة المحلية تفضل زي ما هي لحد ما تتأكد وصولها فعلاً. الإصلاح ده عام لكل الجداول
+     المتزامنة (مبيعات، مشتريات، مصروفات، ديون، مهام، تحركات، سحب قطع، منتجات) مش بس
+     الحالة اللي اتبلغ عنها.
 v194: [✨ سجل المصروفات/الرواتب/السلف في "📜 السجل الزمني الكامل" بقى يفتح الفاتورة الفعلية]
      الضغط على أي صف مصروف/راتب/سلفة في تبويب السجل كان بيوديك لتبويب "مصروفات" العام
      بس، مش للسجل نفسه — السبب مكنش إن مفيش دالة تعديل بالـ id (فيه فعلاً openEditExpenseModal
@@ -2576,8 +2603,16 @@ input:checked+.slider:before{transform:translateX(-20px)}
     var byId = {};
     (localArr||[]).forEach(function(r){ byId[r[keyField]] = r; });
     var protectedFields = __PROTECTED_NONEMPTY_FIELDS[tableName]||[];
+    // ⚠️ v195 — إصلاح جذري لمشكلة "الحذف/التعديل بيرجع لوحده": كنا بنغلّب نسخة السيرفر
+    // على المحلي دايمًا، حتى لو السجل ده لسه معلّق في طابور المزامنة (يعني السيرفر عنده
+    // نسخة قديمة أو مسجل موجود أصلاً اتمسح محليًا ولسه ما وصلش خبر حذفه). دلوقتي: لو فيه
+    // عملية حذف معلّقة، السطر ده ميترجعش تاني؛ ولو فيه تعديل/إضافة معلّقة، بنسيب النسخة
+    // المحلية زي ما هي لحد ما تتأكد إنها وصلت السيرفر فعلاً.
     (serverRows||[]).forEach(function(r){
+      var pendingOp = __pendingSyncOp(tableName, r[keyField]);
+      if(pendingOp==='delete') return;
       var localRow = byId[r[keyField]];
+      if(pendingOp==='upsert' && localRow){ return; }
       var merged = Object.assign({}, localRow||{}, r);
       protectedFields.forEach(function(f){
         if(localRow && localRow[f] && !r[f]) merged[f]=localRow[f];
@@ -3636,7 +3671,7 @@ var APP_TITLE='ابو حوده الحلو الجميل';
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=194;
+var APP_VERSION=196;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -3966,6 +4001,12 @@ if(__errLog.length){ if(document.readyState==='loading'){ document.addEventListe
 var __syncQueue = (function(){ try{ return JSON.parse(localStorage.getItem('mc8_sync_queue')||'[]'); }catch(e){ return []; } })();
 function __saveSyncQueue(){ try{ localStorage.setItem('mc8_sync_queue', JSON.stringify(__syncQueue)); }catch(e){} __renderQueueBadge(); }
 function __queueKey(table,id){ return table+'::'+id; }
+// ⚠️ v195 — يقول لو السجل ده لسه له عملية معلّقة (upsert/delete) في طابور المزامنة
+// المحلي، عشان __mergeServerRows تعرف تحمي التعديل/الحذف المحلي من نسخة سيرفر قديمة.
+function __pendingSyncOp(table,id){
+  var q=__syncQueue.find(function(x){return x.table===table&&String(x.id)===String(id);});
+  return q?q.op:null;
+}
 // ⚠️ v181 — مؤشر مزامنة لحظي لسجل معيّن: بيقول لو السجل ده لسه في طابور المزامنة على
 // *الجهاز الحالي بس* (مش عندك مقدرة تشوف طابور جهاز موظف تاني — ده قيد تقني حقيقي،
 // البيانات اللي لسه ما اتزامنتش أصلاً مش موجودة على أي سيرفر تقدر تسأله عنها).
@@ -5165,7 +5206,7 @@ function renderInventory(){
   var typeFilter=document.getElementById('inv-type-filter')?document.getElementById('inv-type-filter').value:'الكل';
 
   var list=DB.products.filter(function(p){
-    var matchQ=!q||normalizeAr(p.name).includes(normalizeAr(q));
+    var matchQ=!q||normalizeAr(p.name).includes(normalizeAr(q))||(p.aliases||[]).some(function(a){return normalizeAr(a).includes(normalizeAr(q));});
     var matchT=typeFilter==='الكل'||p.unit===typeFilter;
     // تصنيف: ماكينة لو category==='machine'، باقي قطع غيار
     var matchC=_invCategory==='all'||(
@@ -5249,6 +5290,7 @@ function renderInventory(){
   var actionsBar='<div style="display:flex;gap:6px;margin-bottom:8px">'+
     (!_multiSelect?'<button onclick="startMultiSelect(\'products\',\'inv-ms-toolbar\')" style="flex:1;background:#f1f5f9;border:none;border-radius:9px;padding:7px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;color:#374151">☑️ تحديد للطباعة/الحذف</button>':'')+
     '<button onclick="printAllInventory()" style="flex:1;background:#ede9fe;border:none;border-radius:9px;padding:7px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;color:#7c3aed">🖨️ طباعة الكل المعروض</button>'+
+    (!_multiSelect&&__hasPerm('products','can_delete')?'<button onclick="openMergeSuggestionsModal()" style="flex:1;background:#fef9c3;border:none;border-radius:9px;padding:7px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;color:#92400e">🔗 دمج منتجات مكررة</button>':'')+
     '</div>';
 
   if(!list.length){el.innerHTML=stats+catBar+filterHtml+_sortBar(_invSort,'setInvSort',['alpha','qty','newest'])+msToolbar+actionsBar+'<div class="empty">لا توجد منتجات</div>';if(_multiSelect)updateMsToolbar();return;}
@@ -5698,6 +5740,175 @@ async function saveProduct(){
   await persist();
   closeModal();renderInventory();renderHome();
   showToast(_prodId?'✅ تم تعديل المنتج':'✅ تم إضافة المنتج','#16a34a');
+}
+
+// ========== MODULE: دمج المنتجات المكررة (v196) ==========
+// القرار المتفق عليه مع صاحب المشروع (جلسة v195-v196):
+//  1) تاريخ الفواتير/المشتريات/الجرد/سحب القطع القديم بتاع المنتجات المدموجة بيترابط
+//     بالمنتج الناتج (نفس الـid) — يعني تقرير المنتج بعد الدمج بيوريك تاريخهم كأنهم كانوا
+//     نفس المنتج من الأول. القرار ده نهائي ومفيش رجوع فيه بعد التأكيد (تم توضيحه للمستخدم).
+//  2) طريقة اختيار المنتجات للدمج: الاتنين — تحديد يدوي (بيستخدم نظام "☑️ تحديد" الموجود
+//     أصلاً)، وكمان اقتراح تلقائي لمنتجات شكلها مكررة (تشابه أسماء).
+//  3) التكلفة (buy_price/landed_cost) بعد الدمج = متوسط مرجّح بالكمية، بنفس منطق تحديث
+//     تكلفة الشراء الموجود أصلاً في savePurchase (مش FIFO لكل دفعة على حدة).
+//  4) الاسم القديم لأي منتج اتدمج بيتحفظ في aliases[] بتاع المنتج الناتج، عشان البحث
+//     وسحب القطع بالاسم يفضلوا يلاقوه.
+// ⚠️ ملحوظة مهمة: aliases[] عمود جديد مش موجود على جدول products في Supabase —
+// لازم Alfarok يشغّل: ALTER TABLE products ADD COLUMN IF NOT EXISTS aliases jsonb DEFAULT '[]'::jsonb;
+// (بالظبط زي مايجريشن source_purchase_id المعلّق من v174) — من غيرها الحفظ المحلي هيشتغل
+// بس المزامنة للسيرفر هتفشل وتفضل في طابور إعادة المحاولة.
+
+function _productTokens(name){
+  return normalizeAr(name||'').split(/\s+/).filter(Boolean);
+}
+// heuristic بسيط: منتجين "شكلهم مكرر" لو كل كلمات الاسم الأقصر موجودة في الاسم الأطول
+function _looksLikeDuplicateProduct(a,b){
+  if(!a||!b||a.id===b.id)return false;
+  var ta=_productTokens(a.name), tb=_productTokens(b.name);
+  if(!ta.length||!tb.length)return false;
+  var shorter=ta.length<=tb.length?ta:tb, longer=ta.length<=tb.length?tb:ta;
+  var matchCount=shorter.filter(function(w){return longer.indexOf(w)!==-1;}).length;
+  return matchCount===shorter.length;
+}
+function _findDuplicateProductGroups(){
+  var products=DB.products.slice();
+  var used={};
+  var groups=[];
+  for(var i=0;i<products.length;i++){
+    if(used[products[i].id])continue;
+    var group=[products[i]];
+    for(var j=i+1;j<products.length;j++){
+      if(used[products[j].id])continue;
+      if(_looksLikeDuplicateProduct(products[i],products[j])){group.push(products[j]);used[products[j].id]=true;}
+    }
+    if(group.length>1){used[products[i].id]=true;groups.push(group);}
+  }
+  return groups;
+}
+
+function openMergeSuggestionsModal(){
+  var groups=_findDuplicateProductGroups();
+  document.getElementById('modal-title').textContent='🔗 دمج منتجات مكررة';
+  var suggestionsHtml=!groups.length?
+    '<div style="font-size:12px;color:#94a3b8;margin-bottom:14px">مفيش اقتراحات تلقائية دلوقتي (مفيش منتجات أسماءها متشابهة).</div>':
+    '<div style="font-size:12px;color:#64748b;margin-bottom:8px">اقتراحات تلقائية بناءً على تشابه الأسماء — اضغط على مجموعة عشان تراجعها:</div>'+
+    groups.map(function(g){
+      return '<div onclick="openMergeConfirm(['+g.map(function(p){return "'"+p.id+"'";}).join(',')+'])" style="background:#f8fafc;border:2px solid #e2e8f0;border-radius:10px;padding:10px 12px;margin-bottom:8px;cursor:pointer">'+
+        g.map(function(p){return '<div style="font-weight:700;font-size:13px">'+esc(p.name)+' <span style="color:#94a3b8;font-weight:400">('+p.qty+' '+esc(p.unit||'')+')</span></div>';}).join('')+
+      '</div>';
+    }).join('');
+  document.getElementById('modal-body').innerHTML=
+    suggestionsHtml+
+    '<div style="border-top:1px solid #e2e8f0;margin:12px 0;padding-top:12px;font-size:12px;color:#64748b">'+
+    'أو دمج يدوي: اقفل الشاشة دي، اضغط "☑️ تحديد للطباعة/الحذف" في المخزون، اختار منتجين أو أكتر، وهيظهر زرار "🔗 دمج" في الشريط.'+
+    '</div>'+
+    '<button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button>';
+  openModal();
+}
+
+function openMergeConfirm(productIds){
+  var prods=productIds.map(function(id){return DB.products.find(function(p){return p.id===id;});}).filter(Boolean);
+  if(prods.length<2)return showToast('⚠️ لازم تختار منتجين على الأقل عشان تدمجهم','#dc2626');
+  var defaultCanonical=prods.slice().sort(function(a,b){return (b.qty||0)-(a.qty||0);})[0].id;
+  window.__mergeCandidates=prods;
+  var totalQty=prods.reduce(function(s,p){return s+(p.qty||0);},0);
+  var totalBuyVal=prods.reduce(function(s,p){return s+(p.qty||0)*(p.buy_price||0);},0);
+  var avgBuy=totalQty>0?Math.round((totalBuyVal/totalQty)*100)/100:0;
+  document.getElementById('modal-title').textContent='🔗 تأكيد الدمج';
+  document.getElementById('modal-body').innerHTML=
+    '<div style="background:#fff7ed;border-radius:10px;padding:10px 12px;margin-bottom:12px;font-size:12px;color:#9a3412">'+
+    '⚠️ الدمج نهائي ومفيش رجوع فيه. كل الفواتير والمشتريات والجرد وسحب القطع القديم الخاص بالمنتجات دي هيترابط بالمنتج المدموج تلقائيًا (تاريخهم هيبقى واحد في التقارير).'+
+    '</div>'+
+    '<div class="field"><label>اختار الاسم النهائي (الأساسي)</label>'+
+    prods.map(function(p){
+      return '<label style="display:flex;align-items:center;gap:8px;padding:8px 0;font-size:13px;cursor:pointer">'+
+        '<input type="radio" name="merge-canonical" value="'+p.id+'" '+(p.id===defaultCanonical?'checked':'')+'> '+esc(p.name)+' <span style="color:#94a3b8">('+p.qty+')</span></label>';
+    }).join('')+
+    '</div>'+
+    '<div style="background:#f8fafc;border-radius:10px;padding:10px 12px;margin:10px 0;font-size:12px">'+
+    'الكمية الإجمالية بعد الدمج: <b>'+totalQty+'</b><br>متوسط سعر الشراء المرجّح: <b>'+fmt(avgBuy)+'</b>'+
+    '</div>'+
+    '<div class="modal-actions"><button class="btn btn-red btn-full" onclick="execMergeProducts()">✅ تأكيد الدمج النهائي</button>'+
+    '<button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
+  openModal();
+}
+
+async function execMergeProducts(){
+  if(!__hasPerm('products','can_delete')){showToast('🚫 مفيش صلاحية دمج/حذف منتجات. كلم المالك.','#dc2626');return;}
+  var radio=document.querySelector('input[name="merge-canonical"]:checked');
+  if(!radio)return showToast('⚠️ اختار المنتج الأساسي','#dc2626');
+  var canonicalId=radio.value;
+  var prods=window.__mergeCandidates||[];
+  var canonical=prods.find(function(p){return p.id===canonicalId;});
+  var dups=prods.filter(function(p){return p.id!==canonicalId;});
+  if(!canonical||!dups.length)return;
+
+  var totalQty=prods.reduce(function(s,p){return s+(p.qty||0);},0);
+  var totalBuyVal=prods.reduce(function(s,p){return s+(p.qty||0)*(p.buy_price||0);},0);
+  var totalLandedVal=prods.reduce(function(s,p){return s+(p.qty||0)*(p.landed_cost||p.buy_price||0);},0);
+  var avgBuy=totalQty>0?Math.round((totalBuyVal/totalQty)*100)/100:(canonical.buy_price||0);
+  var avgLanded=totalQty>0?Math.round((totalLandedVal/totalQty)*100)/100:(canonical.landed_cost||avgBuy);
+
+  var aliasSet={};
+  (canonical.aliases||[]).forEach(function(a){aliasSet[a]=true;});
+  dups.forEach(function(p){
+    aliasSet[p.name]=true;
+    (p.aliases||[]).forEach(function(a){aliasSet[a]=true;});
+  });
+  delete aliasSet[canonical.name];
+  var aliases=Object.keys(aliasSet);
+
+  var dupIds={};
+  dups.forEach(function(p){dupIds[p.id]=true;});
+
+  // 1) إعادة ربط بنود الفواتير القديمة بالمنتج المدموج
+  var salesChanged=[];
+  DB.sales.forEach(function(s){
+    var changed=false;
+    (s.items||[]).forEach(function(it){ if(it.productId&&dupIds[it.productId]){it.productId=canonicalId;changed=true;} });
+    if(changed)salesChanged.push(s);
+  });
+  for(var i1=0;i1<salesChanged.length;i1++){ await dbUpdate('sales',salesChanged[i1].id,{items:salesChanged[i1].items}); }
+
+  // 2) إعادة ربط بنود المشتريات القديمة
+  var purchChanged=[];
+  DB.purchases.forEach(function(pu){
+    var changed=false;
+    (pu.items||[]).forEach(function(it){ if(it.productId&&dupIds[it.productId]){it.productId=canonicalId;changed=true;} });
+    if(changed)purchChanged.push(pu);
+  });
+  for(var i2=0;i2<purchChanged.length;i2++){ await dbUpdate('purchases',purchChanged[i2].id,{items:purchChanged[i2].items}); }
+
+  // 3) الجرد — بلوب متزامن ككل (مش جدول صفوف)، التعديل المحلي كفاية وpersist هيبعته
+  (DB.stocktakes||[]).forEach(function(st){
+    (st.items||[]).forEach(function(it){ if(it.productId&&dupIds[it.productId]){it.productId=canonicalId;} });
+  });
+
+  // 4) سحب القطع الداخلي — حقل مختلف الاسم (product_id مش productId)
+  var wdChanged=[];
+  (DB.part_withdrawals||[]).forEach(function(w){
+    if(w.product_id&&dupIds[w.product_id]){ w.product_id=canonicalId; wdChanged.push(w); }
+  });
+  for(var i3=0;i3<wdChanged.length;i3++){ await dbUpdate('part_withdrawals',wdChanged[i3].id,{product_id:canonicalId}); }
+
+  // 5) تحديث المنتج الأساسي بالكمية والتكلفة المرجّحة والأسماء البديلة
+  DB.products=DB.products.map(function(p){
+    return p.id===canonicalId?Object.assign({},p,{qty:totalQty,buy_price:avgBuy,landed_cost:avgLanded,aliases:aliases}):p;
+  });
+  await persist();
+  await dbUpdate('products',canonicalId,{qty:totalQty,buy_price:avgBuy,landed_cost:avgLanded,aliases:aliases});
+
+  // 6) حذف المنتجات المكررة فعليًا (محليًا وسيرفر)
+  for(var i4=0;i4<dups.length;i4++){
+    DB.products=DB.products.filter(function(p){return p.id!==dups[i4].id;});
+    await dbDelete('products',dups[i4].id,dups[i4]);
+  }
+  await persist();
+
+  window.__mergeCandidates=null;
+  if(_multiSelect)cancelMultiSelect(); else closeModal();
+  renderInventory();renderHome();
+  showToast('✅ تم دمج '+prods.length+' منتج في "'+canonical.name+'"','#16a34a');
 }
 
 
@@ -7645,7 +7856,9 @@ function openDeleteSaleModal(saleId){
     confirmAction('هتحذف الفاتورة دي؟',async function(){
       await _restoreStockFromSale(s);
       DB.sales=DB.sales.filter(function(x){return x.id!==saleId;});
-      await persist();renderSales();renderInventory();renderHome();
+      await persist();
+      await dbDelete('sales',saleId,s); // ⚠️ v195 — كان ناقص، نفس باج deleteSaleAndDebt/deleteSaleOnly
+      renderSales();renderInventory();renderHome();
       showToast('🗑️ تم الحذف — رجعت الكمية للمخزون','#64748b');
     });
     return;
@@ -7669,9 +7882,16 @@ async function deleteSaleAndDebt(saleId,debtId){
   var s=DB.sales.find(function(x){return x.id===saleId;});
   if(s&&_blockIfClosedMonth(s.date))return; // v175
   await _restoreStockFromSale(s);
+  var __oldDebt=DB.debts.find(function(x){return x.id===debtId;});
   DB.sales=DB.sales.filter(function(x){return x.id!==saleId;});
   DB.debts=DB.debts.filter(function(x){return x.id!==debtId;});
-  await persist();closeModal();renderSales();renderInventory();renderHome();
+  await persist();
+  // ⚠️ v195 — إصلاح جذري: الدالة دي كانت بتمسح الفاتورة والدين من الشاشة والتخزين
+  // المحلي بس، من غير ما تنادي dbDelete خالص — يعني السيرفر فاضل عنده نسخة الفاتورة
+  // زي ما هي، وأول مزامنة بترجّعها تاني (زي كل مرة تقريبًا، مش باج نادر).
+  if(s) await dbDelete('sales',saleId,s);
+  if(__oldDebt) await dbDelete('debts',debtId,__oldDebt);
+  closeModal();renderSales();renderInventory();renderHome();
   showToast('🗑️ تم حذف الفاتورة والدين — رجعت الكمية للمخزون','#64748b');
 }
 
@@ -7680,7 +7900,10 @@ async function deleteSaleOnly(saleId){
   if(s&&_blockIfClosedMonth(s.date))return; // v175
   await _restoreStockFromSale(s);
   DB.sales=DB.sales.filter(function(x){return x.id!==saleId;});
-  await persist();closeModal();renderSales();renderInventory();renderHome();
+  await persist();
+  // ⚠️ v195 — نفس إصلاح دالة deleteSaleAndDebt فوق: لازم dbDelete عشان يتمسح من السيرفر فعلاً.
+  if(s) await dbDelete('sales',saleId,s);
+  closeModal();renderSales();renderInventory();renderHome();
   showToast('🗑️ تم حذف الفاتورة — الدين باقٍ، والكمية رجعت للمخزون','#64748b');
 }
 
@@ -9852,8 +10075,15 @@ function _clearBtn(key,label,count){
 async function execClearExpenses(type){
   var msg=type==='all'?'هتمسح كل المصاريف؟':'هتمسح هذا النوع من المصاريف؟';
   confirmAction(msg,async function(){
-    if(type==='all'){DB.expenses=[];}
+    var __toDelete;
+    if(type==='all'){__toDelete=DB.expenses.slice();DB.expenses=[];}
     else{
+      __toDelete=DB.expenses.filter(function(e){
+        if(type==='manual')return !(e.source&&e.source!=='manual');
+        if(type==='salary')return !(e.source!=='salary');
+        if(type==='fixed_exp')return !(e.source!=='fixed_exp');
+        return false;
+      });
       DB.expenses=DB.expenses.filter(function(e){
         if(type==='manual')return e.source&&e.source!=='manual';
         if(type==='salary')return e.source!=='salary';
@@ -9861,7 +10091,11 @@ async function execClearExpenses(type){
         return true;
       });
     }
-    await persist();closeModal();_refreshExpensesView();renderHome();
+    await persist();
+    // ⚠️ v195 — كان ناقص: المسح الجماعي كان بيشيل من DB.expenses محليًا بس من غير
+    // dbDelete، فكل المصاريف الملغاة كانت بترجع تاني أول مزامنة (نفس عيلة باج حذف الفاتورة).
+    for(var __i=0;__i<__toDelete.length;__i++){ await dbDelete('expenses',__toDelete[__i].id,__toDelete[__i]); }
+    closeModal();_refreshExpensesView();renderHome();
     showToast('🗑️ تم المسح','#64748b');
   });
 }
@@ -10970,7 +11204,7 @@ async function withdrawPartForMovement(movementId){
   var name=(v('wd-part-name')||'').trim();
   var qty=+v('wd-part-qty')||1;
   if(!name){msg.textContent='⚠️ اكتب اسم القطعة';msg.style.color='#dc2626';return;}
-  var prod=(DB.products||[]).find(function(p){return normalizeAr(p.name)===normalizeAr(name);});
+  var prod=(DB.products||[]).find(function(p){return normalizeAr(p.name)===normalizeAr(name)||(p.aliases||[]).some(function(a){return normalizeAr(a)===normalizeAr(name);});});
   if(!prod){msg.textContent='⚠️ القطعة دي مش موجودة في المخزون';msg.style.color='#dc2626';return;}
   if(prod.qty<qty){msg.textContent='⚠️ الكمية المتاحة '+prod.qty+' بس';msg.style.color='#dc2626';return;}
   if(!window.__currentProfile){msg.textContent='⚠️ لازم تكون مسجل دخول عشان تسحب قطعة';msg.style.color='#dc2626';return;}
@@ -15493,6 +15727,7 @@ function updateMsToolbar(){
     '<span style="font-size:13px;font-weight:700">تم تحديد '+count+'</span>'+
     '<div style="display:flex;gap:6px;margin-right:auto;flex-wrap:wrap">'+
     (count>0?'<button class="btn btn-sm" style="background:#ede9fe;color:#7c3aed" onclick="printSelectedGeneric()">🖨️ طباعة ('+count+')</button>':'')+
+    (count>=2&&_multiTable==='products'?'<button class="btn btn-sm" style="background:#fef9c3;color:#92400e" onclick="openMergeConfirm(Object.keys(_selected))">🔗 دمج ('+count+')</button>':'')+
     (count>0?'<button class="btn btn-sm btn-red" onclick="deleteSelected()">🗑️ حذف ('+count+')</button>':'')+ 
     (count>0?'<button class="btn btn-sm" style="background:#dcfce7;color:#15803d" onclick="exportSelected()">📤 تصدير</button>':'')+
     '<button class="btn btn-sm btn-outline" onclick="cancelMultiSelect()">إلغاء</button>'+
