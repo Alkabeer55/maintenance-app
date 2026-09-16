@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v188</title>
+<title>ابو حوده الحلو الجميل v194</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,8 +13,51 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="2026-09-15 — v188";
+<script>var BUILD_STAMP="2026-09-16 — v194";
 /* ===== سجل التعديلات (Changelog) =====
+v194: [✨ سجل المصروفات/الرواتب/السلف في "📜 السجل الزمني الكامل" بقى يفتح الفاتورة الفعلية]
+     الضغط على أي صف مصروف/راتب/سلفة في تبويب السجل كان بيوديك لتبويب "مصروفات" العام
+     بس، مش للسجل نفسه — السبب مكنش إن مفيش دالة تعديل بالـ id (فيه فعلاً openEditExpenseModal
+     شغالة ومستخدمة في زرار ✏️ بتبويب مصروفات بالظبط)، الموضوع إن السجل مكنش بينادي عليها.
+     اتصلح بتوجيه صف المصروف لنفس مودال التعديل الموجود، بنفس منطق باقي أنواع العمليات
+     (فاتورة، مشترى، رأس مال...). آمنة برضه لصفوف الرواتب/السلف لأنها نفس المودال المستخدم
+     بالظبط لتعديلها من شاشة مصروفات العادية.
+v193: [🐛 إصلاح: باج شاشة الإعدادات "TypeError: Failed to fetch" الأحمر المكدّس]
+     زرار "🔍 تحقق من تطابق البيانات مع السيرفر" (الإعدادات → رفع البيانات المحلية)
+     كان بيعمل ~15 نداء فحص منفصل (جدول جدول) من غير ما يتأكد الأول إن فيه نت. لو
+     مفيش نت، كل نداء كان بيفشل لوحده ويطلع سطر أحمر منفصل "❌ [الجدول]: خطأ اتصال"،
+     فيظهر ~15 سطر أحمر مكدّس دفعة واحدة — بدل ما يعدي على بنر الأخطاء الهادي (v180)
+     زي باقي أخطاء النت في التطبيق. اتصلح بفحص navigator.onLine في أول الدالة: لو
+     مفيش نت، بيوريك تنبيه واحد بس "🚫 لازم تكون متصل بالنت" ومبيحاولش أصلاً.
+v192: [✨ تقرير المهندسين — بديل زرار "التقارير المالية" المكرر في المزيد]
+     زرار "التقارير المالية" كان مكرر مع تاب "تقارير" في الشريط السفلي أصلاً، فاتشال
+     واتحط مكانه "👥 تقرير المهندسين" (للمالك بس). بيوريك كل مهندس مربوط بحساب دخول:
+     إجمالي مبيعاته ومصروفاته وصافي رصيد الأمانة معاه، ولو ضغطت عليه بيفتحلك صفحته
+     الكاملة (آخر فواتيره وتحركاته + تفاصيل رصيد الخزنة بالكامل)، وكل فاتورة/تحرك فيها
+     قابل للضغط يوديك لتفاصيله. البيانات كلها موجودة أصلاً في الكود (created_by + حساب
+     رصيد الأمانة اللي شغال في شاشة "حسابي") فمفيش منطق جديد اتضاف، بس عرض جديد ليها.
+v191: [🐛 على الأرجح سبب "الموظفين بيتسجلوا خروج تلقائي بعد شوية استخدام"]
+     لقيت إن كود v171 (كسر حلقة فشل 42501) كان بينادي sb.auth.refreshSession() يدويًا —
+     وده بالظبط نفس الباج اللي وثّقته v169 قبل كده (السطر فوقه في الكود ده بالظبط):
+     التجديد اليدوي بيتعارض (race condition) مع تجديد التوكن التلقائي جوه مكتبة Supabase
+     نفسها، والسيرفر بيرفض واحد منهم كـ"توكن معاد استخدامه" ويسقط الجلسة فعليًا — يعني
+     v171 رجّعت نفس المشكلة اللي v169 كانت مصلحاها من مكان تاني في الكود. اتصلحت بنفس
+     منطق v169 بالظبط: بدل التجديد اليدوي، بننتظر لحظة ونتأكد إن فيه جلسة موجودة بس
+     (من غير إجبارها تتجدد) ونعيد المحاولة. ⚠️ ده تشخيص قوي مبني على تناقض واضح في الكود
+     نفسه، بس محتاج متابعة فعلية بعد التحديث — لو استمرت شكوى الموظفين تاني قولّي فورًا.
+v190: [🐛 إصلاح جذري: كل حقول الأسعار/الكميات كانت بتتكتب بالعكس]
+     كل حقول الأرقام في التطبيق (34 حقل — سعر الشراء، سعر البيع، الكميات، إلخ) كانت وارثة
+     اتجاه الصفحة RTL زي أي نص عادي، وده بيخلي الأرقام تتسجل بالعكس أثناء الكتابة (تحتاج
+     تكتبها مقلوبة عشان تطلع صح) — سبب باج "بكتب سعر في المشتريات غلط" و"تعديل سعر البيع
+     مش بيثبت" (على الأرجح نفس السبب في الحالتين: كنت بتكتب رقم يبان مختلف عن اللي اتحفظ
+     فعليًا). اتصلحت بقاعدة عامة واحدة: كل حقول الأرقام بقت تتكتب LTR زي أي رقم طبيعي، بغض
+     النظر عن اتجاه باقي الصفحة. جرّب اكتب سعر عادي زي أي رقم وقولّي لو لسه فيه غرابة.
+v189: [✨ ترتيب تابات التقارير بالسحب والإفلات المباشر]
+     تقدر دلوقتي تضغط ضغطة مطوّلة (نص ثانية تقريبًا) على أي تاب في شاشة التقارير المالية
+     وتسحبه لمكانه اللي تحبه، مش بس "قائمة الدخل" — أي تاب. الترتيب بيتحفظ على الجهاز
+     تلقائي ومبيتفقدش لما تقفل وتفتح التطبيق. ⚠️ ده تفاعل سحب باللمس معتمد على منطق
+     تقني مجرب في أماكن تانية بس متختبرش فعليًا على موبايل حقيقي جوه بيئة التطوير دي —
+     جرّبه واختبر إن السحب سلس وإن الترتيب بيتحفظ صح، وقولّي لو حسّيت بأي غرابة.
 v188: [🐛 إصلاح تكسّر شريط تابات "التقارير المالية" (9 تابات كانت بتتزنّق في صف واحد)]
      شريط التابات بقى قابل للسحب أفقيًا بدل ما كل تاب ياخد نصيب ضيق جدًا (flex:1) ويتقصّر
      نصه أو يتكسر شكله. ⚠️ ده إصلاح الجزء الأول بس ("الشاشة مش مظبوطة") — جزء "ترتيب
@@ -858,6 +901,9 @@ v107: [تحسين] "مش فاكر قيمة المخزون اليدوي" — بد
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;overflow:hidden;background:#f1f5f9;font-family:'Cairo',Tahoma,sans-serif;direction:rtl;overscroll-behavior-y:contain}
+/* v190 — إصلاح: كل حقول الأرقام (أسعار/كميات) كانت بترث اتجاه الصفحة RTL، وده بيخلي
+   الأرقام تتسجل بالعكس أثناء الكتابة. الأرقام لازم تتكتب LTR دايمًا مهما كان اتجاه الصفحة. */
+input[type=number]{direction:ltr;text-align:center}
 #app{height:100%;display:flex;flex-direction:column;max-width:480px;margin:0 auto;background:#f1f5f9}
 #header{background:#0f172a;color:#fff;padding:12px 16px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.2)}
 #header.hidden{display:none}
@@ -2652,6 +2698,13 @@ input:checked+.slider:before{transform:translateX(-20px)}
   // فعلاً وصل ومفيش سجلات لسه عالقة على جهاز واحد بس =====
   async function __verifySyncCounts(){
     if(typeof sb === 'undefined' || !window.__currentProfile){ showToast('🚫 لازم تكون متصل بالنت ومسجّل دخول','#dc2626'); return; }
+    // ===== v193 — إصلاح: الزرار ده معناه معدوم من غير نت (مفيش حاجة يقارنها)، وكان
+    // قبل كده بيحاول ينادي كل جدول لوحده فيفشل كل نداء بسبب فقدان النت، فيطلع سطر أحمر
+    // منفصل لكل جدول (~15 سطر) بدل تنبيه هادي واحد زي باقي أخطاء النت في التطبيق. =====
+    if(typeof navigator!=='undefined' && navigator.onLine===false){
+      showToast('🚫 لازم تكون متصل بالنت عشان تقارن البيانات مع السيرفر','#dc2626');
+      return;
+    }
     showToast('🔍 جاري المقارنة...','#7c3aed');
     var rowsTables = Object.keys(__SYNCED_TABLES);
     var blobTables = [
@@ -3436,17 +3489,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
     <div id="screen-reports" class="screen">
       <div style="font-size:19px;font-weight:900;margin-bottom:12px">📊 التقارير المالية</div>
       <div id="report-period-filter"></div>
-      <div class="tabs tabs-scroll">
-        <button class="tab active" onclick="switchReportTab('period',this)">قائمة الدخل</button>
-        <button class="tab" onclick="switchReportTab('income',this)">التحصيل</button>
-        <button class="tab" onclick="switchReportTab('balance',this)">المركز</button>
-        <button class="tab" onclick="switchReportTab('cashflow',this)">💵 التدفق النقدي</button>
-        <button class="tab" onclick="switchReportTab('expenses',this)">المصروفات</button>
-        <button class="tab" onclick="switchReportTab('analysis',this)">📈 تحليل</button>
-        <button class="tab" onclick="switchReportTab('parts_sold',this)">🔩 الأكثر مبيعًا</button>
-        <button class="tab" onclick="switchReportTab('models',this)">🖨️ الموديلات</button>
-        <button class="tab" onclick="switchReportTab('ledger',this)">📜 السجل</button>
-      </div>
+      <div id="report-tabs-bar" class="tabs tabs-scroll"></div>
       <div id="tab-period"></div>
       <div id="tab-income" style="display:none"></div>
       <div id="tab-balance" style="display:none"></div>
@@ -3593,7 +3636,7 @@ var APP_TITLE='ابو حوده الحلو الجميل';
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=188;
+var APP_VERSION=194;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -4181,12 +4224,19 @@ async function __pushRowToServer(table, row){
       // v171 — [🐛 كسر حلقة فشل RLS 42501 اللي كانت بتتكرر للأبد] الكود 42501 هنا معناه
       // عمليًا إن auth.uid() رجع فاضي وقت التنفيذ (توكن تالف/منتهي فعليًا على السيرفر)
       // حتى لو الجلسة شكلها موجودة محليًا. بدل ما نسيبها تتكرر بلا نهاية، بمجرد ما
-      // نلاقي 42501 بنجرب تجديد الجلسة مرة واحدة وإعادة المحاولة، ولو فشل كمان
-      // بنعمل تسجيل خروج تلقائي فورًا عشان نكسر الحلقة ونطلب دخول جديد نضيف.
+      // نلاقي 42501 بننتظر لحظة ونجرب تاني مرة واحدة، ولو فشل كمان بنعمل تسجيل خروج
+      // تلقائي فورًا عشان نكسر الحلقة ونطلب دخول جديد نضيف.
+      // ⚠️ v191 — [🐛 إصلاح: نفس باج v168/v169 اتكرر هنا] كان هنا نداء يدوي لـ
+      // sb.auth.refreshSession() قبل إعادة المحاولة — وده بالظبط اللي v169 وثّقت إنه
+      // بيتعارض (race condition) مع تجديد التوكن التلقائي جوه مكتبة Supabase نفسها،
+      // وبيسقط الجلسة فعليًا بدل ما يصلحها. على الأرجح ده سبب شكوى الموظفين إنهم
+      // بيتسجلوا خروج تلقائي بعد شوية استخدام. الحل زي v169 بالظبط: منجبرش تجديد
+      // يدوي، بس نستنى لحظة (تدي فرصة للتجديد التلقائي لو شغال أصلاً) ونعيد المحاولة.
       if(res.error.code === '42501' && !payload.__retriedAfterRefresh){
         try{
-          var _rf = await sb.auth.refreshSession();
-          if(!_rf.error && _rf.data && _rf.data.session){
+          await new Promise(function(r){setTimeout(r,800);});
+          var _hasSession = await __ensureFreshSession();
+          if(_hasSession){
             payload.__retriedAfterRefresh = true; // منع تكرار لا نهائي
             var payload2 = Object.assign({}, payload); delete payload2.__retriedAfterRefresh;
             var res2 = await sb.from(table).upsert(payload2);
@@ -4194,7 +4244,7 @@ async function __pushRowToServer(table, row){
             res = res2;
           }
         }catch(e5){}
-        // لو وصلنا هنا يبقى التجديد فشل أو المحاولة التانية فشلت برضو — الجلسة تالفة فعلاً.
+        // لو وصلنا هنا يبقى المحاولة التانية فشلت برضو — الجلسة تالفة فعلاً.
         // v172 — [🐛 إصلاح حلقة تسجيل الخروج/الدخول المتكررة] كنا بنمسح جلسة السيرفر
         // بس، وكان التطبيق بيرجع يدخل تلقائي بنفس الحساب المحفوظ محليًا (وضع الأوفلاين
         // المصمم أصلاً)، فيحصل نفس الخطأ تاني فورًا ويلف في حلقة. دلوقتي بنمسح الحساب
@@ -4586,6 +4636,88 @@ function compressImage(file,callback,maxWidth,quality){
 // ===== NAV =====
 // ===== NAVIGATION =====
 var currentScreen='home',currentReportTab='period',currentDebtTab='customer';
+
+// v188 — ترتيب تابات التقارير قابل للسحب والإفلات، محفوظ محليًا لكل جهاز
+var REPORT_TAB_DEFS=[
+  {id:'period',label:'قائمة الدخل'},
+  {id:'income',label:'التحصيل'},
+  {id:'balance',label:'المركز'},
+  {id:'cashflow',label:'💵 التدفق النقدي'},
+  {id:'expenses',label:'المصروفات'},
+  {id:'analysis',label:'📈 تحليل'},
+  {id:'parts_sold',label:'🔩 الأكثر مبيعًا'},
+  {id:'models',label:'🖨️ الموديلات'},
+  {id:'ledger',label:'📜 السجل'}
+];
+var _reportTabOrder=(function(){
+  var saved=LS.get('mc8_report_tab_order',null);
+  var allIds=REPORT_TAB_DEFS.map(function(t){return t.id;});
+  if(!Array.isArray(saved))return allIds.slice();
+  var cleaned=saved.filter(function(id){return allIds.indexOf(id)!==-1;});
+  allIds.forEach(function(id){if(cleaned.indexOf(id)===-1)cleaned.push(id);}); // أي تاب جديد يتضاف في الآخر تلقائي
+  return cleaned;
+})();
+
+function renderReportTabsBar(){
+  var bar=document.getElementById('report-tabs-bar');if(!bar)return;
+  var byId={};REPORT_TAB_DEFS.forEach(function(t){byId[t.id]=t;});
+  bar.innerHTML=_reportTabOrder.map(function(id){
+    var t=byId[id];if(!t)return'';
+    return '<button class="tab'+(id===currentReportTab?' active':'')+'" data-tabid="'+id+'" onclick="if(!__tabWasDragged)switchReportTab(\''+id+'\',this)">'+t.label+'</button>';
+  }).join('');
+  _wireReportTabsDrag(bar);
+}
+
+// سحب وإفلات لترتيب التابات: ضغطة مطوّلة (350 مللي ثانية) على تاب من غير ما تحرك
+// إصبعك تفعّل وضع السحب، بعدها تحريك الإصبع أفقيًا بيبدّل مكان التاب مع اللي جنبه فورًا
+var __tabWasDragged=false;
+function _wireReportTabsDrag(bar){
+  var pressTimer=null,dragging=null,startX=0,moved=false;
+  function clearPress(){if(pressTimer){clearTimeout(pressTimer);pressTimer=null;}}
+  function endDrag(){
+    if(dragging){dragging.style.transform='';dragging.style.zIndex='';dragging.style.opacity='';}
+    dragging=null;bar.style.overflowX='auto';
+    if(moved){
+      var order=Array.prototype.map.call(bar.querySelectorAll('.tab'),function(b){return b.getAttribute('data-tabid');});
+      _reportTabOrder=order;
+      LS.set('mc8_report_tab_order',order);
+      __tabWasDragged=true;
+      setTimeout(function(){__tabWasDragged=false;},300); // يمنع إن الضغطة نفسها تفتح تاب غلط بعد السحب
+    }
+    moved=false;
+  }
+  bar.querySelectorAll('.tab').forEach(function(btn){
+    btn.addEventListener('touchstart',function(e){
+      var touch=e.touches[0];startX=touch.clientX;moved=false;
+      clearPress();
+      pressTimer=setTimeout(function(){
+        dragging=btn;bar.style.overflowX='hidden';
+        btn.style.transform='scale(1.06)';btn.style.zIndex='5';btn.style.opacity='0.85';
+        if(navigator.vibrate)navigator.vibrate(15);
+      },350);
+    },{passive:true});
+    btn.addEventListener('touchmove',function(e){
+      if(!dragging){
+        // لو الإصبع اتحرك قبل ما الضغطة المطوّلة تخلص، إلغِ وضع السحب (يبقى سكرول عادي)
+        if(Math.abs(e.touches[0].clientX-startX)>8)clearPress();
+        return;
+      }
+      moved=true;
+      var touchX=e.touches[0].clientX;
+      var siblings=Array.prototype.slice.call(bar.querySelectorAll('.tab'));
+      var myIdx=siblings.indexOf(dragging);
+      for(var i=0;i<siblings.length;i++){
+        if(siblings[i]===dragging)continue;
+        var r=siblings[i].getBoundingClientRect();
+        var mid=r.left+r.width/2;
+        if(i<myIdx&&touchX<mid){bar.insertBefore(dragging,siblings[i]);break;}
+        if(i>myIdx&&touchX>mid){bar.insertBefore(dragging,siblings[i].nextSibling);break;}
+      }
+    },{passive:true});
+    btn.addEventListener('touchend',function(){clearPress();endDrag();});
+    btn.addEventListener('touchcancel',function(){clearPress();endDrag();});
+  });
+}
 var _navHistory=['home'];
 var navLabels={home:'الرئيسية',inventory:'مخزون',sales:'مبيعات',purchases:'مشتريات',debts:'الديون',reports:'التقارير',tasks:'المهمات',settings:'إعدادات',movements:'التحركات','movements-report':'تقرير التحركات','tasks-report':'تقرير المهمات',ledger:'سجل العميل'};
 var navIcons={home:'🏠',inventory:'📦',sales:'🧾',purchases:'🛒',debts:'💳',reports:'📊',tasks:'📋',settings:'⚙️',movements:'🔧','movements-report':'📊','tasks-report':'📊',ledger:'👤'};
@@ -11711,6 +11843,7 @@ var _reportPeriod=_makePeriodState({mode:'month'});
 
 function renderReports(){
   var tab=currentReportTab||'period';
+  renderReportTabsBar();
   var filterEl=document.getElementById('report-period-filter');
   if(filterEl)filterEl.innerHTML=renderPeriodFilterHTML('_reportPeriod','renderReports');
   // v139 — إتاحة تحكّم أدق للمالك: يقدر يخفي تبويبي "المركز المالي" و"التدفق النقدي"
@@ -11898,7 +12031,7 @@ function renderFinancialLedger(){
   DB.expenses.forEach(function(e){
     if(!e.date||!inRange(e.date))return;
     var lbl=e.is_advance?'سلفة':(e.type==='رواتب'?'راتب':'مصروف');
-    events.push({date:e.date,icon:e.is_advance?'💵':(e.type==='رواتب'?'👤':'💸'),type:lbl,desc:(e.note||e.label||e.type||'—'),amount:e.amount,sign:-1,nav:'switchReportTab(\'expenses\',null)'});
+    events.push({date:e.date,icon:e.is_advance?'💵':(e.type==='رواتب'?'👤':'💸'),type:lbl,desc:(e.note||e.label||e.type||'—'),amount:e.amount,sign:-1,nav:'openEditExpenseModal(\''+e.id+'\')'});
   });
   // سداد ديون (عميل بيدفع = فلوس داخلة / إحنا بندفع مورد = فلوس خارجة)
   (DB.debts||[]).forEach(function(d){
@@ -17055,6 +17188,68 @@ function _investorCard(inv){
 
 // ⚠️ v111 — السجل الكامل الزمني لمستثمر: مساهمات + توزيعات أرباح + سحوبات مرتبة بالتاريخ
 // ⚠️ v118 — نفس فكرة "السجل الكامل" بتاعة المستثمر، لكن لصاحب المشروع نفسه
+// ===== v191 — تقرير المهندسين (بديل زرار "التقارير المالية" المكرر في المزيد) =====
+// مبني بالكامل على بيانات موجودة أصلاً: created_by على كل فاتورة/مصروف/تحرك،
+// وحساب رصيد الأمانة (_computeEmpCashBalance) اللي كان مستخدم قبل كده لشاشة "حسابي".
+function openEmployeesReport(){
+  if(!window.__isOwner){showToast('🚫 التقرير ده للمالك بس','#dc2626');return;}
+  var emps=(DB.accounts.employees||[]).filter(function(e){return e.active!==false&&e.linked_profile_id;});
+  document.getElementById('modal-title').textContent='👥 تقرير المهندسين';
+  if(!emps.length){
+    document.getElementById('modal-body').innerHTML='<div class="empty">مفيش موظفين مربوطين بحساب دخول لسه — اربط الموظف بحسابه من ⚙️ الإعدادات ← إدارة الموظفين.</div>'+
+      '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+    openModal();return;
+  }
+  document.getElementById('modal-body').innerHTML=
+    emps.map(function(emp){
+      var bal=_computeEmpCashBalance(emp)||{salesSum:0,expSum:0,balance:0};
+      var invCount=(DB.sales||[]).filter(function(s){return s.created_by===emp.linked_profile_id;}).length;
+      return '<div onclick="openEmployeeDetailReport('+jsStr(emp.id)+')" style="cursor:pointer;background:#f8fafc;border-radius:11px;padding:12px;margin-bottom:9px;border:1px solid #e2e8f0">'+
+        '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">'+
+        '<b style="font-size:14px">👤 '+esc(emp.name||'—')+'</b>'+
+        '<span style="font-size:11px;color:#94a3b8">'+invCount+' فاتورة ›</span></div>'+
+        '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;font-size:11px;text-align:center">'+
+        '<div style="background:#dcfce7;border-radius:7px;padding:6px"><div style="color:#15803d">مبيعات</div><b style="color:#15803d">'+fmt(bal.salesSum)+'</b></div>'+
+        '<div style="background:#fee2e2;border-radius:7px;padding:6px"><div style="color:#dc2626">مصروفات</div><b style="color:#dc2626">'+fmt(bal.expSum)+'</b></div>'+
+        '<div style="background:'+(bal.balance>=0?'#dbeafe':'#fee2e2')+';border-radius:7px;padding:6px"><div style="color:'+(bal.balance>=0?'#1e40af':'#dc2626')+'">صافي الخزنة معاه</div><b style="color:'+(bal.balance>=0?'#1e40af':'#dc2626')+'">'+fmt(bal.balance)+'</b></div>'+
+        '</div></div>';
+    }).join('')+
+    '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+  openModal();
+}
+function openEmployeeDetailReport(empId){
+  var emp=(DB.accounts.employees||[]).find(function(e){return e.id===empId;});if(!emp)return;
+  var pid=emp.linked_profile_id;
+  var bal=_computeEmpCashBalance(emp)||{since:'',salesSum:0,debtPaySum:0,advSum:0,expSum:0,salarySum:0,balance:0};
+  var sales=(DB.sales||[]).filter(function(s){return s.created_by===pid;}).sort(function(a,b){return(b.date||'')<(a.date||'')?-1:1;});
+  var moves=(DB.movements||[]).filter(function(m){return m.created_by===pid;}).sort(function(a,b){return(b.opened_at||'')<(a.opened_at||'')?-1:1;});
+
+  document.getElementById('modal-title').textContent='👤 صفحة المهندس — '+(emp.name||'');
+  document.getElementById('modal-body').innerHTML=
+    '<div style="background:#eef2ff;border-radius:10px;padding:10px 12px;margin-bottom:12px">'+
+      '<div style="font-size:11px;color:#4338ca;font-weight:700;margin-bottom:6px">💰 رصيد الأمانة (من '+esc(fmtDate(bal.since))+')</div>'+
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:11px">'+
+      '<div>مبيعات: <b>'+fmt(bal.salesSum)+'</b></div>'+
+      '<div>تحصيل ديون عملاء: <b>'+fmt(bal.debtPaySum)+'</b></div>'+
+      '<div>عهدة اتدّت له: <b>'+fmt(bal.advSum)+'</b></div>'+
+      '<div>مصروفات سجّلها: <b style="color:#dc2626">-'+fmt(bal.expSum)+'</b></div>'+
+      '<div>رواتب اتصرفتله: <b style="color:#dc2626">-'+fmt(bal.salarySum)+'</b></div>'+
+      '<div style="font-weight:900;color:'+(bal.balance>=0?'#1e40af':'#dc2626')+'">الصافي معاه دلوقتي: '+fmt(bal.balance)+'</div>'+
+      '</div></div>'+
+    '<div style="font-weight:800;font-size:13px;margin-bottom:6px">🧾 آخر فواتيره ('+sales.length+')</div>'+
+    (sales.length?sales.slice(0,20).map(function(s){
+      return '<div onclick="closeModal();openSaleModal('+jsStr(s.id)+')" style="cursor:pointer;display:flex;justify-content:space-between;background:#f8fafc;border-radius:8px;padding:7px 10px;margin-bottom:5px;font-size:12px">'+
+        '<span>'+esc(s.customer||'—')+' — '+esc(fmtDate(s.date))+'</span><b>'+fmt(s.total)+'</b></div>';
+    }).join(''):'<div class="empty">مفيش فواتير</div>')+
+    '<div style="font-weight:800;font-size:13px;margin:12px 0 6px">🔧 آخر تحركاته ('+moves.length+')</div>'+
+    (moves.length?moves.slice(0,20).map(function(m){
+      return '<div onclick="closeModal();openMovementDetail('+jsStr(m.id)+')" style="cursor:pointer;display:flex;justify-content:space-between;background:#f8fafc;border-radius:8px;padding:7px 10px;margin-bottom:5px;font-size:12px">'+
+        '<span>'+esc(m.customer||'—')+' — '+esc(m.device||'')+'</span><span style="color:#94a3b8">'+esc(fmtDate(m.opened_at))+'</span></div>';
+    }).join(''):'<div class="empty">مفيش تحركات</div>')+
+    '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal();openEmployeesReport()">‹ رجوع لكل المهندسين</button></div>';
+  openModal();
+}
+
 function openOwnerTimeline(){
   var events=[];
   (DB.accounts.capital||[]).forEach(function(c){
@@ -18007,7 +18202,7 @@ function renderMore(){
     reports:{
       key:'reports',title:'📊 كل التقارير والإحصائيات (الأساس)',icon:'📊',
       items:[
-        {icon:'📊',label:'التقارير المالية',screen:'reports',color:'#fff7ed',tc:'#c2410c'},
+        {icon:'👥',label:'تقرير المهندسين',action:'openEmployeesReport()',color:'#fff7ed',tc:'#c2410c',ownerOnly:true},
         {icon:'📒',label:'الحسابات',screen:'accounting',color:'#fdf2f8',tc:'#86198f'},
         {icon:'🔧',label:'تقرير التحركات',screen:'movements-report',color:'#fdf2f8',tc:'#86198f'},
         {icon:'📋',label:'تقرير المهمات',screen:'tasks-report',color:'#f0fdf4',tc:'#15803d'},
@@ -18030,7 +18225,7 @@ function renderMore(){
 
   el.innerHTML=order.map(function(key){
     var sec=sectionsMap[key];if(!sec)return'';
-    var items=sec.items.filter(function(item){return !item.screen||__canOpenScreen(item.screen);});
+    var items=sec.items.filter(function(item){return (!item.screen||__canOpenScreen(item.screen))&&(!item.ownerOnly||window.__isOwner);});
     if(!items.length)return'';
     return '<div style="margin-bottom:18px">'+
       '<div style="font-size:14px;font-weight:900;color:#0f172a;margin-bottom:9px">'+sec.title+'</div>'+
