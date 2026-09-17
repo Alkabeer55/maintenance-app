@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v196</title>
+<title>ابو حوده الحلو الجميل v202</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,8 +13,82 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="2026-09-16 — v196";
+<script>var BUILD_STAMP="2026-09-16 — v202";
 /* ===== سجل التعديلات (Changelog) =====
+v202: [✨ الكميات الكسرية — كل الخانات والأماكن]
+     - كل خانات الأرقام في التطبيق (بيع/شراء/جرد/سحب قطع/كمية المنتج) بقت تقبل كسور —
+     الإصلاح مركزي في fld()/acField() فبيغطي كل الشاشات مرة واحدة.
+     - سحب القطع: الحد الأدنى كان محصور بـ1 (مبيقبلش كسر أصلاً)، اتشال.
+     - عربة فاتورة البيع: رقم الكمية كان بيتغير بأزرار +/− بس (زيادة/نقصان وحدة كاملة —
+     مفيش طريقة تكتب كسر خالص). دلوقتي الرقم نفسه قابل للضغط ويفتح خانة تكتب فيها أي رقم.
+     - ✨ وحدة تحويل (اختياري لأي منتج، زي كيس حبر بيتباع بالجرام): من شاشة تعديل المنتج
+     تحدد اسم الوحدة الفرعية ونسبة التحويل (1 كيس = 1000 جرام مثلاً). وقت البيع، خانة
+     الكمية بتديك اختيار تاني تكتب فيه بالجرام مباشرة (200) وهي تحسبلك الكسر (0.2 كيس)
+     أوتوماتيك بدل ما تحسبها يدوي.
+     - إصلاح جذري إضافي: أي عملية جمع/طرح على الكمية (بيع، شراء، جرد، سحب قطعة، أمانة)
+     بقت بتعدي على roundQty() عشان تمنع أخطاء الفاصلة العشرية المتراكمة في JS (زي
+     0.1+0.2 اللي بتطلع 0.30000000000000004 بدل 0.3) — بيقرّب لأقرب 3 خانات عشرية.
+     العرض في كروت المخزون والفواتير والجرد بقى بيشيل الأصفار الزيادة (2.500 → 2.5).
+     ⚠️ نطاق مقصود: عربة الشراء (المشتريات) لسه بأزرار +/− لوحدات كاملة بس من غير خانة
+     كتابة كسر مباشرة — لأن مثالك كان عن البيع (تبيع جزء من اللي اشتريته كامل)، مش الشراء
+     نفسه. لو محتاج نفس خانة الكتابة اليدوية في الشراء كمان قولّي وأضيفها.
+v201: [🐛 قيمة المخزون في الإحصائيات بقت مستبعدة الأمانة افتراضيًا]
+     كانت بتحسب بضاعة الأمانة (مستلمة أو عند طرف تاني) كإنها ملكك بالكامل، فترقم "قيمة
+     المخزون" كان مضخّم غلط. دلوقتي القيمة الافتراضية مستبعدة الأمانة تمامًا، مع زرار
+     "شامل الأمانة؟" فوق كارت القيمة المالية بالإحصائيات (📊) يوريك الرقم شامل الأمانة
+     كمان لو عايز تقارن.
+v200: [✨ نظام مخازن الأمانة (Consignment) — باتجاهين]
+     - 📥 استلام أمانة من مورد: زرار جديد بالمخزون، بتسجل الصنف والكمية وثمن الأمانة
+     (اللي هتديه للمورد) وسعر البيع. البضاعة دي مش "مشترى" فعلي — لما تتباع بس (من شاشة
+     البيع العادية زي أي منتج) بيتسجل عليك أوتوماتيك دين (مورد) بثمن الأمانة × الكمية
+     المباعة، بالظبط زي أي دين عادي.
+     - 📤 تسليم أمانة لطرف تاني: بتختار صنف من مخزونك الحالي وكمية، بتتشال من مخزونك
+     وتتحط كصنف أمانة "عنده". لما يبلغك إنه باع، زرار "✅" على العنصر بيسجل دين "مستحق
+     ليك" (عميل) بنفس الطريقة ويقلل الكمية المتاحة عنده.
+     - إرجاع في الاتجاهين (زرار ↩️) من غير أي دين — مش عملية بيع.
+     - كل بضاعة الأمانة بتظهر في نفس قائمة المخزون (بعلامة 📥/📤 + اسم الطرف) مع فلتر
+     مخصص يعزلها لوحدها لو عايز.
+     ⚠️ حاجة واحدة لسه مش قررناها: حساب "قيمة المخزون" في الإحصائيات (📊) لسه بيحسب
+     بضاعة الأمانة المستلمة (📥) كإنها ملكك بالكامل — مع إنها مش مدفوعة فعليًا لحد ما
+     تتباع. محتاج قرارك: نستبعدها من "قيمة الشراء" وﻻ نسيبها زي ما هي؟
+     ⚠️ تعديل فاتورة بيع (مش إضافة جديدة) عشان تضيف/تغيّر صنف أمانة فيها — الدين
+     الأوتوماتيكي للأمانة مش بيتحسب في حالة التعديل دلوقتي (بس في فاتورة جديدة). لو
+     محتاجها، قولّي عشان أضيفها بحرص (عشان منحسبش نفس الدين مرتين بالغلط).
+v199: [✨ تصنيف المخزون الهرمي — الشركة والنوع (انك جيت/ليزر)]
+     خانتين جداد مستقلتين على كل منتج (بدون ما نلمس القسم "مكن/قطع غيار" ولا "جديد/مستعمل"
+     الموجودين أصلاً): 🏭 الشركة و⚙️ النوع (انك جيت/ليزر). شاشة الإعدادات فيها إدارة كاملة
+     للقايمتين (إضافة/تعديل/مسح) بنفس شكل أنواع القطع الموجود. فلترين جداد في المخزون
+     (بيدعموا "بدون" لعرض المنتجات اللي لسه من غير تصنيف). زرار "🔍 خمّن الشركات" بيظهر
+     تلقائي لو فيه منتجات من غير شركة، وبيدور في اسم كل منتج على اسم شركة (لاتيني أو أشهر
+     كتابة عربي زي "ريكو"/"كيوسيرا") ويقترحها عليك للتأكيد بضغطة — تقدر تشيل علامة أي
+     اقتراح غلط قبل ما تأكد.
+     ⚠️ نفس وضع aliases من v196: company و tech_type أعمدة جديدة مش موجودة في جدول
+     products على Supabase. لازم تشغّل:
+     ALTER TABLE products ADD COLUMN IF NOT EXISTS company text;
+     ALTER TABLE products ADD COLUMN IF NOT EXISTS tech_type text;
+     من غيرهم الحفظ المحلي هيشتغل عادي بس مش هيتزامنوا للسيرفر.
+v198: [✨ كارت "الأكثر مبيعًا" بدل "منخفض" + فرز "الإضافة"/"آخر تعديل" منفصلين + إحصائيات أشمل]
+     - كارت "منخفض ⚠️" اتشال من مربعات المخزون الأربعة وبدلته "🏆 الأكثر مبيعًا" (بيوريك
+     المنتج الأكتر مبيعًا بعدده، وبالضغط عليه بتفتح قائمة أعلى 15 منتج بالعدد والربح وتاريخ
+     آخر بيع — بيشتغل حتى لو المنتج اتباع بالكامل أو اتحذف أو اتدمج، لأنه بيدور في الفواتير
+     نفسها مش في قائمة المخزون الحالية). فلتر "منخفض" لسه متاح بضغطة برضو — نقلته لرابط صغير
+     جنب سطر "🔎 عرض" عشان ميضيعش خالص.
+     - فرز المخزون: "🕐 الأحدث" اتقسم لخيارين منفصلين زي ما طلبت: "📅 الإضافة" (تاريخ أول
+     إضافة للمنتج) و"✏️ آخر تعديل" (تاريخ آخر مرة عدّلت بيانات المنتج من شاشة التعديل —
+     مش شامل تغيّر الكمية التلقائي من بيع/شراء، لو ده مش اللي قصدته قولّي). المنتجات
+     القديمة قبل v127 هتفضل بلا تاريخ إضافة (نفس القيد اللي اتشرح قبل كده).
+     - إحصائيات المخزون (📊) بقت فيها كمان: 📊 مقارنة مبيعات الشهر الهجري الحالي باللي
+     قبله، 💹 الأكثر ربحًا و📉 الأقل ربحًا (بالأرباح الفعلية المسجلة وقت البيع مش السعر
+     الحالي)، 👤 أكتر العملاء شراءً. وقسم "أكثر منتجات بيعاً" بقى دقيق زي كارت الأكثر
+     مبيعًا الجديد (بيشمل المنتجات المحذوفة/المدموجة).
+v197: [🐛 إصلاح ترتيب "أ-ي" في المخزون]
+     كان بيقارن الاسم الخام، واللي ممكن يدّي ترتيب غير ثابت عبر أجهزة مختلفة (دعم ترتيب
+     العربي مش موحّد بين كل المتصفحات) ومكنش بيجمع أشكال الهمزة (أ/إ/آ/ا) والتاء المربوطة
+     مع بعض زي البحث بالظبط. اتصلح بمقارنة النسخة المُطبَّعة (normalizeAr) نفس منطق البحث.
+     ⚠️ "الأحدث" (newest): الكود سليم فعليًا — بيرتب حسب تاريخ إضافة المنتج (created_at)،
+     بس المنتجات اللي اتضافت قبل الإصدار اللي سجّل التاريخ ده (v127) مفيش عندها تاريخ محفوظ
+     أصلًا، فبتنزل لآخر الترتيب بدل ما تتوزع صح. مش قادر أخترع تاريخ حقيقي لمنتج قديم —
+     محتاج أعرف منك المقصود بـ"الأحدث" بالظبط قبل أي تعديل تاني (شوف رد المحادثة).
 v196: [✨ دمج المنتجات المكررة — ميزة جديدة كاملة]
      زرار جديد "🔗 دمج منتجات مكررة" في شاشة المخزون: (أ) اقتراحات تلقائية لمنتجات
      أسماءها متشابهة، (ب) دمج يدوي عن طريق "☑️ تحديد" الموجود أصلاً ثم زرار "🔗 دمج".
@@ -1722,7 +1796,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
       ['none:بدون عمولة','fixed:مبلغ ثابت','percent:نسبة % من صافي الربح','both:الاثنين مع بعض'].map(function(o){var kv=o.split(':');return '<option value="'+kv[0]+'"'+((linkedRec.commission_type||'none')===kv[0]?' selected':'')+'>'+kv[1]+'</option>';}).join('')+
       '</select>'+
       '<div id="comm-inputs-'+linkedRec.id+'">'+__commInputsHTML(linkedRec)+'</div>'+
-      '<div class="field" style="margin-bottom:8px;background:#f0fdf4;border-radius:8px;padding:8px"><label style="font-size:11px;color:#15803d">💵 (إضافي، بيتجمع فوق أي اختيار فوق) مبلغ ثابت لكل عطل يخلص "منتهي" بنجاح</label><input id="comm-perjob-'+linkedRec.id+'" type="number" value="'+(linkedRec.commission_per_job||0)+'" style="width:100%;padding:8px;border:1.5px solid #bbf7d0;border-radius:8px;font-family:inherit"></div>'+
+      '<div class="field" style="margin-bottom:8px;background:#f0fdf4;border-radius:8px;padding:8px"><label style="font-size:11px;color:#15803d">💵 (إضافي، بيتجمع فوق أي اختيار فوق) مبلغ ثابت لكل عطل يخلص "منتهي" بنجاح</label><input id="comm-perjob-'+linkedRec.id+'" type="number" step="any" value="'+(linkedRec.commission_per_job||0)+'" style="width:100%;padding:8px;border:1.5px solid #bbf7d0;border-radius:8px;font-family:inherit"></div>'+
       '<button class="btn btn-primary btn-full btn-sm" style="margin-bottom:8px" onclick="__saveCommissionConfig('+jsStr(linkedRec.id)+')">💾 حفظ إعداد العمولة</button>'+
       '<div style="font-size:12px;color:#374151;background:#eff6ff;border-radius:8px;padding:8px;margin-bottom:8px">رصيد عمولة معتمدة لسه ما اتصرفتش: <b>'+fmt(linkedRec.commission_pending||0)+'</b></div>'+
       ((linkedRec.commission_type&&linkedRec.commission_type!=='none')||(+linkedRec.commission_per_job||0)>0?
@@ -1760,7 +1834,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
     if(!linkedRec){ el.innerHTML='<div style="font-size:12px;color:#94a3b8">الموظف ده لازم يتربط بسجل راتب الأول (من "الأساسيات")</div>'; return; }
     el.innerHTML=
       '<div style="font-size:11px;color:#64748b;margin-bottom:5px">📱 عدد الأجهزة المسموح يدخل بيها (0 = بدون تقييد)</div>'+
-      '<div style="display:flex;gap:6px;margin-bottom:8px"><input id="emp-maxdev-'+linkedRec.id+'" type="number" min="0" value="'+(linkedRec.max_devices||0)+'" style="flex:1;padding:8px;border:1.5px solid #e2e8f0;border-radius:8px;font-family:inherit">'+
+      '<div style="display:flex;gap:6px;margin-bottom:8px"><input id="emp-maxdev-'+linkedRec.id+'" type="number" step="any" min="0" value="'+(linkedRec.max_devices||0)+'" style="flex:1;padding:8px;border:1.5px solid #e2e8f0;border-radius:8px;font-family:inherit">'+
       '<button class="btn btn-primary btn-sm" onclick="__saveEmpMaxDevices('+jsStr(linkedRec.id)+')">💾 حفظ</button></div>'+
       ((linkedRec.devices||[]).length?
         '<div style="font-size:11px;color:#64748b;margin-bottom:6px">الأجهزة المسجّلة حاليًا:</div>'+
@@ -1792,8 +1866,8 @@ input:checked+.slider:before{transform:translateX(-20px)}
   function __commInputsHTML(rec){
     var t=rec.commission_type||'none';
     var html='';
-    if(t==='fixed'||t==='both')html+='<div class="field" style="margin-bottom:8px"><label style="font-size:11px">مبلغ ثابت كل فترة (ج)</label><input id="comm-fixed-'+rec.id+'" type="number" value="'+(rec.commission_fixed||0)+'" style="width:100%;padding:8px;border:1.5px solid #e2e8f0;border-radius:8px;font-family:inherit"></div>';
-    if(t==='percent'||t==='both')html+='<div class="field" style="margin-bottom:8px"><label style="font-size:11px">نسبة % من صافي الربح (بعد خصم تكلفة القطع/الخدمات) من مبيعاته</label><input id="comm-percent-'+rec.id+'" type="number" value="'+(rec.commission_percent||0)+'" style="width:100%;padding:8px;border:1.5px solid #e2e8f0;border-radius:8px;font-family:inherit"></div>';
+    if(t==='fixed'||t==='both')html+='<div class="field" style="margin-bottom:8px"><label style="font-size:11px">مبلغ ثابت كل فترة (ج)</label><input id="comm-fixed-'+rec.id+'" type="number" step="any" value="'+(rec.commission_fixed||0)+'" style="width:100%;padding:8px;border:1.5px solid #e2e8f0;border-radius:8px;font-family:inherit"></div>';
+    if(t==='percent'||t==='both')html+='<div class="field" style="margin-bottom:8px"><label style="font-size:11px">نسبة % من صافي الربح (بعد خصم تكلفة القطع/الخدمات) من مبيعاته</label><input id="comm-percent-'+rec.id+'" type="number" step="any" value="'+(rec.commission_percent||0)+'" style="width:100%;padding:8px;border:1.5px solid #e2e8f0;border-radius:8px;font-family:inherit"></div>';
     return html;
   }
   function __renderCommInputs(recId,type){
@@ -3671,7 +3745,7 @@ var APP_TITLE='ابو حوده الحلو الجميل';
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=196;
+var APP_VERSION=202;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -3682,7 +3756,7 @@ var DB = {
   schedule:{}, movCounter:0,
   accounts:{capital:[],fixed_assets:[],fixed_expenses:[],receivables:[]},
   archive:{customers:[],suppliers:[],products:[],expDescs:[],serials:[],models:[]},
-  settings:{partTypes:['جديد','مع انك','ليزر','استعمال خارجي','استعمال داخلي'],machineTypes:['جديد','استعمال خارجي','عرض للبيع','اسكراب'],appName:'مركز الصيانة'},
+  settings:{partTypes:['جديد','مع انك','ليزر','استعمال خارجي','استعمال داخلي'],machineTypes:['جديد','استعمال خارجي','عرض للبيع','اسكراب'],companies:['HP','Ricoh','Kyocera','Xerox','Epson','Canon'],techTypes:['انك جيت','ليزر'],appName:'مركز الصيانة'},
   inventory_snapshots:[],
   scheduled_list:[], // IDs الأعطال المرتبة في القائمة اليومية بترتيب المستخدم
   scheduled_map:{},  // {id: work_date} يوم العمل لكل عطل
@@ -3745,6 +3819,9 @@ function loadDB(){
     if(!DB.settings) DB.settings={};
     if(!DB.settings.partTypes||!DB.settings.partTypes.length) DB.settings.partTypes=['جديد','مع انك','ليزر','استعمال خارجي','استعمال داخلي'];
     if(!DB.settings.machineTypes||!DB.settings.machineTypes.length) DB.settings.machineTypes=['جديد','استعمال خارجي','عرض للبيع','اسكراب'];
+    // ⚠️ v199 — تصنيف المخزون الهرمي (شركة + نوع) — تهيئة القوائم لأول مرة للتطبيقات الموجودة
+    if(!DB.settings.companies||!DB.settings.companies.length) DB.settings.companies=['HP','Ricoh','Kyocera','Xerox','Epson','Canon'];
+    if(!DB.settings.techTypes||!DB.settings.techTypes.length) DB.settings.techTypes=['انك جيت','ليزر'];
     if(!DB.settings.quickServices||!DB.settings.quickServices.length) DB.settings.quickServices=[{name:'تسليك',price:600},{name:'زيارة صيانة',price:0},{name:'تنظيف',price:0},{name:'فحص',price:0}];
     if(!DB.settings.quickAmounts||!DB.settings.quickAmounts.length) DB.settings.quickAmounts=[50,100,150,200,300,500]; // v158 — اختصارات إدخال مبلغ سريع
     if(!DB.settings.bundles) DB.settings.bundles=[];
@@ -4606,11 +4683,11 @@ function closeConfirm(){document.getElementById('confirm-overlay').classList.rem
 // ===== FIELD BUILDERS =====
 function fld(id,label,type,value,placeholder,required){
   value=value===undefined||value===null?'':value;
-  return '<div class="field"><label>'+label+(required?'<span class="required">*</span>':'')+'</label><input id="'+id+'" type="'+type+'" value="'+esc(value)+'" placeholder="'+(placeholder||'')+'"></div>';
+  return '<div class="field"><label>'+label+(required?'<span class="required">*</span>':'')+'</label><input id="'+id+'" type="'+type+'" '+(type==='number'?'step="any"':'')+' value="'+esc(value)+'" placeholder="'+(placeholder||'')+'"></div>';
 }
 
 function acField(id,label,type,value,placeholder,archiveKey,required){
-  return '<div class="field"><label>'+label+(required?'<span class="required">*</span>':'')+'</label><div class="autocomplete-wrap"><input id="'+id+'" type="'+type+'" value="'+esc(value||'')+'" placeholder="'+placeholder+'" autocomplete="off"><div id="ac-'+id+'" class="autocomplete-list" style="display:none"></div></div></div>';
+  return '<div class="field"><label>'+label+(required?'<span class="required">*</span>':'')+'</label><div class="autocomplete-wrap"><input id="'+id+'" type="'+type+'" '+(type==='number'?'step="any"':'')+' value="'+esc(value||'')+'" placeholder="'+placeholder+'" autocomplete="off"><div id="ac-'+id+'" class="autocomplete-list" style="display:none"></div></div></div>';
 }
 
 function initAC(id,archiveKey){
@@ -4637,6 +4714,11 @@ function selAC(id,value){
 
 function v(id){var el=document.getElementById(id);return el?el.value:'';}
 function fmt(n){return(n||0).toLocaleString('ar-EG')+' ج';}
+// ⚠️ v202 — الكميات الكسرية: roundQty بتتحط حوالين أي عملية جمع/طرح على qty عشان تمنع
+// أخطاء الفاصلة العشرية المتراكمة (زي 0.1+0.2 اللي بتطلع 0.30000000000000004 في JS)،
+// وfmtQty بتعرض الكمية من غير أصفار زيادة (2.500 → 2.5، لكن 3 تفضل 3 مش 3.0).
+function roundQty(n){return Math.round((+n||0)*1000)/1000;}
+function fmtQty(n){n=roundQty(n);return n%1===0?String(n):String(n).replace(/0+$/,'').replace(/\.$/,'');}
 // ⚠️ تحسين v105: عرض موحّد للأرباح — لما الرقم يبقى سالب (خسارة)، فمش كفاية إن الرقم بس
 // يظهر بالسالب (fmt أصلاً بتعرضه كده)؛ لازم كمان الكلمة جنبه تتغيّر من "ربح" لـ"خسارة"
 // عشان يبان واضح من أول نظرة إن الوضع سالب، مش مجرد رقم أصغر. profitLabel بتدّي الكلمة
@@ -5177,6 +5259,7 @@ function updateTasksBadge(){
 // ===== INVENTORY =====
 // ===== INVENTORY =====
 var _invSort='alpha';
+var _invStatsIncludeConsignment=false; // ⚠️ v201 — تبديل عرض قيمة المخزون شاملة الأمانة أو لأ
 var _invCategory='all'; // all | parts | machines
 var _invStockFilter='available'; // available(qty>0,default) | low | out | all
 function setInvSort(s){_invSort=s;renderInventory();}
@@ -5201,13 +5284,110 @@ function isDeadStock(p){
   return lastActivity<cutoff;
 }
 
+// ⚠️ v198 — تجميع "الأكثر مبيعًا": بيدور في كل الفواتير القديمة (مش بس المنتجات
+// الموجودة حاليًا بالمخزون)، فبيشتغل صح حتى لو المنتج اتباع بالكامل أو اتحذف أو اتدمج.
+// بيستخدم buyPrice/price المسجلين وقت البيع نفسه (مش السعر الحالي) عشان الربح يبقى دقيق
+// تاريخيًا حتى لو سعر التكلفة اتغيّر بعد كده.
+function _computeBestSellers(){
+  var agg={};
+  DB.sales.forEach(function(s){
+    (s.items||[]).forEach(function(it){
+      var key=it.productId||('name:'+normalizeAr(it.name||''));
+      if(!agg[key])agg[key]={name:it.name,qty:0,lastDate:'',profit:0,productId:it.productId||null};
+      agg[key].qty+=(it.qty||0);
+      agg[key].profit+=(it.qty||0)*((it.price||0)-(it.buyPrice||0));
+      if(!agg[key].lastDate||(s.date||'')>agg[key].lastDate){agg[key].lastDate=s.date||'';agg[key].name=it.name;}
+    });
+  });
+  return Object.keys(agg).map(function(k){return agg[k];}).sort(function(a,b){return b.qty-a.qty;});
+}
+function openBestSellersModal(){
+  var top=_computeBestSellers().slice(0,15);
+  document.getElementById('modal-title').textContent='🏆 الأكثر مبيعًا';
+  document.getElementById('modal-body').innerHTML=!top.length?
+    '<div class="empty">مفيش بيانات بيع كفاية لسه</div>':
+    top.map(function(r,i){
+      return '<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #f1f5f9">'+
+        '<div><div style="font-weight:800;font-size:13px">'+(i+1)+'. '+esc(r.name)+(r.productId&&!DB.products.find(function(p){return p.id===r.productId;})?' <span style="font-size:9px;color:#94a3b8">(مش موجود بالمخزون حاليًا)</span>':'')+'</div>'+
+        '<div style="font-size:11px;color:#94a3b8">آخر بيع: '+(r.lastDate||'—')+'</div></div>'+
+        '<div style="text-align:left"><div style="font-weight:900;color:#2563eb">'+r.qty+'</div>'+
+        '<div style="font-size:10px;color:#16a34a">ربح '+fmt(Math.round(r.profit))+'</div></div>'+
+        '</div>';
+    }).join('')+
+    '<button class="btn btn-outline btn-full" style="margin-top:12px" onclick="closeModal()">إغلاق</button>';
+  openModal();
+}
+// ⚠️ v199 — خمّن الشركة من اسم المنتج لأي منتج من غير شركة محددة. بيدور بالاسم اللاتيني
+// للشركة (زي "HP")، وكمان أشهر أسماء الشركات الستة الافتراضية بالعربي (لو Alfarok مسحهم/غيّرهم
+// من الإعدادات مش هيلاقيهم، بس هيفضل يدور بالاسم اللاتيني اللي هو مسجله فعلاً في القايمة).
+var _companyArabicAliases={
+  'HP':['اتش بي','إتش بي','اتش بى'],
+  'Ricoh':['ريكو'],
+  'Kyocera':['كيوسيرا'],
+  'Xerox':['زيروكس'],
+  'Epson':['ابسون','إبسون'],
+  'Canon':['كانون']
+};
+function _guessCompanyForName(name){
+  var n=normalizeAr(String(name||'').toLowerCase());
+  var companies=DB.settings.companies||[];
+  for(var i=0;i<companies.length;i++){
+    var c=companies[i];
+    if(n.indexOf(c.toLowerCase())!==-1)return c;
+    var aliases=_companyArabicAliases[c]||[];
+    for(var j=0;j<aliases.length;j++){ if(n.indexOf(normalizeAr(aliases[j]))!==-1)return c; }
+  }
+  return null;
+}
+function guessProductCompanies(){
+  var untagged=DB.products.filter(function(p){return !p.company;});
+  var suggestions=untagged.map(function(p){return {id:p.id,name:p.name,guess:_guessCompanyForName(p.name)};}).filter(function(s){return s.guess;});
+  if(!suggestions.length){showToast('⚠️ مفيش اقتراحات — مفيش اسم منتج فيه اسم شركة معروفة','#dc2626');return;}
+  window.__companyGuesses=suggestions;
+  document.getElementById('modal-title').textContent='🔍 اقتراحات الشركات';
+  document.getElementById('modal-body').innerHTML=
+    '<div style="font-size:12px;color:#64748b;margin-bottom:10px">'+suggestions.length+' منتج اتلقى فيهم اسم شركة — شيل علامة أي واحد مش عايزه وبعدين أكّد:</div>'+
+    suggestions.map(function(s,i){
+      return '<label style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid #f1f5f9;font-size:12px;cursor:pointer">'+
+        '<input type="checkbox" id="cg-'+i+'" checked>'+
+        '<span style="flex:1">'+esc(s.name)+'</span>'+
+        '<b style="color:#0891b2">'+esc(s.guess)+'</b></label>';
+    }).join('')+
+    '<div class="modal-actions"><button class="btn btn-green btn-full" onclick="applyCompanyGuesses()">✅ تأكيد المحدد</button>'+
+    '<button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
+  openModal();
+}
+async function applyCompanyGuesses(){
+  var suggestions=window.__companyGuesses||[];
+  var applied=0;
+  for(var i=0;i<suggestions.length;i++){
+    var box=document.getElementById('cg-'+i);
+    if(!box||!box.checked)continue;
+    var s=suggestions[i];
+    DB.products=DB.products.map(function(p){return p.id===s.id?Object.assign({},p,{company:s.guess}):p;});
+    await dbUpdate('products',s.id,{company:s.guess});
+    applied++;
+  }
+  await persist();
+  window.__companyGuesses=null;
+  closeModal();renderInventory();
+  showToast('✅ اتحددت الشركة لـ'+applied+' منتج','#16a34a');
+}
+
 function renderInventory(){
   var q=document.getElementById('inv-search')?document.getElementById('inv-search').value:'';
   var typeFilter=document.getElementById('inv-type-filter')?document.getElementById('inv-type-filter').value:'الكل';
+  var companyFilter=document.getElementById('inv-company-filter')?document.getElementById('inv-company-filter').value:'الكل';
+  var techFilter=document.getElementById('inv-tech-filter')?document.getElementById('inv-tech-filter').value:'الكل';
+  var consignFilter=document.getElementById('inv-consign-filter')?document.getElementById('inv-consign-filter').value:'الكل';
 
   var list=DB.products.filter(function(p){
     var matchQ=!q||normalizeAr(p.name).includes(normalizeAr(q))||(p.aliases||[]).some(function(a){return normalizeAr(a).includes(normalizeAr(q));});
     var matchT=typeFilter==='الكل'||p.unit===typeFilter;
+    var matchCo=companyFilter==='الكل'||(companyFilter==='بدون'?!p.company:p.company===companyFilter);
+    var matchTech=techFilter==='الكل'||(techFilter==='بدون'?!p.tech_type:p.tech_type===techFilter);
+    var matchConsign=consignFilter==='الكل'||
+      (consignFilter==='عادي'?!p.consignment:p.consignment===consignFilter);
     // تصنيف: ماكينة لو category==='machine'، باقي قطع غيار
     var matchC=_invCategory==='all'||(
       _invCategory==='machines'?(p.category==='machine'):
@@ -5220,12 +5400,17 @@ function renderInventory(){
       _invStockFilter==='dead'?isDeadStock(p):
       _invStockFilter==='all'?true:
       p.qty>0; // available (افتراضي)
-    return matchQ&&matchT&&matchC&&matchS;
+    return matchQ&&matchT&&matchCo&&matchTech&&matchConsign&&matchC&&matchS;
   });
 
   if(_invSort==='qty') list.sort(function(a,b){return b.qty-a.qty;});
-  else if(_invSort==='newest') list.sort(function(a,b){return (b.date||b.created_at||'')>(a.date||a.created_at||'')?1:(b.date||b.created_at||'')<(a.date||a.created_at||'')?-1:0;});
-  else list.sort(function(a,b){return (a.name||'').localeCompare(b.name||'','ar');});
+  else if(_invSort==='created') list.sort(function(a,b){return (b.created_at||'')>(a.created_at||'')?1:(b.created_at||'')<(a.created_at||'')?-1:0;});
+  else if(_invSort==='updated') list.sort(function(a,b){return (b.updated_at||b.created_at||'')>(a.updated_at||a.created_at||'')?1:(b.updated_at||b.created_at||'')<(a.updated_at||a.created_at||'')?-1:0;});
+  // ⚠️ v197 — إصلاح ترتيب "أ-ي": كان بيقارن الاسم الخام (localeCompare) واللي بيدي نتيجة
+  // غير ثابتة عبر أجهزة/متصفحات مختلفة (مش كل الأجهزة بتدعم ترتيب اللغة العربية بنفس
+  // الشكل)، وكمان مكنش بيجمع أشكال الهمزة المختلفة (أ/إ/آ/ا) والتاء المربوطة/الهاء مع
+  // بعض زي ما البحث بيعمل بالظبط (normalizeAr). دلوقتي بيقارن النسخة المُطبَّعة زي البحث.
+  else list.sort(function(a,b){return normalizeAr(a.name||'').localeCompare(normalizeAr(b.name||''),'ar');});
 
   var el=document.getElementById('inventory-list');
   // v139 — إخفاء أسعار الشراء/التكلفة عن أي موظف غير المالك (وغير المستثنى "يشوف كل حاجة")
@@ -5248,9 +5433,12 @@ function renderInventory(){
     '<div style="font-size:10px;color:#1e40af;font-weight:700">عدد الأصناف</div>'+
     '<div style="font-size:14px;font-weight:900;color:#1e40af">'+DB.products.length+'</div></div>'
     )+
-    '<div style="background:#fef9c3;border-radius:12px;padding:10px;text-align:center;cursor:pointer;border:2px solid '+(_invStockFilter==='low'?'#ca8a04':'transparent')+'" onclick="setInvStockFilter(\'low\')">'+
-    '<div style="font-size:10px;color:#ca8a04;font-weight:700">منخفض ⚠️</div>'+
-    '<div style="font-size:18px;font-weight:900;color:#ca8a04">'+lowStock.length+'</div></div>'+
+    (function(){var top=_computeBestSellers();var best=top[0];
+    return '<div style="background:#fef9c3;border-radius:12px;padding:10px;text-align:center;cursor:pointer" onclick="openBestSellersModal()">'+
+    '<div style="font-size:10px;color:#92400e;font-weight:700">🏆 الأكثر مبيعًا</div>'+
+    (best?'<div style="font-size:12px;font-weight:900;color:#92400e;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(best.name)+'</div><div style="font-size:10px;color:#a16207">'+best.qty+' قطعة</div>':
+      '<div style="font-size:11px;color:#a16207">مفيش بيانات لسه</div>')+
+    '</div>';})()+
     '<div style="background:#fee2e2;border-radius:12px;padding:10px;text-align:center;cursor:pointer;border:2px solid '+(_invStockFilter==='out'?'#dc2626':'transparent')+'" onclick="setInvStockFilter(\'out\')">'+
     '<div style="font-size:10px;color:#dc2626;font-weight:700">نفذ 🚫</div>'+
     '<div style="font-size:18px;font-weight:900;color:#dc2626">'+outStock.length+'</div></div>'+
@@ -5259,7 +5447,11 @@ function renderInventory(){
     '<div style="font-size:18px;font-weight:900;color:#7c3aed">'+deadStock.length+'</div></div>'+
     '</div>'+
     '<div style="font-size:11px;color:#64748b;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center">'+
-    '<span>🔎 عرض: <b>'+(_invStockFilter==='out'?'نفذ فقط':_invStockFilter==='low'?'منخفض فقط':_invStockFilter==='dead'?'راكد فقط':_invStockFilter==='all'?'الكل (شامل النافذ)':'الموجود فقط')+'</b></span>'+
+    '<span>🔎 عرض: <b>'+(_invStockFilter==='out'?'نفذ فقط':_invStockFilter==='low'?'منخفض فقط':_invStockFilter==='dead'?'راكد فقط':_invStockFilter==='all'?'الكل (شامل النافذ)':'الموجود فقط')+'</b>'+
+    // ⚠️ v198 — كارت "منخفض" اتشال من المربعات عشان مكانه بقى للأكثر مبيعًا (بطلب المستخدم)،
+    // فسيبنا رابط صغير هنا عشان فلتر "منخفض" يفضل متاح بضغطة زي ما كان (مش يختفي خالص)
+    (lowStock.length?' · <span onclick="setInvStockFilter(\'low\')" style="color:#ca8a04;cursor:pointer;font-weight:700">⚠️ منخفض ('+lowStock.length+')</span>':'')+
+    '</span>'+
     (_invStockFilter!=='available'?'<span onclick="setInvStockFilter(\'available\')" style="color:#2563eb;cursor:pointer;font-weight:700">↺ افتراضي</span>':
       '<span onclick="setInvStockFilter(\'all\')" style="color:#94a3b8;cursor:pointer">عرض الكل (شامل النافذ)</span>')+
     '</div>';
@@ -5285,21 +5477,46 @@ function renderInventory(){
     '</div><select id="inv-type-filter" style="display:none"><option>الكل</option>'+
     types.slice(1).map(function(t){return'<option>'+t+'</option>';}).join('')+'</select>';
 
+  // ⚠️ v199 — تصنيف المخزون الهرمي: فلاتر الشركة والنوع (انك جيت/ليزر) — مستقلين عن
+  // فلتر النوع/الحالة الموجود فوق، وليهم قايمة "بدون" لعرض المنتجات اللي لسه من غير تصنيف
+  var untaggedCompanyCount=DB.products.filter(function(p){return !p.company;}).length;
+  filterHtml+='<div style="display:flex;gap:6px;margin-bottom:10px">'+
+    '<select id="inv-company-filter" onchange="renderInventory()" style="flex:1;padding:6px 8px;border:2px solid #e2e8f0;border-radius:9px;font-size:11px;font-family:inherit;background:#fff">'+
+    '<option value="الكل">🏭 كل الشركات</option><option value="بدون">بدون شركة</option>'+
+    (DB.settings.companies||[]).map(function(c){return '<option value="'+esc(c)+'" '+(companyFilter===c?'selected':'')+'>'+esc(c)+'</option>';}).join('')+
+    '</select>'+
+    '<select id="inv-tech-filter" onchange="renderInventory()" style="flex:1;padding:6px 8px;border:2px solid #e2e8f0;border-radius:9px;font-size:11px;font-family:inherit;background:#fff">'+
+    '<option value="الكل">⚙️ كل الأنواع</option><option value="بدون">بدون نوع</option>'+
+    (DB.settings.techTypes||[]).map(function(t){return '<option value="'+esc(t)+'" '+(techFilter===t?'selected':'')+'>'+esc(t)+'</option>';}).join('')+
+    '</select>'+
+    (untaggedCompanyCount?'<button onclick="guessProductCompanies()" style="background:#fef9c3;border:none;border-radius:9px;padding:6px 10px;font-family:inherit;font-size:10px;font-weight:700;cursor:pointer;color:#92400e;white-space:nowrap">🔍 خمّن الشركات</button>':'')+
+    '</div>';
+  filterHtml+='<select id="inv-consign-filter" onchange="renderInventory()" style="width:100%;margin-bottom:10px;padding:6px 8px;border:2px solid #e2e8f0;border-radius:9px;font-size:11px;font-family:inherit;background:#fff">'+
+    '<option value="الكل">📦 كل المخزون (عادي + أمانة)</option>'+
+    '<option value="عادي" '+(consignFilter==='عادي'?'selected':'')+'>ملكي بس (مستبعد الأمانة)</option>'+
+    '<option value="in" '+(consignFilter==='in'?'selected':'')+'>📥 أمانة مستلمة من موردين</option>'+
+    '<option value="out" '+(consignFilter==='out'?'selected':'')+'>📤 أمانة عند طرف تاني</option>'+
+    '</select>';
+
   // شريط التحديد المتعدد (للطباعة/الحذف)
   var msToolbar='<div id="inv-ms-toolbar" style="display:none;background:#eff6ff;border-radius:10px;padding:8px 10px;margin-bottom:8px;align-items:center;gap:8px"></div>';
   var actionsBar='<div style="display:flex;gap:6px;margin-bottom:8px">'+
     (!_multiSelect?'<button onclick="startMultiSelect(\'products\',\'inv-ms-toolbar\')" style="flex:1;background:#f1f5f9;border:none;border-radius:9px;padding:7px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;color:#374151">☑️ تحديد للطباعة/الحذف</button>':'')+
     '<button onclick="printAllInventory()" style="flex:1;background:#ede9fe;border:none;border-radius:9px;padding:7px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;color:#7c3aed">🖨️ طباعة الكل المعروض</button>'+
     (!_multiSelect&&__hasPerm('products','can_delete')?'<button onclick="openMergeSuggestionsModal()" style="flex:1;background:#fef9c3;border:none;border-radius:9px;padding:7px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;color:#92400e">🔗 دمج منتجات مكررة</button>':'')+
+    '</div>'+
+    '<div style="display:flex;gap:6px;margin-bottom:8px">'+
+    (!_multiSelect&&__hasPerm('products','can_insert')?'<button onclick="openReceiveConsignmentModal()" style="flex:1;background:#fce7f3;border:none;border-radius:9px;padding:7px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;color:#be185d">📥 استلام أمانة من مورد</button>':'')+
+    (!_multiSelect&&__hasPerm('products','can_insert')?'<button onclick="openGiveConsignmentModal()" style="flex:1;background:#e0f2fe;border:none;border-radius:9px;padding:7px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;color:#0369a1">📤 تسليم أمانة لطرف</button>':'')+
     '</div>';
 
-  if(!list.length){el.innerHTML=stats+catBar+filterHtml+_sortBar(_invSort,'setInvSort',['alpha','qty','newest'])+msToolbar+actionsBar+'<div class="empty">لا توجد منتجات</div>';if(_multiSelect)updateMsToolbar();return;}
+  if(!list.length){el.innerHTML=stats+catBar+filterHtml+_sortBar(_invSort,'setInvSort',['alpha','qty','created','updated'])+msToolbar+actionsBar+'<div class="empty">لا توجد منتجات</div>';if(_multiSelect)updateMsToolbar();return;}
 
   var salesCount={};
   DB.sales.forEach(function(s){(s.items||[]).forEach(function(i){salesCount[i.name]=(salesCount[i.name]||0)+i.qty;});});
   _invLastList=list; // نحفظ القائمة المعروضة حالياً عشان زر "طباعة الكل المعروض"
 
-  el.innerHTML=stats+catBar+filterHtml+_sortBar(_invSort,'setInvSort',['alpha','qty','newest'])+msToolbar+actionsBar+list.map(function(p){
+  el.innerHTML=stats+catBar+filterHtml+_sortBar(_invSort,'setInvSort',['alpha','qty','created','updated'])+msToolbar+actionsBar+list.map(function(p){
     var isLow=p.qty<=(p.min_qty||0)&&p.qty>0;
     var isOut=p.qty===0;
     var sold=salesCount[p.name]||0;
@@ -5314,8 +5531,10 @@ function renderInventory(){
       (isMachine?'<span style="background:#ede9fe;color:#7c3aed;border-radius:6px;padding:2px 7px;font-size:10px;font-weight:700">🖨️ ماكينة</span>':'')+
       (p.unit?'<span style="background:'+typeColor+';color:'+typeTextColor+';border-radius:6px;padding:2px 7px;font-size:10px;font-weight:700">'+esc(p.unit)+'</span>':'')+
       (p.scrap_price?'<span style="background:#fef9c3;color:#ca8a04;border-radius:6px;padding:2px 7px;font-size:10px;font-weight:700">اسكراب: '+p.scrap_price+' ج</span>':'')+
+      (p.consignment==='in'?'<span style="background:#fce7f3;color:#be185d;border-radius:6px;padding:2px 7px;font-size:10px;font-weight:700">📥 أمانة من '+esc(p.consignment_party||'')+'</span>':'')+
+      (p.consignment==='out'?'<span style="background:#e0f2fe;color:#0369a1;border-radius:6px;padding:2px 7px;font-size:10px;font-weight:700">📤 أمانة عند '+esc(p.consignment_party||'')+'</span>':'')+
       '</div>'+
-      '<div class="item-sub">الكمية: <b style="color:'+(isOut?'#dc2626':isLow?'#ca8a04':'#16a34a')+'">'+p.qty+'</b>'+
+      '<div class="item-sub">الكمية: <b style="color:'+(isOut?'#dc2626':isLow?'#ca8a04':'#16a34a')+'">'+fmtQty(p.qty)+'</b>'+
       (isOut?' 🚫 نفذ':isLow?' ⚠️ منخفض':'')+
       '</div>'+
       '<div class="item-sub">'+(_invShowCost?'شراء: <b>'+p.buy_price+' ج</b>'+
@@ -5323,7 +5542,10 @@ function renderInventory(){
       ' | ':'')+'بيع: <b>'+p.sell_price+' ج</b></div>'+
       '<div class="item-sub" style="color:#7c3aed;cursor:pointer" onclick="openProductSoldDetail(\''+p.id+'\')">📊 السجل الكامل (بيع: <b>'+sold+' وحدة</b>)</div>'+
       '</div>'+
-      '<div style="display:flex;gap:6px">'+
+      '<div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end">'+
+      (p.consignment==='in'?'<button class="btn-ic" style="background:#fce7f3" title="إرجاع للمورد" onclick="event.stopPropagation();openReturnConsignmentModal(\''+p.id+'\')">↩️</button>':'')+
+      (p.consignment==='out'?'<button class="btn-ic" style="background:#dcfce7" title="سجل بيع عندهم" onclick="event.stopPropagation();openConsignmentOutSaleModal(\''+p.id+'\')">✅</button>':'')+
+      (p.consignment==='out'?'<button class="btn-ic" style="background:#e0f2fe" title="استرجاع مني" onclick="event.stopPropagation();openReturnConsignmentModal(\''+p.id+'\')">↩️</button>':'')+
       '<button class="btn-ic" style="background:#f5f3ff" onclick="event.stopPropagation();printOneProduct(\''+p.id+'\')">🖨️</button>'+
       '<button class="btn-ic" style="background:#dbeafe" onclick="event.stopPropagation();openProductModal(\''+p.id+'\')">✏️</button>'+
       '<button class="btn-ic" style="background:#fee2e2" onclick="event.stopPropagation();confirmAction(\'هتحذف المنتج ده؟\',function(){delItem(\'products\',\''+p.id+'\',renderInventory)})">🗑️</button>'+
@@ -5452,35 +5674,86 @@ function renderInventoryStats(){
   var products=DB.products;
   if(!products.length){el.innerHTML='<div class="empty">لا توجد منتجات</div>';return;}
 
-  // أكثر منتجات بيعاً
-  var salesCount={};
-  DB.sales.forEach(function(s){(s.items||[]).forEach(function(i){salesCount[i.name]=(salesCount[i.name]||0)+i.qty;});});
-  var topSelling=products.slice().sort(function(a,b){return (salesCount[b.name]||0)-(salesCount[a.name]||0);}).slice(0,5);
-  var slowMoving=products.filter(function(p){return (salesCount[p.name]||0)===0&&p.qty>0;});
+  // ⚠️ v198 — بقت بتستخدم _computeBestSellers() (بتدور في كل الفواتير مش بس المنتجات
+  // الموجودة حاليًا) عشان تشتغل صح حتى لو منتج اتباع بالكامل أو اتحذف أو اتدمج.
+  var bestSellers=_computeBestSellers();
+  var soldOnly=bestSellers.filter(function(r){return r.qty>0;});
+  var topSelling=soldOnly.slice(0,5);
+  var slowMoving=products.filter(function(p){return !soldOnly.some(function(r){return r.productId===p.id;})&&p.qty>0;});
+  var mostProfitable=soldOnly.slice().sort(function(a,b){return b.profit-a.profit;}).slice(0,5);
+  var leastProfitable=soldOnly.slice().sort(function(a,b){return a.profit-b.profit;}).slice(0,5);
+
+  // أكتر عميل بيشتري
+  var byCustomer={};
+  DB.sales.forEach(function(s){
+    var name=s.customer||'—';
+    if(!byCustomer[name])byCustomer[name]={name:name,total:0,count:0};
+    byCustomer[name].total+=(s.total||0);
+    byCustomer[name].count+=1;
+  });
+  var topCustomers=Object.keys(byCustomer).map(function(k){return byCustomer[k];}).sort(function(a,b){return b.total-a.total;}).slice(0,5);
+
+  // مقارنة مبيعات الشهر الهجري الحالي باللي قبله
+  var _curHP=hijriParts(new Date());
+  var curRange=hijriMonthRange(_curHP.year,_curHP.month);
+  var prevMonth=_curHP.month-1,prevYear=_curHP.year;
+  if(prevMonth<1){prevMonth=12;prevYear-=1;}
+  var prevRange=hijriMonthRange(prevYear,prevMonth);
+  var curSalesTotal=DB.sales.filter(function(s){return s.date>=curRange.start&&s.date<=curRange.end;}).reduce(function(sum,s){return sum+(s.total||0);},0);
+  var prevSalesTotal=DB.sales.filter(function(s){return s.date>=prevRange.start&&s.date<=prevRange.end;}).reduce(function(sum,s){return sum+(s.total||0);},0);
+  var diffPct=prevSalesTotal>0?Math.round(((curSalesTotal-prevSalesTotal)/prevSalesTotal)*100):(curSalesTotal>0?100:0);
 
   // توزيع حسب النوع
   var byType={};
   products.forEach(function(p){byType[p.unit||'غير محدد']=(byType[p.unit||'غير محدد']||0)+1;});
 
-  var totalVal=products.reduce(function(s,p){return s+p.qty*(p.buy_price||0);},0);
+  // ⚠️ v201 — قيمة المخزون افتراضيًا بتستبعد بضاعة الأمانة (مستلمة أو عند طرف تاني) لأنها
+  // مش ملكك بالكامل أو مش عندك فعليًا، وده كان بيضخّم رقم "قيمة المخزون" غلط. مع زرار
+  // بيوريك القيمة شاملة الأمانة كمان لمين عايز يشوفها.
+  var ownedProducts=products.filter(function(p){return !p.consignment;});
+  var totalVal=ownedProducts.reduce(function(s,p){return s+p.qty*(p.buy_price||0);},0);
   // قطع/ماكينات الاسكراب تُباع بسعر الاسكراب (scrap_price) لا بسعر البيع العادي (sell_price غالباً 0 لأنها لا تُباع كوحدة كاملة)
-  var totalSellVal=products.reduce(function(s,p){return s+p.qty*(p.unit==='اسكراب'?(p.scrap_price||0):(p.sell_price||0));},0);
+  var totalSellVal=ownedProducts.reduce(function(s,p){return s+p.qty*(p.unit==='اسكراب'?(p.scrap_price||0):(p.sell_price||0));},0);
+  var totalValIncl=products.reduce(function(s,p){return s+p.qty*(p.buy_price||0);},0);
+  var totalSellValIncl=products.reduce(function(s,p){return s+p.qty*(p.unit==='اسكراب'?(p.scrap_price||0):(p.sell_price||0));},0);
+  var consignCount=products.length-ownedProducts.length;
+  var showIncl=!!_invStatsIncludeConsignment;
+  var dispVal=showIncl?totalValIncl:totalVal;
+  var dispSellVal=showIncl?totalSellValIncl:totalSellVal;
 
   el.innerHTML=
     // ملخص مالي
     '<div class="card" style="margin-bottom:10px">'+
-    '<div style="font-weight:900;font-size:14px;margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid #0f172a">💰 القيمة المالية للمخزون</div>'+
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid #0f172a">'+
+    '<div style="font-weight:900;font-size:14px">💰 القيمة المالية للمخزون</div>'+
+    (consignCount?'<span onclick="_invStatsIncludeConsignment=!_invStatsIncludeConsignment;renderInventoryStats()" style="font-size:10px;font-weight:700;cursor:pointer;color:'+(showIncl?'#be185d':'#94a3b8')+';background:'+(showIncl?'#fce7f3':'#f1f5f9')+';border-radius:7px;padding:4px 8px">'+(showIncl?'✓ شامل الأمانة':'شامل الأمانة؟')+'</span>':'')+
+    '</div>'+
+    (consignCount&&!showIncl?'<div style="font-size:10px;color:#94a3b8;margin-bottom:8px">'+consignCount+' صنف أمانة مش محسوبين هنا</div>':'')+
     '<div style="display:flex;gap:8px;margin-bottom:10px">'+
     '<div style="flex:1;background:#dbeafe;border-radius:11px;padding:12px;text-align:center">'+
     '<div style="font-size:10px;color:#1e40af;font-weight:700;margin-bottom:4px">قيمة الشراء</div>'+
-    '<div style="font-size:16px;font-weight:900;color:#1e40af">'+fmt(totalVal)+'</div></div>'+
+    '<div style="font-size:16px;font-weight:900;color:#1e40af">'+fmt(dispVal)+'</div></div>'+
     '<div style="flex:1;background:#dcfce7;border-radius:11px;padding:12px;text-align:center">'+
     '<div style="font-size:10px;color:#15803d;font-weight:700;margin-bottom:4px">قيمة البيع</div>'+
-    '<div style="font-size:16px;font-weight:900;color:#15803d">'+fmt(totalSellVal)+'</div></div>'+
+    '<div style="font-size:16px;font-weight:900;color:#15803d">'+fmt(dispSellVal)+'</div></div>'+
     '</div>'+
     '<div style="background:#f0fdf4;border-radius:10px;padding:10px;display:flex;justify-content:space-between;align-items:center">'+
     '<span style="font-size:13px;font-weight:700">هامش الربح المتوقع</span>'+
-    '<span style="font-size:16px;font-weight:900;color:#15803d">'+fmt(totalSellVal-totalVal)+'</span></div></div>'+
+    '<span style="font-size:16px;font-weight:900;color:#15803d">'+fmt(dispSellVal-dispVal)+'</span></div></div>'+
+
+    // مقارنة الشهر الحالي بالسابق
+    '<div class="card" style="margin-bottom:10px">'+
+    '<div style="font-weight:900;font-size:14px;margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid #0891b2">📊 مبيعات الشهر ده مقابل اللي قبله</div>'+
+    '<div style="display:flex;gap:8px;margin-bottom:8px">'+
+    '<div style="flex:1;background:#ecfeff;border-radius:11px;padding:12px;text-align:center">'+
+    '<div style="font-size:10px;color:#0e7490;font-weight:700;margin-bottom:4px">الشهر ده</div>'+
+    '<div style="font-size:16px;font-weight:900;color:#0e7490">'+fmt(curSalesTotal)+'</div></div>'+
+    '<div style="flex:1;background:#f8fafc;border-radius:11px;padding:12px;text-align:center">'+
+    '<div style="font-size:10px;color:#64748b;font-weight:700;margin-bottom:4px">اللي قبله</div>'+
+    '<div style="font-size:16px;font-weight:900;color:#64748b">'+fmt(prevSalesTotal)+'</div></div>'+
+    '</div>'+
+    '<div style="background:'+(diffPct>=0?'#f0fdf4':'#fef2f2')+';border-radius:10px;padding:10px;text-align:center;font-size:13px;font-weight:800;color:'+(diffPct>=0?'#15803d':'#dc2626')+'">'+
+    (diffPct>=0?'📈 زيادة ':'📉 نقص ')+Math.abs(diffPct)+'%</div></div>'+
 
     // توزيع حسب النوع
     '<div class="card" style="margin-bottom:10px">'+
@@ -5494,15 +5767,41 @@ function renderInventoryStats(){
     // أكثر بيعاً
     '<div class="card" style="margin-bottom:10px">'+
     '<div style="font-weight:900;font-size:14px;margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid #2563eb">🏆 أكثر منتجات بيعاً</div>'+
-    (topSelling.length?topSelling.map(function(p,i){
-      var sold=salesCount[p.name]||0;
+    (topSelling.length?topSelling.map(function(r,i){
+      var stillHere=r.productId&&products.find(function(p){return p.id===r.productId;});
       return '<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #f1f5f9">'+
         '<div><span style="font-size:14px">'+(i===0?'🥇':i===1?'🥈':i===2?'🥉':'  ')+' </span>'+
-        '<span style="font-weight:700;font-size:13px">'+esc(p.name)+'</span></div>'+
-        '<div style="text-align:left"><b style="color:#2563eb">'+sold+' وحدة</b>'+
-        '<div style="font-size:10px;color:#94a3b8">متبقي: '+p.qty+'</div></div></div>';
+        '<span style="font-weight:700;font-size:13px">'+esc(r.name)+'</span>'+
+        (!stillHere?'<span style="font-size:9px;color:#94a3b8"> (مش موجود بالمخزون حاليًا)</span>':'')+'</div>'+
+        '<div style="text-align:left"><b style="color:#2563eb">'+r.qty+' وحدة</b>'+
+        '<div style="font-size:10px;color:#16a34a">ربح '+fmt(Math.round(r.profit))+'</div></div></div>';
     }).join(''):'<div class="empty" style="padding:12px">لم تتم مبيعات بعد</div>')+
     '</div>'+
+
+    // الأكثر/الأقل ربحًا
+    (soldOnly.length?
+    '<div class="card" style="margin-bottom:10px">'+
+    '<div style="font-weight:900;font-size:14px;margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid #16a34a">💹 الأكثر ربحًا</div>'+
+    mostProfitable.map(function(r){
+      return '<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #f1f5f9;font-size:13px">'+
+        '<span>'+esc(r.name)+'</span><span style="color:#16a34a;font-weight:700">'+fmt(Math.round(r.profit))+'</span></div>';
+    }).join('')+'</div>'+
+    '<div class="card" style="margin-bottom:10px">'+
+    '<div style="font-weight:900;font-size:14px;margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid #dc2626">📉 الأقل ربحًا</div>'+
+    leastProfitable.map(function(r){
+      return '<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #f1f5f9;font-size:13px">'+
+        '<span>'+esc(r.name)+'</span><span style="color:#dc2626;font-weight:700">'+fmt(Math.round(r.profit))+'</span></div>';
+    }).join('')+'</div>':'')+
+
+    // أكتر عميل بيشتري
+    (topCustomers.length?
+    '<div class="card" style="margin-bottom:10px">'+
+    '<div style="font-weight:900;font-size:14px;margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid #ca8a04">👤 أكتر العملاء شراءً</div>'+
+    topCustomers.map(function(c,i){
+      return '<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #f1f5f9">'+
+        '<span style="font-size:13px;font-weight:700">'+(i===0?'🥇 ':i===1?'🥈 ':i===2?'🥉 ':'')+esc(c.name)+'</span>'+
+        '<div style="text-align:left"><b style="color:#ca8a04">'+fmt(c.total)+'</b><div style="font-size:10px;color:#94a3b8">'+c.count+' فاتورة</div></div></div>';
+    }).join('')+'</div>':'')+
 
     // بطيء الحركة
     (slowMoving.length?
@@ -5647,6 +5946,24 @@ function openProductModal(id){
     '<div id="prod-type-btns" style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:4px">'+typeButtons(currentTypes)+'</div>'+
     '<input type="hidden" id="prod-unit" value="'+currentUnit+'"></div>'+
 
+    '<div class="field"><label>🏭 الشركة (اختياري)</label>'+
+    '<select id="prod-company" style="width:100%;padding:9px 12px;border:2px solid #e2e8f0;border-radius:9px;font-size:13px;font-family:inherit;background:#fff">'+
+    '<option value="">غير محدد</option>'+
+    (DB.settings.companies||[]).map(function(c){return '<option value="'+esc(c)+'" '+((p&&p.company)===c?'selected':'')+'>'+esc(c)+'</option>';}).join('')+
+    '</select></div>'+
+
+    '<div class="field"><label>⚙️ النوع (انك جيت/ليزر) (اختياري)</label>'+
+    '<select id="prod-tech-type" style="width:100%;padding:9px 12px;border:2px solid #e2e8f0;border-radius:9px;font-size:13px;font-family:inherit;background:#fff">'+
+    '<option value="">غير محدد</option>'+
+    (DB.settings.techTypes||[]).map(function(t){return '<option value="'+esc(t)+'" '+((p&&p.tech_type)===t?'selected':'')+'>'+esc(t)+'</option>';}).join('')+
+    '</select></div>'+
+
+    '<div class="field" style="background:#f8fafc;border-radius:10px;padding:10px"><label style="font-size:12px">📐 وحدة تحويل (اختياري — لو بتبيع جزء من الوحدة، زي كيس حبر بيتباع بالجرام)</label>'+
+    '<div style="display:flex;gap:6px;margin-top:6px">'+
+    '<input id="prod-subunit-name" type="text" placeholder="اسم الوحدة الفرعية (جرام)" value="'+esc(p&&p.subunit_name||'')+'" style="flex:1;padding:8px 10px;border:2px solid #e2e8f0;border-radius:8px;font-family:inherit;font-size:12px">'+
+    '<input id="prod-subunit-ratio" type="number" step="any" placeholder="1 '+esc(p&&p.unit||'وحدة')+' = كام؟" value="'+(p&&p.subunit_ratio||'')+'" style="width:110px;padding:8px 10px;border:2px solid #e2e8f0;border-radius:8px;font-family:inherit;font-size:12px">'+
+    '</div></div>'+
+
     fld('prod-qty','الكمية','number',p?p.qty:'','',true)+
     fld('prod-minqty','الحد الأدنى للتنبيه','number',p?(p.min_qty||0):0)+
     fld('prod-buy','سعر الشراء (ج)','number',p?p.buy_price:'')+
@@ -5724,12 +6041,17 @@ async function saveProduct(){
     name:name,
     category:v('prod-category')||'parts',
     unit:v('prod-unit')||'جديد',
-    qty:qty,min_qty:+v('prod-minqty')||0,
+    company:v('prod-company')||'',
+    tech_type:v('prod-tech-type')||'',
+    subunit_name:v('prod-subunit-name')||'',
+    subunit_ratio:+v('prod-subunit-ratio')||0,
+    qty:roundQty(qty),min_qty:+v('prod-minqty')||0,
     buy_price:+v('prod-buy')||0,
     sell_price:+v('prod-sell')||0,
     scrap_price:+v('prod-scrap')||0
   };
   if(!_prodId){ obj.created_at=today(); obj.source='manual'; } // ⚠️ v127 — تسجيل تاريخ ومصدر الإضافة (يدوي/مشتريات) لأول مرة
+  obj.updated_at=today(); // ⚠️ v198 — تاريخ آخر تعديل منفصل عن تاريخ الإضافة (لفرز "آخر تعديل")
   if(_prodId){
     DB.products=DB.products.map(function(p){return p.id===_prodId?Object.assign({},p,obj):p;});
   }else{
@@ -5912,6 +6234,172 @@ async function execMergeProducts(){
 }
 
 
+// ========== MODULE: بضاعة الأمانة (Consignment) — v200 ==========
+// القرار المتفق عليه: نظام باتجاهين معاً —
+//  (أ) استلام أمانة من مورد: بتاخد بضاعة وتبيعها، ولما تتباع بيتسجل عليك دين (مورد) أوتوماتيك
+//      بثمن الأمانة المتفق عليه × الكمية المباعة (زي أي دين عادي بالظبط).
+//  (ب) تسليم أمانة لطرف تاني: بتدي من بضاعتك لحد يبيعها، ولما يبلغك إنه باع بيتسجل دين
+//      "مستحق ليك" (عميل) أوتوماتيك بنفس الطريقة.
+// بيانات الأمانة (الاتجاهين) بتظهر في نفس قائمة المخزون العادية (بعلامة مميزة) مع فلتر
+// مخصص يعزلها، بدل ما تكون شاشة منفصلة تمامًا — بطلب المستخدم صراحة.
+
+function openReceiveConsignmentModal(){
+  document.getElementById('modal-title').textContent='📥 استلام بضاعة أمانة من مورد';
+  document.getElementById('modal-body').innerHTML=
+    '<div style="background:#fdf2f8;border-radius:10px;padding:10px 12px;margin-bottom:12px;font-size:12px;color:#9d174d">'+
+    'البضاعة دي مش هتتحسب "ملك" ليك — لما تبيعها بس هيتسجل عليك دين للمورد أوتوماتيك بثمن الأمانة × الكمية المباعة.'+
+    '</div>'+
+    acField('cons-in-party','اسم المورد','text','','','suppliers',true)+
+    fld('cons-in-name','اسم الصنف','text','','',true)+
+    fld('cons-in-qty','الكمية','number','','',true)+
+    fld('cons-in-cost','ثمن الأمانة (اللي هتديه للمورد لكل وحدة تتباع)','number','','',true)+
+    fld('cons-in-sell','سعر البيع (اللي هتبيعه بيه)','number','','',true)+
+    '<div class="modal-actions"><button class="btn btn-green btn-full" onclick="saveReceiveConsignment()">✅ استلام</button>'+
+    '<button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
+  openModal();
+  initAC('cons-in-party','suppliers');
+}
+
+async function saveReceiveConsignment(){
+  var party=v('cons-in-party'),name=v('cons-in-name');
+  var qty=+v('cons-in-qty'),cost=+v('cons-in-cost'),sell=+v('cons-in-sell');
+  if(!party||!name)return showToast('⚠️ اكتب اسم المورد والصنف','#dc2626');
+  if(!qty||qty<=0)return showToast('⚠️ الكمية غير صحيحة','#dc2626');
+  if(!cost||cost<0)return showToast('⚠️ ثمن الأمانة غير صحيح','#dc2626');
+  var obj={
+    id:genId(),name:name,category:'parts',unit:'جديد',
+    qty:qty,min_qty:0,buy_price:cost,sell_price:sell||0,scrap_price:0,
+    consignment:'in',consignment_party:party,consignment_cost:cost,
+    created_at:today(),updated_at:today(),source:'consignment'
+  };
+  DB.products.push(obj);
+  addArchive('suppliers',party);
+  await persist();
+  await dbUpsert('products',obj);
+  closeModal();renderInventory();renderHome();
+  showToast('✅ اتسجلت بضاعة الأمانة','#16a34a');
+}
+
+function openGiveConsignmentModal(){
+  var regular=DB.products.filter(function(p){return !p.consignment&&p.qty>0;});
+  if(!regular.length)return showToast('⚠️ مفيش منتجات ملكك متاحة تسلمها','#dc2626');
+  document.getElementById('modal-title').textContent='📤 تسليم بضاعة أمانة لطرف تاني';
+  document.getElementById('modal-body').innerHTML=
+    '<div style="background:#f0f9ff;border-radius:10px;padding:10px 12px;margin-bottom:12px;font-size:12px;color:#075985">'+
+    'هتشيل الكمية دي من مخزونك الحالي. لما الطرف التاني يبلغك إنه باع منها، سجّلها من زرار "✅" على العنصر في المخزون.'+
+    '</div>'+
+    '<div class="field"><label>الصنف</label><select id="cons-out-product" style="width:100%;padding:9px 12px;border:2px solid #e2e8f0;border-radius:9px;font-size:13px;font-family:inherit;background:#fff">'+
+    regular.map(function(p){return '<option value="'+p.id+'">'+esc(p.name)+' (متاح: '+p.qty+')</option>';}).join('')+
+    '</select></div>'+
+    acField('cons-out-party','اسم الطرف التاني','text','','','customers',true)+
+    fld('cons-out-qty','الكمية المُسلَّمة','number','','',true)+
+    fld('cons-out-price','السعر اللي هيدفعهولك لكل وحدة تتباع عنده','number','','',true)+
+    '<div class="modal-actions"><button class="btn btn-green btn-full" onclick="saveGiveConsignment()">✅ تسليم</button>'+
+    '<button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
+  openModal();
+  initAC('cons-out-party','customers');
+}
+
+async function saveGiveConsignment(){
+  var srcId=v('cons-out-product'),party=v('cons-out-party');
+  var qty=+v('cons-out-qty'),price=+v('cons-out-price');
+  var src=DB.products.find(function(p){return p.id===srcId;});
+  if(!src)return showToast('⚠️ اختار صنف','#dc2626');
+  if(!party)return showToast('⚠️ اكتب اسم الطرف','#dc2626');
+  if(!qty||qty<=0||qty>src.qty)return showToast('⚠️ الكمية غير صحيحة (المتاح: '+src.qty+')','#dc2626');
+  if(!price||price<0)return showToast('⚠️ السعر غير صحيح','#dc2626');
+  DB.products=DB.products.map(function(p){return p.id===src.id?Object.assign({},p,{qty:roundQty(p.qty-qty)}):p;});
+  await dbUpdate('products',src.id,{qty:roundQty(src.qty-qty)});
+  var existing=DB.products.find(function(p){return p.consignment==='out'&&p.consignment_party===party&&normalizeAr(p.name)===normalizeAr(src.name);});
+  if(existing){
+    DB.products=DB.products.map(function(p){return p.id===existing.id?Object.assign({},p,{qty:p.qty+qty}):p;});
+    await dbUpdate('products',existing.id,{qty:existing.qty+qty});
+  }else{
+    var obj={
+      id:genId(),name:src.name,category:src.category,unit:src.unit,
+      qty:qty,min_qty:0,buy_price:src.buy_price,sell_price:price,scrap_price:0,
+      consignment:'out',consignment_party:party,consignment_price:price,
+      created_at:today(),updated_at:today(),source:'consignment'
+    };
+    DB.products.push(obj);
+    await dbUpsert('products',obj);
+  }
+  addArchive('customers',party);
+  await persist();
+  closeModal();renderInventory();renderHome();
+  showToast('✅ اتسلمت الكمية لـ'+party,'#16a34a');
+}
+
+function openConsignmentOutSaleModal(id){
+  var p=DB.products.find(function(x){return x.id===id;});if(!p)return;
+  document.getElementById('modal-title').textContent='✅ تسجيل بيع عند '+esc(p.consignment_party||'');
+  document.getElementById('modal-body').innerHTML=
+    '<div style="background:#f0fdf4;border-radius:10px;padding:10px 12px;margin-bottom:12px;font-size:12px;color:#15803d">'+
+    'هيتسجل عليه دين "مستحق ليك" بقيمة الكمية × '+fmt(p.consignment_price||0)+' ج، وهتقل الكمية المتاحة عنده.'+
+    '</div>'+
+    fld('cons-sale-qty','الكمية اللي اتباعت','number','','',true)+
+    '<div class="modal-actions"><button class="btn btn-green btn-full" onclick="saveConsignmentOutSale(\''+id+'\')">✅ تأكيد</button>'+
+    '<button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
+  openModal();
+}
+
+async function saveConsignmentOutSale(id){
+  var p=DB.products.find(function(x){return x.id===id;});if(!p)return;
+  var qty=+v('cons-sale-qty');
+  if(!qty||qty<=0||qty>p.qty)return showToast('⚠️ الكمية غير صحيحة (المتاح عنده: '+p.qty+')','#dc2626');
+  var total=qty*(p.consignment_price||0);
+  DB.products=DB.products.map(function(x){return x.id===id?Object.assign({},x,{qty:roundQty(x.qty-qty)}):x;});
+  await dbUpdate('products',id,{qty:roundQty(p.qty-qty)});
+  var debtObj={id:genId(),type:'customer',name:p.consignment_party,desc:'أمانة عنده: '+p.name+' × '+qty,details:'أمانة عنده: '+p.name+' × '+qty,total:total,paid:0,date:today(),payments:[],source:'consignment'};
+  DB.debts.unshift(debtObj);
+  await dbUpsert('debts',debtObj);
+  await persist();
+  closeModal();renderInventory();renderHome();
+  showToast('✅ اتسجل البيع ودين '+fmt(total)+' ج على '+p.consignment_party,'#16a34a');
+}
+
+function openReturnConsignmentModal(id){
+  var p=DB.products.find(function(x){return x.id===id;});if(!p)return;
+  var isIn=p.consignment==='in';
+  document.getElementById('modal-title').textContent=isIn?'↩️ إرجاع للمورد':'↩️ استرجاع مني';
+  document.getElementById('modal-body').innerHTML=
+    '<div style="font-size:12px;color:#64748b;margin-bottom:12px">مفيش دين هيتسجل — دي مش عملية بيع.</div>'+
+    fld('cons-ret-qty','الكمية المرتجعة','number',p.qty,'',true)+
+    '<div class="modal-actions"><button class="btn btn-primary btn-full" onclick="saveReturnConsignment(\''+id+'\')">✅ تأكيد الإرجاع</button>'+
+    '<button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
+  openModal();
+}
+
+async function saveReturnConsignment(id){
+  var p=DB.products.find(function(x){return x.id===id;});if(!p)return;
+  var qty=+v('cons-ret-qty');
+  if(!qty||qty<=0||qty>p.qty)return showToast('⚠️ الكمية غير صحيحة (المتاح: '+p.qty+')','#dc2626');
+  var newQty=roundQty(p.qty-qty);
+  if(newQty<=0){
+    DB.products=DB.products.filter(function(x){return x.id!==id;});
+    await dbDelete('products',id,p);
+  }else{
+    DB.products=DB.products.map(function(x){return x.id===id?Object.assign({},x,{qty:newQty}):x;});
+    await dbUpdate('products',id,{qty:newQty});
+  }
+  await persist();
+  closeModal();renderInventory();renderHome();
+  showToast('✅ تم تسجيل الإرجاع','#16a34a');
+}
+
+// ⚠️ v200 — بتتنادى من جوه saveSale لما عنصر مباع يكون من نوع "أمانة مستلمة من مورد"
+// (consignment==='in')، عشان تسجل دين المورد أوتوماتيك بثمن الأمانة × الكمية المباعة،
+// بالظبط زي أي دين عادي في التطبيق (القرار اللي اتفقنا عليه).
+async function _handleConsignmentInSale(prod,qtySold){
+  if(!prod||prod.consignment!=='in'||!qtySold)return;
+  var total=qtySold*(prod.consignment_cost||0);
+  if(total<=0)return;
+  var debtObj={id:genId(),type:'supplier',name:prod.consignment_party,desc:'أمانة: '+prod.name+' × '+qtySold,details:'أمانة: '+prod.name+' × '+qtySold,total:total,paid:0,date:today(),payments:[],source:'consignment'};
+  DB.debts.unshift(debtObj);
+  await dbUpsert('debts',debtObj);
+}
+
+
 // ========== MODULE: STOCKTAKE (الجرد) ==========
 // DB.stocktakes = [{id, started_at, closed_at, approved_at, status:'open'|'closed'|'approved',
 //                    items:[{productId, name, unit, system_qty, counted_qty}]}]
@@ -6009,7 +6497,7 @@ function renderStocktake(){
       (showSystemQty?'<span style="font-size:11px;color:#64748b">مسجل: <b>'+item.system_qty+'</b></span>':'')+
       '</div>'+
       '<div style="display:flex;gap:6px;align-items:center">'+
-      '<input type="number" inputmode="numeric" value="'+item.counted_qty+'" '+
+      '<input type="number" step="any" inputmode="numeric" value="'+item.counted_qty+'" '+
       'onchange="setStocktakeCount(\''+item.productId+'\',this.value)" '+
       'style="flex:1;padding:8px 10px;border:2px solid '+(isConfirmed?(diff===0?'#bbf7d0':'#fed7aa'):'#e2e8f0')+';border-radius:9px;font-family:inherit;font-size:14px;text-align:center;font-weight:800">'+
       (isConfirmed&&diff!==0?'<span style="font-size:12px;font-weight:800;color:'+(diff>0?'#ea580c':'#dc2626')+';min-width:36px;text-align:center">'+(diff>0?'+':'')+diff+'</span>':'')+
@@ -6132,9 +6620,9 @@ function _renderStocktakeReport(st){
     return '<div style="background:#fff;border-radius:10px;padding:9px 12px;margin-bottom:6px;box-shadow:0 1px 3px rgba(0,0,0,.05);border-right:3px solid '+(diff<0?'#dc2626':'#ea580c')+'">'+
       '<div style="display:flex;justify-content:space-between;align-items:center">'+
       '<b style="font-size:13px">'+esc(i.name)+'</b>'+
-      '<span style="font-size:13px;font-weight:900;color:'+(diff<0?'#dc2626':'#ea580c')+'">'+(diff>0?'+':'')+diff+'</span>'+
+      '<span style="font-size:13px;font-weight:900;color:'+(diff<0?'#dc2626':'#ea580c')+'">'+(diff>0?'+':'')+fmtQty(diff)+'</span>'+
       '</div>'+
-      '<div style="font-size:11px;color:#94a3b8">مسجل: '+i.system_qty+' ← فعلي: '+i.counted_qty+
+      '<div style="font-size:11px;color:#94a3b8">مسجل: '+fmtQty(i.system_qty)+' ← فعلي: '+fmtQty(i.counted_qty)+
       (val>0?' — قيمة الفرق (سعر التكلفة): <b style="color:'+(diff<0?'#dc2626':'#ea580c')+'">'+fmt(val)+' ج</b>':'')+'</div>'+
       '</div>';
   }
@@ -6251,7 +6739,7 @@ function printStocktakeReport(id){
   var diffs=st.items.filter(function(i){return i.counted_qty!==i.system_qty;});
   var rows=st.items.map(function(i){
     var diff=i.counted_qty-i.system_qty;
-    return '<tr><td>'+esc(i.name)+'</td><td>'+i.system_qty+'</td><td>'+i.counted_qty+'</td><td>'+(diff===0?'مطابق':(diff>0?'+':'')+diff)+'</td></tr>';
+    return '<tr><td>'+esc(i.name)+'</td><td>'+fmtQty(i.system_qty)+'</td><td>'+fmtQty(i.counted_qty)+'</td><td>'+(diff===0?'مطابق':(diff>0?'+':'')+fmtQty(diff))+'</td></tr>';
   }).join('');
   printSection('🖨️ تقرير جرد '+fmtDate(st.started_at),
     '<table><thead><tr><th>الصنف</th><th>المسجل</th><th>الفعلي</th><th>الفرق</th></tr></thead><tbody>'+rows+'</tbody></table>'+
@@ -6262,7 +6750,7 @@ var _salesPage=0, SALES_PER_PAGE=30;
 var _salesSort='newest';
 
 function _sortBar(currentSort,setter,opts){
-  var labels={newest:'🕐 الأحدث',alpha:'أ-ي',amount:'💰 الأعلى',qty:'📦 الكمية'};
+  var labels={newest:'🕐 الأحدث',created:'📅 الإضافة',updated:'✏️ آخر تعديل',alpha:'أ-ي',amount:'💰 الأعلى',qty:'📦 الكمية'};
   return '<div style="display:flex;gap:5px;margin-bottom:10px;overflow-x:auto;padding-bottom:3px">'+
     opts.map(function(s){
       var active=currentSort===s;
@@ -6497,7 +6985,7 @@ function renderSaleBody(s){
           '<span style="flex:1;font-size:13px">'+esc(it.name)+'</span>'+
           '<div style="display:flex;align-items:center;gap:5px">'+
           '<button onclick="chgQty('+i+',-1)" style="background:#fee2e2;border:none;border-radius:6px;width:26px;height:26px;cursor:pointer;font-size:14px;font-weight:900;color:#dc2626">−</button>'+
-          '<span style="font-weight:900;font-size:14px;min-width:22px;text-align:center">'+it.qty+'</span>'+
+          '<span onclick="editSaleItemQtyPrompt('+i+')" style="font-weight:900;font-size:14px;min-width:22px;text-align:center;cursor:pointer;text-decoration:underline dotted">'+fmtQty(it.qty)+'</span>'+
           '<button onclick="chgQty('+i+',1)" style="background:#dcfce7;border:none;border-radius:6px;width:26px;height:26px;cursor:pointer;font-size:14px;font-weight:900;color:#16a34a">+</button>'+
           '<b style="color:#16a34a;min-width:50px;text-align:left;font-size:12px">'+fmt(it.qty*it.price)+'</b>'+
           '<button onclick="rmSaleItem('+i+')" style="background:#fee2e2;border:none;border-radius:6px;padding:2px 6px;cursor:pointer;font-size:11px;color:#dc2626">✕</button>'+
@@ -6574,7 +7062,7 @@ function renderSaleBody(s){
     '<div style="background:#fff7ed;border-radius:11px;padding:11px 13px;margin-bottom:12px;border:1.5px solid #fed7aa">'+
     '<div style="font-size:12px;font-weight:800;color:#ea580c;margin-bottom:8px">🔧 بند صيانة / زيارة</div>'+
     '<div style="display:flex;gap:6px;flex-wrap:wrap">'+
-    '<input id="srv-price-inline" type="number" placeholder="💰 المبلغ ج" style="flex:1;min-width:90px;padding:9px 8px;border:2px solid #e2e8f0;border-radius:9px;font-size:13px;font-family:inherit;background:#fff;outline:none;text-align:center">'+
+    '<input id="srv-price-inline" type="number" step="any" placeholder="💰 المبلغ ج" style="flex:1;min-width:90px;padding:9px 8px;border:2px solid #e2e8f0;border-radius:9px;font-size:13px;font-family:inherit;background:#fff;outline:none;text-align:center">'+
     '<input id="srv-name-inline" type="text" placeholder="وصف (اختياري — افتراضي: صيانة)" style="flex:2;min-width:120px;padding:9px 11px;border:2px solid #e2e8f0;border-radius:9px;font-size:13px;font-family:inherit;background:#fff;outline:none;direction:rtl">'+
     '<button onclick="addServiceInline()" style="background:#ea580c;color:#fff;border:none;border-radius:9px;padding:9px 16px;font-family:inherit;font-size:15px;font-weight:900;cursor:pointer;flex-shrink:0">+</button>'+
     '</div>'+
@@ -6597,23 +7085,23 @@ function renderSaleBody(s){
     // عدادات
     '<div style="display:flex;gap:8px;margin-bottom:12px">'+
     '<div style="flex:1"><label style="display:block;font-size:12px;color:#64748b;margin-bottom:4px;font-weight:700">⚫ عداد أسود</label>'+
-    '<input id="sale-counter" type="number" class="counter-black" value="'+esc(s&&s.counter?s.counter:'')+'" placeholder="0"></div>'+
+    '<input id="sale-counter" type="number" step="any" class="counter-black" value="'+esc(s&&s.counter?s.counter:'')+'" placeholder="0"></div>'+
     '<div style="flex:1"><label style="display:block;font-size:12px;color:#64748b;margin-bottom:4px;font-weight:700">🌈 عداد ألوان</label>'+
-    '<input id="sale-color-counter" type="number" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit;background:#f8fafc;text-align:center;outline:none" value="'+esc(s&&s.color_counter?s.color_counter:'')+'" placeholder="0"></div></div>'+
+    '<input id="sale-color-counter" type="number" step="any" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit;background:#f8fafc;text-align:center;outline:none" value="'+esc(s&&s.color_counter?s.color_counter:'')+'" placeholder="0"></div></div>'+
 
     fld('sale-note','📝 ملاحظة (اختياري)','text',s?s.note||'':'')+
 
     // خصم
     '<div style="display:flex;gap:8px;margin-bottom:12px">'+
     '<div style="flex:1" class="field"><label>💰 خصم (ج)</label>'+
-    '<input id="sale-discount" type="number" value="'+((s&&s.discount)||'')+'" placeholder="0" min="0" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit;background:#f8fafc;outline:none" oninput="updateSaleDiscount()"></div>'+
+    '<input id="sale-discount" type="number" step="any" value="'+((s&&s.discount)||'')+'" placeholder="0" min="0" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit;background:#f8fafc;outline:none" oninput="updateSaleDiscount()"></div>'+
     '<div style="flex:1" class="field"><label>% نسبة خصم</label>'+
-    '<input id="sale-discount-pct" type="number" value="" placeholder="0" min="0" max="100" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit;background:#f8fafc;outline:none" oninput="updateSaleDiscountPct()"></div>'+
+    '<input id="sale-discount-pct" type="number" step="any" value="" placeholder="0" min="0" max="100" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit;background:#f8fafc;outline:none" oninput="updateSaleDiscountPct()"></div>'+
     '</div>'+
 
     // المبلغ المدفوع
     '<div class="field"><label>💵 المبلغ المدفوع (ج)</label>'+
-    '<input id="sale-paid" type="number" value="'+esc(s?s.paid:'')+'" oninput="onPaidManualEdit()" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit;background:#f8fafc;outline:none"></div>'+
+    '<input id="sale-paid" type="number" step="any" value="'+esc(s?s.paid:'')+'" oninput="onPaidManualEdit()" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit;background:#f8fafc;outline:none"></div>'+
 
     // طريقة الاستلام
     payMethodsHtml+
@@ -6705,7 +7193,7 @@ function openQuickServicesSettings(){
 function qsRow(q,i){
   return '<div class="qs-row" style="display:flex;gap:6px;margin-bottom:6px" data-i="'+i+'">'+
     '<input class="qs-name" type="text" value="'+esc(q.name)+'" placeholder="اسم الخدمة" style="flex:2;padding:8px 10px;border:2px solid #e2e8f0;border-radius:9px;font-size:13px;font-family:inherit;direction:rtl">'+
-    '<input class="qs-price" type="number" value="'+(q.price||0)+'" placeholder="السعر (0=يدوي)" style="flex:1;padding:8px 10px;border:2px solid #e2e8f0;border-radius:9px;font-size:13px;font-family:inherit;text-align:center">'+
+    '<input class="qs-price" type="number" step="any" value="'+(q.price||0)+'" placeholder="السعر (0=يدوي)" style="flex:1;padding:8px 10px;border:2px solid #e2e8f0;border-radius:9px;font-size:13px;font-family:inherit;text-align:center">'+
     '<button onclick="this.parentElement.remove()" style="background:#fee2e2;border:none;border-radius:8px;padding:0 10px;color:#dc2626;font-weight:700;cursor:pointer">✕</button>'+
     '</div>';
 }
@@ -6965,10 +7453,51 @@ async function markSaleItemDamaged(idx){
 }
 
 function chgQty(idx,delta){
-  _saleItems[idx].qty=Math.max(1,_saleItems[idx].qty+delta);
+  _saleItems[idx].qty=roundQty(Math.max(0.01,_saleItems[idx].qty+delta));
   var vals=_saveSaleFields();
   var s=_saleId?DB.sales.find(function(x){return x.id===_saleId;}):null;
   renderSaleBody(s);_restoreSaleFields(vals);
+}
+
+// ⚠️ v202 — الكميات الكسرية: بتفتح لما تدوس على رقم الكمية في عربة الفاتورة، بتقبل رقم
+// عشري مباشر، وكمان لو المنتج معاه "وحدة تحويل" (زي كيس حبر بيتباع بالجرام) بتديك خانة
+// تانية تكتب فيها بالوحدة الفرعية (200 جرام) وهي تحسبلك الكسر من الوحدة الأساسية أوتوماتيك.
+var _qtyEditSnapshot=null;
+function editSaleItemQtyPrompt(idx){
+  var it=_saleItems[idx];
+  var prod=it.productId?DB.products.find(function(p){return p.id===it.productId;}):null;
+  var hasSubunit=prod&&prod.subunit_name&&prod.subunit_ratio>0;
+  _qtyEditSnapshot=_saveSaleFields(); // ⚠️ v202 — نحفظ باقي حقول الفاتورة قبل ما نستبدل محتوى المودال مؤقتًا بخانة الكمية
+  document.getElementById('modal-title').textContent='الكمية — '+esc(it.name);
+  document.getElementById('modal-body').innerHTML=
+    fld('siq-main','الكمية (بـ'+(prod?prod.unit:'وحدة')+')','number',it.qty,'',true)+
+    (hasSubunit?'<div style="font-size:11px;color:#64748b;margin:-6px 0 10px">أو اكتب بالـ'+esc(prod.subunit_name)+' (1 '+esc(prod.unit)+' = '+prod.subunit_ratio+' '+esc(prod.subunit_name)+')</div>'+
+      fld('siq-sub','بالـ'+esc(prod.subunit_name),'number','','',false)+
+      '<button type="button" onclick="_applySubunitQty('+idx+')" class="btn btn-outline btn-full" style="margin-bottom:10px">↓ احسبها بالـ'+esc(prod.unit)+'</button>':'')+
+    '<div class="modal-actions"><button class="btn btn-primary btn-full" onclick="saveSaleItemQty('+idx+')">💾 تحديث</button>'+
+    '<button class="btn btn-outline btn-full" onclick="cancelSaleItemQtyEdit()">إلغاء</button></div>';
+  openModal();
+}
+function _applySubunitQty(idx){
+  var it=_saleItems[idx];
+  var prod=it.productId?DB.products.find(function(p){return p.id===it.productId;}):null;
+  if(!prod||!prod.subunit_ratio)return;
+  var subAmount=+v('siq-sub');
+  if(!subAmount||subAmount<=0)return showToast('⚠️ اكتب رقم صحيح بالـ'+prod.subunit_name,'#dc2626');
+  document.getElementById('siq-main').value=roundQty(subAmount/prod.subunit_ratio);
+}
+function saveSaleItemQty(idx){
+  var qty=+v('siq-main');
+  if(!qty||qty<=0)return showToast('⚠️ الكمية غير صحيحة','#dc2626');
+  var prod=_saleItems[idx].productId?DB.products.find(function(p){return p.id===_saleItems[idx].productId;}):null;
+  if(prod&&qty>prod.qty)return showToast('⚠️ متاح بس '+fmtQty(prod.qty)+' '+(prod.unit||''),'#dc2626');
+  _saleItems[idx].qty=roundQty(qty);
+  var s=_saleId?DB.sales.find(function(x){return x.id===_saleId;}):null;
+  renderSaleBody(s);_restoreSaleFields(_qtyEditSnapshot||{});_qtyEditSnapshot=null;
+}
+function cancelSaleItemQtyEdit(){
+  var s=_saleId?DB.sales.find(function(x){return x.id===_saleId;}):null;
+  renderSaleBody(s);_restoreSaleFields(_qtyEditSnapshot||{});_qtyEditSnapshot=null;
 }
 
 function rmSaleItem(idx){
@@ -7064,7 +7593,7 @@ async function saveSale(){
         (oldSale.items||[]).forEach(function(oldItem){
           if(!oldItem.productId)return;
           DB.products=DB.products.map(function(p){
-            return p.id===oldItem.productId?Object.assign({},p,{qty:p.qty+oldItem.qty}):p;
+            return p.id===oldItem.productId?Object.assign({},p,{qty:roundQty(p.qty+oldItem.qty)}):p;
           });
         });
       }
@@ -7078,7 +7607,7 @@ async function saveSale(){
         if(oldSale)(oldSale.items||[]).forEach(function(oldItem){
           if(!oldItem.productId)return;
           DB.products=DB.products.map(function(p){
-            return p.id===oldItem.productId?Object.assign({},p,{qty:p.qty-oldItem.qty}):p;
+            return p.id===oldItem.productId?Object.assign({},p,{qty:roundQty(p.qty-oldItem.qty)}):p;
           });
         });
         return showToast('⚠️ '+stockErrors2[0],'#dc2626');
@@ -7086,7 +7615,7 @@ async function saveSale(){
       _saleItems.forEach(function(item){
         if(!item.productId)return;
         DB.products=DB.products.map(function(p){
-          return p.id===item.productId?Object.assign({},p,{qty:Math.max(0,p.qty-item.qty)}):p;
+          return p.id===item.productId?Object.assign({},p,{qty:roundQty(Math.max(0,p.qty-item.qty))}):p;
         });
       });
       var affectedIds={};
@@ -7131,7 +7660,7 @@ async function saveSale(){
       var stockErrors=[];
       _saleItems.forEach(function(item){
         var prod=DB.products.find(function(p){return p.id===item.productId;});
-        if(prod&&prod.qty<item.qty)stockErrors.push(esc(item.name)+': متوفر '+prod.qty);
+        if(prod&&prod.qty<item.qty)stockErrors.push(esc(item.name)+': متوفر '+fmtQty(prod.qty));
       });
       if(stockErrors.length)return showToast('⚠️ '+stockErrors[0],'#dc2626');
       obj.id=genId();
@@ -7141,9 +7670,10 @@ async function saveSale(){
         var item=_saleItems[i];
         var prod=DB.products.find(function(p){return p.id===item.productId;});
         if(prod){
-          var newQty=Math.max(0,prod.qty-item.qty);
+          var newQty=roundQty(Math.max(0,prod.qty-item.qty));
           DB.products=DB.products.map(function(p){return p.id===item.productId?Object.assign({},p,{qty:newQty}):p;});
           await dbUpdate('products',item.productId,{qty:newQty});
+          await _handleConsignmentInSale(prod,item.qty); // ⚠️ v200 — دين المورد التلقائي لو العنصر أمانة مستلمة
         }
       }
       if(total>0&&paid<total){
@@ -7592,7 +8122,7 @@ async function finishExtractForSale(){
     var existing=DB.products.find(function(p){return p.category!=='machine'&&normalizeAr(p.name)===normalizeAr(item.name);});
     var productId;
     if(existing){
-      var newQty=existing.qty+item.qty;
+      var newQty=roundQty(existing.qty+item.qty);
       var avgBuy=newQty>0?Math.round((existing.qty*(existing.buy_price||0)+item.qty*item.buy_price)/newQty):0;
       DB.products=DB.products.map(function(p){return p.id===existing.id?Object.assign({},p,{qty:newQty,buy_price:avgBuy}):p;});
       productId=existing.id;
@@ -7840,7 +8370,7 @@ async function _restoreStockFromSale(sale){
   sale.items.forEach(function(item){
     if(!item.productId)return;
     DB.products=DB.products.map(function(p){
-      return p.id===item.productId?Object.assign({},p,{qty:p.qty+item.qty}):p;
+      return p.id===item.productId?Object.assign({},p,{qty:roundQty(p.qty+item.qty)}):p;
     });
   });
   // ملاحظة: سجل ماكينة الاسكراب (parts_extracted) لا يتأثر بحذف الفاتورة عمداً —
@@ -8075,7 +8605,7 @@ function renderPurchBody(p){
           '<button onclick="chgPurchQty('+i+',-1)" style="background:#fee2e2;border:none;border-radius:6px;width:26px;height:26px;cursor:pointer;font-size:14px;font-weight:900;color:#dc2626">−</button>'+
           '<span style="font-weight:900;font-size:14px;min-width:22px;text-align:center">'+it.qty+'</span>'+
           '<button onclick="chgPurchQty('+i+',1)" style="background:#dcfce7;border:none;border-radius:6px;width:26px;height:26px;cursor:pointer;font-size:14px;font-weight:900;color:#16a34a">+</button>'+
-          '<input type="number" id="pi-price-'+i+'" value="'+it.price+'" style="width:65px;padding:4px 6px;border:2px solid #e2e8f0;border-radius:7px;font-size:13px;font-family:inherit;text-align:center" oninput="updPurchPrice('+i+',this.value)">'+
+          '<input type="number" step="any" id="pi-price-'+i+'" value="'+it.price+'" style="width:65px;padding:4px 6px;border:2px solid #e2e8f0;border-radius:7px;font-size:13px;font-family:inherit;text-align:center" oninput="updPurchPrice('+i+',this.value)">'+
           '<button onclick="rmPurchItem('+i+')" style="background:#fee2e2;border:none;border-radius:6px;padding:2px 6px;cursor:pointer;font-size:11px;color:#dc2626">✕</button>'+
           '</div>'+
           (extraCost>0?'<div style="width:100%;font-size:10px;color:#ea580c;margin-top:3px">💰 الحقيقي: '+it.price+' ج ← بعد التكاليف: <b>'+Math.round(landedPrice)+' ج</b></div>':'')+
@@ -8103,7 +8633,7 @@ function renderPurchBody(p){
     // ===== تكاليف إضافية =====
     '<div style="background:#fff7ed;border-radius:11px;padding:11px 13px;margin-bottom:12px;border:1.5px solid #fed7aa">'+
     '<div style="font-size:12px;font-weight:800;color:#ea580c;margin-bottom:6px">📦 تكاليف إضافية (شحن، جمارك، نقل...)</div>'+
-    '<input id="purch-extra-cost" type="number" value="'+(p&&p.extra_cost?p.extra_cost:'')+'" placeholder="0" oninput="onExtraCostChange()" style="width:100%;padding:9px 12px;border:2px solid #e2e8f0;border-radius:9px;font-size:14px;font-family:inherit;background:#fff;outline:none;text-align:center;margin-bottom:6px">'+
+    '<input id="purch-extra-cost" type="number" step="any" value="'+(p&&p.extra_cost?p.extra_cost:'')+'" placeholder="0" oninput="onExtraCostChange()" style="width:100%;padding:9px 12px;border:2px solid #e2e8f0;border-radius:9px;font-size:14px;font-family:inherit;background:#fff;outline:none;text-align:center;margin-bottom:6px">'+
     '<div style="font-size:11px;color:#94a3b8">يُقسَّم على عدد القطع تلقائياً ويُستخدم كتكلفة حقيقية عند حساب الربح في البيع — مش بيغيّر السعر الأساسي للمنتج</div>'+
     '</div>'+
 
@@ -8148,11 +8678,11 @@ function filterPurchProds(){
       '<div style="background:#fdf2f8;border-radius:10px;padding:10px 12px;border:1.5px solid #f5d0fe;margin-top:6px">'+
       '<div style="font-size:12px;font-weight:800;color:#86198f;margin-bottom:7px">🆕 "'+esc(q)+'" غير موجود</div>'+
       '<div style="display:flex;gap:6px;margin-bottom:7px">'+
-      '<input id="new-prod-price" type="number" placeholder="سعر الشراء ج" style="flex:1;padding:9px 8px;border:2px solid #e2e8f0;border-radius:9px;font-size:13px;font-family:inherit;background:#fff;outline:none;text-align:center">'+
-      '<input id="new-prod-qty" type="number" placeholder="كمية" value="1" style="width:60px;padding:9px 6px;border:2px solid #e2e8f0;border-radius:9px;font-size:13px;font-family:inherit;background:#fff;outline:none;text-align:center">'+
+      '<input id="new-prod-price" type="number" step="any" placeholder="سعر الشراء ج" style="flex:1;padding:9px 8px;border:2px solid #e2e8f0;border-radius:9px;font-size:13px;font-family:inherit;background:#fff;outline:none;text-align:center">'+
+      '<input id="new-prod-qty" type="number" step="any" placeholder="كمية" value="1" style="width:60px;padding:9px 6px;border:2px solid #e2e8f0;border-radius:9px;font-size:13px;font-family:inherit;background:#fff;outline:none;text-align:center">'+
       '</div>'+
       '<div style="margin-bottom:7px">'+
-      '<input id="new-prod-sell" type="number" placeholder="سعر البيع ج (اختياري)" style="width:100%;padding:9px 8px;border:2px solid #bbf7d0;border-radius:9px;font-size:13px;font-family:inherit;background:#fff;outline:none;text-align:center">'+
+      '<input id="new-prod-sell" type="number" step="any" placeholder="سعر البيع ج (اختياري)" style="width:100%;padding:9px 8px;border:2px solid #bbf7d0;border-radius:9px;font-size:13px;font-family:inherit;background:#fff;outline:none;text-align:center">'+
       '</div>'+
       '<div style="display:flex;gap:6px">'+
       '<button onclick="addNewProdToPurch(true)" style="flex:1;background:#2563eb;color:#fff;border:none;border-radius:9px;padding:9px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer">📦 أضف للمخزون</button>'+
@@ -8456,15 +8986,15 @@ function renderPurchImportReview(){
     return '<div style="background:#f8fafc;border-radius:10px;padding:8px;margin-bottom:6px">'+
       '<div style="display:flex;gap:5px;align-items:center;margin-bottom:5px">'+
       '<input value="'+esc(it.name)+'" oninput="_purchImportItems['+i+'].name=this.value" style="flex:2;min-width:0;padding:7px;border:1.5px solid #e2e8f0;border-radius:7px;font-size:12px;font-family:inherit" placeholder="اسم الصنف">'+
-      '<input type="number" value="'+it.qty+'" oninput="_purchImportItems['+i+'].qty=+this.value||0" style="width:48px;padding:7px;border:1.5px solid #e2e8f0;border-radius:7px;font-size:12px;font-family:inherit" placeholder="عدد">'+
+      '<input type="number" step="any" value="'+it.qty+'" oninput="_purchImportItems['+i+'].qty=+this.value||0" style="width:48px;padding:7px;border:1.5px solid #e2e8f0;border-radius:7px;font-size:12px;font-family:inherit" placeholder="عدد">'+
       '<button onclick="_purchImportItems.splice('+i+',1);renderPurchImportReview()" style="background:#fee2e2;border:none;border-radius:7px;width:28px;height:28px;font-size:12px;cursor:pointer;flex-shrink:0">✕</button>'+
       '</div>'+
       '<div style="display:flex;gap:5px;align-items:center">'+
-      '<div style="flex:1;display:flex;align-items:center;gap:4px"><span style="font-size:10px;color:#94a3b8;white-space:nowrap">💰 شراء</span><input type="number" value="'+it.price+'" oninput="_purchImportItems['+i+'].price=+this.value||0" style="width:100%;padding:6px;border:1.5px solid #e2e8f0;border-radius:7px;font-size:12px;font-family:inherit"></div>'+
+      '<div style="flex:1;display:flex;align-items:center;gap:4px"><span style="font-size:10px;color:#94a3b8;white-space:nowrap">💰 شراء</span><input type="number" step="any" value="'+it.price+'" oninput="_purchImportItems['+i+'].price=+this.value||0" style="width:100%;padding:6px;border:1.5px solid #e2e8f0;border-radius:7px;font-size:12px;font-family:inherit"></div>'+
       (matched?
         '<div style="flex:1;font-size:11px;color:#16a34a;text-align:center">✅ سعر بيعه الحالي هيفضل زي ما هو ('+fmt(matched.sell_price||0)+')</div>'
       :
-        '<div style="flex:1;display:flex;align-items:center;gap:4px"><span style="font-size:10px;color:#94a3b8;white-space:nowrap">🏷️ بيع</span><input type="number" value="'+(it.sellPrice||'')+'" oninput="_purchImportItems['+i+'].sellPrice=+this.value||0" style="width:100%;padding:6px;border:1.5px solid #16a34a;border-radius:7px;font-size:12px;font-family:inherit" placeholder="سعر البيع"></div>'
+        '<div style="flex:1;display:flex;align-items:center;gap:4px"><span style="font-size:10px;color:#94a3b8;white-space:nowrap">🏷️ بيع</span><input type="number" step="any" value="'+(it.sellPrice||'')+'" oninput="_purchImportItems['+i+'].sellPrice=+this.value||0" style="width:100%;padding:6px;border:1.5px solid #16a34a;border-radius:7px;font-size:12px;font-family:inherit" placeholder="سعر البيع"></div>'
       )+
       '</div></div>';
   }).join('');
@@ -9452,7 +9982,7 @@ function _batchExpRowHtml(i){
     '<select id="batch-type-'+i+'" style="flex:1.3;padding:8px;border:2px solid #e2e8f0;border-radius:8px;font-family:inherit;font-size:12px">'+
     cats.map(function(c){return '<option>'+esc(c)+'</option>';}).join('')+'</select>'+
     '<input id="batch-sub-'+i+'" type="text" placeholder="الفرع (اختياري)" style="flex:1;padding:8px;border:2px solid #e2e8f0;border-radius:8px;font-family:inherit;font-size:12px">'+
-    '<input id="batch-amount-'+i+'" type="number" placeholder="المبلغ" style="width:80px;padding:8px;border:2px solid #e2e8f0;border-radius:8px;font-family:inherit;font-size:12px">'+
+    '<input id="batch-amount-'+i+'" type="number" step="any" placeholder="المبلغ" style="width:80px;padding:8px;border:2px solid #e2e8f0;border-radius:8px;font-family:inherit;font-size:12px">'+
     (i>0?'<button onclick="document.getElementById(\'batch-row-'+i+'\').remove()" style="background:none;border:none;color:#dc2626;font-size:15px;cursor:pointer">✕</button>':'')+
     '</div>';
 }
@@ -10177,7 +10707,7 @@ function openIncrementModal(fexpId){
 
     '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">'+
     '<div class="field" style="margin:0"><label>كل كام مرة دفع</label>'+
-    '<input id="inc-every" type="number" value="'+(inc.every||1)+'" min="1" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit;background:#f8fafc;outline:none"></div>'+
+    '<input id="inc-every" type="number" step="any" value="'+(inc.every||1)+'" min="1" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit;background:#f8fafc;outline:none"></div>'+
     '<div class="field" style="margin:0"><label>الفترة</label>'+
     '<select id="inc-period" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit">'+
     '<option value="month"'+(inc.period==='month'?' selected':'')+'>شهري</option>'+
@@ -11093,7 +11623,7 @@ function renderMovementBody(m){
       '<div style="display:flex;gap:6px;margin-top:6px">'+
       '<input id="wd-part-name" type="text" placeholder="اسم القطعة..." list="wd-parts-list" autocomplete="off" style="flex:2;padding:9px 12px;border:2px solid #e2e8f0;border-radius:9px;font-size:13px;font-family:inherit;background:#fff;outline:none">'+
       '<datalist id="wd-parts-list">'+(DB.products||[]).filter(function(p){return p.qty>0;}).map(function(p){return '<option value="'+esc(p.name)+'">('+p.qty+' متاح)</option>';}).join('')+'</datalist>'+
-      '<input id="wd-part-qty" type="number" value="1" min="1" style="width:60px;padding:9px 8px;border:2px solid #e2e8f0;border-radius:9px;font-size:13px;font-family:inherit;text-align:center">'+
+      '<input id="wd-part-qty" type="number" step="any" value="1" min="0.01" style="width:60px;padding:9px 8px;border:2px solid #e2e8f0;border-radius:9px;font-size:13px;font-family:inherit;text-align:center">'+
       '<button onclick="withdrawPartForMovement(\''+m.id+'\')" style="background:#16a34a;color:#fff;border:none;border-radius:9px;padding:9px 13px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer">سحب</button>'+
       '</div><div id="wd-msg" style="font-size:11px;margin-top:6px;min-height:14px"></div>'+
       '</div>'
@@ -11209,7 +11739,7 @@ async function withdrawPartForMovement(movementId){
   if(prod.qty<qty){msg.textContent='⚠️ الكمية المتاحة '+prod.qty+' بس';msg.style.color='#dc2626';return;}
   if(!window.__currentProfile){msg.textContent='⚠️ لازم تكون مسجل دخول عشان تسحب قطعة';msg.style.color='#dc2626';return;}
 
-  var newQty=prod.qty-qty;
+  var newQty=roundQty(prod.qty-qty);
   DB.products=DB.products.map(function(p){return p.id===prod.id?Object.assign({},p,{qty:newQty}):p;});
   await persist();
   await dbUpdate('products',prod.id,{qty:newQty});
@@ -13849,7 +14379,7 @@ function renderCapital(){
     '<div style="font-weight:900;font-size:13px;color:#7c3aed;margin-bottom:4px">🏦 رصيد افتتاحي (قبل استخدام النظام)</div>'+
     '<div style="font-size:11px;color:#94a3b8;margin-bottom:10px">أي نقدية فعلية كانت موجودة (أو ناقصة) في الخزنة قبل ما تبدأ تسجل هنا. بيؤثر على النقدية المعروضة فقط.</div>'+
     '<div style="display:flex;gap:8px;align-items:center">'+
-    '<input id="opening-balance-inp" type="number" value="'+opening+'" style="flex:1;padding:9px 12px;border:2px solid #e2e8f0;border-radius:10px;font-family:inherit;font-size:14px;font-weight:800;text-align:center">'+
+    '<input id="opening-balance-inp" type="number" step="any" value="'+opening+'" style="flex:1;padding:9px 12px;border:2px solid #e2e8f0;border-radius:10px;font-family:inherit;font-size:14px;font-weight:800;text-align:center">'+
     '<button onclick="saveOpeningBalance()" style="background:#7c3aed;color:#fff;border:none;border-radius:10px;padding:9px 16px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer">حفظ</button>'+
     '</div></div>'+
 
@@ -13878,7 +14408,7 @@ function renderCapital(){
         '</div>';
     })()+
     '<div style="display:flex;gap:8px;align-items:center">'+
-    '<input id="opening-inventory-inp" type="number" value="'+(DB.accounts.opening_inventory_value||0)+'" style="flex:1;padding:9px 12px;border:2px solid #e2e8f0;border-radius:10px;font-family:inherit;font-size:14px;font-weight:800;text-align:center">'+
+    '<input id="opening-inventory-inp" type="number" step="any" value="'+(DB.accounts.opening_inventory_value||0)+'" style="flex:1;padding:9px 12px;border:2px solid #e2e8f0;border-radius:10px;font-family:inherit;font-size:14px;font-weight:800;text-align:center">'+
     '<button onclick="saveOpeningInventoryValue()" style="background:#b45309;color:#fff;border:none;border-radius:10px;padding:9px 16px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer">حفظ</button>'+
     '</div></div>'+
 
@@ -14526,7 +15056,7 @@ function openSalaryIncrementModal(empId){
     fld('empinc-value','قيمة الزيادة (% أو ج)','number',inc.value||'')+
     '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">'+
     '<div class="field" style="margin:0"><label>كل كام صرفة</label>'+
-    '<input id="empinc-every" type="number" value="'+(inc.every||12)+'" min="1" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit;background:#f8fafc;outline:none"></div>'+
+    '<input id="empinc-every" type="number" step="any" value="'+(inc.every||12)+'" min="1" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit;background:#f8fafc;outline:none"></div>'+
     '<div class="field" style="margin:0"><label>الفترة</label>'+
     '<select id="empinc-period" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit">'+
     '<option value="month"'+(inc.period==='month'?' selected':'')+'>شهري</option>'+
@@ -14931,7 +15461,7 @@ function renderSettings(){
       '<span style="font-size:11px;color:#64748b">افتراضيًا = راتب الموظف ÷ 30. لو عايز رقم ثابت غير كده لكل الموظفين:</span>'+
       '</div>'+
       '<div style="display:flex;gap:6px;align-items:center">'+
-      '<input id="att-ded-override" type="number" placeholder="سيبها فاضية = تلقائي (راتب÷30)" value="'+((DB.settings&&DB.settings.attendanceDeductionOverride!=null)?DB.settings.attendanceDeductionOverride:'')+'" style="flex:1;padding:6px 8px;border:1.5px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:12px" onchange="__saveAttendanceDeductionOverride(this.value)">'+
+      '<input id="att-ded-override" type="number" step="any" placeholder="سيبها فاضية = تلقائي (راتب÷30)" value="'+((DB.settings&&DB.settings.attendanceDeductionOverride!=null)?DB.settings.attendanceDeductionOverride:'')+'" style="flex:1;padding:6px 8px;border:1.5px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:12px" onchange="__saveAttendanceDeductionOverride(this.value)">'+
       '</div></div>'+
       '<div class="card">'+
       '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #e2e8f0">🔒 خصوصية بيانات الموظفين</div>'+
@@ -14993,7 +15523,7 @@ function renderSettings(){
     '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:4px;padding-bottom:8px;border-bottom:2px solid #e2e8f0">🐌 مدة اعتبار الصنف "راكد"</div>'+
     '<div style="font-size:11px;color:#94a3b8;margin-bottom:10px">أي صنف موجود بالمخزون ومحدش اشتراه لمدة أطول من المدة دي، هيظهر في كرت "راكد 🐌" بشاشة المخزون. حاليًا: <b>'+(DB.settings.deadStockDays||30)+' يوم</b>.</div>'+
     '<div style="display:flex;gap:8px">'+
-    '<input id="dead-stock-days-input" type="number" value="'+(DB.settings.deadStockDays||30)+'" style="flex:1;padding:9px 12px;border:2px solid #e2e8f0;border-radius:9px;font-family:inherit;font-size:13px">'+
+    '<input id="dead-stock-days-input" type="number" step="any" value="'+(DB.settings.deadStockDays||30)+'" style="flex:1;padding:9px 12px;border:2px solid #e2e8f0;border-radius:9px;font-family:inherit;font-size:13px">'+
     '<button onclick="changeDeadStockDays()" style="padding:9px 16px;background:#7c3aed;color:#fff;border:none;border-radius:9px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer">💾 حفظ</button>'+
     '</div></div>'+
     '<div class="card">'+
@@ -15005,7 +15535,7 @@ function renderSettings(){
     '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:4px;padding-bottom:8px;border-bottom:2px solid #e2e8f0">🗄️ مدة الانتقال التلقائي للاستوك</div>'+
     '<div style="font-size:11px;color:#94a3b8;margin-bottom:10px">أي عطل "جديد" أو "جاري" يعدّي عليه المدة دي من غير أي إجراء، هينتقل تلقائيًا لحالة "في الاستوك".</div>'+
     '<div style="display:flex;gap:8px;align-items:center">'+
-    '<input type="number" id="stock-days-input" value="'+((DB.settings&&DB.settings.stockThresholdDays)||7)+'" style="flex:1;padding:9px;border:2px solid #e2e8f0;border-radius:9px;font-family:inherit;text-align:center">'+
+    '<input type="number" step="any" id="stock-days-input" value="'+((DB.settings&&DB.settings.stockThresholdDays)||7)+'" style="flex:1;padding:9px;border:2px solid #e2e8f0;border-radius:9px;font-family:inherit;text-align:center">'+
     '<span style="font-size:12px;color:#64748b">يوم</span>'+
     '<button onclick="saveStockDays()" style="padding:9px 16px;background:#0891b2;color:#fff;border:none;border-radius:9px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer">حفظ</button>'+
     '</div></div>'+
@@ -15042,6 +15572,8 @@ function renderSettings(){
     '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #e2e8f0">🏷️ أنواع/تصنيفات المخزون</div>'+
     settingsTypesEditor('partTypes','🔩 أنواع قطع الغيار','#2563eb')+
     settingsTypesEditor('machineTypes','🖨️ أنواع الماكينات','#7c3aed')+
+    settingsTypesEditor('companies','🏭 الشركات','#0891b2','company')+
+    settingsTypesEditor('techTypes','⚙️ النوع (انك جيت/ليزر)','#ea580c','tech_type')+
     '</div>'+
     // ⚠️ v159 — مدخل رسمي وآمن لإدارة الحزم/الخدمات السريعة من هنا، بدل ما تكون
     // متاحة بس من جوه الفاتورة (كان بيمسح بيانات الفاتورة الجاري كتابتها لو دخلت منه)
@@ -15072,7 +15604,7 @@ function renderSettings(){
     '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:4px;padding-bottom:8px;border-bottom:2px solid #e2e8f0">➕ دخل إضافي شهري</div>'+
     '<div style="font-size:11px;color:#94a3b8;margin-bottom:10px">أي مبلغ تكتبه هنا هيتجمع تلقائياً مع صافي الربح الحقيقي — سيبه 0 لو مش محتاجه</div>'+
     '<div style="display:flex;gap:6px">'+
-    '<input id="extra-income-input" type="number" value="'+((DB.settings&&DB.settings.extraIncomeMonthly)||0)+'" placeholder="0" style="flex:1;padding:9px 12px;border:2px solid #e2e8f0;border-radius:9px;font-family:inherit;font-size:13px;text-align:center">'+
+    '<input id="extra-income-input" type="number" step="any" value="'+((DB.settings&&DB.settings.extraIncomeMonthly)||0)+'" placeholder="0" style="flex:1;padding:9px 12px;border:2px solid #e2e8f0;border-radius:9px;font-family:inherit;font-size:13px;text-align:center">'+
     '<button onclick="setExtraIncome()" style="padding:9px 16px;background:#16a34a;color:#fff;border:none;border-radius:9px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer">✅ حفظ</button>'+
     '</div></div>'+
     '<div class="card">'+
@@ -15283,7 +15815,8 @@ async function syncSalesWithDebts(){
 }
 
 // محرر صغير لإضافة/حذف عناصر من قائمة أنواع المخزون (partTypes أو machineTypes)
-function settingsTypesEditor(field,label,color){
+function settingsTypesEditor(field,label,color,productField){
+  productField=productField||'unit';
   var list=DB.settings[field]||[];
   return '<div style="margin-bottom:14px">'+
     '<div style="font-size:12px;font-weight:700;color:#374151;margin-bottom:7px">'+label+'</div>'+
@@ -15291,8 +15824,8 @@ function settingsTypesEditor(field,label,color){
     list.map(function(t){
       return '<span style="display:flex;align-items:center;gap:5px;background:#f1f5f9;border-radius:8px;padding:5px 9px;font-size:12px;font-weight:700;color:#374151">'+
         esc(t)+
-        '<span onclick="editInvType(\''+field+'\','+jsStr(t)+')" style="color:#2563eb;cursor:pointer;font-weight:900">✏️</span>'+
-        '<span onclick="removeInvType(\''+field+'\','+jsStr(t)+')" style="color:#dc2626;cursor:pointer;font-weight:900">✕</span></span>';
+        '<span onclick="editInvType(\''+field+'\','+jsStr(t)+',\''+productField+'\')" style="color:#2563eb;cursor:pointer;font-weight:900">✏️</span>'+
+        '<span onclick="removeInvType(\''+field+'\','+jsStr(t)+',\''+productField+'\')" style="color:#dc2626;cursor:pointer;font-weight:900">✕</span></span>';
     }).join('')+
     '</div>'+
     '<div style="display:flex;gap:6px">'+
@@ -15314,31 +15847,34 @@ async function addInvType(field){
 }
 
 // تعديل اسم نوع موجود — بيحدّث كل المنتجات المرتبطة بالاسم القديم تلقائياً
-function editInvType(field,oldName){
+// ⚠️ v199 — بقت تقبل productField عشان تتقدر تُستخدم لأكتر من خانة (unit، وكمان company/product_type الجداد)، مش unit بس زي الأول
+function editInvType(field,oldName,productField){
   document.getElementById('modal-title').textContent='✏️ تعديل النوع';
   document.getElementById('modal-body').innerHTML=
     fld('edit-type-inp','الاسم الجديد','text',oldName,'',true)+
     '<div class="modal-actions">'+
-    '<button class="btn btn-primary btn-full" onclick="saveEditInvType(\''+field+'\','+jsStr(oldName)+')">💾 حفظ</button>'+
+    '<button class="btn btn-primary btn-full" onclick="saveEditInvType(\''+field+'\','+jsStr(oldName)+',\''+(productField||'unit')+'\')">💾 حفظ</button>'+
     '<button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
   openModal();
 }
 
-async function saveEditInvType(field,oldName){
+async function saveEditInvType(field,oldName,productField){
+  productField=productField||'unit';
   var newName=v('edit-type-inp');
   if(!newName)return showToast('⚠️ اكتب اسم صحيح','#dc2626');
   if(newName===oldName)return closeModal();
   if((DB.settings[field]||[]).indexOf(newName)!==-1)return showToast('⚠️ النوع موجود بالفعل','#dc2626');
   DB.settings[field]=(DB.settings[field]||[]).map(function(t){return t===oldName?newName:t;});
   // تحديث كل المنتجات المستخدمة للاسم القديم عشان تفضل متصلة بيه
-  DB.products=DB.products.map(function(p){return p.unit===oldName?Object.assign({},p,{unit:newName}):p;});
+  DB.products=DB.products.map(function(p){return p[productField]===oldName?Object.assign({},p,_objSet(productField,newName)):p;});
   await persist();
   closeModal();renderSettings();renderInventory();
   showToast('✅ تم تعديل النوع في كل المنتجات المرتبطة','#16a34a');
 }
 
-async function removeInvType(field,name){
-  var count=DB.products.filter(function(p){return p.unit===name;}).length;
+async function removeInvType(field,name,productField){
+  productField=productField||'unit';
+  var count=DB.products.filter(function(p){return p[productField]===name;}).length;
   var msg=count?'فيه '+count+' منتج مستخدم بالنوع ده — هيفضل كما هو، بس مش هيظهر كاختيار جديد. تمسحه؟':'تأكيد حذف النوع؟';
   confirmAction(msg,async function(){
     DB.settings[field]=(DB.settings[field]||[]).filter(function(t){return t!==name;});
@@ -15347,6 +15883,7 @@ async function removeInvType(field,name){
     showToast('🗑️ تم الحذف','#64748b');
   });
 }
+function _objSet(k,val){var o={};o[k]=val;return o;}
 
 function formatBackupDate(iso){
   try{
@@ -15556,7 +16093,7 @@ function printInvoice(id){
   var w=window.open('','_blank','width=420,height=650');
   var rows=s.items.map(function(i){
     return '<tr><td style="padding:6px 8px;border-bottom:1px solid #eee">'+esc(i.name)+'</td>'+
-      '<td style="padding:6px 8px;border-bottom:1px solid #eee;text-align:center">'+i.qty+'</td>'+
+      '<td style="padding:6px 8px;border-bottom:1px solid #eee;text-align:center">'+fmtQty(i.qty)+'</td>'+
       '<td style="padding:6px 8px;border-bottom:1px solid #eee;text-align:left">'+i.price+' ج</td>'+
       '<td style="padding:6px 8px;border-bottom:1px solid #eee;text-align:left">'+(i.qty*i.price)+' ج</td></tr>';
   }).join('');
@@ -16108,8 +16645,8 @@ function renderExtractBody(m){
       '<div style="font-size:11px;font-weight:700;color:#ea580c;margin-bottom:7px">أو أضف قطعة جديدة مش في المخزون</div>'+
       '<div style="display:flex;gap:5px">'+
       '<input id="extract-new-name" type="text" placeholder="اسم القطعة..." style="flex:2;padding:8px 10px;border:2px solid #e2e8f0;border-radius:8px;font-size:13px;font-family:inherit;background:#fff;outline:none;direction:rtl">'+
-      '<input id="extract-new-qty" type="number" value="1" placeholder="كمية" style="width:60px;padding:8px 6px;border:2px solid #e2e8f0;border-radius:8px;font-size:13px;font-family:inherit;text-align:center">'+
-      '<input id="extract-new-price" type="number" value="0" placeholder="سعر ج" style="width:70px;padding:8px 6px;border:2px solid #e2e8f0;border-radius:8px;font-size:13px;font-family:inherit;text-align:center">'+
+      '<input id="extract-new-qty" type="number" step="any" value="1" placeholder="كمية" style="width:60px;padding:8px 6px;border:2px solid #e2e8f0;border-radius:8px;font-size:13px;font-family:inherit;text-align:center">'+
+      '<input id="extract-new-price" type="number" step="any" value="0" placeholder="سعر ج" style="width:70px;padding:8px 6px;border:2px solid #e2e8f0;border-radius:8px;font-size:13px;font-family:inherit;text-align:center">'+
       '</div>'+
       '<button onclick="addExtractNewItem()" style="width:100%;margin-top:7px;padding:8px;background:#ea580c;color:#fff;border:none;border-radius:8px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer">+ إضافة للقائمة</button>'+
       '</div>'+
@@ -16153,10 +16690,10 @@ function renderExtractBody(m){
         '<span style="font-weight:900;min-width:18px;text-align:center">'+it.qty+'</span>'+
         '<button onclick="chgExtractQty('+i+',1)" style="background:#dcfce7;border:none;border-radius:5px;width:24px;height:24px;cursor:pointer;font-weight:900;color:#15803d;flex-shrink:0">+</button>'+
         '<div style="display:flex;flex-direction:column;gap:2px">'+
-        '<input type="number" id="ex-buy-'+i+'" value="'+(it.buy_price||0)+'" placeholder="شراء" title="سعر الشراء (تكلفة القطعة)" '+
+        '<input type="number" step="any" id="ex-buy-'+i+'" value="'+(it.buy_price||0)+'" placeholder="شراء" title="سعر الشراء (تكلفة القطعة)" '+
         'style="width:62px;padding:3px 5px;border:2px solid #fed7aa;border-radius:6px;font-size:11px;font-family:inherit;text-align:center" '+
         'oninput="_scrapExtractItems['+i+'].buy_price=+this.value;_scrapExtractItems['+i+']._manualBuy=true;renderExtractBody(_curExtractMachine())">'+
-        '<input type="number" id="ex-price-'+i+'" value="'+it.sell_price+'" placeholder="بيع" title="سعر البيع" '+
+        '<input type="number" step="any" id="ex-price-'+i+'" value="'+it.sell_price+'" placeholder="بيع" title="سعر البيع" '+
         'style="width:62px;padding:3px 5px;border:2px solid #e2e8f0;border-radius:6px;font-size:11px;font-family:inherit;text-align:center" '+
         'oninput="_scrapExtractItems['+i+'].sell_price=+this.value">'+
         '</div>'+
@@ -16240,7 +16777,7 @@ async function confirmExtractParts(machineId){
       DB.products=DB.products.map(function(p){
         if(p.id!==item.productId)return p;
         var oldQty=p.qty,oldBuy=p.buy_price||0;
-        var newQty=oldQty+item.qty;
+        var newQty=roundQty(oldQty+item.qty);
         var avgBuy=newQty>0?Math.round((oldQty*oldBuy+item.qty*itemBuy)/newQty):0;
         return Object.assign({},p,{qty:newQty,buy_price:avgBuy});
       });
