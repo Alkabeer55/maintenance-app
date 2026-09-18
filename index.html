@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v203</title>
+<title>ابو حوده الحلو الجميل v204</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,8 +13,46 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="2026-09-17 — v203";
+<script>var BUILD_STAMP="2026-09-18 — v204";
+/* ============================================================
+   📜 قواعد ثابتة للتطوير — تُراعى إلزاميًا في أي تحديث جديد
+   (مجمّعة من دروس/أخطاء فعلية اتصلحت في نسخ سابقة — راجعها قبل أي تعديل)
+   ============================================================
+   1) اتجاه الكتابة: الصفحة كلها dir="rtl"، لكن أي حقل رقمي (سعر/كمية/مبلغ) لازم
+      style="direction:ltr;text-align:center" — غير كده الرقم بيتكتب مقلوب (باج v190).
+      التاريخ (type="date") نفس الكلام: direction:ltr.
+   2) فلتر التاريخ في أي شاشة: زوج from/to بنفس الأسلوب بالظبط (type="date"، id
+      واضح، onchange بيحدّث متغيّر global ويعيد render الشاشة). فلتر الحالة/النوع:
+      صف أزرار flex متجاورة (segmented control) — المختار background:#0f172a
+      و color:#fff، وغير المختار background:#f1f5f9 و color:#64748b. لو الفلتر
+      نفسه قابل لإلغاء نفسه بالضغط عليه تاني (زي setInvStockFilter) وضّح ده بتعليق.
+   3) الصلاحيات: أي إضافة/تعديل/حذف على جدول متزامن مع السيرفر (__SYNCED_TABLES)
+      لازم تتفحص بـ __hasPerm(table,'can_insert'|'can_update'|'can_delete') أول
+      سطر في الدالة، وعند الرفض: showToast('🚫 مفيش صلاحية ...','#dc2626') ثم return.
+   4) التاريخ/الوقت: today() المحلي فقط (مش new Date().toISOString() مباشرة) —
+      باج v185/v186 كان بيزحزح اليوم/الشهر بالليل بسبب حساب UTC مباشر.
+   5) نسخ أي عنصر فيه array متداخل (بنود فاتورة/مشترى) قبل التعديل عليه: لازم
+      .map(function(it){return Object.assign({},it);}) — .slice() وحدها مش كافية
+      لأنها نسخ سطحي وبتسيب عناصر الـ array بتشاور على نفس الكائنات الأصلية (باج v104).
+   6) أي رقم تقريبي/مجمّع (متوسط مرجّح، مخزون مجمّع من كل الموردين، تقدير ربح) لازم
+      يتوضح بالنص في الواجهة إنه تقديري/مجمّع مش دقيق لكل دفعة — أوضح من رقم مضبوط غلط.
+   7) الألوان الثابتة: أخضر (#16a34a/#15803d) = إيجابي/مدفوع/ربح، أحمر (#dc2626) =
+      سلبي/دين/خسارة، بنفسجي (#7c3aed/#5b21b6) = تحليلي/راكد/تقارير، أزرق (#2563eb) =
+      روابط وإجراءات ثانوية، برتقالي (#ea580c/#c2410c) = تكاليف إضافية/موردين.
+   8) توثيق كل تعديل: تعليق ⚠️ vNNN فوق الكود مباشرة يشرح المشكلة والسبب الجذري
+      والحل باختصار، بالإضافة لسطر جديد في الـ Changelog تحت، وزيادة APP_VERSION
+      و BUILD_STAMP رقم واحد بالظبط لكل تحديث (حتى لو أكتر من تغيير في نفس الدفعة).
+   ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v204: [✨ أرشيف الموردين — تاب "تحليل الأصناف" لكل مورد]
+     شاشة كشف حساب المورد (🏭 أرشيف الموردين ← اضغط على مورد) بقى فيها تابين: 🛒 العمليات
+     (المشتريات والمدفوعات، زي ما كانت) و📊 تحليل الأصناف (جديد) — لكل صنف اشتريته من
+     المورد ده: الكمية والمبلغ اللي اتدفع له (بالمتوسط)، إجمالي المباع من نفس الصنف كل
+     الوقت وصافي ربحه، المتبقي بالمخزون دلوقتي، وعلامة "🐌 راكد" لو الصنف واقف من مدة
+     طويلة. ولو مورد تاني باعك نفس الصنف بسعر أرخص، بيظهرلك تنبيه بالاسم والسعر والتاريخ.
+     فلتر التاريخ (من/لحد) بتاع الشاشة بقى شغال على التابين الاتنين. ⚠️ ملحوظة مهمة:
+     "المتبقي بالمخزون" رقم مجمّع من كل الموردين (متوسط مرجّح) مش تتبّع لكل دفعة لوحدها،
+     لأن التطبيق أصلاً مابيسجلش المخزون بالدفعة — موضّح ده بالنص في الشاشة نفسها.
 v203: [🐛 3 إصلاحات جذرية + ✨ 5 أنظمة جديدة — دفعة كبيرة حسب طلب العميل]
      ⚠️⚠️ SQL مطلوب تشغيله على Supabase عشان المزامنة بين الأجهزة تشتغل بالكامل (الحفظ
      المحلي هيشتغل عادي من غيرهم، بس مش هيتزامن لحد ما تضيفهم):
@@ -3791,7 +3829,7 @@ var APP_TITLE='ابو حوده الحلو الجميل';
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=203;
+var APP_VERSION=204;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -17806,6 +17844,64 @@ function _backfillCentralCodes(){
 // ============================================================
 var _suppliersSearch='',_suppliersSort='alpha',_currentSupplierLedgerId=null;
 var _supLedgerFrom='',_supLedgerTo='',_supLedgerStatus='all';
+var _supLedgerTab='ops'; // ⚠️ v204 — 'ops' (المشتريات والمدفوعات) | 'analysis' (تحليل الأصناف والربح)
+
+// ⚠️ v204 — "تحليل أصناف المورد": لكل صنف اشتريته من المورد ده (فلترة بنفس تاريخ from/to
+// بتاعة الليدجر) — الكمية والمبلغ اللي اتدفع له، مقابل إجمالي المباع من نفس الصنف (كل
+// الأوقات) وصافي ربحه، والمتبقي بالمخزون دلوقتي، وهل هو راكد (isDeadStock)، ولو في مورد
+// تاني باعك نفس الصنف بسعر أرخص. ⚠️ ملحوظة مهمة: "المتبقي بالمخزون" هو رصيد الصنف الإجمالي
+// (كل الموردين مجمّعين في رقم واحد بمتوسط مرجّح — زي أي مكان تاني بالتطبيق)، مش تتبّع
+// دفعات (batch tracking) لكل مورد لوحده، لأن التطبيق أصلاً مابيسجلش المخزون بالدفعة. بنوضح
+// ده في الواجهة بدل ما نديله رقم دقيق وهمي.
+function _supplierProductAnalysis(sup,fromDate,toDate){
+  var qn=normalizeAr(sup.name);
+  var byProduct={};
+  (DB.purchases||[]).forEach(function(pu){
+    if(normalizeAr(pu.supplier||'')!==qn)return;
+    if(fromDate&&(pu.date||'')<fromDate)return;
+    if(toDate&&(pu.date||'')>toDate)return;
+    (pu.items||[]).forEach(function(it){
+      var key=(it.productId&&it.productId!=='__new__')?it.productId:('name:'+normalizeAr(it.name||''));
+      if(!byProduct[key])byProduct[key]={productId:(it.productId&&it.productId!=='__new__')?it.productId:null,name:it.name,qtyBought:0,totalSpent:0,lastDate:''};
+      byProduct[key].qtyBought+=(it.qty||0);
+      byProduct[key].totalSpent+=(it.qty||0)*(it.price||0);
+      if(!byProduct[key].lastDate||pu.date>byProduct[key].lastDate)byProduct[key].lastDate=pu.date;
+    });
+  });
+  var rows=Object.keys(byProduct).map(function(k){
+    var r=byProduct[k];
+    r.avgPrice=r.qtyBought>0?r.totalSpent/r.qtyBought:0;
+    var prod=r.productId?DB.products.find(function(p){return p.id===r.productId;}):DB.products.find(function(p){return normalizeAr(p.name)===normalizeAr(r.name);});
+    r.currentStock=prod?prod.qty:null;
+    r.isDead=prod?isDeadStock(prod):false;
+    var sold=0,soldVal=0,soldProfit=0;
+    DB.sales.forEach(function(s){
+      (s.items||[]).forEach(function(it){
+        var match=r.productId?it.productId===r.productId:normalizeAr(it.name||'')===normalizeAr(r.name);
+        if(match){
+          sold+=(it.qty||0);
+          soldVal+=(it.qty||0)*(it.price||0);
+          soldProfit+=(it.qty||0)*((it.price||0)-(it.buyPrice!=null?it.buyPrice:(prod?(prod.landed_cost||prod.buy_price||0):0)));
+        }
+      });
+    });
+    r.soldQty=sold;r.soldVal=soldVal;r.soldProfit=soldProfit;
+    var cheaperFrom=null;
+    (DB.purchases||[]).forEach(function(pu2){
+      if(normalizeAr(pu2.supplier||'')===qn)return;
+      (pu2.items||[]).forEach(function(it2){
+        var match2=r.productId?it2.productId===r.productId:normalizeAr(it2.name||'')===normalizeAr(r.name);
+        if(match2&&(it2.price||0)>0&&it2.price<r.avgPrice&&(!cheaperFrom||it2.price<cheaperFrom.price)){
+          cheaperFrom={supplier:pu2.supplier,price:it2.price,date:pu2.date};
+        }
+      });
+    });
+    r.cheaperFrom=cheaperFrom;
+    return r;
+  });
+  rows.sort(function(a,b){return b.totalSpent-a.totalSpent;});
+  return rows;
+}
 
 function _supplierPurchases(supName){
   var qn=normalizeAr(supName);
@@ -17975,21 +18071,34 @@ function renderSupplierLedger(id){
     '<div style="background:#ede9fe;border-radius:11px;padding:10px;text-align:center"><div style="font-size:10px;color:#5b21b6;font-weight:700">إجمالي المشتريات</div><div style="font-size:16px;font-weight:900;color:#5b21b6">'+fmt(st.totalPurchased)+' ج</div></div>'+
     '<div style="background:'+(st.debtBalance>0?'#fee2e2':'#dcfce7')+';border-radius:11px;padding:10px;text-align:center"><div style="font-size:10px;color:'+(st.debtBalance>0?'#dc2626':'#15803d')+';font-weight:700">الرصيد المستحق</div><div style="font-size:16px;font-weight:900;color:'+(st.debtBalance>0?'#dc2626':'#15803d')+'">'+fmt(st.debtBalance)+' ج</div></div>'+
     '</div>'+
-    // ⚠️ فلتر بالتاريخ والحالة زي ما طلب العميل
-    '<div style="background:#fff;border-radius:11px;padding:10px;margin-bottom:10px;box-shadow:0 2px 10px rgba(0,0,0,.05)">'+
-    '<div style="font-size:11px;font-weight:800;color:#64748b;margin-bottom:6px">🔍 فلتر المشتريات</div>'+
-    '<div style="display:flex;gap:6px;margin-bottom:6px">'+
-    '<input type="date" id="sup-ledger-from" value="'+_supLedgerFrom+'" onchange="_supLedgerFrom=this.value;renderSupplierLedger(\''+id+'\')" style="flex:1;padding:7px;border:1.5px solid #e2e8f0;border-radius:8px;font-family:inherit;font-size:11px">'+
-    '<input type="date" id="sup-ledger-to" value="'+_supLedgerTo+'" onchange="_supLedgerTo=this.value;renderSupplierLedger(\''+id+'\')" style="flex:1;padding:7px;border:1.5px solid #e2e8f0;border-radius:8px;font-family:inherit;font-size:11px">'+
+    // ⚠️ v204 — تابين: العمليات (المشتريات والمدفوعات، زي ما كانت) / تحليل الأصناف والربح
+    '<div style="display:flex;gap:6px;margin-bottom:10px">'+
+    ['ops','analysis'].map(function(k){
+      var lbl={ops:'🛒 العمليات',analysis:'📊 تحليل الأصناف'}[k];
+      var a=_supLedgerTab===k;
+      return '<div onclick="_supLedgerTab=\''+k+'\';renderSupplierLedger(\''+id+'\')" style="flex:1;text-align:center;padding:8px;border-radius:9px;font-size:12px;font-weight:800;cursor:pointer;background:'+(a?'#0f172a':'#f1f5f9')+';color:'+(a?'#fff':'#64748b')+'">'+lbl+'</div>';
+    }).join('')+
     '</div>'+
-    '<div style="display:flex;gap:5px">'+
+    // ⚠️ فلتر بالتاريخ زي ما طلب العميل — مشترك بين التابين (الحالة بتظهر بس في تاب العمليات)
+    '<div style="background:#fff;border-radius:11px;padding:10px;margin-bottom:10px;box-shadow:0 2px 10px rgba(0,0,0,.05)">'+
+    '<div style="font-size:11px;font-weight:800;color:#64748b;margin-bottom:6px">🔍 فلتر بالتاريخ</div>'+
+    '<div style="display:flex;gap:6px;margin-bottom:6px">'+
+    '<input type="date" id="sup-ledger-from" value="'+_supLedgerFrom+'" onchange="_supLedgerFrom=this.value;renderSupplierLedger(\''+id+'\')" style="flex:1;padding:7px;border:1.5px solid #e2e8f0;border-radius:8px;font-family:inherit;font-size:11px;direction:ltr;text-align:center">'+
+    '<input type="date" id="sup-ledger-to" value="'+_supLedgerTo+'" onchange="_supLedgerTo=this.value;renderSupplierLedger(\''+id+'\')" style="flex:1;padding:7px;border:1.5px solid #e2e8f0;border-radius:8px;font-family:inherit;font-size:11px;direction:ltr;text-align:center">'+
+    '</div>'+
+    (_supLedgerTab==='ops'?('<div style="display:flex;gap:5px">'+
     ['all','paid','debt'].map(function(k){
       var lbl={all:'الكل',paid:'مدفوعة بالكامل',debt:'عليها دين'}[k];
       var a=_supLedgerStatus===k;
       return '<div onclick="_supLedgerStatus=\''+k+'\';renderSupplierLedger(\''+id+'\')" style="flex:1;text-align:center;padding:6px;border-radius:7px;font-size:10px;font-weight:700;cursor:pointer;background:'+(a?'#0f172a':'#f1f5f9')+';color:'+(a?'#fff':'#64748b')+'">'+lbl+'</div>';
     }).join('')+
-    '</div></div>'+
-    '<div style="font-size:12px;font-weight:800;color:#374151;margin-bottom:6px">🛒 المشتريات ('+purchases.length+')</div>'+
+    '</div>'):'')+
+    '</div>'+
+    (_supLedgerTab==='ops'?_renderSupplierOpsTab(purchases,allPayments):_renderSupplierAnalysisTab(s));
+}
+
+function _renderSupplierOpsTab(purchases,allPayments){
+  return '<div style="font-size:12px;font-weight:800;color:#374151;margin-bottom:6px">🛒 المشتريات ('+purchases.length+')</div>'+
     (purchases.length?purchases.map(function(p){
       var tot=(p.total||0)+(p.extra_cost||0);var paid=p.paid||0;var bal=tot-paid;
       return '<div style="background:#fff;border-radius:11px;padding:10px 12px;margin-bottom:7px;box-shadow:0 2px 8px rgba(0,0,0,.05);border-right:3px solid '+(bal>0?'#dc2626':'#16a34a')+'" onclick="openPurchaseModal(\''+p.id+'\')">'+
@@ -18004,6 +18113,42 @@ function renderSupplierLedger(id){
         '<div><div style="font-size:12px;font-weight:700;color:#15803d">'+fmt(pay.amount)+' ج</div><div style="font-size:10px;color:#94a3b8">'+esc(pay.debtDetails)+'</div></div>'+
         '<span style="font-size:11px;color:#64748b">'+fmtDate(pay.date)+'</span></div>';
     }).join(''):'<div class="empty" style="padding:16px">لا توجد مدفوعات مسجّلة</div>');
+}
+
+// ⚠️ v204 — تاب "تحليل الأصناف": لكل صنف اشتريته من المورد ده — جبت بكام، بعت بكام (كل
+// الوقت)، صافي الربح، المتبقي بالمخزون، هل راكد، ولو في مورد أرخص لنفس الصنف.
+function _renderSupplierAnalysisTab(s){
+  var rows=_supplierProductAnalysis(s,_supLedgerFrom,_supLedgerTo);
+  if(!rows.length)return '<div class="empty" style="padding:16px">لا توجد أصناف مشتراة من هذا المورد في الفترة المحددة</div>';
+  var totalSpent=rows.reduce(function(a,r){return a+r.totalSpent;},0);
+  var totalProfit=rows.reduce(function(a,r){return a+r.soldProfit;},0);
+  var deadCount=rows.filter(function(r){return r.isDead;}).length;
+  return '<div style="background:#f8fafc;border-radius:10px;padding:9px 12px;margin-bottom:10px;font-size:11px;color:#64748b">'+
+    'ℹ️ "المتبقي بالمخزون" هو رصيد الصنف الإجمالي (مجمّع من كل الموردين بمتوسط مرجّح)، مش تتبّع لكل دفعة لوحدها — التطبيق مابيسجلش المخزون بالدفعة أصلاً.'+
+    '</div>'+
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">'+
+    '<div style="background:#eff6ff;border-radius:10px;padding:9px;text-align:center"><div style="font-size:10px;color:#1e40af;font-weight:700">إجمالي اتدفع للمورد ده</div><div style="font-size:14px;font-weight:900;color:#1e40af">'+fmt(totalSpent)+' ج</div></div>'+
+    '<div style="background:'+(totalProfit>=0?'#f0fdf4':'#fef2f2')+';border-radius:10px;padding:9px;text-align:center"><div style="font-size:10px;color:'+(totalProfit>=0?'#15803d':'#dc2626')+';font-weight:700">صافي الربح من أصنافه (كل الوقت)</div><div style="font-size:14px;font-weight:900;color:'+(totalProfit>=0?'#15803d':'#dc2626')+'">'+fmt(totalProfit)+' ج</div></div>'+
+    '</div>'+
+    (deadCount?('<div style="background:#f5f3ff;border-radius:10px;padding:8px;text-align:center;margin-bottom:10px"><span style="font-size:12px;font-weight:800;color:#7c3aed">🐌 '+deadCount+' صنف من عنده راكد دلوقتي</span></div>'):'')+
+    rows.map(function(r){
+      var stockLabel=r.currentStock===null?'غير معروف (صنف قديم/محذوف)':(r.currentStock+' متبقي');
+      return '<div style="background:#fff;border-radius:11px;padding:10px 12px;margin-bottom:8px;box-shadow:0 2px 8px rgba(0,0,0,.05);border-right:3px solid '+(r.isDead?'#7c3aed':'#e2e8f0')+'">'+
+        '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px">'+
+        '<span style="font-weight:800;font-size:13px">'+esc(r.name)+'</span>'+
+        (r.isDead?'<span style="background:#f5f3ff;color:#7c3aed;border-radius:6px;padding:2px 7px;font-size:10px;font-weight:800">🐌 راكد</span>':'')+
+        (r.productId?'<span onclick="openProductSoldDetail(\''+r.productId+'\')" style="font-size:10px;color:#2563eb;font-weight:700;cursor:pointer">📊 السجل الكامل ←</span>':'')+
+        '</div>'+
+        '<div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:6px">'+
+        '<span style="background:#ede9fe;color:#5b21b6;border-radius:6px;padding:3px 7px;font-size:10px;font-weight:700">🛒 اشتريت منه '+r.qtyBought+' بـ '+fmt(r.totalSpent)+' ج (متوسط '+fmt(Math.round(r.avgPrice))+')</span>'+
+        '<span style="background:#f0fdf4;color:#15803d;border-radius:6px;padding:3px 7px;font-size:10px;font-weight:700">📤 اتباع (كل الوقت) '+r.soldQty+' بـ '+fmt(r.soldVal)+' ج</span>'+
+        '<span style="background:'+(r.soldProfit>=0?'#f0fdf4':'#fef2f2')+';color:'+(r.soldProfit>=0?'#15803d':'#dc2626')+';border-radius:6px;padding:3px 7px;font-size:10px;font-weight:700">💵 ربح '+fmt(r.soldProfit)+' ج</span>'+
+        '<span style="background:#f1f5f9;color:#475569;border-radius:6px;padding:3px 7px;font-size:10px;font-weight:700">📦 '+stockLabel+'</span>'+
+        '</div>'+
+        (r.cheaperFrom?('<div style="margin-top:6px;background:#fffbeb;border:1.5px dashed #fbbf24;border-radius:7px;padding:6px 8px;font-size:10.5px;color:#b45309;font-weight:700">'+
+          '⚠️ '+esc(r.cheaperFrom.supplier)+' باعك نفس الصنف بـ '+fmt(r.cheaperFrom.price)+' ج ('+fmtDate(r.cheaperFrom.date)+') — أرخص من متوسط سعر '+esc(s.name)+'</div>'):'')+
+        '</div>';
+    }).join('');
 }
 
 function openAddClientModal(){
