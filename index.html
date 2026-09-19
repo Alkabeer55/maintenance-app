@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v204</title>
+<title>ابو حوده الحلو الجميل v206</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,9 +13,10 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="2026-09-18 — v204";
+<script>var BUILD_STAMP="2026-09-19 — v206";
 /* ============================================================
-   📜 قواعد ثابتة للتطوير — تُراعى إلزاميًا في أي تحديث جديد
+   📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
+   تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
    (مجمّعة من دروس/أخطاء فعلية اتصلحت في نسخ سابقة — راجعها قبل أي تعديل)
    ============================================================
    1) اتجاه الكتابة: الصفحة كلها dir="rtl"، لكن أي حقل رقمي (سعر/كمية/مبلغ) لازم
@@ -42,8 +43,86 @@
    8) توثيق كل تعديل: تعليق ⚠️ vNNN فوق الكود مباشرة يشرح المشكلة والسبب الجذري
       والحل باختصار، بالإضافة لسطر جديد في الـ Changelog تحت، وزيادة APP_VERSION
       و BUILD_STAMP رقم واحد بالظبط لكل تحديث (حتى لو أكتر من تغيير في نفس الدفعة).
+   9) ⚠️ v206 — منع التكرار (لازم إلزاميًا، من غير استثناء): أي زرار بينفّذ عملية بتنشئ
+      سجل جديد، أو بتحرّك فلوس، أو بتغيّر مخزون/كمية — لازم يتلف بـ
+      onclick="__runOnce(this,fn)" (أو onclick="__runOnce(this,function(){return fn(args);})"
+      لو الدالة محتاجة parameters). من غير استثناء حتى لو الزرار "شكله بسيط" أو "مستبعد"
+      — التجربة العملية (v205/v206) أثبتت إن أي زرار إنشاء اتسيب من غير __runOnce كان
+      فعليًا بيتكرر عند الاستخدام الحقيقي. زرارات الحذف والإغلاق/التأكيد اللي بتعدي على
+      confirmAction() محمية تلقائيًا (زرار "تأكيد" نفسه بيتعطّل بعد أول ضغطة — v206)، فمش
+      محتاجة __runOnce إضافي بنفسها. أي دالة جديدة بتنشئ سجل (genId()+push/unshift) ومالهاش
+      مسار خالص عن طريق confirmAction، الزرار بتاعها لازم __runOnce من أول يوم.
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v206: [🐛 منع تكرار العمليات — مسح شامل لكل التطبيق + قاعدة دستورية دائمة (بند 9)]
+     1) إصلاح مركزي واحد بيغطي عشرات الأزرار دفعة واحدة: confirmAction() (المستخدمة في كل
+        تأكيدات الحذف/الإغلاق/الدمج تقريبًا في التطبيق) مكنش فيها أي حماية من ضغطتين
+        سريعتين على زرار "تأكيد" — دلوقتي الزرار بيتعطّل فورًا أول ما يتضغط.
+     2) مسح شامل للملف (176 دالة async) لقى 15 زرار تاني بينفّذ عملية إنشاء سجل من غير
+        __runOnce، اتصلحوا كلهم: إضافة قالب مصروف، إغلاق جرد بدون فروق، تسوية فرق كاش
+        تلقائية، سحب قطع اسكراب للمخزون، تسجيل إجازة موظف، تأكيد حضور موظف، إنهاء سحب
+        اسكراب لفاتورة، تسجيل صنف كتالف من فاتورة، دمج موديلات، صرف مصروف سريع (مكانين)،
+        حفظ لقطة رصيد/مخزون يدوية (4 أماكن)، إضافة ماكينة لعميل، حفظ الرصيد الافتتاحي،
+        حفظ قيمة المخزون الافتتاحي، حفظ تعديل قطعة اسكراب.
+     3) اتضاف بند 9 في "الدستور" (القواعد الثابتة فوق): أي زرار إنشاء/مالي/مخزون لازم
+        __runOnce من أول يوم — قاعدة دائمة لأي كود جديد.
+     ⚠️ لم تتغيّر: منطق أي دالة من الدوال دي — التعديل كله في طريقة استدعائها من الزرار
+     بس (تغليف بـ __runOnce)، من غير أي لمسة في الحسابات أو المنطق المحاسبي.
+v205: [🔍 مراجعة شاملة مطلوبة من العميل — إصلاحات حقيقية تم تنفيذها واختبارها بمراجعة الكود
+      (مش كل بند طُلب اتراجع بنفس العمق — التفاصيل والحدود تحت بالظبط)]
+     1) الكميات الكسرية: المشتريات كانت عربتها +/− لوحدات كاملة بس. دلوقتي تقدر تدوس على
+        رقم الكمية في عربة المشترى وتكتبها كسر يدويًا (بنفس أمان نظام البيع، ودعم وحدة
+        التحويل لو موجودة). كل حسابات المخزون في المشتريات (إنشاء/تعديل) وفي الأمانة
+        (استلام/تسليم/بيع جزء/إرجاع) وسحب القطع بقت بتعدي على roundQty() عشان تمنع
+        فروق الفاصلة العشرية (زي 0.30000000000000004). fmtQty() اتأكد إنها شغالة صح
+        (2.500 ← 2.5، 3 ← 3) واتطبقت على عرض الكمية في عربة المشتريات.
+     2) دين الأمانة عند تعديل الفاتورة: السبب الجذري كان إن دالة تسجيل دين المورد
+        (_handleConsignmentInSale) بتتنادى بس عند إنشاء فاتورة جديدة، ومفيش أي كود بيعالج
+        الأمانة عند تعديل فاتورة موجودة خالص — وكمان الدين نفسه مكنش مربوط بالفاتورة
+        (مفيش source_sale_id) فمستحيل يتصحح بعدين. اتصلح جذريًا: كل دين أمانة بقى مربوط
+        بالفاتورة والصنف، ودالة جديدة (_syncConsignmentDebtsForSale) بتقارن كمية كل صنف
+        أمانة قبل/بعد التعديل وتنشئ/تعدّل/تصفّر الدين من غير تكرار ومن غير ما تفقد أي سداد
+        سابق. نفس المعالجة (_removeConsignmentDebtsForSale) اتضافت عند حذف الفاتورة بنوعيها.
+     3) المخزون متعدد الموردين: روجعت معادلة المتوسط المرجّح في savePurchase — صحيحة
+        رياضيًا ومحفوظة زي ما هي، والربح وقت البيع بياخد نسخة buyPrice محفوظة وقت البيع
+        نفسه (مش سعر حالي بيتغير بأثر رجعي) — اتأكد إنه سليم، مفيش تعديل لزم هنا.
+     4) أرشيف الموردين → تحليل الأصناف (v204): اكتشفت خلط حقيقي في الربح — كارت "صافي
+        الربح من أصنافه" كان بيجمع ربح كل صنف (كل الوقت/كل الموردين مجتمعين) لكل مورد
+        اشترى الصنف ده، يعني نفس الربح بيتكرر/يتضاعف لو نفس الصنف من أكتر من مورد. اتشال
+        الكارت المضلل ده خالص، واتوضّح في كل كارت صنف إن "المباع/الربح" بتاعه هو أداء
+        الصنف كله مش نصيب المورد ده تحديدًا، مع تنبيه إضافي لو الصنف اتجاب من مورد تاني
+        كمان. باقي البنود (الكمية المشتراة، المبلغ المدفوع، المخزون الحالي، علامة الراكد
+        اللي بتعتمد على isDeadStock/إعداد المدة، تحذير السعر الأرخص، فلتر التاريخ) اتأكد
+        إنها صحيحة زي ما هي.
+     5) المزامنة: راجعت __syncQueue/__mergeServerRows/dbUpsert/dbUpdate/dbDelete —
+        __mergeServerRows فعلاً بتحمي التعديل/الحذف المحلي المعلّق من نسخة سيرفر قديمة
+        (اتصلح قبل كده في v195) واتأكد إنه لسه سليم. ⚠️ حد معروف باقٍ من غير حل: لو جهاز
+        تاني مسح سجل من السيرفر ومفيش عملية معلّقة عليه في الجهاز الحالي، السجل مش
+        بيتشال محليًا تلقائيًا (محتاج حل بنية تحتية أكبر زي tombstone records — مش نطاق
+        الإصلاح ده).
+     6) منع التكرار: 6 أزرار مالية كانت بتنفّذ من غير __runOnce (يعني ضغطة مزدوجة كانت
+        ممكن تنتج عمليتين): سحب المستثمر، تأكيد توزيع الأرباح، سحب قطعة غيار من المخزون،
+        دفع السلفة، صرف الراتب الشهري، دفع مصروف دوري، إضافة مساهمة رأس مال، صرف الراتب
+        اليومي — كلهم بقوا محميين دلوقتي. سداد الديون والمشتريات والمبيعات والمصروفات
+        والأمانة كانت أصلاً محمية من قبل.
+     7) النقدية: راجعت معادلة الكاش بالكامل (renderFinancialLedger وما حولها) — بالفعل
+        مصممة صح: دين مورد "يدوي" (من غير مشترى فعلي) بيأثر على الكاش بس وقت السداد
+        الفعلي مش وقت إنشاء الدين (زي بالظبط دين العميل)، وديون الأمانة الجديدة
+        (v205 بند 2) بتقع تلقائيًا في نفس التصنيف ده لأنها مش مرتبطة بمشترى — اتأكد
+        إن التصنيف ده شغال صح من غير ما يحتاج تعديل.
+     8) الإقفال الشهري: اتأكد إن كل المسارات اللي لمستها (حذف/تعديل فاتورة فيها أمانة)
+        بتفحص _blockIfClosedMonth أول حاجة (موروثة من الحارس الموجود في saveSale
+        وdeleteSaleAndDebt/deleteSaleOnly). ملحوظة: باقي بنود الإقفال الشهري (فتح الشهر
+        للمالك، منع غير المالك) موجودة من v175 ولم تُعَد مراجعتها بعمق في الجولة دي.
+     9) الصلاحيات: كل الدوال الجديدة في البند 2 بتعدي حصريًا على dbUpsert/dbUpdate/dbDelete
+        اللي بيفحصوا __hasPerm(table,...) مركزيًا — فمحتاجاش فحص صلاحية منفصل.
+     10) LocalStorage: persist() فعلاً بيحذّر عند 4000KB وبيتعامل مع QuotaExceededError
+        من غير ما يفقد النسخة القديمة المحفوظة (setItem عملية ذرية) — اتأكد إنه سليم.
+     ⚠️ لم يتم تنفيذه في v205 (لتجنّب ادّعاء إصلاح مالم يُراجَع فعليًا): أداة "فحص سلامة
+     البيانات" الجديدة (بند 11)، مراجعة دمج المنتجات v196 (بند 12)، تحسين البحث (بند 13)،
+     مراجعة استيراد المشتريات من الصور (بند 14)، وتنفيذ الـ25 سيناريو اختبار المذكورة
+     كخطوات فعلية داخل تطبيق شغال (مفيش بيئة تشغيل فعلية متاحة هنا لتنفيذها، غير المراجعة
+     المنطقية للكود اللي بنيت عليها كل الإصلاحات فوق).
 v204: [✨ أرشيف الموردين — تاب "تحليل الأصناف" لكل مورد]
      شاشة كشف حساب المورد (🏭 أرشيف الموردين ← اضغط على مورد) بقى فيها تابين: 🛒 العمليات
      (المشتريات والمدفوعات، زي ما كانت) و📊 تحليل الأصناف (جديد) — لكل صنف اشتريته من
@@ -3829,7 +3908,7 @@ var APP_TITLE='ابو حوده الحلو الجميل';
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=204;
+var APP_VERSION=206;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -4757,9 +4836,21 @@ function closeModal(){
   // كده وحفظها، كان هيقفل العطل القديم غلط بالغلط. تنظيفه هنا آمن مع كل المودالات.
   _saleFromMovementId=null;
 }
+// ⚠️ v206 — إصلاح مركزي واحد بيغطي عشرات الأزرار دفعة واحدة: confirmAction (المستخدمة في
+// كل تأكيدات الحذف/الإغلاق/الدمج تقريبًا في التطبيق) مكنش فيها أي حماية من ضغطتين سريعتين
+// على زرار "تأكيد" نفسه — لو حد ضغط عليه مرتين بسرعة قبل ما الـ overlay يقفل، cb() كانت
+// بتتنفذ مرتين (يعني أي عملية إنشاء سجل جوه confirmAction كانت ممكن تتكرر). دلوقتي زرار
+// التأكيد بيتعطّل فورًا أول ما يتضغط، ومبيرجعش يشتغل إلا لما confirmAction تتنادى تاني
+// (تأكيد جديد فعلاً) — نفس فكرة __runOnce بالظبط بس على زرار التأكيد المشترك ده.
 function confirmAction(msg,cb){
   document.getElementById('confirm-msg').textContent=msg;
-  document.getElementById('confirm-yes').onclick=function(){cb();closeConfirm();};
+  var yesBtn=document.getElementById('confirm-yes');
+  yesBtn.disabled=false;
+  yesBtn.onclick=function(){
+    if(yesBtn.disabled)return;
+    yesBtn.disabled=true;
+    try{ cb(); }finally{ closeConfirm(); }
+  };
   document.getElementById('confirm-overlay').classList.add('open');
 }
 function closeConfirm(){document.getElementById('confirm-overlay').classList.remove('open');}
@@ -5915,7 +6006,7 @@ function renderInventoryCompare(){
 
   if(!snaps.length){
     el.innerHTML='<div class="empty">لسه مفيش لقطات شهرية محفوظة. أول لقطة بتُسجَّل تلقائياً أول كل شهر هجري من لحظة استخدام النسخة دي.</div>'+
-      '<button class="btn btn-outline btn-full" style="margin-top:10px" onclick="saveInventorySnapshot(today(),\'لقطة يدوية\').then(function(){renderInventoryCompare()})">📸 حفظ لقطة بتاريخ اليوم الآن</button>';
+      '<button class="btn btn-outline btn-full" style="margin-top:10px" onclick="__runOnce(this,function(){return saveInventorySnapshot(today(),\'لقطة يدوية\').then(function(){renderInventoryCompare()});})">📸 حفظ لقطة بتاريخ اليوم الآن</button>';
     return;
   }
   if(!_cmpFrom)_cmpFrom=snaps[0].asOf;
@@ -5928,7 +6019,7 @@ function renderInventoryCompare(){
     '<div style="font-weight:900;font-size:14px;margin-bottom:10px">📅 اختار فترتين للمقارنة</div>'+
     '<div class="field"><label>من</label><select id="cmp-from" onchange="_cmpFrom=this.value;renderInventoryCompare()" style="width:100%;padding:9px;border:2px solid #e2e8f0;border-radius:9px;font-family:inherit;font-size:13px">'+optsFrom+'</select></div>'+
     '<div class="field"><label>إلى</label><select id="cmp-to" onchange="_cmpTo=this.value;renderInventoryCompare()" style="width:100%;padding:9px;border:2px solid #e2e8f0;border-radius:9px;font-family:inherit;font-size:13px">'+optsTo+'</select></div>'+
-    '<button class="btn btn-outline btn-full" style="margin-top:6px" onclick="saveInventorySnapshot(today(),\'لقطة يدوية\').then(function(){renderInventoryCompare()})">📸 حفظ لقطة بتاريخ اليوم</button>'+
+    '<button class="btn btn-outline btn-full" style="margin-top:6px" onclick="__runOnce(this,function(){return saveInventorySnapshot(today(),\'لقطة يدوية\').then(function(){renderInventoryCompare()});})">📸 حفظ لقطة بتاريخ اليوم</button>'+
     '</div>';
 
   var fromSnap=snaps.find(function(s){return s.asOf===_cmpFrom;});
@@ -6355,7 +6446,8 @@ function openReceiveConsignmentModal(){
 
 async function saveReceiveConsignment(){
   var party=v('cons-in-party'),name=v('cons-in-name');
-  var qty=+v('cons-in-qty'),cost=+v('cons-in-cost'),sell=+v('cons-in-sell');
+  // ⚠️ v205 — roundQty() على كل كميات الأمانة عشان ما يحصلش فرق فاصلة عشرية متراكم
+  var qty=roundQty(+v('cons-in-qty')),cost=+v('cons-in-cost'),sell=+v('cons-in-sell');
   if(!party||!name)return showToast('⚠️ اكتب اسم المورد والصنف','#dc2626');
   if(!qty||qty<=0)return showToast('⚠️ الكمية غير صحيحة','#dc2626');
   if(!cost||cost<0)return showToast('⚠️ ثمن الأمانة غير صحيح','#dc2626');
@@ -6395,7 +6487,8 @@ function openGiveConsignmentModal(){
 
 async function saveGiveConsignment(){
   var srcId=v('cons-out-product'),party=v('cons-out-party');
-  var qty=+v('cons-out-qty'),price=+v('cons-out-price');
+  // ⚠️ v205 — roundQty() على الكمية عند التسليم عشان ما يحصلش فرق فاصلة عشرية متراكم
+  var qty=roundQty(+v('cons-out-qty')),price=+v('cons-out-price');
   var src=DB.products.find(function(p){return p.id===srcId;});
   if(!src)return showToast('⚠️ اختار صنف','#dc2626');
   if(!party)return showToast('⚠️ اكتب اسم الطرف','#dc2626');
@@ -6405,8 +6498,9 @@ async function saveGiveConsignment(){
   await dbUpdate('products',src.id,{qty:roundQty(src.qty-qty)});
   var existing=DB.products.find(function(p){return p.consignment==='out'&&p.consignment_party===party&&normalizeAr(p.name)===normalizeAr(src.name);});
   if(existing){
-    DB.products=DB.products.map(function(p){return p.id===existing.id?Object.assign({},p,{qty:p.qty+qty}):p;});
-    await dbUpdate('products',existing.id,{qty:existing.qty+qty});
+    var mergedQty=roundQty(existing.qty+qty);
+    DB.products=DB.products.map(function(p){return p.id===existing.id?Object.assign({},p,{qty:mergedQty}):p;});
+    await dbUpdate('products',existing.id,{qty:mergedQty});
   }else{
     var obj={
       id:genId(),name:src.name,category:src.category,unit:src.unit,
@@ -6438,7 +6532,7 @@ function openConsignmentOutSaleModal(id){
 
 async function saveConsignmentOutSale(id){
   var p=DB.products.find(function(x){return x.id===id;});if(!p)return;
-  var qty=+v('cons-sale-qty');
+  var qty=roundQty(+v('cons-sale-qty')); // ⚠️ v205 — roundQty() على الكمية
   if(!qty||qty<=0||qty>p.qty)return showToast('⚠️ الكمية غير صحيحة (المتاح عنده: '+p.qty+')','#dc2626');
   var total=qty*(p.consignment_price||0);
   DB.products=DB.products.map(function(x){return x.id===id?Object.assign({},x,{qty:roundQty(x.qty-qty)}):x;});
@@ -6465,7 +6559,7 @@ function openReturnConsignmentModal(id){
 
 async function saveReturnConsignment(id){
   var p=DB.products.find(function(x){return x.id===id;});if(!p)return;
-  var qty=+v('cons-ret-qty');
+  var qty=roundQty(+v('cons-ret-qty')); // ⚠️ v205 — roundQty() على الكمية
   if(!qty||qty<=0||qty>p.qty)return showToast('⚠️ الكمية غير صحيحة (المتاح: '+p.qty+')','#dc2626');
   var newQty=roundQty(p.qty-qty);
   if(newQty<=0){
@@ -6481,15 +6575,74 @@ async function saveReturnConsignment(id){
 }
 
 // ⚠️ v200 — بتتنادى من جوه saveSale لما عنصر مباع يكون من نوع "أمانة مستلمة من مورد"
-// (consignment==='in')، عشان تسجل دين المورد أوتوماتيك بثمن الأمانة × الكمية المباعة،
-// بالظبط زي أي دين عادي في التطبيق (القرار اللي اتفقنا عليه).
-async function _handleConsignmentInSale(prod,qtySold){
+// (consignment==='in')، عشان تسجل دين المورد أوتوماتيك بثمن الأمانة × الكمية المباعة.
+// ⚠️ v205 — إصلاح جذري: الدين اللي بتعمله الدالة مكنش مربوط بالفاتورة (مفيش source_sale_id
+// ولا consignment_product_id)، فمستحيل نلاقيه أو نصححه أو نلغيه بعد كده لو الفاتورة اتعدلت.
+// دلوقتي بترتبط بالفاتورة والصنف، وبقى فيه _syncConsignmentDebtsForSale تحت بتتنادى من
+// مسار تعديل الفاتورة (كانت الدالة دي أصلاً بتتنادى بس عند إنشاء فاتورة جديدة).
+async function _handleConsignmentInSale(prod,qtySold,saleId){
   if(!prod||prod.consignment!=='in'||!qtySold)return;
   var total=qtySold*(prod.consignment_cost||0);
   if(total<=0)return;
-  var debtObj={id:genId(),type:'supplier',name:prod.consignment_party,desc:'أمانة: '+prod.name+' × '+qtySold,details:'أمانة: '+prod.name+' × '+qtySold,total:total,paid:0,date:today(),payments:[],source:'consignment'};
+  var debtObj={id:genId(),type:'supplier',name:prod.consignment_party,desc:'أمانة: '+prod.name+' × '+fmtQty(qtySold),details:'أمانة: '+prod.name+' × '+fmtQty(qtySold),total:total,paid:0,date:today(),payments:[],source:'consignment',source_sale_id:saleId||null,consignment_product_id:prod.id};
   DB.debts.unshift(debtObj);
   await dbUpsert('debts',debtObj);
+}
+
+// ⚠️ v205 — جديد: بتتنادى بس لما فاتورة موجودة بالفعل بتتعدّل (مش عند الإنشاء لأول مرة).
+// بتقارن كمية كل صنف "أمانة مستلمة" (consignment==='in') قبل التعديل وبعده لكل منتج على
+// حدة، وتصحح دين المورد المرتبط بدل ما تنشئ دين مكرر:
+//  - صنف أمانة اتضاف لأول مرة في الفاتورة → دين جديد مربوط بالفاتورة والصنف
+//  - كمية صنف أمانة موجود اتغيرت (زودت/قلّت) → تصحيح إجمالي الدين، مع الحفاظ على أي
+//    سداد سابق زي ما هو تمامًا (نفس منطق تصحيح دين المشترى في savePurchase)
+//  - صنف أمانة اتشال بالكامل من الفاتورة → لو مفيش سداد عليه: حذف الدين، ولو فيه سداد
+//    جزئي: تصفير الإجمالي لحد قيمة المدفوع بالظبط (نفس ما بيحصل مع دين العميل العادي)
+// ملحوظة: التكلفة المستخدمة هي consignment_cost الحالي للمنتج وقت الحفظ (نفس فكرة متوسط
+// التكلفة المستخدم في كل حسابات التطبيق) — مش سعر تاريخي منفصل لكل عملية بيع قديمة.
+async function _syncConsignmentDebtsForSale(oldItems,newItems,saleId,saleDate){
+  var oldMap={},newMap={};
+  (oldItems||[]).forEach(function(it){
+    if(!it.productId)return;
+    oldMap[it.productId]=roundQty((oldMap[it.productId]||0)+it.qty);
+  });
+  (newItems||[]).forEach(function(it){
+    if(!it.productId)return;
+    newMap[it.productId]=roundQty((newMap[it.productId]||0)+it.qty);
+  });
+  var allPids={};
+  Object.keys(oldMap).forEach(function(k){allPids[k]=true;});
+  Object.keys(newMap).forEach(function(k){allPids[k]=true;});
+  for(var pid in allPids){
+    var prod=DB.products.find(function(p){return p.id===pid;});
+    if(!prod||prod.consignment!=='in')continue; // مش صنف أمانة مستلمة حاليًا — متأثرش
+    var oldQty=oldMap[pid]||0,newQty=newMap[pid]||0;
+    if(oldQty===newQty)continue; // مفيش تغيير فعلي في كمية هذا الصنف بالذات
+    var newTotalOwed=newQty*(prod.consignment_cost||0);
+    var existingDebt=DB.debts.find(function(d){return d.type==='supplier'&&d.source_sale_id===saleId&&d.consignment_product_id===pid;});
+    if(newTotalOwed<=0){
+      if(existingDebt){
+        if((existingDebt.paid||0)>0){
+          var zeroedTotal=existingDebt.paid;
+          DB.debts=DB.debts.map(function(d){return d.id===existingDebt.id?Object.assign({},d,{total:zeroedTotal}):d;});
+          await dbUpdate('debts',existingDebt.id,{total:zeroedTotal});
+        }else{
+          DB.debts=DB.debts.filter(function(d){return d.id!==existingDebt.id;});
+          await dbDelete('debts',existingDebt.id,existingDebt);
+        }
+      }
+      continue;
+    }
+    if(existingDebt){
+      var newTotal=Math.max(newTotalOwed,existingDebt.paid||0);
+      var upd={total:newTotal,desc:'أمانة: '+prod.name+' × '+fmtQty(newQty),details:'أمانة: '+prod.name+' × '+fmtQty(newQty)};
+      DB.debts=DB.debts.map(function(d){return d.id===existingDebt.id?Object.assign({},d,upd):d;});
+      await dbUpdate('debts',existingDebt.id,upd);
+    }else{
+      var newDebt={id:genId(),type:'supplier',name:prod.consignment_party,desc:'أمانة: '+prod.name+' × '+fmtQty(newQty),details:'أمانة: '+prod.name+' × '+fmtQty(newQty),total:newTotalOwed,paid:0,date:saleDate||today(),payments:[],source:'consignment',source_sale_id:saleId,consignment_product_id:pid};
+      DB.debts.unshift(newDebt);
+      await dbUpsert('debts',newDebt);
+    }
+  }
 }
 
 
@@ -6730,7 +6883,7 @@ function _renderStocktakeReport(st){
     :(diffs.length?
       '<button class="btn btn-red btn-full" onclick="confirmApproveStocktake(\''+st.id+'\')">✅ اعتماد الفروق وتحديث المخزون</button>'
     :
-      '<button class="btn btn-green btn-full" onclick="approveStocktake(\''+st.id+'\')">✅ إغلاق الجرد (مفيش فروق)</button>'))+
+      '<button class="btn btn-green btn-full" onclick="__runOnce(this,function(){return approveStocktake(\''+st.id+'\');})">✅ إغلاق الجرد (مفيش فروق)</button>'))+
     '<button class="btn btn-outline btn-full" style="margin-top:6px" onclick="printStocktakeReport(\''+st.id+'\')">🖨️ طباعة تقرير الفروق</button>'+
     '</div>';
 }
@@ -7395,7 +7548,7 @@ function _buildItemsHtml(total){
         '<span style="font-weight:900;font-size:14px;min-width:22px;text-align:center">'+it.qty+'</span>'+
         '<button onclick="chgQty('+i+',1)" style="background:#dcfce7;border:none;border-radius:6px;width:26px;height:26px;cursor:pointer;font-size:14px;font-weight:900;color:#16a34a">+</button>'+
         '<b style="color:#16a34a;min-width:50px;text-align:left;font-size:12px">'+fmt(it.qty*it.price)+'</b>'+
-        '<button onclick="markSaleItemDamaged('+i+')" title="تسجيل كخطأ/تالف بدل البيع" style="background:#fef3c7;border:none;border-radius:6px;padding:2px 6px;cursor:pointer;font-size:11px;color:#92400e">⚠️</button>'+
+        '<button onclick="__runOnce(this,function(){return markSaleItemDamaged('+i+');})" title="تسجيل كخطأ/تالف بدل البيع" style="background:#fef3c7;border:none;border-radius:6px;padding:2px 6px;cursor:pointer;font-size:11px;color:#92400e">⚠️</button>'+
         '<button onclick="rmSaleItem('+i+')" style="background:#fee2e2;border:none;border-radius:6px;padding:2px 6px;cursor:pointer;font-size:11px;color:#dc2626">✕</button>'+
         '</div></div>';
     }).join('')+
@@ -7774,6 +7927,11 @@ async function saveSale(){
         DB.debts.unshift(newDebt);
         await dbUpsert('debts',newDebt);
       }
+
+      // ===== 3) تصحيح ديون الأمانة (consignment) المرتبطة بأصناف الفاتورة — ⚠️ v205 =====
+      // مكانتش موجودة قبل كده خالص في مسار التعديل، فأي إضافة/تغيير/حذف صنف أمانة في
+      // فاتورة قديمة كان بيتم من غير ما يتصحح دين المورد المرتبط بيه.
+      await _syncConsignmentDebtsForSale(oldSale&&oldSale.items,_saleItems,_saleId,v('sale-date'));
     }else{
       var stockErrors=[];
       _saleItems.forEach(function(item){
@@ -7791,7 +7949,7 @@ async function saveSale(){
           var newQty=roundQty(Math.max(0,prod.qty-item.qty));
           DB.products=DB.products.map(function(p){return p.id===item.productId?Object.assign({},p,{qty:newQty}):p;});
           await dbUpdate('products',item.productId,{qty:newQty});
-          await _handleConsignmentInSale(prod,item.qty); // ⚠️ v200 — دين المورد التلقائي لو العنصر أمانة مستلمة
+          await _handleConsignmentInSale(prod,item.qty,obj.id); // ⚠️ v200/v205 — دين المورد التلقائي لو العنصر أمانة مستلمة، مربوط بالفاتورة
         }
       }
       if(total>0&&paid<total){
@@ -8173,7 +8331,7 @@ function openExtractFromScrapForSale(){
         '</div>';
     }).join('')+
     '<div class="modal-actions">'+
-    (_exsaleItems.length?'<button class="btn btn-green btn-full" onclick="finishExtractForSale()">✅ إنهاء وإضافة '+_exsaleItems.length+' قطعة للفاتورة</button>':'')+
+    (_exsaleItems.length?'<button class="btn btn-green btn-full" onclick="__runOnce(this,finishExtractForSale)">✅ إنهاء وإضافة '+_exsaleItems.length+' قطعة للفاتورة</button>':'')+
     '<button class="btn btn-outline btn-full" onclick="cancelExtractForSale()">رجوع للفاتورة</button></div>';
 }
 
@@ -8495,6 +8653,26 @@ async function _restoreStockFromSale(sale){
   // هو سجل تاريخي لما اتفكك فعلياً من الماكينة، بغض النظر عن مصير القطعة بعد كده.
 }
 
+// ⚠️ v205 — جديد: عند حذف فاتورة فيها صنف/أصناف أمانة (consignment==='in')، لازم نلغي
+// دين المورد المرتبط بيها (source_sale_id) — الكمية بترجعت للمخزون فوق في نفس اللحظة،
+// فمنطقيًا الصنف "مابيعش" خالص دلوقتي، فمفيش سبب يفضل دين المورد قايم. لو فيه سداد جزئي
+// اتسجل عليه فعلاً، بنصفّر الإجمالي لحد قيمة المدفوع بدل ما نمسح الدين (زي منطق التعديل
+// في _syncConsignmentDebtsForSale بالظبط). بتتنادى في الحذف بنوعيه (مع أو من غير دين العميل)
+// لأن استرجاع المخزون بيحصل في الحالتين، فوضع دين المورد لازم يتصحح في الحالتين كمان.
+async function _removeConsignmentDebtsForSale(saleId){
+  var linked=DB.debts.filter(function(d){return d.type==='supplier'&&d.source_sale_id===saleId&&d.consignment_product_id;});
+  for(var i=0;i<linked.length;i++){
+    var d=linked[i];
+    if((d.paid||0)>0){
+      DB.debts=DB.debts.map(function(x){return x.id===d.id?Object.assign({},x,{total:d.paid}):x;});
+      await dbUpdate('debts',d.id,{total:d.paid});
+    }else{
+      DB.debts=DB.debts.filter(function(x){return x.id!==d.id;});
+      await dbDelete('debts',d.id,d);
+    }
+  }
+}
+
 function openDeleteSaleModal(saleId){
   var s=DB.sales.find(function(x){return x.id===saleId;});if(!s)return;
   var linkedDebt=DB.debts.find(function(d){return d.source_sale_id===saleId;});
@@ -8530,6 +8708,7 @@ async function deleteSaleAndDebt(saleId,debtId){
   var s=DB.sales.find(function(x){return x.id===saleId;});
   if(s&&_blockIfClosedMonth(s.date))return; // v175
   await _restoreStockFromSale(s);
+  await _removeConsignmentDebtsForSale(saleId); // ⚠️ v205
   var __oldDebt=DB.debts.find(function(x){return x.id===debtId;});
   DB.sales=DB.sales.filter(function(x){return x.id!==saleId;});
   DB.debts=DB.debts.filter(function(x){return x.id!==debtId;});
@@ -8547,6 +8726,7 @@ async function deleteSaleOnly(saleId){
   var s=DB.sales.find(function(x){return x.id===saleId;});
   if(s&&_blockIfClosedMonth(s.date))return; // v175
   await _restoreStockFromSale(s);
+  await _removeConsignmentDebtsForSale(saleId); // ⚠️ v205 — كانت ناقصة هنا (اتضافت في deleteSaleAndDebt بس)
   DB.sales=DB.sales.filter(function(x){return x.id!==saleId;});
   await persist();
   // ⚠️ v195 — نفس إصلاح دالة deleteSaleAndDebt فوق: لازم dbDelete عشان يتمسح من السيرفر فعلاً.
@@ -8670,6 +8850,7 @@ function togglePurchGroup(key){
 
 // ===== فتح مشترى =====
 var _purchId=null,_purchItems=[];
+var _purchQtyEditSnapshot=null; // ⚠️ v205 — لقطة لحقول المشترى (مورد/مدفوع/تكاليف إضافية) قبل فتح خانة الكمية الكسرية، زي نفس أسلوب onExtraCostChange
 
 function openPurchaseModal(id){
   _purchId=id||null;
@@ -8736,7 +8917,7 @@ function renderPurchBody(p){
           '<span style="flex:1;font-size:13px;min-width:90px">'+esc(it.name)+(isNew?'<span style="font-size:9px;background:#86198f;color:#fff;border-radius:5px;padding:1px 5px;margin-right:4px">جديد</span>':'')+'</span>'+
           '<div style="display:flex;align-items:center;gap:5px">'+
           '<button onclick="chgPurchQty('+i+',-1)" style="background:#fee2e2;border:none;border-radius:6px;width:26px;height:26px;cursor:pointer;font-size:14px;font-weight:900;color:#dc2626">−</button>'+
-          '<span style="font-weight:900;font-size:14px;min-width:22px;text-align:center">'+it.qty+'</span>'+
+          '<span onclick="editPurchItemQtyPrompt('+i+')" style="font-weight:900;font-size:14px;min-width:22px;text-align:center;cursor:pointer;text-decoration:underline dotted" title="دوس لتحديد كمية كسرية">'+fmtQty(it.qty)+'</span>'+
           '<button onclick="chgPurchQty('+i+',1)" style="background:#dcfce7;border:none;border-radius:6px;width:26px;height:26px;cursor:pointer;font-size:14px;font-weight:900;color:#16a34a">+</button>'+
           '<input type="number" step="any" id="pi-price-'+i+'" value="'+it.price+'" style="width:65px;padding:4px 6px;border:2px solid #e2e8f0;border-radius:7px;font-size:13px;font-family:inherit;text-align:center" oninput="updPurchPrice('+i+',this.value)">'+
           '<button onclick="rmPurchItem('+i+')" style="background:#fee2e2;border:none;border-radius:6px;padding:2px 6px;cursor:pointer;font-size:11px;color:#dc2626">✕</button>'+
@@ -8877,10 +9058,55 @@ function addNewProdToPurch(addToStock){
 }
 
 function chgPurchQty(idx,delta){
-  _purchItems[idx].qty=Math.max(1,_purchItems[idx].qty+delta);
-  var st=_purchSaveState();
+  // ⚠️ v205 — كانت Math.max(1,...) يعني أي كمية كسرية اتكتبت يدويًا بترجع 1 أول ما تدوس −/+ ،
+  // وبترجع roundQty() عشان تمنع فروق الفاصلة العشرية المتراكمة (زي 0.30000000000000004)
+  _purchItems[idx].qty=roundQty(Math.max(0.01,_purchItems[idx].qty+delta));
   var pur=_purchId?DB.purchases.find(function(x){return x.id===_purchId;}):null;
-  _purchRestoreState(st,pur);
+  var st=_purchSaveState();
+  renderPurchBody(pur);
+  if(document.getElementById('purch-supplier'))document.getElementById('purch-supplier').value=st.ss;
+  if(document.getElementById('purch-paid'))document.getElementById('purch-paid').value=st.sp;
+  if(document.getElementById('purch-extra-cost'))document.getElementById('purch-extra-cost').value=st.ec;
+}
+
+// ⚠️ v205 — إدخال كمية كسرية يدويًا في عربة المشتريات (نفس أمان نظام البيع v202 بالظبط:
+// نفس roundQty()، ونفس منطق "وحدة التحويل" لو المنتج معاه subunit). بتفتح لما تدوس على
+// رقم الكمية في عربة المشترى — نفس فكرة onExtraCostChange في حفظ/استرجاع باقي الحقول.
+function editPurchItemQtyPrompt(idx){
+  var it=_purchItems[idx];if(!it)return;
+  var prod=(it.productId&&it.productId!=='__new__')?DB.products.find(function(p){return p.id===it.productId;}):null;
+  var hasSubunit=prod&&prod.subunit_name&&prod.subunit_ratio>0;
+  _purchQtyEditSnapshot=_purchSaveState();
+  document.getElementById('modal-title').textContent='الكمية — '+esc(it.name);
+  document.getElementById('modal-body').innerHTML=
+    fld('pqi-main','الكمية (بـ'+(prod?prod.unit:'وحدة')+')','number',it.qty,'',true)+
+    (hasSubunit?'<div style="font-size:11px;color:#64748b;margin:-6px 0 10px">أو اكتب بالـ'+esc(prod.subunit_name)+' (1 '+esc(prod.unit)+' = '+prod.subunit_ratio+' '+esc(prod.subunit_name)+')</div>'+
+      fld('pqi-sub','بالـ'+esc(prod.subunit_name),'number','','',false)+
+      '<button type="button" onclick="_applyPurchSubunitQty('+idx+')" class="btn btn-outline btn-full" style="margin-bottom:10px">↓ احسبها بالـ'+esc(prod.unit)+'</button>':'')+
+    '<div class="modal-actions"><button class="btn btn-primary btn-full" onclick="__runOnce(this,function(){return savePurchItemQty('+idx+');})">💾 تحديث</button>'+
+    '<button class="btn btn-outline btn-full" onclick="cancelPurchItemQtyEdit()">إلغاء</button></div>';
+  openModal();
+}
+function _applyPurchSubunitQty(idx){
+  var it=_purchItems[idx];
+  var prod=(it.productId&&it.productId!=='__new__')?DB.products.find(function(p){return p.id===it.productId;}):null;
+  if(!prod||!prod.subunit_ratio)return;
+  var subAmount=+v('pqi-sub');
+  if(!subAmount||subAmount<=0)return showToast('⚠️ اكتب رقم صحيح بالـ'+prod.subunit_name,'#dc2626');
+  document.getElementById('pqi-main').value=roundQty(subAmount/prod.subunit_ratio);
+}
+function savePurchItemQty(idx){
+  var qty=+v('pqi-main');
+  if(!qty||qty<=0)return showToast('⚠️ الكمية غير صحيحة','#dc2626');
+  _purchItems[idx].qty=roundQty(qty);
+  var pur=_purchId?DB.purchases.find(function(x){return x.id===_purchId;}):null;
+  _purchRestoreState(_purchQtyEditSnapshot||{},pur);
+  _purchQtyEditSnapshot=null;
+}
+function cancelPurchItemQtyEdit(){
+  var pur=_purchId?DB.purchases.find(function(x){return x.id===_purchId;}):null;
+  _purchRestoreState(_purchQtyEditSnapshot||{},pur);
+  _purchQtyEditSnapshot=null;
 }
 
 function rmPurchItem(idx){
@@ -8948,11 +9174,13 @@ async function savePurchase(){
     Object.keys(oldItemsMap).forEach(function(k){allPids[k]=true;});
     Object.keys(newItemsMap).forEach(function(k){allPids[k]=true;});
     for(var pid2 in allPids){
-      var delta=(newItemsMap[pid2]||0)-(oldItemsMap[pid2]||0);
+      // ⚠️ v205 — roundQty() على الفرق والنتيجة النهائية عشان لا يتراكم خطأ فاصلة عشرية
+      // (زي 0.30000000000000004) مع الكميات الكسرية في المشتريات
+      var delta=roundQty((newItemsMap[pid2]||0)-(oldItemsMap[pid2]||0));
       if(!delta)continue;
       var prod2=DB.products.find(function(x){return x.id===pid2;});
       if(prod2){
-        var newQty2=Math.max(0,prod2.qty+delta);
+        var newQty2=roundQty(Math.max(0,prod2.qty+delta));
         DB.products=DB.products.map(function(x){return x.id===pid2?Object.assign({},x,{qty:newQty2}):x;});
         await dbUpdate('products',pid2,{qty:newQty2});
       }
@@ -9002,7 +9230,8 @@ async function savePurchase(){
       if(item.productId&&item.productId!=='__new__'){
         var prod=DB.products.find(function(p){return p.id===item.productId;});
         if(prod){
-          var newQty=prod.qty+item.qty;
+          // ⚠️ v205 — roundQty() عشان الكميات الكسرية ما تسببش خطأ فاصلة عشرية متراكم بالمخزون
+          var newQty=roundQty(prod.qty+item.qty);
           // متوسط مرجّح: السعر الجديد = (الكمية القديمة×سعرها + الكمية الجديدة×سعرها) ÷ الإجمالي
           var oldQty=prod.qty||0;
           var oldBuy=prod.buy_price||0;
@@ -9013,7 +9242,7 @@ async function savePurchase(){
           await dbUpdate('products',item.productId,{qty:newQty,buy_price:avgBuy,landed_cost:avgLanded});
         }
       }else if(item.addToStock){
-        var newProd={id:genId(),name:item.name,unit:item.newUnit||'جديد',category:'parts',company:item.newCompany||'',tech_type:item.newTechType||'',qty:item.qty,min_qty:0,buy_price:item.price,landed_cost:landedCost,sell_price:item.sellPrice>0?item.sellPrice:item.price,created_at:today(),source:'purchase'};
+        var newProd={id:genId(),name:item.name,unit:item.newUnit||'جديد',category:'parts',company:item.newCompany||'',tech_type:item.newTechType||'',qty:roundQty(item.qty),min_qty:0,buy_price:item.price,landed_cost:landedCost,sell_price:item.sellPrice>0?item.sellPrice:item.price,created_at:today(),source:'purchase'};
         DB.products.push(newProd);
         await dbUpsert('products',newProd);
         addArchive('products',item.name);
@@ -10257,7 +10486,7 @@ function openExpenseTemplatesSettings(){
     cats.map(function(c){return '<option>'+esc(c)+'</option>';}).join('')+'</select></div>'+
     fld('et-sub','الفرع (اختياري)','text','')+
     fld('et-amount','المبلغ الافتراضي (ج)','number','')+
-    '<button class="btn btn-orange btn-full" onclick="addExpenseTemplate()" style="margin-top:6px">+ إضافة القالب</button>'+
+    '<button class="btn btn-orange btn-full" onclick="__runOnce(this,addExpenseTemplate)" style="margin-top:6px">+ إضافة القالب</button>'+
     '</div>'+
     '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal();renderExpensesList()">تم</button></div>';
   openModal();
@@ -10380,8 +10609,9 @@ function openPaySalaryModal(empId){
     fld('sal-amount','المبلغ المصروف (ج)','number',suggested,'',true)+
     fld('sal-note','ملاحظة','text','','مثال: راتب يناير 2025')+
     dateField('sal-date','📅 تاريخ الصرف',null)+
+    // ⚠️ v205 — زرار صرف الراتب كان بينفّذ من غير __runOnce (فلوس فعلية خارجة من الخزنة)
     '<div class="modal-actions">'+
-    '<button class="btn btn-green btn-full" onclick="confirmPaySalary(\''+empId+'\')">✅ صرف الراتب</button>'+
+    '<button class="btn btn-green btn-full" onclick="__runOnce(this,function(){return confirmPaySalary(\''+empId+'\');})">✅ صرف الراتب</button>'+
     '<button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
   openModal();
 }
@@ -10450,7 +10680,8 @@ function openPayFixedExpModal(fexpId){
     fld('fexp-pay-note','ملاحظة','text','','مثال: إيجار يناير 2025')+
     dateField('fexp-pay-date','📅 تاريخ الدفع',null)+
     '<div class="modal-actions">'+
-    '<button class="btn btn-orange btn-full" onclick="confirmPayFixedExp(\''+fexpId+'\')">✅ تأكيد الدفع</button>'+
+    // ⚠️ v205 — كان بينفّذ من غير __runOnce (فلوس فعلية خارجة من الخزنة)
+    '<button class="btn btn-orange btn-full" onclick="__runOnce(this,function(){return confirmPayFixedExp(\''+fexpId+'\');})">✅ تأكيد الدفع</button>'+
     '<button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
   openModal();
 }
@@ -10613,7 +10844,7 @@ function renderExpensesList(){
   // ⚠️ v110 — قوالب مصروفات جاهزة: ضغطة واحدة تسجّل المصروف على طول من غير فتح الفورم
   var tmplHtml='<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">'+
     (DB.settings.expenseTemplates||[]).map(function(t,i){
-      return '<button onclick="quickLogExpense('+i+')" style="padding:7px 12px;background:#fff7ed;border:1.5px solid #fed7aa;border-radius:9px;font-family:inherit;font-size:12px;font-weight:800;color:#ea580c;cursor:pointer">⚡ '+esc(t.name)+' — '+fmt(t.amount)+'</button>';
+      return '<button onclick="__runOnce(this,function(){return quickLogExpense('+i+');})" style="padding:7px 12px;background:#fff7ed;border:1.5px solid #fed7aa;border-radius:9px;font-family:inherit;font-size:12px;font-weight:800;color:#ea580c;cursor:pointer">⚡ '+esc(t.name)+' — '+fmt(t.amount)+'</button>';
     }).join('')+
     '<button onclick="openExpenseTemplatesSettings()" style="padding:7px 12px;background:#fff;border:1.5px dashed #cbd5e1;border-radius:9px;font-family:inherit;font-size:12px;font-weight:700;color:#64748b;cursor:pointer">⚙️ القوالب</button>'+
     '</div>';
@@ -11839,7 +12070,9 @@ function renderMovementBody(m){
       '<input id="wd-part-name" type="text" placeholder="اسم القطعة..." list="wd-parts-list" autocomplete="off" style="flex:2;padding:9px 12px;border:2px solid #e2e8f0;border-radius:9px;font-size:13px;font-family:inherit;background:#fff;outline:none">'+
       '<datalist id="wd-parts-list">'+(DB.products||[]).filter(function(p){return p.qty>0;}).map(function(p){return '<option value="'+esc(p.name)+'">('+p.qty+' متاح)</option>';}).join('')+'</datalist>'+
       '<input id="wd-part-qty" type="number" step="any" value="1" min="0.01" style="width:60px;padding:9px 8px;border:2px solid #e2e8f0;border-radius:9px;font-size:13px;font-family:inherit;text-align:center">'+
-      '<button onclick="withdrawPartForMovement(\''+m.id+'\')" style="background:#16a34a;color:#fff;border:none;border-radius:9px;padding:9px 13px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer">سحب</button>'+
+      // ⚠️ v205 — زرار سحب قطعة الغيار كان بينفّذ من غير __runOnce — ضغطة مزدوجة أو بطء
+      // نت ممكن كانت تسحب نفس القطعة مرتين (تخصم من المخزون مرتين وتسجل سحبين)
+      '<button onclick="__runOnce(this,function(){return withdrawPartForMovement(\''+m.id+'\');})" style="background:#16a34a;color:#fff;border:none;border-radius:9px;padding:9px 13px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer">سحب</button>'+
       '</div><div id="wd-msg" style="font-size:11px;margin-top:6px;min-height:14px"></div>'+
       '</div>'
     ):'')+
@@ -11947,7 +12180,7 @@ async function withdrawPartForMovement(movementId){
     msg.textContent='🚫 مفيش صلاحية سحب قطع غيار. كلم المالك.';msg.style.color='#dc2626';return;
   }
   var name=(v('wd-part-name')||'').trim();
-  var qty=+v('wd-part-qty')||1;
+  var qty=roundQty(+v('wd-part-qty')||1); // ⚠️ v205 — roundQty() على المدخل مباشرة زي باقي أماكن الكمية
   if(!name){msg.textContent='⚠️ اكتب اسم القطعة';msg.style.color='#dc2626';return;}
   var prod=(DB.products||[]).find(function(p){return normalizeAr(p.name)===normalizeAr(name)||(p.aliases||[]).some(function(a){return normalizeAr(a)===normalizeAr(name);});});
   if(!prod){msg.textContent='⚠️ القطعة دي مش موجودة في المخزون';msg.style.color='#dc2626';return;}
@@ -13560,7 +13793,7 @@ function renderExpensesReport(){
   // ⚠️ v117 — إصلاح: الزرار كان مختفي تمامًا لو مفيش قوالب متسجلة، فمحدش كان يعرف يوصله أصلاً
   var tmplHtmlR='<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">'+
     (DB.settings.expenseTemplates||[]).map(function(t,i){
-      return '<button onclick="quickLogExpense('+i+');renderExpensesReport()" style="padding:6px 11px;background:#fff7ed;border:1.5px solid #fed7aa;border-radius:9px;font-family:inherit;font-size:11px;font-weight:800;color:#ea580c;cursor:pointer">⚡ '+esc(t.name)+'</button>';
+      return '<button onclick="__runOnce(this,function(){return quickLogExpense('+i+').then(renderExpensesReport);})" style="padding:6px 11px;background:#fff7ed;border:1.5px solid #fed7aa;border-radius:9px;font-family:inherit;font-size:11px;font-weight:800;color:#ea580c;cursor:pointer">⚡ '+esc(t.name)+'</button>';
     }).join('')+
     '<button onclick="openExpenseTemplatesSettings()" style="padding:6px 11px;background:#fff;border:1.5px dashed #cbd5e1;border-radius:9px;font-family:inherit;font-size:11px;font-weight:700;color:#64748b;cursor:pointer">⚙️ '+((DB.settings.expenseTemplates||[]).length?'':'أضف قالب')+'</button>'+
     '</div>';
@@ -14466,7 +14699,7 @@ function _renderBalanceCompare(){
   var snaps=(DB.accounts.balance_snapshots||[]).slice().sort(function(a,b){return a.asOf>b.asOf?-1:1;});
   if(!snaps.length){
     return '<div class="empty">لا توجد لقطات محفوظة بعد — ستُحفظ تلقائياً أول كل شهر</div>'+
-      '<button class="btn btn-primary btn-full" style="margin-top:10px" onclick="saveBalanceSnapshot(today(),\'لقطة يدوية\').then(function(){renderAccounting()})">📸 حفظ لقطة الآن</button>';
+      '<button class="btn btn-primary btn-full" style="margin-top:10px" onclick="__runOnce(this,function(){return saveBalanceSnapshot(today(),\'لقطة يدوية\').then(function(){renderAccounting()});})">📸 حفظ لقطة الآن</button>';
   }
   if(!_compareA)_compareA=snaps[Math.min(1,snaps.length-1)].asOf;
   if(!_compareB)_compareB=snaps[0].asOf;
@@ -14503,7 +14736,7 @@ function _renderBalanceCompare(){
       diffRow('أرباح العمليات',a.retainedEarnings,b.retainedEarnings)+
       diffRow('إجمالي حقوق الملكية',a.totalEquity,b.totalEquity)
     )+
-    '<button class="btn btn-outline btn-full" onclick="saveBalanceSnapshot(today(),\'لقطة يدوية\').then(function(){renderAccounting()})">📸 حفظ لقطة بتاريخ اليوم</button>';
+    '<button class="btn btn-outline btn-full" onclick="__runOnce(this,function(){return saveBalanceSnapshot(today(),\'لقطة يدوية\').then(function(){renderAccounting()});})">📸 حفظ لقطة بتاريخ اليوم</button>';
 }
 
 function _accKpi(label,val,color,bg){
@@ -14700,7 +14933,7 @@ function renderCapital(){
     '<div style="font-size:11px;color:#94a3b8;margin-bottom:10px">أي نقدية فعلية كانت موجودة (أو ناقصة) في الخزنة قبل ما تبدأ تسجل هنا. بيؤثر على النقدية المعروضة فقط.</div>'+
     '<div style="display:flex;gap:8px;align-items:center">'+
     '<input id="opening-balance-inp" type="number" step="any" value="'+opening+'" style="flex:1;padding:9px 12px;border:2px solid #e2e8f0;border-radius:10px;font-family:inherit;font-size:14px;font-weight:800;text-align:center">'+
-    '<button onclick="saveOpeningBalance()" style="background:#7c3aed;color:#fff;border:none;border-radius:10px;padding:9px 16px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer">حفظ</button>'+
+    '<button onclick="__runOnce(this,saveOpeningBalance)" style="background:#7c3aed;color:#fff;border:none;border-radius:10px;padding:9px 16px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer">حفظ</button>'+
     '</div></div>'+
 
     // ⚠️ إعداد جديد v106 — بيحل مشكلة "النقدية غلط بسبب مخزون/ديون اتدخلت يدوي زمان من غير
@@ -14729,7 +14962,7 @@ function renderCapital(){
     })()+
     '<div style="display:flex;gap:8px;align-items:center">'+
     '<input id="opening-inventory-inp" type="number" step="any" value="'+(DB.accounts.opening_inventory_value||0)+'" style="flex:1;padding:9px 12px;border:2px solid #e2e8f0;border-radius:10px;font-family:inherit;font-size:14px;font-weight:800;text-align:center">'+
-    '<button onclick="saveOpeningInventoryValue()" style="background:#b45309;color:#fff;border:none;border-radius:10px;padding:9px 16px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer">حفظ</button>'+
+    '<button onclick="__runOnce(this,saveOpeningInventoryValue)" style="background:#b45309;color:#fff;border:none;border-radius:10px;padding:9px 16px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer">حفظ</button>'+
     '</div></div>'+
 
     (adjItems.length?
@@ -14782,7 +15015,7 @@ function autoBalanceDiff(diff){
     '<br>هيتضاف بند رأس مال بنفس القيمة عشان يوازن الميزانية.</div>'+
     fld('bal-name','سبب الفرق (مهم توثيقه)','text','','مثال: أصل افتتاحي (مكن مستعمل) لم يُسجَّل بكامل قيمته',true)+
     '<div class="modal-actions">'+
-    '<button class="btn btn-red btn-full" onclick="confirmAutoBalanceDiff('+diff+')">⚖️ تأكيد التسوية</button>'+
+    '<button class="btn btn-red btn-full" onclick="__runOnce(this,function(){return confirmAutoBalanceDiff('+diff+');})">⚖️ تأكيد التسوية</button>'+
     '<button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
   openModal();
 }
@@ -15651,7 +15884,7 @@ function openModelFamiliesSettings(){
     '<div class="field"><label>المجموعة (الشركة)</label><select id="mf-group" style="width:100%;padding:9px;border:2px solid #e2e8f0;border-radius:9px;font-family:inherit">'+
     DB.settings.modelGroups.map(function(g){return '<option value="'+g.id+'">'+esc(g.name)+'</option>';}).join('')+
     '</select></div>'+
-    '<button class="btn btn-orange btn-full" onclick="mergeModelFamily()">🔗 دمج المحدد</button>'+
+    '<button class="btn btn-orange btn-full" onclick="__runOnce(this,mergeModelFamily)">🔗 دمج المحدد</button>'+
     '</div>'+
 
     (DB.settings.modelFamilies.length?'<div style="font-size:12px;font-weight:800;color:#374151;margin:10px 0 6px">العائلات الحالية</div>'+
@@ -16861,7 +17094,7 @@ function openScrapPartDetail(machineId,partIdx){
     }).join('')+
     '</div>'+
     '<div class="modal-actions">'+
-    '<button class="btn btn-primary btn-full" onclick="saveScrapPartDetail(\''+machineId+'\','+partIdx+')">💾 حفظ التعديل</button>'+
+    '<button class="btn btn-primary btn-full" onclick="__runOnce(this,function(){return saveScrapPartDetail(\''+machineId+'\','+partIdx+');})">💾 حفظ التعديل</button>'+
     '<button class="btn btn-red btn-full" onclick="confirmAction(\'هتحذف القطعة دي من سجل الماكينة؟ (مش هيمسحها من المخزون لو لسه موجودة هناك)\',function(){delScrapPart(\''+machineId+'\','+partIdx+')})">🗑️ حذف من سجل الاستخراج</button>'+
     '<button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
   openModal();
@@ -17025,7 +17258,7 @@ function renderExtractBody(m){
     '</div>';
 
   confirmEl.innerHTML='<div class="modal-actions">'+
-    '<button class="btn btn-green btn-full" onclick="confirmExtractParts(\''+machineId+'\')">✅ إضافة '+totalQty+' قطعة للمخزون</button>'+
+    '<button class="btn btn-green btn-full" onclick="__runOnce(this,function(){return confirmExtractParts(\''+machineId+'\');})">✅ إضافة '+totalQty+' قطعة للمخزون</button>'+
     '<button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
 }
 
@@ -17886,6 +18119,17 @@ function _supplierProductAnalysis(sup,fromDate,toDate){
       });
     });
     r.soldQty=sold;r.soldVal=soldVal;r.soldProfit=soldProfit;
+    // ⚠️ v205 — عدد الموردين المختلفين اللي اشتريت منهم نفس الصنف ده تاريخيًا (كل الوقت،
+    // مش بس فترة الفلتر) — لو أكتر من واحد، لازم نوضح إن المبيعات/الربح المعروضين فوق
+    // هما لكل الصنف مجمّع من كل الموردين، مش نصيب المورد ده تحديدًا (المخزون مش متتبّع بالدفعة)
+    var suppliersForThisProduct={};
+    (DB.purchases||[]).forEach(function(pu3){
+      (pu3.items||[]).forEach(function(it3){
+        var m3=r.productId?it3.productId===r.productId:normalizeAr(it3.name||'')===normalizeAr(r.name);
+        if(m3)suppliersForThisProduct[normalizeAr(pu3.supplier||'')]=true;
+      });
+    });
+    r.sharedWithOtherSuppliers=Object.keys(suppliersForThisProduct).length>1;
     var cheaperFrom=null;
     (DB.purchases||[]).forEach(function(pu2){
       if(normalizeAr(pu2.supplier||'')===qn)return;
@@ -18121,15 +18365,16 @@ function _renderSupplierAnalysisTab(s){
   var rows=_supplierProductAnalysis(s,_supLedgerFrom,_supLedgerTo);
   if(!rows.length)return '<div class="empty" style="padding:16px">لا توجد أصناف مشتراة من هذا المورد في الفترة المحددة</div>';
   var totalSpent=rows.reduce(function(a,r){return a+r.totalSpent;},0);
-  var totalProfit=rows.reduce(function(a,r){return a+r.soldProfit;},0);
   var deadCount=rows.filter(function(r){return r.isDead;}).length;
+  // ⚠️ v205 — إصلاح جذري: كان فيه هنا كارت "صافي الربح من أصنافه" بيجمع soldProfit كل
+  // الأصناف — ده رقم غلط ومضلل، لأن soldProfit لكل صنف هو ربح الصنف كله (من كل الموردين
+  // مجتمعين، لأن المخزون مش متتبّع بالدفعة)، فلو نفس الصنف اتجاب من أكتر من مورد، كل مورد
+  // كان بيظهرله نفس رقم الربح كامل (تكرار/مضاعفة)، ومجموعهم كان بيبقى رقم وهمي مالوش معنى
+  // محاسبي حقيقي. اتشال الكارت خالص بدل ما نديك رقم شكله دقيق وهو غلط.
   return '<div style="background:#f8fafc;border-radius:10px;padding:9px 12px;margin-bottom:10px;font-size:11px;color:#64748b">'+
-    'ℹ️ "المتبقي بالمخزون" هو رصيد الصنف الإجمالي (مجمّع من كل الموردين بمتوسط مرجّح)، مش تتبّع لكل دفعة لوحدها — التطبيق مابيسجلش المخزون بالدفعة أصلاً.'+
+    'ℹ️ "المتبقي بالمخزون" هو رصيد الصنف الإجمالي (مجمّع من كل الموردين بمتوسط مرجّح). و"إجمالي المباع/الربح" لكل صنف تحت هو أداء الصنف كله (من كل الموردين مجتمعين)، مش نصيب هذا المورد تحديدًا — التطبيق مابيسجلش المخزون بالدفعة أصلاً فمفيش طريقة دقيقة نعرف بيه أنهي وحدة مباعة جت من مين.'+
     '</div>'+
-    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">'+
-    '<div style="background:#eff6ff;border-radius:10px;padding:9px;text-align:center"><div style="font-size:10px;color:#1e40af;font-weight:700">إجمالي اتدفع للمورد ده</div><div style="font-size:14px;font-weight:900;color:#1e40af">'+fmt(totalSpent)+' ج</div></div>'+
-    '<div style="background:'+(totalProfit>=0?'#f0fdf4':'#fef2f2')+';border-radius:10px;padding:9px;text-align:center"><div style="font-size:10px;color:'+(totalProfit>=0?'#15803d':'#dc2626')+';font-weight:700">صافي الربح من أصنافه (كل الوقت)</div><div style="font-size:14px;font-weight:900;color:'+(totalProfit>=0?'#15803d':'#dc2626')+'">'+fmt(totalProfit)+' ج</div></div>'+
-    '</div>'+
+    '<div style="background:#eff6ff;border-radius:10px;padding:9px;text-align:center;margin-bottom:10px"><div style="font-size:10px;color:#1e40af;font-weight:700">إجمالي اتدفع للمورد ده (في الفترة المحددة)</div><div style="font-size:16px;font-weight:900;color:#1e40af">'+fmt(totalSpent)+' ج</div></div>'+
     (deadCount?('<div style="background:#f5f3ff;border-radius:10px;padding:8px;text-align:center;margin-bottom:10px"><span style="font-size:12px;font-weight:800;color:#7c3aed">🐌 '+deadCount+' صنف من عنده راكد دلوقتي</span></div>'):'')+
     rows.map(function(r){
       var stockLabel=r.currentStock===null?'غير معروف (صنف قديم/محذوف)':(r.currentStock+' متبقي');
@@ -18141,10 +18386,11 @@ function _renderSupplierAnalysisTab(s){
         '</div>'+
         '<div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:6px">'+
         '<span style="background:#ede9fe;color:#5b21b6;border-radius:6px;padding:3px 7px;font-size:10px;font-weight:700">🛒 اشتريت منه '+r.qtyBought+' بـ '+fmt(r.totalSpent)+' ج (متوسط '+fmt(Math.round(r.avgPrice))+')</span>'+
-        '<span style="background:#f0fdf4;color:#15803d;border-radius:6px;padding:3px 7px;font-size:10px;font-weight:700">📤 اتباع (كل الوقت) '+r.soldQty+' بـ '+fmt(r.soldVal)+' ج</span>'+
-        '<span style="background:'+(r.soldProfit>=0?'#f0fdf4':'#fef2f2')+';color:'+(r.soldProfit>=0?'#15803d':'#dc2626')+';border-radius:6px;padding:3px 7px;font-size:10px;font-weight:700">💵 ربح '+fmt(r.soldProfit)+' ج</span>'+
+        '<span style="background:#f0fdf4;color:#15803d;border-radius:6px;padding:3px 7px;font-size:10px;font-weight:700">📤 مبيعات الصنف كله '+r.soldQty+' بـ '+fmt(r.soldVal)+' ج</span>'+
+        '<span style="background:'+(r.soldProfit>=0?'#f0fdf4':'#fef2f2')+';color:'+(r.soldProfit>=0?'#15803d':'#dc2626')+';border-radius:6px;padding:3px 7px;font-size:10px;font-weight:700">💵 ربح الصنف كله '+fmt(r.soldProfit)+' ج</span>'+
         '<span style="background:#f1f5f9;color:#475569;border-radius:6px;padding:3px 7px;font-size:10px;font-weight:700">📦 '+stockLabel+'</span>'+
         '</div>'+
+        (r.sharedWithOtherSuppliers?'<div style="margin-top:5px;font-size:10px;color:#94a3b8">ℹ️ الصنف ده اتجاب من مورد/موردين تانيين كمان — المبيعات والربح فوق لكل الكمية مجمّعة، مش نصيب '+esc(s.name)+' لوحده</div>':'')+
         (r.cheaperFrom?('<div style="margin-top:6px;background:#fffbeb;border:1.5px dashed #fbbf24;border-radius:7px;padding:6px 8px;font-size:10.5px;color:#b45309;font-weight:700">'+
           '⚠️ '+esc(r.cheaperFrom.supplier)+' باعك نفس الصنف بـ '+fmt(r.cheaperFrom.price)+' ج ('+fmtDate(r.cheaperFrom.date)+') — أرخص من متوسط سعر '+esc(s.name)+'</div>'):'')+
         '</div>';
@@ -18186,7 +18432,7 @@ function openAddMachineModal(clientId){
     dateField('nm-date','📅 تاريخ أول تعامل',null)+
     fld('nm-notes','ملاحظات','text','')+
     '<div class="modal-actions">'+
-    '<button class="btn btn-primary btn-full" onclick="saveMachine(\''+clientId+'\')">إضافة</button>'+
+    '<button class="btn btn-primary btn-full" onclick="__runOnce(this,function(){return saveMachine(\''+clientId+'\');})">إضافة</button>'+
     '<button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
   openModal();
 }
@@ -18895,7 +19141,8 @@ function openAddCapitalModal(invId){
     dateField('acap-date','📅 التاريخ',null)+
     fld('acap-note','ملاحظة','text','')+
     '<div class="modal-actions">'+
-    '<button class="btn btn-primary btn-full" onclick="saveAddCapital(\''+invId+'\')">إضافة</button>'+
+    // ⚠️ v205 — كان بينفّذ من غير __runOnce (فلوس فعلية داخلة للخزنة — مساهمة رأس مال)
+    '<button class="btn btn-primary btn-full" onclick="__runOnce(this,function(){return saveAddCapital(\''+invId+'\');})">إضافة</button>'+
     '<button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
   openModal();
 }
@@ -18917,6 +19164,8 @@ function openInvestorWithdrawModal(invId){
   var inv=(DB.accounts.investors||[]).find(function(i){return i.id===invId;});if(!inv)return;
   var retained=(DB.accounts.retained_earnings.investors||{})[invId]||0;
   document.getElementById('modal-title').textContent='💰 سحب — '+esc(inv.name);
+  // ⚠️ v205 — زرار السحب كان بينفّذ saveInvestorWithdraw مباشرة من غير __runOnce، يعني
+  // ضغطة مزدوجة أو بطء في الاستجابة ممكن تسجل سحبين بدل واحد وتخصم من الأرباح المحتجزة مرتين
   document.getElementById('modal-body').innerHTML=
     '<div style="background:#f0fdf4;border-radius:10px;padding:10px 12px;margin-bottom:12px">'+
     '<div style="font-size:13px;font-weight:700;color:#15803d">أرباح محتجزة متاحة</div>'+
@@ -18925,7 +19174,7 @@ function openInvestorWithdrawModal(invId){
     dateField('wdraw-date','📅 التاريخ',null)+
     fld('wdraw-note','ملاحظة','text','')+
     '<div class="modal-actions">'+
-    '<button class="btn btn-green btn-full" onclick="saveInvestorWithdraw(\''+invId+'\')">✅ تأكيد السحب</button>'+
+    '<button class="btn btn-green btn-full" onclick="__runOnce(this,function(){return saveInvestorWithdraw(\''+invId+'\');})">✅ تأكيد السحب</button>'+
     '<button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
   openModal();
 }
@@ -19040,8 +19289,10 @@ function openProfitCycleModal(){
 
     fld('pc-note','ملاحظة','text','')+
 
+    // ⚠️ v205 — زرار تأكيد توزيع الأرباح كان بينفّذ saveProfitCycle مباشرة من غير
+    // __runOnce — ضغطة مزدوجة ممكن كانت تعمل دورة توزيع مكررة (رقم أرباح مزدوج فعليًا)
     '<div class="modal-actions">'+
-    '<button class="btn btn-green btn-full" onclick="saveProfitCycle()">✅ تأكيد التوزيع</button>'+
+    '<button class="btn btn-green btn-full" onclick="__runOnce(this,saveProfitCycle)">✅ تأكيد التوزيع</button>'+
     '<button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
   openModal();
   _updatePcProfitBox();
@@ -19378,7 +19629,8 @@ function openPayDailyWageModal(empId){
     fld('dw-note','ملاحظة','text','')+
     dateField('dw-date','📅 تاريخ الصرف',null)+
     '<div class="modal-actions">'+
-    '<button class="btn btn-green btn-full" onclick="confirmPayDailyWage(\''+empId+'\')">✅ تسجيل الدفعة</button>'+
+    // ⚠️ v205 — كان بينفّذ من غير __runOnce (فلوس فعلية خارجة من الخزنة)
+    '<button class="btn btn-green btn-full" onclick="__runOnce(this,function(){return confirmPayDailyWage(\''+empId+'\');})">✅ تسجيل الدفعة</button>'+
     '<button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
   openModal();
 }
@@ -19418,8 +19670,9 @@ function openPayAdvanceModal(empId){
     fld('adv-amount','مبلغ السلفة (ج)','number','','',true)+
     fld('adv-note','ملاحظة','text','')+
     dateField('adv-date','📅 تاريخ الصرف',null)+
+    // ⚠️ v205 — زرار تسجيل السلفة كان بينفّذ من غير __runOnce (تسجيل فلوس فعلية خارجة من الخزنة)
     '<div class="modal-actions">'+
-    '<button class="btn btn-red btn-full" onclick="confirmPayAdvance(\''+empId+'\')">✅ تسجيل السلفة</button>'+
+    '<button class="btn btn-red btn-full" onclick="__runOnce(this,function(){return confirmPayAdvance(\''+empId+'\');})">✅ تسجيل السلفة</button>'+ 
     '<button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
   openModal();
 }
@@ -19452,7 +19705,7 @@ function openMarkLeaveModal(empId){
     dateField('leave-date','تاريخ الإجازة',null)+
     fld('leave-note','السبب (اختياري)','text','')+
     '<div class="modal-actions">'+
-    '<button class="btn btn-primary btn-full" onclick="confirmMarkLeave(\''+empId+'\')">✅ تسجيل</button>'+
+    '<button class="btn btn-primary btn-full" onclick="__runOnce(this,function(){return confirmMarkLeave(\''+empId+'\');})">✅ تسجيل</button>'+
     '<button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
   openModal();
 }
@@ -19503,7 +19756,7 @@ function _buildAttendanceCardHTML(prof){
     '<div style="display:flex;justify-content:space-between;align-items:center">'+
     '<div><div style="font-size:13px;font-weight:800;color:'+(confirmed?'#15803d':'#c2410c')+'">📅 حضور اليوم ('+esc(fmtDate(todayStr))+')</div>'+
     '<div style="font-size:11px;color:#64748b;margin-top:3px">'+(confirmed?'✅ اتأكد الساعة '+new Date(myAtt.confirmed_at).toLocaleTimeString('ar-EG',{hour:'2-digit',minute:'2-digit'}):(myAtt?'⏳ اتسجّل تلقائي — محتاج تأكيد':'⚠️ لسه ما اتسجلش'))+'</div></div>'+
-    (confirmed?'':'<button class="btn btn-primary btn-sm" onclick="confirmMyAttendance()">✅ تأكيد حضوري</button>')+
+    (confirmed?'':'<button class="btn btn-primary btn-sm" onclick="__runOnce(this,confirmMyAttendance)">✅ تأكيد حضوري</button>')+
     '</div></div>';
 }
 // v136 — باقي كارتات "حسابي" (بروفايل مختصر + راتب + مهام + أعطال) من غير كارت الحضور
