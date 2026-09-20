@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v209</title>
+<title>ابو حوده الحلو الجميل v210</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="2026-09-19 — v209";
+<script>var BUILD_STAMP="2026-09-19 — v210";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -54,6 +54,19 @@
       مسار خالص عن طريق confirmAction، الزرار بتاعها لازم __runOnce من أول يوم.
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v210: [🐛 احتمال جذري تاني لتكرار "جلسة الدخول تالفة" عند الموظفين — تجديد استباقي عند الرجوع للتاب]
+     نفس فئة الباج اللي v169/v191 وثّقوها (ومحتاجة متابعة زي ما v191 طلبت). السبب المحتمل:
+     على الموبايل، لما المتصفح يروح للخلفية (تبديل تطبيقات/قفل الشاشة) فترة، نظام
+     Android/iOS بيوقف مؤقتات الجافاسكريبت اللي مكتبة Supabase بتجدد بيها التوكن تلقائيًا
+     في الخلفية — فلما ترجع للتاب بعد فترة والتوكن منتهي، أول حركة فعلية (فاتورة/مصروف)
+     بتقابله منتهي وتفشل. الموظفين بيبدّلوا تطبيقات ويرجعوا أكتر من المالك عادةً في طبيعة
+     شغلهم، وده سبب معقول ليه المشكلة بتظهر عندهم أكتر تحديدًا. الحل: أول ما التاب يرجع
+     مرئي، بنتأكد من الجلسة فورًا (sb.auth.getSession() بس — نفس أسلوب __ensureFreshSession
+     الآمن، من غير أي refreshSession() يدوي زي باج v169/v191 بالظبط) قبل ما المستخدم يعمل
+     أي حركة، فلو محتاجة تجديد، المكتبة تجدده بنفسها بهدوء في الخلفية بدل ما يفشل تعامل
+     حقيقي للمستخدم. ⚠️ ده تشخيص منطقي مبني على سلوك معروف للمتصفحات على الموبايل، مش
+     تأكيد قاطع — محتاج متابعة فعلية بعد التحديث زي ما v191 طلبت بالظبط: لو استمرت
+     شكوى الموظفين تاني حتى بعد كده، قولّي فورًا بتفاصيل (نوع الموبايل/المتصفح لو ممكن).
 v209: [🐛 إصلاح جذري خطير: تعديل سعر/بيانات صنف كان بيتحفظ محليًا بس ومبيتزامنش مع السيرفر خالص]
      السبب الجذري: saveProduct() (شاشة "تعديل منتج" الأساسية) كانت بتحدّث DB.products
      وتنادي persist() (حفظ محلي بس) من غير ما تنادي dbUpdate/dbUpsert خالص. يعني أي
@@ -3614,7 +3627,22 @@ input:checked+.slider:before{transform:translateX(-20px)}
     }catch(e){ /* صامت — مفيش داعي نزعج المستخدم لو فشل تحديث دوري */ }
   }
   document.addEventListener('visibilitychange', function(){
-    if(document.visibilityState==='visible') __refreshPermsLive();
+    if(document.visibilityState==='visible'){
+      __refreshPermsLive();
+      // ⚠️ v210 — على الموبايل، لما المتصفح يتبعّت للخلفية (تبديل تطبيقات، قفل الشاشة)
+      // لفترة، نظام Android/iOS بيوقف مؤقتات الجافاسكريبت (setTimeout) اللي مكتبة
+      // Supabase بتعتمد عليها عشان تجدد التوكن تلقائيًا في الخلفية — فلما ترجع للتطبيق
+      // بعد فترة، أول حركة (فاتورة/مصروف...) بتقابل توكن منتهي ومكانش لسه اتجدد،
+      // فبتفشل ويبان "جلسة الدخول تالفة". الموظفين بيبدّلوا تطبيقات ويرجعوا أكتر من
+      // المالك عادةً، فده سبب معقول ليه المشكلة بتظهر عندهم أكتر. الحل: أول ما التاب
+      // يرجع يبان، نتأكد من الجلسة فورًا (نفس طريقة __ensureFreshSession الآمنة —
+      // sb.auth.getSession() بس، من غير refreshSession() يدوي زي باج v169/v191) قبل
+      // ما المستخدم يعمل أي حركة، فلو محتاجة تجديد، المكتبة تجدده بنفسها في الخلفية
+      // في اللحظة دي بدل ما يفشل تعامل المستخدم الفعلي.
+      if(typeof sb!=='undefined' && window.__currentProfile && typeof __ensureFreshSession==='function'){
+        __ensureFreshSession().catch(function(){});
+      }
+    }
   });
   setInterval(__refreshPermsLive, 180000);
 </script>
@@ -3963,7 +3991,7 @@ var APP_TITLE='ابو حوده الحلو الجميل';
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=209;
+var APP_VERSION=210;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
