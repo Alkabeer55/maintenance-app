@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v206</title>
+<title>ابو حوده الحلو الجميل v209</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="2026-09-19 — v206";
+<script>var BUILD_STAMP="2026-09-19 — v209";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -54,6 +54,48 @@
       مسار خالص عن طريق confirmAction، الزرار بتاعها لازم __runOnce من أول يوم.
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v209: [🐛 إصلاح جذري خطير: تعديل سعر/بيانات صنف كان بيتحفظ محليًا بس ومبيتزامنش مع السيرفر خالص]
+     السبب الجذري: saveProduct() (شاشة "تعديل منتج" الأساسية) كانت بتحدّث DB.products
+     وتنادي persist() (حفظ محلي بس) من غير ما تنادي dbUpdate/dbUpsert خالص. يعني أي
+     تعديل — وأهمه تغيير السعر — كان يفضل على الجهاز اللي عدّلت منه بس. وبعدين أول ما
+     يحصل سحب بيانات من السيرفر (فتح تاني، جهاز تاني، أي مزامنة عادية)، السعر القديم من
+     السيرفر يرجع يغلب التعديل بصمت — بالظبط "بعدّل السعر والتعديل مش بيثبت".
+     عملت مسح شامل لباقي التطبيق بنفس الطريقة ولقيت 8 أماكن تانية نفس الباج بالظبط،
+     كلها اتصلحت: approveStocktake (فروق الجرد ومصروف العجز)، finishExtractForSale
+     وconfirmExtractParts (قطع الاسكراب المستخرجة للمخزون)، markScrapDepleted (تصفير
+     مخزون ماكينة مستنفدة)، saveEditInvType (تعديل اسم نوع/فئة بيرتبط بيه منتجات كتير)،
+     _restoreStockFromSale (استرجاع المخزون عند حذف فاتورة — 3 أماكن استخدام)،
+     saveEditExpense (تعديل مصروف موجود)، syncSalesWithDebts (أداة تصحيح فواتير/ديون).
+     ⚠️ ملحوظة: لو حد عدّل سعر صنف قبل كده وحس إنه "رجع لوحده"، السبب هو الباج ده —
+     أي تعديل تعمله دلوقتي بعد v209 هيثبت صح.
+v208: [✨ بانر أخطاء مبسّط للموظفين + السبب الجذري الحقيقي لتكرار تسجيل الخروج]
+     1) غير المالك دلوقتي بيشوف سطر واحد مبسّط ("فيه بيانات لسه بتتزامن — دوس للمحاولة")
+        بدل تفاصيل الأخطاء التقنية الكاملة (أسماء جداول/أعمدة في قاعدة البيانات) اللي
+        مالهاش لازمة عملية ليه أصلاً. المالك لوحده بيشوف التفاصيل الكاملة زي الأول.
+     2) السبب الجذري وراء تكرار "جلسة الدخول تالفة" (RLS 42501) للموظف المهندس: راجعت
+        __pushBizBlobsToServer بالكامل ولقيت إنها بتنادي sb.from('business_state') مباشرة
+        من غير ما تعدي على __hasPerm() خالص (بعكس كل الجداول التانية في التطبيق) — يعني
+        التصميم في كود التطبيق نفسه مقصود منه إن جدول business_state (اللي فيه الموردين/
+        الجرد/الجداول المؤجلة) يكون متاح كتابة لأي مستخدم مسجّل دخول بغض النظر عن دوره،
+        مش المالك بس. الخطأ 42501 معناه إن سياسة RLS على السيرفر (Supabase) مش متوافقة
+        مع التصميم ده — على الأغلب مفيش سياسة INSERT/UPDATE للأدوار غير المالك على
+        business_state، أو فيه سياسة بترجع للمالك بس. ⚠️ ده تعديل على قاعدة البيانات
+        نفسها على Supabase مش في كود التطبيق، ومحتاج يتنفّذ يدويًا (SQL) — التفاصيل
+        والكود الجاهز اتوصّلوا للعميل في الشات مباشرة.
+v207: [🐛 إصلاح: سيل أخطاء "Cannot read properties of null" في حساب الموظف بعد تسجيل الخروج الإجباري]
+     السبب الجذري: __pushBizBlobsToServer() بتلف على 7 عناصر (suppliers/stocktakes/
+     inventory_snapshots/daily_archive/scheduled_list/scheduled_map/scheduled_carried)
+     وكل عنصر بياخد await لنداء سيرفر — وده بيدّي فرصة لكود تاني يشتغل بينهم. لو الجلسة
+     اتقفلت فجأة في النص (RLS 42501 → تسجيل خروج إجباري تلقائي، زي اللي بيحصل مع
+     صلاحيات الموظف المهندس أكتر من المالك)، window.__currentProfile بيبقى null، وكان
+     الكود بيكمل يحاول يقرا .id منه لباقي العناصر من غير ما يتأكد، فيرمي خطأ وهمي لكل
+     واحد فيهم فوق خطأ "تسجيل الخروج" الحقيقي اللي اتسجل أصلاً. دلوقتي بيتأكد إن الجلسة
+     لسه موجودة قبل كل عنصر، ولو راحت بيسيب الباقي في طابور المزامنة من غير ما يرمي
+     أخطاء وهمية زيادة.
+     ⚠️ ملحوظة مهمة لسه مفتوحة: السبب اللي الموظف ده بالذات بيتقفل جلسته (42501) كتير
+     أوي (×18 مرة) مش اتصلح هنا — ده غالبًا فجوة في صلاحيات RLS للدور "مهندس" على جدول
+     business_state أو جدول تاني في Supabase، ومحتاج فحص/تعديل SQL يدوي على السيرفر
+     (مفيش وصول قاعدة بيانات هنا لأعمله بنفسي).
 v206: [🐛 منع تكرار العمليات — مسح شامل لكل التطبيق + قاعدة دستورية دائمة (بند 9)]
      1) إصلاح مركزي واحد بيغطي عشرات الأزرار دفعة واحدة: confirmAction() (المستخدمة في كل
         تأكيدات الحذف/الإغلاق/الدمج تقريبًا في التطبيق) مكنش فيها أي حماية من ضغطتين
@@ -3077,6 +3119,19 @@ input:checked+.slider:before{transform:translateX(-20px)}
     }
     for(var i=0;i<__BIZ_BLOBS.length;i++){
       var b = __BIZ_BLOBS[i];
+      // ⚠️ v207 — إصلاح باج حقيقي: كل عنصر هنا بياخد await (نداء سيرفر)، وده بيدّي فرصة
+      // لكود تاني يشتغل بينهم — لو جلسة الدخول اتقفلت فجأة في النص (زي 42501 → تسجيل
+      // خروج إجباري في نفس اللحظة)، window.__currentProfile بيبقى null، وكان الكود
+      // بيكمل يحاول يقرا window.__currentProfile.id تحت من غير ما يتأكد إنه لسه موجود،
+      // فيرمي "Cannot read properties of null (reading 'id')" لكل عنصر متبقي في القائمة —
+      // ده بالظبط سبب سيل الأخطاء المتكررة (scheduled_carried/scheduled_map/...) اللي
+      // بتظهر بعد كل مرة الجلسة بتتقفل فجأة. دلوقتي بنتأكد إن الجلسة لسه موجودة قبل كل
+      // عنصر، ولو راحت بنسيب الباقي في طابور المزامنة (هيتحاول تاني بعد الدخول من جديد)
+      // من غير ما نرمي خطأ وهمي زيادة عن الخطأ الحقيقي (تسجيل الخروج) اللي اتسجل أصلاً.
+      if(!window.__currentProfile){
+        for(var j=i;j<__BIZ_BLOBS.length;j++)__queueForSync('__bizblob__', __BIZ_BLOBS[j].id, __BIZ_BLOBS[j].id);
+        break;
+      }
       try{
         var payload = {
           id: b.id,
@@ -3908,7 +3963,7 @@ var APP_TITLE='ابو حوده الحلو الجميل';
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=206;
+var APP_VERSION=209;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -4209,6 +4264,17 @@ function __renderErrorBanner(){
   var hardErrors=__errLog.filter(function(e){return!e.soft;});
   var softEntry=__errLog.find(function(e){return e.soft;});
   var isOnlySoft=softEntry&&!hardErrors.length;
+  // ⚠️ v207 — للموظفين (غير المالك): تفاصيل الأخطاء دي تقنية بحتة (أسماء جداول/أعمدة
+  // في قاعدة البيانات) ومفيش حاجة عملية الموظف يعملها غيرها — مش هو اللي هيضيف عمود
+  // ناقص أو يصلح صلاحية RLS. عرض التفاصيل دي عليه كانت مجرد قلق زيادة من غير فايدة.
+  // دلوقتي الموظف بيشوف سطر واحد مبسّط بس مع زرار "حاول تاني"، والمالك لوحده اللي
+  // بيشوف التفاصيل الكاملة زي الأول (هو اللي فعلاً يقدر يتصرف فيها).
+  if(!window.__isOwner && hardErrors.length && !isOnlySoft){
+    el.innerHTML = '<div style="background:#7f1d1d;color:#fff;padding:7px 10px;font-size:12px;font-weight:800;display:flex;justify-content:space-between;align-items:center;font-family:inherit;cursor:pointer" onclick="__drainSyncQueue(true)">'+
+      '<span>⚠️ فيه بيانات لسه بتتزامن — دوس هنا للمحاولة تاني</span>'+
+      '<button onclick="event.stopPropagation();__clearAllErrors()" style="background:#fff;color:#7f1d1d;border:none;border-radius:6px;padding:4px 10px;font-weight:800;font-size:12px">إخفاء</button></div>';
+    return;
+  }
   // v149 — البنر مطوي افتراضيًا (سطر واحد بس)، عشان ما يمنعش استخدام التطبيق تحته.
   // المستخدم بيفتحه بنفسه لو حب يشوف/يمسح التفاصيل.
   var header = isOnlySoft?
@@ -6236,11 +6302,21 @@ async function saveProduct(){
   };
   if(!_prodId){ obj.created_at=today(); obj.source='manual'; } // ⚠️ v127 — تسجيل تاريخ ومصدر الإضافة (يدوي/مشتريات) لأول مرة
   obj.updated_at=today(); // ⚠️ v198 — تاريخ آخر تعديل منفصل عن تاريخ الإضافة (لفرز "آخر تعديل")
+  // ⚠️ v209 — باج جذري: الدالة دي كانت بتحدّث DB.products وتنادي persist() (حفظ محلي
+  // بس) ومتنادش dbUpdate/dbUpsert خالص، يعني أي تعديل من شاشة "تعديل منتج" (خصوصًا
+  // تغيير السعر) مكانش بيتزامن مع السيرفر أبدًا — يفضل بس على نفس الجهاز، وأول ما
+  // يحصل سحب بيانات من السيرفر (فتح التطبيق تاني، جهاز تاني...) السعر القديم من
+  // السيرفر يرجع يغلب التعديل المحلي بصمت لأنه مكانش متسجل في طابور المزامنة أصلاً.
+  // ده بالظبط سبب "بعدّل السعر والتعديل مش بيثبت". كل تعديلات المخزون التانية في
+  // التطبيق (زي تحديث الكمية من المشتريات) كانت أصلاً بتعدي على dbUpdate صح — المنتج
+  // نفسه (شاشة تعديل منتج) بس كان ناقصها.
   if(_prodId){
     DB.products=DB.products.map(function(p){return p.id===_prodId?Object.assign({},p,obj):p;});
+    await dbUpdate('products',_prodId,obj);
   }else{
     obj.id=genId();
     DB.products.push(obj);
+    await dbUpsert('products',obj);
   }
   addArchive('products',name);
   await persist();
@@ -6912,6 +6988,7 @@ async function approveStocktake(id){
 
   var totalShortageValue=0,totalSurplusValue=0;
   var shortageDetails=[],surplusDetails=[];
+  var touchedProductIds={}; // ⚠️ v209
 
   st.items.forEach(function(i){
     if(i.counted_qty===i.system_qty)return;
@@ -6921,17 +6998,20 @@ async function approveStocktake(id){
     if(diff<0){totalShortageValue+=value;shortageDetails.push(i.name+' (-'+Math.abs(diff)+')');}
     else{totalSurplusValue+=value;surplusDetails.push(i.name+' (+'+diff+')');}
     DB.products=DB.products.map(function(p){return p.id===i.productId?Object.assign({},p,{qty:i.counted_qty}):p;});
+    touchedProductIds[i.productId]=true;
   });
 
   // ===== القيد المحاسبي: العجز = مصروف تشغيلي بسعر التكلفة =====
   // مدين: مصروف عجز مخزون | دائن: المخزون (المخزون اتخصم فوق فعلياً)
+  var shortageExpense=null;
   if(totalShortageValue>0){
-    DB.expenses.push({
+    shortageExpense={
       id:genId(),label:'عجز مخزون — جرد '+fmtDate(st.started_at),
       amount:Math.round(totalShortageValue),type:'عجز مخزون',
       note:shortageDetails.join('، '),date:today(),
       source:'stocktake',stocktake_id:st.id
-    });
+    };
+    DB.expenses.push(shortageExpense);
   }
 
   // ===== القيد المحاسبي: الزيادة = إيراد آخر (تسوية مخزون) بسعر التكلفة =====
@@ -6951,6 +7031,17 @@ async function approveStocktake(id){
   st.surplus_value=Math.round(totalSurplusValue);
   DB.stocktakes=DB.stocktakes.map(function(s){return s.id===st.id?st:s;});
   await persist();
+  // ⚠️ v209 — باج جذري: كانت بتحدّث DB.products و DB.expenses محليًا بس (من غير
+  // dbUpdate/dbUpsert) — الاتنين جداول "متزامنة صف بصف" (__SYNCED_TABLES)، فـpersist()
+  // المركزي مابيغطيهاش (بيغطي بس الجداول-blob زي stocktakes/accounts). يعني فروق الجرد
+  // (العجز/الزيادة) كانت بترجع المخزون القديم تاني على أول مزامنة، ومصروف العجز
+  // مكانش بيتسجل على السيرفر خالص. DB.stocktakes نفسها وDB.accounts.inventory_adjustments
+  // مش محتاجين تعديل — دول أصلاً بيتغطوا تلقائيًا من persist() (بلوب مركزي).
+  for(var pid in touchedProductIds){
+    var pr=DB.products.find(function(x){return x.id===pid;});
+    if(pr)await dbUpdate('products',pid,{qty:pr.qty});
+  }
+  if(shortageExpense)await dbUpsert('expenses',shortageExpense);
   _activeStocktakeId=null;
   switchInvTab('stocktake');
   renderStocktake();renderInventory();
@@ -8402,14 +8493,29 @@ async function finishExtractForSale(){
       var avgBuy=newQty>0?Math.round((existing.qty*(existing.buy_price||0)+item.qty*item.buy_price)/newQty):0;
       DB.products=DB.products.map(function(p){return p.id===existing.id?Object.assign({},p,{qty:newQty,buy_price:avgBuy}):p;});
       productId=existing.id;
+      item._syncExisting=true; // ⚠️ v209
     }else{
       productId=genId();
       // القطعة المستخرجة من اسكراب تتصنف "اسكراب" مش "استعمال داخلي" — عشان تنعكس صح في هامش الربح وتقارير المخزون
-      DB.products.push({id:productId,name:item.name,category:'parts',unit:'اسكراب',qty:item.qty,min_qty:0,buy_price:item.buy_price,scrap_price:item.sell_price,sell_price:item.sell_price,scrap_source:item.machineId});
+      var newProdObj={id:productId,name:item.name,category:'parts',unit:'اسكراب',qty:item.qty,min_qty:0,buy_price:item.buy_price,scrap_price:item.sell_price,sell_price:item.sell_price,scrap_source:item.machineId};
+      DB.products.push(newProdObj);
+      item._syncNewProd=newProdObj; // ⚠️ v209
       addArchive('products',item.name);
     }
     item.productId=productId;
   });
+  // ⚠️ v209 — باج جذري: القطع المستخرجة كانت بتتحدّث في DB.products محليًا بس (من غير
+  // dbUpdate/dbUpsert)، يعني الكمية/السعر الجديد كان يفضل على الجهاز بتاعك بس ويتمسح
+  // بصمت أول ما السيرفر يترجع يتزامن (نفس باج saveProduct بالظبط).
+  for(var i=0;i<_exsaleItems.length;i++){
+    var it=_exsaleItems[i];
+    if(it._syncExisting){
+      var p=DB.products.find(function(x){return x.id===it.productId;});
+      if(p)await dbUpdate('products',it.productId,{qty:p.qty,buy_price:p.buy_price});
+    }else if(it._syncNewProd){
+      await dbUpsert('products',it._syncNewProd);
+    }
+  }
 
   // سجل الاستخراج في كل ماكينة اتاخد منها قطع
   DB.scrap_machines=(DB.scrap_machines||[]).map(function(m){
@@ -8643,12 +8749,21 @@ async function saveRemindPhone(clientId){
 // وأي قطعة اسكراب فيها ترجع تزوّد سجل الماكينة كمان
 async function _restoreStockFromSale(sale){
   if(!sale||!sale.items||!sale.items.length)return;
+  // ⚠️ v209 — باج جذري: كانت بترجّع الكمية محليًا بس (DB.products.map) من غير ما تنادي
+  // dbUpdate خالص، يعني حذف فاتورة كان بيرجّع الكمية على جهازك بس، والسيرفر يفضل بالرقم
+  // القديم (الأقل) — وأول مزامنة/سحب بيانات كانت ترجّع تخصم الكمية تاني من عندك بصمت.
+  var touched={};
   sale.items.forEach(function(item){
     if(!item.productId)return;
     DB.products=DB.products.map(function(p){
       return p.id===item.productId?Object.assign({},p,{qty:roundQty(p.qty+item.qty)}):p;
     });
+    touched[item.productId]=true;
   });
+  for(var pid in touched){
+    var p=DB.products.find(function(x){return x.id===pid;});
+    if(p)await dbUpdate('products',pid,{qty:p.qty});
+  }
   // ملاحظة: سجل ماكينة الاسكراب (parts_extracted) لا يتأثر بحذف الفاتورة عمداً —
   // هو سجل تاريخي لما اتفكك فعلياً من الماكينة، بغض النظر عن مصير القطعة بعد كده.
 }
@@ -11088,6 +11203,7 @@ async function saveEditExpense(id){
   var update={amount:amount,type:type,subcategory:sub,note:note,date:v('edit-exp-date'),label:label};
   DB.expenses=DB.expenses.map(function(e){return e.id===id?Object.assign({},e,update):e;});
   await persist();
+  await dbUpdate('expenses',id,update); // ⚠️ v209 — كان ناقص، نفس باج saveProduct بالظبط (تعديل المصروف مكانش بيتزامن مع السيرفر خالص)
   closeModal();renderHome();
   _refreshExpensesView();
   showToast('✅ تم التعديل','#16a34a');
@@ -16344,9 +16460,12 @@ async function syncSalesWithDebts(){
     if(!debtsBySale[d.source_sale_id])debtsBySale[d.source_sale_id]=[];
     debtsBySale[d.source_sale_id].push(d);
   });
-  Object.keys(debtsBySale).forEach(function(saleId){
+  var fixedSaleIds=[]; // ⚠️ v209
+  var saleIds=Object.keys(debtsBySale);
+  for(var i=0;i<saleIds.length;i++){
+    var saleId=saleIds[i];
     var sale=DB.sales.find(function(s){return s.id===saleId;});
-    if(!sale)return;
+    if(!sale)continue;
     checked++;
     var relatedDebts=debtsBySale[saleId];
     var totalRemainingInDebts=relatedDebts.reduce(function(s,d){return s+(d.total-(d.paid||0));},0);
@@ -16354,14 +16473,21 @@ async function syncSalesWithDebts(){
     if(Math.round(correctPaid*100)!==Math.round((sale.paid||0)*100)){
       DB.sales=DB.sales.map(function(s){return s.id===saleId?Object.assign({},s,{paid:correctPaid}):s;});
       fixed++;
+      fixedSaleIds.push(saleId);
     }
-  });
+  }
   // كمان: فواتير مالهاش دين مرتبط خالص لكن paid<total (يعني كان المفروض يتسجلها دين ومتسجلش) — نبلغ عنها بس من غير تعديل تلقائي
   var missingDebtCount=0;
   DB.sales.forEach(function(s){
     if(s.paid<s.total&&!DB.debts.some(function(d){return d.source_sale_id===s.id;}))missingDebtCount++;
   });
-  if(fixed>0)await persist();
+  if(fixed>0){
+    await persist();
+    for(var j=0;j<fixedSaleIds.length;j++){
+      var fs=DB.sales.find(function(s){return s.id===fixedSaleIds[j];});
+      if(fs)await dbUpdate('sales',fixedSaleIds[j],{paid:fs.paid}); // ⚠️ v209 — كان ناقص، التصحيح مكانش بيتزامن مع السيرفر
+    }
+  }
   var msg='✅ تم فحص '+checked+' فاتورة مرتبطة بديون، وصححنا '+fixed+' منها';
   if(missingDebtCount>0)msg+=' — ⚠️ لاحظنا كمان '+missingDebtCount+' فاتورة غير مدفوعة بالكامل ومالهاش دين مسجل خالص (تقدر تسجله يدوياً من شاشة الفاتورة)';
   showToast(msg,fixed>0?'#16a34a':'#64748b');
@@ -16419,8 +16545,10 @@ async function saveEditInvType(field,oldName,productField){
   if((DB.settings[field]||[]).indexOf(newName)!==-1)return showToast('⚠️ النوع موجود بالفعل','#dc2626');
   DB.settings[field]=(DB.settings[field]||[]).map(function(t){return t===oldName?newName:t;});
   // تحديث كل المنتجات المستخدمة للاسم القديم عشان تفضل متصلة بيه
+  var touchedIds=(DB.products||[]).filter(function(p){return p[productField]===oldName;}).map(function(p){return p.id;}); // ⚠️ v209
   DB.products=DB.products.map(function(p){return p[productField]===oldName?Object.assign({},p,_objSet(productField,newName)):p;});
   await persist();
+  for(var i=0;i<touchedIds.length;i++)await dbUpdate('products',touchedIds[i],_objSet(productField,newName)); // ⚠️ v209
   closeModal();renderSettings();renderInventory();
   showToast('✅ تم تعديل النوع في كل المنتجات المرتبطة','#16a34a');
 }
@@ -17334,6 +17462,7 @@ async function confirmExtractParts(machineId){
         var avgBuy=newQty>0?Math.round((oldQty*oldBuy+item.qty*itemBuy)/newQty):0;
         return Object.assign({},p,{qty:newQty,buy_price:avgBuy});
       });
+      item._syncExisting=true; // ⚠️ v209
     } else {
       // إنشاء منتج جديد في المخزون — يتصنّف "اسكراب" عشان ينعكس صح في هامش الربح وتقارير المخزون
       var newProd={
@@ -17343,6 +17472,7 @@ async function confirmExtractParts(machineId){
         scrap_source:machineId
       };
       DB.products.push(newProd);
+      item.productId=newProd.id;item._syncNewProd=newProd; // ⚠️ v209
       addArchive('products',item.name);
     }
   }
@@ -17359,6 +17489,18 @@ async function confirmExtractParts(machineId){
   });
 
   await persist();
+  // ⚠️ v209 — نفس باج finishExtractForSale/saveProduct بالظبط: تحديث المخزون هنا كان
+  // محلي بس من غير dbUpdate/dbUpsert (products جدول متزامن صف بصف، persist() المركزي
+  // مابيغطيهوش).
+  for(var j=0;j<_scrapExtractItems.length;j++){
+    var it2=_scrapExtractItems[j];
+    if(it2._syncExisting){
+      var pr2=DB.products.find(function(x){return x.id===it2.productId;});
+      if(pr2)await dbUpdate('products',it2.productId,{qty:pr2.qty,buy_price:pr2.buy_price});
+    }else if(it2._syncNewProd){
+      await dbUpsert('products',it2._syncNewProd);
+    }
+  }
   closeModal();renderScrap();renderInventory();
   var totalQty=_scrapExtractItems.reduce(function(s,i){return s+i.qty;},0);
   showToast('✅ تم إضافة '+totalQty+' قطعة للمخزون','#16a34a');
@@ -17370,10 +17512,13 @@ async function markScrapDepleted(id){
     return m.id===id?Object.assign({},m,{status:'depleted'}):m;
   });
   // تحديث المخزون
+  var touchedIds=(DB.products||[]).filter(function(p){return p.scrap_machine_id===id;}).map(function(p){return p.id;}); // ⚠️ v209
   DB.products=DB.products.map(function(p){
     return p.scrap_machine_id===id?Object.assign({},p,{unit:'اسكراب',qty:0}):p;
   });
-  await persist();renderScrap();
+  await persist();
+  for(var i=0;i<touchedIds.length;i++)await dbUpdate('products',touchedIds[i],{unit:'اسكراب',qty:0}); // ⚠️ v209
+  renderScrap();
   showToast('✅ تم تسجيل الماكينة كمستنفدة','#16a34a');
 }
 
