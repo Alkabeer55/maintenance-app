@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v210</title>
+<title>ابو حوده الحلو الجميل v214</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="2026-09-19 — v210";
+<script>var BUILD_STAMP="2026-09-19 — v214";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -54,6 +54,58 @@
       مسار خالص عن طريق confirmAction، الزرار بتاعها لازم __runOnce من أول يوم.
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v214: [✨ تحسينات الجرد حسب طلب العميل]
+     1) شاشة العد بتخفي الأصناف الخلصانة (كميتها صفر أصلاً) افتراضيًا دلوقتي — "المفروض
+        يظهر الموجود فقط" زي ما طلب العميل — مع زرار لإظهارها وقت الحاجة. أي صنف اتغيّر
+        رقمه أثناء الجرد (حتى لو أصله صفر) بيفضل ظاهر دايمًا عشان الفرق ميضيعش من الحساب.
+     2) زرار جديد "🔓 رجوع للعد وتعديل الأرقام" في شاشة المقارنة (قبل الاعتماد بس) —
+        قبل كده كان الخيار الوحيد بعد قفل الجردة هو "اعتماد نهائي" أو تسيبها معلّقة، مفيش
+        رجوع لتصحيح رقم غلط. المخزون نفسه لسه مابيتحدّثش خالص لحد "اعتماد الفروق" —
+        فالرجوع للعد آمن ومالوش أي أثر مالي أو مخزني.
+     3) توضيح: شاشة المقارنة أصلاً بتوضح الأثر المالي المتوقع لكل من النقص (هيتسجل
+        كمصروف "عجز مخزون" بسعر التكلفة) والزيادة (هتتسجل كإيراد تسوية "زيادة مخزون" بسعر
+        التكلفة) قبل الاعتماد — مفيش تعديل لزم هنا، بس اتوضّحت للعميل في الشات مباشرة.
+v213: [🐛 إصلاح بطء فتح التطبيق بدون نت]
+     السبب الجذري: sb.auth.getSession() وطلب بيانات البروفايل عند بدء التطبيق مفيهمش
+     أي مهلة زمنية (timeout) — لو الموبايل متصل بشبكة (واي فاي/بيانات) من غير إنترنت
+     فعلي، طلبات الشبكة كانت بتفضل معلّقة لحد ما المتصفح نفسه يستسلم بمهلته الافتراضية
+     (ممكن توصل لدقايق) قبل ما يوصل للكود اللي بيرجع للبيانات المحفوظة محليًا ويفتح
+     التطبيق أوفلاين. دلوقتي فيه مهلة 5 ثواني بس على أي محاولة شبكة عند بدء التشغيل، وفيه
+     فحص سريع (navigator.onLine) بيتخطى المحاولة تمامًا لو مفيش اتصال خالص من الأساس.
+     ⚠️ ملحوظتين مهمتين عن باقي طلب المراجعة:
+     - راجعت مسار خصم المخزون عند البيع (saveSale) وحماية "التعديل بيرجع لوحده"
+       (__mergeServerRows + طابور المزامنة) بعمق تاني، ومنطقهم سليم في الكود الحالي —
+       مقدرتش ألاقي سبب تقني لمشكلة "اشتريت 1 وبعتها ولسه واحدة في المخزن" بمراجعة
+       الكود لوحدها. ده يحتاج مثال محدد فعلي (اسم الصنف، تاريخ البيع) عشان أتتبعه صح
+       بدل التخمين.
+     - راجعت شاشة الجرد (startStocktake/renderStocktake) ومقدرتش ألاقي أي فلتر بيشيل
+       الأصناف اللي كميتها صفر — كل الأصناف (حتى الخلصانة) بتظهر في قائمة الجرد فعليًا
+       في الكود الحالي. محتاج مثال محدد (اسم صنف بالذات بيختفي) عشان أشوف السبب.
+v212: [🐛 تقوية جذرية لمنع تكرار العمليات — ثغرة حقيقية في __runOnce نفسها]
+     المستخدم أكّد إن التكرار عند الضغط أكتر من مرة لسه موجود رغم إصلاحات v206 الشاملة.
+     راجعت __runOnce نفسها (مش الأزرار اللي بتستخدمها) ولقيت ثغرة حقيقية في تصميمها:
+     كانت بتعتمد بس على تعطيل عنصر الزرار (btn.disabled=true). المشكلة: دوال حفظ كتير
+     بترندر الشاشة/المودال من تاني وهي لسه شغالة (قبل ما رد الشبكة يوصل)، وده بيستبدل
+     عنصر الزرار القديم (المعطّل) بعنصر جديد "سليم" في الـ DOM — فضغطة تانية في اللحظة
+     دي بالظبط كانت بتلاقي زرار جديد مش عارف إن فيه عملية شغالة، فتعدي عادي وتسبب تكرار
+     فعلي. دلوقتي فيه قفل عام (__runOnceInFlight) مستقل تمامًا عن أي عنصر DOM — مفيش
+     عمليتين تقدروا تشتغلوا في نفس اللحظة في كل التطبيق، حتى لو الشاشة اترندرت من تاني.
+     كمان عملت مسح شامل تاني لكل زرارات إنشاء السجلات في التطبيق (async وغير async) —
+     كل حاجة لقيتها فعلاً بتنشئ سجل جديد إما محمية بـ __runOnce أو بتعدي على
+     confirmAction() (المحمي مركزيًا من v206) — مفيش زرار تاني لقيته مكشوف.
+     ⚠️ لو التكرار استمر حتى بعد كده، محتاج مثال محدد فعلاً (إيه بالظبط كان بيتعمل، في
+     أنهي شاشة) عشان أقدر أحدد المكان بدل ما أفترض.
+v211: [✨ تشخيص عن بُعد لمشكلة خروج الموظفين — زرار "نسخ للمالك"]
+     v210 مكانش كافي (المستخدم أكّد المشكلة لسه مستمرة، وبنمط عشوائي مش مرتبط بحاجة
+     معينة). اقترحت إن المالك يشوف بانر الأخطاء على جهازه — لكن ده غلط: __errLog متخزن
+     في localStorage بتاع كل جهاز لوحده، يعني جهاز المالك مالوش علاقة بأخطاء جهاز
+     الموظف خالص، ومستحيل المالك يشوف حاجة من جهازه هو. الحل العملي: زرار "📋 نسخ
+     للمالك" جديد في بانر الموظف (والمالك كمان) بينسخ كل تفاصيل الأخطاء المسجّلة فعليًا
+     على الجهاز اللي المشكلة حصلت عليه (نص، توقيت، عدد التكرار) للـ clipboard مباشرة،
+     عشان الموظف نفسه (حتى لو مش فاهم التفاصيل) يقدر يبعتها واتساب للمالك بضغطة واحدة —
+     من غير ما يحتاج وصول فعلي لجهاز الموظف أو يمسك اللحظة اللي المشكلة بتحصل فيها بالظبط.
+     ⚠️ السبب الجذري الحقيقي لسه مش معروف بيقين — الخطوة الجاية هي الانتظار لحد ما حد
+     يستخدم الزرار ده ويبعت التفاصيل الفعلية، وساعتها هينحل بالدليل مش بالتخمين.
 v210: [🐛 احتمال جذري تاني لتكرار "جلسة الدخول تالفة" عند الموظفين — تجديد استباقي عند الرجوع للتاب]
      نفس فئة الباج اللي v169/v191 وثّقوها (ومحتاجة متابعة زي ما v191 طلبت). السبب المحتمل:
      على الموبايل، لما المتصفح يروح للخلفية (تبديل تطبيقات/قفل الشاشة) فترة، نظام
@@ -3504,14 +3556,32 @@ input:checked+.slider:before{transform:translateX(-20px)}
     }catch(e){console.warn('فشل تسجيل الحضور التلقائي',e);}
   }
 
+  // ⚠️ v213 — بدون نت، التطبيق كان بياخد وقت طويل يفتح بدل ما يروح على طول لوضع
+  // الأوفلاين المحفوظ محليًا. السبب: sb.auth.getSession() وطلب بيانات البروفايل تحت
+  // (sb.from('profiles')...) مفيهمش أي مهلة زمنية (timeout) — لو الموبايل متصل بشبكة
+  // (واي فاي/بيانات) بس من غير إنترنت فعلي، الـ fetch بيفضل معلّق لحد ما المتصفح نفسه
+  // يستسلم بعد مهلته الافتراضية (ممكن توصل لدقايق)، قبل ما يوصل للكود اللي بيرجع
+  // للبيانات المحفوظة محليًا. دلوقتي بنحط مهلة قصيرة (5 ثواني) على أي محاولة شبكة هنا،
+  // وبنتخطى المحاولة تمامًا لو navigator.onLine بيقول صراحةً إن مفيش اتصال خالص.
+  function __withTimeout(promise, ms){
+    return Promise.race([
+      promise,
+      // ⚠️ الرسالة لازم تحتوي "fetch" عشان تتفهم صح إنها "مشكلة نت" (زي regex
+      // الفحص تحت اللي بيفرّق بين مشكلة نت حقيقية وجلسة تالفة فعليًا — v169)،
+      // مش "جلسة تالفة" (غير كده هيحصل تسجيل خروج إجباري غلط لمجرد بطء الشبكة)
+      new Promise(function(_,reject){ setTimeout(function(){reject(new Error('Failed to fetch (timeout)'));}, ms); })
+    ]);
+  }
   async function __checkExistingSession(){
     var userId = null;
+    var __offlineFast = (typeof navigator!=='undefined' && navigator.onLine===false);
     try{
       // v154 — getSession() نفسها أحيانًا بتحاول تجدد التوكن بطلب شبكة، ولو النت مقطوع
       // بترفض/تفشل قبل ما توصل لمنطق "استخدم آخر بيانات محفوظة" تحت خالص. بنحطها في
       // try منفصلة، ولو فشلت بنرجع لآخر مستخدم كان داخل من الجهاز ده (محفوظ محليًا)
       // بدل ما نوقف كل حاولة الدخول الأوفلاين من الأساس.
-      var s = await sb.auth.getSession();
+      if(__offlineFast) throw new Error('offline');
+      var s = await __withTimeout(sb.auth.getSession(), 5000);
       if(s.data && s.data.session) userId = s.data.session.user.id;
     }catch(e){
       console.warn('getSession فشلت (غالبًا نت مقطوع أثناء تجديد التوكن):', e);
@@ -3522,9 +3592,9 @@ input:checked+.slider:before{transform:translateX(-20px)}
     if(!userId) return;
     try{
         var profRes;
-        var networkFailed=false, authFailed=false;
-        try{
-          profRes = await sb.from('profiles').select('full_name, role_id, branch_id, is_active, full_visibility').eq('id', userId).single();
+        var networkFailed=__offlineFast, authFailed=false;
+        if(!__offlineFast) try{
+          profRes = await __withTimeout(sb.from('profiles').select('full_name, role_id, branch_id, is_active, full_visibility').eq('id', userId).single(), 5000);
         }catch(netErr){
           // v169 — [🐛 إصلاح: كل خطأ كان بيتحط في خانة "مشكلة نت" حتى لو كان فعليًا
           // جلسة/توكن تالف] بنفرّق دلوقتي: خطأ الشبكة الحقيقي (Failed to fetch) وحده
@@ -3991,7 +4061,7 @@ var APP_TITLE='ابو حوده الحلو الجميل';
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=210;
+var APP_VERSION=214;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -4205,10 +4275,20 @@ function persist(){
 // جدًا لظهور نفس الفاتورة/المصروف/التحركة مرتين بالظبط في نفس القائمة (كل ضغطة بتعمل
 // سجل جديد بـ id مختلف، والاتنين بيتزامنوا مع السيرفر بشكل طبيعي وكأنهم عمليتين حقيقيتين).
 // بتعطّل الزرار لحظة الضغط، وترجعه شغال تاني تلقائيًا بعد ما الحفظ يخلص (نجح أو فشل).
+// ⚠️ v212 — تقوية جذرية: كان __runOnce بيعتمد بس على تعطيل عنصر الزرار نفسه (btn.disabled).
+// المشكلة: كتير من دوال الحفظ بترندر الشاشة/المودال من تاني وهي لسه شغالة (قبل ما
+// الشبكة ترد)، وده بيستبدل عنصر الزرار القديم (المعطّل) بعنصر جديد "سليم" في الـ DOM —
+// فلو المستخدم دوس تاني في اللحظة دي بالظبط، الزرار الجديد ده مش عارف إن فيه عملية
+// شغالة أصلاً ومبيمنعش التكرار. دلوقتي فيه قفل عام (__runOnceInFlight) مستقل تمامًا عن
+// أي عنصر DOM — مفيش عمليتين تقدر تشتغلوا في نفس اللحظة في كل التطبيق، حتى لو الشاشة
+// اترندرت من تاني في النص.
+var __runOnceInFlight = false;
 function __runOnce(btn, fn){
+  if(__runOnceInFlight) return;
   if(!btn || btn.disabled) return;
   btn.disabled = true;
-  var re = function(){ if(btn) btn.disabled = false; };
+  __runOnceInFlight = true;
+  var re = function(){ if(btn) btn.disabled = false; __runOnceInFlight = false; };
   try{
     var result = fn();
     if(result && typeof result.then === 'function'){ result.then(re, re); }
@@ -4269,6 +4349,35 @@ var __errBannerExpanded = false;
 function __toggleErrBanner(){ __errBannerExpanded = !__errBannerExpanded; __renderErrorBanner(); }
 function __dismissError(idx){ __errLog.splice(idx,1); __saveErrLog(); __renderErrorBanner(); }
 function __clearAllErrors(){ __errLog.length=0; __errBannerExpanded=false; __saveErrLog(); __renderErrorBanner(); }
+// ⚠️ v211 — بديل عملي لما المالك مقدرش يوصل لجهاز الموظف فعليًا (سجل الأخطاء مخزّن
+// في localStorage بتاع كل جهاز لوحده). بتلخّص كل الأخطاء المسجّلة على الجهاز ده +
+// معلومات سياق مفيدة (الدور، حالة النت، وقت آخر تأكيد جلسة) في نص واحد جاهز للصق،
+// عشان أي حد (حتى لو مش فاهم التفاصيل) يقدر يبعته للمالك واتساب بضغطة واحدة.
+function __copyErrorLogToClipboard(){
+  var lines=[];
+  lines.push('=== سجل أخطاء التطبيق ('+new Date().toLocaleString('ar-EG')+') ===');
+  lines.push('الدور: '+(window.__isOwner?'مالك':'موظف')+' | متصل بالنت: '+(navigator.onLine?'أيوه':'لأ'));
+  if(!__errLog.length){lines.push('(مفيش أخطاء مسجّلة على الجهاز ده حاليًا)');}
+  __errLog.forEach(function(e){
+    lines.push('— ['+e.t+'] '+e.context+(e.count>1?' (×'+e.count+')':'')+': '+e.message);
+  });
+  var text=lines.join('\n');
+  var done=function(){showToast('✅ اتنسخت التفاصيل — الصقها في رسالة للمالك','#16a34a');};
+  var fail=function(){
+    // بديل لو Clipboard API مش متاحة (سياق مش https أو متصفح قديم)
+    try{
+      var ta=document.createElement('textarea');
+      ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+      document.body.appendChild(ta);ta.focus();ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      done();
+    }catch(e){showToast('⚠️ تعذر النسخ — جرب تاخد screenshot بدل كده','#dc2626');}
+  };
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done).catch(fail);
+  }else{ fail(); }
+}
 function __renderErrorBanner(){
   var el = document.getElementById('__err-banner');
   if(!el){
@@ -4297,10 +4406,15 @@ function __renderErrorBanner(){
   // ناقص أو يصلح صلاحية RLS. عرض التفاصيل دي عليه كانت مجرد قلق زيادة من غير فايدة.
   // دلوقتي الموظف بيشوف سطر واحد مبسّط بس مع زرار "حاول تاني"، والمالك لوحده اللي
   // بيشوف التفاصيل الكاملة زي الأول (هو اللي فعلاً يقدر يتصرف فيها).
+  // ⚠️ v211 — لكن الأخطاء دي متسجلة في localStorage بتاع جهاز الموظف نفسه بس — لو
+  // المالك فتح التطبيق من جهازه هو مش هيشوف حاجة خالص (كل جهاز له سجل أخطاء منفصل).
+  // فأضفنا زرار "نسخ التفاصيل" يخلي الموظف نفسه ينسخ التفاصيل الكاملة (حتى وهو مش
+  // فاهمها) ويبعتها للمالك واتساب، من غير ما يحتاج المالك يوصل لجهاز الموظف فعليًا.
   if(!window.__isOwner && hardErrors.length && !isOnlySoft){
-    el.innerHTML = '<div style="background:#7f1d1d;color:#fff;padding:7px 10px;font-size:12px;font-weight:800;display:flex;justify-content:space-between;align-items:center;font-family:inherit;cursor:pointer" onclick="__drainSyncQueue(true)">'+
-      '<span>⚠️ فيه بيانات لسه بتتزامن — دوس هنا للمحاولة تاني</span>'+
-      '<button onclick="event.stopPropagation();__clearAllErrors()" style="background:#fff;color:#7f1d1d;border:none;border-radius:6px;padding:4px 10px;font-weight:800;font-size:12px">إخفاء</button></div>';
+    el.innerHTML = '<div style="background:#7f1d1d;color:#fff;padding:7px 10px;font-size:12px;font-weight:800;display:flex;justify-content:space-between;align-items:center;font-family:inherit;gap:6px">'+
+      '<span onclick="__drainSyncQueue(true)" style="cursor:pointer;flex:1">⚠️ فيه بيانات لسه بتتزامن — دوس هنا للمحاولة تاني</span>'+
+      '<button onclick="__copyErrorLogToClipboard()" style="background:#fff;color:#7f1d1d;border:none;border-radius:6px;padding:4px 8px;font-weight:800;font-size:11px;white-space:nowrap">📋 نسخ للمالك</button>'+
+      '<button onclick="__clearAllErrors()" style="background:transparent;color:#fff;border:1.5px solid #fff;border-radius:6px;padding:4px 8px;font-weight:800;font-size:11px">إخفاء</button></div>';
     return;
   }
   // v149 — البنر مطوي افتراضيًا (سطر واحد بس)، عشان ما يمنعش استخدام التطبيق تحته.
@@ -4309,9 +4423,10 @@ function __renderErrorBanner(){
     '<div style="background:#1e3a5f;color:#fff;padding:7px 10px;font-size:12px;font-weight:800;display:flex;justify-content:space-between;align-items:center;font-family:inherit;cursor:pointer" onclick="__toggleErrBanner()">'+
     '<span>📴 مفيش نت — التغييرات هتتزامن تلقائيًا '+(__errBannerExpanded?'▲':'▼')+'</span>'+
     '<button onclick="event.stopPropagation();__clearAllErrors()" style="background:#fff;color:#1e3a5f;border:none;border-radius:6px;padding:4px 10px;font-weight:800;font-size:12px">إخفاء</button></div>':
-    '<div style="background:#7f1d1d;color:#fff;padding:7px 10px;font-size:12px;font-weight:800;display:flex;justify-content:space-between;align-items:center;font-family:inherit;cursor:pointer" onclick="__toggleErrBanner()">'+
-    '<span>⚠️ فيه '+hardErrors.length+' خطأ محتاج تراجعه '+(__errBannerExpanded?'▲':'▼ (دوس هنا)')+'</span>'+
-    '<button onclick="event.stopPropagation();__clearAllErrors()" style="background:#fff;color:#7f1d1d;border:none;border-radius:6px;padding:4px 10px;font-weight:800;font-size:12px">مسح الكل</button></div>';
+    '<div style="background:#7f1d1d;color:#fff;padding:7px 10px;font-size:12px;font-weight:800;display:flex;justify-content:space-between;align-items:center;font-family:inherit;gap:6px">'+
+    '<span onclick="__toggleErrBanner()" style="cursor:pointer;flex:1">⚠️ فيه '+hardErrors.length+' خطأ محتاج تراجعه '+(__errBannerExpanded?'▲':'▼ (دوس هنا)')+'</span>'+
+    '<button onclick="__copyErrorLogToClipboard()" style="background:#fff;color:#7f1d1d;border:none;border-radius:6px;padding:4px 8px;font-weight:800;font-size:11px;white-space:nowrap">📋 نسخ</button>'+
+    '<button onclick="__clearAllErrors()" style="background:transparent;color:#fff;border:1.5px solid #fff;border-radius:6px;padding:4px 8px;font-weight:800;font-size:11px">مسح الكل</button></div>';
   if(!__errBannerExpanded){ el.innerHTML = header; return; }
   el.innerHTML = header + '<div style="max-height:40vh;overflow-y:auto">'+
     __errLog.map(function(e,i){
@@ -6780,6 +6895,7 @@ function _activeStocktake(){
 }
 
 var _stSearch='';
+var _stShowDepleted=false; // ⚠️ v214 — إخفاء الأصناف الخلصانة (كميتها صفر) من شاشة العد افتراضيًا، بناءً على طلب العميل — مع خيار إظهارها لو احتاج
 // ⚠️ v184 — إصلاح: كان oninput بينادي renderStocktake() على طول كل ضغطة حرف، وده بيعيد
 // رسم الـ<input> نفسه من الصفر (innerHTML كامل) فيقفل الكيبورد فورًا. نفس حل بحث الديون
 // بالظبط: تأخير بسيط (debounce) + إرجاع الفوكس والمؤشر بعد إعادة الرسم.
@@ -6821,7 +6937,13 @@ function renderStocktake(){
   var confirmedCount=items.filter(function(i){return i.confirmed;}).length;
   var qEl=document.getElementById('st-search');
   var q=qEl?normalizeAr(qEl.value.trim()):normalizeAr(_stSearch);
-  var filtered=q?items.filter(function(i){return normalizeAr(i.name).includes(q);}):items;
+  // ⚠️ v214 — افتراضيًا بنخفي الأصناف اللي أصلاً صفر (خلصانة) من شاشة العد — بناءً على
+  // طلب العميل "المفروض يظهر الموجود فقط". بنسيب زرار لإظهارها وقت الحاجة (لو حابب يتأكد
+  // إن صنف خلصان فعلاً ماعندوش رصيد راجع غلط، أو يعيد عدّه). صنف اتغيّر رقمه أثناء الجرد
+  // (counted_qty≠system_qty) بيفضل ظاهر دايمًا حتى لو كان أصله صفر، عشان الفرق ميضيعش.
+  var depletedHidden=items.filter(function(i){return i.system_qty===0&&i.counted_qty===i.system_qty;}).length;
+  var visibleItems=_stShowDepleted?items:items.filter(function(i){return !(i.system_qty===0&&i.counted_qty===i.system_qty);});
+  var filtered=q?visibleItems.filter(function(i){return normalizeAr(i.name).includes(q);}):visibleItems;
 
   var progressHtml='<div style="background:#fff;border-radius:12px;padding:12px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(0,0,0,.06)">'+
     '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">'+
@@ -6830,6 +6952,7 @@ function renderStocktake(){
     '<div style="background:#f1f5f9;border-radius:8px;height:8px;overflow:hidden;margin-bottom:6px">'+
     '<div style="background:#16a34a;height:100%;width:'+(items.length?Math.round(confirmedCount/items.length*100):0)+'%"></div></div>'+
     '<div style="font-size:12px;color:#64748b">تم تأكيد <b style="color:#16a34a">'+confirmedCount+'</b> من <b>'+items.length+'</b> صنف</div>'+
+    (depletedHidden?'<div style="font-size:11px;color:#94a3b8;margin-top:4px">'+depletedHidden+' صنف خلصان (صفر) مخفي — <span onclick="_stShowDepleted='+(!_stShowDepleted)+';renderStocktake()" style="color:#2563eb;font-weight:700;cursor:pointer;text-decoration:underline">'+(_stShowDepleted?'إخفاؤهم تاني':'إظهارهم')+'</span></div>':'')+
     '</div>'+
     '<div style="display:flex;gap:6px;margin-bottom:10px">'+
     '<input id="st-search" type="text" placeholder="🔍 بحث عن صنف..." value="'+esc(_stSearch)+'" oninput="onStSearchInput(this.value)" '+
@@ -6988,8 +7111,24 @@ function _renderStocktakeReport(st){
       '<button class="btn btn-red btn-full" onclick="confirmApproveStocktake(\''+st.id+'\')">✅ اعتماد الفروق وتحديث المخزون</button>'
     :
       '<button class="btn btn-green btn-full" onclick="__runOnce(this,function(){return approveStocktake(\''+st.id+'\');})">✅ إغلاق الجرد (مفيش فروق)</button>'))+
+    // ⚠️ v214 — قبل كده كان مفيش أي طريقة ترجع للعد تاني لو لاحظت رقم غلط في المقارنة —
+    // الخيار الوحيد كان "اعتماد" (نهائي) أو تسيبها معلّقة. زرار الرجوع ده بيرجّع حالة
+    // الجردة لـ"مفتوحة" تاني عشان تعدّل أي رقم، بس متاح قبل الاعتماد فقط — بعد الاعتماد
+    // المخزون بيكون اتحدّث فعليًا وترجيعه محتاج مراجعة تانية تمامًا (مش نفس العملية).
+    (!isApproved?'<button class="btn btn-outline btn-full" style="margin-top:6px" onclick="reopenStocktakeForCounting(\''+st.id+'\')">🔓 رجوع للعد وتعديل الأرقام</button>':'')+
     '<button class="btn btn-outline btn-full" style="margin-top:6px" onclick="printStocktakeReport(\''+st.id+'\')">🖨️ طباعة تقرير الفروق</button>'+
     '</div>';
+}
+
+// ⚠️ v214 — جديد: يرجّع جردة "مقفولة بانتظار الاعتماد" لحالة "مفتوحة" تاني عشان تقدر
+// تعدّل أي رقم غلط قبل ما تعتمدها نهائيًا. متاح بس قبل الاعتماد — المخزون لسه ماتغيرش
+// خالص في الحالة دي (approveStocktake هو الوحيد اللي بيغيّر المخزون فعليًا).
+function reopenStocktakeForCounting(id){
+  var st=(DB.stocktakes||[]).find(function(x){return x.id===id});if(!st||st.status!=='closed')return;
+  st.status='open';
+  DB.stocktakes=DB.stocktakes.map(function(s){return s.id===st.id?st:s;});
+  persist();
+  renderStocktake();
 }
 
 // تكلفة الوحدة الحالية لصنف (لتقدير قيمة النقص وقت العرض بس، مش بيتغير أي بيانات)
