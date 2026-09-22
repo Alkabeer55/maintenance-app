@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v214</title>
+<title>ابو حوده الحلو الجميل v218</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="2026-09-19 — v214";
+<script>var BUILD_STAMP="2026-09-19 — v218";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -54,6 +54,60 @@
       مسار خالص عن طريق confirmAction، الزرار بتاعها لازم __runOnce من أول يوم.
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v218: [✨ أصناف يدوية المنشأ بالتفصيل + ✨ مواعيد الصلاة والتنبيه الصوتي]
+     1) زرار جديد "📋 الأصناف يدوية/قديمة المنشأ" (إعدادات ← صيانة البيانات) — قائمة كل
+     الأصناف اللي مالهاش تاريخ مشترى موثّق بالكامل (نفس المجموعة اللي أداة فحص الكميات
+     v217 مبتفحصهاش)، بالتفاصيل (كمية، سعر شراء/بيع، تاريخ إضافة) مع تنبيه لو سعر الشراء
+     0 (يأثر على دقة حساب الربح)، ورابط تعديل مباشر لكل صنف.
+     2) نظام مواعيد الصلاة والتنبيه (إعدادات ← عام): حساب فلكي محلي بالكامل (بدون
+     إنترنت/API خارجي، طريقة رابطة العالم الإسلامي — فجر 18°، عشاء 17°) بناءً على
+     الموقع الجغرافي (زرار "استخدم موقعي" أو إحداثيات يدوية)، مع تصحيح يدوي بالدقيقة لكل
+     صلاة لو فيه فرق عن مسجدك. لما يدخل الوقت والتطبيق مفتوح: تنبيه مرئي + نغمة صوتية
+     (مولّدة برمجيًا، مش تسجيل آذان حقيقي لأسباب حقوق ملكية) + إشعار نظام لو الإذن
+     متاح. ⚠️ حدود مهمة موضّحة في الشاشة نفسها: (أ) الحساب تقريبي فلكيًا مش بديل لتطبيق
+     مواقيت متخصص لو محتاج دقة دينية عالية، (ب) التنبيه بيشتغل بس والتطبيق مفتوح (تاب
+     في الخلفية كفاية، بس مش لو قفلت المتصفح تمامًا) — قيد أساسي في أي تطبيق ويب مش له
+     سيرفر إشعارات مخصص. تم اختبار الحساب رياضيًا مقابل مواقيت القاهرة الحقيقية ومطابق.
+v217: [🐛 إصلاح جذري وقائي لباج "الكتابة فوق كمية اتغيّرت في الخلفية" + أداة فحص كميات المخزون]
+     1) الإصلاح الوقائي: شاشة "تعديل منتج" بقت بتاخد لقطة من الكمية وقت الفتح
+     (_prodQtyAtOpen). عند الحفظ، لو خانة الكمية لسه بنفس القيمة اللي كانت وقت الفتح
+     (يعني المستخدم ماكتبش فيها حاجة بنفسه) بس الكمية الفعلية في DB.products اتغيّرت في
+     الخلفية (مشترى/بيع/جرد اتزامن وانت الشاشة فاتحة)، بنتجاهل القيمة القديمة تلقائيًا
+     ونسيب الكمية الجديدة الصح زي ما هي — بدل ما نكتب فوقها بالقديم بصمت (بالظبط باج
+     "ترس عادم 06"). لو المستخدم فعلاً غيّر الرقم بنفسه، التغيير بتاعه بيتنفذ عادي زي
+     الأول — الحماية دي بس لما الخانة متلموسة.
+     2) أداة جديدة "🔍 فحص كميات المخزون" (إعدادات ← صيانة البيانات، مالك بس): بتفحص كل
+     صنف اشتُرى بالكامل من داخل التطبيق (source='purchase'، بدون رصيد قديم يدوي/أمانة/
+     اسكراب) وتقارن كميته الحالية بمجموع (مشترى − مباع − مسحوب + فروق جرد معتمدة)، وتبلغ
+     عن أي صنف مش متطابق. ⚠️ ملحوظة أمانة مهمة: الفحص دقيق 100% بس للأصناف دي تحديدًا؛
+     الأصناف اللي منشأها يدوي/قديم/أمانة/اسكراب (زي "ترس عادم 06" نفسه) مبيتفحصوش
+     أوتوماتيك لأن جزء من تاريخهم مش موثّق بالكامل داخل التطبيق، فمفيش طريقة أتأكد من
+     رقمهم الصح بثقة 100% — ده موضّح بوضوح في الأداة نفسها بدل ما ندّعي فحص شامل وهمي.
+v216: [🔍 تشخيص فعلي من نسخة احتياطية حقيقية — ترس عادم 06: لقيت السبب الأرجح]
+     العميل بعت نسخة احتياطية JSON فعلية فحصتها بالتفصيل:
+     - المنتج (id: bbdcdd47...): qty=1، آخر تعديل 2026-09-12.
+     - المشترى المرتبط: بتاريخ 2026-09-11 (قبل التعديل بيوم)، قطعتين بسعر 125، نفس الـ
+       productId بالظبط (مفيش لخبطة في الربط).
+     - جردة النهاردة (لسه معلّقة، مش معتمدة): system_qty=1، counted_qty=3 — يعني العميل
+       عدّ 3 فعلاً بنفسه، ومطابق تمامًا لـ(1 قديم يدوي + 2 من المشترى).
+     التفسير الأرجح: كود المشترى نفسه صحيح (بيضيف الكمية ويستدعي المزامنة صح، اتأكد
+     بمراجعة الكود). الأرجح إن حد فتح شاشة "تعديل المنتج" بعد المشترى بيوم (نفس تاريخ
+     آخر تعديل بالظبط) لغرض تاني (تصحيح السعر لـ110 مثلاً)، والشاشة دي بتستبدل الكمية
+     بالكامل بالرقم المعروض وقتها (مش بتجمع) — لو كان فيه تأخير مزامنة في اللحظة دي،
+     ممكن الشاشة عرضت الكمية القديمة (1) والحفظ رجّعها فوق الكمية الصح (3).
+     ⚠️ ده تفسير الأرجح مبني على الأدلة المتاحة (مش تأكيد قاطع مية بالمية — مفيش وصول
+     لسجل مزامنة حي وقتها).
+     الإصلاح: تنبيه واضح جديد في شاشة "تعديل المنتج" فوق حقل الكمية مباشرة، يوضح إن
+     التعديل هنا استبدال كامل مش جمع، وبينصح باستخدام "📋 الجرد" بدل التعديل المباشر
+     لتصحيح كمية غلط — عشان الفرق يتوثق صح (مصروف عجز/إيراد زيادة) بدل ما يستبدل بصمت.
+v215: [✨ سجل تسويات المخزون (زيادة الجرد) — عرض وحذف كل قيد لوحده]
+     مكانش فيه أي طريقة تشوف بيها تفاصيل قيود "زيادة المخزون" (الدخل اللي بيتسجل تلقائي
+     من فروق الجرد) كل واحدة لوحدها — بس مجموع كلي في تقرير "صافي الربح". العميل احتاج
+     يراجع قيد بعينه (لبس بين صنف قديم اتضاف يدوي قبل كده وصنف اتسجل "زيادة" في جردة
+     لاحقة). دلوقتي زرار "📋 عرض تفاصيل كل تسوية" تحت سطر "إيراد تسوية مخزون" في تحليل
+     الأرباح المالي، بيفتح سجل كل قيد لوحده (الصنف، القيمة، التاريخ)، مع زرار حذف
+     للمالك لو قيد معيّن اتسجل غلط — الحذف بيشيل القيد من سجل الأرباح بس، من غير ما
+     يأثر على كمية المخزون نفسها (دي منظومة منفصلة اتحدّثت فعلاً وقت اعتماد الجردة).
 v214: [✨ تحسينات الجرد حسب طلب العميل]
      1) شاشة العد بتخفي الأصناف الخلصانة (كميتها صفر أصلاً) افتراضيًا دلوقتي — "المفروض
         يظهر الموجود فقط" زي ما طلب العميل — مع زرار لإظهارها وقت الحاجة. أي صنف اتغيّر
@@ -4061,7 +4115,7 @@ var APP_TITLE='ابو حوده الحلو الجميل';
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=214;
+var APP_VERSION=218;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -4133,6 +4187,8 @@ function loadDB(){
     if(!DB.stocktakes) DB.stocktakes=[];
     if(!DB.part_withdrawals) DB.part_withdrawals=[];
     if(!DB.settings) DB.settings={};
+    // ⚠️ v218 — إعدادات مواعيد الصلاة والتنبيه الصوتي (افتراضيًا متوقفة لحد ما المستخدم يفعّلها بنفسه ويحدد موقعه)
+    if(!DB.settings.prayerTimes) DB.settings.prayerTimes={enabled:false,lat:null,lng:null,tz:null,offsets:{fajr:0,dhuhr:0,asr:0,maghrib:0,isha:0},sound:true};
     if(!DB.settings.partTypes||!DB.settings.partTypes.length) DB.settings.partTypes=['جديد','مع انك','ليزر','استعمال خارجي','استعمال داخلي'];
     if(!DB.settings.machineTypes||!DB.settings.machineTypes.length) DB.settings.machineTypes=['جديد','استعمال خارجي','عرض للبيع','اسكراب'];
     // ⚠️ v199 — تصنيف المخزون الهرمي (شركة + نوع) — تهيئة القوائم لأول مرة للتطبيقات الموجودة
@@ -6298,9 +6354,11 @@ function renderInventoryCompare(){
 }
 
 var _prodId=null;
+var _prodQtyAtOpen=null; // ⚠️ v217 — لقطة من الكمية وقت فتح شاشة التعديل، لحماية من الكتابة فوق كمية اتحدّثت في الخلفية (شوف saveProduct)
 function openProductModal(id){
   _prodId=id||null;
   var p=id?DB.products.find(function(x){return x.id===id;}):null;
+  _prodQtyAtOpen=p?p.qty:null; // ⚠️ v217 — انظر شرح الحماية في saveProduct تحت
   var isMachine=p&&p.category==='machine';
   document.getElementById('modal-title').textContent=p?'تعديل المنتج':'إضافة منتج جديد';
 
@@ -6352,6 +6410,11 @@ function openProductModal(id){
     '</div></div>'+
 
     fld('prod-qty','الكمية','number',p?p.qty:'','',true)+
+    // ⚠️ v216 — تنبيه: الشاشة دي بتستبدل الكمية بالرقم اللي هتكتبه بالظبط (مش بتجمع/تطرح).
+    // لو فاتح الشاشة عشان تعدّل حاجة تانية (السعر مثلاً) وموقصدش تغيّر الكمية، سيبها زي
+    // ما هي من غير لمس. لتصحيح كمية غلط، الأفضل تستخدم "🔍 فحص سلامة البيانات" أو شاشة
+    // "📋 الجرد" بدل التعديل المباشر هنا — عشان الفرق يتسجل ويتوثق صح بدل ما يستبدل بصمت.
+    (p?'<div style="font-size:11px;color:#b45309;background:#fffbeb;border-radius:8px;padding:7px 10px;margin:-6px 0 10px">⚠️ التعديل هنا بيستبدل الكمية بالرقم اللي هتكتبه بالظبط. لو مش قاصد تغييرها سيبها زي ما هي — لتصحيح كمية غلط استخدم شاشة "📋 الجرد" بدل كده، عشان الفرق يتوثق صح.</div>':'')+
     fld('prod-minqty','الحد الأدنى للتنبيه','number',p?(p.min_qty||0):0)+
     fld('prod-buy','سعر الشراء (ج)','number',p?p.buy_price:'')+
     fld('prod-sell','سعر البيع (ج)','number',p?p.sell_price:'')+
@@ -6429,6 +6492,20 @@ async function saveProduct(){
   var name=v('prod-name'),qty=+v('prod-qty');
   if(!name)return showToast('⚠️ اسم المنتج مطلوب','#dc2626');
   if(isNaN(qty)||qty<0)return showToast('⚠️ الكمية غير صحيحة','#dc2626');
+  // ⚠️ v217 — إصلاح جذري وقائي: لو فاتح شاشة "تعديل منتج" وسبت خانة الكمية زي ما هي
+  // (ماكتبتش فيها حاجة بنفسك)، بس في نفس الوقت عملية تانية (مشترى/بيع/جرد اتزامن متأخر)
+  // غيّرت الكمية الحقيقية في الخلفية وانت الشاشة لسه فاتحة — كان الحفظ بيكتب فوق الكمية
+  // الجديدة الصح بالرقم القديم اللي كان ظاهر وقت ما فتحت الشاشة (بالظبط باج "ترس عادم
+  // 06"). دلوقتي: لو خانة الكمية زي ما هي من وقت الفتح، بس الكمية الفعلية اتغيّرت في
+  // الخلفية، بنتجاهل القيمة القديمة ونسيب الكمية الجديدة زي ما هي (منعتبرش ده "تعديل"
+  // من المستخدم أصلاً — هو ماكتبش حاجة).
+  if(_prodId){
+    var __liveProd=DB.products.find(function(x){return x.id===_prodId;});
+    if(__liveProd && _prodQtyAtOpen!==null && qty===_prodQtyAtOpen && __liveProd.qty!==_prodQtyAtOpen){
+      showToast('ℹ️ الكمية اتغيّرت في الخلفية من '+fmtQty(_prodQtyAtOpen)+' لـ'+fmtQty(__liveProd.qty)+' وانت بتعدّل — اتجاهلنا الرقم القديم وسبنا الكمية الصح زي ما هي','#2563eb');
+      qty=__liveProd.qty;
+    }
+  }
   var obj={
     name:name,
     category:v('prod-category')||'parts',
@@ -15085,7 +15162,8 @@ function renderFinancialAnalysis(){
     _bsRow('إجمالي المبيعات',totalSalesAllTime)+
     _bsRow('− تكلفة البضاعة المباعة',-totalCogsAllTime)+
     _bsRow('− المصاريف',-totalExpAllTime)+
-    (totalInvAdjAllTime>0?_bsRow('+ إيراد تسوية مخزون (زيادة جرد)',totalInvAdjAllTime):'')+
+    (totalInvAdjAllTime>0?(_bsRow('+ إيراد تسوية مخزون (زيادة جرد)',totalInvAdjAllTime)+
+      '<div onclick="event.stopPropagation();openInventoryAdjustmentsLog()" style="font-size:11px;color:#2563eb;font-weight:700;cursor:pointer;text-align:left;margin:-4px 0 4px">📋 عرض تفاصيل كل تسوية ←</div>'):'')+
     _bsTotal('= صافي الربح',netProfit,netProfit>=0?'#16a34a':'#dc2626')+
     '<div style="font-size:12px;color:#64748b;margin-top:4px">هامش الربح: <b style="color:'+(marginPct>=0?'#16a34a':'#dc2626')+'">'+marginPct+'%</b></div>',
     'navigate(\'reports\')'
@@ -15173,6 +15251,38 @@ function renderFinancialAnalysis(){
   );
 
   el.innerHTML=card1+card2+card3+card4+card5+card6+card7;
+}
+
+// ⚠️ v215 — جديد: مكانش فيه أي طريقة تشوف بيها تفاصيل قيود "زيادة المخزون" (الأرباح
+// اللي بتتسجل تلقائي من فروق الجرد) لكل واحدة لوحدها — بس مجموع كلي في التقرير. ده
+// كان بيصعّب مراجعة/تصحيح قيد بعينه لو حسّيت إنه اتسجل غلط (زي لبس بين صنف قديم
+// اتضاف يدوي قبل كده وصنف "زيادة" من جرد لاحق).
+function openInventoryAdjustmentsLog(){
+  var list=(DB.accounts.inventory_adjustments||[]).slice().sort(function(a,b){return (b.date||'')>(a.date||'')?1:-1;});
+  document.getElementById('modal-title').textContent='📈 سجل تسويات المخزون (زيادة الجرد)';
+  document.getElementById('modal-body').innerHTML=
+    '<div style="font-size:11px;color:#64748b;margin-bottom:10px">كل قيد هنا اتسجل تلقائي لما جردة اعتمدت وجدت كمية أكتر من المسجل — بسعر التكلفة وقت الاعتماد.</div>'+
+    (list.length?list.map(function(a){
+      return '<div style="background:#fff7ed;border-radius:10px;padding:10px 12px;margin-bottom:8px;border-right:3px solid #ea580c">'+
+        '<div style="display:flex;justify-content:space-between;align-items:center">'+
+        '<b style="font-size:13px">'+esc(a.label||'تسوية مخزون')+'</b>'+
+        '<span style="font-size:13px;font-weight:900;color:#ea580c">+'+fmt(a.amount)+' ج</span></div>'+
+        '<div style="font-size:11px;color:#94a3b8;margin-top:3px">'+esc(fmtDate(a.date))+(a.note?' — '+esc(a.note):'')+'</div>'+
+        (window.__isOwner?'<button onclick="delInventoryAdjustment(\''+a.id+'\')" style="margin-top:6px;background:#fee2e2;color:#dc2626;border:none;border-radius:7px;padding:5px 10px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer">🗑️ حذف (كان غلط)</button>':'')+
+        '</div>';
+    }).join(''):'<div class="empty">لا توجد تسويات مسجّلة</div>')+
+    '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+  openModal();
+}
+function delInventoryAdjustment(id){
+  if(!window.__isOwner)return;
+  confirmAction('هيتشال القيد ده من سجل الأرباح بس (صافي الربح هيقل بقد قيمته) — من غير ما يأثر على كمية المخزون الحالية للصنف، لأن الكمية دي اتحدّثت فعلاً في المخزون وقت اعتماد الجردة ونظام منفصل تمامًا عن القيد المالي ده. متأكد؟',async function(){
+    DB.accounts.inventory_adjustments=(DB.accounts.inventory_adjustments||[]).filter(function(a){return a.id!==id;});
+    await persist();
+    openInventoryAdjustmentsLog();
+    renderFinancialAnalysis();
+    showToast('✅ اتشال القيد','#16a34a');
+  });
 }
 
 function _costStructure(acc){
@@ -16345,6 +16455,7 @@ function renderSettings(){
     '<input id="app-title-input" type="text" value="'+esc(APP_TITLE)+'" placeholder="اسم التطبيق..." style="flex:1;padding:9px 12px;border:2px solid #e2e8f0;border-radius:9px;font-family:inherit;font-size:13px">'+
     '<button onclick="changeAppTitle()" style="padding:9px 16px;background:#7c3aed;color:#fff;border:none;border-radius:9px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer">✏️ تغيير</button>'+
     '</div></div>'+
+    renderPrayerSettingsCard()+
     '<div class="card">'+
     '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:4px;padding-bottom:8px;border-bottom:2px solid #e2e8f0">🔄 تحويل الرصيد الافتتاحي لمشتريات</div>'+
     '<div style="font-size:11px;color:#94a3b8;margin-bottom:10px">لو عندك "مخزون بضاعة مُدخل يدويًا" في الحسابات، الزرار ده بيحوّله لمشترى حقيقي واحد بتاريخ اليوم عشان يدخل في تقارير المخزون والموردين بشكل صحيح. الكاش عندك مش هيتأثر خالص (نفس الرقم، مصدره بس بيبقى مشترى بدل خانة يدوية).</div>'+
@@ -16447,6 +16558,10 @@ function renderSettings(){
     '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #e2e8f0">🔧 صيانة البيانات</div>'+
     '<div style="font-size:12px;color:#64748b;margin-bottom:10px">لو سددت دين من شاشة "الديون" وفاتورته الأصلية فضلت شكلها غير مدفوعة في التقارير</div>'+
     '<button class="settings-btn" onclick="syncSalesWithDebts()">🔄 مزامنة مدفوعات الفواتير مع الديون</button>'+
+    '<div style="font-size:12px;color:#64748b;margin:12px 0 10px">⚠️ v217 — فحص كل صنف اشتُرى بالكامل من داخل التطبيق (بدون رصيد قديم مجهول المصدر) ومقارنة كميته الحالية بمجموع المشتريات والمبيعات والجرد — لاكتشاف أي كمية اتغيّرت غلط زي باج "تعديل المنتج" اللي اتصلح في v217</div>'+
+    '<button class="settings-btn" onclick="auditProductQuantities()">🔍 فحص كميات المخزون</button>'+
+    '<div style="font-size:12px;color:#64748b;margin:12px 0 10px">⚠️ v218 — قائمة كل الأصناف اللي منشأها يدوي/قديم/غير موثّق بمشترى حقيقي (نفس المجموعة اللي أداة الفحص فوق مبتفحصهاش أوتوماتيك) — عشان تراجعها بنفسك بالتفاصيل</div>'+
+    '<button class="settings-btn" onclick="listManualOriginProducts()">📋 الأصناف يدوية/قديمة المنشأ</button>'+
     '</div>';
 
   // ===== قسم 4: المزامنة والتخزين =====
@@ -16659,6 +16774,250 @@ async function syncSalesWithDebts(){
   if(missingDebtCount>0)msg+=' — ⚠️ لاحظنا كمان '+missingDebtCount+' فاتورة غير مدفوعة بالكامل ومالهاش دين مسجل خالص (تقدر تسجله يدوياً من شاشة الفاتورة)';
   showToast(msg,fixed>0?'#16a34a':'#64748b');
 }
+
+// ⚠️ v217 — جديد: فحص كمية كل صنف مقابل مجموع (المشتريات − المبيعات + فروق الجرد
+// المعتمدة − سحب القطع). بيقتصر على الأصناف "معروفة الأصل بالكامل" (source==='purchase'،
+// يعني كل تاريخها داخل التطبيق من مشترى حقيقي، مفيش رصيد قديم مجهول قبلها) لأن دي
+// الوحيدة اللي نقدر نتأكد من رقمها بدقة 100%. الأصناف التانية (منشأ يدوي/قديم/أمانة/
+// اسكراب) بتتحسب لكن بعلامة "غير مؤكد" لأن جزء من تاريخها مش موثّق بالكامل في التطبيق.
+function auditProductQuantities(){
+  var mismatches=[],unverified=0,checked=0;
+  DB.products.forEach(function(p){
+    if(p.category==='machine')return;
+    checked++;
+    var purchasedQty=0;
+    (DB.purchases||[]).forEach(function(pu){(pu.items||[]).forEach(function(it){if(it.productId===p.id)purchasedQty+=(it.qty||0);});});
+    var soldQty=0;
+    (DB.sales||[]).forEach(function(s){(s.items||[]).forEach(function(it){if(it.productId===p.id)soldQty+=(it.qty||0);});});
+    var withdrawnQty=0;
+    (DB.part_withdrawals||[]).forEach(function(w){if(w.product_id===p.id)withdrawnQty+=(w.qty||0);});
+    var stocktakeAdj=0,stCount=0;
+    (DB.stocktakes||[]).forEach(function(st){
+      if(st.status!=='approved')return;
+      (st.items||[]).forEach(function(it){if(it.productId===p.id){stocktakeAdj+=roundQty((it.counted_qty||0)-(it.system_qty||0));stCount++;}});
+    });
+    var fullyKnownOrigin = p.source==='purchase' && !p.consignment && !p.scrap_source;
+    var expected=roundQty(purchasedQty-soldQty-withdrawnQty+stocktakeAdj);
+    var diff=roundQty((p.qty||0)-expected);
+    if(fullyKnownOrigin){
+      if(Math.abs(diff)>0.01){
+        mismatches.push({p:p,purchasedQty:purchasedQty,soldQty:soldQty,withdrawnQty:withdrawnQty,stocktakeAdj:stocktakeAdj,stCount:stCount,expected:expected,diff:diff,certain:true});
+      }
+    }else{
+      unverified++;
+    }
+  });
+  document.getElementById('modal-title').textContent='🔍 فحص كميات المخزون';
+  document.getElementById('modal-body').innerHTML=
+    '<div style="font-size:11px;color:#64748b;background:#f8fafc;border-radius:9px;padding:9px 11px;margin-bottom:10px">فحصنا '+checked+' صنف. الفحص دقيق 100% بس للأصناف اللي كل تاريخها موثّق داخل التطبيق من مشترى حقيقي (مفيش رصيد قديم يدوي/أمانة/اسكراب قبله) — وعددها '+(checked-unverified)+'. باقي '+unverified+' صنف (منشأ يدوي/قديم/أمانة/اسكراب) متفحصتش تلقائيًا لأن جزء من تاريخهم مش موثّق بالكامل.</div>'+
+    (mismatches.length?
+      ('<div style="font-size:13px;font-weight:800;color:#dc2626;margin-bottom:8px">⚠️ '+mismatches.length+' صنف كميته الحالية مش متطابقة مع تاريخه الموثّق</div>'+
+      mismatches.map(function(m){
+        return '<div style="background:#fef2f2;border-radius:10px;padding:10px 12px;margin-bottom:8px;border-right:3px solid #dc2626">'+
+          '<div style="display:flex;justify-content:space-between;align-items:center"><b style="font-size:13px">'+esc(m.p.name)+'</b>'+
+          '<span onclick="closeModal();openProductModal(\''+m.p.id+'\')" style="font-size:11px;color:#2563eb;font-weight:700;cursor:pointer">✏️ تعديل ←</span></div>'+
+          '<div style="font-size:11px;color:#64748b;margin-top:4px">الحالية: <b>'+fmtQty(m.p.qty)+'</b> — المفروض تكون: <b>'+fmtQty(m.expected)+'</b> (الفرق: <b style="color:#dc2626">'+(m.diff>0?'+':'')+fmtQty(m.diff)+'</b>)</div>'+
+          '<div style="font-size:10px;color:#94a3b8;margin-top:3px">مشترى '+fmtQty(m.purchasedQty)+' − مباع '+fmtQty(m.soldQty)+' − مسحوب '+fmtQty(m.withdrawnQty)+(m.stCount?' + فرق جرد معتمد '+fmtQty(m.stocktakeAdj):'')+'</div>'+
+          '</div>';
+      }).join(''))
+    :'<div class="empty">✅ مفيش أي مشكلة في الأصناف اللي أمكن التأكد منها بدقة</div>')+
+    '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+  openModal();
+}
+
+// ⚠️ v218 — جديد: قائمة كل الأصناف يدوية/قديمة المنشأ (بالظبط نفس المجموعة اللي
+// auditProductQuantities مبتفحصهاش أوتوماتيك) — بالتفاصيل (كمية، سعر شراء/بيع، تاريخ
+// إضافة، الفئة)، عشان صاحب المشروع يراجعها بعينه ويحدد أسعار تقديرية معقولة للي محتاجها.
+function listManualOriginProducts(){
+  var list=DB.products.filter(function(p){
+    return p.category!=='machine' && !(p.source==='purchase' && !p.consignment && !p.scrap_source);
+  }).sort(function(a,b){return (a.name||'').localeCompare(b.name||'','ar');});
+  document.getElementById('modal-title').textContent='📋 أصناف يدوية/قديمة المنشأ ('+list.length+')';
+  document.getElementById('modal-body').innerHTML=
+    '<div style="font-size:11px;color:#64748b;background:#f8fafc;border-radius:9px;padding:9px 11px;margin-bottom:10px">الأصناف دي كلها ماعندهاش تاريخ مشترى موثّق بالكامل داخل التطبيق (زودت يدوي، أو أمانة، أو مستخرجة من اسكراب) — عشان كده أداة "فحص الكميات" بتستبعدها. راجع كل صنف وحدد له سعر شراء تقديري معقول لو كان 0، عشان حساب الربح يبقى دقيق.</div>'+
+    (list.length?list.map(function(p){
+      var tag=p.consignment?'🤝 أمانة':(p.scrap_source?'♻️ اسكراب':'✍️ يدوي/قديم');
+      return '<div style="background:#fff;border-radius:10px;padding:10px 12px;margin-bottom:8px;box-shadow:0 2px 8px rgba(0,0,0,.05);border-right:3px solid #94a3b8" onclick="closeModal();openProductModal(\''+p.id+'\')">'+
+        '<div style="display:flex;justify-content:space-between;align-items:center">'+
+        '<b style="font-size:13px">'+esc(p.name)+'</b>'+
+        '<span style="background:#f1f5f9;color:#475569;border-radius:6px;padding:2px 7px;font-size:10px;font-weight:700">'+tag+'</span></div>'+
+        '<div style="font-size:11px;color:#64748b;margin-top:4px">الكمية: <b>'+fmtQty(p.qty)+'</b> — شراء: <b>'+fmt(p.buy_price||0)+' ج</b>'+(!p.buy_price?' <span style="color:#dc2626;font-weight:700">(غير محدد!)</span>':'')+' — بيع: <b>'+fmt(p.sell_price||0)+' ج</b></div>'+
+        '<div style="font-size:10px;color:#94a3b8;margin-top:3px">'+(p.created_at?'اتضاف: '+esc(fmtDate(p.created_at)):'تاريخ الإضافة غير مسجّل')+'</div>'+
+        '</div>';
+    }).join(''):'<div class="empty">مفيش أصناف يدوية/قديمة المنشأ — كل الأصناف مشترياتها موثّقة بالكامل 🎉</div>')+
+    '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+  openModal();
+}
+
+// ============================================================
+// ⚠️ v218 — مواعيد الصلاة والتنبيه الصوتي
+// ============================================================
+// حساب فلكي محلي (بدون إنترنت، بدون API خارجي) بطريقة MWL (رابطة العالم الإسلامي —
+// فجر 18°، عشاء 17°) وهي نفس الطريقة اللي بتستخدمها أغلب تطبيقات المواقيت. ممكن يكون
+// فيه فرق دقيقة أو اتنين عن نداء المسجد المحلي عندك — عشان كده فيه "تصحيح يدوي بالدقيقة"
+// لكل صلاة في الإعدادات تقدر تظبطه عليه مرة واحدة ويفضل ثابت.
+// ⚠️ مهم جدًا: التنبيه ده بيشتغل بس والتطبيق مفتوح (حتى لو تاب تاني/في الخلفية) — ده
+// تطبيق ويب مش تطبيق نظام، فمينفعش يوصلك تنبيه والتطبيق مقفول تمامًا (نفس أي موقع ويب).
+function _julianDay(y,m,d){
+  if(m<=2){y-=1;m+=12;}
+  var A=Math.floor(y/100),B=2-A+Math.floor(A/4);
+  return Math.floor(365.25*(y+4716))+Math.floor(30.6001*(m+1))+d+B-1524.5;
+}
+function _sunPosition(jd){
+  var D=jd-2451545.0;
+  var g=(357.529+0.98560028*D)%360; if(g<0)g+=360;
+  var q=(280.459+0.98564736*D)%360; if(q<0)q+=360;
+  var L=(q+1.915*Math.sin(g*Math.PI/180)+0.020*Math.sin(2*g*Math.PI/180))%360; if(L<0)L+=360;
+  var e=23.439-0.00000036*D;
+  var RA=Math.atan2(Math.cos(e*Math.PI/180)*Math.sin(L*Math.PI/180),Math.cos(L*Math.PI/180))*180/Math.PI/15;
+  RA=RA-360/15*Math.floor(RA/(360/15));
+  var eqt=q/15-RA; if(eqt>12)eqt-=24; if(eqt<-12)eqt+=24;
+  var decl=Math.asin(Math.sin(e*Math.PI/180)*Math.sin(L*Math.PI/180))*180/Math.PI;
+  return {decl:decl,eqt:eqt};
+}
+// بيرجّع الوقت (ساعات، من نص الليل) اللي الشمس بتوصل فيه لزاوية معينة تحت/فوق الأفق —
+// نفس المعادلة بتحسب الشروق/الغروب/الفجر/العشاء، الفرق بس زاوية الشمس المطلوبة
+function _sunAngleTime(angle,lat,decl,noon,dir){
+  var latR=lat*Math.PI/180,declR=decl*Math.PI/180,angleR=angle*Math.PI/180;
+  var cosH=(Math.sin(angleR)-Math.sin(latR)*Math.sin(declR))/(Math.cos(latR)*Math.cos(declR));
+  if(cosH>1||cosH<-1)return null; // الشمس مابتوصلش للزاوية دي (خطوط عرض قطبية قصوى)
+  var H=Math.acos(cosH)*180/Math.PI/15;
+  return noon+dir*H;
+}
+function _asrTime(lat,decl,noon){
+  var latR=lat*Math.PI/180,declR=decl*Math.PI/180;
+  var t=Math.atan(1/(1+Math.tan(Math.abs(latR-declR))))*180/Math.PI;
+  return _sunAngleTime(t,lat,decl,noon,1);
+}
+function _computePrayerTimes(lat,lng,tz,date){
+  var jd=_julianDay(date.getFullYear(),date.getMonth()+1,date.getDate());
+  var sp=_sunPosition(jd-tz/24);
+  var noon=12+tz-lng/15-sp.eqt;
+  var fajr=_sunAngleTime(-18,lat,sp.decl,noon,-1);
+  var sunrise=_sunAngleTime(-0.833,lat,sp.decl,noon,-1);
+  var maghrib=_sunAngleTime(-0.833,lat,sp.decl,noon,1);
+  var isha=_sunAngleTime(-17,lat,sp.decl,noon,1);
+  var asr=_asrTime(lat,sp.decl,noon);
+  var off=(DB.settings.prayerTimes&&DB.settings.prayerTimes.offsets)||{};
+  function m(h,key){return h===null?null:h+((off[key]||0)/60);}
+  return {fajr:m(fajr,'fajr'),sunrise:sunrise,dhuhr:m(noon,'dhuhr'),asr:m(asr,'asr'),maghrib:m(maghrib,'maghrib'),isha:m(isha,'isha')};
+}
+function _fmtPrayerHour(h){
+  if(h===null||isNaN(h))return '—';
+  h=((h%24)+24)%24;
+  var hh=Math.floor(h),mm=Math.round((h-hh)*60);
+  if(mm===60){mm=0;hh=(hh+1)%24;}
+  var ampm=hh<12?'ص':'م';var hh12=hh%12;if(hh12===0)hh12=12;
+  return hh12+':'+String(mm).padStart(2,'0')+' '+ampm;
+}
+function _todayPrayerTimes(){
+  var pt=DB.settings.prayerTimes;
+  if(!pt||pt.lat==null||pt.lng==null)return null;
+  var tz=pt.tz!=null?pt.tz:-(new Date().getTimezoneOffset()/60);
+  return _computePrayerTimes(pt.lat,pt.lng,tz,new Date());
+}
+function usePrayerCurrentLocation(){
+  if(!navigator.geolocation)return showToast('⚠️ المتصفح ده مش بيدعم تحديد الموقع','#dc2626');
+  showToast('📍 بنحدد موقعك...','#2563eb');
+  navigator.geolocation.getCurrentPosition(function(pos){
+    document.getElementById('prayer-lat').value=pos.coords.latitude.toFixed(4);
+    document.getElementById('prayer-lng').value=pos.coords.longitude.toFixed(4);
+    showToast('✅ اتحدد الموقع — دوس حفظ','#16a34a');
+  },function(err){
+    showToast('⚠️ اتعذر تحديد الموقع — اكتب الإحداثيات يدوي أو دور عليها في خرائط جوجل','#dc2626');
+  },{enableHighAccuracy:false,timeout:8000});
+}
+async function savePrayerSettings(){
+  var lat=+v('prayer-lat'),lng=+v('prayer-lng');
+  if(!lat||!lng||isNaN(lat)||isNaN(lng))return showToast('⚠️ حدد الموقع الأول (زرار "استخدم موقعي")','#dc2626');
+  DB.settings.prayerTimes={
+    enabled:document.getElementById('prayer-enabled').checked,
+    lat:lat,lng:lng,tz:-(new Date().getTimezoneOffset()/60),
+    sound:document.getElementById('prayer-sound').checked,
+    offsets:{
+      fajr:+v('prayer-off-fajr')||0,dhuhr:+v('prayer-off-dhuhr')||0,
+      asr:+v('prayer-off-asr')||0,maghrib:+v('prayer-off-maghrib')||0,isha:+v('prayer-off-isha')||0
+    }
+  };
+  if(DB.settings.prayerTimes.enabled&&typeof Notification!=='undefined'&&Notification.permission==='default'){
+    try{await Notification.requestPermission();}catch(e){}
+  }
+  await persist();
+  __prayerAlertedToday={};
+  showToast('✅ اتحفظت مواعيد الصلاة','#16a34a');
+  renderSettings();
+}
+// ⚠️ نغمة تنبيه مولّدة برمجيًا (Web Audio API) — مفيش ملف صوت آذان متضمّن في التطبيق
+// (حقوق ملكية)، فبنستخدم نغمة جرس بسيطة واضحة كبديل للفت الانتباه لدخول الوقت.
+function _playPrayerSound(){
+  try{
+    var ctx=new (window.AudioContext||window.webkitAudioContext)();
+    [660,880,660].forEach(function(freq,i){
+      var o=ctx.createOscillator(),g=ctx.createGain();
+      o.type='sine';o.frequency.value=freq;
+      o.connect(g);g.connect(ctx.destination);
+      var t=ctx.currentTime+i*0.35;
+      g.gain.setValueAtTime(0.0001,t);
+      g.gain.exponentialRampToValueAtTime(0.3,t+0.05);
+      g.gain.exponentialRampToValueAtTime(0.0001,t+0.32);
+      o.start(t);o.stop(t+0.33);
+    });
+  }catch(e){console.warn('تعذر تشغيل صوت التنبيه:',e);}
+}
+var __prayerAlertedToday={},__prayerAlertedDate=null;
+function _checkPrayerAlerts(){
+  var pt=DB.settings.prayerTimes;
+  if(!pt||!pt.enabled||pt.lat==null)return;
+  var now=new Date();
+  var todayKey=now.toDateString();
+  if(__prayerAlertedDate!==todayKey){__prayerAlertedToday={};__prayerAlertedDate=todayKey;}
+  var times=_todayPrayerTimes();if(!times)return;
+  var nowH=now.getHours()+now.getMinutes()/60;
+  var names={fajr:'الفجر',dhuhr:'الظهر',asr:'العصر',maghrib:'المغرب',isha:'العشاء'};
+  ['fajr','dhuhr','asr','maghrib','isha'].forEach(function(k){
+    var h=times[k];if(h===null)return;
+    if(!__prayerAlertedToday[k]&&nowH>=h&&nowH<h+5/60){ // فرصة 5 دقايق من دخول الوقت عشان مايفوتش لو التاب كان مقفول شوية
+      __prayerAlertedToday[k]=true;
+      showToast('🕌 حان الآن موعد أذان '+names[k],'#0f172a');
+      if(pt.sound)_playPrayerSound();
+      if(typeof Notification!=='undefined'&&Notification.permission==='granted'){
+        try{new Notification('🕌 حان وقت الصلاة',{body:'حان الآن موعد أذان '+names[k],icon:'./icon-192.png'});}catch(e){}
+      }
+    }
+  });
+}
+setInterval(_checkPrayerAlerts,20000);
+
+function renderPrayerSettingsCard(){
+  var pt=DB.settings.prayerTimes||{};
+  var times=_todayPrayerTimes();
+  return '<div class="card">'+
+    '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #e2e8f0">🕌 مواعيد الصلاة والتنبيه</div>'+
+    '<label style="display:flex;align-items:center;gap:8px;margin-bottom:10px;cursor:pointer"><input type="checkbox" id="prayer-enabled" '+(pt.enabled?'checked':'')+' style="width:18px;height:18px"><span style="font-size:13px;font-weight:700">تفعيل تنبيه دخول وقت الصلاة (والتطبيق مفتوح)</span></label>'+
+    '<label style="display:flex;align-items:center;gap:8px;margin-bottom:10px;cursor:pointer"><input type="checkbox" id="prayer-sound" '+(pt.sound!==false?'checked':'')+' style="width:18px;height:18px"><span style="font-size:13px;font-weight:700">🔊 صوت تنبيه (مش أذان كامل — نغمة جرس)</span></label>'+
+    '<div style="display:flex;gap:6px;margin-bottom:8px">'+
+    '<input id="prayer-lat" type="number" step="any" placeholder="خط العرض" value="'+(pt.lat!=null?pt.lat:'')+'" style="flex:1;padding:9px;border:1.5px solid #e2e8f0;border-radius:9px;font-family:inherit;font-size:12px;direction:ltr;text-align:center">'+
+    '<input id="prayer-lng" type="number" step="any" placeholder="خط الطول" value="'+(pt.lng!=null?pt.lng:'')+'" style="flex:1;padding:9px;border:1.5px solid #e2e8f0;border-radius:9px;font-family:inherit;font-size:12px;direction:ltr;text-align:center">'+
+    '</div>'+
+    '<button type="button" onclick="usePrayerCurrentLocation()" class="btn btn-outline btn-full" style="margin-bottom:10px">📍 استخدم موقعي الحالي</button>'+
+    (times?('<div style="background:#f0f9ff;border-radius:10px;padding:10px;margin-bottom:10px;display:grid;grid-template-columns:repeat(5,1fr);gap:4px;text-align:center">'+
+      ['fajr','dhuhr','asr','maghrib','isha'].map(function(k){
+        var lbl={fajr:'الفجر',dhuhr:'الظهر',asr:'العصر',maghrib:'المغرب',isha:'العشاء'}[k];
+        return '<div><div style="font-size:10px;color:#64748b">'+lbl+'</div><div style="font-size:11px;font-weight:800;color:#0369a1">'+_fmtPrayerHour(times[k])+'</div></div>';
+      }).join('')+'</div>'):'')+
+    '<div style="font-size:11px;color:#64748b;margin-bottom:6px">تصحيح يدوي بالدقيقة (لو فيه فرق عن مسجدك) — سيبها 0 لو مش محتاج</div>'+
+    '<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-bottom:10px">'+
+    ['fajr','dhuhr','asr','maghrib','isha'].map(function(k){
+      var lbl={fajr:'فجر',dhuhr:'ظهر',asr:'عصر',maghrib:'مغرب',isha:'عشا'}[k];
+      return '<div style="text-align:center"><div style="font-size:9px;color:#94a3b8">'+lbl+'</div><input id="prayer-off-'+k+'" type="number" value="'+((pt.offsets&&pt.offsets[k])||0)+'" style="width:100%;padding:5px 2px;border:1.5px solid #e2e8f0;border-radius:7px;font-size:11px;text-align:center;direction:ltr"></div>';
+    }).join('')+
+    '</div>'+
+    '<button onclick="__runOnce(this,savePrayerSettings)" class="btn btn-primary btn-full" style="margin-bottom:6px">💾 حفظ</button>'+
+    '<button type="button" onclick="_playPrayerSound()" class="btn btn-outline btn-full">🔊 تجربة الصوت</button>'+
+    '<div style="font-size:10.5px;color:#94a3b8;margin-top:8px">⚠️ الحساب فلكي تقريبي (طريقة رابطة العالم الإسلامي) وبيشتغل بس والتطبيق مفتوح — مش بديل عن تطبيق مواقيت متخصص لو محتاج دقة دينية عالية.</div>'+
+    '</div>';
+}
+
 
 // محرر صغير لإضافة/حذف عناصر من قائمة أنواع المخزون (partTypes أو machineTypes)
 function settingsTypesEditor(field,label,color,productField){
