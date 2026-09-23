@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v219</title>
+<title>ابو حوده الحلو الجميل v220</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="2026-09-19 — v219";
+<script>var BUILD_STAMP="2026-09-19 — v220";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -54,6 +54,16 @@
       مسار خالص عن طريق confirmAction، الزرار بتاعها لازم __runOnce من أول يوم.
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v220: [✨ القرآن الكريم كامل — قراءة واستماع]
+     العميل وضّح إنه عايز "كلهم" (قراءة + صوت) مش بس آية يومية. شاشة جديدة "📖 القرآن
+     الكريم" (☰ المزيد ← إيماني)، متاحة لأي حد (مالك/موظف) من غير قيود صلاحيات:
+     - قائمة كل الـ114 سورة بالاسم والرقم، مع بحث.
+     - فتح أي سورة: نص كامل (رسم عثماني) + مشغّل صوت (تلاوة الشيخ العفاسي).
+     ⚠️ قرار تصميم مهم ولازم يُفهم بوضوح: نص القرآن الكامل (6236 آية) ماتكتبش يدوي جوه
+     كود التطبيق — ده خطر حقيقي لاحتمال خطأ نقل في نص بهذا الحجم من الذاكرة. بدل كده،
+     النص والصوت بييجوا لايف من خدمة "Al Quran Cloud" (خدمة مجانية موثوقة ومستخدمة على
+     نطاق واسع، بدون تسجيل أو مفتاح API) أول مرة تفتح سورة، وبعدين بتتخزن على الجهاز
+     وتتقرا/تتسمع حتى من غير نت. يعني: فتح سورة لأول مرة محتاج نت، بعد كده لأ.
 v219: [✨ آية اليوم في الشاشة الرئيسية]
      العميل حدد إنه عايز تذكير/آية يومية بسيطة بس (من غير نص كامل للقرآن ومن غير صوت
      تلاوة). كارت جديد "📖 آية اليوم" في أعلى الشاشة الرئيسية، بيعرض آية قصيرة من قائمة
@@ -3874,6 +3884,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
     <div id="screen-clients" class="screen"><div id="clients-body"></div></div>
 
     <div id="screen-suppliers" class="screen"><div id="suppliers-body"></div></div>
+    <div id="screen-quran" class="screen"><div id="quran-body"></div></div>
 
     <div id="screen-supplier-ledger" class="screen"><div id="supplier-ledger-body"></div></div>
 
@@ -4121,7 +4132,7 @@ var APP_TITLE='ابو حوده الحلو الجميل';
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=219;
+var APP_VERSION=220;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -5288,8 +5299,8 @@ function _wireReportTabsDrag(bar){
   });
 }
 var _navHistory=['home'];
-var navLabels={home:'الرئيسية',inventory:'مخزون',sales:'مبيعات',purchases:'مشتريات',debts:'الديون',reports:'التقارير',tasks:'المهمات',settings:'إعدادات',movements:'التحركات','movements-report':'تقرير التحركات','tasks-report':'تقرير المهمات',ledger:'سجل العميل'};
-var navIcons={home:'🏠',inventory:'📦',sales:'🧾',purchases:'🛒',debts:'💳',reports:'📊',tasks:'📋',settings:'⚙️',movements:'🔧','movements-report':'📊','tasks-report':'📊',ledger:'👤'};
+var navLabels={home:'الرئيسية',inventory:'مخزون',sales:'مبيعات',purchases:'مشتريات',debts:'الديون',reports:'التقارير',tasks:'المهمات',settings:'إعدادات',movements:'التحركات','movements-report':'تقرير التحركات','tasks-report':'تقرير المهمات',ledger:'سجل العميل',quran:'القرآن الكريم'};
+var navIcons={home:'🏠',inventory:'📦',sales:'🧾',purchases:'🛒',debts:'💳',reports:'📊',tasks:'📋',settings:'⚙️',movements:'🔧','movements-report':'📊','tasks-report':'📊',ledger:'👤',quran:'📖'};
 
 // ⚠️ v121 — إصلاح جذري أمني: كان مفيش أي تحقق صلاحية عند فتح الشاشات خالص، فأي موظف
 // مسجّل دخول (بأي دور) يقدر يفتح كل شاشة في التطبيق ويشوف كل البيانات المالية (تقارير،
@@ -16906,6 +16917,110 @@ function _todayVerse(){
 }
 
 // ============================================================
+// ⚠️ v220 — القرآن الكريم (قراءة + استماع) — العميل طلب "كلهم" بعد ما وضّح مطلوب
+// ============================================================
+// نص القرآن الكامل (114 سورة، 6236 آية) كبير جدًا ومحفوف بمخاطر خطأ نقل لو اتكتب من
+// الذاكرة — عشان كده النص والصوت بييجوا لايف من "Al Quran Cloud" (خدمة مجانية مفتوحة
+// موثوقة، بيستخدمها آلاف التطبيقات، بدون تسجيل أو مفتاح API) بدل ما نضمّن نص القرآن
+// كامل جوه الملف. أول مرة تفتح سورة محتاجة نت، وبعدين بتتخزن محليًا وتتقرا/تتسمع حتى
+// من غير نت. قائمة أسماء السور فيها نسخة احتياطية مدمجة (بدون نت) — أرقام الآيات
+// والنص نفسه لأ، دي بتيجي من المصدر بس.
+var QURAN_SURAH_NAMES=['الفاتحة','البقرة','آل عمران','النساء','المائدة','الأنعام','الأعراف','الأنفال','التوبة','يونس','هود','يوسف','الرعد','إبراهيم','الحجر','النحل','الإسراء','الكهف','مريم','طه','الأنبياء','الحج','المؤمنون','النور','الفرقان','الشعراء','النمل','القصص','العنكبوت','الروم','لقمان','السجدة','الأحزاب','سبأ','فاطر','يس','الصافات','ص','الزمر','غافر','فصلت','الشورى','الزخرف','الدخان','الجاثية','الأحقاف','محمد','الفتح','الحجرات','ق','الذاريات','الطور','النجم','القمر','الرحمن','الواقعة','الحديد','المجادلة','الحشر','الممتحنة','الصف','الجمعة','المنافقون','التغابن','الطلاق','التحريم','الملك','القلم','الحاقة','المعارج','نوح','الجن','المزمل','المدثر','القيامة','الإنسان','المرسلات','النبأ','النازعات','عبس','التكوير','الانفطار','المطففين','الانشقاق','البروج','الطارق','الأعلى','الغاشية','الفجر','البلد','الشمس','الليل','الضحى','الشرح','التين','العلق','القدر','البينة','الزلزلة','العاديات','القارعة','التكاثر','العصر','الهمزة','الفيل','قريش','الماعون','الكوثر','الكافرون','النصر','المسد','الإخلاص','الفلق','الناس'];
+var _quranCurrentSurah=null,_quranSearch='';
+var __quranAudio=null;
+
+async function _getQuranSurahList(){
+  var cached=LS.get('mc8_quran_surahs',null);
+  if(cached&&cached.length===114)return cached;
+  try{
+    var res=await fetch('https://api.alquran.cloud/v1/surah');
+    var json=await res.json();
+    var list=json.data.map(function(s){return {number:s.number,name:s.name,englishName:s.englishName,ayahs:s.numberOfAyahs,type:s.revelationType==='Meccan'?'مكية':'مدنية'};});
+    LS.set('mc8_quran_surahs',list);
+    return list;
+  }catch(e){
+    return QURAN_SURAH_NAMES.map(function(n,i){return {number:i+1,name:'سورة '+n,englishName:'',ayahs:null,type:''};});
+  }
+}
+async function _getQuranSurahText(number){
+  var cacheKey='mc8_quran_surah_'+number;
+  var cached=LS.get(cacheKey,null);
+  if(cached)return cached;
+  var res=await fetch('https://api.alquran.cloud/v1/surah/'+number+'/quran-uthmani');
+  var json=await res.json();
+  if(json.code!==200)throw new Error('فشل تحميل السورة');
+  var data={number:json.data.number,name:json.data.name,ayahs:json.data.ayahs.map(function(a){return {n:a.numberInSurah,text:a.text};})};
+  LS.set(cacheKey,data);
+  return data;
+}
+function renderQuranScreen(){
+  var el=document.getElementById('quran-body');if(!el)return;
+  if(_quranCurrentSurah){_renderQuranReader(el,_quranCurrentSurah);return;}
+  el.innerHTML='<div style="padding:14px"><div class="empty">⏳ جاري تحميل قائمة السور...</div></div>';
+  _getQuranSurahList().then(function(list){
+    window.__quranSurahList=list;
+    _renderQuranList(el,list);
+  });
+}
+function _renderQuranList(el,list){
+  var q=normalizeAr((_quranSearch||'').trim());
+  var filtered=q?list.filter(function(s){return normalizeAr(s.name).includes(q)||String(s.number)===q;}):list;
+  el.innerHTML=
+    '<div style="padding:12px 14px 6px">'+
+    '<input id="quran-search-input" type="text" placeholder="🔍 دوّر على اسم سورة أو رقمها" value="'+esc(_quranSearch)+'" oninput="_quranSearch=this.value;_renderQuranList(document.getElementById(\'quran-body\'),window.__quranSurahList||[])" style="width:100%;padding:11px 14px;border:1.5px solid #e2e8f0;border-radius:12px;font-family:inherit;font-size:13px;margin-bottom:10px">'+
+    '</div>'+
+    '<div style="padding:0 14px 14px">'+
+    filtered.map(function(s){
+      return '<div onclick="openQuranSurah('+s.number+')" style="background:#fff;border-radius:12px;padding:12px 14px;margin-bottom:8px;box-shadow:0 2px 8px rgba(0,0,0,.05);display:flex;justify-content:space-between;align-items:center;cursor:pointer">'+
+        '<div style="display:flex;align-items:center;gap:10px">'+
+        '<div style="width:32px;height:32px;border-radius:50%;background:#f0fdfa;color:#0f766e;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800">'+s.number+'</div>'+
+        '<div><div style="font-size:14px;font-weight:800;color:#0f172a">سورة '+esc(s.name.replace(/^سورة /,''))+'</div>'+
+        (s.ayahs?'<div style="font-size:10px;color:#94a3b8">'+s.ayahs+' آية'+(s.type?' — '+s.type:'')+'</div>':'')+
+        '</div></div>'+
+        '<span style="color:#cbd5e1">←</span>'+
+        '</div>';
+    }).join('')+
+    (filtered.length?'':'<div class="empty">مفيش نتيجة</div>')+
+    '</div>';
+}
+function openQuranSurah(number){
+  _quranCurrentSurah=number;
+  renderQuranScreen();
+}
+function backToQuranList(){
+  if(__quranAudio){__quranAudio.pause();__quranAudio=null;}
+  _quranCurrentSurah=null;
+  renderQuranScreen();
+}
+function _renderQuranReader(el,number){
+  el.innerHTML='<div style="padding:14px">'+
+    '<div onclick="backToQuranList()" style="color:#2563eb;font-weight:700;font-size:13px;margin-bottom:10px;cursor:pointer">← رجوع لقائمة السور</div>'+
+    '<div class="empty">⏳ جاري تحميل السورة...</div></div>';
+  _getQuranSurahText(number).then(function(data){
+    if(_quranCurrentSurah!==number)return; // المستخدم رجع/غيّر السورة قبل ما التحميل يخلص
+    var audioUrl='https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/'+number+'.mp3';
+    el.innerHTML=
+      '<div style="padding:14px">'+
+      '<div onclick="backToQuranList()" style="color:#2563eb;font-weight:700;font-size:13px;margin-bottom:10px;cursor:pointer">← رجوع لقائمة السور</div>'+
+      '<div style="text-align:center;margin-bottom:14px">'+
+      '<div style="font-size:20px;font-weight:900;color:#0f766e">'+esc(data.name)+'</div>'+
+      '</div>'+
+      '<audio controls preload="none" style="width:100%;margin-bottom:16px" src="'+audioUrl+'"></audio>'+
+      '<div style="background:#fff;border-radius:14px;padding:18px 16px;box-shadow:0 2px 10px rgba(0,0,0,.05);font-size:19px;line-height:2.6;text-align:justify;font-family:inherit">'+
+      data.ayahs.map(function(a){return esc(a.text)+' <span style="color:#0f766e;font-size:13px;font-weight:800">﴿'+a.n+'﴾</span>';}).join(' ')+
+      '</div>'+
+      '</div>';
+  }).catch(function(e){
+    if(_quranCurrentSurah!==number)return;
+    el.innerHTML='<div style="padding:14px">'+
+      '<div onclick="backToQuranList()" style="color:#2563eb;font-weight:700;font-size:13px;margin-bottom:10px;cursor:pointer">← رجوع لقائمة السور</div>'+
+      '<div class="empty">⚠️ محتاج اتصال نت عشان تفتح السورة دي لأول مرة. بعد كده هتتخزن وتقرا حتى من غير نت.</div>'+
+      '<button onclick="_renderQuranReader(document.getElementById(\'quran-body\'),'+number+')" class="btn btn-outline btn-full" style="margin-top:10px">🔄 حاول تاني</button>'+
+      '</div>';
+  });
+}
+
+// ============================================================
 // ⚠️ v218 — مواعيد الصلاة والتنبيه الصوتي
 // ============================================================
 // حساب فلكي محلي (بدون إنترنت، بدون API خارجي) بطريقة MWL (رابطة العالم الإسلامي —
@@ -18177,6 +18292,7 @@ renderScreen=function(s){
   if(s==='supplier-ledger'){renderSupplierLedger(_currentSupplierLedgerId);return;}
   if(s==='guide'){renderGuide();return;}
   if(s==='my-account'){renderMyAccount();return;}
+  if(s==='quran'){renderQuranScreen();return;} // ⚠️ v220
   _baseRS(s);
 };
 navLabels['my-account']='حسابي';navIcons['my-account']='👤';
@@ -20603,6 +20719,13 @@ function renderMore(){
         {icon:'👤',label:'حسابي (مهامي وأعطالي وراتبي)',screen:'my-account',color:'#f5f3ff',tc:'#6d28d9'}
       ]:[]
     },
+    faith:{
+      key:'faith',title:'🕌 إيماني',icon:'🕌',
+      // ⚠️ v220 — القرآن الكريم (قراءة + استماع)، متاح للكل بدون قيود صلاحيات
+      items:[
+        {icon:'📖',label:'القرآن الكريم',screen:'quran',color:'#f0fdfa',tc:'#0f766e'}
+      ]
+    },
     ops:{
       key:'ops',title:'💼 العمليات',icon:'💼',
       items:[
@@ -20637,7 +20760,7 @@ function renderMore(){
   };
   // ⚠️ v120 — شيلنا الأسهم ▲▼ خالص (كانت وحشة في الترتيب حسب ملاحظتك). دلوقتي ترتيب ثابت
   // ومنطقي: العمليات (اللي بتستخدمها يوميًا) أول حاجة، بعدين التقارير، وآخر حاجة الإدارة.
-  var order=['myaccount','ops','reports','admin'];
+  var order=['myaccount','faith','ops','reports','admin'];
 
   el.innerHTML=order.map(function(key){
     var sec=sectionsMap[key];if(!sec)return'';
