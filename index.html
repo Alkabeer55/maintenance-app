@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v220</title>
+<title>ابو حوده الحلو الجميل v221</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="2026-09-19 — v220";
+<script>var BUILD_STAMP="2026-09-19 — v221";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -54,6 +54,19 @@
       مسار خالص عن طريق confirmAction، الزرار بتاعها لازم __runOnce من أول يوم.
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v221: [✨ تشغيل متواصل للقرآن + مواعيد الصلاة والآية في الرئيسية + إخفاء الملخص المالي + تعديل فروق الجرد مباشرة]
+     1) تشغيل متواصل: لما سورة تخلص صوتها، اللي بعدها تشتغل أوتوماتيك (زرار تشغيل/إيقاف
+     الخاصية دي متاح تحت مشغّل الصوت). بيستخدم نفس عنصر الصوت الموجود (مش بيبني واحد
+     جديد) عشان المتصفح يسمح بالتشغيل التلقائي المتواصل من غير ما يحتاج ضغطة يوزر جديدة.
+     2) "آية اليوم" بقت أول حاجة فوق الشاشة الرئيسية، والاختيار بقى عشوائي (مش تسلسلي)
+     بذرة ثابتة على تاريخ اليوم — نفس الآية طول اليوم، وعشوائية تاني بكرة.
+     3) مواعيد الصلاة الخمسة بقت تظهر كمان في الشاشة الرئيسية (مش بس الإعدادات) — بس لو
+     المستخدم فعّلها وحدد موقعه، غير كده الكارت مش بيظهر خالص.
+     4) الملخص المالي في الرئيسية (المبيعات/الربح/الديون) بقى ضبابي افتراضيًا لخصوصية
+     أكتر (لو حد شايف الشاشة من بعيد)، وبيظهر واضح بمجرد الضغط عليه.
+     5) شاشة مقارنة الجرد: بقى فيها خانة كمية قابلة للتعديل جنب كل صنف زيادة/نقص، عشان
+     تصحح رقم غلط فورًا من نفس الشاشة من غير ما تحتاج ترجع لكل شاشة العد من الأول —
+     متاحة طول ما الجردة لسه مش معتمدة نهائيًا.
 v220: [✨ القرآن الكريم كامل — قراءة واستماع]
      العميل وضّح إنه عايز "كلهم" (قراءة + صوت) مش بس آية يومية. شاشة جديدة "📖 القرآن
      الكريم" (☰ المزيد ← إيماني)، متاحة لأي حد (مالك/موظف) من غير قيود صلاحيات:
@@ -3800,6 +3813,8 @@ input:checked+.slider:before{transform:translateX(-20px)}
   <div id="content">
 
     <div id="screen-home" class="screen active">
+      <div id="home-verse"></div>
+      <div id="home-prayer-times"></div>
       <div id="home-attendance-top"></div>
       <div class="hero">
         <div style="font-size:22px;font-weight:900;margin-bottom:4px">🔧 أبو حودة الحلو الجميل</div>
@@ -3829,7 +3844,8 @@ input:checked+.slider:before{transform:translateX(-20px)}
         </div>
         <div id="today-sched-list" style="margin-top:8px"></div>
       </div>
-      <div id="home-fin-summary">
+      <div style="position:relative">
+      <div id="home-fin-summary" style="filter:blur(7px);transition:filter .2s">
       <div class="stats-row">
         <div class="stat-card" style="background:#2563eb;cursor:pointer" onclick="navigate('reports')">
           <div id="stat-sales-label" style="font-size:11px;opacity:.8;margin-bottom:4px">💰 مبيعات الشهر</div>
@@ -3849,7 +3865,10 @@ input:checked+.slider:before{transform:translateX(-20px)}
       <div id="profit-gap-card"></div>
       <div id="retained-total-card"></div>
       </div>
-      <div id="home-verse"></div>
+      <div id="home-fin-reveal-overlay" onclick="toggleFinSummaryReveal()" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;cursor:pointer">
+        <span style="background:#0f172a;color:#fff;padding:9px 18px;border-radius:20px;font-size:12px;font-weight:800;box-shadow:0 4px 12px rgba(0,0,0,.2)">👁️ دوس لإظهار الأرقام</span>
+      </div>
+      </div>
       <div style="text-align:center;padding:10px 0;color:#94a3b8;font-size:11px">v<span id="home-version-stamp">1</span> — <span id="build-stamp"></span> 💾 Offline</div>
     </div>
 
@@ -4132,7 +4151,7 @@ var APP_TITLE='ابو حوده الحلو الجميل';
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=220;
+var APP_VERSION=221;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -5597,13 +5616,27 @@ function openGlobalSearch(){
 }
 
 
+// ⚠️ v220 — إخفاء الملخص المالي في الرئيسية بضبابية افتراضيًا (خصوصية لو حد شايف
+// الشاشة من بعيد)، ويظهر بوضوح بمجرد الضغط عليه. الحالة بترجع تتخفي تلقائيًا في أول
+// مرة تفتح فيها التطبيق (متغيّر جافاسكريبت عادي، مش محفوظ دائم).
+var _finSummaryRevealed=false;
+function toggleFinSummaryReveal(){
+  _finSummaryRevealed=!_finSummaryRevealed;
+  _applyFinSummaryReveal();
+}
+function _applyFinSummaryReveal(){
+  var wrap=document.getElementById('home-fin-summary'),ov=document.getElementById('home-fin-reveal-overlay');
+  if(!wrap)return;
+  wrap.style.filter=_finSummaryRevealed?'none':'blur(7px)';
+  if(ov)ov.style.display=_finSummaryRevealed?'none':'flex';
+}
+
 // ========== MODULE: HOME ==========
 // ===== HOME =====
 // ===== HOME =====
 function renderHome(){
-  // ⚠️ v219 — "آية اليوم": تذكير بسيط بس، آية قصيرة معروفة بتتغيّر كل يوم (نفس الآية
-  // طول اليوم، بتتغيّر تاني بكرة) — قائمة مختارة من آيات قصيرة مشهورة جدًا تقليل احتمال
-  // أي خطأ في النقل، مش القرآن كامل ومفيش صوت (حسب طلب العميل تحديدًا).
+  // ⚠️ v220 — "آية اليوم" بقت فوق الشاشة (زي ما طلب العميل)، والاختيار بقى عشوائي مش
+  // بالتسلسل (نفس الآية ثابتة طول اليوم، وبتتغيّر عشوائي بكرة).
   var verseEl=document.getElementById('home-verse');
   if(verseEl){
     var v_=_todayVerse();
@@ -5613,6 +5646,23 @@ function renderHome(){
       '<div style="color:#99f6e4;font-size:11px;margin-top:8px">'+esc(v_.ref)+'</div>'+
       '</div>';
   }
+  // ⚠️ v220 — مواعيد الصلاة على الرئيسية كمان (مش بس الإعدادات) — بتظهر بس لو المستخدم
+  // فعّلها وحدد موقعه من الإعدادات؛ غير كده الكارت مايظهرش خالص.
+  var prayerEl=document.getElementById('home-prayer-times');
+  if(prayerEl){
+    var ptSet=DB.settings&&DB.settings.prayerTimes;
+    if(ptSet&&ptSet.enabled&&ptSet.lat!=null){
+      var pTimes=_todayPrayerTimes();
+      prayerEl.innerHTML=pTimes?('<div style="background:#fff;border-radius:14px;padding:10px 12px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.06);display:grid;grid-template-columns:repeat(5,1fr);gap:4px;text-align:center">'+
+        ['fajr','dhuhr','asr','maghrib','isha'].map(function(k){
+          var lbl={fajr:'الفجر',dhuhr:'الظهر',asr:'العصر',maghrib:'المغرب',isha:'العشاء'}[k];
+          return '<div><div style="font-size:9.5px;color:#94a3b8">'+lbl+'</div><div style="font-size:11px;font-weight:800;color:#0f766e">'+_fmtPrayerHour(pTimes[k])+'</div></div>';
+        }).join('')+'</div>'):'';
+    }else{
+      prayerEl.innerHTML='';
+    }
+  }
+  _applyFinSummaryReveal(); // ⚠️ v220 — إعادة تطبيق حالة إخفاء/إظهار الملخص المالي عند كل رندر
   // ⚠️ v121 — إخفاء ملخص الأرباح/المبيعات/الديون في الرئيسية عن أي موظف معندوش صلاحية
   // "عرض" في التقارير، بدل ما يكون ظاهر للجميع زي ما كان قبل كده
   // v134 — + خصوصية بيانات الموظفين: لو الإعداد مفعّل، الملخص المالي ده للمالك بس نهائيًا
@@ -7152,6 +7202,33 @@ async function closeStocktake(){
 }
 
 // عرض تقرير الفروق لجردة مقفولة (closed) — من غير ما يلمس المخزون؛ الاعتماد فقط هو اللي بيعدّل
+// ⚠️ v221 — تعديل مباشر لكمية صنف زيادة/نقص من شاشة المقارنة نفسها، من غير الرجوع
+// لكل شاشة العد. بيرفّض التعديل لو الجردة اتعتمدت خالص (بعد الاعتماد المخزون اتحدّث
+// فعليًا وده عملية تانية تمامًا).
+function editStocktakeDiffCount(stId,productId,newValStr){
+  var st=(DB.stocktakes||[]).find(function(x){return x.id===stId;});if(!st)return;
+  if(st.status==='approved')return showToast('⚠️ الجردة دي معتمدة بالفعل — مينفعش تتعدل','#dc2626');
+  var newVal=+newValStr;
+  if(isNaN(newVal)||newVal<0)return showToast('⚠️ كمية غير صحيحة','#dc2626');
+  var item=st.items.find(function(i){return i.productId===productId;});if(!item)return;
+  item.counted_qty=roundQty(newVal);
+  item.confirmed=true;
+  DB.stocktakes=DB.stocktakes.map(function(s){return s.id===stId?st:s;});
+  persist();
+  _refreshStocktakeReportView(stId);
+}
+function _refreshStocktakeReportView(stId){
+  if(document.getElementById('inv-stocktake-body')&&_activeStocktakeId===stId){
+    renderStocktake();
+    return;
+  }
+  var overlay=document.getElementById('modal-overlay');
+  if(overlay&&overlay.classList.contains('open')){
+    var st=(DB.stocktakes||[]).find(function(x){return x.id===stId;});if(!st)return;
+    var mb=document.getElementById('modal-body');
+    if(mb)mb.innerHTML=_renderStocktakeReport(st)+'<button class="btn btn-outline btn-full" style="margin-top:8px" onclick="closeModal()">إغلاق</button>';
+  }
+}
 function _renderStocktakeReport(st){
   var diffs=st.items.filter(function(i){return i.counted_qty!==i.system_qty;});
   var shortages=diffs.filter(function(i){return i.counted_qty<i.system_qty;});
@@ -7201,8 +7278,15 @@ function _renderStocktakeReport(st){
       '<b style="font-size:13px">'+esc(i.name)+'</b>'+
       '<span style="font-size:13px;font-weight:900;color:'+(diff<0?'#dc2626':'#ea580c')+'">'+(diff>0?'+':'')+fmtQty(diff)+'</span>'+
       '</div>'+
-      '<div style="font-size:11px;color:#94a3b8">مسجل: '+fmtQty(i.system_qty)+' ← فعلي: '+fmtQty(i.counted_qty)+
-      (val>0?' — قيمة الفرق (سعر التكلفة): <b style="color:'+(diff<0?'#dc2626':'#ea580c')+'">'+fmt(val)+' ج</b>':'')+'</div>'+
+      // ⚠️ v221 — إمكانية تعديل الكمية الفعلية مباشرة من هنا (بدل ما تضطر ترجع لشاشة
+      // العد كلها من الأول)، طالما الجردة لسه مش معتمدة نهائيًا
+      '<div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px">'+
+      '<span style="font-size:11px;color:#94a3b8">مسجل: '+fmtQty(i.system_qty)+' ← فعلي:</span>'+
+      (!isApproved?
+        '<input type="number" step="any" value="'+i.counted_qty+'" onchange="editStocktakeDiffCount(\''+st.id+'\',\''+(i.productId||'')+'\',this.value)" style="width:72px;padding:4px 6px;border:1.5px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:12px;text-align:center;direction:ltr">'
+      :'<b style="font-size:12px">'+fmtQty(i.counted_qty)+'</b>')+
+      '</div>'+
+      (val>0?'<div style="font-size:11px;color:#94a3b8;margin-top:2px">قيمة الفرق (سعر التكلفة): <b style="color:'+(diff<0?'#dc2626':'#ea580c')+'">'+fmt(val)+' ج</b></div>':'')+
       '</div>';
   }
 
@@ -16910,10 +16994,14 @@ var QURAN_VERSES=[
   {text:'وَاصْبِرْ وَمَا صَبْرُكَ إِلَّا بِاللَّهِ',ref:'سورة النحل: 127'}
 ];
 function _todayVerse(){
+  // ⚠️ v220 — اختيار عشوائي (مش تسلسلي) بس ثابت طول نفس اليوم — بذرة عشوائية من رقم
+  // التاريخ نفسه (نفس الفكرة اللي بتستخدمها تطبيقات كتير لـ"عشوائي لكن ثابت اليوم ده")
   var now=new Date();
-  var start=new Date(now.getFullYear(),0,0);
-  var doy=Math.floor((now-start)/86400000);
-  return QURAN_VERSES[doy%QURAN_VERSES.length];
+  var seed=now.getFullYear()*10000+(now.getMonth()+1)*100+now.getDate();
+  var x=Math.sin(seed)*10000;
+  var rand=x-Math.floor(x);
+  var idx=Math.floor(rand*QURAN_VERSES.length);
+  return QURAN_VERSES[idx];
 }
 
 // ============================================================
@@ -16988,10 +17076,12 @@ function openQuranSurah(number){
   renderQuranScreen();
 }
 function backToQuranList(){
-  if(__quranAudio){__quranAudio.pause();__quranAudio=null;}
+  var ap=document.getElementById('quran-audio-player');
+  if(ap)ap.pause();
   _quranCurrentSurah=null;
   renderQuranScreen();
 }
+var _quranAutoNext=true; // ⚠️ v220 — تشغيل متواصل: لما سورة تخلص، تشتغل اللي بعدها أوتوماتيك
 function _renderQuranReader(el,number){
   el.innerHTML='<div style="padding:14px">'+
     '<div onclick="backToQuranList()" style="color:#2563eb;font-weight:700;font-size:13px;margin-bottom:10px;cursor:pointer">← رجوع لقائمة السور</div>'+
@@ -17002,11 +17092,12 @@ function _renderQuranReader(el,number){
     el.innerHTML=
       '<div style="padding:14px">'+
       '<div onclick="backToQuranList()" style="color:#2563eb;font-weight:700;font-size:13px;margin-bottom:10px;cursor:pointer">← رجوع لقائمة السور</div>'+
-      '<div style="text-align:center;margin-bottom:14px">'+
-      '<div style="font-size:20px;font-weight:900;color:#0f766e">'+esc(data.name)+'</div>'+
+      '<div style="text-align:center;margin-bottom:10px">'+
+      '<div id="quran-reader-title" style="font-size:20px;font-weight:900;color:#0f766e">'+esc(data.name)+'</div>'+
       '</div>'+
-      '<audio controls preload="none" style="width:100%;margin-bottom:16px" src="'+audioUrl+'"></audio>'+
-      '<div style="background:#fff;border-radius:14px;padding:18px 16px;box-shadow:0 2px 10px rgba(0,0,0,.05);font-size:19px;line-height:2.6;text-align:justify;font-family:inherit">'+
+      '<audio id="quran-audio-player" controls preload="none" style="width:100%;margin-bottom:8px" src="'+audioUrl+'" onended="_quranAudioEnded()"></audio>'+
+      '<label style="display:flex;align-items:center;gap:6px;justify-content:center;margin-bottom:14px;cursor:pointer"><input type="checkbox" id="quran-autonext" '+(_quranAutoNext?'checked':'')+' onchange="_quranAutoNext=this.checked" style="width:15px;height:15px"><span style="font-size:11.5px;color:#64748b;font-weight:700">▶️ تشغيل متواصل — تبدأ السورة اللي بعدها أوتوماتيك</span></label>'+
+      '<div id="quran-reader-text" style="background:#fff;border-radius:14px;padding:18px 16px;box-shadow:0 2px 10px rgba(0,0,0,.05);font-size:19px;line-height:2.6;text-align:justify;font-family:inherit">'+
       data.ayahs.map(function(a){return esc(a.text)+' <span style="color:#0f766e;font-size:13px;font-weight:800">﴿'+a.n+'﴾</span>';}).join(' ')+
       '</div>'+
       '</div>';
@@ -17018,6 +17109,25 @@ function _renderQuranReader(el,number){
       '<button onclick="_renderQuranReader(document.getElementById(\'quran-body\'),'+number+')" class="btn btn-outline btn-full" style="margin-top:10px">🔄 حاول تاني</button>'+
       '</div>';
   });
+}
+// ⚠️ v220 — بتتنادى لما الصوت يخلص. بنحدّث نفس عنصر <audio> الموجود (مش بنبني الصفحة
+// من جديد) عشان المتصفح يقبل يشغّل تلقائي من غير ما يحتاج ضغطة جديدة من المستخدم —
+// المتصفحات بتمنع autoplay لعنصر جديد، لكن بتسمح لعنصر موجود يكمل تشغيل في نفس السياق.
+function _quranAudioEnded(){
+  if(!_quranAutoNext||_quranCurrentSurah>=114)return;
+  var next=_quranCurrentSurah+1;
+  _quranCurrentSurah=next;
+  _getQuranSurahText(next).then(function(data){
+    if(_quranCurrentSurah!==next)return;
+    var titleEl=document.getElementById('quran-reader-title');
+    var textEl=document.getElementById('quran-reader-text');
+    var audioEl=document.getElementById('quran-audio-player');
+    if(!audioEl)return; // المستخدم خرج من شاشة القرآن
+    if(titleEl)titleEl.textContent=data.name;
+    if(textEl)textEl.innerHTML=data.ayahs.map(function(a){return esc(a.text)+' <span style="color:#0f766e;font-size:13px;font-weight:800">﴿'+a.n+'﴾</span>';}).join(' ');
+    audioEl.src='https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/'+next+'.mp3';
+    audioEl.play().catch(function(){/* لو المتصفح منع التشغيل التلقائي، هيفضل واقف لحد ما المستخدم يدوس تشغيل بنفسه */});
+  }).catch(function(){});
 }
 
 // ============================================================
