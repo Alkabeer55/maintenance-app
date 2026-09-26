@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="2026-09-19 — v221";
+<script>var BUILD_STAMP="2026-09-26 — v222";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -54,6 +54,23 @@
       مسار خالص عن طريق confirmAction، الزرار بتاعها لازم __runOnce من أول يوم.
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v222: [🐛 إصلاح باج إعادة تشغيل القرآن + ترتيب الرئيسية + بحث "تدبر" + إحصائيات الأصناف اليدوية]
+     1) باج مهم اتصلح: شاشة القرآن كانت بتعيد بناء عنصر <audio> من الصفر (وبالتالي
+     الصوت يرجع لأول السورة) في كل مرة تدخل/تخرج من الشاشة، حتى لو نفس السورة لسه
+     شغالة. دلوقتي: لو نفس السورة متعرضة والـ<audio> لسه موجود، مفيش rebuild خالص.
+     2) الرئيسية: "آية اليوم" ومواعيد الصلاة نزلوا تحت اسم التطبيق (مش فوقه).
+     3) الملخص المالي (المبيعات/الربح/الديون): كل ضغطة بتظهره لمدة 4 ثواني بس وبعدين
+     يرجع يتغبّش لوحده تلقائيًا (قبل كده كان بيفضل ظاهر نهائيًا بعد أول ضغطة).
+     4) نظام بحث "📿 تدبر" جديد جوه شاشة القرآن: بحث بكلمة في نص القرآن كله (مش بس
+     أسماء السور) عن طريق Al Quran Cloud API، بيورّي كل الآيات المطابقة مع رقمها
+     ورابط مباشر يفتح السورة.
+     5) صوت مواعيد الصلاة: بدل النغمة المولّدة بس، التطبيق دلوقتي بيحاول يشغّل ملف
+     "adhan.mp3" لو حاططه صاحب التطبيق جنب index.html على استضافته (يختاره ويتأكد من
+     رخصته بنفسه)، وبيرجع تلقائيًا للنغمة المولّدة لو الملف مش موجود — نفس سبب v218:
+     مفيش تسجيل أذان جاهز متضمّن جوه كود التطبيق نفسه لاحتمال حقوق ملكية.
+     6) شاشة "📋 أصناف يدوية/قديمة المنشأ": بقى فيها كارت إحصائيات إجمالي فوق القائمة
+     (عدد الأصناف، الكمية الموجودة، الكمية اللي خرجت/اتباعت، قيمة المخزون بسعر الشراء
+     وقيمة البيع المتوقعة)، وكل صنف في القائمة بقى بيوري "الخارج" (المباع) جنب الموجود.
 v221: [✨ تشغيل متواصل للقرآن + مواعيد الصلاة والآية في الرئيسية + إخفاء الملخص المالي + تعديل فروق الجرد مباشرة]
      1) تشغيل متواصل: لما سورة تخلص صوتها، اللي بعدها تشتغل أوتوماتيك (زرار تشغيل/إيقاف
      الخاصية دي متاح تحت مشغّل الصوت). بيستخدم نفس عنصر الصوت الموجود (مش بيبني واحد
@@ -3813,14 +3830,15 @@ input:checked+.slider:before{transform:translateX(-20px)}
   <div id="content">
 
     <div id="screen-home" class="screen active">
-      <div id="home-verse"></div>
-      <div id="home-prayer-times"></div>
-      <div id="home-attendance-top"></div>
+      <!-- ⚠️ v222 — الآية ومواعيد الصلاة نزلوا تحت اسم التطبيق (مش فوقه) بطلب العميل -->
       <div class="hero">
         <div style="font-size:22px;font-weight:900;margin-bottom:4px">🔧 أبو حودة الحلو الجميل</div>
         <div id="home-user-name" style="font-size:13px;font-weight:700;opacity:.85;margin-bottom:2px"></div>
         <div id="today-date" style="font-size:12px;opacity:.6"></div>
       </div>
+      <div id="home-verse"></div>
+      <div id="home-prayer-times"></div>
+      <div id="home-attendance-top"></div>
       <div style="display:flex;gap:8px;margin-bottom:14px">
         <button class="quick-action-btn" style="background:#dbeafe;color:#1e40af" onclick="openSaleModal()"><span style="font-size:22px">🧾</span><span style="font-size:10px;font-weight:800">فاتورة</span></button>
         <button class="quick-action-btn" style="background:#fdf2f8;color:#86198f" onclick="openMovementModal()"><span style="font-size:22px">🔧</span><span style="font-size:10px;font-weight:800">تحرك</span></button>
@@ -4151,7 +4169,7 @@ var APP_TITLE='ابو حوده الحلو الجميل';
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=221;
+var APP_VERSION=222;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -5620,9 +5638,19 @@ function openGlobalSearch(){
 // الشاشة من بعيد)، ويظهر بوضوح بمجرد الضغط عليه. الحالة بترجع تتخفي تلقائيًا في أول
 // مرة تفتح فيها التطبيق (متغيّر جافاسكريبت عادي، مش محفوظ دائم).
 var _finSummaryRevealed=false;
+var _finRevealTimer=null;
+// ⚠️ v222 — الملخص المالي كان بيفضل ظاهر نهائيًا بعد أول ضغطة (لغاية ما تخرج من الشاشة
+// وترجعلها). العميل عايزه يظهر مؤقتًا مع كل ضغطة بس (مش يفضل واضح). دلوقتي: كل ضغطة
+// تظهره لمدة قصيرة (4 ثواني) وبعدين يرجع يتغبّش لوحده تلقائيًا، وتقدر تضغط تاني في أي
+// وقت تصفّر المؤقت وتظهره تاني من الأول.
 function toggleFinSummaryReveal(){
-  _finSummaryRevealed=!_finSummaryRevealed;
+  _finSummaryRevealed=true;
   _applyFinSummaryReveal();
+  if(_finRevealTimer)clearTimeout(_finRevealTimer);
+  _finRevealTimer=setTimeout(function(){
+    _finSummaryRevealed=false;
+    _applyFinSummaryReveal();
+  },4000);
 }
 function _applyFinSummaryReveal(){
   var wrap=document.getElementById('home-fin-summary'),ov=document.getElementById('home-fin-reveal-overlay');
@@ -16945,16 +16973,40 @@ function listManualOriginProducts(){
   var list=DB.products.filter(function(p){
     return p.category!=='machine' && !(p.source==='purchase' && !p.consignment && !p.scrap_source);
   }).sort(function(a,b){return (a.name||'').localeCompare(b.name||'','ar');});
+  // ⚠️ v222 — إحصائيات إجمالية فوق القائمة (بطلب العميل): عدد الأصناف، إجمالي قيمتها
+  // بسعر الشراء، إجمالي الكمية الموجودة حاليًا، وإجمالي الكمية اللي خرجت (اتباعت) منها.
+  // "الخارج" بيتحسب من نفس بيانات المبيعات (DB.sales) زي أداة فحص الكميات بالظبط.
+  var totalQtyStock=0,totalStockValue=0,totalSellValue=0,totalQtyOut=0,missingPriceCount=0;
+  var soldMap={};
+  (DB.sales||[]).forEach(function(s){(s.items||[]).forEach(function(it){if(it.productId)soldMap[it.productId]=(soldMap[it.productId]||0)+(it.qty||0);});});
+  list.forEach(function(p){
+    totalQtyStock+=(p.qty||0);
+    totalStockValue+=(p.qty||0)*(p.buy_price||0);
+    totalSellValue+=(p.qty||0)*(p.sell_price||0);
+    totalQtyOut+=(soldMap[p.id]||0);
+    if(!p.buy_price)missingPriceCount++;
+  });
   document.getElementById('modal-title').textContent='📋 أصناف يدوية/قديمة المنشأ ('+list.length+')';
   document.getElementById('modal-body').innerHTML=
     '<div style="font-size:11px;color:#64748b;background:#f8fafc;border-radius:9px;padding:9px 11px;margin-bottom:10px">الأصناف دي كلها ماعندهاش تاريخ مشترى موثّق بالكامل داخل التطبيق (زودت يدوي، أو أمانة، أو مستخرجة من اسكراب) — عشان كده أداة "فحص الكميات" بتستبعدها. راجع كل صنف وحدد له سعر شراء تقديري معقول لو كان 0، عشان حساب الربح يبقى دقيق.</div>'+
+    '<div style="background:#fff;border-radius:12px;padding:12px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.05)">'+
+    '<div style="font-size:11.5px;font-weight:800;color:#0f172a;margin-bottom:8px">📊 إحصائيات إجمالية</div>'+
+    '<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px">'+
+    '<div style="background:#f0f9ff;border-radius:9px;padding:8px;text-align:center"><div style="font-size:9.5px;color:#0369a1">📦 عدد الأصناف</div><div style="font-size:16px;font-weight:900;color:#0369a1">'+list.length+'</div></div>'+
+    '<div style="background:#f0fdf4;border-radius:9px;padding:8px;text-align:center"><div style="font-size:9.5px;color:#15803d">✅ الموجود (كمية حالية)</div><div style="font-size:16px;font-weight:900;color:#15803d">'+fmtQty(totalQtyStock)+'</div></div>'+
+    '<div style="background:#fef2f2;border-radius:9px;padding:8px;text-align:center"><div style="font-size:9.5px;color:#dc2626">📤 الخارج (اتباع)</div><div style="font-size:16px;font-weight:900;color:#dc2626">'+fmtQty(totalQtyOut)+'</div></div>'+
+    '<div style="background:#faf5ff;border-radius:9px;padding:8px;text-align:center"><div style="font-size:9.5px;color:#7c3aed">💰 قيمة المخزون (شراء)</div><div style="font-size:14px;font-weight:900;color:#7c3aed">'+fmt(totalStockValue)+' ج</div></div>'+
+    '</div>'+
+    '<div style="font-size:10px;color:#94a3b8;margin-top:8px">قيمة البيع المتوقعة لو اتباع كل الموجود: <b style="color:#374151">'+fmt(totalSellValue)+' ج</b>'+(missingPriceCount?' — <span style="color:#dc2626;font-weight:700">'+missingPriceCount+' صنف سعر شرائه 0 (الرقم ده تقديري ناقص)</span>':'')+'</div>'+
+    '</div>'+
     (list.length?list.map(function(p){
       var tag=p.consignment?'🤝 أمانة':(p.scrap_source?'♻️ اسكراب':'✍️ يدوي/قديم');
+      var soldQty=soldMap[p.id]||0;
       return '<div style="background:#fff;border-radius:10px;padding:10px 12px;margin-bottom:8px;box-shadow:0 2px 8px rgba(0,0,0,.05);border-right:3px solid #94a3b8" onclick="closeModal();openProductModal(\''+p.id+'\')">'+
         '<div style="display:flex;justify-content:space-between;align-items:center">'+
         '<b style="font-size:13px">'+esc(p.name)+'</b>'+
         '<span style="background:#f1f5f9;color:#475569;border-radius:6px;padding:2px 7px;font-size:10px;font-weight:700">'+tag+'</span></div>'+
-        '<div style="font-size:11px;color:#64748b;margin-top:4px">الكمية: <b>'+fmtQty(p.qty)+'</b> — شراء: <b>'+fmt(p.buy_price||0)+' ج</b>'+(!p.buy_price?' <span style="color:#dc2626;font-weight:700">(غير محدد!)</span>':'')+' — بيع: <b>'+fmt(p.sell_price||0)+' ج</b></div>'+
+        '<div style="font-size:11px;color:#64748b;margin-top:4px">الموجود: <b>'+fmtQty(p.qty)+'</b> — الخارج: <b>'+fmtQty(soldQty)+'</b> — شراء: <b>'+fmt(p.buy_price||0)+' ج</b>'+(!p.buy_price?' <span style="color:#dc2626;font-weight:700">(غير محدد!)</span>':'')+' — بيع: <b>'+fmt(p.sell_price||0)+' ج</b></div>'+
         '<div style="font-size:10px;color:#94a3b8;margin-top:3px">'+(p.created_at?'اتضاف: '+esc(fmtDate(p.created_at)):'تاريخ الإضافة غير مسجّل')+'</div>'+
         '</div>';
     }).join(''):'<div class="empty">مفيش أصناف يدوية/قديمة المنشأ — كل الأصناف مشترياتها موثّقة بالكامل 🎉</div>')+
@@ -17041,21 +17093,82 @@ async function _getQuranSurahText(number){
   LS.set(cacheKey,data);
   return data;
 }
+var _quranRenderedFor=null; // ⚠️ v222 — انظر الشرح عند الاستخدام تحت
 function renderQuranScreen(){
   var el=document.getElementById('quran-body');if(!el)return;
-  if(_quranCurrentSurah){_renderQuranReader(el,_quranCurrentSurah);return;}
+  if(_quranCurrentSurah){
+    // ⚠️ v222 — إصلاح باج: كل دخول/خروج من شاشة القرآن (حتى مجرد تبديل تاب ورجوع)
+    // كان بيعيد بناء عنصر <audio> من الصفر عن طريق innerHTML، فالصوت كان بيرجع
+    // يشتغل من أول السورة تاني حتى لو كان في نص التلاوة. دلوقتي: لو نفس السورة لسه
+    // متعرضة والـ<audio> لسه موجود، مانعملش rebuild خالص ونسيب التشغيل زي ما هو.
+    if(_quranRenderedFor===_quranCurrentSurah&&document.getElementById('quran-audio-player'))return;
+    _renderQuranReader(el,_quranCurrentSurah);
+    return;
+  }
+  _quranRenderedFor=null;
+  // ⚠️ v222 — نظام بحث "تدبر": بحث بكلمة في نص القرآن كله (مش بس أسماء السور)
+  if(_quranTadabburMode){_renderQuranTadabbur(el);return;}
   el.innerHTML='<div style="padding:14px"><div class="empty">⏳ جاري تحميل قائمة السور...</div></div>';
   _getQuranSurahList().then(function(list){
     window.__quranSurahList=list;
     _renderQuranList(el,list);
   });
 }
+var _quranTadabburMode=false,_quranTadabburQuery='',_quranTadabburBusy=false;
+function _backFromTadabbur(){_quranTadabburMode=false;renderQuranScreen();}
+function _renderQuranTadabbur(el){
+  el.innerHTML=
+    '<div style="padding:14px">'+
+    '<div onclick="_backFromTadabbur()" style="color:#2563eb;font-weight:700;font-size:13px;margin-bottom:10px;cursor:pointer">← رجوع لقائمة السور</div>'+
+    '<div style="font-size:15px;font-weight:900;color:#0f766e;margin-bottom:10px">📿 تدبر — بحث بكلمة في القرآن كله</div>'+
+    '<div style="display:flex;gap:6px;margin-bottom:4px">'+
+    '<input id="tadabbur-input" type="text" placeholder="اكتب كلمة (مثال: الصبر، الرحمة...)" value="'+esc(_quranTadabburQuery)+'" onkeydown="if(event.key===\'Enter\')_runTadabburSearch()" style="flex:1;padding:11px 14px;border:1.5px solid #e2e8f0;border-radius:12px;font-family:inherit;font-size:13px">'+
+    '<button onclick="_runTadabburSearch()" style="background:#0f766e;color:#fff;border:none;border-radius:12px;padding:0 16px;font-family:inherit;font-size:14px;cursor:pointer">بحث</button>'+
+    '</div>'+
+    '<div style="font-size:10.5px;color:#94a3b8;margin-bottom:10px">محتاج اتصال نت. البحث بالرسم العثماني، فحاول تكتب الكلمة بشكلها المعتاد في المصحف</div>'+
+    '<div id="tadabbur-results"></div>'+
+    '</div>';
+}
+function _runTadabburSearch(){
+  var input=document.getElementById('tadabbur-input');
+  var kw=(input?input.value:'').trim();
+  _quranTadabburQuery=kw;
+  var resEl=document.getElementById('tadabbur-results');
+  if(!resEl)return;
+  if(!kw){resEl.innerHTML='';return;}
+  if(_quranTadabburBusy)return;
+  _quranTadabburBusy=true;
+  resEl.innerHTML='<div class="empty">⏳ جاري البحث...</div>';
+  fetch('https://api.alquran.cloud/v1/search/'+encodeURIComponent(kw)+'/all/quran-uthmani')
+    .then(function(r){return r.json();})
+    .then(function(json){
+      _quranTadabburBusy=false;
+      if(_quranTadabburQuery!==kw)return; // المستخدم غيّر الكلمة قبل ما الرد يوصل
+      if(json.code!==200||!json.data||!json.data.matches||!json.data.matches.length){
+        resEl.innerHTML='<div class="empty">مفيش آيات فيها الكلمة دي. جرّب كلمة تانية أو تأكد من الرسم</div>';
+        return;
+      }
+      var matches=json.data.matches;
+      resEl.innerHTML='<div style="font-size:11.5px;color:#64748b;font-weight:700;margin-bottom:8px">'+matches.length+' نتيجة</div>'+
+        matches.map(function(m){
+          return '<div onclick="openQuranSurah('+m.surah.number+')" style="background:#fff;border-radius:12px;padding:12px 14px;margin-bottom:8px;box-shadow:0 2px 8px rgba(0,0,0,.05);cursor:pointer">'+
+            '<div style="font-size:11px;color:#0f766e;font-weight:800;margin-bottom:4px">سورة '+esc((m.surah.name||'').replace(/^سورة /,''))+' — آية '+m.numberInSurah+'</div>'+
+            '<div style="font-size:15px;line-height:2;text-align:justify">'+esc(m.text)+'</div>'+
+            '</div>';
+        }).join('');
+    })
+    .catch(function(){
+      _quranTadabburBusy=false;
+      resEl.innerHTML='<div class="empty">⚠️ فشل البحث — تأكد من اتصال النت وحاول تاني</div>';
+    });
+}
 function _renderQuranList(el,list){
   var q=normalizeAr((_quranSearch||'').trim());
   var filtered=q?list.filter(function(s){return normalizeAr(s.name).includes(q)||String(s.number)===q;}):list;
   el.innerHTML=
     '<div style="padding:12px 14px 6px">'+
-    '<input id="quran-search-input" type="text" placeholder="🔍 دوّر على اسم سورة أو رقمها" value="'+esc(_quranSearch)+'" oninput="_quranSearch=this.value;_renderQuranList(document.getElementById(\'quran-body\'),window.__quranSurahList||[])" style="width:100%;padding:11px 14px;border:1.5px solid #e2e8f0;border-radius:12px;font-family:inherit;font-size:13px;margin-bottom:10px">'+
+    '<input id="quran-search-input" type="text" placeholder="🔍 دوّر على اسم سورة أو رقمها" value="'+esc(_quranSearch)+'" oninput="_quranSearch=this.value;_renderQuranList(document.getElementById(\'quran-body\'),window.__quranSurahList||[])" style="width:100%;padding:11px 14px;border:1.5px solid #e2e8f0;border-radius:12px;font-family:inherit;font-size:13px;margin-bottom:8px">'+
+    '<button onclick="_quranTadabburMode=true;renderQuranScreen()" style="width:100%;background:#0f766e;color:#fff;border:none;border-radius:12px;padding:11px;font-family:inherit;font-size:13px;font-weight:800;cursor:pointer;margin-bottom:10px">📿 بحث بكلمة في القرآن كله (تدبر)</button>'+
     '</div>'+
     '<div style="padding:0 14px 14px">'+
     filtered.map(function(s){
@@ -17073,12 +17186,14 @@ function _renderQuranList(el,list){
 }
 function openQuranSurah(number){
   _quranCurrentSurah=number;
+  _quranRenderedFor=null; // فتح سورة (حتى لو نفسها) لازم يبني الشاشة من جديد
   renderQuranScreen();
 }
 function backToQuranList(){
   var ap=document.getElementById('quran-audio-player');
   if(ap)ap.pause();
   _quranCurrentSurah=null;
+  _quranRenderedFor=null;
   renderQuranScreen();
 }
 var _quranAutoNext=true; // ⚠️ v220 — تشغيل متواصل: لما سورة تخلص، تشتغل اللي بعدها أوتوماتيك
@@ -17101,6 +17216,7 @@ function _renderQuranReader(el,number){
       data.ayahs.map(function(a){return esc(a.text)+' <span style="color:#0f766e;font-size:13px;font-weight:800">﴿'+a.n+'﴾</span>';}).join(' ')+
       '</div>'+
       '</div>';
+    _quranRenderedFor=number; // ⚠️ v222 — علّم إن السورة دي اتبنت، عشان الدخول/الخروج مايكسرش الصوت
   }).catch(function(e){
     if(_quranCurrentSurah!==number)return;
     el.innerHTML='<div style="padding:14px">'+
@@ -17126,6 +17242,7 @@ function _quranAudioEnded(){
     if(titleEl)titleEl.textContent=data.name;
     if(textEl)textEl.innerHTML=data.ayahs.map(function(a){return esc(a.text)+' <span style="color:#0f766e;font-size:13px;font-weight:800">﴿'+a.n+'﴾</span>';}).join(' ');
     audioEl.src='https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/'+next+'.mp3';
+    _quranRenderedFor=next; // ⚠️ v222 — حدّث العلامة عشان دخول/خروج من الشاشة بعد كده مايرجّعش يبني من الأول
     audioEl.play().catch(function(){/* لو المتصفح منع التشغيل التلقائي، هيفضل واقف لحد ما المستخدم يدوس تشغيل بنفسه */});
   }).catch(function(){});
 }
@@ -17228,20 +17345,40 @@ async function savePrayerSettings(){
   showToast('✅ اتحفظت مواعيد الصلاة','#16a34a');
   renderSettings();
 }
-// ⚠️ نغمة تنبيه مولّدة برمجيًا (Web Audio API) — مفيش ملف صوت آذان متضمّن في التطبيق
-// (حقوق ملكية)، فبنستخدم نغمة جرس بسيطة واضحة كبديل للفت الانتباه لدخول الوقت.
+// ⚠️ v222 — العميل طلب صوت "أذان حقيقي" مش نغمة جرس. المشكلة زي ما موضّح في v218:
+// مفيش تسجيل أذان حقيقي متضمّن جوه كود التطبيق نفسه (لو ضفنا تسجيل شيخ معيّن بالاسم
+// كملف/base64 جوه الكود ده نسخة من عمل فني/تسجيل صوتي ممكن يكون محمي بحقوق ملكية،
+// حتى لو النص الديني نفسه مش ملك حد). الحل العملي والآمن: لو حاططّ إنت (صاحب التطبيق)
+// ملف صوتي باسم "adhan.mp3" في نفس مجلد index.html على الاستضافة بتاعتك (تختاره إنت
+// وتتأكد من حقوقه/رخصته بنفسك)، التطبيق هيشغّله تلقائيًا. لو الملف مش موجود، بيرجع
+// تلقائيًا لنغمة تنبيه مولّدة برمجيًا (Web Audio API) بديلة بس أوضح وأطول من القديمة.
+var __adhanAudioEl=null;
 function _playPrayerSound(){
   try{
+    if(!__adhanAudioEl){
+      __adhanAudioEl=new Audio('./adhan.mp3');
+      __adhanAudioEl.preload='none';
+    }
+    var a=__adhanAudioEl;
+    a.currentTime=0;
+    var playPromise=a.play();
+    if(playPromise&&playPromise.catch){
+      playPromise.catch(function(){_playPrayerFallbackTone();});
+    }
+  }catch(e){_playPrayerFallbackTone();}
+}
+function _playPrayerFallbackTone(){
+  try{
     var ctx=new (window.AudioContext||window.webkitAudioContext)();
-    [660,880,660].forEach(function(freq,i){
+    [660,880,660,988,660].forEach(function(freq,i){
       var o=ctx.createOscillator(),g=ctx.createGain();
       o.type='sine';o.frequency.value=freq;
       o.connect(g);g.connect(ctx.destination);
-      var t=ctx.currentTime+i*0.35;
+      var t=ctx.currentTime+i*0.4;
       g.gain.setValueAtTime(0.0001,t);
-      g.gain.exponentialRampToValueAtTime(0.3,t+0.05);
-      g.gain.exponentialRampToValueAtTime(0.0001,t+0.32);
-      o.start(t);o.stop(t+0.33);
+      g.gain.exponentialRampToValueAtTime(0.32,t+0.05);
+      g.gain.exponentialRampToValueAtTime(0.0001,t+0.37);
+      o.start(t);o.stop(t+0.38);
     });
   }catch(e){console.warn('تعذر تشغيل صوت التنبيه:',e);}
 }
@@ -17275,7 +17412,8 @@ function renderPrayerSettingsCard(){
   return '<div class="card">'+
     '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #e2e8f0">🕌 مواعيد الصلاة والتنبيه</div>'+
     '<label style="display:flex;align-items:center;gap:8px;margin-bottom:10px;cursor:pointer"><input type="checkbox" id="prayer-enabled" '+(pt.enabled?'checked':'')+' style="width:18px;height:18px"><span style="font-size:13px;font-weight:700">تفعيل تنبيه دخول وقت الصلاة (والتطبيق مفتوح)</span></label>'+
-    '<label style="display:flex;align-items:center;gap:8px;margin-bottom:10px;cursor:pointer"><input type="checkbox" id="prayer-sound" '+(pt.sound!==false?'checked':'')+' style="width:18px;height:18px"><span style="font-size:13px;font-weight:700">🔊 صوت تنبيه (مش أذان كامل — نغمة جرس)</span></label>'+
+    '<label style="display:flex;align-items:center;gap:8px;margin-bottom:6px;cursor:pointer"><input type="checkbox" id="prayer-sound" '+(pt.sound!==false?'checked':'')+' style="width:18px;height:18px"><span style="font-size:13px;font-weight:700">🔊 صوت تنبيه عند دخول الوقت</span></label>'+
+    '<div style="font-size:11px;color:#94a3b8;margin-bottom:10px">لو حاطط ملف "adhan.mp3" جنب index.html على استضافتك هيتشغّل هو، غير كده هتسمع نغمة تنبيه بديلة</div>'+
     '<div style="display:flex;gap:6px;margin-bottom:8px">'+
     '<input id="prayer-lat" type="number" step="any" placeholder="خط العرض" value="'+(pt.lat!=null?pt.lat:'')+'" style="flex:1;padding:9px;border:1.5px solid #e2e8f0;border-radius:9px;font-family:inherit;font-size:12px;direction:ltr;text-align:center">'+
     '<input id="prayer-lng" type="number" step="any" placeholder="خط الطول" value="'+(pt.lng!=null?pt.lng:'')+'" style="flex:1;padding:9px;border:1.5px solid #e2e8f0;border-radius:9px;font-family:inherit;font-size:12px;direction:ltr;text-align:center">'+
