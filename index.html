@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="2026-09-26 — v222";
+<script>var BUILD_STAMP="2026-09-26 — v223";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -54,6 +54,15 @@
       مسار خالص عن طريق confirmAction، الزرار بتاعها لازم __runOnce من أول يوم.
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v223: [🐛 سبب جديد لـ"جلسة الدخول تالفة" — تطبيق مفتوح فترة طويلة بدون استخدام]
+     العميل أبلغ إن الباج بيحصل تحديدًا لما موظف يسيب التطبيق مفتوح فترة (بدون ما
+     يقفله أو يبدّل تاب) وبعدين يسجّل فاتورة — الحالة دي بالظبط مكانتش مغطاة قبل
+     كده: تجديد v210 كان بيتأكد بس لما التاب يرجع من الخلفية (visibilitychange)، ودورة
+     المزامنة كل 30 ثانية كانت بترجع فورًا من غير تأكد لو مفيش حاجة في الطابور أصلاً.
+     يعني خلال فترة الخمول دي، مفيش حاجة بتتأكد من التوكن أو تجدده. دلوقتي فيه حلين
+     إضافيين: 1) تأكد استباقي من الجلسة *قبل* أي محاولة حفظ فعلية على السيرفر (مش
+     بعد الفشل زي كان)، 2) تايمر مستقل بيتأكد من الجلسة كل 4 دقايق طول ما فيه مستخدم
+     مسجّل دخول، بغض النظر عن حالة طابور المزامنة.
 v222: [🐛 إصلاح باج إعادة تشغيل القرآن + ترتيب الرئيسية + بحث "تدبر" + إحصائيات الأصناف اليدوية]
      1) باج مهم اتصلح: شاشة القرآن كانت بتعيد بناء عنصر <audio> من الصفر (وبالتالي
      الصوت يرجع لأول السورة) في كل مرة تدخل/تخرج من الشاشة، حتى لو نفس السورة لسه
@@ -4169,7 +4178,7 @@ var APP_TITLE='ابو حوده الحلو الجميل';
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=222;
+var APP_VERSION=223;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -4678,6 +4687,15 @@ if(typeof window!=='undefined'){
   window.addEventListener('online', function(){ __drainSyncQueue(); });
   setInterval(function(){ __drainSyncQueue(); }, 30000);
   setTimeout(function(){ __drainSyncQueue(); }, 3000);
+  // ⚠️ v223 — تجديد/تأكيد الجلسة بشكل مستقل عن طابور المزامنة، كل 4 دقايق، طول ما
+  // التطبيق فاتح وفيه بروفايل مسجّل دخول — حتى لو مفيش حاجة قيد المزامنة (موظف واقف
+  // على الشاشة من غير ما يعمل حاجة). ده بيمنع التوكن إنه يفضل من غير تجديد لفترة
+  // طويلة قبل أول عملية حفظ فعلية. (انظر شرح أوسع عند __pushRowToServer)
+  setInterval(function(){
+    if(typeof sb!=='undefined' && window.__currentProfile){
+      __ensureFreshSession().catch(function(){});
+    }
+  }, 240000);
 }
 if(__syncQueue.length){ setTimeout(__renderQueueBadge, 300); }
 
@@ -4763,6 +4781,17 @@ async function dbDelete(table, id, oldRow){
 
 async function __pushRowToServer(table, row){
   if(!__SYNCED_TABLES[table] || typeof sb === 'undefined' || !window.__currentProfile) return;
+  // ⚠️ v223 — [🐛 سبب جديد لـ"جلسة الدخول تالفة"] لو الموظف سايب التطبيق مفتوح فترة
+  // من غير استخدام (شاشة ظاهرة طول الوقت، يعني visibilitychange مايحصلش خالص لأن
+  // التاب مقفلش/اتغيّرش)، مكنش فيه أي حاجة بتتأكد من الجلسة أو تجدد التوكن خلال
+  // الفترة دي — v210 كان بيتأكد بس عند رجوع التاب من الخلفية، ودورة المزامنة كل 30
+  // ثانية كانت بترجع فورًا من غير ما تتأكد من الجلسة لو الطابور فاضي (مفيش حاجة
+  // اتسجلت لسه). فأول عملية حفظ فعلية (فاتورة مثلاً) بعد فترة الخمول دي كانت بتقابل
+  // توكن منتهي فعلاً على السيرفر، والتجديد التلقائي جوه المكتبة يمكن يتأخر أو
+  // يتوقف مؤقتًا لو المتصفح ضيّق مؤقتات التاب. الحل: نتأكد من الجلسة استباقيًا هنا
+  // *قبل* أي محاولة حفظ فعلية (مش بعد ما تفشل زي كان قبل كده)، عشان لو محتاجة تجديد
+  // تاخد فرصتها قبل الطلب الفعلي بدل ما نكتشف الفشل بعدين.
+  await __ensureFreshSession();
   try{
     var payload = Object.assign({}, row, {
       updated_by: window.__currentProfile.id,
