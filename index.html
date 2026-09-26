@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="2026-09-26 — v223";
+<script>var BUILD_STAMP="2026-09-26 — v224";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -54,6 +54,18 @@
       مسار خالص عن طريق confirmAction، الزرار بتاعها لازم __runOnce من أول يوم.
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v224: [🐛 السبب الجذري الحقيقي لـ"جلسة الدخول تالفة" — التحقق كان من مصدر محلي دايمًا]
+     العميل أكّد إن نفس الرسالة رجعت تاني رغم v223. بعد مراجعة أعمق: كل محاولات
+     الإصلاح من v168 لحد v223 كانت بتتأكد من الجلسة عن طريق sb.auth.getSession()
+     بس — والدالة دي بترجّع الجلسة *المحفوظة محليًا على الجهاز* من غير ما تتأكد
+     فعليًا إن التوكن لسه مقبول عند سيرفر Supabase. يعني كل مرة كنا "نتأكد" كانت
+     بترجع "تمام" حتى لو التوكن فعليًا معطوب عند السيرفر — وده ليه كل التوقيتات
+     المختلفة اللي جربناها (عند الرجوع من الخلفية v210، قبل كل حفظ v223) ماحلتش
+     حاجة: كانت بتسأل نفس المصدر الغلط. الإصلاح الحقيقي: __ensureFreshSession بقى
+     بيستخدم sb.auth.getUser() (بيبعت طلب فعلي للسيرفر يتأكد بيه من التوكن) مرة كل
+     دقيقة كحد أقصى (تجنبًا لزيادة الطلبات)، ولو التوكن طلع فعلاً مش مقبول بيعمل
+     sb.auth.refreshSession() تجديد صريح — وهنا التجديد اليدوي مبرر فعلاً لأننا أكدنا
+     إن التوكن معطوب حقيقي (مش زي مخاوف v169 من التجديد اليدوي وقت ما الجلسة سليمة).
 v223: [🐛 سبب جديد لـ"جلسة الدخول تالفة" — تطبيق مفتوح فترة طويلة بدون استخدام]
      العميل أبلغ إن الباج بيحصل تحديدًا لما موظف يسيب التطبيق مفتوح فترة (بدون ما
      يقفله أو يبدّل تاب) وبعدين يسجّل فاتورة — الحالة دي بالظبط مكانتش مغطاة قبل
@@ -4178,7 +4190,7 @@ var APP_TITLE='ابو حوده الحلو الجميل';
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=223;
+var APP_VERSION=224;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -4617,10 +4629,29 @@ var __draining = false;
 // منهم كـ"توكن معاد استخدامه" ويسقط الجلسة فعليًا — وده اللي كسر تحميل الموظفين
 // وكل البيانات تمامًا. الحل الصح: نكتفي بالتأكد إن فيه جلسة موجودة من غير ما
 // نجبر تجديدها يدويًا؛ التجديد التلقائي بتاع المكتبة كافي وبيشتغل لوحده.
-async function __ensureFreshSession(){
+var __lastVerifiedSessionAt = 0;
+async function __ensureFreshSession(force){
   try{
     var s = await sb.auth.getSession();
-    return !!(s && s.data && s.data.session);
+    if(!(s && s.data && s.data.session)) return false;
+    // ⚠️ v224 — [🐛 السبب الحقيقي وراء تكرار "جلسة الدخول تالفة" رغم v210/v223]
+    // getSession() بيرجّع الجلسة *المحفوظة محليًا* بس — وجودها مش معناه إنها لسه
+    // مقبولة فعليًا عند سيرفر Supabase في كل الحالات (ده بالظبط ليه كل محاولات
+    // v210/v223 (تجديد استباقي بناءً على getSession) ماحلتش المشكلة نهائيًا: كانت
+    // بتتأكد من نفس المصدر المحلي اللي أصلاً بيقول "تمام" وهو مش تمام). الفرق إن
+    // getUser() بيبعت طلب فعلي لسيرفر Supabase Auth يتأكد بيه إن الـ access token
+    // لسه مقبول هناك. بنعمل التأكد الحقيقي ده مرة كل دقيقة بس (مش مع كل نداء) عشان
+    // منزودش عدد الطلبات، إلا لو "force" اتبعتت صراحة.
+    if(!force && (Date.now()-__lastVerifiedSessionAt) < 60000) return true;
+    var u = await sb.auth.getUser();
+    if(u && u.data && u.data.user){ __lastVerifiedSessionAt = Date.now(); return true; }
+    // التوكن اتقبلش من السيرفر رغم وجود جلسة محلية — نجرب تجديد صريح مرة واحدة
+    // (هنا التجديد اليدوي مبرر لأننا أكدنا فعليًا إن التوكن الحالي معطوب، على عكس
+    // مخاوف v169 من التجديد اليدوي وقت ما تكون الجلسة أصلاً سليمة).
+    var r = await sb.auth.refreshSession();
+    var okAfterRefresh = !!(r && r.data && r.data.session);
+    if(okAfterRefresh) __lastVerifiedSessionAt = Date.now();
+    return okAfterRefresh;
   }catch(e){
     // لو السؤال عن الجلسة فشل (غالبًا نت متقطع لحظيًا)، منمنعش المزامنة بسبب
     // كده — نسيب المحاولة الفعلية تحصل وتفشل لوحدها برسالة واضحة لو المشكلة حقيقية
@@ -4791,7 +4822,7 @@ async function __pushRowToServer(table, row){
   // يتوقف مؤقتًا لو المتصفح ضيّق مؤقتات التاب. الحل: نتأكد من الجلسة استباقيًا هنا
   // *قبل* أي محاولة حفظ فعلية (مش بعد ما تفشل زي كان قبل كده)، عشان لو محتاجة تجديد
   // تاخد فرصتها قبل الطلب الفعلي بدل ما نكتشف الفشل بعدين.
-  await __ensureFreshSession();
+  await __ensureFreshSession(true);
   try{
     var payload = Object.assign({}, row, {
       updated_by: window.__currentProfile.id,
@@ -4864,7 +4895,7 @@ async function __pushRowToServer(table, row){
       if(res.error.code === '42501' && !payload.__retriedAfterRefresh){
         try{
           await new Promise(function(r){setTimeout(r,800);});
-          var _hasSession = await __ensureFreshSession();
+          var _hasSession = await __ensureFreshSession(true); // force — تأكد حقيقي من السيرفر مش من الكاش
           if(_hasSession){
             payload.__retriedAfterRefresh = true; // منع تكرار لا نهائي
             var payload2 = Object.assign({}, payload); delete payload2.__retriedAfterRefresh;
