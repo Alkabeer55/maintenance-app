@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v221</title>
+<title>ابو حوده الحلو الجميل v234</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="2026-09-26 — v226";
+<script>var BUILD_STAMP="2026-09-28 — v234";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -54,6 +54,45 @@
       مسار خالص عن طريق confirmAction، الزرار بتاعها لازم __runOnce من أول يوم.
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v230: [🧠 نظام تدبر شامل: مواضيع + ملاحظات ووسوم + سجل بحث + أرشفة + دفتر يومي + خريطة ذهنية]
+     بطلب العميل بعد عصف ذهني: 1) "📚 مواضيعي" — تصنيف أي آية (من نتائج بحث تدبر أو
+     من شاشة القراءة) لموضوع تسميه إنت، والآية ممكن تتضاف لأكتر من موضوع. 2) كل آية
+     جوه موضوع ليها ملاحظة حرة + وسوم (tags) تقدر تدور بيها بعدين. 3) سجل بحث تدبر —
+     آخر 15 كلمة دورت عليها تظهر كـ"chips" تضغط عليها بدل ما تكتب تاني. 4) أرشفة —
+     أي موضوع خلصت منه وفهمته تقدر تأرشفه (يتشال من القائمة النشطة بس يفضل موجود).
+     5) "📅 دفتر التدبر اليومي" — آية جديدة كل يوم (بترتيب ثابت حسب التاريخ، مش
+     عشوائي فعلي، عشان تفضل نفسها لو فتحت التطبيق أكتر من مرة في نفس اليوم)، تكتب
+     تحتها خاطرتك، وبيتسجل سجل تاريخي للأيام اللي فاتت. 6) "🗺️ خريطة ذهنية" — SVG
+     بسيط: عقدة مركزية "تدبر" ومنها خطوط لكل المواضيع، حجم كل دايرة حسب عدد آياتها،
+     تضغط عليها تفتح الموضوع مباشرة. كل البيانات دي (مواضيع/ملاحظات/سجل بحث/دفتر
+     يومي) شخصية بحتة فبتتخزن محليًا على الجهاز مش على السيرفر (نفس فلسفة v229).
+v229: [📿 تكملة تدبر: تفسير الآية + المفضلة + آخر موضع قراءة تلقائي]
+     1) كل آية في شاشة القراءة بقت قابلة للضغط: تفتح تفسير مبسّط (التفسير الميسر) من
+     مصدر مجاني (spa5k/tafsir_api عبر jsDelivr CDN).
+     2) من نفس نافذة التفسير تقدر تضيف الآية للمفضلة ⭐ — وليها شاشة منفصلة "المفضلة"
+     من قائمة السور، تقدر تفتح منها أي آية محفوظة وترجع تقراها.
+     3) آخر سورة فتحتها بتتحفظ تلقائيًا (محليًا على الجهاز)، وأول ما تفتح شاشة القرآن
+     تاني هتلاقي بانر "📖 كمّل من حيث وقفت" فوق قائمة السور.
+     كل البيانات دي (المفضلة + آخر قراءة) بتتخزن محليًا (localStorage) مش على
+     السيرفر، لأنها تفضيلات شخصية للقراءة مش بيانات عمل.
+v228: [🎛️ إعداد فردي لكل موظف: يشوف التحركات/المهام الغير محددة ولا لأ]
+     العميل عايز يسيب "المهندس المسؤول" فاضي عادي وقت التسجيل (مش إجباري)، بس يحدد
+     هو بنفسه لكل مهندس من الإعدادات هل يشوف التحركات/المهام الغير محددة دي ولا لأ —
+     مستقل عن "يشوف كل حاجة" (full_visibility). ضفت عمود جديد profiles.see_unassigned
+     وزرار تبديل في شاشة "👥 الموظفون ← صلاحيات ← حسب الموظف ← الخصوصية". محتاج تشغّل
+     SQL على Supabase عشان يشتغل فعليًا (كود وتعليمات في رد الشات).
+v227: [✅ السبب الحقيقي اتأكد فعليًا — مشكلة سياسة RLS مش جلسة دخول خالص]
+     تشخيص v226 رجع بدليل قاطع: auth.uid() الحقيقي من السيرفر كان مطابق 100% لبروفايل
+     الموظف (الجلسة سليمة تمامًا)، والفشل حصل على تعديل صف موجود في جدول "movements"
+     برسالة "USING expression" — يعني ده تعديل (UPDATE) على تحرك/مهمة اتسجلت أصلاً
+     بمعرفة المالك ومتعيّنة للموظف (created_by=المالك، assigned_to=الموظف، زي تصميم
+     v139)، وسياسة RLS للـUPDATE شرطها created_by=auth.uid() بس من غير استثناء
+     assigned_to. يعني كل محاولات v168→v226 (تجديد توكن بكل أشكاله) كانت بتصلّح حاجة
+     سليمة من الأصل — والمشكلة الحقيقية سياسة على السيرفر (Supabase) محتاجة تتعدّل
+     هناك، مش في كود التطبيق. اللي اتعمل هنا: التطبيق بقى مايعملش تسجيل خروج قسري
+     خالص عند 42501 (كان بيقاطع شغل الموظف من غير أي فايدة فعلية)، وبدل كده بيوري
+     رسالة واضحة تشرح المشكلة الحقيقية وتقول بالظبط إيه اللي المالك محتاج يعدّله في
+     سياسة RLS (يضيف OR assigned_to = auth.uid()).
 v226: [🧭 وقف التخمين — تشخيص حقيقي بدل تصليح تاني]
      العميل طلب نوقف نخمّن حلول ونشخّص المشكلة صح. إعادة نظر جوهرية: كود 42501
      (insufficient_privilege) في Postgres عادةً معناه إن الـ JWT سليم وauth.uid()
@@ -1723,15 +1762,23 @@ input:checked+.slider:before{transform:translateX(-20px)}
   // عليه" (assigned_to) — أيًا كان مين سجّلها، لو معيّن على الموظف ده هيشوفها، ولو معيّنة
   // على حد تاني أو مش معيّنة لحد، مش هيشوفها (وده هو المطلوب بالظبط: "يشوف اللي اخترته
   // إنه يشتغل عليه بس").
+  // ⚠️ v228 — [🎛️ إعداد فردي لكل موظف: يشوف التحركات/المهام الغير محددة (assigned_to
+  // فاضي) ولا لأ] العميل عايز يسيب assigned_to فاضي عادي وقت التسجيل (مش إجباري)،
+  // لكن يحدد هو بنفسه لكل مهندس عن طريق الإعدادات هل يشوف الحاجات الغير معيّنة دي
+  // ولا يشوف بتاعته المحدد له بس. ده إعداد شخصي مستقل عن "يشوف كل حاجة" (full_visibility
+  // بيوري له بيانات الكل، وده تحديدًا بيوري له بس الحاجات الفاضية+بتاعته).
   function _visFilterAssigned(list){
     if(window.__isOwner)return list;
     if(!DB.settings||DB.settings.employeeSeeOwnDataOnly===false)return list;
     if(window.__currentProfile&&window.__currentProfile.full_visibility)return list;
     var me=window.__currentProfile&&window.__currentProfile.id;
     if(!me)return list;
+    var seeUnassigned=!!(window.__currentProfile&&window.__currentProfile.see_unassigned);
     return (list||[]).filter(function(r){
-      if(!r.created_by&&!r.assigned_to)return true; // سجل قديم من قبل الميزة دي
-      return r.assigned_to===me;
+      if(!r.created_by&&!r.assigned_to)return true; // سجل قديم من قبل الميزة دي أصلاً
+      if(r.assigned_to===me)return true;
+      if(!r.assigned_to&&seeUnassigned)return true; // الإعداد الفردي الجديد
+      return false;
     });
   }
 
@@ -1971,7 +2018,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
   async function __loadEmployeePermsUI(){
     var sub=document.getElementById('perm-sub-body');
     try{
-      var res = await sb.from('profiles').select('id, full_name, role_id, is_active, archived_at, full_visibility').neq('role_id','owner');
+      var res = await sb.from('profiles').select('id, full_name, role_id, is_active, archived_at, full_visibility, see_unassigned').neq('role_id','owner');
       var emps = res.data || [];
       if(!emps.length){ sub.innerHTML='<div style="color:#94a3b8;text-align:center;padding:20px">لسه مفيش موظفين.</div>'; return; }
       var opts='<option value="">— اختار موظف —</option>'+emps.map(function(e){
@@ -2224,6 +2271,11 @@ input:checked+.slider:before{transform:translateX(-20px)}
       '<div style="font-size:12px;font-weight:800;margin-bottom:8px;color:'+(emp.full_visibility?'#2563eb':'#374151')+'">'+(emp.full_visibility?'👁️ استثناء: يشوف كل حاجة (مش بس بتاعته)':'🔒 الوضع الافتراضي: يشوف بتاعته هو بس')+'</div>'+
       '<button class="btn btn-full btn-sm" style="background:'+(emp.full_visibility?'#fee2e2;color:#dc2626':'#dbeafe;color:#2563eb')+'" onclick="__toggleEmpFullVisibility('+jsStr(emp.id)+','+(emp.full_visibility?'true':'false')+')">'+(emp.full_visibility?'🔒 رجّعه يشوف بتاعته بس':'👁️ استثناء: خليه يشوف كل حاجة')+'</button>'+
       '</div>'+
+      '<div style="background:'+(emp.see_unassigned?'#f0fdf4':'#fff')+';border:1.5px solid '+(emp.see_unassigned?'#bbf7d0':'#e2e8f0')+';border-radius:10px;padding:12px;margin-bottom:12px">'+
+      '<div style="font-size:11px;color:#64748b;margin-bottom:5px">📋 التحركات/المهام اللي لسه من غير "مهندس مسؤول" محدد</div>'+
+      '<div style="font-size:12px;font-weight:800;margin-bottom:8px;color:'+(emp.see_unassigned?'#15803d':'#374151')+'">'+(emp.see_unassigned?'✅ بيشوفها ويقدر يشتغل عليها':'🔒 مش بيشوفها (يشوف بتاعته المحدد له بس)')+'</div>'+
+      '<button class="btn btn-full btn-sm" style="background:'+(emp.see_unassigned?'#fee2e2;color:#dc2626':'#dcfce7;color:#15803d')+'" onclick="__toggleEmpSeeUnassigned('+jsStr(emp.id)+','+(emp.see_unassigned?'true':'false')+')">'+(emp.see_unassigned?'🔒 امنعه يشوفها':'✅ خليه يشوفها ويقدر ياخدها')+'</button>'+
+      '</div>'+
       (linkedRec?
         '<div style="background:#fff;border:1.5px solid #e2e8f0;border-radius:10px;padding:12px">'+
         '<div style="font-size:11px;color:#64748b;margin-bottom:8px">📊 لو فاتح له شاشة "التقارير" (بالاستثناء الفردي)، تقدر تخفي عنه تبويبات بعينها:</div>'+
@@ -2269,6 +2321,16 @@ input:checked+.slider:before{transform:translateX(-20px)}
     if(res.error){ showToast('❌ فشل: '+res.error.message+' — لو الخطأ عن عمود مش موجود، لازم تعمل: alter table profiles add column full_visibility boolean default false;','#dc2626'); return; }
     __logActivity('update', 'employees', userId, {event: currentlyFull?'إلغاء استثناء رؤية كل البيانات':'استثناء: رؤية كل البيانات'});
     showToast(currentlyFull?'✅ رجع يشوف بتاعته بس':'👁️ بقى يشوف كل حاجة','#16a34a');
+    __loadEmployeePermsUI();
+  }
+  // ⚠️ v228 — إعداد فردي: يشوف التحركات/المهام الغير محددة (assigned_to فاضي) ولا لأ.
+  // محتاج عمود جديد جوه profiles + تعديل سياسة RLS على movements (وtasks لو موجود
+  // نفس النمط) عشان السيرفر برضو يسمح، مش بس واجهة التطبيق — شوف رد الشات للتفاصيل.
+  async function __toggleEmpSeeUnassigned(userId, currentlySee){
+    var res=await sb.from('profiles').update({see_unassigned: !currentlySee}).eq('id',userId);
+    if(res.error){ showToast('❌ فشل: '+res.error.message+' — لو الخطأ عن عمود مش موجود، لازم تعمل: alter table profiles add column see_unassigned boolean default false;','#dc2626'); return; }
+    __logActivity('update', 'employees', userId, {event: currentlySee?'إلغاء رؤية الغير محدد':'استثناء: رؤية الغير محدد'});
+    showToast(currentlySee?'🔒 امتنع يشوف الغير محدد':'✅ بقى يشوف الغير محدد ويقدر ياخده','#16a34a');
     __loadEmployeePermsUI();
   }
   function __commInputsHTML(rec){
@@ -2914,7 +2976,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
         return;
       }
       var userId = res.data.user.id;
-      var profRes = await sb.from('profiles').select('full_name, role_id, branch_id, is_active, full_visibility').eq('id', userId).single();
+      var profRes = await sb.from('profiles').select('full_name, role_id, branch_id, is_active, full_visibility, see_unassigned').eq('id', userId).single();
       if(profRes.error || !profRes.data){
         // ===== إصلاح جذري: لو حساب الدخول (Auth) موجود بس ملف الموظف (profiles) لأي سبب
         // متعملش (مثلاً وقعت مشكلة نت في التسجيل الأول) — بدل ما نوقّف المستخدم في طريق
@@ -3736,7 +3798,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
         var profRes;
         var networkFailed=__offlineFast, authFailed=false;
         if(!__offlineFast) try{
-          profRes = await __withTimeout(sb.from('profiles').select('full_name, role_id, branch_id, is_active, full_visibility').eq('id', userId).single(), 5000);
+          profRes = await __withTimeout(sb.from('profiles').select('full_name, role_id, branch_id, is_active, full_visibility, see_unassigned').eq('id', userId).single(), 5000);
         }catch(netErr){
           // v169 — [🐛 إصلاح: كل خطأ كان بيتحط في خانة "مشكلة نت" حتى لو كان فعليًا
           // جلسة/توكن تالف] بنفرّق دلوقتي: خطأ الشبكة الحقيقي (Failed to fetch) وحده
@@ -3819,9 +3881,12 @@ input:checked+.slider:before{transform:translateX(-20px)}
       // نفسه ومكنش بيتحدّث خالص هنا — فكان لو المالك يفعّلها لموظف فاتح التطبيق بالفعل،
       // الموظف يفضل شايف "بتاعته بس" (عدد أقل) لحد ما يقفل التطبيق قفل كامل ويفتحه تاني،
       // مش مجرد يرجعله من الخلفية. دلوقتي بنعيد جلب full_visibility مع كل تحديث دوري.
-      var pv=await sb.from('profiles').select('full_visibility').eq('id',window.__currentProfile.id).maybeSingle();
-      if(pv&&!pv.error&&pv.data&&window.__currentProfile.full_visibility!==pv.data.full_visibility){
+      // ⚠️ v228 — نفس الفكرة بالظبط لعمود see_unassigned الجديد (يشوف التحركات/المهام
+      // الغير محددة ولا لأ) — لازم يتحدّث دوريًا هنا برضو، مش بس full_visibility.
+      var pv=await sb.from('profiles').select('full_visibility, see_unassigned').eq('id',window.__currentProfile.id).maybeSingle();
+      if(pv&&!pv.error&&pv.data&&(window.__currentProfile.full_visibility!==pv.data.full_visibility||window.__currentProfile.see_unassigned!==pv.data.see_unassigned)){
         window.__currentProfile.full_visibility=pv.data.full_visibility;
+        window.__currentProfile.see_unassigned=pv.data.see_unassigned;
         try{if(typeof renderReports==='function')renderReports();}catch(e2){}
       }
       __applyPermVisibility();
@@ -3868,7 +3933,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
     <div id="header-title"></div>
     <button style="background:rgba(255,255,255,.12);border:none;color:#fff;border-radius:10px;padding:6px 10px;cursor:pointer;font-size:14px" onclick="openGlobalSearch()">🔍</button>
     <button id="undo-btn" style="background:rgba(255,255,255,.12);border:none;color:#fff;border-radius:10px;padding:6px 10px;cursor:pointer;font-size:14px" onclick="undoLast()">↩️</button>
-    <div id="sync-status" style="font-size:10px;color:rgba(255,255,255,.6);min-width:50px;text-align:left">☁️</div>
+    <div id="sync-status" style="font-size:10px;color:rgba(255,255,255,.6);width:78px;max-width:78px;flex:0 0 78px;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" onclick="showToast(this.title||this.textContent,'#334155')">☁️</div>
   </div>
   <div id="content">
 
@@ -4212,7 +4277,7 @@ var APP_TITLE='ابو حوده الحلو الجميل';
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=226;
+var APP_VERSION=234;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -4436,6 +4501,27 @@ function persist(){
 // أي عنصر DOM — مفيش عمليتين تقدر تشتغلوا في نفس اللحظة في كل التطبيق، حتى لو الشاشة
 // اترندرت من تاني في النص.
 var __runOnceInFlight = false;
+// ⚠️ v233 — حارس عام على مستوى التطبيق كله ضد ضغطة إصبع سريعة مرتين على نفس الزرار
+// (بتاعت اللمس على الموبايل بتطلق أكتر من حدث أحيانًا) بتخلي أي عملية حفظ/إضافة تتكرر.
+// بيشتغل على مستوى الالتقاط (capture) قبل أي onclick، فبيغطي كل زرار في التطبيق من غير
+// ما نلمس مئات الأزرار الفردية — أبسط طريق لأفضل نتيجة زي ما طلبت.
+document.addEventListener('click', function(e){
+  var b=e.target.closest('button');
+  if(!b)return;
+  var now=Date.now();
+  if(b.__lastTapT && (now-b.__lastTapT)<700){ e.stopImmediatePropagation(); e.preventDefault(); return; }
+  b.__lastTapT=now;
+}, true);
+
+// ⚠️ v233 — تحكّم من الإعدادات في أي أزرار إجراءات تظهر فوق كروت التحركات (الكل + مرتبة)
+// عشان المساحة تبقى مظبوطة — أي زرار متفق مع الافتراضي (ظاهر) لو مش محدد في الإعدادات
+function _movAct(key,scope){
+  scope=scope||'all';
+  var root=(DB.settings&&DB.settings.movCardActions)||{};
+  var c=root[scope]||{};
+  return c[key]!==false;
+}
+
 function __runOnce(btn, fn){
   if(__runOnceInFlight) return;
   if(!btn || btn.disabled) return;
@@ -4451,7 +4537,7 @@ function __runOnce(btn, fn){
 
 function setSyncStatus(msg,color){
   var el=document.getElementById('sync-status');
-  if(el){el.textContent=msg;el.style.color=color||'rgba(255,255,255,.6)';}
+  if(el){el.textContent=msg;el.title=msg;el.style.color=color||'rgba(255,255,255,.6)';}
 }
 
 // ===== v144 — بنر أخطاء دائم =====
@@ -4903,83 +4989,33 @@ async function __pushRowToServer(table, row){
       __reportError('تنبيه: معرّف قديم غير صالح في "'+table+'"', 'الحقول دي كانت بصيغة قديمة (قبل نظام UUID) فاتشالت عشان السجل يتزامن: '+clearedIdFields.join('، ')+'.');
     }
     if(res.error){
-      // v171 — [🐛 كسر حلقة فشل RLS 42501 اللي كانت بتتكرر للأبد] الكود 42501 هنا معناه
-      // عمليًا إن auth.uid() رجع فاضي وقت التنفيذ (توكن تالف/منتهي فعليًا على السيرفر)
-      // حتى لو الجلسة شكلها موجودة محليًا. بدل ما نسيبها تتكرر بلا نهاية، بمجرد ما
-      // نلاقي 42501 بننتظر لحظة ونجرب تاني مرة واحدة، ولو فشل كمان بنعمل تسجيل خروج
-      // تلقائي فورًا عشان نكسر الحلقة ونطلب دخول جديد نضيف.
-      // ⚠️ v191 — [🐛 إصلاح: نفس باج v168/v169 اتكرر هنا] كان هنا نداء يدوي لـ
-      // sb.auth.refreshSession() قبل إعادة المحاولة — وده بالظبط اللي v169 وثّقت إنه
-      // بيتعارض (race condition) مع تجديد التوكن التلقائي جوه مكتبة Supabase نفسها،
-      // وبيسقط الجلسة فعليًا بدل ما يصلحها. على الأرجح ده سبب شكوى الموظفين إنهم
-      // بيتسجلوا خروج تلقائي بعد شوية استخدام. الحل زي v169 بالظبط: منجبرش تجديد
-      // يدوي، بس نستنى لحظة (تدي فرصة للتجديد التلقائي لو شغال أصلاً) ونعيد المحاولة.
-      if(res.error.code === '42501' && !payload.__retriedAfterRefresh){
-        try{
-          await new Promise(function(r){setTimeout(r,800);});
-          var _hasSession = await __ensureFreshSession(true); // force — تأكد حقيقي من السيرفر مش من الكاش
-          if(_hasSession){
-            payload.__retriedAfterRefresh = true; // منع تكرار لا نهائي
-            var payload2 = Object.assign({}, payload); delete payload2.__retriedAfterRefresh;
-            var res2 = await sb.from(table).upsert(payload2);
-            if(!res2.error) return true;
-            res = res2;
-          }
-        }catch(e5){}
-        // ⚠️ v225 — [🐛 احتمال جذري تالت، مختلف تمامًا عن كل المحاولات اللي فاتت]
-        // v224 خلّى __ensureFreshSession يتأكد فعليًا من السيرفر (مش بس محليًا)، يعني
-        // لو وصلنا هنا دلوقتي فالجلسة غالبًا بقت سليمة فعلاً بعد v224 — ومع ذلك
-        // المحاولة التانية ("res2") ممكن تفشل بخطأ *تاني خالص مش 42501* (مثلاً سياسة
-        // RLS بترفض السجل لسبب حقيقي غير متعلق بالجلسة خالص، زي فرع/صلاحية الموظف
-        // على الجدول ده). الكود القديم كان بيتعامل مع *أي* فشل في المحاولة التانية
-        // على إنه "جلسة تالفة" ويعمل تسجيل خروج قسري — وده غلط لو السبب الحقيقي مش
-        // له علاقة بالجلسة أصلاً، لأن تسجيل الخروج مش هيحل حاجة وهيتكرر تاني وتاني.
-        // دلوقتي: تسجيل الخروج القسري بيحصل بس لو الخطأ لسه 42501 فعلاً بعد المحاولة
-        // التانية؛ أي كود خطأ تاني بيتعامل معاه كفشل مزامنة عادي (رسالة واضحة
-        // بالكود والتفاصيل الحقيقية، من غير تسجيل خروج) عشان نعرف السبب الحقيقي.
-        if(res.error.code !== '42501'){
-          console.warn('فشل مزامنة السجل مع السيرفر بعد إعادة المحاولة ('+table+'):', res.error.message);
-          setSyncStatus('⚠️ لم تتم المزامنة مع السيرفر','#dc2626');
-          __reportError('فشل مزامنة قسم "'+table+'" (بعد إعادة محاولة)', 'الكود: '+(res.error.code||'—')+' — الرسالة: '+res.error.message);
-          return false;
-        }
-        // لو وصلنا هنا يبقى المحاولة التانية فشلت برضو — الجلسة تالفة فعلاً.
-        // v172 — [🐛 إصلاح حلقة تسجيل الخروج/الدخول المتكررة] كنا بنمسح جلسة السيرفر
-        // بس، وكان التطبيق بيرجع يدخل تلقائي بنفس الحساب المحفوظ محليًا (وضع الأوفلاين
-        // المصمم أصلاً)، فيحصل نفس الخطأ تاني فورًا ويلف في حلقة. دلوقتي بنمسح الحساب
-        // المحفوظ محليًا كمان (مش بس جلسة السيرفر) عشان بوابة الدخول تفضل ظاهرة فعليًا
-        // وتستنى دخول حقيقي، وبنعمل ده مرة واحدة بس مش مع كل سجل فاشل.
-        if(!window.__forcedLogoutTriggered){
-          window.__forcedLogoutTriggered = true;
-          // ⚠️ v226 — [🧭 تشخيص حقيقي بدل التخمين] الكود 42501 (insufficient_privilege)
-          // في Postgres/Supabase معناه عادةً إن الـ JWT سليم وauth.uid() موجود، بس
-          // سياسة RLS نفسها رافضة الصف لسبب في البيانات (مش في الجلسة) — عكس افتراض
-          // v171 الأصلي إن 42501 = توكن فاضي. توكن فاضي/منتهي فعليًا بيرجع عادة 401
-          // مش 42501. بما إن v224/v225 أكدوا إن فيه جلسة حقيقية وقت الفشل، نجمع هنا كل
-          // التفاصيل اللي ممكن تكشف سبب رفض RLS الحقيقي: auth.uid() الفعلي من السيرفر،
-          // وبيانات البروفايل الحالي، وقيم الحقول اللي غالبًا RLS بيتأكد منها في الصف
-          // (created_by/branch_id/updated_by)، عشان لو اتكررت نقدر نقارنها ونلاقي
-          // الفرق بدل ما نفضل نجرب حلول عشوائية.
-          var __diag = 'جدول: '+table+' | صف id: '+(payload.id||'—')+
-            ' | created_by بالصف: '+(payload.created_by||'—')+
-            ' | branch_id بالصف: '+(payload.branch_id||'—')+
-            ' | updated_by بالصف: '+(payload.updated_by||'—')+
-            ' | بروفايل حالي id: '+(window.__currentProfile&&window.__currentProfile.id||'—')+
-            ' | بروفايل حالي branch_id: '+(window.__currentProfile&&window.__currentProfile.branch_id||'—');
-          try{
-            var __u = await sb.auth.getUser();
-            __diag += ' | auth.uid() الحقيقي من السيرفر: '+((__u&&__u.data&&__u.data.user&&__u.data.user.id)||'فاضي!');
-          }catch(e8){ __diag += ' | تعذر جلب auth.uid()'; }
-          __reportError('جلسة الدخول تالفة — تم تسجيل الخروج تلقائيًا', 'محتاج تدخل ببياناتك تاني عشان تكمل المزامنة. (تفاصيل تقنية: كود 42501 من جدول "'+table+'" — '+(res.error.message||'')+' | تشخيص: '+__diag+')');
-          try{ await sb.auth.signOut(); }catch(e6){}
-          try{
-            var _uid = window.__currentProfile && window.__currentProfile.id;
-            if(_uid) localStorage.removeItem('mc8_cached_profile_'+_uid);
-            localStorage.removeItem('mc8_last_user_id');
-          }catch(e7){}
-          window.__currentProfile = null;
-          setTimeout(function(){ location.reload(); }, 1500);
-        }
+      // ⚠️ v227 — [✅ السبب الحقيقي اتأكد من تشخيص v226 الفعلي، مش تخمين]
+      // اللوج اللي رجع من العميل وضّح الصورة بالكامل: auth.uid() الحقيقي من السيرفر
+      // كان مطابق تمامًا لبروفايل الموظف (يعني الجلسة كانت سليمة 100%)، ومع ذلك
+      // فشل الحفظ بـ42501 على جدول "movements" برسالة "USING expression" — وده
+      // تحديدًا معناه إن العملية كانت *تعديل* على صف موجود بالفعل على السيرفر (مش
+      // إضافة صف جديد)، وسياسة الـ UPDATE بتتحقق إن created_by = auth.uid(). لكن
+      // المهام/التحركات بتتسجل بمعرفة المالك ويتعيّنها لموظف (created_by=المالك،
+      // assigned_to=الموظف — زي ما موضّح في تعليق v139 فوق)، فلما الموظف يحدّث
+      // تحرك اتعيّن عليه (يقفله، يضيف قطع...) بيبقى created_by بتاع الصف الموجود هو
+      // المالك مش هو — فسياسة RLS بترفضه *دايمًا* بغض النظر عن حالة الجلسة خالص.
+      // يعني كل محاولات v168→v226 (تجديد التوكن بكل أشكاله) كانت بتصلّح حاجة سليمة
+      // أصلاً، والمشكلة الحقيقية سياسة RLS ناقصة شرط "assigned_to = auth.uid()".
+      // ده إصلاح سيرفر (Supabase SQL) مش كود — التطبيق نفسه مينفعش يغيّر سياسة RLS.
+      // اللي التطبيق يقدر يعمله: يوقف يعامل 42501 كـ"جلسة تالفة" (تسجيل خروج قسري
+      // مؤذي وبيقاطع شغل الموظف من غير أي فايدة، لأن المشكلة مش جلسة)، ويوري بدل
+      // كده رسالة واضحة تقول المشكلة الحقيقية عشان توصل للمالك يصلّح السياسة.
+      if(res.error.code === '42501'){
+        console.warn('فشل مزامنة (صلاحية RLS) في '+table+':', res.error.message);
+        setSyncStatus('⚠️ لم تتم المزامنة — صلاحية ناقصة','#dc2626');
+        __reportError(
+          '🚫 صلاحية ناقصة في قاعدة البيانات (مش مشكلة جلسة دخول)',
+          'الجلسة سليمة 100% (اتأكد منها فعليًا) — لكن سياسة RLS على جدول "'+table+'" رافضة الحفظ. '+
+          'السبب الأرجح: السجل ده created_by بتاعه شخص تاني (غالبًا المالك اللي سجّل المهمة وعيّنها للموظف)، '+
+          'وسياسة التعديل (UPDATE) في Supabase بتشترط created_by = auth.uid() بس، من غير ما تسمح كمان لما assigned_to = auth.uid(). '+
+          'الحل: من لوحة تحكم Supabase → Database → Policies → جدول "'+table+'" → سياسة UPDATE، ضيف شرط OR assigned_to = auth.uid(). '+
+          'التفاصيل الخام: '+(res.error.message||'')+' (صف id: '+(payload.id||'—')+', created_by بالصف: '+(payload.created_by||'—')+', updated_by: '+(payload.updated_by||'—')+')'
+        );
         return false;
       }
       console.warn('فشل مزامنة السجل مع السيرفر ('+table+'):', res.error.message);
@@ -5265,9 +5301,25 @@ function showToast(msg,color){
 }
 
 // ===== MODAL =====
-function openModal(){document.getElementById('modal-overlay').classList.add('open');}
+// ⚠️ v233 — المودال (بما فيه البحث الشامل وكل فورم فيه حقول) بيتحط أسفل الشاشة، ولوحة
+// المفاتيح في الموبايل (خصوصًا آيفون) بتغطي جزء منه من غير ما تدي الصفحة فرصة تتحرك، فكان
+// آخر جزء (نتائج البحث مثلاً) بيختفي لحد ما تقفل الكيبورد. بنستخدم visualViewport (لو
+// متاحة) عشان نضبط ارتفاع وموضع المودال على المساحة الظاهرة فعليًا فوق الكيبورد بس.
+function __fitModalToViewport(){
+  var ov=document.getElementById('modal-overlay');
+  if(!ov||!ov.classList.contains('open')||!window.visualViewport)return;
+  var vv=window.visualViewport;
+  ov.style.height=vv.height+'px';
+  ov.style.top=vv.offsetTop+'px';
+}
+if(window.visualViewport){
+  window.visualViewport.addEventListener('resize', __fitModalToViewport);
+  window.visualViewport.addEventListener('scroll', __fitModalToViewport);
+}
+function openModal(){document.getElementById('modal-overlay').classList.add('open');setTimeout(__fitModalToViewport,50);}
 function closeModal(){
   document.getElementById('modal-overlay').classList.remove('open');
+  var __ov=document.getElementById('modal-overlay');if(__ov){__ov.style.height='';__ov.style.top='';}
   // v165 — لو المستخدم فتح فاتورة من "إنهاء عطل وتحويل لفاتورة" وبعدين ضغط "إلغاء"
   // بدل ما يحفظ، المتغير ده كان بيفضل عالق. لو فتح أي فاتورة تانية غير مرتبطة بعد
   // كده وحفظها، كان هيقفل العطل القديم غلط بالغلط. تنظيفه هنا آمن مع كل المودالات.
@@ -5799,11 +5851,14 @@ function renderHome(){
     var ptSet=DB.settings&&DB.settings.prayerTimes;
     if(ptSet&&ptSet.enabled&&ptSet.lat!=null){
       var pTimes=_todayPrayerTimes();
-      prayerEl.innerHTML=pTimes?('<div style="background:#fff;border-radius:14px;padding:10px 12px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.06);display:grid;grid-template-columns:repeat(5,1fr);gap:4px;text-align:center">'+
+      prayerEl.innerHTML=pTimes?('<div onclick="navigate(\'settings\');setTimeout(function(){var e=document.getElementById(\'prayer-enabled\');if(e)e.scrollIntoView({block:\'center\'});},150)" style="background:#fff;border-radius:14px;padding:10px 12px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.06);cursor:pointer">'+
+        '<div id="home-prayer-countdown" style="text-align:center;font-size:12px;font-weight:800;color:#0891b2;margin-bottom:8px;min-height:16px"></div>'+
+        '<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:4px;text-align:center">'+
         ['fajr','dhuhr','asr','maghrib','isha'].map(function(k){
           var lbl={fajr:'الفجر',dhuhr:'الظهر',asr:'العصر',maghrib:'المغرب',isha:'العشاء'}[k];
-          return '<div><div style="font-size:9.5px;color:#94a3b8">'+lbl+'</div><div style="font-size:11px;font-weight:800;color:#0f766e">'+_fmtPrayerHour(pTimes[k])+'</div></div>';
-        }).join('')+'</div>'):'';
+          return '<div id="home-prayer-cell-'+k+'"><div style="font-size:9.5px;color:#94a3b8">'+lbl+'</div><div style="font-size:11px;font-weight:800;color:#0f766e">'+_fmtPrayerHour(pTimes[k])+'</div></div>';
+        }).join('')+'</div></div>'):'';
+      if(pTimes)_tickPrayerCountdown();
     }else{
       prayerEl.innerHTML='';
     }
@@ -7797,6 +7852,7 @@ var _saleId=null,_saleItems=[],_saleServices=[];
 // عشان نقفله بس لما الفاتورة تتحفظ فعلاً بنجاح (مش قبل كده). لو المستخدم خرج من
 // غير حفظ، العطل يفضل زي ما هو (مش منتهي).
 var _saleFromMovementId=null;
+var _saleNextSameCustomer=false; // v232
 var _salePayMethod='كاش'; // الافتراضي كاش
 
 function openSaleModal(id){
@@ -7962,6 +8018,7 @@ function renderSaleBody(s){
     dateField('sale-date','📅 التاريخ',s?s.date:null)+
     '<div class="modal-actions">'+
     '<button class="btn btn-green btn-full" onclick="__runOnce(this,saveSale)">'+(s?'حفظ التعديل':'✅ حفظ الفاتورة')+'</button>'+
+    (s?'':'<button class="btn btn-outline btn-full" onclick="__runOnce(this,function(){_saleNextSameCustomer=true;return saveSale();})">✅ حفظ + مكنة تانية لنفس العميل</button>')+
     '<button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
 
   // ربط اسم العميل بماكيناته
@@ -8570,6 +8627,10 @@ async function saveSale(){
     }
     await persist();
     closeModal();renderSales();renderHome();
+    if(_saleNextSameCustomer){ // v232 — فتح فاتورة جديدة بنفس اسم العميل بس، باقي البيانات فاضية للمكنة التالية
+      _saleNextSameCustomer=false;
+      setTimeout(function(){openSaleModal();setTimeout(function(){var ci=document.getElementById('sale-customer');if(ci)ci.value=customer;},60);},250);
+    }
     if(syncResult&&syncResult.isNew&&syncResult.phoneEmpty){
       // تذكير بإضافة الهاتف بعد الحفظ مباشرة
       setTimeout(function(){promptAddClientPhone(syncResult.clientId,customer);},250);
@@ -10979,8 +11040,8 @@ function openExpenseModal(prefill){
     '<textarea id="exp-note" rows="2" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit;direction:rtl;resize:none;background:#f8fafc;outline:none">'+esc(prefill?prefill.note||'':'')+'</textarea></div>'+
     dateField('exp-date','📅 التاريخ',null)+
     '<div class="modal-actions">'+
-    '<button class="btn btn-orange btn-full" onclick="__runOnce(this,saveExpense)">✅ تسجيل (وأضف تاني)</button>'+
-    '<button class="btn btn-outline btn-full" onclick="closeModal()">تم، اقفل</button></div>';
+    '<button class="btn btn-orange btn-full" onclick="__runOnce(this,function(){saveExpense(false)})">✅ تسجيل (وأضف تاني)</button>'+
+    '<button class="btn btn-outline btn-full" onclick="__runOnce(this,function(){saveExpense(true)})">✅ تسجيل وخروج (تم)</button></div>';
   openModal();
   setTimeout(onExpCatChange,50);
 }
@@ -11133,7 +11194,7 @@ async function delExpenseTemplate(idx){
   document.getElementById('exp-tmpl-list').innerHTML=_renderExpTmplList();
 }
 
-async function saveExpense(){
+async function saveExpense(closeAfter){
   if(!__hasPerm('expenses','can_insert')){
     showToast('🚫 مفيش صلاحية إضافة مصروفات. كلم المالك.', '#dc2626');
     return;
@@ -11164,7 +11225,7 @@ async function saveExpense(){
       _refreshExpensesView();
       if(_accountingTab==='employees')renderAccounting();
       showToast('✅ تم تسجيل المصروف','#16a34a');
-      _resetExpenseFormForNext();
+      if(closeAfter)closeModal();else _resetExpenseFormForNext();
       return;
     }
   }
@@ -11178,7 +11239,7 @@ async function saveExpense(){
   renderExpensesList();
   _refreshExpensesView();
   showToast('✅ تم تسجيل المصروف','#16a34a');
-  _resetExpenseFormForNext();
+  if(closeAfter)closeModal();else _resetExpenseFormForNext();
 }
 
 // ⚠️ v119 — بعد تسجيل مصروف، الفورم يفضل مفتوح فاضي وجاهز لإضافة مصروف تاني على طول
@@ -12048,14 +12109,14 @@ function renderMovements(){
       '</div>'+
       (m.status==='ملغي'&&m.cancel_reason?'<div style="font-size:11px;color:#dc2626;background:#fef2f2;border-radius:6px;padding:4px 7px;margin-bottom:4px">🚫 سبب الإلغاء: '+esc(m.cancel_reason)+'</div>':'')+
       '<div style="display:flex;gap:3px">'+
-      (isOpenState?'<button class="btn btn-sm" style="background:#f0fdf4;color:#15803d;border:1px solid #86efac;flex:1;font-size:11px" onclick="openAddLogModal(\''+m.id+'\')">📝</button>':'')+
-      (isOpenState?'<button class="btn btn-green btn-sm" style="font-size:11px" onclick="closeMovement(\''+m.id+'\')">✅</button>':'')+
-      (isOpenState?'<button class="btn btn-sm" style="background:#fef2f2;color:#dc2626;border:1px solid #fecaca;font-size:11px" onclick="openCancelMovementModal(\''+m.id+'\')">🚫</button>':'')+
-      (!isOpenState?'<button class="btn btn-sm" style="background:#f0fdf4;color:#15803d;border:1px solid #86efac;flex:1;font-size:11px" onclick="openMovementDetail(\''+m.id+'\')">📋</button>':'')+
-      (isOpenState?'<button class="btn-ic" style="background:#fdf2f8;color:#86198f;font-size:11px" onclick="quickAddToScheduled(\''+m.id+'\')" title="أضفه لمرتبة اليوم المفتوح">➕</button>':'')+
-      (isOpenState?'<button class="btn-ic" style="background:'+(m.status==='في الاستوك'?'#cffafe':'#f1f5f9')+';font-size:11px" onclick="toggleStockStatus(\''+m.id+'\')" title="'+(m.status==='في الاستوك'?'طلّعه من الاستوك':'حطّه في الاستوك')+'">🗄️</button>':'')+
-      '<button class="btn-ic" style="background:#dbeafe;font-size:11px" onclick="openMovementModal(\''+m.id+'\')">✏️</button>'+
-      '<button class="btn-ic" style="background:#fee2e2;font-size:11px" onclick="confirmAction(\'هتحذف؟\',function(){delMovement(\''+m.id+'\')})">🗑️</button>'+
+      (isOpenState&&_movAct('log','all')?'<button class="btn btn-sm" style="background:#f0fdf4;color:#15803d;border:1px solid #86efac;flex:1;font-size:11px" onclick="openAddLogModal(\''+m.id+'\')">📝</button>':'')+
+      (isOpenState&&_movAct('close','all')?'<button class="btn btn-green btn-sm" style="font-size:11px" onclick="closeMovement(\''+m.id+'\')">✅</button>':'')+
+      (isOpenState&&_movAct('cancel','all')?'<button class="btn btn-sm" style="background:#fef2f2;color:#dc2626;border:1px solid #fecaca;font-size:11px" onclick="openCancelMovementModal(\''+m.id+'\')">🚫</button>':'')+
+      (!isOpenState&&_movAct('detail','all')?'<button class="btn btn-sm" style="background:#f0fdf4;color:#15803d;border:1px solid #86efac;flex:1;font-size:11px" onclick="openMovementDetail(\''+m.id+'\')">📋</button>':'')+
+      (isOpenState&&_movAct('addSched','all')?'<button class="btn-ic" style="background:#fdf2f8;color:#86198f;font-size:11px" onclick="quickAddToScheduled(\''+m.id+'\')" title="أضفه لمرتبة اليوم المفتوح">➕</button>':'')+
+      (isOpenState&&_movAct('stock','all')?'<button class="btn-ic" style="background:'+(m.status==='في الاستوك'?'#cffafe':'#f1f5f9')+';font-size:11px" onclick="toggleStockStatus(\''+m.id+'\')" title="'+(m.status==='في الاستوك'?'طلّعه من الاستوك':'حطّه في الاستوك')+'">🗄️</button>':'')+
+      (_movAct('edit','all')?'<button class="btn-ic" style="background:#dbeafe;font-size:11px" onclick="openMovementModal(\''+m.id+'\')">✏️</button>':'')+
+      (_movAct('del','all')?'<button class="btn-ic" style="background:#fee2e2;font-size:11px" onclick="confirmAction(\'هتحذف؟\',function(){delMovement(\''+m.id+'\')})">🗑️</button>':'')+
       '</div></div>';
   }
 
@@ -12151,13 +12212,10 @@ function renderScheduledList(){
 
   function movCardSched(m,i,arr,showArrows){
     var isCarriedHere=smap[m.id]!==_schedWorkDate; // نسخة متابعة مش يومه الأصلي
-    return '<div style="background:#fff;border-radius:8px;padding:5px 8px;box-shadow:0 1px 3px rgba(0,0,0,.06);margin-bottom:4px;border-right:3px solid '+(isCarriedHere?'#7c3aed':sc(m.status))+'">'+
+    return '<div class="mv-sched-card" data-mvid="'+m.id+'" style="background:#fff;border-radius:8px;padding:5px 8px;box-shadow:0 1px 3px rgba(0,0,0,.06);margin-bottom:4px;border-right:3px solid '+(isCarriedHere?'#7c3aed':sc(m.status))+'">'+
       '<div style="display:flex;align-items:center;gap:4px">'+
-      (showArrows?(
-      '<div style="display:flex;flex-direction:column;gap:1px;flex-shrink:0">'+
-      (i>0?'<button onclick="moveSchedItem('+arr[0]+','+(-1)+')" style="background:#f1f5f9;border:none;border-radius:3px;width:18px;height:16px;cursor:pointer;font-size:8px">▲</button>':'<span style="width:18px;height:16px;display:block"></span>')+
-      (i<arr[1]-1?'<button onclick="moveSchedItem('+arr[0]+',1)" style="background:#f1f5f9;border:none;border-radius:3px;width:18px;height:16px;cursor:pointer;font-size:8px">▼</button>':'<span style="width:18px;height:16px;display:block"></span>')+
-      '</div>'):'')+
+      // ⚠️ v233 — نظام الأسهم اتبدّل بمقبض سحب واحد (☰) بطلب العميل، وده وفّر مساحة الكارت
+      (showArrows?'<span class="mv-drag-handle" style="cursor:grab;font-size:15px;color:#94a3b8;padding:2px 5px;flex-shrink:0;touch-action:none">☰</span>':'')+
       '<span style="background:#0f172a;color:#fff;border-radius:3px;padding:0 4px;font-size:10px;font-weight:900;flex-shrink:0">'+(i+1)+'</span>'+
       '<div style="flex:1;min-width:0">'+
       '<div style="display:flex;justify-content:space-between;align-items:center">'+
@@ -12170,12 +12228,12 @@ function renderScheduledList(){
       '</div>'+
       '</div>'+
       '<div style="display:flex;gap:2px;flex-shrink:0">'+
-      (m.status!=='منتهي'?'<button class="btn-ic" style="background:#f0fdf4;font-size:10px" onclick="openAddLogModal(\''+m.id+'\')">📝</button>':'')+
-      (m.status!=='منتهي'?'<button class="btn-ic" style="background:#dcfce7;font-size:10px" onclick="closeMovement(\''+m.id+'\')">✅</button>':'')+
-      (m.status!=='منتهي'?'<button class="btn-ic" style="background:#f5f3ff;font-size:10px" onclick="openCarryOverModal(\''+m.id+'\')">📌</button>':'')+
-      (m.status!=='منتهي'?'<button class="btn-ic" style="background:'+(m.status==='في الاستوك'?'#cffafe':'#f1f5f9')+';font-size:10px" onclick="toggleStockStatus(\''+m.id+'\')" title="'+(m.status==='في الاستوك'?'طلّعه من الاستوك':'حطّه في الاستوك')+'">🗄️</button>':'')+
-      '<button class="btn-ic" style="background:#dbeafe;font-size:10px" onclick="openMovementModal(\''+m.id+'\')">✏️</button>'+
-      (isCarriedHere?'<button class="btn-ic" style="background:#fee2e2;font-size:10px" onclick="removeCarriedDay(\''+m.id+'\',\''+_schedWorkDate+'\')">✕</button>':'<button class="btn-ic" style="background:#fee2e2;font-size:10px" onclick="removeFromScheduled(\''+m.id+'\')">✕</button>')+
+      (m.status!=='منتهي'&&_movAct('log','sched')?'<button class="btn-ic" style="background:#f0fdf4;font-size:10px" onclick="openAddLogModal(\''+m.id+'\')">📝</button>':'')+
+      (m.status!=='منتهي'&&_movAct('close','sched')?'<button class="btn-ic" style="background:#dcfce7;font-size:10px" onclick="closeMovement(\''+m.id+'\')">✅</button>':'')+
+      (m.status!=='منتهي'&&_movAct('carry','sched')?'<button class="btn-ic" style="background:#f5f3ff;font-size:10px" onclick="openCarryOverModal(\''+m.id+'\')">📌</button>':'')+
+      (m.status!=='منتهي'&&_movAct('stock','sched')?'<button class="btn-ic" style="background:'+(m.status==='في الاستوك'?'#cffafe':'#f1f5f9')+';font-size:10px" onclick="toggleStockStatus(\''+m.id+'\')" title="'+(m.status==='في الاستوك'?'طلّعه من الاستوك':'حطّه في الاستوك')+'">🗄️</button>':'')+
+      (_movAct('edit','sched')?'<button class="btn-ic" style="background:#dbeafe;font-size:10px" onclick="openMovementModal(\''+m.id+'\')">✏️</button>':'')+
+      (_movAct('removeSched','sched')?(isCarriedHere?'<button class="btn-ic" style="background:#fee2e2;font-size:10px" onclick="removeCarriedDay(\''+m.id+'\',\''+_schedWorkDate+'\')">✕</button>':'<button class="btn-ic" style="background:#fee2e2;font-size:10px" onclick="removeFromScheduled(\''+m.id+'\')">✕</button>'):'')+
       '</div></div></div>';
   }
 
@@ -12214,6 +12272,60 @@ function renderScheduledList(){
   }
 
   el.innerHTML=dayBar+filterBar+groupBtn+printDayBtn+cardsHtml;
+  if(_schedGroupMode!=='byEng')_wireSchedDrag(el);
+}
+
+// ⚠️ v233 — سحب وإفلات (بدل الأسهم) لترتيب كروت "مرتبة": ضغطة مطوّلة على مقبض ☰ بتفعّل
+// السحب، بعدين تحريك الإصبع رأسيًا بيبدّل مكان الكارت فورًا؛ نفس فكرة سحب تابات التقارير
+// (v189) بس على المحور الرأسي.
+function _applySchedDragOrder(newIdOrderVisible){
+  var fullList=(DB.scheduled_list||[]).slice();
+  var touched={};newIdOrderVisible.forEach(function(id){touched[id]=true;});
+  var positions=[];
+  fullList.forEach(function(id,i){if(touched[id])positions.push(i);});
+  positions.forEach(function(pos,k){fullList[pos]=newIdOrderVisible[k];});
+  DB.scheduled_list=fullList;
+  persist();
+}
+function _wireSchedDrag(container){
+  var pressTimer=null,dragging=null,startY=0,moved=false;
+  function clearPress(){if(pressTimer){clearTimeout(pressTimer);pressTimer=null;}}
+  function endDrag(){
+    if(dragging){dragging.style.zIndex='';dragging.style.opacity='';dragging.style.boxShadow='';}
+    var wasMoved=moved;
+    if(wasMoved){
+      var order=Array.prototype.map.call(container.querySelectorAll('.mv-sched-card'),function(c){return c.getAttribute('data-mvid');});
+      _applySchedDragOrder(order);
+    }
+    dragging=null;moved=false;
+    if(wasMoved)renderScheduledList();
+  }
+  container.querySelectorAll('.mv-drag-handle').forEach(function(handle){
+    var card=handle.closest('.mv-sched-card');
+    handle.addEventListener('touchstart',function(e){
+      startY=e.touches[0].clientY;moved=false;clearPress();
+      pressTimer=setTimeout(function(){
+        dragging=card;card.style.zIndex='5';card.style.opacity='0.85';card.style.boxShadow='0 4px 14px rgba(0,0,0,.18)';
+        if(navigator.vibrate)navigator.vibrate(15);
+      },200);
+    },{passive:true});
+    handle.addEventListener('touchmove',function(e){
+      if(!dragging){if(Math.abs(e.touches[0].clientY-startY)>8)clearPress();return;}
+      e.preventDefault();moved=true;
+      var touchY=e.touches[0].clientY;
+      var siblings=Array.prototype.slice.call(container.querySelectorAll('.mv-sched-card'));
+      var myIdx=siblings.indexOf(card);
+      for(var i=0;i<siblings.length;i++){
+        if(siblings[i]===card)continue;
+        var r=siblings[i].getBoundingClientRect();
+        var mid=r.top+r.height/2;
+        if(i<myIdx&&touchY<mid){container.insertBefore(card,siblings[i]);break;}
+        if(i>myIdx&&touchY>mid){container.insertBefore(card,siblings[i].nextSibling);break;}
+      }
+    },{passive:false});
+    handle.addEventListener('touchend',function(){clearPress();endDrag();});
+    handle.addEventListener('touchcancel',function(){clearPress();endDrag();});
+  });
 }
 
 // طباعة كل تحركات اليوم المفتوح حالياً في المرتبة (بنفس فلتر الحالة المطبّق على الشاشة)
@@ -16715,6 +16827,7 @@ function renderSettings(){
     '<button onclick="changeAppTitle()" style="padding:9px 16px;background:#7c3aed;color:#fff;border:none;border-radius:9px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer">✏️ تغيير</button>'+
     '</div></div>'+
     renderPrayerSettingsCard()+
+    renderMovActionsSettingsCard()+
     '<div class="card">'+
     '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:4px;padding-bottom:8px;border-bottom:2px solid #e2e8f0">🔄 تحويل الرصيد الافتتاحي لمشتريات</div>'+
     '<div style="font-size:11px;color:#94a3b8;margin-bottom:10px">لو عندك "مخزون بضاعة مُدخل يدويًا" في الحسابات، الزرار ده بيحوّله لمشترى حقيقي واحد بتاريخ اليوم عشان يدخل في تقارير المخزون والموردين بشكل صحيح. الكاش عندك مش هيتأثر خالص (نفس الرقم، مصدره بس بيبقى مشترى بدل خانة يدوية).</div>'+
@@ -17243,7 +17356,10 @@ function _renderQuranTadabbur(el){
     '<input id="tadabbur-input" type="text" placeholder="اكتب كلمة (مثال: الصبر، الرحمة...)" value="'+esc(_quranTadabburQuery)+'" onkeydown="if(event.key===\'Enter\')_runTadabburSearch()" style="flex:1;padding:11px 14px;border:1.5px solid #e2e8f0;border-radius:12px;font-family:inherit;font-size:13px">'+
     '<button onclick="_runTadabburSearch()" style="background:#0f766e;color:#fff;border:none;border-radius:12px;padding:0 16px;font-family:inherit;font-size:14px;cursor:pointer">بحث</button>'+
     '</div>'+
-    '<div style="font-size:10.5px;color:#94a3b8;margin-bottom:10px">محتاج اتصال نت. البحث بالرسم العثماني، فحاول تكتب الكلمة بشكلها المعتاد في المصحف</div>'+
+    '<div style="font-size:10.5px;color:#94a3b8;margin-bottom:8px">محتاج اتصال نت. البحث بالرسم العثماني، فحاول تكتب الكلمة بشكلها المعتاد في المصحف</div>'+
+    (_getSearchLog().length?'<div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px">'+
+      _getSearchLog().map(function(k){return '<span onclick="document.getElementById(\'tadabbur-input\').value='+jsStr(k)+';_runTadabburSearch()" style="background:#f1f5f9;color:#475569;border-radius:20px;padding:4px 10px;font-size:10.5px;cursor:pointer">'+esc(k)+'</span>';}).join('')+
+      '</div>':'')+
     '<div id="tadabbur-results"></div>'+
     '</div>';
 }
@@ -17266,12 +17382,16 @@ function _runTadabburSearch(){
         resEl.innerHTML='<div class="empty">مفيش آيات فيها الكلمة دي. جرّب كلمة تانية أو تأكد من الرسم</div>';
         return;
       }
+      _addToSearchLog(kw); // ⚠️ v230 — سجل بحث تدبر (نتيجة فعلية بس، مش أي محاولة فاشلة)
       var matches=json.data.matches;
       resEl.innerHTML='<div style="font-size:11.5px;color:#64748b;font-weight:700;margin-bottom:8px">'+matches.length+' نتيجة</div>'+
         matches.map(function(m){
-          return '<div onclick="openQuranSurah('+m.surah.number+')" style="background:#fff;border-radius:12px;padding:12px 14px;margin-bottom:8px;box-shadow:0 2px 8px rgba(0,0,0,.05);cursor:pointer">'+
+          return '<div style="background:#fff;border-radius:12px;padding:12px 14px;margin-bottom:8px;box-shadow:0 2px 8px rgba(0,0,0,.05)">'+
+            '<div onclick="openQuranSurah('+m.surah.number+')" style="cursor:pointer">'+
             '<div style="font-size:11px;color:#0f766e;font-weight:800;margin-bottom:4px">سورة '+esc((m.surah.name||'').replace(/^سورة /,''))+' — آية '+m.numberInSurah+'</div>'+
             '<div style="font-size:15px;line-height:2;text-align:justify">'+esc(m.text)+'</div>'+
+            '</div>'+
+            '<button onclick="event.stopPropagation();_showTopicPicker('+m.surah.number+','+m.numberInSurah+','+jsStr(m.surah.name)+','+jsStr(m.text)+')" style="margin-top:8px;background:#eef2ff;color:#4338ca;border:none;border-radius:8px;padding:6px 12px;font-size:11px;font-weight:700;cursor:pointer">📚 أضف لموضوع</button>'+
             '</div>';
         }).join('');
     })
@@ -17283,10 +17403,24 @@ function _runTadabburSearch(){
 function _renderQuranList(el,list){
   var q=normalizeAr((_quranSearch||'').trim());
   var filtered=q?list.filter(function(s){return normalizeAr(s.name).includes(q)||String(s.number)===q;}):list;
+  var _lastRead=_getQuranLastRead();
+  var _favCount=_getQuranFavorites().length;
   el.innerHTML=
     '<div style="padding:12px 14px 6px">'+
+    (_lastRead&&_lastRead.number!==undefined?
+      '<div onclick="openQuranSurah('+_lastRead.number+')" style="background:linear-gradient(135deg,#0f766e,#134e4a);color:#fff;border-radius:12px;padding:12px 14px;margin-bottom:10px;cursor:pointer;display:flex;justify-content:space-between;align-items:center">'+
+      '<div><div style="font-size:11px;opacity:.85">📖 كمّل من حيث وقفت</div><div style="font-size:14px;font-weight:900">'+esc((_lastRead.name||'').replace(/^سورة /,''))+'</div></div>'+
+      '<span style="font-size:18px">←</span></div>'
+    :'')+
     '<input id="quran-search-input" type="text" placeholder="🔍 دوّر على اسم سورة أو رقمها" value="'+esc(_quranSearch)+'" oninput="_quranSearch=this.value;_renderQuranList(document.getElementById(\'quran-body\'),window.__quranSurahList||[])" style="width:100%;padding:11px 14px;border:1.5px solid #e2e8f0;border-radius:12px;font-family:inherit;font-size:13px;margin-bottom:8px">'+
-    '<button onclick="_quranTadabburMode=true;renderQuranScreen()" style="width:100%;background:#0f766e;color:#fff;border:none;border-radius:12px;padding:11px;font-family:inherit;font-size:13px;font-weight:800;cursor:pointer;margin-bottom:10px">📿 بحث بكلمة في القرآن كله (تدبر)</button>'+
+    '<div style="display:flex;gap:8px;margin-bottom:8px">'+
+    '<button onclick="_quranTadabburMode=true;renderQuranScreen()" style="flex:1;background:#0f766e;color:#fff;border:none;border-radius:12px;padding:11px;font-family:inherit;font-size:12.5px;font-weight:800;cursor:pointer">📿 بحث بكلمة (تدبر)</button>'+
+    '<button onclick="_showQuranFavorites()" style="flex:1;background:#fff7ed;color:#c2410c;border:1.5px solid #fed7aa;border-radius:12px;padding:11px;font-family:inherit;font-size:12.5px;font-weight:800;cursor:pointer">⭐ المفضلة ('+_favCount+')</button>'+
+    '</div>'+
+    '<div style="display:flex;gap:8px;margin-bottom:10px">'+
+    '<button onclick="_showQuranTopicsList()" style="flex:1;background:#eef2ff;color:#4338ca;border:1.5px solid #c7d2fe;border-radius:12px;padding:11px;font-family:inherit;font-size:12.5px;font-weight:800;cursor:pointer">📚 مواضيعي ('+_getQuranTopics().filter(function(t){return !t.archived;}).length+')</button>'+
+    '<button onclick="_showDailyJournal()" style="flex:1;background:#f0fdf4;color:#15803d;border:1.5px solid #bbf7d0;border-radius:12px;padding:11px;font-family:inherit;font-size:12.5px;font-weight:800;cursor:pointer">📅 دفتر التدبر</button>'+
+    '</div>'+
     '</div>'+
     '<div style="padding:0 14px 14px">'+
     filtered.map(function(s){
@@ -17302,9 +17436,315 @@ function _renderQuranList(el,list){
     (filtered.length?'':'<div class="empty">مفيش نتيجة</div>')+
     '</div>';
 }
+// ⚠️ v229 — تدبر إضافي: آخر موضع قراءة (تلقائي) + مفضلة الآيات + تفسير مبسّط
+// (التفسير الميسر) لكل آية. كل ده بيتخزن محليًا على الجهاز (localStorage) لأنها
+// تفضيلات شخصية للقراءة مش بيانات عمل محتاجة مزامنة بين الأجهزة.
+function _quranLastReadKey(){return 'mc8_quran_last_read';}
+function _setQuranLastRead(number,name){LS.set(_quranLastReadKey(),{number:number,name:name,ts:Date.now()});}
+function _getQuranLastRead(){return LS.get(_quranLastReadKey(),null);}
+function _quranFavKey(){return 'mc8_quran_favorites';}
+function _getQuranFavorites(){return LS.get(_quranFavKey(),[])||[];}
+function _isQuranFav(surah,ayah){return _getQuranFavorites().some(function(f){return f.surah===surah&&f.ayah===ayah;});}
+function _toggleQuranFav(surah,ayah,surahName,text){
+  var favs=_getQuranFavorites();
+  var idx=favs.findIndex(function(f){return f.surah===surah&&f.ayah===ayah;});
+  var added;
+  if(idx!==-1){favs.splice(idx,1);added=false;}
+  else{favs.unshift({surah:surah,ayah:ayah,surahName:surahName,text:text,ts:Date.now()});added=true;}
+  LS.set(_quranFavKey(),favs);
+  return added;
+}
+function _showQuranFavorites(){
+  var favs=_getQuranFavorites();
+  document.getElementById('modal-title').textContent='⭐ الآيات المفضّلة ('+favs.length+')';
+  document.getElementById('modal-body').innerHTML=
+    (favs.length?favs.map(function(f){
+      return '<div style="background:#fff;border-radius:12px;padding:12px 14px;margin-bottom:8px;box-shadow:0 2px 8px rgba(0,0,0,.05)">'+
+        '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">'+
+        '<span style="font-size:11px;color:#0f766e;font-weight:800">سورة '+esc((f.surahName||'').replace(/^سورة /,''))+' — آية '+f.ayah+'</span>'+
+        '<button onclick="_toggleQuranFav('+f.surah+','+f.ayah+',\'\',\'\');_showQuranFavorites()" style="background:none;border:none;color:#f59e0b;font-size:16px;cursor:pointer">★</button>'+
+        '</div>'+
+        '<div style="font-size:15px;line-height:2;text-align:justify;margin-bottom:8px">'+esc(f.text)+'</div>'+
+        '<button onclick="closeModal();openQuranSurah('+f.surah+')" style="background:#f0fdfa;color:#0f766e;border:none;border-radius:8px;padding:6px 12px;font-size:11px;font-weight:700;cursor:pointer">↩️ افتح السورة</button>'+
+        '</div>';
+    }).join(''):'<div class="empty">لسه مفيش آيات في المفضلة — اضغط على أي آية وأنت بتقرا وحط ⭐</div>')+
+    '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+  openModal();
+}
+// ⚠️ v229 — تفسير مبسّط (الميسر) لأي آية، من مصدر مجاني (spa5k/tafsir_api عبر jsDelivr)
+function _showAyahTafsir(surah,ayahNum,surahName,ayahText){
+  document.getElementById('modal-title').textContent='📖 آية '+ayahNum;
+  var isFav=_isQuranFav(surah,ayahNum);
+  document.getElementById('modal-body').innerHTML=
+    '<div style="background:#f0fdfa;border-radius:12px;padding:14px;margin-bottom:12px;font-size:17px;line-height:2.4;text-align:justify">'+esc(ayahText)+'</div>'+
+    '<button id="tafsir-fav-btn" onclick="_onToggleFavFromModal('+surah+','+ayahNum+','+jsStr(surahName)+')" style="width:100%;background:'+(isFav?'#fef3c7;color:#b45309':'#f1f5f9;color:#475569')+';border:none;border-radius:10px;padding:10px;font-size:12.5px;font-weight:800;cursor:pointer;margin-bottom:8px">'+(isFav?'★ في المفضلة (اضغط للإزالة)':'☆ أضف للمفضلة')+'</button>'+
+    '<button onclick="_showTopicPicker('+surah+','+ayahNum+','+jsStr(surahName)+','+jsStr(ayahText)+')" style="width:100%;background:#eef2ff;color:#4338ca;border:none;border-radius:10px;padding:10px;font-size:12.5px;font-weight:800;cursor:pointer;margin-bottom:12px">📚 أضف لموضوع</button>'+
+    '<div style="font-size:11px;font-weight:800;color:#64748b;margin-bottom:6px">💡 التفسير الميسر</div>'+
+    '<div id="tafsir-text-body" style="background:#fff;border:1.5px solid #e2e8f0;border-radius:12px;padding:14px;font-size:14px;line-height:2;text-align:justify;min-height:60px">⏳ جاري التحميل...</div>'+
+    '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+  openModal();
+  fetch('https://cdn.jsdelivr.net/gh/spa5k/tafsir_api@main/tafsir/ar-tafsir-muyassar/'+surah+'/'+ayahNum+'.json')
+    .then(function(r){return r.json();})
+    .then(function(j){
+      var t=document.getElementById('tafsir-text-body');
+      if(!t)return;
+      t.textContent=(j&&j.text)?j.text:'مفيش تفسير متاح للآية دي حاليًا.';
+    })
+    .catch(function(){
+      var t=document.getElementById('tafsir-text-body');
+      if(t)t.textContent='⚠️ محتاج اتصال نت عشان تجيب التفسير.';
+    });
+}
+function _onToggleFavFromModal(surah,ayahNum,surahName){
+  var text=(document.querySelector('#modal-body div[style*="f0fdfa"]')||{}).textContent||'';
+  var added=_toggleQuranFav(surah,ayahNum,surahName,text);
+  var btn=document.getElementById('tafsir-fav-btn');
+  if(btn){
+    btn.style.background=added?'#fef3c7':'#f1f5f9';
+    btn.style.color=added?'#b45309':'#475569';
+    btn.textContent=added?'★ في المفضلة (اضغط للإزالة)':'☆ أضف للمفضلة';
+  }
+}
+
+// ===================================================================
+// ⚠️ v230 — [🧠 نظام تدبر شامل] بطلب العميل: تصنيف الآيات حسب موضوع +
+// ملاحظات ووسوم حرة + سجل بحث + أرشفة + دفتر تدبر يومي + خريطة ذهنية
+// بصرية بسيطة. كل البيانات دي شخصية بحتة (زي المفضلة وآخر قراءة في v229)
+// فبتتخزن محليًا على الجهاز (localStorage) مش على السيرفر.
+// ===================================================================
+
+// ----- 1) المواضيع (تصنيف الآيات) -----
+function _qtKey(){return 'mc8_quran_topics';}
+function _getQuranTopics(){return LS.get(_qtKey(),[])||[];}
+function _saveQuranTopics(list){LS.set(_qtKey(),list);}
+function _createQuranTopic(name){
+  var list=_getQuranTopics();
+  var t={id:'t'+Date.now()+Math.random().toString(36).slice(2,6),name:name,createdAt:Date.now(),archived:false,note:'',items:[]};
+  list.unshift(t);
+  _saveQuranTopics(list);
+  return t.id;
+}
+function _addAyahToTopic(topicId,surah,ayah,surahName,text){
+  var list=_getQuranTopics();
+  var t=list.find(function(x){return x.id===topicId;});
+  if(!t)return false;
+  if(t.items.some(function(it){return it.surah===surah&&it.ayah===ayah;}))return false; // موجودة أصلاً
+  t.items.push({surah:surah,ayah:ayah,surahName:surahName,text:text,note:'',tags:[]});
+  _saveQuranTopics(list);
+  return true;
+}
+function _removeAyahFromTopic(topicId,surah,ayah){
+  var list=_getQuranTopics();
+  var t=list.find(function(x){return x.id===topicId;});
+  if(!t)return;
+  t.items=t.items.filter(function(it){return !(it.surah===surah&&it.ayah===ayah);});
+  _saveQuranTopics(list);
+}
+function _toggleTopicArchive(topicId){
+  var list=_getQuranTopics();
+  var t=list.find(function(x){return x.id===topicId;});
+  if(!t)return;
+  t.archived=!t.archived;
+  _saveQuranTopics(list);
+}
+function _deleteQuranTopic(topicId){
+  _saveQuranTopics(_getQuranTopics().filter(function(x){return x.id!==topicId;}));
+}
+
+// ----- 2) اختيار/إنشاء موضوع لإضافة آية له -----
+function _showTopicPicker(surah,ayah,surahName,text){
+  var topics=_getQuranTopics().filter(function(t){return !t.archived;});
+  document.getElementById('modal-title').textContent='➕ أضف الآية لموضوع';
+  document.getElementById('modal-body').innerHTML=
+    '<div style="display:flex;gap:6px;margin-bottom:12px">'+
+    '<input id="new-topic-name" type="text" placeholder="اسم موضوع جديد..." style="flex:1;padding:10px 12px;border:1.5px solid #e2e8f0;border-radius:10px;font-family:inherit;font-size:13px">'+
+    '<button onclick="_createTopicAndAdd('+surah+','+ayah+','+jsStr(surahName)+','+jsStr(text)+')" style="background:#0f766e;color:#fff;border:none;border-radius:10px;padding:0 14px;font-size:13px;font-weight:800;cursor:pointer">إنشاء</button>'+
+    '</div>'+
+    (topics.length?
+      '<div style="font-size:11px;color:#64748b;margin-bottom:6px">أو ضيفها لموضوع موجود:</div>'+
+      topics.map(function(t){
+        return '<div onclick="_confirmAddToTopic('+jsStr(t.id)+','+surah+','+ayah+','+jsStr(surahName)+','+jsStr(text)+')" style="background:#fff;border:1.5px solid #e2e8f0;border-radius:10px;padding:10px 12px;margin-bottom:6px;cursor:pointer;display:flex;justify-content:space-between;align-items:center">'+
+          '<span style="font-size:13px;font-weight:700">📚 '+esc(t.name)+'</span><span style="font-size:10.5px;color:#94a3b8">'+t.items.length+' آية</span></div>';
+      }).join('')
+    :'<div class="empty">لسه مفيش مواضيع — أنشئ واحد فوق</div>')+
+    '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
+  openModal();
+}
+function _createTopicAndAdd(surah,ayah,surahName,text){
+  var input=document.getElementById('new-topic-name');
+  var name=(input?input.value:'').trim();
+  if(!name){showToast('❌ اكتب اسم الموضوع الأول','#dc2626');return;}
+  var id=_createQuranTopic(name);
+  _confirmAddToTopic(id,surah,ayah,surahName,text);
+}
+function _confirmAddToTopic(topicId,surah,ayah,surahName,text){
+  var added=_addAyahToTopic(topicId,surah,ayah,surahName,text);
+  showToast(added?'✅ اتضافت للموضوع':'ℹ️ الآية دي مضافة للموضوع ده أصلاً','#16a34a');
+  closeModal();
+}
+
+// ----- 3) شاشة "مواضيعي" (قائمة + خريطة ذهنية بسيطة) -----
+var _quranTopicsShowArchived=false;
+function _showQuranTopicsList(){
+  var all=_getQuranTopics();
+  var list=all.filter(function(t){return _quranTopicsShowArchived?t.archived:!t.archived;});
+  document.getElementById('modal-title').textContent='📚 مواضيعي ('+list.length+')';
+  document.getElementById('modal-body').innerHTML=
+    '<div style="display:flex;gap:6px;margin-bottom:12px">'+
+    '<button onclick="_showQuranMindMap()" style="flex:1;background:#eef2ff;color:#4338ca;border:none;border-radius:10px;padding:9px;font-size:12px;font-weight:800;cursor:pointer">🗺️ خريطة ذهنية</button>'+
+    '<button onclick="_quranTopicsShowArchived=!_quranTopicsShowArchived;_showQuranTopicsList()" style="flex:1;background:#f1f5f9;color:#475569;border:none;border-radius:10px;padding:9px;font-size:12px;font-weight:800;cursor:pointer">'+(_quranTopicsShowArchived?'📂 شوف النشطة':'🗃️ شوف الأرشيف')+'</button>'+
+    '</div>'+
+    (list.length?list.map(function(t){
+      return '<div onclick="_showTopicDetail('+jsStr(t.id)+')" style="background:#fff;border-radius:12px;padding:12px 14px;margin-bottom:8px;box-shadow:0 2px 8px rgba(0,0,0,.05);cursor:pointer;display:flex;justify-content:space-between;align-items:center">'+
+        '<div><div style="font-size:14px;font-weight:800">📚 '+esc(t.name)+'</div><div style="font-size:10.5px;color:#94a3b8">'+t.items.length+' آية'+(t.note?' — فيه ملاحظة':'')+'</div></div>'+
+        '<span style="color:#cbd5e1">←</span></div>';
+    }).join(''):'<div class="empty">'+(_quranTopicsShowArchived?'مفيش مواضيع مؤرشفة':'لسه مفيش مواضيع — ابدأ بالبحث في "تدبر" وضيف آيات لموضوع جديد')+'</div>')+
+    '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+  openModal();
+}
+function _showTopicDetail(topicId){
+  var t=_getQuranTopics().find(function(x){return x.id===topicId;});
+  if(!t){closeModal();return;}
+  document.getElementById('modal-title').textContent='📚 '+t.name;
+  document.getElementById('modal-body').innerHTML=
+    '<textarea id="topic-note-'+t.id+'" placeholder="ملاحظة عامة عن الموضوع..." onblur="_saveTopicNote('+jsStr(t.id)+')" style="width:100%;min-height:60px;padding:10px 12px;border:1.5px solid #e2e8f0;border-radius:10px;font-family:inherit;font-size:12.5px;margin-bottom:12px">'+esc(t.note||'')+'</textarea>'+
+    '<div style="display:flex;gap:6px;margin-bottom:12px">'+
+    '<button onclick="_toggleTopicArchive('+jsStr(t.id)+');closeModal();_showQuranTopicsList()" style="flex:1;background:#f1f5f9;color:#475569;border:none;border-radius:9px;padding:8px;font-size:11.5px;font-weight:700;cursor:pointer">'+(t.archived?'📂 رجّعه نشط':'🗃️ أرشفه')+'</button>'+
+    '<button onclick="if(confirm(\'متأكد تمسح الموضوع ده؟\')){_deleteQuranTopic('+jsStr(t.id)+');closeModal();_showQuranTopicsList();}" style="flex:1;background:#fef2f2;color:#dc2626;border:none;border-radius:9px;padding:8px;font-size:11.5px;font-weight:700;cursor:pointer">🗑️ احذف الموضوع</button>'+
+    '</div>'+
+    (t.items.length?t.items.map(function(it,idx){
+      return '<div style="background:#fff;border-radius:12px;padding:12px 14px;margin-bottom:8px;box-shadow:0 2px 8px rgba(0,0,0,.05)">'+
+        '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">'+
+        '<span style="font-size:11px;color:#0f766e;font-weight:800">سورة '+esc((it.surahName||'').replace(/^سورة /,''))+' — آية '+it.ayah+'</span>'+
+        '<button onclick="_removeAyahFromTopic('+jsStr(t.id)+','+it.surah+','+it.ayah+');_showTopicDetail('+jsStr(t.id)+')" style="background:none;border:none;color:#dc2626;font-size:11px;cursor:pointer">✕ شيل</button>'+
+        '</div>'+
+        '<div style="font-size:14px;line-height:2;text-align:justify;margin-bottom:8px">'+esc(it.text)+'</div>'+
+        '<input value="'+esc((it.tags||[]).join('، '))+'" placeholder="وسوم (افصل بينهم بفاصلة)" onblur="_saveAyahTags('+jsStr(t.id)+','+idx+',this.value)" style="width:100%;padding:6px 8px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:11px;margin-bottom:6px">'+
+        '<textarea placeholder="ملاحظتك على الآية دي..." onblur="_saveAyahNote('+jsStr(t.id)+','+idx+',this.value)" style="width:100%;min-height:44px;padding:6px 8px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:11.5px">'+esc(it.note||'')+'</textarea>'+
+        '</div>';
+    }).join(''):'<div class="empty">لسه مفيش آيات في الموضوع ده</div>')+
+    '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal();_showQuranTopicsList()">← رجوع للمواضيع</button></div>';
+  openModal();
+}
+function _saveTopicNote(topicId){
+  var el=document.getElementById('topic-note-'+topicId);if(!el)return;
+  var list=_getQuranTopics();var t=list.find(function(x){return x.id===topicId;});
+  if(t){t.note=el.value;_saveQuranTopics(list);}
+}
+function _saveAyahNote(topicId,idx,val){
+  var list=_getQuranTopics();var t=list.find(function(x){return x.id===topicId;});
+  if(t&&t.items[idx]){t.items[idx].note=val;_saveQuranTopics(list);}
+}
+function _saveAyahTags(topicId,idx,val){
+  var list=_getQuranTopics();var t=list.find(function(x){return x.id===topicId;});
+  if(t&&t.items[idx]){t.items[idx].tags=val.split(/[،,]/).map(function(s){return s.trim();}).filter(Boolean);_saveQuranTopics(list);}
+}
+
+// ----- 4) خريطة ذهنية بصرية بسيطة (SVG) — عقدة مركزية + مواضيع حواليها -----
+function _showQuranMindMap(){
+  var topics=_getQuranTopics().filter(function(t){return !t.archived;});
+  document.getElementById('modal-title').textContent='🗺️ الخريطة الذهنية';
+  if(!topics.length){
+    document.getElementById('modal-body').innerHTML='<div class="empty">لسه مفيش مواضيع تتعرض في الخريطة</div><div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal();_showQuranTopicsList()">← رجوع</button></div>';
+    openModal();return;
+  }
+  var cx=150,cy=150,r=110,n=topics.length;
+  var nodesHtml='',linesHtml='';
+  topics.forEach(function(t,i){
+    var angle=(i/n)*2*Math.PI-Math.PI/2;
+    var x=cx+r*Math.cos(angle),y=cy+r*Math.sin(angle);
+    var size=Math.min(46,26+t.items.length*3);
+    linesHtml+='<line x1="'+cx+'" y1="'+cy+'" x2="'+x+'" y2="'+y+'" stroke="#cbd5e1" stroke-width="1.5"/>';
+    nodesHtml+='<g onclick="closeModal();_showTopicDetail('+jsStr(t.id)+')" style="cursor:pointer">'+
+      '<circle cx="'+x+'" cy="'+y+'" r="'+(size/2)+'" fill="#0f766e" opacity="0.88"/>'+
+      '<text x="'+x+'" y="'+y+'" text-anchor="middle" dominant-baseline="middle" fill="#fff" font-size="9" font-weight="800">'+t.items.length+'</text>'+
+      '</g>'+
+      '<text x="'+x+'" y="'+(y+size/2+13)+'" text-anchor="middle" fill="#334155" font-size="10" font-weight="700">'+esc(t.name.length>10?t.name.slice(0,9)+'…':t.name)+'</text>';
+  });
+  document.getElementById('modal-body').innerHTML=
+    '<div style="font-size:10.5px;color:#94a3b8;text-align:center;margin-bottom:8px">اضغط على أي دايرة عشان تفتح الموضوع — رقم الدايرة = عدد الآيات فيه</div>'+
+    '<svg viewBox="0 0 300 300" style="width:100%;height:auto;background:#f8fafc;border-radius:14px">'+
+    linesHtml+
+    '<circle cx="150" cy="150" r="30" fill="#134e4a"/><text x="150" y="150" text-anchor="middle" dominant-baseline="middle" fill="#fff" font-size="11" font-weight="900">🧠 تدبر</text>'+
+    nodesHtml+
+    '</svg>'+
+    '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal();_showQuranTopicsList()">← رجوع للمواضيع</button></div>';
+  openModal();
+}
+
+// ----- 5) سجل البحث (تدبر) -----
+function _searchLogKey(){return 'mc8_quran_search_log';}
+function _getSearchLog(){return LS.get(_searchLogKey(),[])||[];}
+function _addToSearchLog(kw){
+  if(!kw)return;
+  var log=_getSearchLog().filter(function(x){return x!==kw;});
+  log.unshift(kw);
+  if(log.length>15)log=log.slice(0,15);
+  LS.set(_searchLogKey(),log);
+}
+
+// ----- 6) دفتر التدبر اليومي -----
+function _journalKey(){return 'mc8_quran_daily_journal';}
+function _getJournal(){return LS.get(_journalKey(),[])||[];}
+function _todayStr(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function _showDailyJournal(){
+  var journal=_getJournal();
+  var today=_todayStr();
+  var todayEntry=journal.find(function(e){return e.date===today;});
+  document.getElementById('modal-title').textContent='📅 دفتر التدبر اليومي';
+  document.getElementById('modal-body').innerHTML='<div class="empty">⏳ جاري تجهيز آية اليوم...</div>';
+  openModal();
+  (function(){
+    if(todayEntry)return Promise.resolve(todayEntry);
+    return _getQuranSurahList().then(function(surahs){
+      var seed=today.split('-').join('');
+      var num=parseInt(seed,10);
+      var surahIdx=num%114;
+      var sInfo=surahs[surahIdx];
+      return _getQuranSurahText(sInfo.number).then(function(data){
+        var ayahIdx=num%data.ayahs.length;
+        var ayah=data.ayahs[ayahIdx];
+        return {date:today,surah:sInfo.number,ayah:ayah.n,surahName:sInfo.name,text:ayah.text,reflection:''};
+      });
+    });
+  })().then(function(entry){
+    _renderJournalModal(entry,journal);
+  }).catch(function(){
+    document.getElementById('modal-body').innerHTML='<div class="empty">⚠️ محتاج اتصال نت عشان يجيب آية اليوم لأول مرة</div><div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+  });
+}
+function _renderJournalModal(entry,journal){
+  var history=journal.filter(function(e){return e.date!==entry.date;}).slice(0,20);
+  document.getElementById('modal-body').innerHTML=
+    '<div style="font-size:11px;color:#64748b;margin-bottom:6px">📆 '+entry.date+' — سورة '+esc((entry.surahName||'').replace(/^سورة /,''))+' آية '+entry.ayah+'</div>'+
+    '<div style="background:#f0fdfa;border-radius:12px;padding:14px;margin-bottom:10px;font-size:16px;line-height:2.3;text-align:justify">'+esc(entry.text)+'</div>'+
+    '<textarea id="journal-reflection" placeholder="اكتب خاطرتك على آية النهاردة..." style="width:100%;min-height:80px;padding:10px 12px;border:1.5px solid #e2e8f0;border-radius:10px;font-family:inherit;font-size:13px;margin-bottom:10px">'+esc(entry.reflection||'')+'</textarea>'+
+    '<button onclick="_saveJournalEntry('+jsStr(entry.date)+','+entry.surah+','+entry.ayah+','+jsStr(entry.surahName)+','+jsStr(entry.text)+')" class="btn btn-primary btn-full" style="margin-bottom:14px">💾 حفظ خاطرة النهاردة</button>'+
+    (history.length?'<div style="font-size:11px;font-weight:800;color:#64748b;margin-bottom:8px">📜 سجل الأيام اللي فاتت</div>'+
+      history.map(function(e){
+        return '<div style="background:#fff;border:1.5px solid #e2e8f0;border-radius:10px;padding:10px 12px;margin-bottom:6px">'+
+          '<div style="font-size:10px;color:#94a3b8;margin-bottom:3px">'+e.date+' — سورة '+esc((e.surahName||'').replace(/^سورة /,''))+' آية '+e.ayah+'</div>'+
+          (e.reflection?'<div style="font-size:12px">'+esc(e.reflection)+'</div>':'<div style="font-size:11px;color:#cbd5e1">من غير خاطرة</div>')+
+          '</div>';
+      }).join(''):'')+
+    '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+}
+function _saveJournalEntry(date,surah,ayah,surahName,text){
+  var journal=_getJournal();
+  var refl=(document.getElementById('journal-reflection')||{}).value||'';
+  var idx=journal.findIndex(function(e){return e.date===date;});
+  var entry={date:date,surah:surah,ayah:ayah,surahName:surahName,text:text,reflection:refl};
+  if(idx!==-1)journal[idx]=entry;else journal.unshift(entry);
+  LS.set(_journalKey(),journal);
+  showToast('✅ اتحفظت خاطرة النهاردة','#16a34a');
+  closeModal();
+}
+
 function openQuranSurah(number){
   _quranCurrentSurah=number;
   _quranRenderedFor=null; // فتح سورة (حتى لو نفسها) لازم يبني الشاشة من جديد
+  var sInfo=(window.__quranSurahList||[]).find(function(s){return s.number===number;});
+  _setQuranLastRead(number, sInfo?sInfo.name:('سورة رقم '+number));
   renderQuranScreen();
 }
 function backToQuranList(){
@@ -17331,8 +17771,12 @@ function _renderQuranReader(el,number){
       '<audio id="quran-audio-player" controls preload="none" style="width:100%;margin-bottom:8px" src="'+audioUrl+'" onended="_quranAudioEnded()"></audio>'+
       '<label style="display:flex;align-items:center;gap:6px;justify-content:center;margin-bottom:14px;cursor:pointer"><input type="checkbox" id="quran-autonext" '+(_quranAutoNext?'checked':'')+' onchange="_quranAutoNext=this.checked" style="width:15px;height:15px"><span style="font-size:11.5px;color:#64748b;font-weight:700">▶️ تشغيل متواصل — تبدأ السورة اللي بعدها أوتوماتيك</span></label>'+
       '<div id="quran-reader-text" style="background:#fff;border-radius:14px;padding:18px 16px;box-shadow:0 2px 10px rgba(0,0,0,.05);font-size:19px;line-height:2.6;text-align:justify;font-family:inherit">'+
-      data.ayahs.map(function(a){return esc(a.text)+' <span style="color:#0f766e;font-size:13px;font-weight:800">﴿'+a.n+'﴾</span>';}).join(' ')+
+      data.ayahs.map(function(a){
+        var isFav=_isQuranFav(number,a.n);
+        return '<span onclick="_showAyahTafsir('+number+','+a.n+','+jsStr(data.name)+','+jsStr(a.text)+')" style="cursor:pointer">'+esc(a.text)+' <span style="color:'+(isFav?'#f59e0b':'#0f766e')+';font-size:13px;font-weight:800">﴿'+a.n+'﴾'+(isFav?'⭐':'')+'</span></span>';
+      }).join(' ')+
       '</div>'+
+      '<div style="font-size:10.5px;color:#94a3b8;text-align:center;margin-top:8px">💡 اضغط على أي آية عشان تقرا تفسيرها أو تحطها في المفضلة</div>'+
       '</div>';
     _quranRenderedFor=number; // ⚠️ v222 — علّم إن السورة دي اتبنت، عشان الدخول/الخروج مايكسرش الصوت
   }).catch(function(e){
@@ -17432,6 +17876,44 @@ function _todayPrayerTimes(){
   var tz=pt.tz!=null?pt.tz:-(new Date().getTimezoneOffset()/60);
   return _computePrayerTimes(pt.lat,pt.lng,tz,new Date());
 }
+// ⚠️ v231 — عد تنازلي حي على الرئيسية للصلاة الجاية (بيتحدث كل ثانية)، وتظليل خانة
+// الصلاة الجاية باللون الأساسي عشان تبان واضحة وسط الخمس مواعيد.
+function _nextPrayerInfo(){
+  var pt=DB.settings.prayerTimes;
+  if(!pt||!pt.enabled||pt.lat==null)return null;
+  var times=_todayPrayerTimes();if(!times)return null;
+  var order=['fajr','dhuhr','asr','maghrib','isha'];
+  var labels={fajr:'الفجر',dhuhr:'الظهر',asr:'العصر',maghrib:'المغرب',isha:'العشاء'};
+  var now=new Date();
+  var nowH=now.getHours()+now.getMinutes()/60+now.getSeconds()/3600;
+  for(var i=0;i<order.length;i++){
+    var k=order[i];
+    if(times[k]!=null&&times[k]>nowH)return {key:k,label:labels[k],ms:Math.round((times[k]-nowH)*3600000)};
+  }
+  // كل مواعيد النهارده عدّت — العد التنازلي بقى لفجر بكرة
+  var tomorrow=new Date(now.getTime()+86400000);
+  var tz=pt.tz!=null?pt.tz:-(now.getTimezoneOffset()/60);
+  var tTimes=_computePrayerTimes(pt.lat,pt.lng,tz,tomorrow);
+  if(tTimes.fajr!=null)return {key:'fajr',label:'الفجر',ms:Math.round(((24-nowH)+tTimes.fajr)*3600000)};
+  return null;
+}
+function _fmtCountdown(ms){
+  if(ms<0)ms=0;
+  var s=Math.floor(ms/1000);
+  var h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sec=s%60;
+  return String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(sec).padStart(2,'0');
+}
+function _tickPrayerCountdown(){
+  var elx=document.getElementById('home-prayer-countdown');
+  if(!elx)return;
+  var info=_nextPrayerInfo();
+  elx.textContent=info?('⏳ باقي على أذان '+info.label+' — '+_fmtCountdown(info.ms)):'';
+  ['fajr','dhuhr','asr','maghrib','isha'].forEach(function(k){
+    var cell=document.getElementById('home-prayer-cell-'+k);
+    if(cell)cell.style.cssText=(info&&info.key===k)?'background:#ecfeff;border-radius:9px;padding:2px 0':'';
+  });
+}
+setInterval(_tickPrayerCountdown,1000);
 function usePrayerCurrentLocation(){
   if(!navigator.geolocation)return showToast('⚠️ المتصفح ده مش بيدعم تحديد الموقع','#dc2626');
   showToast('📍 بنحدد موقعك...','#2563eb');
@@ -17523,6 +18005,44 @@ function _checkPrayerAlerts(){
   });
 }
 setInterval(_checkPrayerAlerts,20000);
+
+// ⚠️ v233 — إعدادات: تحكّم في أي أزرار إجراءات تظهر فوق كروت التحركات (الكل + مرتبة)
+// عشان تحل مشكلة زحمة المساحة بدل ما الأزرار تتفرض كلها دايمًا
+// ⚠️ v234 — فصلت إعدادات "الكل" عن "مرتبة" (كانا مشتركين في v233) بطلب العميل — كل
+// شاشة ليها مجموعة أزرارها المتاحة، ومفيش داعي نعرض زرار في قايمة شاشة أصلاً مش موجود فيها
+var MOV_ACTIONS_DEFS_ALL=[['log','📝 إضافة ملاحظة'],['close','✅ إنهاء العطل'],['cancel','🚫 إلغاء'],
+  ['detail','📋 التفاصيل (للمنتهي)'],['addSched','➕ إضافة للمرتبة'],['stock','🗄️ حالة الاستوك'],
+  ['edit','✏️ تعديل'],['del','🗑️ حذف']];
+var MOV_ACTIONS_DEFS_SCHED=[['log','📝 إضافة ملاحظة'],['close','✅ إنهاء العطل'],['carry','📌 ترحيل'],
+  ['stock','🗄️ حالة الاستوك'],['edit','✏️ تعديل'],['removeSched','✕ إزالة من المرتبة']];
+function _movActsChecklist(scope,defs,title){
+  var c=((DB.settings&&DB.settings.movCardActions)||{})[scope]||{};
+  return '<div style="margin-bottom:14px">'+
+    '<div style="font-size:12.5px;font-weight:800;color:#374151;margin-bottom:7px">'+title+'</div>'+
+    defs.map(function(d){
+      var checked=c[d[0]]!==false;
+      return '<label style="display:flex;align-items:center;gap:8px;margin-bottom:6px;cursor:pointer"><input type="checkbox" id="movact-'+scope+'-'+d[0]+'" '+(checked?'checked':'')+' style="width:17px;height:17px"><span style="font-size:12.5px;font-weight:700">'+d[1]+'</span></label>';
+    }).join('')+
+    '</div>';
+}
+function renderMovActionsSettingsCard(){
+  return '<div class="card">'+
+    '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #e2e8f0">🔘 أزرار كروت التحركات</div>'+
+    '<div style="font-size:11px;color:#94a3b8;margin-bottom:10px">بطّل أي زرار مش محتاجه في كل شاشة لوحدها عشان الكارت يبقى أنضف وأوفر مساحة</div>'+
+    _movActsChecklist('all',MOV_ACTIONS_DEFS_ALL,'📋 شاشة "الكل"')+
+    _movActsChecklist('sched',MOV_ACTIONS_DEFS_SCHED,'📋 شاشة "مرتبة"')+
+    '<button onclick="__runOnce(this,saveMovActionsSettings)" class="btn btn-primary btn-full">💾 حفظ</button>'+
+    '</div>';
+}
+async function saveMovActionsSettings(){
+  var out={all:{},sched:{}};
+  MOV_ACTIONS_DEFS_ALL.forEach(function(d){var el=document.getElementById('movact-all-'+d[0]);out.all[d[0]]=el?el.checked:true;});
+  MOV_ACTIONS_DEFS_SCHED.forEach(function(d){var el=document.getElementById('movact-sched-'+d[0]);out.sched[d[0]]=el?el.checked:true;});
+  DB.settings.movCardActions=out;
+  await persist();
+  showToast('✅ اتحفظ','#16a34a');
+  renderMovements();
+}
 
 function renderPrayerSettingsCard(){
   var pt=DB.settings.prayerTimes||{};
