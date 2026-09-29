@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v234</title>
+<title>ابو حوده الحلو الجميل v236</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="2026-09-28 — v234";
+<script>var BUILD_STAMP="2026-09-28 — v236";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -4277,7 +4277,7 @@ var APP_TITLE='ابو حوده الحلو الجميل';
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=234;
+var APP_VERSION=236;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -4520,6 +4520,85 @@ function _movAct(key,scope){
   var root=(DB.settings&&DB.settings.movCardActions)||{};
   var c=root[scope]||{};
   return c[key]!==false;
+}
+
+// ⚠️ v236 — ٣ أنماط لعرض أزرار كروت التحركات (الكل + مرتبة)، الفاروق يختار بينهم من
+// الإعدادات: primary (زرارين ظاهرين + ⋯ للباقي) / tap (تدوس على الكارت يطلعلك الأزرار) /
+// swipe (تسحب الكارت زي واتساب يطلعلك الأزرار من تحته) — الافتراضي swipe بطلب العميل.
+var __mvMoreCache={};
+function _movCardStyle(){ return (DB.settings&&DB.settings.movCardStyle)||'swipe'; }
+function _movWrapCard(id,ns,contentHtml,actionsArr,borderColor){
+  var style=_movCardStyle();
+  var base='background:#fff;border-radius:9px;box-shadow:0 1px 4px rgba(0,0,0,.06);border-right:3px solid '+borderColor+';';
+  if(!actionsArr.length)return '<div style="'+base+'padding:6px 9px;margin-bottom:5px">'+contentHtml+'</div>';
+  if(style==='tap'){
+    return '<div class="mv-tapcard" data-mvid="'+ns+id+'" style="'+base+'padding:6px 9px;margin-bottom:5px">'+
+      '<div class="mv-tap-body">'+contentHtml+'</div>'+
+      '<div class="mv-tap-actions" style="display:none;gap:3px;margin-top:5px">'+actionsArr.join('')+'</div>'+
+      '</div>';
+  }
+  if(style==='primary'){
+    var primary=actionsArr.slice(0,2), rest=actionsArr.slice(2);
+    if(rest.length)__mvMoreCache[ns+id]=rest;
+    return '<div style="'+base+'padding:6px 9px;margin-bottom:5px">'+contentHtml+
+      '<div style="display:flex;gap:3px;margin-top:4px">'+primary.join('')+
+      (rest.length?'<button class="btn-ic" style="background:#f1f5f9;font-size:13px" onclick="_movMoreMenu(\''+ns+id+'\')">⋯</button>':'')+
+      '</div></div>';
+  }
+  // swipe (الافتراضي)
+  return '<div class="mv-swipe-outer" data-mvid="'+ns+id+'" style="position:relative;overflow:hidden;border-radius:9px;margin-bottom:5px">'+
+    '<div class="mv-swipe-actions" style="position:absolute;inset:0;display:flex;align-items:stretch;justify-content:flex-start;gap:2px;padding:2px 4px">'+actionsArr.join('')+'</div>'+
+    '<div class="mv-swipe-content" style="position:relative;'+base+'padding:6px 9px;touch-action:pan-y">'+contentHtml+'</div>'+
+    '</div>';
+}
+function _toggleMvTap(cardEl){
+  var box=cardEl.querySelector('.mv-tap-actions');
+  if(!box)return;
+  box.style.display=(box.style.display==='none'||!box.style.display)?'flex':'none';
+}
+function _movMoreMenu(key){
+  var rest=__mvMoreCache[key];if(!rest||!rest.length)return;
+  var box=document.getElementById('modal-body');
+  box.innerHTML='<div style="font-weight:900;font-size:15px;margin-bottom:12px">⋯ إجراءات أكتر</div>'+
+    '<div style="display:flex;flex-direction:column;gap:8px">'+rest.map(function(h){return h.replace('class="btn-ic"','class="btn-ic" style="width:100%;padding:10px;font-size:15px"').replace('class="btn btn-sm"','class="btn" style="width:100%;padding:10px"');}).join('')+'</div>'+
+    '<button class="btn btn-outline btn-full" style="margin-top:14px" onclick="closeModal()">إغلاق</button>';
+  openModal();
+}
+// سحب أفقي (تاب واتساب) + تاب لإظهار الأزرار — بيشتغل على أي كارت داخل الحاوية بعد كل رندر
+function _wireMvSwipeAndTap(container){
+  container.querySelectorAll('.mv-tapcard').forEach(function(card){
+    card.querySelector('.mv-tap-body').addEventListener('click',function(){_toggleMvTap(card);});
+  });
+  var openCard=null;
+  function closeOpen(){if(openCard){openCard.style.transform='';openCard=null;}}
+  container.querySelectorAll('.mv-swipe-outer').forEach(function(outer){
+    var content=outer.querySelector('.mv-swipe-content');
+    var actions=outer.querySelector('.mv-swipe-actions');
+    var startX=0,startY=0,dx=0,dragging=false,horiz=false;
+    content.addEventListener('touchstart',function(e){
+      if(e.target.closest('.mv-drag-handle'))return; // مقبض سحب المرتبة له منطقه الخاص
+      if(openCard&&openCard!==content){closeOpen();}
+      startX=e.touches[0].clientX;startY=e.touches[0].clientY;dx=0;dragging=true;horiz=false;
+      content.style.transition='none';
+    },{passive:true});
+    content.addEventListener('touchmove',function(e){
+      if(!dragging)return;
+      var cx=e.touches[0].clientX,cy=e.touches[0].clientY;
+      var ddx=cx-startX,ddy=cy-startY;
+      if(!horiz&&Math.abs(ddx)>Math.abs(ddy)&&Math.abs(ddx)>8)horiz=true;
+      if(!horiz)return;
+      e.preventDefault();
+      var maxW=actions.scrollWidth||160;
+      dx=Math.max(-maxW,Math.min(0,ddx));
+      content.style.transform='translateX('+dx+'px)';
+    },{passive:false});
+    content.addEventListener('touchend',function(){
+      dragging=false;content.style.transition='transform .15s';
+      var maxW=actions.scrollWidth||160;
+      if(horiz&&dx<-maxW*0.4){content.style.transform='translateX(-'+maxW+'px)';openCard=content;}
+      else{content.style.transform='';if(openCard===content)openCard=null;}
+    });
+  });
 }
 
 function __runOnce(btn, fn){
@@ -5316,6 +5395,15 @@ if(window.visualViewport){
   window.visualViewport.addEventListener('resize', __fitModalToViewport);
   window.visualViewport.addEventListener('scroll', __fitModalToViewport);
 }
+// ⚠️ v235 — أي حقل (زي اسم العميل) بيتفوكس جوه المودال، بمجرد ما لوحة المفاتيح تفتح بنعمل
+// scrollIntoView ليه صراحة داخل المساحة الجديدة المظبوطة، عشان يفضل ظاهر وانت بتكتب فيه
+// من غير ما تقفل الكيبورد — ده بيغطي كل الحقول ("الخانات الأساسية") مش البحث بس.
+document.addEventListener('focusin', function(e){
+  var t=e.target;
+  if(!t||!(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.tagName==='SELECT'))return;
+  if(!t.closest('#modal-box'))return;
+  setTimeout(function(){ __fitModalToViewport(); t.scrollIntoView({block:'center',behavior:'smooth'}); }, 320);
+}, true);
 function openModal(){document.getElementById('modal-overlay').classList.add('open');setTimeout(__fitModalToViewport,50);}
 function closeModal(){
   document.getElementById('modal-overlay').classList.remove('open');
@@ -7796,7 +7884,7 @@ function renderSales(){
   if(msBar&&_multiTable==='sales')updateMsToolbar();
   else if(msBar&&_multiTable!=='sales')msBar.style.display='none';
 
-  el.innerHTML=pageItems.map(function(s){
+  el.innerHTML=pageItems.map(function(s,__idx){
     var sc=statusColor(s.status),sb=statusBg(s.status);
     var rem=s.total-(s.paid||0);
     var pm=s.payment_method||'كاش';
@@ -7806,6 +7894,7 @@ function renderSales(){
         __hCost=__isFieldHidden('sales','items_cost'), __hNote=__isFieldHidden('sales','note');
     var inner=
       '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">'+
+      '<span style="background:#0f172a;color:#fff;border-radius:3px;padding:0 4px;font-size:10px;font-weight:900;flex-shrink:0;margin-top:2px">'+(start+__idx+1)+'</span>'+
       '<div style="flex:1;min-width:0">'+
       '<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:3px">'+
       (__hC?'<span style="font-weight:900;font-size:14px;color:#94a3b8">🔒 عميل</span>':'<span style="font-weight:900;font-size:14px;cursor:pointer;color:#0f172a" onclick="openLedger(\''+esc(s.customer)+'\')">'+esc(s.customer)+'</span>')+
@@ -12097,7 +12186,7 @@ function renderMovements(){
         '<div style="font-size:11px;color:#64748b">'+(m.device&&!__hDev?esc(m.device):'')+(m.fault_type&&!__hDesc?(m.device&&!__hDev?' — ':'')+esc(m.fault_type):'')+'</div>'+
         '</div></div>';
     }
-    return '<div style="background:#fff;border-radius:9px;padding:6px 9px;box-shadow:0 1px 4px rgba(0,0,0,.06);margin-bottom:5px;border-right:3px solid '+sc(m.status)+'">'+
+    var contentHtml=
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px">'+
       '<div>'+num+'<b style="font-size:14px">'+custDisp+'</b> '+_localSyncBadgeHTML('movements',m.id)+'</div>'+
       (__hSt?'':'<span style="background:'+sc(m.status)+'22;color:'+sc(m.status)+';border-radius:5px;padding:1px 6px;font-size:10px;font-weight:800">'+esc(m.status)+'</span>')+
@@ -12107,17 +12196,18 @@ function renderMovements(){
       (m.fault_type&&!__hDesc?(m.device&&!__hDev?' — ':'')+esc(m.fault_type):'')+
       (lastLog&&!__hDesc?' | <span style="color:#94a3b8">'+esc(lastLog.note.substring(0,30))+(lastLog.note.length>30?'...':'')+'</span>':'')+
       '</div>'+
-      (m.status==='ملغي'&&m.cancel_reason?'<div style="font-size:11px;color:#dc2626;background:#fef2f2;border-radius:6px;padding:4px 7px;margin-bottom:4px">🚫 سبب الإلغاء: '+esc(m.cancel_reason)+'</div>':'')+
-      '<div style="display:flex;gap:3px">'+
-      (isOpenState&&_movAct('log','all')?'<button class="btn btn-sm" style="background:#f0fdf4;color:#15803d;border:1px solid #86efac;flex:1;font-size:11px" onclick="openAddLogModal(\''+m.id+'\')">📝</button>':'')+
-      (isOpenState&&_movAct('close','all')?'<button class="btn btn-green btn-sm" style="font-size:11px" onclick="closeMovement(\''+m.id+'\')">✅</button>':'')+
-      (isOpenState&&_movAct('cancel','all')?'<button class="btn btn-sm" style="background:#fef2f2;color:#dc2626;border:1px solid #fecaca;font-size:11px" onclick="openCancelMovementModal(\''+m.id+'\')">🚫</button>':'')+
-      (!isOpenState&&_movAct('detail','all')?'<button class="btn btn-sm" style="background:#f0fdf4;color:#15803d;border:1px solid #86efac;flex:1;font-size:11px" onclick="openMovementDetail(\''+m.id+'\')">📋</button>':'')+
-      (isOpenState&&_movAct('addSched','all')?'<button class="btn-ic" style="background:#fdf2f8;color:#86198f;font-size:11px" onclick="quickAddToScheduled(\''+m.id+'\')" title="أضفه لمرتبة اليوم المفتوح">➕</button>':'')+
-      (isOpenState&&_movAct('stock','all')?'<button class="btn-ic" style="background:'+(m.status==='في الاستوك'?'#cffafe':'#f1f5f9')+';font-size:11px" onclick="toggleStockStatus(\''+m.id+'\')" title="'+(m.status==='في الاستوك'?'طلّعه من الاستوك':'حطّه في الاستوك')+'">🗄️</button>':'')+
-      (_movAct('edit','all')?'<button class="btn-ic" style="background:#dbeafe;font-size:11px" onclick="openMovementModal(\''+m.id+'\')">✏️</button>':'')+
-      (_movAct('del','all')?'<button class="btn-ic" style="background:#fee2e2;font-size:11px" onclick="confirmAction(\'هتحذف؟\',function(){delMovement(\''+m.id+'\')})">🗑️</button>':'')+
-      '</div></div>';
+      (m.status==='ملغي'&&m.cancel_reason?'<div style="font-size:11px;color:#dc2626;background:#fef2f2;border-radius:6px;padding:4px 7px;margin-bottom:4px">🚫 سبب الإلغاء: '+esc(m.cancel_reason)+'</div>':'');
+    var actionsArr=[
+      (isOpenState&&_movAct('log','all')?'<button class="btn btn-sm" style="background:#f0fdf4;color:#15803d;border:1px solid #86efac;flex:1;font-size:11px" onclick="openAddLogModal(\''+m.id+'\')">📝 ملاحظة</button>':''),
+      (isOpenState&&_movAct('close','all')?'<button class="btn btn-green btn-sm" style="font-size:11px" onclick="closeMovement(\''+m.id+'\')">✅ إنهاء</button>':''),
+      (isOpenState&&_movAct('cancel','all')?'<button class="btn btn-sm" style="background:#fef2f2;color:#dc2626;border:1px solid #fecaca;font-size:11px" onclick="openCancelMovementModal(\''+m.id+'\')">🚫 إلغاء</button>':''),
+      (!isOpenState&&_movAct('detail','all')?'<button class="btn btn-sm" style="background:#f0fdf4;color:#15803d;border:1px solid #86efac;flex:1;font-size:11px" onclick="openMovementDetail(\''+m.id+'\')">📋 التفاصيل</button>':''),
+      (isOpenState&&_movAct('addSched','all')?'<button class="btn-ic" style="background:#fdf2f8;color:#86198f;font-size:11px" onclick="quickAddToScheduled(\''+m.id+'\')" title="أضفه لمرتبة اليوم المفتوح">➕</button>':''),
+      (isOpenState&&_movAct('stock','all')?'<button class="btn-ic" style="background:'+(m.status==='في الاستوك'?'#cffafe':'#f1f5f9')+';font-size:11px" onclick="toggleStockStatus(\''+m.id+'\')" title="'+(m.status==='في الاستوك'?'طلّعه من الاستوك':'حطّه في الاستوك')+'">🗄️</button>':''),
+      (_movAct('edit','all')?'<button class="btn-ic" style="background:#dbeafe;font-size:11px" onclick="openMovementModal(\''+m.id+'\')">✏️</button>':''),
+      (_movAct('del','all')?'<button class="btn-ic" style="background:#fee2e2;font-size:11px" onclick="confirmAction(\'هتحذف؟\',function(){delMovement(\''+m.id+'\')})">🗑️</button>':'')
+    ].filter(Boolean);
+    return _movWrapCard(m.id,'mvA',contentHtml,actionsArr,sc(m.status));
   }
 
   function grpSection(label,color,movs){
@@ -12151,6 +12241,7 @@ function renderMovements(){
   var doneHtml=grpDone.length?'<div style="margin-top:8px;font-size:11px;font-weight:700;color:#15803d;margin-bottom:4px">✅ منتهية ('+grpDone.length+')</div>'+grpDone.map(movCard).join(''):'';
   var canceledHtml=grpCanceled.length?'<div style="margin-top:8px;font-size:11px;font-weight:700;color:#dc2626;margin-bottom:4px">🚫 ملغية ('+grpCanceled.length+')</div>'+grpCanceled.map(movCard).join(''):'';
   el.innerHTML=summary+countBar+movSortBar+(activeHtml||doneHtml||canceledHtml?activeHtml+doneHtml+canceledHtml:'<div class="empty">لا توجد أعطال</div>');
+  _wireMvSwipeAndTap(el);
 }
 
 // ===== القائمة المرتبة يدوياً =====
@@ -12212,7 +12303,7 @@ function renderScheduledList(){
 
   function movCardSched(m,i,arr,showArrows){
     var isCarriedHere=smap[m.id]!==_schedWorkDate; // نسخة متابعة مش يومه الأصلي
-    return '<div class="mv-sched-card" data-mvid="'+m.id+'" style="background:#fff;border-radius:8px;padding:5px 8px;box-shadow:0 1px 3px rgba(0,0,0,.06);margin-bottom:4px;border-right:3px solid '+(isCarriedHere?'#7c3aed':sc(m.status))+'">'+
+    var contentHtml=
       '<div style="display:flex;align-items:center;gap:4px">'+
       // ⚠️ v233 — نظام الأسهم اتبدّل بمقبض سحب واحد (☰) بطلب العميل، وده وفّر مساحة الكارت
       (showArrows?'<span class="mv-drag-handle" style="cursor:grab;font-size:15px;color:#94a3b8;padding:2px 5px;flex-shrink:0;touch-action:none">☰</span>':'')+
@@ -12226,15 +12317,16 @@ function renderScheduledList(){
       (m.device?esc(m.device):'—')+(m.fault_type?' — '+esc(m.fault_type):'')+
       (isCarriedHere?' <span style="color:#7c3aed;font-weight:700">| 📌 متابعة من '+fmtDate(smap[m.id])+'</span>':'')+
       '</div>'+
-      '</div>'+
-      '<div style="display:flex;gap:2px;flex-shrink:0">'+
-      (m.status!=='منتهي'&&_movAct('log','sched')?'<button class="btn-ic" style="background:#f0fdf4;font-size:10px" onclick="openAddLogModal(\''+m.id+'\')">📝</button>':'')+
-      (m.status!=='منتهي'&&_movAct('close','sched')?'<button class="btn-ic" style="background:#dcfce7;font-size:10px" onclick="closeMovement(\''+m.id+'\')">✅</button>':'')+
-      (m.status!=='منتهي'&&_movAct('carry','sched')?'<button class="btn-ic" style="background:#f5f3ff;font-size:10px" onclick="openCarryOverModal(\''+m.id+'\')">📌</button>':'')+
-      (m.status!=='منتهي'&&_movAct('stock','sched')?'<button class="btn-ic" style="background:'+(m.status==='في الاستوك'?'#cffafe':'#f1f5f9')+';font-size:10px" onclick="toggleStockStatus(\''+m.id+'\')" title="'+(m.status==='في الاستوك'?'طلّعه من الاستوك':'حطّه في الاستوك')+'">🗄️</button>':'')+
-      (_movAct('edit','sched')?'<button class="btn-ic" style="background:#dbeafe;font-size:10px" onclick="openMovementModal(\''+m.id+'\')">✏️</button>':'')+
-      (_movAct('removeSched','sched')?(isCarriedHere?'<button class="btn-ic" style="background:#fee2e2;font-size:10px" onclick="removeCarriedDay(\''+m.id+'\',\''+_schedWorkDate+'\')">✕</button>':'<button class="btn-ic" style="background:#fee2e2;font-size:10px" onclick="removeFromScheduled(\''+m.id+'\')">✕</button>'):'')+
-      '</div></div></div>';
+      '</div></div>';
+    var actionsArr=[
+      (m.status!=='منتهي'&&_movAct('log','sched')?'<button class="btn-ic" style="background:#f0fdf4;font-size:10px" onclick="openAddLogModal(\''+m.id+'\')">📝</button>':''),
+      (m.status!=='منتهي'&&_movAct('close','sched')?'<button class="btn-ic" style="background:#dcfce7;font-size:10px" onclick="closeMovement(\''+m.id+'\')">✅</button>':''),
+      (m.status!=='منتهي'&&_movAct('carry','sched')?'<button class="btn-ic" style="background:#f5f3ff;font-size:10px" onclick="openCarryOverModal(\''+m.id+'\')">📌</button>':''),
+      (m.status!=='منتهي'&&_movAct('stock','sched')?'<button class="btn-ic" style="background:'+(m.status==='في الاستوك'?'#cffafe':'#f1f5f9')+';font-size:10px" onclick="toggleStockStatus(\''+m.id+'\')" title="'+(m.status==='في الاستوك'?'طلّعه من الاستوك':'حطّه في الاستوك')+'">🗄️</button>':''),
+      (_movAct('edit','sched')?'<button class="btn-ic" style="background:#dbeafe;font-size:10px" onclick="openMovementModal(\''+m.id+'\')">✏️</button>':''),
+      (_movAct('removeSched','sched')?(isCarriedHere?'<button class="btn-ic" style="background:#fee2e2;font-size:10px" onclick="removeCarriedDay(\''+m.id+'\',\''+_schedWorkDate+'\')">✕</button>':'<button class="btn-ic" style="background:#fee2e2;font-size:10px" onclick="removeFromScheduled(\''+m.id+'\')">✕</button>'):'')
+    ].filter(Boolean);
+    return _movWrapCard(m.id,'mvS',contentHtml,actionsArr,isCarriedHere?'#7c3aed':sc(m.status));
   }
 
   // ⚠️ v122 — تقسيم واضح: كرت منفصل لكل مهندس فيه أعطاله بس، وقسم "الكل مع بعض" فوقهم
@@ -12273,6 +12365,7 @@ function renderScheduledList(){
 
   el.innerHTML=dayBar+filterBar+groupBtn+printDayBtn+cardsHtml;
   if(_schedGroupMode!=='byEng')_wireSchedDrag(el);
+  _wireMvSwipeAndTap(el);
 }
 
 // ⚠️ v233 — سحب وإفلات (بدل الأسهم) لترتيب كروت "مرتبة": ضغطة مطوّلة على مقبض ☰ بتفعّل
@@ -18025,9 +18118,22 @@ function _movActsChecklist(scope,defs,title){
     }).join('')+
     '</div>';
 }
+var MOV_STYLE_DEFS=[['swipe','👉 سحب (زي واتساب)'],['tap','👆 دوس على الكارت'],['primary','🔘 زرارين + ⋯ للباقي']];
+async function saveMovCardStyle(val){
+  DB.settings.movCardStyle=val;
+  await persist();
+  renderMovements();renderScheduledList();
+  showToast('✅ اتحفظ','#16a34a');
+}
 function renderMovActionsSettingsCard(){
+  var curStyle=_movCardStyle();
   return '<div class="card">'+
     '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #e2e8f0">🔘 أزرار كروت التحركات</div>'+
+    '<div style="font-size:12.5px;font-weight:800;color:#374151;margin-bottom:7px">📐 شكل إظهار الأزرار</div>'+
+    MOV_STYLE_DEFS.map(function(d){
+      return '<label style="display:flex;align-items:center;gap:8px;margin-bottom:6px;cursor:pointer"><input type="radio" name="movstyle" value="'+d[0]+'" '+(curStyle===d[0]?'checked':'')+' onchange="saveMovCardStyle(\''+d[0]+'\')" style="width:17px;height:17px"><span style="font-size:12.5px;font-weight:700">'+d[1]+'</span></label>';
+    }).join('')+
+    '<div style="height:1px;background:#e2e8f0;margin:12px 0"></div>'+
     '<div style="font-size:11px;color:#94a3b8;margin-bottom:10px">بطّل أي زرار مش محتاجه في كل شاشة لوحدها عشان الكارت يبقى أنضف وأوفر مساحة</div>'+
     _movActsChecklist('all',MOV_ACTIONS_DEFS_ALL,'📋 شاشة "الكل"')+
     _movActsChecklist('sched',MOV_ACTIONS_DEFS_SCHED,'📋 شاشة "مرتبة"')+
