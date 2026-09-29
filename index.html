@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v237</title>
+<title>ابو حوده الحلو الجميل v240</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="2026-09-29 — v237";
+<script>var BUILD_STAMP="2026-09-29 — v240";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -4075,6 +4075,8 @@ input:checked+.slider:before{transform:translateX(-20px)}
           <button class="btn-add" style="background:#ea580c" onclick="navigate('movements-report')">📊</button>
         </div>
       </div>
+      <!-- ⚠️ v238 — التابات + فلتر الفترة + خانة البحث ثابتين (sticky) أعلى الشاشة أثناء السكرول -->
+      <div style="position:sticky;top:0;z-index:5;background:#f1f5f9;padding-top:2px;margin-top:-2px">
       <div class="tabs" style="margin-bottom:10px">
         <button class="tab active" onclick="switchMovTab('scheduled',this)">📋 مرتبة</button>
         <button class="tab" onclick="switchMovTab('list',this)">الكل</button>
@@ -4083,6 +4085,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
       </div>
       <div id="movements-period-filter"></div>
       <div id="movements-search-box" style="display:none"></div>
+      </div>
       <div id="movements-scheduled"></div>
       <div id="movements-list" style="display:none"></div>
       <div id="schedule-body" style="display:none"></div>
@@ -4133,8 +4136,11 @@ input:checked+.slider:before{transform:translateX(-20px)}
 
     <div id="screen-reports" class="screen">
       <div style="font-size:19px;font-weight:900;margin-bottom:12px">📊 التقارير المالية</div>
+      <!-- ⚠️ v238 — فلتر الفترة + تابات التقارير ثابتين أعلى الشاشة أثناء السكرول -->
+      <div style="position:sticky;top:0;z-index:5;background:#f1f5f9;padding-top:2px;margin-top:-2px">
       <div id="report-period-filter"></div>
       <div id="report-tabs-bar" class="tabs tabs-scroll"></div>
+      </div>
       <div id="tab-period"></div>
       <div id="tab-income" style="display:none"></div>
       <div id="tab-balance" style="display:none"></div>
@@ -4281,7 +4287,7 @@ var APP_TITLE='ابو حوده الحلو الجميل';
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=237;
+var APP_VERSION=240;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -6043,7 +6049,7 @@ function renderHome(){
   // عرض واضح لأعطال اليوم (أول 4) — كارت بلون الحالة بدل نص رمادي صغير
   var todayListEl=document.getElementById('today-sched-list');
   if(todayListEl){
-    var scHome=function(s){return s==='منتهي'?'#15803d':s==='جاري'?'#ca8a04':s==='في الاستوك'?'#0891b2':'#2563eb';};
+    var scHome=function(s){return s==='منتهي'?'#15803d':s==='جاري'?'#ca8a04':s==='في الاستوك'?'#0891b2':s==='منتظر'?'#f59e0b':'#2563eb';};
     todayListEl.innerHTML=todaySchedMovs.length?
       todaySchedMovs.slice(0,4).map(function(m){
         var isCarried=smap[m.id]!==todayStr;
@@ -12055,7 +12061,7 @@ function sortedMovements(){
   if(_movFilter&&_movFilter!=='all'){
     if(_movFilter==='today'){var t=today();list=list.filter(function(m){return m.opened_at===t||m.closed_at===t;});}
     else if(_movFilter==='نشط'){list=list.filter(function(m){return m.status==='جديد'||m.status==='جاري';});}
-    else if(_movFilter==='active_all'){list=list.filter(function(m){return m.status==='جديد'||m.status==='جاري'||m.status==='في الاستوك';});}
+    else if(_movFilter==='active_all'){list=list.filter(function(m){return m.status==='جديد'||m.status==='جاري'||m.status==='في الاستوك'||m.status==='منتظر';});}
     else if(_movFilter==='ارشيف'){list=list.filter(function(m){return m.status==='منتهي'||m.status==='ملغي';});}
     else list=list.filter(function(m){return m.status===_movFilter;});
   }
@@ -12131,21 +12137,23 @@ function renderMovements(){
   var newCount=allMovs.filter(function(m){return m.status==='جديد';}).length;
   var open=allMovs.filter(function(m){return m.status==='جاري';}).length;
   var stockCount=allMovs.filter(function(m){return m.status==='في الاستوك';}).length;
+  var waitingCount=allMovs.filter(function(m){return m.status==='منتظر';}).length; // ⚠️ v238
   var activeCount=newCount+open;
   var done=allMovs.filter(function(m){return m.status==='منتهي';}).length;
   var canceled=allMovs.filter(function(m){return m.status==='ملغي';}).length;
   var total=allMovs.length;
-  // ⚠️ v118 — كارت "الكل" بقى معناه: كل حاجة ماعدا المنتهي (جديد+جاري+استوك)، مش العدد الإجمالي المطلق
-  var allActiveCount=newCount+open+stockCount;
+  // ⚠️ v118 — كارت "الكل" بقى معناه: كل حاجة ماعدا المنتهي (جديد+جاري+استوك+منتظر)، مش العدد الإجمالي المطلق
+  var allActiveCount=newCount+open+stockCount+waitingCount;
   var periodNote=(pr0.from||pr0.to)?' (خلال الفترة المختارة)':'';
 
   // صف واحد: نشط (جديد+جاري) / جاري فقط / جديد فقط / منتهي
   var summary='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">'+
     '<span style="font-size:11px;font-weight:800;color:#64748b">📊 إحصائيات — كل الأعطال ('+total+')'+periodNote+'</span>'+
     '</div>'+
-    '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:8px">'+
+    '<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-bottom:8px">'+
     movMiniClickable('🗂️ الكل',allActiveCount,'#0f172a','#f1f5f9','active_all')+
     movMiniClickable('🗄️ الاستوك',stockCount,'#0891b2','#cffafe','في الاستوك')+
+    movMiniClickable('⏳ منتظر',waitingCount,'#f59e0b','#fef3c7','منتظر')+
     movMiniClickable('⚡ نشط',activeCount,'#7c3aed','#f5f3ff','نشط')+
     movMiniClickable('منتهي',done,'#15803d','#dcfce7','منتهي')+
     '</div>'+
@@ -12176,7 +12184,7 @@ function renderMovements(){
     '</div>';
 
   if(!list.length){el.innerHTML=summary+countBar+movSortBar+'<div class="empty">لا توجد أعطال بهذا الفلتر</div>';return;}
-  var sc=function(s){return s==='منتهي'?'#15803d':s==='جاري'?'#ca8a04':s==='في الاستوك'?'#0891b2':s==='ملغي'?'#dc2626':'#2563eb';};
+  var sc=function(s){return s==='منتهي'?'#15803d':s==='جاري'?'#ca8a04':s==='في الاستوك'?'#0891b2':s==='منتظر'?'#f59e0b':s==='ملغي'?'#dc2626':'#2563eb';};
 
   var todayStr=today();
   var weekAgo=new Date(new Date(todayStr).getTime()-6*86400000).toISOString().split('T')[0];
@@ -12220,6 +12228,7 @@ function renderMovements(){
       (!isOpenState&&_movAct('detail','all')?'<button class="btn btn-sm" style="background:#f0fdf4;color:#15803d;border:1px solid #86efac;flex:1;font-size:11px" onclick="openMovementDetail(\''+m.id+'\')">📋 التفاصيل</button>':''),
       (isOpenState&&_movAct('addSched','all')?'<button class="btn-ic" style="background:#fdf2f8;color:#86198f;font-size:11px" onclick="quickAddToScheduled(\''+m.id+'\')" title="أضفه لمرتبة اليوم المفتوح">➕</button>':''),
       (isOpenState&&_movAct('stock','all')?'<button class="btn-ic" style="background:'+(m.status==='في الاستوك'?'#cffafe':'#f1f5f9')+';font-size:11px" onclick="toggleStockStatus(\''+m.id+'\')" title="'+(m.status==='في الاستوك'?'طلّعه من الاستوك':'حطّه في الاستوك')+'">🗄️</button>':''),
+      (isOpenState&&_movAct('wait','all')?'<button class="btn-ic" style="background:'+(m.status==='منتظر'?'#fef3c7':'#f1f5f9')+';font-size:11px" onclick="toggleWaitingStatus(\''+m.id+'\')" title="'+(m.status==='منتظر'?'طلّعه من الانتظار':'حطّه منتظر')+'">⏳</button>':''),
       (_movAct('edit','all')?'<button class="btn-ic" style="background:#dbeafe;font-size:11px" onclick="openMovementModal(\''+m.id+'\')" title="تعديل">✏️</button>':''),
       (_movAct('del','all')?'<button class="btn-ic" style="background:#fee2e2;font-size:11px" onclick="confirmAction(\'هتحذف؟\',function(){delMovement(\''+m.id+'\')})" title="حذف">🗑️</button>':'')
     ].filter(Boolean);
@@ -12271,7 +12280,7 @@ function renderScheduledList(){
   var allMovs=DB.movements||[];  // كل التحركات بما فيها المنتهية
   var smap=DB.scheduled_map||{};
   var carried=DB.scheduled_carried||{};
-  var sc=function(s){return s==='منتهي'?'#15803d':s==='جاري'?'#ca8a04':s==='في الاستوك'?'#0891b2':'#2563eb';};
+  var sc=function(s){return s==='منتهي'?'#15803d':s==='جاري'?'#ca8a04':s==='في الاستوك'?'#0891b2':s==='منتظر'?'#f59e0b':'#2563eb';};
 
   // هل العطل ظاهر في يوم معين؟ (يومه الأصلي أو من ضمن الأيام اللي اترحّل لها)
   function movOnDate(id,dt){
@@ -12303,7 +12312,7 @@ function renderScheduledList(){
 
   // فلتر + زرار إضافة + زرار ترحيل يدوي فوري
   var filterBar='<div style="display:flex;gap:4px;margin-bottom:7px">'+
-    [['all','الكل'],['جديد','جديد'],['في الاستوك','🗄️ الاستوك']].map(function(f){
+    [['all','الكل'],['جديد','جديد'],['في الاستوك','🗄️ الاستوك'],['منتظر','⏳ منتظر']].map(function(f){
       var a=_schedFilter===f[0];
       return '<button data-f="'+f[0]+'" onclick="setSchedFilter(this.dataset.f)" style="flex:1;padding:4px;border:2px solid '+(a?'#86198f':'#e2e8f0')+';border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;background:'+(a?'#fdf2f8':'#fff')+';color:'+(a?'#86198f':'#64748b')+';font-family:inherit">'+f[1]+'</button>';
     }).join('')+
@@ -12322,7 +12331,7 @@ function renderScheduledList(){
     var contentHtml=
       '<div style="display:flex;align-items:center;gap:4px">'+
       // ⚠️ v233 — نظام الأسهم اتبدّل بمقبض سحب واحد (☰) بطلب العميل، وده وفّر مساحة الكارت
-      (showArrows?'<span class="mv-drag-handle" style="cursor:grab;font-size:15px;color:#94a3b8;padding:2px 5px;flex-shrink:0;touch-action:none">☰</span>':'')+
+      (showArrows?'<span class="mv-drag-handle" style="cursor:grab;font-size:15px;color:#94a3b8;padding:2px 5px;flex-shrink:0;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none">☰</span>':'')+
       '<span style="background:#0f172a;color:#fff;border-radius:3px;padding:0 4px;font-size:10px;font-weight:900;flex-shrink:0">'+(i+1)+'</span>'+
       '<div style="flex:1;min-width:0">'+
       '<div style="display:flex;justify-content:space-between;align-items:center">'+
@@ -12340,6 +12349,7 @@ function renderScheduledList(){
       (m.status!=='منتهي'&&_movAct('close','sched')?'<button class="btn-ic" style="background:#dcfce7;'+__szS+'" onclick="closeMovement(\''+m.id+'\')" title="إنهاء">✅</button>':''),
       (m.status!=='منتهي'&&_movAct('carry','sched')?'<button class="btn-ic" style="background:#f5f3ff;'+__szS+'" onclick="openCarryOverModal(\''+m.id+'\')" title="ترحيل">📌</button>':''),
       (m.status!=='منتهي'&&_movAct('stock','sched')?'<button class="btn-ic" style="background:'+(m.status==='في الاستوك'?'#cffafe':'#f1f5f9')+';'+__szS+'" onclick="toggleStockStatus(\''+m.id+'\')" title="'+(m.status==='في الاستوك'?'طلّعه من الاستوك':'حطّه في الاستوك')+'">🗄️</button>':''),
+      (m.status!=='منتهي'&&_movAct('wait','sched')?'<button class="btn-ic" style="background:'+(m.status==='منتظر'?'#fef3c7':'#f1f5f9')+';'+__szS+'" onclick="toggleWaitingStatus(\''+m.id+'\')" title="'+(m.status==='منتظر'?'طلّعه من الانتظار':'حطّه منتظر')+'">⏳</button>':''),
       (_movAct('edit','sched')?'<button class="btn-ic" style="background:#dbeafe;'+__szS+'" onclick="openMovementModal(\''+m.id+'\')" title="تعديل">✏️</button>':''),
       (_movAct('removeSched','sched')?(isCarriedHere?'<button class="btn-ic" style="background:#fee2e2;'+__szS+'" onclick="removeCarriedDay(\''+m.id+'\',\''+_schedWorkDate+'\')" title="إزالة">✕</button>':'<button class="btn-ic" style="background:#fee2e2;'+__szS+'" onclick="removeFromScheduled(\''+m.id+'\')" title="إزالة">✕</button>'):'')
     ].filter(Boolean);
@@ -12484,13 +12494,26 @@ async function toggleStockStatus(id){
   var m=(DB.movements||[]).find(function(x){return x.id===id;});if(!m)return;
   var toStock=m.status!=='في الاستوك';
   var newStatus=toStock?'في الاستوك':'جاري';
-  var logs=(m.log||[]).concat([{date:today(),note:toStock?'اتحط في الاستوك يدويًا':'اترجع من الاستوك يدويًا',status:newStatus}]);
+  var logs=(m.log||[]).concat([{date:today(),note:toStock?'اتحط في الاستوك يدويًا':'اترجع من الاستوك يدويًا',status:newStatus,by:window.__currentProfile?window.__currentProfile.id:null}]);
   var update={status:newStatus,log:logs,customer:m.customer}; // ⚠️ v128 — كانت بتتحفظ محليًا بس من غير مزامنة سيرفر خالص
   DB.movements=DB.movements.map(function(x){return x.id===id?Object.assign({},x,update):x;});
   await persist();
   await dbUpdate('movements',id,update);
   if(_movTab==='scheduled')renderScheduledList();else renderMovements();
   showToast(toStock?'🗄️ اتحط في الاستوك':'↩️ اترجع من الاستوك','#0891b2');
+}
+// ⚠️ v238 — نفس فكرة toggleStockStatus بالظبط بس لحالة "⏳ منتظر" (منتظر قطعة غيار/رد عميل...إلخ)
+async function toggleWaitingStatus(id){
+  var m=(DB.movements||[]).find(function(x){return x.id===id;});if(!m)return;
+  var toWait=m.status!=='منتظر';
+  var newStatus=toWait?'منتظر':'جاري';
+  var logs=(m.log||[]).concat([{date:today(),note:toWait?'اتحط منتظر يدويًا':'اترجع من الانتظار يدويًا',status:newStatus,by:window.__currentProfile?window.__currentProfile.id:null}]);
+  var update={status:newStatus,log:logs,customer:m.customer};
+  DB.movements=DB.movements.map(function(x){return x.id===id?Object.assign({},x,update):x;});
+  await persist();
+  await dbUpdate('movements',id,update);
+  if(_movTab==='scheduled')renderScheduledList();else renderMovements();
+  showToast(toWait?'⏳ اتحط منتظر':'↩️ اترجع من الانتظار','#f59e0b');
 }
 
 async function autoRolloverStale(){
@@ -12925,7 +12948,7 @@ function renderMovementBody(m){
     '</select></div>'+
     '<div class="field"><label>الحالة</label>'+
     '<select id="mov-status" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit">'+
-    ['جديد','جاري','في الاستوك','منتهي','ملغي'].map(function(s){return '<option'+(m?m.status===s?' selected':'':s==='جديد'?' selected':'')+'>'+s+'</option>';}).join('')+
+    ['جديد','جاري','في الاستوك','منتظر','منتهي','ملغي'].map(function(s){return '<option'+(m?m.status===s?' selected':'':s==='جديد'?' selected':'')+'>'+s+'</option>';}).join('')+
     '</select></div>'+
     '<div class="modal-actions">'+
     '<button class="btn btn-primary btn-full" onclick="__runOnce(this,saveMovement)">'+(m?'حفظ التعديل':'تسجيل')+'</button>'+
@@ -13148,6 +13171,10 @@ async function saveMovement(){
     }else{
       DB.movCounter=(DB.movCounter||0)+1;
       obj.id=genId();obj.log=[];obj.seq_num=DB.movCounter;
+      // ⚠️ v239 — created_by كان بيتسجل بس عن طريق fallback عام جوه dbUpsert، مش تسجيل
+      // صريح هنا زي sales/expenses بالظبط (v164) — ده كان الفرق اللي بيسيب ثغرة لأي
+      // مسار حفظ منسي مستقبلًا. دلوقتي بيتسجل صراحة هنا، وfallback dbUpsert باقي كخط دفاع تاني.
+      obj.created_by=window.__currentProfile?window.__currentProfile.id:null;
       DB.movements.unshift(obj);
       await dbUpsert('movements',obj);
     }
@@ -13195,8 +13222,9 @@ function openAddLogModal(id){
     (m.log&&m.log.length?'<div style="max-height:150px;overflow-y:auto;margin-bottom:10px;background:#f8fafc;border-radius:9px;padding:8px 10px">'+
       '<div style="font-size:11px;font-weight:700;color:#64748b;margin-bottom:6px">📋 السجل السابق:</div>'+
       m.log.slice().reverse().map(function(l){
+        var authorName=(window.__isOwner&&l.by&&l.by!==window.__currentProfile.id)?_employeeNameById(l.by):null;
         return '<div style="margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid #e2e8f0">'+
-          '<div style="font-size:10px;color:#94a3b8">'+esc(fmtDate(l.date))+'</div>'+
+          '<div style="font-size:10px;color:#94a3b8">'+esc(fmtDate(l.date))+(authorName?' <span style="background:#ede9fe;color:#6d28d9;border-radius:6px;padding:0 6px;font-weight:700">👤 '+esc(authorName)+'</span>':'')+'</div>'+
           '<div style="font-size:12px;margin-top:2px">'+esc(l.note)+'</div></div>';
       }).join('')+'</div>':'')+
     '<div class="field"><label>ماذا عملت اليوم؟<span class="required">*</span></label>'+
@@ -13222,7 +13250,9 @@ async function saveLog(id){
   var update={};
   DB.movements=DB.movements.map(function(m){
     if(m.id!==id)return m;
-    var log=(m.log||[]).concat([{date:today(),note:note}]);
+    // ⚠️ v240 — تسجيل "مين كتب الملاحظة دي" (by) عشان يبقى واضح في كل التطبيق أي حاجة
+    // دخلها مهندس، مش بس تاريخها
+    var log=(m.log||[]).concat([{date:today(),note:note,by:window.__currentProfile?window.__currentProfile.id:null}]);
     update={log:log,status:newStatus,customer:m.customer}; // ⚠️ v128 — نضمّن اسم العميل صراحة في أي تحديث جزئي، حماية إضافية ضد إنشاء صف ناقص على السيرفر لو حصل سباق توقيت
     if(newStatus==='منتهي'&&m.status!=='منتهي'){update.closed_at=today();update.closed_order=Date.now();}
     return Object.assign({},m,update);
@@ -13261,7 +13291,7 @@ async function confirmContinueMovement(id){
   var m=(DB.movements||[]).find(function(x){return x.id===id;});if(!m)return;
   var note=v('close-note');
   var newId=genId();
-  var logEntry={date:today(),note:(note||'تم إنجاز جزء من الشغل')+' — فيه تكملة لاحقة',status:'منتهي'};
+  var logEntry={date:today(),note:(note||'تم إنجاز جزء من الشغل')+' — فيه تكملة لاحقة',status:'منتهي',by:window.__currentProfile?window.__currentProfile.id:null};
   var oldUpdate={};
   DB.movements=DB.movements.map(function(x){
     if(x.id!==id)return x;
@@ -13274,7 +13304,8 @@ async function confirmContinueMovement(id){
     id:newId,customer:m.customer,device:m.device||'',serial:m.serial||'',
     fault_type:m.fault_type||'',fault_desc:m.fault_desc||'',
     status:'جديد',opened_at:today(),parts:[],log:[],seq_num:DB.movCounter,
-    assigned_to:m.assigned_to||null,continued_from_id:id
+    assigned_to:m.assigned_to||null,continued_from_id:id,
+    created_by:window.__currentProfile?window.__currentProfile.id:null // ⚠️ v239 — نفس تعميم created_by الصريح
   };
   DB.movements.unshift(newMov);
   await persist();
@@ -13306,7 +13337,7 @@ async function confirmCancelMovement(id){
   var m=(DB.movements||[]).find(function(x){return x.id===id;});if(!m)return;
   var reason=v('cancel-reason');
   if(!reason)return showToast('⚠️ سبب الإلغاء مطلوب','#dc2626');
-  var logEntry={date:today(),note:'ملغي — '+reason,status:'ملغي'};
+  var logEntry={date:today(),note:'ملغي — '+reason,status:'ملغي',by:window.__currentProfile?window.__currentProfile.id:null};
   var update={};
   DB.movements=DB.movements.map(function(x){
     if(x.id!==id)return x;
@@ -13325,7 +13356,7 @@ async function confirmCloseMovement(id,addInvoice){
   var m=(DB.movements||[]).find(function(x){return x.id===id;});if(!m)return;
   var note=v('close-note');
   // إضافة log الإنهاء
-  var logEntry={date:today(),note:note||'تم الإنهاء',status:'منتهي'};
+  var logEntry={date:today(),note:note||'تم الإنهاء',status:'منتهي',by:window.__currentProfile?window.__currentProfile.id:null};
   var update={};
   // ⚠️ v157 — لو هيتحول لفاتورة، متقفلش العطل دلوقتي؛ سيبها تتقفل بس لما الفاتورة
   // تتحفظ فعلاً بنجاح (شوف saveSale). قبل كده كان بيتقفل فورًا حتى لو المستخدم
@@ -13432,9 +13463,13 @@ function openMovementDetail(id){
     (m.fault_desc?'<div style="font-size:12px;color:#64748b;margin-bottom:8px">'+esc(m.fault_desc)+'</div>':'')+
     (m.parts&&m.parts.length?'<div style="font-size:12px;font-weight:700;color:#ea580c;margin-bottom:4px">🔩 قطع الغيار:</div>'+
       m.parts.map(function(p){return '<div style="font-size:12px">• '+esc(p.name)+(p.qty>1?' × '+p.qty:'')+'</div>';}).join(''):'')+'</div>'+
+    // ⚠️ v240 — الأحدث فوق (كان بيتعرض بترتيب الإدخال العادي فالجديد يطلع تحت خالص)
     (m.log&&m.log.length?'<div class="card" style="margin-bottom:10px"><div style="font-weight:700;font-size:13px;margin-bottom:10px">📋 سجل العمل ('+m.log.length+')</div>'+
-      m.log.map(function(l,i){return '<div style="padding:8px 0;border-bottom:1px solid #f1f5f9">'+
-        '<div style="font-size:10px;color:#94a3b8">اليوم '+(i+1)+' — '+esc(fmtDate(l.date))+'</div>'+
+      m.log.slice().reverse().map(function(l,i){
+        var dayNum=m.log.length-i; // بعد القلب: رقم اليوم لازم يتحسب من الترتيب الأصلي مش المعكوس
+        var authorName=(window.__isOwner&&l.by&&l.by!==window.__currentProfile.id)?_employeeNameById(l.by):null;
+        return '<div style="padding:8px 0;border-bottom:1px solid #f1f5f9">'+
+        '<div style="font-size:10px;color:#94a3b8">اليوم '+dayNum+' — '+esc(fmtDate(l.date))+(authorName?' <span style="background:#ede9fe;color:#6d28d9;border-radius:6px;padding:0 6px;font-weight:700">👤 '+esc(authorName)+'</span>':'')+'</div>'+
         '<div style="font-size:13px">'+esc(l.note)+'</div></div>';}).join('')+'</div>':'')+
     (relSales.length?'<div class="card" style="margin-bottom:10px"><div style="font-weight:700;font-size:13px;margin-bottom:10px">🧾 فواتير '+esc(m.customer)+' ('+relSales.length+')</div>'+
       relSales.slice(0,5).map(function(s){return '<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #f1f5f9;font-size:12px">'+
@@ -13448,7 +13483,7 @@ function openMovementDetail(id){
 function openDailyArchiveDetail(idx){
   var dailyArchive=(DB.daily_archive||[]).slice().sort(function(a,b){return b.work_date>a.work_date?1:-1;});
   var day=dailyArchive[idx];if(!day)return;
-  var scDaily=function(s){return s==='منتهي'?'#15803d':s==='جاري'?'#ca8a04':s==='في الاستوك'?'#0891b2':s==='ملغي'?'#dc2626':'#2563eb';};
+  var scDaily=function(s){return s==='منتهي'?'#15803d':s==='جاري'?'#ca8a04':s==='في الاستوك'?'#0891b2':s==='منتظر'?'#f59e0b':s==='ملغي'?'#dc2626':'#2563eb';};
   document.getElementById('modal-title').textContent='📅 '+day.label;
   document.getElementById('modal-body').innerHTML=
     day.items.map(function(item,i){
@@ -18122,9 +18157,9 @@ setInterval(_checkPrayerAlerts,20000);
 // شاشة ليها مجموعة أزرارها المتاحة، ومفيش داعي نعرض زرار في قايمة شاشة أصلاً مش موجود فيها
 var MOV_ACTIONS_DEFS_ALL=[['log','📝 إضافة ملاحظة'],['close','✅ إنهاء العطل'],['cancel','🚫 إلغاء'],
   ['detail','📋 التفاصيل (للمنتهي)'],['addSched','➕ إضافة للمرتبة'],['stock','🗄️ حالة الاستوك'],
-  ['edit','✏️ تعديل'],['del','🗑️ حذف']];
+  ['wait','⏳ حالة الانتظار'],['edit','✏️ تعديل'],['del','🗑️ حذف']];
 var MOV_ACTIONS_DEFS_SCHED=[['log','📝 إضافة ملاحظة'],['close','✅ إنهاء العطل'],['carry','📌 ترحيل'],
-  ['stock','🗄️ حالة الاستوك'],['edit','✏️ تعديل'],['removeSched','✕ إزالة من المرتبة']];
+  ['stock','🗄️ حالة الاستوك'],['wait','⏳ حالة الانتظار'],['edit','✏️ تعديل'],['removeSched','✕ إزالة من المرتبة']];
 function _movActsChecklist(scope,defs,title){
   var c=((DB.settings&&DB.settings.movCardActions)||{})[scope]||{};
   return '<div style="margin-bottom:14px">'+
@@ -20756,6 +20791,8 @@ function openEmployeeDetailReport(empId){
   var bal=_computeEmpCashBalance(emp)||{since:'',salesSum:0,debtPaySum:0,advSum:0,expSum:0,salarySum:0,balance:0};
   var sales=(DB.sales||[]).filter(function(s){return s.created_by===pid;}).sort(function(a,b){return(b.date||'')<(a.date||'')?-1:1;});
   var moves=(DB.movements||[]).filter(function(m){return m.created_by===pid;}).sort(function(a,b){return(b.opened_at||'')<(a.opened_at||'')?-1:1;});
+  // ⚠️ v240 — "كل البيانات اللي دخلها المهندس" كانت ناقصة تفاصيل المصروفات (كان مجموع بس)
+  var exps=(DB.expenses||[]).filter(function(e){return e.created_by===pid;}).sort(function(a,b){return(b.date||'')<(a.date||'')?-1:1;});
 
   document.getElementById('modal-title').textContent='👤 صفحة المهندس — '+(emp.name||'');
   document.getElementById('modal-body').innerHTML=
@@ -20779,6 +20816,11 @@ function openEmployeeDetailReport(empId){
       return '<div onclick="closeModal();openMovementDetail('+jsStr(m.id)+')" style="cursor:pointer;display:flex;justify-content:space-between;background:#f8fafc;border-radius:8px;padding:7px 10px;margin-bottom:5px;font-size:12px">'+
         '<span>'+esc(m.customer||'—')+' — '+esc(m.device||'')+'</span><span style="color:#94a3b8">'+esc(fmtDate(m.opened_at))+'</span></div>';
     }).join(''):'<div class="empty">مفيش تحركات</div>')+
+    '<div style="font-weight:800;font-size:13px;margin:12px 0 6px">💸 مصروفاته ('+exps.length+')</div>'+
+    (exps.length?exps.slice(0,20).map(function(e){
+      return '<div onclick="closeModal();openEditExpenseModal('+jsStr(e.id)+')" style="cursor:pointer;display:flex;justify-content:space-between;background:#f8fafc;border-radius:8px;padding:7px 10px;margin-bottom:5px;font-size:12px">'+
+        '<span>'+esc(e.type||'—')+' — '+esc(fmtDate(e.date))+'</span><b style="color:#dc2626">-'+fmt(e.amount)+'</b></div>';
+    }).join(''):'<div class="empty">مفيش مصروفات</div>')+
     '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal();openEmployeesReport()">‹ رجوع لكل المهندسين</button></div>';
   openModal();
 }
