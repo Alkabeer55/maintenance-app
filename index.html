@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v240</title>
+<title>ابو حوده الحلو الجميل v242</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="2026-09-29 — v240";
+<script>var BUILD_STAMP="2026-09-29 — v242";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -4287,7 +4287,7 @@ var APP_TITLE='ابو حوده الحلو الجميل';
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=240;
+var APP_VERSION=242;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -8996,14 +8996,40 @@ function renderLedger(customerName){
       }).join('')+'</div>';
   }
 
+  // ⚠️ v241 — كان بيتعرض رقم إجمالي الدين بس فوق، من غير أي تفصيل لكل معاملة على حدة
+  if(debts.length){
+    content+='<div class="card" style="margin-bottom:12px">'+
+      '<div style="font-weight:800;font-size:13px;margin-bottom:8px;color:#374151">💳 تفاصيل الديون ('+debts.length+')</div>'+
+      debts.slice().sort(function(a,b){return(b.date||'')<(a.date||'')?-1:1;}).map(function(d){
+        var dRem=d.total-(d.paid||0), dPaid=dRem<=0;
+        var isLinked=_isDebtLinked(d);
+        var originBadge=isLinked?'<span style="background:#eff6ff;color:#2563eb;border-radius:6px;padding:2px 6px;font-size:10px;font-weight:800;margin-right:5px">🧾 من فاتورة</span>':'<span style="background:#fff7ed;color:#c2410c;border-radius:6px;padding:2px 6px;font-size:10px;font-weight:800;margin-right:5px">✍️ يدوي</span>';
+        return '<div style="background:'+(dPaid?'#f0fdf4':'#fff7ed')+';border-radius:9px;padding:8px 10px;margin-bottom:6px;border:1px solid '+(dPaid?'#86efac':'#fed7aa')+'">'+
+          '<div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#64748b;margin-bottom:3px">'+
+          '<span>'+esc(fmtDate(d.date))+(d.desc||d.details?' — '+esc(d.desc||d.details):'')+'</span>'+originBadge+'</div>'+
+          '<div style="display:flex;gap:10px;font-size:11px">'+
+          '<span>الإجمالي: <b style="color:#0f172a">'+fmt(d.total)+'</b></span>'+
+          '<span>مدفوع: <b style="color:#16a34a">'+fmt(d.paid||0)+'</b></span>'+
+          (dPaid?'<span style="color:#15803d;font-weight:700">✅ مسدّد</span>':'<span>متبقي: <b style="color:#2563eb">'+fmt(dRem)+'</b></span>')+
+          '</div></div>';
+      }).join('')+
+      '</div>';
+  }
+
   // قطع الغيار اللي اشتراها العميل ده — من كل فواتيره المفلترة بالفترة الحالية
+  // ⚠️ v242 — ضفنا تكلفة كل قطعة (سعر الشراء) جنب سعر البيع، عشان يبان الربح لكل صنف
+  // لوحده — زي profitLabel/openProductSoldDetail بالظبط. بيظهر في الوضع الكامل بس
+  // (مخفي في وضع "عرض للعميل" زي باقي أرقام الربح في الصفحة دي).
   var custParts={};
   sales.forEach(function(s){
     (s.items||[]).forEach(function(it){
       var key=it.productId||it.name;
-      if(!custParts[key])custParts[key]={name:it.name,qty:0,total:0};
+      if(!custParts[key])custParts[key]={name:it.name,productId:it.productId,qty:0,total:0,cost:0};
+      var prod=it.productId?DB.products.find(function(x){return x.id===it.productId;}):null;
+      var unitCost=it.buyPrice!=null?it.buyPrice:((prod&&(prod.landed_cost||prod.buy_price))||0);
       custParts[key].qty+=it.qty;
       custParts[key].total+=it.qty*it.price;
+      custParts[key].cost+=it.qty*unitCost;
     });
   });
   var custPartsList=Object.values(custParts).sort(function(a,b){return b.total-a.total;});
@@ -9011,8 +9037,15 @@ function renderLedger(customerName){
     content+='<div class="card" style="margin-bottom:12px">'+
       '<div style="font-weight:800;font-size:13px;margin-bottom:8px;color:#374151">🔩 قطع الغيار اللي اشتراها ('+custPartsList.length+' صنف)</div>'+
       custPartsList.map(function(p){
-        return '<div onclick="filterInventoryByName('+jsStr(p.name)+')" style="cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #f1f5f9;font-size:12px">'+
-          '<span>'+esc(p.name)+' <span style="color:#94a3b8">× '+p.qty+'</span></span><b style="color:#0891b2">'+fmt(p.total)+'</b></div>';
+        var profit=p.total-p.cost;
+        return '<div onclick="filterInventoryByName('+jsStr(p.name)+')" style="cursor:pointer;padding:6px 0;border-bottom:1px solid #f1f5f9;font-size:12px">'+
+          '<div style="display:flex;justify-content:space-between;align-items:center">'+
+          '<span>'+esc(p.name)+' <span style="color:#94a3b8">× '+p.qty+'</span></span><b style="color:#0891b2">'+fmt(p.total)+'</b></div>'+
+          (isPublic?'':'<div style="display:flex;gap:10px;font-size:10.5px;color:#94a3b8;margin-top:2px">'+
+          '<span>التكلفة: <b style="color:#64748b">'+fmt(p.cost)+'</b></span>'+
+          '<span>'+profitLabel(profit,'الربح','الخسارة')+': <b style="color:'+(profit>=0?'#16a34a':'#dc2626')+'">'+fmt(profit)+'</b></span>'+
+          '</div>')+
+          '</div>';
       }).join('')+'</div>';
   }
 
@@ -10535,20 +10568,29 @@ function printDebt(id){
   ]);
 }
 
+// ⚠️ v241 — كانت طباعة "كشف الحساب" بتحشر كل المعاملات في سطر نصي واحد مفصول بـ"|"، غير
+// قابل للقراءة فعليًا في ورقة مطبوعة. بقت جدول حقيقي عمود لكل بيانة، زي كشف حساب بنكي.
 function printDebtGroup(name,type){
-  var rawList=(DB.debts||[]).filter(function(d){return normalizeAr(d.name)===normalizeAr(name)&&d.type===type;});
+  var rawList=(DB.debts||[]).filter(function(d){return normalizeAr(d.name)===normalizeAr(name)&&d.type===type;})
+    .sort(function(a,b){return(a.date||'')<(b.date||'')?-1:1;});
   var totalDebt=rawList.reduce(function(s,d){return s+(d.total||0);},0);
   var totalPaid=rawList.reduce(function(s,d){return s+(d.paid||0);},0);
-  var rows=rawList.map(function(d){return fmtDate(d.date)+' — '+(d.desc||d.details||'')+' — '+fmt(d.total)+' ج (مسدد '+fmt(d.paid||0)+')';}).join(' | ');
-  printGenericCard('💰 كشف حساب — '+name,[
-    {label:'الاسم',value:name},
-    {label:'النوع',value:type==='supplier'?'دين عليّ لمورد':'دين على عميل'},
-    {label:'عدد المعاملات',value:rawList.length},
-    {label:'إجمالي المبالغ',value:fmt(totalDebt)+' ج'},
-    {label:'إجمالي المسدد',value:fmt(totalPaid)+' ج'},
-    {label:'المتبقي',value:fmt(totalDebt-totalPaid)+' ج'},
-    {label:'تفاصيل المعاملات',value:rows}
-  ]);
+  var rowsHtml=rawList.map(function(d){
+    var dRem=(d.total||0)-(d.paid||0);
+    return '<tr>'+
+      '<td>'+esc(fmtDate(d.date))+'</td>'+
+      '<td>'+esc(d.desc||d.details||'—')+'</td>'+
+      '<td>'+(_isDebtLinked(d)?'🧾 فاتورة':'✍️ يدوي')+'</td>'+
+      '<td>'+fmt(d.total)+'</td>'+
+      '<td>'+fmt(d.paid||0)+'</td>'+
+      '<td>'+fmt(dRem)+'</td>'+
+      '</tr>';
+  }).join('');
+  var body='<table><thead><tr><th>التاريخ</th><th>الوصف</th><th>المصدر</th><th>الإجمالي</th><th>المسدد</th><th>المتبقي</th></tr></thead><tbody>'+
+    rowsHtml+
+    '<tr style="font-weight:900;border-top:2px solid #333"><td colspan="3">الإجمالي</td><td>'+fmt(totalDebt)+'</td><td>'+fmt(totalPaid)+'</td><td>'+fmt(totalDebt-totalPaid)+'</td></tr>'+
+    '</tbody></table>';
+  printSection('💰 كشف حساب — '+name+' ('+(type==='supplier'?'مورد':'عميل')+')',body);
 }
 
 function toggleDebtDetails(id){
