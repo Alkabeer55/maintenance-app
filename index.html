@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v242</title>
+<title>ابو حوده الحلو الجميل v244</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="2026-09-29 — v242";
+<script>var BUILD_STAMP="1448-04-20 — v244";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -54,6 +54,13 @@
       مسار خالص عن طريق confirmAction، الزرار بتاعها لازم __runOnce من أول يوم.
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v244: [✨ كشف حساب مزدوج (عليه/له) + 🐛 الراتب من المصروفات يتخصم من الأساسي + إصلاح قوالب المصروفات]
+     1) زرار ⚖️ "كشف حساب" على كل كارت دين: شاشة واحدة للشخص فيها "ليّ عليه" و"له عليّ" والصافي،
+        كل كارت قابل للضغط يفلتر القائمة، وكل صف يفتح التعديل، وتحت كل دين سدّاداته بالتاريخ الهجري، + طباعة.
+     2) فورم المصروف (الخارجي) لما تختار "رواتب" + موظف: بقى فيه اختيار "سلفة (تتخصم من الراتب
+        الأساسي)" وهو الافتراضي، أو "مكافأة (تتضاف فوق الراتب)". السلفة بتتخصم أوتوماتيك من صرفة الراتب.
+     3) قوالب المصروفات (quickLogExpense) كانت بتحفظ الفرع في حقل غلط (sub) فبيختفي من التقارير،
+        ومن غير created_by (خطر RLS على الموظفين) — اتصلح. نفس created_by اتضاف في "إضافة كذا مصروف".
 v230: [🧠 نظام تدبر شامل: مواضيع + ملاحظات ووسوم + سجل بحث + أرشفة + دفتر يومي + خريطة ذهنية]
      بطلب العميل بعد عصف ذهني: 1) "📚 مواضيعي" — تصنيف أي آية (من نتائج بحث تدبر أو
      من شاشة القراءة) لموضوع تسميه إنت، والآية ممكن تتضاف لأكتر من موضوع. 2) كل آية
@@ -4201,21 +4208,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
 
   </div>
 
-        <nav id="nav">
-    <button class="nav-btn active" data-screen="home" onclick="navigate('home')"><span class="nav-icon">🏠</span><span class="nav-label">الرئيسية</span><div class="nav-dot"></div></button>
-    <button class="nav-btn" data-screen="movements" onclick="navigate('movements')" style="position:relative">
-      <span class="nav-icon">🔧</span><span class="nav-label">تحركات</span>
-      <span id="movements-badge" style="display:none;position:absolute;top:6px;right:6px;background:#86198f;color:#fff;border-radius:50%;width:15px;height:15px;font-size:9px;font-weight:900;align-items:center;justify-content:center"></span>
-      <div class="nav-dot"></div>
-    </button>
-    <button class="nav-btn" data-screen="tasks" onclick="navigate('tasks')" style="position:relative">
-      <span class="nav-icon">📋</span><span class="nav-label">مهمات</span>
-      <span id="tasks-badge" style="display:none;position:absolute;top:6px;right:6px;background:#dc2626;color:#fff;border-radius:50%;width:15px;height:15px;font-size:9px;font-weight:900;align-items:center;justify-content:center"></span>
-      <div class="nav-dot"></div>
-    </button>
-    <button class="nav-btn" data-screen="reports" onclick="navigate('reports')"><span class="nav-icon">📊</span><span class="nav-label">تقارير</span><div class="nav-dot"></div></button>
-    <button class="nav-btn" data-screen="more" onclick="navigate('more')"><span class="nav-icon">☰</span><span class="nav-label">المزيد</span><div class="nav-dot"></div></button>
-  </nav></div>
+        <nav id="nav"></nav></div>
 
 <div id="modal-overlay" onclick="if(event.target===this)closeModal()">
   <div id="modal-box">
@@ -4287,7 +4280,7 @@ var APP_TITLE='ابو حوده الحلو الجميل';
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=242;
+var APP_VERSION=244;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -5532,7 +5525,7 @@ function compressImage(file,callback,maxWidth,quality){
 // ========== MODULE: NAV ==========
 // ===== NAV =====
 // ===== NAVIGATION =====
-var currentScreen='home',currentReportTab='period',currentDebtTab='customer';
+var currentScreen='home',currentReportTab='period',currentDebtTab='all'; // ⚠️ v243 — "إجمالي الديون" بقى الافتراضي بدل "لي عليهم"
 
 // v188 — ترتيب تابات التقارير قابل للسحب والإفلات، محفوظ محليًا لكل جهاز
 var REPORT_TAB_DEFS=[
@@ -5618,6 +5611,33 @@ function _wireReportTabsDrag(bar){
 var _navHistory=['home'];
 var navLabels={home:'الرئيسية',inventory:'مخزون',sales:'مبيعات',purchases:'مشتريات',debts:'الديون',reports:'التقارير',tasks:'المهمات',settings:'إعدادات',movements:'التحركات','movements-report':'تقرير التحركات','tasks-report':'تقرير المهمات',ledger:'سجل العميل',quran:'القرآن الكريم'};
 var navIcons={home:'🏠',inventory:'📦',sales:'🧾',purchases:'🛒',debts:'💳',reports:'📊',tasks:'📋',settings:'⚙️',movements:'🔧','movements-report':'📊','tasks-report':'📊',ledger:'👤',quran:'📖'};
+// ⚠️ v243 — شريط التنقل السفلي بقى بيتبني ديناميكيًا من ترتيب مخزّن (DB.settings.navOrder)
+// بدل ما يكون ثابت في الـHTML، عشان يبقى قابل لإعادة الترتيب من الإعدادات. الترتيب
+// الافتراضي الجديد: تقارير قبل مهمات (بطلب العميل).
+var NAV_BAR_DEFS={
+  home:{icon:'🏠',label:'الرئيسية'},
+  movements:{icon:'🔧',label:'تحركات',badge:'movements-badge'},
+  reports:{icon:'📊',label:'تقارير'},
+  tasks:{icon:'📋',label:'مهمات',badge:'tasks-badge'},
+  more:{icon:'☰',label:'المزيد'}
+};
+var NAV_BAR_DEFAULT_ORDER=['home','movements','reports','tasks','more'];
+function _navOrder(){
+  var o=(DB.settings&&DB.settings.navOrder)||NAV_BAR_DEFAULT_ORDER;
+  // لو فيه عنصر جديد مش موجود في ترتيب قديم محفوظ، نضيفه في الآخر عشان ميختفيش
+  NAV_BAR_DEFAULT_ORDER.forEach(function(id){if(o.indexOf(id)===-1)o=o.concat([id]);});
+  return o;
+}
+function renderNavBar(){
+  var el=document.getElementById('nav');if(!el)return;
+  el.innerHTML=_navOrder().map(function(id){
+    var d=NAV_BAR_DEFS[id];if(!d)return '';
+    return '<button class="nav-btn'+(id==='home'?' active':'')+'" data-screen="'+id+'" onclick="navigate(\''+id+'\')" style="position:relative">'+
+      '<span class="nav-icon">'+d.icon+'</span><span class="nav-label">'+d.label+'</span>'+
+      (d.badge?'<span id="'+d.badge+'" style="display:none;position:absolute;top:6px;right:6px;background:'+(id==='tasks'?'#dc2626':'#86198f')+';color:#fff;border-radius:50%;width:15px;height:15px;font-size:9px;font-weight:900;align-items:center;justify-content:center"></span>':'')+
+      '<div class="nav-dot"></div></button>';
+  }).join('');
+}
 
 // ⚠️ v121 — إصلاح جذري أمني: كان مفيش أي تحقق صلاحية عند فتح الشاشات خالص، فأي موظف
 // مسجّل دخول (بأي دور) يقدر يفتح كل شاشة في التطبيق ويشوف كل البيانات المالية (تقارير،
@@ -5648,6 +5668,7 @@ function __canOpenScreen(screen){
 }
 
 function navigate(screen){
+  if(!document.getElementById('nav').children.length)renderNavBar(); // أول مرة بس — بعدها الأزرار موجودة فعلاً
   // المصروفات بقت مدمجة بالكامل داخل تاب "المصروفات" بشاشة التقارير — لا توجد شاشة مستقلة بعد الآن
   if(screen==='expenses'){
     navigate('reports');
@@ -9035,7 +9056,10 @@ function renderLedger(customerName){
   var custPartsList=Object.values(custParts).sort(function(a,b){return b.total-a.total;});
   if(custPartsList.length){
     content+='<div class="card" style="margin-bottom:12px">'+
-      '<div style="font-weight:800;font-size:13px;margin-bottom:8px;color:#374151">🔩 قطع الغيار اللي اشتراها ('+custPartsList.length+' صنف)</div>'+
+      '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">'+
+      '<div style="font-weight:800;font-size:13px;color:#374151">🔩 قطع الغيار اللي اشتراها ('+custPartsList.length+' صنف)</div>'+
+      (isPublic?'':'<button class="btn btn-sm" style="background:#ede9fe;color:#5b21b6;border:none" onclick="openCustomerInvoiceProfitDetail('+jsStr(customerName)+')">📊 حسب الفاتورة/المكنة</button>')+
+      '</div>'+
       custPartsList.map(function(p){
         var profit=p.total-p.cost;
         return '<div onclick="filterInventoryByName('+jsStr(p.name)+')" style="cursor:pointer;padding:6px 0;border-bottom:1px solid #f1f5f9;font-size:12px">'+
@@ -9097,6 +9121,50 @@ function renderLedger(customerName){
 
   content+='</div>';
   el.innerHTML=content;
+}
+
+// ⚠️ v243 — شاشة "تفصيل الأرباح حسب الفاتورة/المكنة" لعميل معيّن: كل فاتورة لوحدها
+// (كل قطعة فيها بتكلفتها وسعرها وربحها + إجمالي الفاتورة)، وتجميع تاني حسب المكنة
+// (السيريال/الموديل) عبر كل فواتير العميل ده. متاحة من زرار في "سجل العميل".
+function openCustomerInvoiceProfitDetail(name){
+  var qn=normalizeAr(name);
+  var mySales=(DB.sales||[]).filter(function(s){return normalizeAr(s.customer)===qn;})
+    .sort(function(a,b){return(b.date||'')<(a.date||'')?-1:1;});
+  var byMachine={};
+  var invoicesHtml=mySales.map(function(s){
+    var invCost=0,invSale=0;
+    var rows=(s.items||[]).map(function(it){
+      var prod=it.productId?DB.products.find(function(x){return x.id===it.productId;}):null;
+      var unitCost=it.buyPrice!=null?it.buyPrice:((prod&&(prod.landed_cost||prod.buy_price))||0);
+      var lineCost=it.qty*unitCost, lineSale=it.qty*it.price, lineProfit=lineSale-lineCost;
+      invCost+=lineCost;invSale+=lineSale;
+      return '<tr><td>'+esc(it.name)+' ×'+it.qty+'</td><td>'+fmt(lineCost)+'</td><td>'+fmt(lineSale)+'</td><td style="color:'+(lineProfit>=0?'#16a34a':'#dc2626')+'">'+fmt(lineProfit)+'</td></tr>';
+    }).join('');
+    var mKey=s.serial||s.model||'بدون سيريال';
+    if(!byMachine[mKey])byMachine[mKey]={cost:0,sale:0,count:0};
+    byMachine[mKey].cost+=invCost;byMachine[mKey].sale+=invSale;byMachine[mKey].count++;
+    return '<div class="card" style="margin-bottom:10px">'+
+      '<div style="display:flex;justify-content:space-between;font-size:11px;color:#64748b;margin-bottom:6px">'+
+      '<span>'+esc(fmtDate(s.date))+(s.serial?' — 🔢 '+esc(s.serial):'')+(s.model?' — 🖨️ '+esc(s.model):'')+'</span>'+
+      '<span onclick="closeModal();openSaleModal('+jsStr(s.id)+')" style="color:#2563eb;cursor:pointer">فتح الفاتورة ›</span></div>'+
+      (rows?'<table style="width:100%;font-size:11px"><thead><tr><th>الصنف</th><th>التكلفة</th><th>البيع</th><th>الربح</th></tr></thead><tbody>'+rows+'</tbody></table>':'<div class="empty">بدون أصناف</div>')+
+      '<div style="display:flex;justify-content:space-between;margin-top:6px;padding-top:6px;border-top:1px solid #e2e8f0;font-weight:800;font-size:12px">'+
+      '<span>إجمالي الفاتورة</span><span>تكلفة '+fmt(invCost)+' — بيع '+fmt(invSale)+' — <span style="color:'+(invSale-invCost>=0?'#16a34a':'#dc2626')+'">ربح '+fmt(invSale-invCost)+'</span></span></div>'+
+      '</div>';
+  }).join('');
+  var machineRows=Object.keys(byMachine).map(function(k){
+    var m=byMachine[k];
+    return '<tr><td>'+esc(k)+'</td><td>'+m.count+'</td><td>'+fmt(m.cost)+'</td><td>'+fmt(m.sale)+'</td><td style="color:'+(m.sale-m.cost>=0?'#16a34a':'#dc2626')+'">'+fmt(m.sale-m.cost)+'</td></tr>';
+  }).join('');
+  document.getElementById('modal-title').textContent='📊 أرباح '+name+' — حسب الفاتورة/المكنة';
+  document.getElementById('modal-body').innerHTML=
+    '<div class="card" style="margin-bottom:12px"><div style="font-weight:800;font-size:13px;margin-bottom:8px">🖨️ إجمالي حسب المكنة</div>'+
+    (machineRows?'<table style="width:100%;font-size:11px"><thead><tr><th>المكنة</th><th>فواتير</th><th>تكلفة</th><th>بيع</th><th>ربح</th></tr></thead><tbody>'+machineRows+'</tbody></table>':'<div class="empty">لا يوجد</div>')+
+    '</div>'+
+    '<div style="font-weight:800;font-size:13px;margin:10px 0 8px">🧾 تفصيل كل فاتورة</div>'+
+    (invoicesHtml||'<div class="empty">لا توجد فواتير</div>')+
+    '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal();renderLedger('+jsStr(name)+')">إغلاق</button></div>';
+  openModal();
 }
 
 // ===== استخراج قطعة اسكراب مباشرة من شاشة المبيعات =====
@@ -9229,7 +9297,10 @@ async function finishExtractForSale(){
   DB.scrap_machines=(DB.scrap_machines||[]).map(function(m){
     if(!byMachine[m.id])return m;
     var newParts=(m.parts_extracted||[]).concat(
-      byMachine[m.id].map(function(it){return {id:genId(),name:it.name,qty:it.qty,added_date:today(),buy_price:it.buy_price||0,sell_price:it.sell_price||0};})
+      // ⚠️ v243 — productId بقى بيتسجل هنا صراحة (كان متاح في it.productId وما كانش بيتخزن)،
+      // عشان تتبع حالة البيع يبقى دقيق بربط مباشر، مش مطابقة بالاسم بس اللي بتتكسر لو
+      // القطعة اتسمّت تاني بعدين — وده السبب الأرجح لظهور قطع متباعة وكأنها لسه بالمخزن
+      byMachine[m.id].map(function(it){return {id:genId(),name:it.name,qty:it.qty,added_date:today(),buy_price:it.buy_price||0,sell_price:it.sell_price||0,productId:it.productId};})
     );
     return Object.assign({},m,{parts_extracted:newParts});
   });
@@ -10469,7 +10540,7 @@ function renderDebts(){
     var __hName=__isFieldHidden('debts','name'), __hTot=__isFieldHidden('debts','total'), __hPaid=__isFieldHidden('debts','paid');
     var nameDisp=__hName?'🔒 اسم':esc(g.name);
     var mixedNote=g.isMixed?
-      '<div style="background:#fffbeb;border:1px solid #fde68a;border-radius:9px;padding:8px 10px;margin-bottom:8px">'+
+      '<div onclick="openTwoWayStatement('+jsStr(g.name)+')" style="cursor:pointer;background:#fffbeb;border:1px solid #fde68a;border-radius:9px;padding:8px 10px;margin-bottom:8px">'+
       '<table style="width:100%;border-collapse:collapse;font-size:12px">'+
       '<tr style="border-bottom:1px solid #fde68a"><td style="padding:5px 3px;color:#2563eb;font-weight:800">💰 ليّ عليه</td><td style="padding:5px 3px;text-align:left;font-weight:900;color:#2563eb">'+fmt(g.custDebt-g.custPaid)+' ج</td></tr>'+
       '<tr><td style="padding:5px 3px;color:#dc2626;font-weight:800">💸 له عليّ</td><td style="padding:5px 3px;text-align:left;font-weight:900;color:#dc2626">'+fmt(g.suppDebt-g.suppPaid)+' ج</td></tr>'+
@@ -10549,10 +10620,101 @@ function renderDebts(){
       // أزرار سريعة على مستوى المجموعة (سداد الكل)
       '<div style="display:flex;gap:6px;margin-top:4px">'+
       (!isPaid?'<button class="btn btn-green btn-sm" style="flex:1" onclick="openPayGroupDebt('+jsStr(g.name)+',\''+g.type+'\')">💰 سداد من '+esc(g.name)+'</button>':'')+
+      '<button class="btn btn-sm" style="background:#fffbeb;color:#92400e;border:none" onclick="openTwoWayStatement('+jsStr(g.name)+')">⚖️ كشف</button>'+
       '<button class="btn btn-sm" style="background:#f5f3ff;color:#7c3aed;flex:'+(isPaid?'1':'0')+'" onclick="printDebtGroup('+jsStr(g.name)+',\''+g.type+'\')">🖨️'+(isPaid?' طباعة':'')+'</button>'+
       '</div>'+
       '</div>';
   }).join('');
+}
+
+// ⚠️ v244 — كشف حساب مزدوج لشخص واحد (طلب العميل: "هو أخد إيه وأنا أخدت إيه والباقي كام").
+// المشكلة: نظام الديون كان بيعرض الإجمالي/المسدد لكل دين لوحده، ومفيش شاشة واحدة تجمع اتجاهين
+// (ليّ عليه type=customer + له عليّ type=supplier) لنفس الاسم مع سداداتهم. الاتجاه كان موجود أصلًا
+// في الحقل type — فمفيش تغيير في الداتا ولا في السيرفر، بس عرض جديد فوق نفس البيانات.
+var _twsName='',_twsDir='all',_twsQ='';
+function _twsRows(){
+  var key=normalizeAr(_twsName);
+  return (DB.debts||[]).filter(function(d){return normalizeAr(d.name)===key;});
+}
+function openTwoWayStatement(name){
+  if(__isFieldHidden('debts','name')||__isFieldHidden('debts','total')||__isFieldHidden('debts','paid')){
+    return showToast('🚫 مفيش صلاحية تشوف تفاصيل الديون. كلم المالك.','#dc2626');
+  }
+  _twsName=name;_twsDir='all';_twsQ='';
+  document.getElementById('modal-title').textContent='⚖️ كشف حساب — '+name;
+  document.getElementById('modal-body').innerHTML=
+    '<div id="tws-cards"></div>'+
+    '<input type="text" placeholder="🔍 دوّر في الوصف..." oninput="_twsQ=this.value;_renderTwsList()" style="width:100%;padding:9px 12px;border:2px solid #e2e8f0;border-radius:11px;font-size:13px;font-family:inherit;background:#f8fafc;outline:none;margin-bottom:10px">'+
+    '<div id="tws-list"></div>'+
+    '<div class="modal-actions"><button class="btn btn-sm" style="background:#f5f3ff;color:#7c3aed;border:none;flex:1" onclick="_twsPrint()">🖨️ طباعة الكشف</button>'+
+    '<button class="btn btn-outline btn-full" style="flex:1" onclick="closeModal()">إغلاق</button></div>';
+  openModal();
+  _renderTwsCards();_renderTwsList();
+}
+function _twsSet(dir){_twsDir=dir;_renderTwsCards();_renderTwsList();}
+function _twsTotals(){
+  var all=_twsRows(),t={cT:0,cP:0,sT:0,sP:0};
+  all.forEach(function(d){
+    if(d.type==='customer'){t.cT+=(d.total||0);t.cP+=(d.paid||0);}
+    else{t.sT+=(d.total||0);t.sP+=(d.paid||0);}
+  });
+  t.cR=t.cT-t.cP;t.sR=t.sT-t.sP;t.net=t.cR-t.sR;
+  return t;
+}
+function _renderTwsCards(){
+  var t=_twsTotals();
+  function card(dir,bg,bd,col,title,lines){
+    var act=_twsDir===dir;
+    return '<div onclick="_twsSet(\''+dir+'\')" style="cursor:pointer;flex:1;background:'+bg+';border:2.5px solid '+(act?col:bd)+';border-radius:12px;padding:9px 8px;text-align:center">'+
+      '<div style="font-size:11px;font-weight:800;color:'+col+';margin-bottom:5px">'+title+'</div>'+lines+'</div>';
+  }
+  function ln(l,v,c){return '<div style="display:flex;justify-content:space-between;font-size:11px;margin-top:2px"><span style="color:#64748b">'+l+'</span><b style="color:'+(c||'#0f172a')+'">'+fmt(v)+'</b></div>';}
+  var netCol=t.net>0.001?'#15803d':t.net<-0.001?'#dc2626':'#475569';
+  document.getElementById('tws-cards').innerHTML=
+    '<div style="display:flex;gap:7px;margin-bottom:8px">'+
+    card('customer','#dcfce7','#86efac','#15803d','💰 ليّ عليه (هو أخد مني)',ln('الإجمالي',t.cT)+ln('سدّد',t.cP,'#16a34a')+ln('الباقي',t.cR,'#15803d'))+
+    card('supplier','#fef2f2','#fca5a5','#dc2626','💸 له عليّ (أنا أخدت منه)',ln('الإجمالي',t.sT)+ln('سدّدت',t.sP,'#16a34a')+ln('الباقي',t.sR,'#dc2626'))+
+    '</div>'+
+    '<div onclick="_twsSet(\'all\')" style="cursor:pointer;background:#fffbeb;border:2.5px solid '+(_twsDir==='all'?'#92400e':'#fde68a')+';border-radius:12px;padding:9px;text-align:center;margin-bottom:10px">'+
+    '<div style="font-size:11px;font-weight:800;color:#92400e">⚖️ الصافي (اضغط لعرض الكل)</div>'+
+    '<div style="font-size:16px;font-weight:900;color:'+netCol+'">'+(t.net>0.001?'هو عليه لي '+fmt(t.net)+' ج':t.net<-0.001?'أنا عليّ له '+fmt(Math.abs(t.net))+' ج':'متعادلين ✅')+'</div></div>';
+}
+function _renderTwsList(){
+  var el=document.getElementById('tws-list');if(!el)return;
+  var q=normalizeAr(_twsQ||'');
+  var rows=_twsRows().filter(function(d){
+    if(_twsDir!=='all'&&d.type!==_twsDir)return false;
+    if(q&&normalizeAr(d.desc||d.details||'').indexOf(q)===-1)return false;
+    return true;
+  }).sort(function(a,b){return (b.date||'')>(a.date||'')?1:(b.date||'')<(a.date||'')?-1:0;}); // الأحدث فوق
+  if(!rows.length){el.innerHTML='<div class="empty">لا توجد معاملات</div>';return;}
+  el.innerHTML=rows.map(function(d){
+    var rem=(d.total||0)-(d.paid||0),isC=d.type==='customer';
+    var col=isC?'#15803d':'#dc2626';
+    var pays=(d.payments||[]).slice().sort(function(a,b){return (b.date||'')>(a.date||'')?1:-1;}).map(function(p){
+      return '<div style="font-size:11px;color:#16a34a;padding:2px 0">↳ '+(isC?'سدّد لي':'سدّدت له')+' <b>'+fmt(p.amount)+'</b> — '+esc(fmtDate(p.date))+'</div>';
+    }).join('');
+    return '<div onclick="openEditDebtModal(\''+d.id+'\')" style="cursor:pointer;background:#fff;border:1.5px solid #e2e8f0;border-right:4px solid '+col+';border-radius:11px;padding:9px 11px;margin-bottom:7px">'+
+      '<div style="display:flex;justify-content:space-between;align-items:center">'+
+      '<span style="font-size:12px;color:#64748b">'+esc(fmtDate(d.date))+(d.desc||d.details?' — '+esc(d.desc||d.details):'')+'</span>'+
+      '<span style="background:'+(isC?'#dcfce7':'#fef2f2')+';color:'+col+';border-radius:7px;padding:2px 8px;font-size:10px;font-weight:800">'+(isC?'💰 ليّ عليه':'💸 له عليّ')+'</span></div>'+
+      '<div style="display:flex;gap:10px;font-size:12px;margin-top:5px"><span>الإجمالي: <b>'+fmt(d.total)+'</b></span><span>مسدّد: <b style="color:#16a34a">'+fmt(d.paid||0)+'</b></span><span>باقي: <b style="color:'+col+'">'+fmt(rem)+'</b></span></div>'+
+      pays+'</div>';
+  }).join('');
+}
+function _twsPrint(){
+  var t=_twsTotals();
+  var rows=_twsRows().sort(function(a,b){return (a.date||'')<(b.date||'')?-1:1;});
+  var body='<table><thead><tr><th>الاتجاه</th><th>الإجمالي</th><th>المسدد</th><th>الباقي</th></tr></thead><tbody>'+
+    '<tr><td>💰 ليّ عليه (هو أخد مني)</td><td>'+fmt(t.cT)+'</td><td>'+fmt(t.cP)+'</td><td>'+fmt(t.cR)+'</td></tr>'+
+    '<tr><td>💸 له عليّ (أنا أخدت منه)</td><td>'+fmt(t.sT)+'</td><td>'+fmt(t.sP)+'</td><td>'+fmt(t.sR)+'</td></tr>'+
+    '<tr style="font-weight:900"><td colspan="3">الصافي</td><td>'+(t.net>0.001?'هو عليه لي ':t.net<-0.001?'أنا عليّ له ':'')+fmt(Math.abs(t.net))+'</td></tr></tbody></table><br>'+
+    '<table><thead><tr><th>التاريخ</th><th>الاتجاه</th><th>الوصف</th><th>الإجمالي</th><th>المسدد</th><th>الباقي</th></tr></thead><tbody>'+
+    rows.map(function(d){
+      return '<tr><td>'+esc(fmtDate(d.date))+'</td><td>'+(d.type==='customer'?'ليّ عليه':'له عليّ')+'</td><td>'+esc(d.desc||d.details||'—')+'</td><td>'+fmt(d.total)+'</td><td>'+fmt(d.paid||0)+'</td><td>'+fmt((d.total||0)-(d.paid||0))+'</td></tr>'+
+        (d.payments||[]).map(function(p){return '<tr style="color:#555"><td>'+esc(fmtDate(p.date))+'</td><td colspan="2">↳ سداد</td><td></td><td>'+fmt(p.amount)+'</td><td></td></tr>';}).join('');
+    }).join('')+'</tbody></table>';
+  printSection('⚖️ كشف حساب — '+_twsName,body);
 }
 
 function printDebt(id){
@@ -11183,7 +11345,13 @@ function openExpenseModal(prefill){
     '<select id="exp-employee" onchange="onExpEmployeeChange()" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit">'+
     '<option value="">— اختر موظف —</option>'+
     (DB.accounts.employees||[]).filter(function(e){return e.active!==false;}).map(function(e){return '<option value="'+e.id+'">'+esc(e.name)+' ('+fmt(e.salary)+'/شهر)</option>';}).join('')+
-    '</select></div></div>'+
+    '</select></div>'+
+    // ⚠️ v244 — الراتب من فورم المصروفات كان بيتسجل مصروف عادي منفصل ومش بيتخصم من الراتب الأساسي.
+    // دلوقتي لازم تختار: سلفة (تتخصم أوتوماتيك من صرفة الراتب — الافتراضي) أو مكافأة (فوق الراتب).
+    '<div class="field" style="margin:10px 0 0"><label>نوع الصرف للموظف</label>'+
+    '<select id="exp-pay-kind" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit">'+
+    '<option value="advance">💵 سلفة — تتخصم من راتبه الأساسي آخر الشهر</option>'+
+    '<option value="bonus">🎁 مكافأة / حافز — بتتضاف فوق الراتب</option></select></div></div>'+
 
     '<div class="field"><label>الفرع (تفصيل اختياري)</label>'+
     '<div id="exp-sub-chips" style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:6px"></div>'+
@@ -11246,7 +11414,8 @@ async function saveBatchExpenses(){
     newExpenses.push({
       id:genId(),type:(document.getElementById('batch-type-'+idx)||{}).value,
       subcategory:(document.getElementById('batch-sub-'+idx)||{}).value||'',
-      amount:amount,note:'',date:date,source:'manual'
+      amount:amount,note:'',date:date,source:'manual',
+      created_by:window.__currentProfile?window.__currentProfile.id:null // ⚠️ v244
     });
   });
   if(!newExpenses.length)return showToast('⚠️ محتاج مبلغ واحد على الأقل','#dc2626');
@@ -11299,7 +11468,9 @@ function addExpType(){
 async function quickLogExpense(idx){
   var t=(DB.settings.expenseTemplates||[])[idx];if(!t)return;
   if(!__hasPerm('expenses','can_insert')){showToast('🚫 مفيش صلاحية إضافة مصروفات. كلم المالك.','#dc2626');return;}
-  var exp={id:genId(),type:t.category||'أخرى',sub:t.sub||'',amount:t.amount||0,note:t.name,date:today(),source:'manual'};
+  // ⚠️ v244 — كان بيحفظ الفرع في حقل sub بس (التقارير بتقرا subcategory) وبدون created_by (خطر RLS للموظفين)
+  var exp={id:genId(),type:t.category||'أخرى',sub:t.sub||'',subcategory:t.sub||'',amount:t.amount||0,note:t.name,date:today(),source:'manual',
+    created_by:window.__currentProfile?window.__currentProfile.id:null};
   DB.expenses.unshift(exp);
   await persist();await dbUpsert('expenses',exp);
   renderExpensesList();renderHome();
@@ -11364,12 +11535,14 @@ async function saveExpense(closeAfter){
   if(type==='رواتب'&&empId){
     var emp=(DB.accounts.employees||[]).find(function(e){return e.id===empId;});
     if(emp){
-      var label='رواتب — '+esc(emp.name)+(sub?' ('+sub+')':'');
+      var isAdv=(v('exp-pay-kind')!=='bonus'); // ⚠️ v244 — الافتراضي سلفة (بتتخصم من الراتب الأساسي)
+      var label=(isAdv?'سلفة — ':'رواتب — ')+esc(emp.name)+(sub?' ('+sub+')':'');
       obj={id:genId(),label:label,amount:amount,type:'رواتب',subcategory:sub,
         note:(note?note+' — ':'')+esc(emp.name),date:v('exp-date'),source:'salary',employee_id:empId,
+        official_pay:false,is_advance:isAdv,
         created_by:window.__currentProfile?window.__currentProfile.id:null}; // v164
-      // مصروف يدوي بفئة رواتب (مكافأة/بدل/حافز/عمولة) — يتسجل كمصروف عادي فقط
-      // ولا يُعتبر دفع للراتب الأساسي؛ الدفع الرسمي فقط من زر "صرف راتب" في تبويب الموظفين
+      // سلفة: بتتخصم أوتوماتيك من صرفة الراتب (_advancesPaidThisMonth). مكافأة: مصروف فوق الراتب.
+      // الدفع الرسمي للراتب الأساسي فقط من زر "صرف راتب" في تبويب الموظفين
       DB.expenses.unshift(obj);
       await persist();
       await dbUpsert('expenses',obj);
@@ -17014,6 +17187,7 @@ function renderSettings(){
     '<button onclick="changeAppTitle()" style="padding:9px 16px;background:#7c3aed;color:#fff;border:none;border-radius:9px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer">✏️ تغيير</button>'+
     '</div></div>'+
     renderPrayerSettingsCard()+
+    renderNavOrderSettingsCard()+
     renderMovActionsSettingsCard()+
     '<div class="card">'+
     '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:4px;padding-bottom:8px;border-bottom:2px solid #e2e8f0">🔄 تحويل الرصيد الافتتاحي لمشتريات</div>'+
@@ -18219,6 +18393,31 @@ async function saveMovCardStyle(val){
   renderMovements();renderScheduledList();
   showToast('✅ اتحفظ','#16a34a');
 }
+// ⚠️ v243 — إعدادات: إعادة ترتيب شريط التنقل السفلي بأسهم فوق/تحت (قايمة من 5 عناصر بس،
+// فالأسهم كفاية هنا ومفيش داعي لتعقيد السحب زي قايمة "مرتبة" الطويلة)
+function renderNavOrderSettingsCard(){
+  var order=_navOrder();
+  return '<div class="card">'+
+    '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #e2e8f0">↕️ ترتيب شريط التنقل السفلي</div>'+
+    order.map(function(id,i){
+      var d=NAV_BAR_DEFS[id];
+      return '<div style="display:flex;align-items:center;gap:8px;margin-bottom:7px;background:#f8fafc;border-radius:9px;padding:7px 10px">'+
+        '<span style="font-size:13px;flex:1;font-weight:700">'+d.icon+' '+d.label+'</span>'+
+        '<button class="btn-ic" style="background:#e2e8f0;'+(i===0?'opacity:.3':'')+'" '+(i===0?'disabled':'')+' onclick="_moveNavOrder('+i+',-1)">▲</button>'+
+        '<button class="btn-ic" style="background:#e2e8f0;'+(i===order.length-1?'opacity:.3':'')+'" '+(i===order.length-1?'disabled':'')+' onclick="_moveNavOrder('+i+',1)">▼</button>'+
+        '</div>';
+    }).join('')+
+    '</div>';
+}
+async function _moveNavOrder(i,dir){
+  var order=_navOrder().slice();
+  var j=i+dir;if(j<0||j>=order.length)return;
+  var tmp=order[i];order[i]=order[j];order[j]=tmp;
+  DB.settings.navOrder=order;
+  await persist();
+  renderNavBar();
+  renderSettings();
+}
 function renderMovActionsSettingsCard(){
   var curStyle=_movCardStyle();
   return '<div class="card">'+
@@ -18820,7 +19019,7 @@ function renderExtractedPartsList(){
   var allParts=[];
   (DB.scrap_machines||[]).forEach(function(m){
     (m.parts_extracted||[]).forEach(function(p,pi){
-      var soldInfo=_scrapPartSaleInfo(m.id,p.name);
+      var soldInfo=_scrapPartSaleInfo(m.id,p.name,p.productId);
       allParts.push({machineId:m.id,machineName:m.name,partIdx:pi,name:p.name,qty:p.qty,buyPrice:p.buy_price||0,soldQty:soldInfo.soldQty||0,date:p.added_date});
     });
   });
@@ -18912,7 +19111,7 @@ function scrapMachineCard(m, collapsed){
     '<div style="margin-top:8px;background:#f8fafc;border-radius:9px;padding:8px 10px">'+
     '<div style="font-size:11px;font-weight:700;color:#64748b;margin-bottom:6px">📦 القطع المستخرجة ('+totalQty+' وحدة)</div>'+
     parts.map(function(p,pi){
-      var soldInfo=_scrapPartSaleInfo(m.id,p.name);
+      var soldInfo=_scrapPartSaleInfo(m.id,p.name,p.productId);
       return '<div onclick="openScrapPartDetail(\''+m.id+'\','+pi+')" style="display:flex;justify-content:space-between;align-items:center;padding:7px 8px;border-bottom:1px solid #e2e8f0;font-size:12px;cursor:pointer;border-radius:7px" onmouseover="this.style.background=\'#fff\'" onmouseout="this.style.background=\'transparent\'">'+
         '<div><b>'+esc(p.name)+'</b><span style="color:#94a3b8;font-size:11px;margin-right:6px">× '+p.qty+'</span>'+
         (soldInfo.soldQty>0?'<span style="background:#dcfce7;color:#15803d;border-radius:5px;padding:1px 6px;font-size:10px;font-weight:700;margin-right:4px">✅ اتباع '+soldInfo.soldQty+'</span>':'<span style="background:#fef9c3;color:#ca8a04;border-radius:5px;padding:1px 6px;font-size:10px;font-weight:700;margin-right:4px">في المخزن</span>')+
@@ -18963,10 +19162,13 @@ function scrapMachineCard(m, collapsed){
 
 // معلومة بيع قطعة اسكراب معينة — بتدور في كل فواتير البيع على أي بند لنفس المنتج (productId) اللي مصدره الماكينة دي،
 // بغض النظر عن طريقة إضافته للفاتورة (استخراج مباشر أو بحث عادي في المخزون) — عشان الحساب يفضل دقيق في الحالتين
-function _scrapPartSaleInfo(machineId,partName){
+function _scrapPartSaleInfo(machineId,partName,directProductId){
   var soldQty=0,buyers=[];
-  // نلاقي أولاً الـ productId الحقيقي للقطعة دي (المنتج في DB.products اللي مصدره الماكينة دي بنفس الاسم)
-  var prod=DB.products.find(function(p){return p.scrap_source===machineId&&normalizeAr(p.name)===normalizeAr(partName);});
+  // ⚠️ v243 — لو عندنا ربط مباشر (productId) مسجّل مع القطعة، نستخدمه قبل أي حاجة —
+  // أدق من مطابقة الاسم اللي بتتكسر لو القطعة اتسمّت تاني بعدين. البحث بالاسم لسه
+  // موجود كـ fallback للسجلات القديمة اللي اتسجلت قبل v243.
+  var prod=directProductId?DB.products.find(function(p){return p.id===directProductId;}):null;
+  if(!prod)prod=DB.products.find(function(p){return (p.scrap_source===machineId||p.scrap_machine_id===machineId)&&normalizeAr(p.name)===normalizeAr(partName);});
   (DB.sales||[]).forEach(function(s){
     (s.items||[]).forEach(function(it){
       var matches=prod?(it.productId===prod.id):(normalizeAr(it.name)===normalizeAr(partName)&&it.fromScrap);
@@ -18983,7 +19185,7 @@ function _scrapPartSaleInfo(machineId,partName){
 function openScrapPartDetail(machineId,partIdx){
   var m=(DB.scrap_machines||[]).find(function(x){return x.id===machineId;});if(!m)return;
   var p=(m.parts_extracted||[])[partIdx];if(!p)return;
-  var soldInfo=_scrapPartSaleInfo(machineId,p.name);
+  var soldInfo=_scrapPartSaleInfo(machineId,p.name,p.productId);
   var remaining=_scrapRemainingCost(machineId);
 
   document.getElementById('modal-title').textContent='🔩 '+esc(p.name);
@@ -19265,7 +19467,7 @@ async function confirmExtractParts(machineId){
     if(m.id!==machineId)return m;
     var newParts=(m.parts_extracted||[]).concat(
       _scrapExtractItems.map(function(it){
-        return {id:genId(),name:it.name,qty:it.qty,added_date:todayStr,buy_price:it.buy_price||0,sell_price:it.sell_price||0};
+        return {id:genId(),name:it.name,qty:it.qty,added_date:todayStr,buy_price:it.buy_price||0,sell_price:it.sell_price||0,productId:it.productId}; // ⚠️ v243
       })
     );
     return Object.assign({},m,{parts_extracted:newParts});
