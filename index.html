@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v244</title>
+<title>ابو حوده الحلو الجميل v245</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="1448-04-20 — v244";
+<script>var BUILD_STAMP="1448-04-21 — v245";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -54,6 +54,11 @@
       مسار خالص عن طريق confirmAction، الزرار بتاعها لازم __runOnce من أول يوم.
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v245: [♻️ إعادة بناء كشف الحساب المزدوج]
+     الكشف بقى بيتبني من الفواتير والمشتريات بأسماء الأصناف (كمية × سعر)، قسم "🟢 هو أخد مني" وقسم
+     "🔴 أنا أخدت منه" وتحت كل معاملة سداداتها بتاريخها الهجري والباقي، والصافي لمين في الآخر.
+     الكروت قابلة للضغط (فلتر) وزرار "غير المسدد فقط/الكل" وكل معاملة تفتح أصلها. + زرار PDF/طباعة منظم
+     (ملخص → تفاصيل) + مشاركة واتساب كنص. + تحذير لو الكشف مختلف عن شاشة الديون.
 v244: [✨ كشف حساب مزدوج (عليه/له) + 🐛 الراتب من المصروفات يتخصم من الأساسي + إصلاح قوالب المصروفات]
      1) زرار ⚖️ "كشف حساب" على كل كارت دين: شاشة واحدة للشخص فيها "ليّ عليه" و"له عليّ" والصافي،
         كل كارت قابل للضغط يفلتر القائمة، وكل صف يفتح التعديل، وتحت كل دين سدّاداته بالتاريخ الهجري، + طباعة.
@@ -4280,7 +4285,7 @@ var APP_TITLE='ابو حوده الحلو الجميل';
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=244;
+var APP_VERSION=245;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -10627,94 +10632,186 @@ function renderDebts(){
   }).join('');
 }
 
-// ⚠️ v244 — كشف حساب مزدوج لشخص واحد (طلب العميل: "هو أخد إيه وأنا أخدت إيه والباقي كام").
-// المشكلة: نظام الديون كان بيعرض الإجمالي/المسدد لكل دين لوحده، ومفيش شاشة واحدة تجمع اتجاهين
-// (ليّ عليه type=customer + له عليّ type=supplier) لنفس الاسم مع سداداتهم. الاتجاه كان موجود أصلًا
-// في الحقل type — فمفيش تغيير في الداتا ولا في السيرفر، بس عرض جديد فوق نفس البيانات.
-var _twsName='',_twsDir='all',_twsQ='';
-function _twsRows(){
-  var key=normalizeAr(_twsName);
-  return (DB.debts||[]).filter(function(d){return normalizeAr(d.name)===key;});
+// ⚠️ v245 — إعادة بناء كشف الحساب المزدوج. العميل رفض النسخة الأولى (v244) لأنها كانت بتعرض صفوف الديون
+// الإجمالية بس من غير اسم الصنف، ومش واضح مين أخد إيه ولا الباقي لمين. دلوقتي الكشف بيتبني من الفواتير
+// (هو أخد مني) والمشتريات (أنا أخدت منه) بأصنافها، + الديون اليدوية/الأمانة، + كل السدادات بتاريخها الهجري.
+// الاتجاه: customer = هو أخد مني (ليّ عليه) ، supplier = أنا أخدت منه (له عليّ).
+// الربط: الفاتورة ← دينها بـ source_sale_id ، المشترى ← دينه بـ source_purchase_id. أي دين من غير ربط يظهر كصف مستقل.
+var _twsName='',_twsDir='all',_twsOpenOnly=true;
+function _twsNetTxt(n){return n>0.001?'هو عليه لي '+fmt(n)+' ج':n<-0.001?'أنا عليّ له '+fmt(Math.abs(n))+' ج':'متعادلين ✅';}
+function _twsBuild(){
+  var key=normalizeAr(_twsName||'');
+  function same(n){return normalizeAr(n||'')===key;}
+  var sales=(DB.sales||[]).filter(function(s){return same(s.customer);});
+  var purchs=(DB.purchases||[]).filter(function(p){return same(p.supplier);});
+  var debts=(DB.debts||[]).filter(function(d){return same(d.name);});
+  var sId={},pId={};
+  sales.forEach(function(s){sId[s.id]=1;});
+  purchs.forEach(function(p){pId[p.id]=1;});
+  function pays(d){
+    var arr=(d.payments||[]).map(function(p){return {date:p.date,amount:+p.amount||0};});
+    var sum=arr.reduce(function(t,p){return t+p.amount;},0);
+    var res=(d.paid||0)-sum;
+    if(res>0.001)arr.push({date:d.date,amount:res}); // سداد قديم متسجل في paid بدون تاريخ
+    return arr;
+  }
+  var docs=[];
+  sales.forEach(function(s){
+    var hasLines=(s.items||[]).length||(s.services||[]).length;
+    if(!hasLines&&!(s.total>0))return; // زيارة بدون بيع
+    var lines=(s.items||[]).map(function(it){return {name:it.name,qty:it.qty,price:it.price,amt:(it.qty||0)*(it.price||0)};});
+    (s.services||[]).forEach(function(sv){lines.push({name:'🔧 '+(sv.name||'خدمة'),qty:'',price:'',amt:sv.price||0});});
+    if((s.discount||0)>0)lines.push({name:'خصم',qty:'',price:'',amt:-s.discount});
+    if(!lines.length)lines.push({name:s.note||'مبلغ',qty:'',price:'',amt:s.total||0});
+    var pp=[];
+    debts.forEach(function(d){if(d.type==='customer'&&d.source_sale_id===s.id)pp=pp.concat(pays(d));});
+    docs.push({dir:'customer',kind:'sale',id:s.id,date:s.date,title:'فاتورة'+(s.serial?' — '+s.serial:'')+(s.model?' ('+s.model+')':''),lines:lines,total:s.total||0,upfront:s.paid||0,pays:pp});
+  });
+  purchs.forEach(function(p){
+    var lines=(p.items||[]).map(function(it){return {name:it.name,qty:it.qty,price:it.price,amt:(it.qty||0)*(it.price||0)};});
+    if((p.extra_cost||0)>0)lines.push({name:'مصاريف إضافية',qty:'',price:'',amt:p.extra_cost});
+    var pp=[];
+    debts.forEach(function(d){if(d.type==='supplier'&&d.source_purchase_id===p.id)pp=pp.concat(pays(d));});
+    docs.push({dir:'supplier',kind:'purch',id:p.id,date:p.date,title:'مشترى',lines:lines,total:(p.total||0)+(p.extra_cost||0),upfront:p.paid||0,pays:pp});
+  });
+  debts.forEach(function(d){
+    var linked=(d.type==='customer'&&d.source_sale_id&&sId[d.source_sale_id])||(d.type==='supplier'&&d.source_purchase_id&&pId[d.source_purchase_id]);
+    if(linked)return;
+    var t=d.desc||d.details||'دين';
+    docs.push({dir:d.type==='customer'?'customer':'supplier',kind:'debt',id:d.id,date:d.date,title:/^أمانة/.test(t)?'أمانة':'دين مسجّل',lines:[{name:t,qty:'',price:'',amt:d.total||0}],total:d.total||0,upfront:0,pays:pays(d)});
+  });
+  docs.forEach(function(x){
+    x.paid=x.upfront+x.pays.reduce(function(t,p){return t+p.amount;},0);
+    x.rem=x.total-x.paid;
+  });
+  docs.sort(function(a,b){return (a.date||'')<(b.date||'')?-1:(a.date||'')>(b.date||'')?1:0;}); // الأقدم فوق
+  return docs;
+}
+function _twsSum(docs){
+  var s={cT:0,cP:0,sT:0,sP:0};
+  docs.forEach(function(x){if(x.dir==='customer'){s.cT+=x.total;s.cP+=x.paid;}else{s.sT+=x.total;s.sP+=x.paid;}});
+  s.cR=s.cT-s.cP;s.sR=s.sT-s.sP;s.net=s.cR-s.sR;
+  return s;
+}
+function _twsDocs(){
+  var all=_twsBuild();
+  return _twsOpenOnly?all.filter(function(x){return Math.abs(x.rem)>0.001;}):all;
 }
 function openTwoWayStatement(name){
   if(__isFieldHidden('debts','name')||__isFieldHidden('debts','total')||__isFieldHidden('debts','paid')){
     return showToast('🚫 مفيش صلاحية تشوف تفاصيل الديون. كلم المالك.','#dc2626');
   }
-  _twsName=name;_twsDir='all';_twsQ='';
+  _twsName=name;_twsDir='all';_twsOpenOnly=true;
   document.getElementById('modal-title').textContent='⚖️ كشف حساب — '+name;
   document.getElementById('modal-body').innerHTML=
-    '<div id="tws-cards"></div>'+
-    '<input type="text" placeholder="🔍 دوّر في الوصف..." oninput="_twsQ=this.value;_renderTwsList()" style="width:100%;padding:9px 12px;border:2px solid #e2e8f0;border-radius:11px;font-size:13px;font-family:inherit;background:#f8fafc;outline:none;margin-bottom:10px">'+
-    '<div id="tws-list"></div>'+
-    '<div class="modal-actions"><button class="btn btn-sm" style="background:#f5f3ff;color:#7c3aed;border:none;flex:1" onclick="_twsPrint()">🖨️ طباعة الكشف</button>'+
+    '<div id="tws-top"></div><div id="tws-list"></div>'+
+    '<div class="modal-actions" style="flex-wrap:wrap">'+
+    '<button class="btn btn-sm" style="background:#f5f3ff;color:#7c3aed;border:none;flex:1" onclick="_twsPrint()">🖨️ PDF / طباعة</button>'+
+    '<button class="btn btn-sm" style="background:#dcfce7;color:#15803d;border:none;flex:1" onclick="_twsShareText()">📲 واتساب</button>'+
     '<button class="btn btn-outline btn-full" style="flex:1" onclick="closeModal()">إغلاق</button></div>';
   openModal();
-  _renderTwsCards();_renderTwsList();
+  _renderTws();
 }
-function _twsSet(dir){_twsDir=dir;_renderTwsCards();_renderTwsList();}
-function _twsTotals(){
-  var all=_twsRows(),t={cT:0,cP:0,sT:0,sP:0};
-  all.forEach(function(d){
-    if(d.type==='customer'){t.cT+=(d.total||0);t.cP+=(d.paid||0);}
-    else{t.sT+=(d.total||0);t.sP+=(d.paid||0);}
-  });
-  t.cR=t.cT-t.cP;t.sR=t.sT-t.sP;t.net=t.cR-t.sR;
-  return t;
+function _twsSetDir(d){_twsDir=d;_renderTws();}
+function _twsToggleOpen(){_twsOpenOnly=!_twsOpenOnly;_renderTws();}
+function _twsOpenDoc(kind,id){
+  if(kind==='sale')openSaleModal(id);
+  else if(kind==='purch')openPurchaseModal(id);
+  else openEditDebtModal(id);
 }
-function _renderTwsCards(){
-  var t=_twsTotals();
-  function card(dir,bg,bd,col,title,lines){
-    var act=_twsDir===dir;
-    return '<div onclick="_twsSet(\''+dir+'\')" style="cursor:pointer;flex:1;background:'+bg+';border:2.5px solid '+(act?col:bd)+';border-radius:12px;padding:9px 8px;text-align:center">'+
-      '<div style="font-size:11px;font-weight:800;color:'+col+';margin-bottom:5px">'+title+'</div>'+lines+'</div>';
-  }
-  function ln(l,v,c){return '<div style="display:flex;justify-content:space-between;font-size:11px;margin-top:2px"><span style="color:#64748b">'+l+'</span><b style="color:'+(c||'#0f172a')+'">'+fmt(v)+'</b></div>';}
-  var netCol=t.net>0.001?'#15803d':t.net<-0.001?'#dc2626':'#475569';
-  document.getElementById('tws-cards').innerHTML=
-    '<div style="display:flex;gap:7px;margin-bottom:8px">'+
-    card('customer','#dcfce7','#86efac','#15803d','💰 ليّ عليه (هو أخد مني)',ln('الإجمالي',t.cT)+ln('سدّد',t.cP,'#16a34a')+ln('الباقي',t.cR,'#15803d'))+
-    card('supplier','#fef2f2','#fca5a5','#dc2626','💸 له عليّ (أنا أخدت منه)',ln('الإجمالي',t.sT)+ln('سدّدت',t.sP,'#16a34a')+ln('الباقي',t.sR,'#dc2626'))+
-    '</div>'+
-    '<div onclick="_twsSet(\'all\')" style="cursor:pointer;background:#fffbeb;border:2.5px solid '+(_twsDir==='all'?'#92400e':'#fde68a')+';border-radius:12px;padding:9px;text-align:center;margin-bottom:10px">'+
-    '<div style="font-size:11px;font-weight:800;color:#92400e">⚖️ الصافي (اضغط لعرض الكل)</div>'+
-    '<div style="font-size:16px;font-weight:900;color:'+netCol+'">'+(t.net>0.001?'هو عليه لي '+fmt(t.net)+' ج':t.net<-0.001?'أنا عليّ له '+fmt(Math.abs(t.net))+' ج':'متعادلين ✅')+'</div></div>';
-}
-function _renderTwsList(){
-  var el=document.getElementById('tws-list');if(!el)return;
-  var q=normalizeAr(_twsQ||'');
-  var rows=_twsRows().filter(function(d){
-    if(_twsDir!=='all'&&d.type!==_twsDir)return false;
-    if(q&&normalizeAr(d.desc||d.details||'').indexOf(q)===-1)return false;
-    return true;
-  }).sort(function(a,b){return (b.date||'')>(a.date||'')?1:(b.date||'')<(a.date||'')?-1:0;}); // الأحدث فوق
-  if(!rows.length){el.innerHTML='<div class="empty">لا توجد معاملات</div>';return;}
-  el.innerHTML=rows.map(function(d){
-    var rem=(d.total||0)-(d.paid||0),isC=d.type==='customer';
-    var col=isC?'#15803d':'#dc2626';
-    var pays=(d.payments||[]).slice().sort(function(a,b){return (b.date||'')>(a.date||'')?1:-1;}).map(function(p){
-      return '<div style="font-size:11px;color:#16a34a;padding:2px 0">↳ '+(isC?'سدّد لي':'سدّدت له')+' <b>'+fmt(p.amount)+'</b> — '+esc(fmtDate(p.date))+'</div>';
-    }).join('');
-    return '<div onclick="openEditDebtModal(\''+d.id+'\')" style="cursor:pointer;background:#fff;border:1.5px solid #e2e8f0;border-right:4px solid '+col+';border-radius:11px;padding:9px 11px;margin-bottom:7px">'+
-      '<div style="display:flex;justify-content:space-between;align-items:center">'+
-      '<span style="font-size:12px;color:#64748b">'+esc(fmtDate(d.date))+(d.desc||d.details?' — '+esc(d.desc||d.details):'')+'</span>'+
-      '<span style="background:'+(isC?'#dcfce7':'#fef2f2')+';color:'+col+';border-radius:7px;padding:2px 8px;font-size:10px;font-weight:800">'+(isC?'💰 ليّ عليه':'💸 له عليّ')+'</span></div>'+
-      '<div style="display:flex;gap:10px;font-size:12px;margin-top:5px"><span>الإجمالي: <b>'+fmt(d.total)+'</b></span><span>مسدّد: <b style="color:#16a34a">'+fmt(d.paid||0)+'</b></span><span>باقي: <b style="color:'+col+'">'+fmt(rem)+'</b></span></div>'+
-      pays+'</div>';
+function _twsDocHtml(x){
+  var isC=x.dir==='customer',col=isC?'#15803d':'#dc2626';
+  function pl(label,a,d){return '<div style="font-size:11px;color:#16a34a;padding:2px 0">↳ '+label+' <b>'+fmt(a)+'</b> — '+esc(fmtDate(d))+'</div>';}
+  var lines=x.lines.map(function(l){
+    var q=(l.qty!==''&&l.qty!=null)?' <span style="color:#64748b">× '+fmtQty(l.qty)+(l.price?' @ '+fmt(l.price):'')+'</span>':'';
+    return '<div style="display:flex;justify-content:space-between;gap:8px;font-size:12px;padding:3px 0;border-bottom:1px dashed #eef2f7"><span style="flex:1">'+esc(l.name||'')+q+'</span><b style="color:'+(l.amt<0?'#dc2626':'#0f172a')+'">'+fmt(l.amt)+'</b></div>';
   }).join('');
+  var pays='';
+  if(x.upfront>0)pays+=pl('دفع وقت المعاملة',x.upfront,x.date);
+  x.pays.forEach(function(p){pays+=pl(isC?'سدّد لي':'سدّدت له',p.amount,p.date);});
+  return '<div onclick="_twsOpenDoc(\''+x.kind+'\',\''+x.id+'\')" style="cursor:pointer;background:#fff;border:1.5px solid #e2e8f0;border-right:4px solid '+col+';border-radius:11px;padding:9px 11px;margin-bottom:8px">'+
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">'+
+    '<span style="font-size:12px;font-weight:800">'+esc(fmtDate(x.date))+' — '+esc(x.title)+'</span>'+
+    '<span style="background:'+(isC?'#dcfce7':'#fef2f2')+';color:'+col+';border-radius:7px;padding:2px 8px;font-size:10px;font-weight:800">'+(isC?'🟢 هو أخد':'🔴 أنا أخدت')+'</span></div>'+
+    lines+pays+
+    '<div style="display:flex;justify-content:space-between;margin-top:5px;font-size:12px;font-weight:800"><span>الإجمالي '+fmt(x.total)+'</span>'+
+    '<span style="color:'+(x.rem>0.001?col:'#16a34a')+'">'+(x.rem>0.001?'الباقي '+fmt(x.rem):'✅ مسدّد')+'</span></div></div>';
+}
+function _renderTws(){
+  var top=document.getElementById('tws-top'),list=document.getElementById('tws-list');
+  if(!top||!list)return;
+  var all=_twsBuild();
+  var docs=_twsOpenOnly?all.filter(function(x){return Math.abs(x.rem)>0.001;}):all;
+  var t=_twsSum(docs),a=_twsSum(all);
+  var key=normalizeAr(_twsName),dn=0;
+  (DB.debts||[]).forEach(function(d){if(normalizeAr(d.name||'')===key){var r=(d.total||0)-(d.paid||0);dn+=(d.type==='customer'?r:-r);}});
+  function ln(l,v,c){return '<div style="display:flex;justify-content:space-between;font-size:11px;margin-top:2px"><span style="color:#64748b">'+l+'</span><b style="color:'+(c||'#0f172a')+'">'+fmt(v)+'</b></div>';}
+  function card(dir,bg,bd,col,title,body){
+    return '<div onclick="_twsSetDir(\''+dir+'\')" style="cursor:pointer;flex:1;background:'+bg+';border:2.5px solid '+(_twsDir===dir?col:bd)+';border-radius:12px;padding:9px 8px">'+
+      '<div style="font-size:11px;font-weight:800;color:'+col+';text-align:center;margin-bottom:4px">'+title+'</div>'+body+'</div>';
+  }
+  var netCol=t.net>0.001?'#15803d':t.net<-0.001?'#dc2626':'#475569';
+  top.innerHTML=
+    '<div style="display:flex;gap:7px;margin-bottom:8px">'+
+    card('customer','#dcfce7','#86efac','#15803d','🟢 هو أخد مني',ln('الإجمالي',t.cT)+ln('سدّد',t.cP,'#16a34a')+ln('الباقي',t.cR,'#15803d'))+
+    card('supplier','#fef2f2','#fca5a5','#dc2626','🔴 أنا أخدت منه',ln('الإجمالي',t.sT)+ln('سدّدت',t.sP,'#16a34a')+ln('الباقي',t.sR,'#dc2626'))+'</div>'+
+    '<div onclick="_twsSetDir(\'all\')" style="cursor:pointer;background:#fffbeb;border:2.5px solid '+(_twsDir==='all'?'#92400e':'#fde68a')+';border-radius:12px;padding:9px;text-align:center;margin-bottom:8px">'+
+    '<div style="font-size:11px;font-weight:800;color:#92400e">⚖️ الصافي بين الاتنين (اضغط لعرض الكل)</div>'+
+    '<div style="font-size:16px;font-weight:900;color:'+netCol+'">'+_twsNetTxt(t.net)+'</div></div>'+
+    '<div onclick="_twsToggleOpen()" style="cursor:pointer;text-align:center;background:#f1f5f9;border-radius:10px;padding:7px;font-size:12px;font-weight:700;color:#334155;margin-bottom:10px">'+
+    (_twsOpenOnly?'👁️ المعروض: غير المسدد فقط — اضغط لعرض كل المعاملات':'👁️ المعروض: كل المعاملات — اضغط لعرض غير المسدد فقط')+'</div>'+
+    (Math.abs(a.net-dn)>0.5?'<div style="background:#fef2f2;border:1px solid #fca5a5;border-radius:9px;padding:7px 9px;font-size:11px;color:#b91c1c;margin-bottom:8px">⚠️ الكشف مختلف '+fmt(Math.abs(a.net-dn))+' ج عن شاشة الديون — غالبًا دين اتعدل يدويًا. راجعه قبل ما تبعت الكشف.</div>':'');
+  var shown=docs.filter(function(x){return _twsDir==='all'||x.dir===_twsDir;});
+  list.innerHTML=shown.length?shown.map(_twsDocHtml).join(''):'<div class="empty">لا توجد معاملات</div>';
 }
 function _twsPrint(){
-  var t=_twsTotals();
-  var rows=_twsRows().sort(function(a,b){return (a.date||'')<(b.date||'')?-1:1;});
-  var body='<table><thead><tr><th>الاتجاه</th><th>الإجمالي</th><th>المسدد</th><th>الباقي</th></tr></thead><tbody>'+
-    '<tr><td>💰 ليّ عليه (هو أخد مني)</td><td>'+fmt(t.cT)+'</td><td>'+fmt(t.cP)+'</td><td>'+fmt(t.cR)+'</td></tr>'+
-    '<tr><td>💸 له عليّ (أنا أخدت منه)</td><td>'+fmt(t.sT)+'</td><td>'+fmt(t.sP)+'</td><td>'+fmt(t.sR)+'</td></tr>'+
-    '<tr style="font-weight:900"><td colspan="3">الصافي</td><td>'+(t.net>0.001?'هو عليه لي ':t.net<-0.001?'أنا عليّ له ':'')+fmt(Math.abs(t.net))+'</td></tr></tbody></table><br>'+
-    '<table><thead><tr><th>التاريخ</th><th>الاتجاه</th><th>الوصف</th><th>الإجمالي</th><th>المسدد</th><th>الباقي</th></tr></thead><tbody>'+
-    rows.map(function(d){
-      return '<tr><td>'+esc(fmtDate(d.date))+'</td><td>'+(d.type==='customer'?'ليّ عليه':'له عليّ')+'</td><td>'+esc(d.desc||d.details||'—')+'</td><td>'+fmt(d.total)+'</td><td>'+fmt(d.paid||0)+'</td><td>'+fmt((d.total||0)-(d.paid||0))+'</td></tr>'+
-        (d.payments||[]).map(function(p){return '<tr style="color:#555"><td>'+esc(fmtDate(p.date))+'</td><td colspan="2">↳ سداد</td><td></td><td>'+fmt(p.amount)+'</td><td></td></tr>';}).join('');
-    }).join('')+'</tbody></table>';
-  printSection('⚖️ كشف حساب — '+_twsName,body);
+  var docs=_twsDocs(),t=_twsSum(docs);
+  function row(a,b,c,d,e,st){return '<tr'+(st?' style="'+st+'"':'')+'><td>'+a+'</td><td>'+b+'</td><td>'+c+'</td><td>'+d+'</td><td>'+e+'</td></tr>';}
+  function sec(dir,title,col){
+    var ds=docs.filter(function(x){return x.dir===dir;});
+    if(!ds.length)return '';
+    var isC=dir==='customer',h='<h3 style="margin:18px 0 6px;color:'+col+'">'+title+'</h3><table><thead><tr><th>التاريخ</th><th>الصنف / البيان</th><th>الكمية</th><th>السعر</th><th>المبلغ</th></tr></thead><tbody>';
+    ds.forEach(function(x){
+      h+='<tr style="background:#f1f5f9"><td>'+esc(fmtDate(x.date))+'</td><td colspan="4"><b>'+esc(x.title)+'</b></td></tr>';
+      x.lines.forEach(function(l){
+        h+=row('',esc(l.name||''),(l.qty!==''&&l.qty!=null)?fmtQty(l.qty):'',l.price?fmt(l.price):'',fmt(l.amt));
+      });
+      h+='<tr><td></td><td colspan="3"><b>إجمالي المعاملة</b></td><td><b>'+fmt(x.total)+'</b></td></tr>';
+      if(x.upfront>0)h+='<tr style="color:#15803d"><td>'+esc(fmtDate(x.date))+'</td><td colspan="3">↳ دفع وقت المعاملة</td><td>−'+fmt(x.upfront)+'</td></tr>';
+      x.pays.forEach(function(p){h+='<tr style="color:#15803d"><td>'+esc(fmtDate(p.date))+'</td><td colspan="3">↳ '+(isC?'سدّد لي':'سدّدت له')+'</td><td>−'+fmt(p.amount)+'</td></tr>';});
+      h+='<tr style="background:#fffbeb"><td></td><td colspan="3"><b>الباقي</b></td><td><b>'+fmt(x.rem)+'</b></td></tr>';
+    });
+    h+='<tr style="background:#e2e8f0"><td colspan="4"><b>'+(isC?'إجمالي الباقي عليه':'إجمالي الباقي عليّ')+'</b></td><td><b>'+fmt(isC?t.cR:t.sR)+'</b></td></tr></tbody></table>';
+    return h;
+  }
+  var netCol=t.net>0.001?'#15803d':t.net<-0.001?'#dc2626':'#475569';
+  var body='<div style="margin-bottom:8px;color:#64748b">تاريخ الكشف: '+esc(fmtDate(today()))+' — '+(_twsOpenOnly?'المعاملات غير المسددة':'كل المعاملات')+'</div>'+
+    '<table><thead><tr><th>البيان</th><th>الإجمالي</th><th>المدفوع</th><th>الباقي</th></tr></thead><tbody>'+
+    '<tr><td>🟢 هو أخد مني</td><td>'+fmt(t.cT)+'</td><td>'+fmt(t.cP)+'</td><td>'+fmt(t.cR)+'</td></tr>'+
+    '<tr><td>🔴 أنا أخدت منه</td><td>'+fmt(t.sT)+'</td><td>'+fmt(t.sP)+'</td><td>'+fmt(t.sR)+'</td></tr>'+
+    '<tr style="background:#fffbeb"><td colspan="3"><b>⚖️ الفرق (الصافي)</b></td><td><b>'+fmt(Math.abs(t.net))+'</b></td></tr></tbody></table>'+
+    '<div style="border:2px solid '+netCol+';border-radius:10px;padding:10px;text-align:center;font-size:17px;font-weight:900;color:'+netCol+';margin:12px 0">الباقي: '+_twsNetTxt(t.net)+'</div>'+
+    sec('customer','🟢 هو أخد مني','#15803d')+sec('supplier','🔴 أنا أخدت منه','#dc2626');
+  printSection('⚖️ كشف حساب — '+esc(_twsName),body);
+}
+function _twsShareText(){
+  var docs=_twsDocs(),t=_twsSum(docs);
+  function sec(dir,title){
+    var ds=docs.filter(function(x){return x.dir===dir;});
+    if(!ds.length)return '';
+    var s='\n'+title+'\n';
+    ds.forEach(function(x){
+      s+='📅 '+fmtDate(x.date)+' — '+x.title+'\n';
+      x.lines.forEach(function(l){s+='  • '+(l.name||'')+((l.qty!==''&&l.qty!=null)?' ×'+fmtQty(l.qty):'')+' = '+fmt(l.amt)+'\n';});
+      s+='  الإجمالي '+fmt(x.total)+' | مدفوع '+fmt(x.paid)+' | الباقي '+fmt(x.rem)+'\n';
+    });
+    return s;
+  }
+  var txt='⚖️ كشف حساب — '+_twsName+'\n📅 '+fmtDate(today())+'\n'+
+    sec('customer','🟢 هو أخد مني — الباقي '+fmt(t.cR)+' ج')+sec('supplier','🔴 أنا أخدت منه — الباقي '+fmt(t.sR)+' ج')+
+    '\n⚖️ الصافي: '+_twsNetTxt(t.net);
+  if(navigator.share){navigator.share({text:txt}).catch(function(){});}
+  else window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank');
 }
 
 function printDebt(id){
