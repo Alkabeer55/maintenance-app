@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v245</title>
+<title>ابو حوده الحلو الجميل v249</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="1448-04-21 — v245";
+<script>var BUILD_STAMP="1448-04-21 — v249";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -54,6 +54,20 @@
       مسار خالص عن طريق confirmAction، الزرار بتاعها لازم __runOnce من أول يوم.
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v249: [👤 صفحة المهندس الشاملة + ⚡ توحيد اختصارات المصروفات]
+     صفحة المهندس: كروت قابلة للضغط (فواتير/تحركات/مصروفات/سحب مخزن/مشتريات/تحصيل/سجل) + سجل نشاطه من السيرفر.
+     اختصارات المصروفات: الفرع بقى اختيار من نفس فروع فورم المصروف (chips) + لو الفئة "رواتب" تختار الموظف ونوع الصرف (سلفة/مكافأة)
+     وبتتسجل بنفس منطق الفورم (تتخصم من الراتب الأساسي لو سلفة).
+v248: [🏷️ البيع بالجملة المرن + 📒 كشف الموظف من صفحته]
+     في الفاتورة: زرار تفعيل/إلغاء الجملة (يعيد التسعير ويحترم السعر المعدّل يدويًا) + ⚙️ إعدادات: تشغيل/إيقاف عام ونسبة خصم جملة %.
+     في الصنف: حقل شرائح الكمية (10=90, 50=85). الأولوية: شريحة ← سعر جملة ثابت ← نسبة ← قطاعي. + زرار كشف الحساب في صفحة المهندس.
+     SQL: ALTER TABLE products ADD COLUMN IF NOT EXISTS wholesale_tiers jsonb DEFAULT '[]'::jsonb;
+v247: [📒 كشف حساب الموظف بشكل الدفتر]
+     زرار "📒 كشف" في كارت كل موظف: جدول (التاريخ | البيان | اتصرف له | الإجمالي التراكمي) لكل صرف راتب/أجر يومي/سلفة/مكافأة،
+     كروت قابلة للضغط (رواتب/سلف/مكافآت/الكل) + فلتر الشهر الهجري الحالي + صندوق حساب الشهر (المستحق − اتصرف = الباقي له/عليه) + PDF وواتساب.
+v246: [📒 كشف الحساب بشكل دفتر محاسبي]
+     جدول واحد: التاريخ | البيان (الصنف) | الكمية | مدين | دائن | الرصيد التراكمي (عليه/له) + سطر الإجمالي.
+     الكروت (مدين/دائن/الرصيد) قابلة للضغط وبتفلتر، والرصيد يفضل تراكمي. كل سطر يفتح أصله. PDF وواتساب بنفس الشكل.
 v245: [♻️ إعادة بناء كشف الحساب المزدوج]
      الكشف بقى بيتبني من الفواتير والمشتريات بأسماء الأصناف (كمية × سعر)، قسم "🟢 هو أخد مني" وقسم
      "🔴 أنا أخدت منه" وتحت كل معاملة سداداتها بتاريخها الهجري والباقي، والصافي لمين في الآخر.
@@ -4285,7 +4299,7 @@ var APP_TITLE='ابو حوده الحلو الجميل';
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=245;
+var APP_VERSION=249;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -6838,6 +6852,9 @@ function openProductModal(id){
     '<div class="field" style="background:#f5f3ff;border-radius:10px;padding:10px">'+
     '<label style="font-size:12px;color:#5b21b6">💼 سعر الجملة (اختياري — للمهندسين/عملاء الجملة)</label>'+
     '<input id="prod-wholesale" type="number" step="any" value="'+(p&&p.wholesale_price?p.wholesale_price:'')+'" placeholder="سيبه فاضي لو نفس سعر البيع العادي" style="width:100%;padding:9px 12px;border:2px solid #ddd6fe;border-radius:9px;font-size:13px;font-family:inherit;margin-top:5px">'+
+    '<label style="font-size:12px;color:#5b21b6;margin-top:8px;display:block">📦 شرائح الكمية (اختياري) — من كمية = سعر</label>'+
+    '<input id="prod-ws-tiers" type="text" value="'+esc(_tiersToText(p))+'" placeholder="10=90, 50=85" style="width:100%;padding:9px 12px;border:2px solid #ddd6fe;border-radius:9px;font-size:13px;font-family:inherit;margin-top:5px;direction:ltr;text-align:left">'+
+    '<div style="font-size:10px;color:#7c3aed;margin-top:3px">مثال: 10=90, 50=85 يعني من 10 قطع بـ90 ومن 50 قطعة بـ85 (بتشتغل لما الجملة شغّالة)</div>'+
     '</div>'+
 
     '<div id="scrap-field" style="display:'+(isMachine?'block':'none')+'">'+
@@ -6934,6 +6951,7 @@ async function saveProduct(){
     buy_price:+v('prod-buy')||0,
     sell_price:+v('prod-sell')||0,
     wholesale_price:+v('prod-wholesale')||0,
+    wholesale_tiers:_tiersFromText(v('prod-ws-tiers')),
     scrap_price:+v('prod-scrap')||0
   };
   if(!_prodId){ obj.created_at=today(); obj.source='manual'; } // ⚠️ v127 — تسجيل تاريخ ومصدر الإضافة (يدوي/مشتريات) لأول مرة
@@ -7826,13 +7844,15 @@ function onCustomerInput(){
   var name=v('sale-customer');
   var phoneWrap=document.getElementById('new-customer-phone-wrap');
   // ⚠️ v203 — تنبيه واضح لما تكتب اسم عميل نوعه "جملة" عشان تفهم ليه الأسعار مختلفة
-  var wsWrap=document.getElementById('wholesale-badge-wrap');
-  if(wsWrap){
-    var c=name?(DB.clients||[]).find(function(x){return normalizeAr(x.name)===normalizeAr(name);}):null;
-    if(c&&c.priceType==='wholesale'){
-      wsWrap.style.display='block';
-      wsWrap.innerHTML='<div style="background:#ede9fe;border-radius:10px;padding:8px 11px;border:1.5px solid #ddd6fe;font-size:11px;color:#5b21b6;font-weight:700">💼 عميل جملة — أسعار الجملة (لو محددة للمنتج) هتتطبق تلقائي على أي صنف تضيفه</div>';
-    }else wsWrap.style.display='none';
+  // ⚠️ v248 — صف الجملة: لو نوع العميل غيّر الوضع (جملة/قطاعي) نعيد تسعير الأصناف التلقائية
+  if(document.getElementById('wholesale-badge-wrap')){
+    var _newWS=_saleIsWholesale();
+    if(window.__lastSaleWS===undefined)window.__lastSaleWS=_newWS;
+    if(_newWS!==window.__lastSaleWS&&_saleWS===null){
+      var _oldWS=window.__lastSaleWS;window.__lastSaleWS=_newWS;
+      _saleItems.forEach(function(it){_repriceAuto(it,it.qty,_oldWS);});
+      _wsRerender();
+    }else{window.__lastSaleWS=_newWS;_wsRefreshRow();}
   }
   if(name&&name.length>=2){
     renderClientMachines(name);
@@ -7993,7 +8013,7 @@ var _saleNextSameCustomer=false; // v232
 var _salePayMethod='كاش'; // الافتراضي كاش
 
 function openSaleModal(id){
-  _saleId=id||null;
+  _saleId=id||null;_saleWS=null; // v248
   var s=id?DB.sales.find(function(x){return x.id===id;}):null;
   // ⚠️ إصلاح جذري v104 — السبب الحقيقي لمشكلة "تعديل المبيعات المخزن مش بيرجع تاني، بتفضل
   // قطعة الغيار مخصومة": .slice() بينسخ الـ array نفسه بس، لكن العناصر (الأوبجكتات) جوه
@@ -8063,7 +8083,7 @@ function renderSaleBody(s){
 
     // اسم العميل مع ماكيناته
     acField('sale-customer','👤 اسم العميل','text',s?s.customer:'','','customers',true)+
-    '<div id="wholesale-badge-wrap" style="display:none;margin-top:-8px;margin-bottom:12px"></div>'+
+    '<div id="wholesale-badge-wrap" style="margin-top:-8px;margin-bottom:12px">'+_wsRowHtml()+'</div>'+
     '<div id="client-machines-wrap" style="display:none;background:#eff6ff;border-radius:10px;padding:10px;margin-top:-8px;margin-bottom:12px;border:1.5px solid #bfdbfe"></div>'+
     '<div id="new-customer-phone-wrap" style="display:none;margin-top:-8px;margin-bottom:12px">'+
     '<div style="background:#fff7ed;border-radius:10px;padding:9px 11px;border:1.5px solid #fed7aa">'+
@@ -8376,7 +8396,7 @@ function addBundleToSale(idx){
     var p=DB.products.find(function(x){return x.id===it.productId;});
     if(!p){missing.push(it.name);return;}
     var ex=_saleItems.find(function(x){return x.productId===p.id;});
-    if(ex)ex.qty+=(it.qty||1);else _saleItems.push({productId:p.id,name:p.name,qty:it.qty||1,price:_effectiveSellPrice(p),buyPrice:p.landed_cost||p.buy_price});
+    if(ex){var _oq2=ex.qty;ex.qty+=(it.qty||1);_repriceAuto(ex,_oq2,_saleIsWholesale());}else _saleItems.push({productId:p.id,name:p.name,qty:it.qty||1,price:_effectiveSellPrice(p,it.qty||1),buyPrice:p.landed_cost||p.buy_price});
     added++;
   });
   var vals=_saveSaleFields();
@@ -8460,20 +8480,108 @@ async function saveBundleDraft(){
 // ⚠️ v203 — نظام بيع الجملة للمهندسين: لو العميل المختار في الفاتورة الحالية نوعه "جملة"،
 // وعندنا سعر جملة محدد للمنتج، نرجّعه بدل سعر البيع العادي. لو مفيش سعر جملة محدد للمنتج
 // أو العميل مش جملة، بنرجع سعر البيع العادي زي ما كان دايمًا (مفيش تغيير في السلوك الافتراضي).
-function _effectiveSellPrice(p){
+// ⚠️ v248 — نظام البيع بالجملة المرن (طلب العميل: "أعمل بيع جملة بالنسبة وأقدر ألغيه براحتي").
+// قبل كده الجملة كانت بس سعر ثابت للصنف + نوع العميل. دلوقتي:
+//  1) زرار تفعيل/إلغاء الجملة على كل فاتورة (بيعيد تسعير الأصناف، وأي سعر اتعدّل يدويًا بيفضل زي ما هو).
+//  2) نسبة خصم جملة عامة على سعر القطاعي (للأصناف اللي ملهاش سعر جملة ثابت) + مفتاح تشغيل/إيقاف عام.
+//  3) شرائح كمية لكل صنف (مثال 10=90, 50=85 يعني من 10 قطع بـ90 ومن 50 بـ85).
+// ترتيب الأولوية لما الجملة شغّالة: شريحة الكمية ← سعر الجملة الثابت ← نسبة الخصم العامة ← القطاعي.
+// الجملة تلقائية لو العميل نوعه "جملة" (priceType) إلا لو اتحددت يدويًا على الفاتورة (_saleWS).
+var _saleWS=null,_wsSnap=null; // null=تلقائي حسب العميل ، true=جملة ، false=قطاعي
+function _wsCfg(){var w=(DB.settings&&DB.settings.wholesale)||{};return {enabled:w.enabled!==false,pct:+w.pct||0};}
+function _wsTiers(p){
+  var t=p&&p.wholesale_tiers;
+  if(typeof t==='string'){try{t=JSON.parse(t);}catch(e){t=[];}}
+  return (Array.isArray(t)?t:[]).filter(function(x){return x&&+x.min>0&&+x.price>0;}).map(function(x){return {min:+x.min,price:+x.price};}).sort(function(a,b){return b.min-a.min;});
+}
+function _tiersToText(p){return _wsTiers(p).slice().reverse().map(function(t){return t.min+'='+t.price;}).join(', ');}
+function _tiersFromText(s){
+  return String(s||'').split(/[,،\n]+/).map(function(x){var m=x.split('=');return {min:+(m[0]||'').trim(),price:+(m[1]||'').trim()};})
+    .filter(function(t){return t.min>0&&t.price>0;});
+}
+function _saleIsWholesale(){
+  if(!_wsCfg().enabled)return false;
+  if(_saleWS!==null)return _saleWS;
+  var cn=(document.getElementById('sale-customer')||{}).value||'';
+  if(!cn)return false;
+  var c=(DB.clients||[]).find(function(x){return normalizeAr(x.name)===normalizeAr(cn);});
+  return !!(c&&c.priceType==='wholesale');
+}
+function _wsPrice(p,qty,ws){
   if(!p)return 0;
-  var custName=(document.getElementById('sale-customer')||{}).value||'';
-  if(custName){
-    var c=(DB.clients||[]).find(function(x){return normalizeAr(x.name)===normalizeAr(custName);});
-    if(c&&c.priceType==='wholesale'&&p.wholesale_price>0)return p.wholesale_price;
-  }
+  if(!ws)return p.sell_price;
+  var t=_wsTiers(p);
+  for(var i=0;i<t.length;i++){if(qty>=t[i].min)return t[i].price;}
+  if(p.wholesale_price>0)return p.wholesale_price;
+  var pct=_wsCfg().pct;
+  if(pct>0)return Math.round(p.sell_price*(1-pct/100)*100)/100;
   return p.sell_price;
+}
+function _effectiveSellPrice(p,qty){return _wsPrice(p,qty||1,_saleIsWholesale());}
+// يعيد تسعير سطر لو سعره لسه هو السعر التلقائي القديم (يعني ما اتعدّلش يدويًا)
+function _repriceAuto(it,oldQty,oldWS){
+  var p=it.productId?DB.products.find(function(x){return x.id===it.productId;}):null;if(!p)return;
+  if(Math.abs((it.price||0)-_wsPrice(p,oldQty,oldWS))<0.005)it.price=_wsPrice(p,it.qty,_saleIsWholesale());
+}
+function _wsRowHtml(){
+  var cfg=_wsCfg(),on=_saleIsWholesale();
+  var cn=(document.getElementById('sale-customer')||{}).value||'';
+  var c=cn?(DB.clients||[]).find(function(x){return normalizeAr(x.name)===normalizeAr(cn);}):null;
+  var auto=(_saleWS===null&&c&&c.priceType==='wholesale'&&cfg.enabled);
+  return '<div style="background:'+(on?'#ede9fe':'#f1f5f9')+';border:1.5px solid '+(on?'#c4b5fd':'#e2e8f0')+';border-radius:10px;padding:8px 11px;display:flex;align-items:center;gap:7px;flex-wrap:wrap">'+
+    '<span style="flex:1;font-size:12px;font-weight:800;color:'+(on?'#5b21b6':'#64748b')+'">🏷️ '+(!cfg.enabled?'الجملة متوقفة (من الإعدادات)':on?'بيع جملة شغّال'+(auto?' (عميل جملة)':''):'بيع قطاعي')+'</span>'+
+    (cfg.enabled?'<button type="button" onclick="_wsToggle()" style="border:none;border-radius:8px;padding:6px 11px;font-family:inherit;font-size:12px;font-weight:800;cursor:pointer;background:'+(on?'#fee2e2':'#7c3aed')+';color:'+(on?'#dc2626':'#fff')+'">'+(on?'إلغاء الجملة':'تفعيل الجملة')+'</button>':'')+
+    '<button type="button" onclick="_wsOpenSettings()" style="border:none;border-radius:8px;padding:6px 9px;font-size:13px;cursor:pointer;background:#fff">⚙️</button></div>';
+}
+function _wsRefreshRow(){var w=document.getElementById('wholesale-badge-wrap');if(w){w.style.display='block';w.innerHTML=_wsRowHtml();}}
+function _wsRerender(){
+  var vals=_saveSaleFields();
+  var s=_saleId?DB.sales.find(function(x){return x.id===_saleId;}):null;
+  renderSaleBody(s);_restoreSaleFields(vals);
+}
+function _wsToggle(){
+  var oldWS=_saleIsWholesale();
+  _saleWS=!oldWS;
+  _saleItems.forEach(function(it){_repriceAuto(it,it.qty,oldWS);});
+  _wsRerender();
+}
+function _wsOpenSettings(){
+  _wsSnap=_saveSaleFields();
+  var cfg=_wsCfg();
+  document.getElementById('modal-title').textContent='⚙️ إعدادات البيع بالجملة';
+  document.getElementById('modal-body').innerHTML=
+    '<div style="background:#f5f3ff;border-radius:10px;padding:10px 12px;margin-bottom:12px;font-size:12px;color:#5b21b6;line-height:1.8">'+
+    'لما الجملة تكون شغّالة، السعر بيتحدد بالترتيب: <b>شريحة الكمية</b> ← <b>سعر الجملة الثابت للصنف</b> ← <b>نسبة الخصم</b> اللي تحت ← سعر القطاعي.</div>'+
+    '<div class="field"><label>تشغيل نظام الجملة</label><select id="ws-enabled" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit">'+
+    '<option value="1"'+(cfg.enabled?' selected':'')+'>✅ شغّال</option><option value="0"'+(!cfg.enabled?' selected':'')+'>⛔ متوقف (الكل قطاعي)</option></select></div>'+
+    fld('ws-pct','نسبة خصم الجملة على سعر القطاعي (%)','number',cfg.pct||'','مثال: 10 يعني الجملة أرخص 10%. اتركها فاضية لو مش عايز نسبة')+
+    '<div style="font-size:11px;color:#64748b;margin-bottom:10px">سعر الجملة الثابت وشرائح الكمية بتتحط من شاشة تعديل الصنف.</div>'+
+    '<div class="modal-actions"><button class="btn btn-primary btn-full" onclick="_wsSaveSettings()">💾 حفظ</button>'+
+    '<button class="btn btn-outline btn-full" onclick="_wsBack()">رجوع</button></div>';
+}
+function _wsBack(){
+  var s=_saleId?DB.sales.find(function(x){return x.id===_saleId;}):null;
+  document.getElementById('modal-title').textContent=s?'تعديل فاتورة':'فاتورة جديدة';
+  renderSaleBody(s);_restoreSaleFields(_wsSnap||{});_wsSnap=null;
+}
+async function _wsSaveSettings(){
+  var pct=+v('ws-pct')||0;
+  if(pct<0||pct>=100)return showToast('⚠️ النسبة لازم تكون من 0 لـ 99','#dc2626');
+  var oldPrices=_saleItems.map(function(it){var p=it.productId?DB.products.find(function(x){return x.id===it.productId;}):null;return p?_wsPrice(p,it.qty,_saleIsWholesale()):null;});
+  DB.settings.wholesale={enabled:v('ws-enabled')!=='0',pct:pct};
+  await persist();
+  _saleItems.forEach(function(it,i){
+    var p=it.productId?DB.products.find(function(x){return x.id===it.productId;}):null;
+    if(p&&oldPrices[i]!==null&&Math.abs((it.price||0)-oldPrices[i])<0.005)it.price=_wsPrice(p,it.qty,_saleIsWholesale());
+  });
+  showToast('✅ اتحفظت إعدادات الجملة','#16a34a');
+  _wsBack();
 }
 
 function addProdToSale(pid){
   var p=DB.products.find(function(x){return x.id===pid;});if(!p)return;
   var ex=_saleItems.find(function(i){return i.productId===pid;});
-  if(ex)ex.qty++;else _saleItems.push({productId:p.id,name:p.name,qty:1,price:_effectiveSellPrice(p),buyPrice:p.landed_cost||p.buy_price});
+  if(ex){var _oq=ex.qty;ex.qty++;_repriceAuto(ex,_oq,_saleIsWholesale());}else _saleItems.push({productId:p.id,name:p.name,qty:1,price:_effectiveSellPrice(p,1),buyPrice:p.landed_cost||p.buy_price});
   var vals=_saveSaleFields();
   var s=_saleId?DB.sales.find(function(x){return x.id===_saleId;}):null;
   renderSaleBody(s);_restoreSaleFields(vals);
@@ -8512,7 +8620,9 @@ async function markSaleItemDamaged(idx){
 }
 
 function chgQty(idx,delta){
+  var _oq3=_saleItems[idx].qty;
   _saleItems[idx].qty=roundQty(Math.max(0.01,_saleItems[idx].qty+delta));
+  _repriceAuto(_saleItems[idx],_oq3,_saleIsWholesale());
   var vals=_saveSaleFields();
   var s=_saleId?DB.sales.find(function(x){return x.id===_saleId;}):null;
   renderSaleBody(s);_restoreSaleFields(vals);
@@ -8550,7 +8660,9 @@ function saveSaleItemQty(idx){
   if(!qty||qty<=0)return showToast('⚠️ الكمية غير صحيحة','#dc2626');
   var prod=_saleItems[idx].productId?DB.products.find(function(p){return p.id===_saleItems[idx].productId;}):null;
   if(prod&&qty>prod.qty)return showToast('⚠️ متاح بس '+fmtQty(prod.qty)+' '+(prod.unit||''),'#dc2626');
+  var _oq4=_saleItems[idx].qty;
   _saleItems[idx].qty=roundQty(qty);
+  _repriceAuto(_saleItems[idx],_oq4,_saleIsWholesale());
   var s=_saleId?DB.sales.find(function(x){return x.id===_saleId;}):null;
   renderSaleBody(s);_restoreSaleFields(_qtyEditSnapshot||{});_qtyEditSnapshot=null;
 }
@@ -10632,13 +10744,116 @@ function renderDebts(){
   }).join('');
 }
 
-// ⚠️ v245 — إعادة بناء كشف الحساب المزدوج. العميل رفض النسخة الأولى (v244) لأنها كانت بتعرض صفوف الديون
-// الإجمالية بس من غير اسم الصنف، ومش واضح مين أخد إيه ولا الباقي لمين. دلوقتي الكشف بيتبني من الفواتير
-// (هو أخد مني) والمشتريات (أنا أخدت منه) بأصنافها، + الديون اليدوية/الأمانة، + كل السدادات بتاريخها الهجري.
-// الاتجاه: customer = هو أخد مني (ليّ عليه) ، supplier = أنا أخدت منه (له عليّ).
-// الربط: الفاتورة ← دينها بـ source_sale_id ، المشترى ← دينه بـ source_purchase_id. أي دين من غير ربط يظهر كصف مستقل.
-var _twsName='',_twsDir='all',_twsOpenOnly=true;
-function _twsNetTxt(n){return n>0.001?'هو عليه لي '+fmt(n)+' ج':n<-0.001?'أنا عليّ له '+fmt(Math.abs(n))+' ج':'متعادلين ✅';}
+// ⚠️ v246 — شكل الكشف بقى زي كشف الحساب المحاسبي اللي العميل بعت صورته: التاريخ | البيان (الصنف) | الكمية | مدين | دائن | الرصيد
+// الرصيد تراكمي بعد كل سطر. مدين = هو أخد مني / أنا سدّدت له ، دائن = أنا أخدت منه / هو سدّد لي.
+// الرصيد الموجب = "عليه" (هو مديون لي) ، السالب = "له" (أنا مديون له). مجموع (مدين − دائن) = نفس صافي شاشة الديون.
+var _twsName='',_twsDir='all';
+function _twsBalTxt(b){return b>0.001?fmt(b)+' عليه':b<-0.001?fmt(Math.abs(b))+' له':'0';}
+function _twsEntries(){
+  var docs=_twsBuild(),E=[],seq=0;
+  function add(date,x,name,qty,debit,credit,first){E.push({date:date||'',seq:seq++,kind:x.kind,id:x.id,title:x.title,name:name,qty:qty,debit:debit,credit:credit,first:first});}
+  docs.forEach(function(x){
+    var isC=x.dir==='customer';
+    x.lines.forEach(function(l,i){
+      var a=l.amt,asDebit=isC;
+      if(a<0){asDebit=!asDebit;a=-a;} // الخصم بيتحط في الجهة العكسية
+      add(x.date,x,l.name,(l.qty!==''&&l.qty!=null)?l.qty:'',asDebit?a:0,asDebit?0:a,i===0);
+    });
+    if(x.upfront>0)add(x.date,x,isC?'دفع وقت الفاتورة':'سدّدت له وقت المشترى','',isC?0:x.upfront,isC?x.upfront:0,false);
+    x.pays.forEach(function(p){add(p.date,x,isC?'سدّد لي':'سدّدت له','',isC?0:p.amount,isC?p.amount:0,false);});
+  });
+  E.sort(function(a,b){return a.date<b.date?-1:a.date>b.date?1:a.seq-b.seq;});
+  var bal=0;E.forEach(function(e){bal+=e.debit-e.credit;e.bal=bal;});
+  return E;
+}
+function _twsTot(E){var d=0,c=0;E.forEach(function(e){d+=e.debit;c+=e.credit;});return {d:d,c:c,bal:d-c};}
+function openTwoWayStatement(name){
+  if(__isFieldHidden('debts','name')||__isFieldHidden('debts','total')||__isFieldHidden('debts','paid')){
+    return showToast('🚫 مفيش صلاحية تشوف تفاصيل الديون. كلم المالك.','#dc2626');
+  }
+  _twsName=name;_twsDir='all';
+  document.getElementById('modal-title').textContent='⚖️ كشف حساب — '+name;
+  document.getElementById('modal-body').innerHTML=
+    '<div id="tws-top"></div><div id="tws-list"></div>'+
+    '<div class="modal-actions" style="flex-wrap:wrap">'+
+    '<button class="btn btn-sm" style="background:#f5f3ff;color:#7c3aed;border:none;flex:1" onclick="_twsPrint()">🖨️ PDF / طباعة</button>'+
+    '<button class="btn btn-sm" style="background:#dcfce7;color:#15803d;border:none;flex:1" onclick="_twsShareText()">📲 واتساب</button>'+
+    '<button class="btn btn-outline btn-full" style="flex:1" onclick="closeModal()">إغلاق</button></div>';
+  openModal();
+  _renderTws();
+}
+function _twsSetDir(d){_twsDir=d;_renderTws();}
+function _twsOpenDoc(kind,id){
+  if(kind==='sale')openSaleModal(id);
+  else if(kind==='purch')openPurchaseModal(id);
+  else openEditDebtModal(id);
+}
+function _twsTableHtml(E,forPrint){
+  var tt=_twsTot(E);
+  var th='padding:6px 4px;background:#f1f5f9;border:1px solid #cbd5e1;font-size:'+(forPrint?'12':'10')+'px;text-align:center';
+  var td='padding:5px 4px;border:1px solid #e2e8f0;font-size:'+(forPrint?'12':'11')+'px;text-align:center';
+  var h='<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse"><thead><tr>'+
+    '<th style="'+th+'">التاريخ</th><th style="'+th+'">البيان</th><th style="'+th+'">الكمية</th>'+
+    '<th style="'+th+';color:#15803d">مدين</th><th style="'+th+';color:#1d4ed8">دائن</th><th style="'+th+'">الرصيد</th></tr></thead><tbody>';
+  E.forEach(function(e){
+    var bc=e.bal>0.001?'#15803d':e.bal<-0.001?'#dc2626':'#475569';
+    h+='<tr'+(forPrint?'':' onclick="_twsOpenDoc(\''+e.kind+'\',\''+e.id+'\')" style="cursor:pointer"')+'>'+
+      '<td style="'+td+'">'+esc(fmtDate(e.date))+'</td>'+
+      '<td style="'+td+';text-align:right">'+(e.first?'<div style="font-size:9px;color:#94a3b8">'+esc(e.title)+'</div>':'')+esc(e.name||'')+'</td>'+
+      '<td style="'+td+'">'+(e.qty!==''?fmtQty(e.qty):'')+'</td>'+
+      '<td style="'+td+';color:#15803d;font-weight:700">'+(e.debit?fmt(e.debit):'')+'</td>'+
+      '<td style="'+td+';color:#1d4ed8;font-weight:700">'+(e.credit?fmt(e.credit):'')+'</td>'+
+      '<td style="'+td+';color:'+bc+';font-weight:800">'+_twsBalTxt(e.bal)+'</td></tr>';
+  });
+  var bc2=tt.bal>0.001?'#15803d':tt.bal<-0.001?'#dc2626':'#475569';
+  h+='</tbody><tfoot><tr style="background:#fef3c7;font-weight:900">'+
+    '<td style="'+td+'" colspan="3">الإجمالي</td><td style="'+td+';color:#15803d">'+fmt(tt.d)+'</td><td style="'+td+';color:#1d4ed8">'+fmt(tt.c)+'</td>'+
+    '<td style="'+td+';color:'+bc2+'">'+_twsBalTxt(tt.bal)+'</td></tr></tfoot></table></div>';
+  return h;
+}
+function _renderTws(){
+  var top=document.getElementById('tws-top'),list=document.getElementById('tws-list');
+  if(!top||!list)return;
+  var E=_twsEntries(),tt=_twsTot(E);
+  var key=normalizeAr(_twsName),dn=0;
+  (DB.debts||[]).forEach(function(d){if(normalizeAr(d.name||'')===key){var r=(d.total||0)-(d.paid||0);dn+=(d.type==='customer'?r:-r);}});
+  function card(dir,bg,bd,col,t1,v){
+    return '<div onclick="_twsSetDir(\''+dir+'\')" style="cursor:pointer;flex:1;background:'+bg+';border:2.5px solid '+(_twsDir===dir?col:bd)+';border-radius:12px;padding:8px 4px;text-align:center">'+
+      '<div style="font-size:10px;font-weight:800;color:'+col+'">'+t1+'</div><div style="font-size:14px;font-weight:900;color:'+col+'">'+v+'</div></div>';
+  }
+  var netCol=tt.bal>0.001?'#15803d':tt.bal<-0.001?'#dc2626':'#475569';
+  top.innerHTML=
+    '<div style="display:flex;gap:6px;margin-bottom:8px">'+
+    card('debit','#dcfce7','#86efac','#15803d','مدين',fmt(tt.d))+
+    card('credit','#dbeafe','#93c5fd','#1d4ed8','دائن',fmt(tt.c))+
+    card('all','#fffbeb','#fde68a',netCol,'الرصيد (الكل)',_twsBalTxt(tt.bal))+'</div>'+
+    '<div style="font-size:10px;color:#64748b;line-height:1.7;margin-bottom:8px">'+
+    '<b style="color:#15803d">مدين</b> = هو أخد مني / أنا سدّدت له &nbsp;•&nbsp; <b style="color:#1d4ed8">دائن</b> = أنا أخدت منه / هو سدّد لي<br>'+
+    'الرصيد: <b>عليه</b> = هو مديون لي &nbsp;•&nbsp; <b>له</b> = أنا مديون له</div>'+
+    (Math.abs(tt.bal-dn)>0.5?'<div style="background:#fef2f2;border:1px solid #fca5a5;border-radius:9px;padding:7px 9px;font-size:11px;color:#b91c1c;margin-bottom:8px">⚠️ الكشف مختلف '+fmt(Math.abs(tt.bal-dn))+' ج عن شاشة الديون — غالبًا دين اتعدل يدويًا. راجعه قبل ما تبعت الكشف.</div>':'');
+  var shown=E.filter(function(e){return _twsDir==='all'||(_twsDir==='debit'?e.debit>0:e.credit>0);});
+  list.innerHTML=shown.length?_twsTableHtml(shown,false)+'<div style="font-size:10px;color:#94a3b8;margin-top:5px">اضغط على أي سطر لفتح أصله للتعديل. الرصيد تراكمي دايمًا حتى مع الفلتر.</div>':'<div class="empty">لا توجد معاملات</div>';
+}
+function _twsPrint(){
+  var E=_twsEntries(),tt=_twsTot(E);
+  var netCol=tt.bal>0.001?'#15803d':tt.bal<-0.001?'#dc2626':'#475569';
+  var sentence=tt.bal>0.001?'الباقي: هو عليه لي '+fmt(tt.bal)+' ج':tt.bal<-0.001?'الباقي: أنا عليّ له '+fmt(Math.abs(tt.bal))+' ج':'الحساب متعادل ✅';
+  var body='<div style="margin-bottom:8px;color:#64748b">تاريخ الكشف: '+esc(fmtDate(today()))+'</div>'+
+    '<div style="font-size:11px;color:#475569;margin-bottom:8px">مدين = هو أخد مني / أنا سدّدت له &nbsp;|&nbsp; دائن = أنا أخدت منه / هو سدّد لي &nbsp;|&nbsp; الرصيد: عليه = هو مديون لي ، له = أنا مديون له</div>'+
+    _twsTableHtml(E,true)+
+    '<div style="border:2px solid '+netCol+';border-radius:10px;padding:10px;text-align:center;font-size:17px;font-weight:900;color:'+netCol+';margin:14px 0">'+sentence+'</div>';
+  printSection('⚖️ كشف حساب — '+esc(_twsName),body);
+}
+function _twsShareText(){
+  var E=_twsEntries(),tt=_twsTot(E);
+  var txt='⚖️ كشف حساب — '+_twsName+'\n📅 '+fmtDate(today())+'\n(مدين = هو أخد مني/سدّدت له ، دائن = أنا أخدت منه/سدّد لي)\n\n';
+  E.forEach(function(e){
+    txt+=fmtDate(e.date)+' | '+(e.name||'')+(e.qty!==''?' ×'+fmtQty(e.qty):'')+' | '+(e.debit?'مدين '+fmt(e.debit):'دائن '+fmt(e.credit))+' | الرصيد '+_twsBalTxt(e.bal)+'\n';
+  });
+  txt+='\nالإجمالي: مدين '+fmt(tt.d)+' — دائن '+fmt(tt.c)+'\n⚖️ '+(tt.bal>0.001?'هو عليه لي '+fmt(tt.bal)+' ج':tt.bal<-0.001?'أنا عليّ له '+fmt(Math.abs(tt.bal))+' ج':'متعادلين ✅');
+  if(navigator.share){navigator.share({text:txt}).catch(function(){});}
+  else window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank');
+}
 function _twsBuild(){
   var key=normalizeAr(_twsName||'');
   function same(n){return normalizeAr(n||'')===key;}
@@ -10686,132 +10901,6 @@ function _twsBuild(){
   });
   docs.sort(function(a,b){return (a.date||'')<(b.date||'')?-1:(a.date||'')>(b.date||'')?1:0;}); // الأقدم فوق
   return docs;
-}
-function _twsSum(docs){
-  var s={cT:0,cP:0,sT:0,sP:0};
-  docs.forEach(function(x){if(x.dir==='customer'){s.cT+=x.total;s.cP+=x.paid;}else{s.sT+=x.total;s.sP+=x.paid;}});
-  s.cR=s.cT-s.cP;s.sR=s.sT-s.sP;s.net=s.cR-s.sR;
-  return s;
-}
-function _twsDocs(){
-  var all=_twsBuild();
-  return _twsOpenOnly?all.filter(function(x){return Math.abs(x.rem)>0.001;}):all;
-}
-function openTwoWayStatement(name){
-  if(__isFieldHidden('debts','name')||__isFieldHidden('debts','total')||__isFieldHidden('debts','paid')){
-    return showToast('🚫 مفيش صلاحية تشوف تفاصيل الديون. كلم المالك.','#dc2626');
-  }
-  _twsName=name;_twsDir='all';_twsOpenOnly=true;
-  document.getElementById('modal-title').textContent='⚖️ كشف حساب — '+name;
-  document.getElementById('modal-body').innerHTML=
-    '<div id="tws-top"></div><div id="tws-list"></div>'+
-    '<div class="modal-actions" style="flex-wrap:wrap">'+
-    '<button class="btn btn-sm" style="background:#f5f3ff;color:#7c3aed;border:none;flex:1" onclick="_twsPrint()">🖨️ PDF / طباعة</button>'+
-    '<button class="btn btn-sm" style="background:#dcfce7;color:#15803d;border:none;flex:1" onclick="_twsShareText()">📲 واتساب</button>'+
-    '<button class="btn btn-outline btn-full" style="flex:1" onclick="closeModal()">إغلاق</button></div>';
-  openModal();
-  _renderTws();
-}
-function _twsSetDir(d){_twsDir=d;_renderTws();}
-function _twsToggleOpen(){_twsOpenOnly=!_twsOpenOnly;_renderTws();}
-function _twsOpenDoc(kind,id){
-  if(kind==='sale')openSaleModal(id);
-  else if(kind==='purch')openPurchaseModal(id);
-  else openEditDebtModal(id);
-}
-function _twsDocHtml(x){
-  var isC=x.dir==='customer',col=isC?'#15803d':'#dc2626';
-  function pl(label,a,d){return '<div style="font-size:11px;color:#16a34a;padding:2px 0">↳ '+label+' <b>'+fmt(a)+'</b> — '+esc(fmtDate(d))+'</div>';}
-  var lines=x.lines.map(function(l){
-    var q=(l.qty!==''&&l.qty!=null)?' <span style="color:#64748b">× '+fmtQty(l.qty)+(l.price?' @ '+fmt(l.price):'')+'</span>':'';
-    return '<div style="display:flex;justify-content:space-between;gap:8px;font-size:12px;padding:3px 0;border-bottom:1px dashed #eef2f7"><span style="flex:1">'+esc(l.name||'')+q+'</span><b style="color:'+(l.amt<0?'#dc2626':'#0f172a')+'">'+fmt(l.amt)+'</b></div>';
-  }).join('');
-  var pays='';
-  if(x.upfront>0)pays+=pl('دفع وقت المعاملة',x.upfront,x.date);
-  x.pays.forEach(function(p){pays+=pl(isC?'سدّد لي':'سدّدت له',p.amount,p.date);});
-  return '<div onclick="_twsOpenDoc(\''+x.kind+'\',\''+x.id+'\')" style="cursor:pointer;background:#fff;border:1.5px solid #e2e8f0;border-right:4px solid '+col+';border-radius:11px;padding:9px 11px;margin-bottom:8px">'+
-    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">'+
-    '<span style="font-size:12px;font-weight:800">'+esc(fmtDate(x.date))+' — '+esc(x.title)+'</span>'+
-    '<span style="background:'+(isC?'#dcfce7':'#fef2f2')+';color:'+col+';border-radius:7px;padding:2px 8px;font-size:10px;font-weight:800">'+(isC?'🟢 هو أخد':'🔴 أنا أخدت')+'</span></div>'+
-    lines+pays+
-    '<div style="display:flex;justify-content:space-between;margin-top:5px;font-size:12px;font-weight:800"><span>الإجمالي '+fmt(x.total)+'</span>'+
-    '<span style="color:'+(x.rem>0.001?col:'#16a34a')+'">'+(x.rem>0.001?'الباقي '+fmt(x.rem):'✅ مسدّد')+'</span></div></div>';
-}
-function _renderTws(){
-  var top=document.getElementById('tws-top'),list=document.getElementById('tws-list');
-  if(!top||!list)return;
-  var all=_twsBuild();
-  var docs=_twsOpenOnly?all.filter(function(x){return Math.abs(x.rem)>0.001;}):all;
-  var t=_twsSum(docs),a=_twsSum(all);
-  var key=normalizeAr(_twsName),dn=0;
-  (DB.debts||[]).forEach(function(d){if(normalizeAr(d.name||'')===key){var r=(d.total||0)-(d.paid||0);dn+=(d.type==='customer'?r:-r);}});
-  function ln(l,v,c){return '<div style="display:flex;justify-content:space-between;font-size:11px;margin-top:2px"><span style="color:#64748b">'+l+'</span><b style="color:'+(c||'#0f172a')+'">'+fmt(v)+'</b></div>';}
-  function card(dir,bg,bd,col,title,body){
-    return '<div onclick="_twsSetDir(\''+dir+'\')" style="cursor:pointer;flex:1;background:'+bg+';border:2.5px solid '+(_twsDir===dir?col:bd)+';border-radius:12px;padding:9px 8px">'+
-      '<div style="font-size:11px;font-weight:800;color:'+col+';text-align:center;margin-bottom:4px">'+title+'</div>'+body+'</div>';
-  }
-  var netCol=t.net>0.001?'#15803d':t.net<-0.001?'#dc2626':'#475569';
-  top.innerHTML=
-    '<div style="display:flex;gap:7px;margin-bottom:8px">'+
-    card('customer','#dcfce7','#86efac','#15803d','🟢 هو أخد مني',ln('الإجمالي',t.cT)+ln('سدّد',t.cP,'#16a34a')+ln('الباقي',t.cR,'#15803d'))+
-    card('supplier','#fef2f2','#fca5a5','#dc2626','🔴 أنا أخدت منه',ln('الإجمالي',t.sT)+ln('سدّدت',t.sP,'#16a34a')+ln('الباقي',t.sR,'#dc2626'))+'</div>'+
-    '<div onclick="_twsSetDir(\'all\')" style="cursor:pointer;background:#fffbeb;border:2.5px solid '+(_twsDir==='all'?'#92400e':'#fde68a')+';border-radius:12px;padding:9px;text-align:center;margin-bottom:8px">'+
-    '<div style="font-size:11px;font-weight:800;color:#92400e">⚖️ الصافي بين الاتنين (اضغط لعرض الكل)</div>'+
-    '<div style="font-size:16px;font-weight:900;color:'+netCol+'">'+_twsNetTxt(t.net)+'</div></div>'+
-    '<div onclick="_twsToggleOpen()" style="cursor:pointer;text-align:center;background:#f1f5f9;border-radius:10px;padding:7px;font-size:12px;font-weight:700;color:#334155;margin-bottom:10px">'+
-    (_twsOpenOnly?'👁️ المعروض: غير المسدد فقط — اضغط لعرض كل المعاملات':'👁️ المعروض: كل المعاملات — اضغط لعرض غير المسدد فقط')+'</div>'+
-    (Math.abs(a.net-dn)>0.5?'<div style="background:#fef2f2;border:1px solid #fca5a5;border-radius:9px;padding:7px 9px;font-size:11px;color:#b91c1c;margin-bottom:8px">⚠️ الكشف مختلف '+fmt(Math.abs(a.net-dn))+' ج عن شاشة الديون — غالبًا دين اتعدل يدويًا. راجعه قبل ما تبعت الكشف.</div>':'');
-  var shown=docs.filter(function(x){return _twsDir==='all'||x.dir===_twsDir;});
-  list.innerHTML=shown.length?shown.map(_twsDocHtml).join(''):'<div class="empty">لا توجد معاملات</div>';
-}
-function _twsPrint(){
-  var docs=_twsDocs(),t=_twsSum(docs);
-  function row(a,b,c,d,e,st){return '<tr'+(st?' style="'+st+'"':'')+'><td>'+a+'</td><td>'+b+'</td><td>'+c+'</td><td>'+d+'</td><td>'+e+'</td></tr>';}
-  function sec(dir,title,col){
-    var ds=docs.filter(function(x){return x.dir===dir;});
-    if(!ds.length)return '';
-    var isC=dir==='customer',h='<h3 style="margin:18px 0 6px;color:'+col+'">'+title+'</h3><table><thead><tr><th>التاريخ</th><th>الصنف / البيان</th><th>الكمية</th><th>السعر</th><th>المبلغ</th></tr></thead><tbody>';
-    ds.forEach(function(x){
-      h+='<tr style="background:#f1f5f9"><td>'+esc(fmtDate(x.date))+'</td><td colspan="4"><b>'+esc(x.title)+'</b></td></tr>';
-      x.lines.forEach(function(l){
-        h+=row('',esc(l.name||''),(l.qty!==''&&l.qty!=null)?fmtQty(l.qty):'',l.price?fmt(l.price):'',fmt(l.amt));
-      });
-      h+='<tr><td></td><td colspan="3"><b>إجمالي المعاملة</b></td><td><b>'+fmt(x.total)+'</b></td></tr>';
-      if(x.upfront>0)h+='<tr style="color:#15803d"><td>'+esc(fmtDate(x.date))+'</td><td colspan="3">↳ دفع وقت المعاملة</td><td>−'+fmt(x.upfront)+'</td></tr>';
-      x.pays.forEach(function(p){h+='<tr style="color:#15803d"><td>'+esc(fmtDate(p.date))+'</td><td colspan="3">↳ '+(isC?'سدّد لي':'سدّدت له')+'</td><td>−'+fmt(p.amount)+'</td></tr>';});
-      h+='<tr style="background:#fffbeb"><td></td><td colspan="3"><b>الباقي</b></td><td><b>'+fmt(x.rem)+'</b></td></tr>';
-    });
-    h+='<tr style="background:#e2e8f0"><td colspan="4"><b>'+(isC?'إجمالي الباقي عليه':'إجمالي الباقي عليّ')+'</b></td><td><b>'+fmt(isC?t.cR:t.sR)+'</b></td></tr></tbody></table>';
-    return h;
-  }
-  var netCol=t.net>0.001?'#15803d':t.net<-0.001?'#dc2626':'#475569';
-  var body='<div style="margin-bottom:8px;color:#64748b">تاريخ الكشف: '+esc(fmtDate(today()))+' — '+(_twsOpenOnly?'المعاملات غير المسددة':'كل المعاملات')+'</div>'+
-    '<table><thead><tr><th>البيان</th><th>الإجمالي</th><th>المدفوع</th><th>الباقي</th></tr></thead><tbody>'+
-    '<tr><td>🟢 هو أخد مني</td><td>'+fmt(t.cT)+'</td><td>'+fmt(t.cP)+'</td><td>'+fmt(t.cR)+'</td></tr>'+
-    '<tr><td>🔴 أنا أخدت منه</td><td>'+fmt(t.sT)+'</td><td>'+fmt(t.sP)+'</td><td>'+fmt(t.sR)+'</td></tr>'+
-    '<tr style="background:#fffbeb"><td colspan="3"><b>⚖️ الفرق (الصافي)</b></td><td><b>'+fmt(Math.abs(t.net))+'</b></td></tr></tbody></table>'+
-    '<div style="border:2px solid '+netCol+';border-radius:10px;padding:10px;text-align:center;font-size:17px;font-weight:900;color:'+netCol+';margin:12px 0">الباقي: '+_twsNetTxt(t.net)+'</div>'+
-    sec('customer','🟢 هو أخد مني','#15803d')+sec('supplier','🔴 أنا أخدت منه','#dc2626');
-  printSection('⚖️ كشف حساب — '+esc(_twsName),body);
-}
-function _twsShareText(){
-  var docs=_twsDocs(),t=_twsSum(docs);
-  function sec(dir,title){
-    var ds=docs.filter(function(x){return x.dir===dir;});
-    if(!ds.length)return '';
-    var s='\n'+title+'\n';
-    ds.forEach(function(x){
-      s+='📅 '+fmtDate(x.date)+' — '+x.title+'\n';
-      x.lines.forEach(function(l){s+='  • '+(l.name||'')+((l.qty!==''&&l.qty!=null)?' ×'+fmtQty(l.qty):'')+' = '+fmt(l.amt)+'\n';});
-      s+='  الإجمالي '+fmt(x.total)+' | مدفوع '+fmt(x.paid)+' | الباقي '+fmt(x.rem)+'\n';
-    });
-    return s;
-  }
-  var txt='⚖️ كشف حساب — '+_twsName+'\n📅 '+fmtDate(today())+'\n'+
-    sec('customer','🟢 هو أخد مني — الباقي '+fmt(t.cR)+' ج')+sec('supplier','🔴 أنا أخدت منه — الباقي '+fmt(t.sR)+' ج')+
-    '\n⚖️ الصافي: '+_twsNetTxt(t.net);
-  if(navigator.share){navigator.share({text:txt}).catch(function(){});}
-  else window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank');
 }
 
 function printDebt(id){
@@ -11564,13 +11653,23 @@ function addExpType(){
 // ⚠️ v110 — قوالب المصروفات الجاهزة: ضغطة واحدة تسجّل المصروف فورًا بتاريخ اليوم
 async function quickLogExpense(idx){
   var t=(DB.settings.expenseTemplates||[])[idx];if(!t)return;
-  if(!__hasPerm('expenses','can_insert')){showToast('🚫 مفيش صلاحية إضافة مصروفات. كلم المالك.','#dc2626');return;}
-  // ⚠️ v244 — كان بيحفظ الفرع في حقل sub بس (التقارير بتقرا subcategory) وبدون created_by (خطر RLS للموظفين)
-  var exp={id:genId(),type:t.category||'أخرى',sub:t.sub||'',subcategory:t.sub||'',amount:t.amount||0,note:t.name,date:today(),source:'manual',
-    created_by:window.__currentProfile?window.__currentProfile.id:null};
+  if(!__hasPerm('expenses','can_insert')){showToast('🚫 مفيش صلاحية تسجيل مصروف. كلم المالك.','#dc2626');return;}
+  var me=window.__currentProfile?window.__currentProfile.id:null;
+  var emp=(t.category==='رواتب'&&t.employee_id)?(DB.accounts.employees||[]).find(function(e){return e.id===t.employee_id;}):null;
+  var exp;
+  if(emp){
+    // ⚠️ v249 — اختصار الراتب بقى بنفس منطق فورم المصروف: سلفة تتخصم من الراتب الأساسي أو مكافأة فوقه
+    var isAdv=t.pay_kind!=='bonus';
+    exp={id:genId(),label:(isAdv?'سلفة — ':'رواتب — ')+esc(emp.name)+(t.sub?' ('+t.sub+')':''),amount:t.amount||0,type:'رواتب',subcategory:t.sub||'',
+      note:(t.name?t.name+' — ':'')+esc(emp.name),date:today(),source:'salary',employee_id:emp.id,official_pay:false,is_advance:isAdv,created_by:me};
+  }else{
+    // ⚠️ v244 — الفرع كان بيتحفظ في sub بس (التقارير بتقرا subcategory) ومن غير created_by (خطر RLS للموظفين)
+    exp={id:genId(),type:t.category||'أخرى',sub:t.sub||'',subcategory:t.sub||'',amount:t.amount||0,note:t.name,date:today(),source:'manual',created_by:me};
+  }
   DB.expenses.unshift(exp);
   await persist();await dbUpsert('expenses',exp);
   renderExpensesList();renderHome();
+  if(emp&&_accountingTab==='employees')renderAccounting();
   showToast('✅ اتسجّل: '+t.name+' — '+fmt(t.amount),'#16a34a');
 }
 
@@ -13706,7 +13805,7 @@ async function confirmCloseMovement(id,addInvoice){
     // ⚠️ v110 — إصلاح: اسم العميل والموديل والسريال ما كانوش بينتقلوا للفاتورة (كانت بتتحط
     // كنص في الملاحظات بس). دلوقتي بتتحط في حقولها الصح، وبانتظار موثوق للفورم بدل setTimeout هش.
     navigate('sales');
-    _saleId=null;_saleItems=[];_saleServices=[];
+    _saleId=null;_saleItems=[];_saleServices=[];_saleWS=null;
     requestAnimationFrame(function(){
       openSaleModal();
       waitForElement('sale-customer',function(){
@@ -14130,7 +14229,7 @@ async function confirmSchedDone(id){
   showToast('✅ تم إنهاء العطل','#16a34a');
   if(toSale){
     navigate('sales');
-    _saleId=null;_saleItems=[];_saleServices=[];
+    _saleId=null;_saleItems=[];_saleServices=[];_saleWS=null;
     requestAnimationFrame(function(){
       openSaleModal();
       waitForElement('sale-customer',function(){
@@ -16616,6 +16715,7 @@ function renderEmployees(){
           (isDaily?'<button class="btn-ic" style="background:#f5f3ff" onclick="openPayDailyWageModal(\''+e.id+'\')">💰 دفعة</button>':_paySalBtn(e.id))+
           (!isDaily?'<button class="btn-ic" style="background:#fff7ed" onclick="openPayAdvanceModal(\''+e.id+'\')">💵 سلفة</button>':'')+
           (e.linked_profile_id?'<button class="btn-ic" style="background:#eff6ff" onclick="openMarkLeaveModal(\''+e.id+'\')">📅 إجازة</button>':'')+
+        '<button class="btn-ic" style="background:#fffbeb" onclick="openEmployeeStatement(\''+e.id+'\')">📒 كشف</button>'+
         '<button class="btn-ic" style="background:#ede9fe" onclick="openSalaryIncrementModal(\''+e.id+'\')" title="زيادة دورية">📈 زيادة</button>'+
         '<button class="btn-ic" style="background:'+(isActive?'#fef9c3':'#dcfce7')+'" onclick="toggleEmployee(\''+e.id+'\')">'+(isActive?'⏸️ إيقاف':'▶️ تفعيل')+'</button>'+
         '<button class="btn-ic" style="background:#dbeafe" onclick="openEditEmployeeModal(\''+e.id+'\')">✏️ تعديل</button>'+
@@ -20781,7 +20881,7 @@ async function delMachine(clientId,machineId){
 function openAddSaleFromClient(clientId,machineIdx){
   var c=DB.clients.find(function(x){return x.id===clientId;});if(!c)return;
   var m=(c.machines||[])[machineIdx]||{};
-  _saleId=null;_saleItems=[];_saleServices=[];
+  _saleId=null;_saleItems=[];_saleServices=[];_saleWS=null;
   navigate('sales');
   setTimeout(function(){openSaleModal();setTimeout(function(){
     if(document.getElementById('sale-customer'))document.getElementById('sale-customer').value=c.name;
@@ -21100,6 +21200,116 @@ function _investorCard(inv){
 // ===== v191 — تقرير المهندسين (بديل زرار "التقارير المالية" المكرر في المزيد) =====
 // مبني بالكامل على بيانات موجودة أصلاً: created_by على كل فاتورة/مصروف/تحرك،
 // وحساب رصيد الأمانة (_computeEmpCashBalance) اللي كان مستخدم قبل كده لشاشة "حسابي".
+// ⚠️ v247 — كشف حساب الموظف بشكل الدفتر (طلب العميل: "وكما شاشة الموظفين"). مصدره مصروفات الرواتب (source=salary + employee_id):
+// official_pay أو أجر يومي = صرف راتب ، is_advance = سلفة ، غير كده = مكافأة/بدل. مفيش سجل "استحقاق شهري" متخزن،
+// فالمستحق بيتحسب للشهر الهجري الحالي بس (الراتب الحالي، أو الأجر اليومي × أيام الحضور) وبيظهر في صندوق الشهر.
+var _empLedId='',_empLedKind='all',_empLedMonth=false;
+function _empLedEntries(){
+  var emp=(DB.accounts.employees||[]).find(function(e){return e.id===_empLedId;});
+  var suf=emp?' ('+esc(emp.name)+')':'';
+  var arr=(DB.expenses||[]).filter(function(ex){return ex.source==='salary'&&ex.employee_id===_empLedId;}).map(function(ex){
+    var kind=ex.is_advance===true?'advance':(ex.official_pay===true||ex.wage_type==='daily')?'salary':'bonus';
+    var label=kind==='advance'?'💵 سلفة':kind==='salary'?(ex.wage_type==='daily'?'💰 صرف أجر يومي':'💰 صرف راتب'):'🎁 مكافأة / بدل';
+    var n=ex.note||'';
+    if(suf&&n.slice(-suf.length)===suf)n=n.slice(0,-suf.length);
+    return {id:ex.id,date:ex.date||'',kind:kind,label:label,note:n,amount:ex.amount||0};
+  });
+  arr.sort(function(a,b){return a.date<b.date?-1:a.date>b.date?1:0;});
+  return arr;
+}
+function _empLedShown(){
+  var all=_empLedEntries();
+  var list=all.filter(function(e){return (_empLedKind==='all'||e.kind===_empLedKind)&&(!_empLedMonth||isInCurrentHijriMonth(e.date));});
+  var run=0;list.forEach(function(e){run+=e.amount;e.run=run;});
+  return list;
+}
+function openEmployeeStatement(empId){
+  var emp=(DB.accounts.employees||[]).find(function(e){return e.id===empId;});if(!emp)return;
+  _empLedId=empId;_empLedKind='all';_empLedMonth=false;
+  document.getElementById('modal-title').textContent='📒 كشف حساب — '+emp.name;
+  document.getElementById('modal-body').innerHTML='<div id="el-top"></div><div id="el-list"></div>'+
+    '<div class="modal-actions" style="flex-wrap:wrap">'+
+    '<button class="btn btn-sm" style="background:#f5f3ff;color:#7c3aed;border:none;flex:1" onclick="_empLedPrint()">🖨️ PDF / طباعة</button>'+
+    '<button class="btn btn-sm" style="background:#dcfce7;color:#15803d;border:none;flex:1" onclick="_empLedShare()">📲 واتساب</button>'+
+    '<button class="btn btn-outline btn-full" style="flex:1" onclick="closeModal()">إغلاق</button></div>';
+  openModal();_renderEmpLed();
+}
+function _empLedSetKind(k){_empLedKind=k;_renderEmpLed();}
+function _empLedToggleMonth(){_empLedMonth=!_empLedMonth;_renderEmpLed();}
+function _empLedTable(list,forPrint){
+  var th='padding:6px 4px;background:#f1f5f9;border:1px solid #cbd5e1;font-size:'+(forPrint?'12':'10')+'px;text-align:center';
+  var td='padding:5px 4px;border:1px solid #e2e8f0;font-size:'+(forPrint?'12':'11')+'px;text-align:center';
+  var tot=list.reduce(function(s,e){return s+e.amount;},0);
+  var h='<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse"><thead><tr><th style="'+th+'">التاريخ</th><th style="'+th+'">البيان</th>'+
+    '<th style="'+th+';color:#dc2626">اتصرف له</th><th style="'+th+'">الإجمالي التراكمي</th></tr></thead><tbody>';
+  list.forEach(function(e){
+    h+='<tr'+(forPrint?'':' onclick="openEditExpenseModal(\''+e.id+'\')" style="cursor:pointer"')+'><td style="'+td+'">'+esc(fmtDate(e.date))+'</td>'+
+      '<td style="'+td+';text-align:right">'+e.label+(e.note?'<div style="font-size:9px;color:#94a3b8">'+esc(e.note)+'</div>':'')+'</td>'+
+      '<td style="'+td+';color:#dc2626;font-weight:700">'+fmt(e.amount)+'</td><td style="'+td+';font-weight:800">'+fmt(e.run)+'</td></tr>';
+  });
+  h+='</tbody><tfoot><tr style="background:#fef3c7;font-weight:900"><td style="'+td+'" colspan="2">الإجمالي</td><td style="'+td+';color:#dc2626">'+fmt(tot)+'</td><td style="'+td+'"></td></tr></tfoot></table></div>';
+  return h;
+}
+function _empMonthBox(emp){
+  var isDaily=emp.wage_type==='daily';
+  var due=isDaily?_dailyWageEarnedThisMonth(emp):(emp.salary||0);
+  var sal=0,adv=0,bon=0;
+  _empLedEntries().forEach(function(e){
+    if(!isInCurrentHijriMonth(e.date))return;
+    if(e.kind==='salary')sal+=e.amount;else if(e.kind==='advance')adv+=e.amount;else bon+=e.amount;
+  });
+  return {due:due,sal:sal,adv:adv,bon:bon,rem:due-sal-adv,isDaily:isDaily};
+}
+function _renderEmpLed(){
+  var emp=(DB.accounts.employees||[]).find(function(e){return e.id===_empLedId;});if(!emp)return;
+  var top=document.getElementById('el-top'),list=document.getElementById('el-list');if(!top||!list)return;
+  var all=_empLedEntries().filter(function(e){return !_empLedMonth||isInCurrentHijriMonth(e.date);});
+  function sum(k){return all.filter(function(e){return k==='all'||e.kind===k;}).reduce(function(s,e){return s+e.amount;},0);}
+  function card(k,bg,bd,col,t,v){
+    return '<div onclick="_empLedSetKind(\''+k+'\')" style="cursor:pointer;background:'+bg+';border:2.5px solid '+(_empLedKind===k?col:bd)+';border-radius:12px;padding:8px 4px;text-align:center">'+
+      '<div style="font-size:10px;font-weight:800;color:'+col+'">'+t+'</div><div style="font-size:14px;font-weight:900;color:'+col+'">'+fmt(v)+'</div></div>';
+  }
+  var m=_empMonthBox(emp);
+  top.innerHTML=
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px">'+
+    card('salary','#dcfce7','#86efac','#15803d','💰 رواتب',sum('salary'))+
+    card('advance','#fff7ed','#fdba74','#c2410c','💵 سلف',sum('advance'))+
+    card('bonus','#ede9fe','#c4b5fd','#7c3aed','🎁 مكافآت',sum('bonus'))+
+    card('all','#fffbeb','#fde68a','#92400e','الكل (اتصرف)',sum('all'))+'</div>'+
+    '<div onclick="_empLedToggleMonth()" style="cursor:pointer;text-align:center;background:#f1f5f9;border-radius:10px;padding:7px;font-size:12px;font-weight:700;color:#334155;margin-bottom:8px">'+
+    (_empLedMonth?'📅 المعروض: الشهر الهجري الحالي — اضغط لعرض كل الأشهر':'📅 المعروض: كل الأشهر — اضغط لعرض الشهر الحالي فقط')+'</div>'+
+    '<div style="background:#f0fdf4;border-radius:10px;padding:9px 11px;margin-bottom:10px;font-size:12px;line-height:1.9">'+
+    '<div style="font-weight:800;color:#15803d;margin-bottom:2px">📆 حساب الشهر الهجري الحالي</div>'+
+    '<div style="display:flex;justify-content:space-between"><span>'+(m.isDaily?'أجر الأيام المكتسب':'الراتب المستحق')+'</span><b>'+fmt(m.due)+'</b></div>'+
+    '<div style="display:flex;justify-content:space-between"><span>اتصرف (راتب/أجر)</span><b>'+fmt(m.sal)+'</b></div>'+
+    '<div style="display:flex;justify-content:space-between"><span>سلف الشهر</span><b>'+fmt(m.adv)+'</b></div>'+
+    '<div style="display:flex;justify-content:space-between;border-top:1px solid #bbf7d0;margin-top:3px;padding-top:3px;font-weight:900;color:'+(m.rem>=0?'#15803d':'#dc2626')+'"><span>الباقي</span><span>'+(m.rem>0.001?'له '+fmt(m.rem):m.rem<-0.001?'عليه (زيادة) '+fmt(Math.abs(m.rem)):'متعادل ✅')+'</span></div>'+
+    (m.bon>0?'<div style="font-size:11px;color:#7c3aed">🎁 مكافآت الشهر (بره الحساب): '+fmt(m.bon)+'</div>':'')+'</div>';
+  var shown=_empLedShown();
+  list.innerHTML=shown.length?_empLedTable(shown,false)+'<div style="font-size:10px;color:#94a3b8;margin-top:5px">اضغط على أي سطر لفتح المصروف للتعديل.</div>':'<div class="empty">لا توجد حركات</div>';
+}
+function _empLedPrint(){
+  var emp=(DB.accounts.employees||[]).find(function(e){return e.id===_empLedId;});if(!emp)return;
+  var m=_empMonthBox(emp);
+  var body='<div style="margin-bottom:8px;color:#64748b">تاريخ الكشف: '+esc(fmtDate(today()))+(_empLedMonth?' — الشهر الهجري الحالي':'')+'</div>'+
+    '<table style="width:100%;border-collapse:collapse;margin-bottom:10px"><tbody>'+
+    '<tr><td style="padding:5px;border:1px solid #e2e8f0">'+(m.isDaily?'أجر الأيام المكتسب (الشهر الحالي)':'الراتب المستحق (الشهر الحالي)')+'</td><td style="padding:5px;border:1px solid #e2e8f0"><b>'+fmt(m.due)+'</b></td></tr>'+
+    '<tr><td style="padding:5px;border:1px solid #e2e8f0">اتصرف (راتب/أجر)</td><td style="padding:5px;border:1px solid #e2e8f0">'+fmt(m.sal)+'</td></tr>'+
+    '<tr><td style="padding:5px;border:1px solid #e2e8f0">سلف الشهر</td><td style="padding:5px;border:1px solid #e2e8f0">'+fmt(m.adv)+'</td></tr>'+
+    '<tr style="background:#fffbeb"><td style="padding:5px;border:1px solid #e2e8f0"><b>الباقي</b></td><td style="padding:5px;border:1px solid #e2e8f0"><b>'+(m.rem>0.001?'له '+fmt(m.rem):m.rem<-0.001?'عليه '+fmt(Math.abs(m.rem)):'متعادل')+'</b></td></tr></tbody></table>'+
+    _empLedTable(_empLedShown(),true);
+  printSection('📒 كشف حساب موظف — '+esc(emp.name),body);
+}
+function _empLedShare(){
+  var emp=(DB.accounts.employees||[]).find(function(e){return e.id===_empLedId;});if(!emp)return;
+  var list=_empLedShown(),m=_empMonthBox(emp),tot=list.reduce(function(s,e){return s+e.amount;},0);
+  var txt='📒 كشف حساب — '+emp.name+'\n📅 '+fmtDate(today())+'\n\n';
+  list.forEach(function(e){txt+=fmtDate(e.date)+' | '+e.label+(e.note?' ('+e.note+')':'')+' | '+fmt(e.amount)+' | تراكمي '+fmt(e.run)+'\n';});
+  txt+='\nإجمالي اللي اتصرف: '+fmt(tot)+'\n📆 الشهر الحالي: مستحق '+fmt(m.due)+' — اتصرف '+fmt(m.sal+m.adv)+' — الباقي '+(m.rem>0.001?'له '+fmt(m.rem):m.rem<-0.001?'عليه '+fmt(Math.abs(m.rem)):'متعادل');
+  if(navigator.share){navigator.share({text:txt}).catch(function(){});}
+  else window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank');
+}
+
 function openEmployeesReport(){
   if(!window.__isOwner){showToast('🚫 التقرير ده للمالك بس','#dc2626');return;}
   var emps=(DB.accounts.employees||[]).filter(function(e){return e.active!==false&&e.linked_profile_id;});
@@ -21126,44 +21336,92 @@ function openEmployeesReport(){
     '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
   openModal();
 }
+// ⚠️ v249 — صفحة المهندس الشاملة: كل اللي لمسه بالتقسيم (فواتير/تحركات/مصروفات/سحب مخزن/مشتريات/تحصيل ديون/سجل النشاط الكامل).
+// الكروت قابلة للضغط وبتفلتر القسم. سحب المخزن كان متسجّل أصلًا باسم الموظف (employee_id) بس مكانش بيظهر هنا.
+// سجل النشاط بيتحمّل من السيرفر (activity_log) بالضغط عشان ما يبطّأش الشاشة.
+var _empDetId='',_empDetSec='all',_empDetAct=null;
+function _empDetData(emp){
+  var pid=emp.linked_profile_id,t=function(a,b){return a<b?1:a>b?-1:0;};
+  var colls=[];
+  (DB.debts||[]).forEach(function(d){(d.payments||[]).forEach(function(p){if(p.collected_by===pid)colls.push({debt:d,date:p.date||'',amount:p.amount||0});});});
+  return {
+    sales:(DB.sales||[]).filter(function(s){return s.created_by===pid;}).sort(function(a,b){return t(a.date||'',b.date||'');}),
+    moves:(DB.movements||[]).filter(function(m){return m.created_by===pid;}).sort(function(a,b){return t(a.opened_at||'',b.opened_at||'');}),
+    exps:(DB.expenses||[]).filter(function(e){return e.created_by===pid;}).sort(function(a,b){return t(a.date||'',b.date||'');}),
+    wds:(DB.part_withdrawals||[]).filter(function(w){return w.employee_id===pid;}).sort(function(a,b){return t(a.withdrawn_at||'',b.withdrawn_at||'');}),
+    purs:(DB.purchases||[]).filter(function(p){return p.created_by===pid;}).sort(function(a,b){return t(a.date||'',b.date||'');}),
+    colls:colls.sort(function(a,b){return t(a.date,b.date);})
+  };
+}
 function openEmployeeDetailReport(empId){
   var emp=(DB.accounts.employees||[]).find(function(e){return e.id===empId;});if(!emp)return;
-  var pid=emp.linked_profile_id;
-  var bal=_computeEmpCashBalance(emp)||{since:'',salesSum:0,debtPaySum:0,advSum:0,expSum:0,salarySum:0,balance:0};
-  var sales=(DB.sales||[]).filter(function(s){return s.created_by===pid;}).sort(function(a,b){return(b.date||'')<(a.date||'')?-1:1;});
-  var moves=(DB.movements||[]).filter(function(m){return m.created_by===pid;}).sort(function(a,b){return(b.opened_at||'')<(a.opened_at||'')?-1:1;});
-  // ⚠️ v240 — "كل البيانات اللي دخلها المهندس" كانت ناقصة تفاصيل المصروفات (كان مجموع بس)
-  var exps=(DB.expenses||[]).filter(function(e){return e.created_by===pid;}).sort(function(a,b){return(b.date||'')<(a.date||'')?-1:1;});
-
+  _empDetId=empId;_empDetSec='all';_empDetAct=null;
   document.getElementById('modal-title').textContent='👤 صفحة المهندس — '+(emp.name||'');
-  document.getElementById('modal-body').innerHTML=
-    '<div style="background:#eef2ff;border-radius:10px;padding:10px 12px;margin-bottom:12px">'+
-      '<div style="font-size:11px;color:#4338ca;font-weight:700;margin-bottom:6px">💰 رصيد الأمانة (من '+esc(fmtDate(bal.since))+')</div>'+
-      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:11px">'+
-      '<div>مبيعات: <b>'+fmt(bal.salesSum)+'</b></div>'+
-      '<div>تحصيل ديون عملاء: <b>'+fmt(bal.debtPaySum)+'</b></div>'+
-      '<div>عهدة اتدّت له: <b>'+fmt(bal.advSum)+'</b></div>'+
-      '<div>مصروفات سجّلها: <b style="color:#dc2626">-'+fmt(bal.expSum)+'</b></div>'+
-      '<div>رواتب اتصرفتله: <b style="color:#dc2626">-'+fmt(bal.salarySum)+'</b></div>'+
-      '<div style="font-weight:900;color:'+(bal.balance>=0?'#1e40af':'#dc2626')+'">الصافي معاه دلوقتي: '+fmt(bal.balance)+'</div>'+
-      '</div></div>'+
-    '<div style="font-weight:800;font-size:13px;margin-bottom:6px">🧾 آخر فواتيره ('+sales.length+')</div>'+
-    (sales.length?sales.slice(0,20).map(function(s){
-      return '<div onclick="closeModal();openSaleModal('+jsStr(s.id)+')" style="cursor:pointer;display:flex;justify-content:space-between;background:#f8fafc;border-radius:8px;padding:7px 10px;margin-bottom:5px;font-size:12px">'+
-        '<span>'+esc(s.customer||'—')+' — '+esc(fmtDate(s.date))+'</span><b>'+fmt(s.total)+'</b></div>';
-    }).join(''):'<div class="empty">مفيش فواتير</div>')+
-    '<div style="font-weight:800;font-size:13px;margin:12px 0 6px">🔧 آخر تحركاته ('+moves.length+')</div>'+
-    (moves.length?moves.slice(0,20).map(function(m){
-      return '<div onclick="closeModal();openMovementDetail('+jsStr(m.id)+')" style="cursor:pointer;display:flex;justify-content:space-between;background:#f8fafc;border-radius:8px;padding:7px 10px;margin-bottom:5px;font-size:12px">'+
-        '<span>'+esc(m.customer||'—')+' — '+esc(m.device||'')+'</span><span style="color:#94a3b8">'+esc(fmtDate(m.opened_at))+'</span></div>';
-    }).join(''):'<div class="empty">مفيش تحركات</div>')+
-    '<div style="font-weight:800;font-size:13px;margin:12px 0 6px">💸 مصروفاته ('+exps.length+')</div>'+
-    (exps.length?exps.slice(0,20).map(function(e){
-      return '<div onclick="closeModal();openEditExpenseModal('+jsStr(e.id)+')" style="cursor:pointer;display:flex;justify-content:space-between;background:#f8fafc;border-radius:8px;padding:7px 10px;margin-bottom:5px;font-size:12px">'+
-        '<span>'+esc(e.type||'—')+' — '+esc(fmtDate(e.date))+'</span><b style="color:#dc2626">-'+fmt(e.amount)+'</b></div>';
-    }).join(''):'<div class="empty">مفيش مصروفات</div>')+
-    '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal();openEmployeesReport()">‹ رجوع لكل المهندسين</button></div>';
-  openModal();
+  document.getElementById('modal-body').innerHTML='<div id="ed-body"></div>'+
+    '<div class="modal-actions"><button class="btn btn-sm" style="background:#fffbeb;color:#92400e;border:none;flex:1" onclick="openEmployeeStatement('+jsStr(emp.id)+')">📒 كشف حساب الراتب</button>'+
+    '<button class="btn btn-outline btn-full" style="flex:1" onclick="closeModal();openEmployeesReport()">‹ رجوع</button></div>';
+  openModal();_renderEmpDet();
+}
+function _empDetSet(sec){_empDetSec=sec;_renderEmpDet();if(sec==='act'&&_empDetAct===null)_empDetLoadAct();}
+function _renderEmpDet(){
+  var emp=(DB.accounts.employees||[]).find(function(e){return e.id===_empDetId;});if(!emp)return;
+  var el=document.getElementById('ed-body');if(!el)return;
+  var bal=_computeEmpCashBalance(emp)||{since:'',salesSum:0,debtPaySum:0,advSum:0,expSum:0,salarySum:0,balance:0};
+  var D=_empDetData(emp);
+  function card(k,icon,label,n){
+    var act=_empDetSec===k;
+    return '<div onclick="_empDetSet(\''+k+'\')" style="cursor:pointer;background:'+(act?'#e0e7ff':'#f8fafc')+';border:2px solid '+(act?'#4338ca':'#e2e8f0')+';border-radius:10px;padding:7px 3px;text-align:center">'+
+      '<div style="font-size:15px">'+icon+'</div><div style="font-size:10px;color:#475569;font-weight:700">'+label+'</div><b style="font-size:13px;color:#4338ca">'+n+'</b></div>';
+  }
+  function sec(k,title,rowsHtml,n){
+    if(_empDetSec!=='all'&&_empDetSec!==k)return '';
+    return '<div style="font-weight:800;font-size:13px;margin:12px 0 6px">'+title+' ('+n+')</div>'+(rowsHtml||'<div class="empty">مفيش</div>');
+  }
+  function row(click,l,r,rc){return '<div onclick="'+click+'" style="cursor:pointer;display:flex;justify-content:space-between;gap:8px;background:#f8fafc;border-radius:8px;padding:7px 10px;margin-bottom:5px;font-size:12px"><span style="flex:1">'+l+'</span><b style="color:'+(rc||'#0f172a')+'">'+r+'</b></div>';}
+  var cap=_empDetSec==='all'?20:60;
+  var salesH=D.sales.slice(0,cap).map(function(s){return row('closeModal();openSaleModal('+jsStr(s.id)+')',esc(s.customer||'—')+' — '+esc(fmtDate(s.date)),fmt(s.total));}).join('');
+  var movesH=D.moves.slice(0,cap).map(function(m){return row('closeModal();openMovementDetail('+jsStr(m.id)+')',esc(m.customer||'—')+' — '+esc(m.device||''),esc(fmtDate(m.opened_at)),'#94a3b8');}).join('');
+  var expsH=D.exps.slice(0,cap).map(function(e){return row('closeModal();openEditExpenseModal('+jsStr(e.id)+')',esc(e.type||'—')+' — '+esc(fmtDate(e.date)),'-'+fmt(e.amount),'#dc2626');}).join('');
+  var wdsH=D.wds.slice(0,cap).map(function(w){
+    var mv=w.movement_id&&(DB.movements||[]).some(function(m){return m.id===w.movement_id;});
+    return row(mv?'closeModal();openMovementDetail('+jsStr(w.movement_id)+')':'void 0','📦 '+esc(w.product_name||'—')+' — '+esc(fmtDate((w.withdrawn_at||'').slice(0,10))),'× '+fmtQty(w.qty||0),'#b45309');}).join('');
+  var pursH=D.purs.slice(0,cap).map(function(p){return row('closeModal();openPurchaseModal('+jsStr(p.id)+')',esc(p.supplier||'—')+' — '+esc(fmtDate(p.date)),fmt((p.total||0)+(p.extra_cost||0)));}).join('');
+  var collsH=D.colls.slice(0,cap).map(function(c){return row('closeModal();openEditDebtModal('+jsStr(c.debt.id)+')',esc(c.debt.name||'—')+' — '+esc(fmtDate(c.date)),'+'+fmt(c.amount),'#15803d');}).join('');
+  var actH=_empDetAct===null?'<button class="btn btn-outline btn-full btn-sm" onclick="_empDetLoadAct()">📜 تحميل سجل نشاطه من السيرفر</button>':_empDetAct;
+  el.innerHTML=
+    '<div style="background:#eef2ff;border-radius:10px;padding:10px 12px;margin-bottom:10px">'+
+    '<div style="font-size:11px;color:#4338ca;font-weight:700;margin-bottom:6px">💰 رصيد الأمانة (من '+esc(fmtDate(bal.since))+')</div>'+
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:11px">'+
+    '<div>مبيعات: <b>'+fmt(bal.salesSum)+'</b></div><div>تحصيل ديون عملاء: <b>'+fmt(bal.debtPaySum)+'</b></div>'+
+    '<div>عهدة اتدّت له: <b>'+fmt(bal.advSum)+'</b></div><div>مصروفات سجّلها: <b style="color:#dc2626">-'+fmt(bal.expSum)+'</b></div>'+
+    '<div>رواتب اتصرفتله: <b style="color:#dc2626">-'+fmt(bal.salarySum)+'</b></div>'+
+    '<div style="font-weight:900;color:'+(bal.balance>=0?'#1e40af':'#dc2626')+'">الصافي معاه دلوقتي: '+fmt(bal.balance)+'</div></div></div>'+
+    '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:6px">'+
+    card('all','🗂️','الكل','')+card('sales','🧾','فواتير',D.sales.length)+card('moves','🔧','تحركات',D.moves.length)+card('exps','💸','مصروفات',D.exps.length)+
+    card('wds','📦','سحب مخزن',D.wds.length)+card('purs','🛒','مشتريات',D.purs.length)+card('colls','💳','تحصيل',D.colls.length)+card('act','📜','السجل','')+'</div>'+
+    (_empDetSec==='act'||_empDetSec==='all'?'':'')+
+    sec('sales','🧾 فواتيره',salesH,D.sales.length)+sec('moves','🔧 تحركاته',movesH,D.moves.length)+sec('exps','💸 مصروفاته',expsH,D.exps.length)+
+    sec('wds','📦 سحبه من المخزن',wdsH,D.wds.length)+sec('purs','🛒 مشترياته',pursH,D.purs.length)+sec('colls','💳 تحصيله من الديون',collsH,D.colls.length)+
+    ((_empDetSec==='all'||_empDetSec==='act')?'<div style="font-weight:800;font-size:13px;margin:12px 0 6px">📜 سجل نشاطه الكامل (كل تعديل/حذف/إضافة)</div><div id="ed-act">'+actH+'</div>':'');
+}
+async function _empDetLoadAct(){
+  var emp=(DB.accounts.employees||[]).find(function(e){return e.id===_empDetId;});if(!emp||!emp.linked_profile_id)return;
+  var box=document.getElementById('ed-act');if(box)box.innerHTML='<div class="empty">جاري التحميل...</div>';
+  try{
+    if(typeof sb==='undefined')throw new Error('غير متصل بالسيرفر');
+    var res=await sb.from('activity_log').select('*').eq('user_id',emp.linked_profile_id).order('created_at',{ascending:false}).limit(80);
+    if(res.error)throw new Error(res.error.message||'خطأ');
+    var rows=res.data||[];
+    _empDetAct=rows.length?rows.map(function(r){
+      var d=null;try{d=r.details?JSON.parse(r.details):null;}catch(e){}
+      var src=(d&&d.row)?d.row:(d||{});
+      var label=src.label||src.name||src.desc||src.title||src.customer||src.supplier||(d&&d.event)||'';
+      var amt=src.amount!==undefined?src.amount:(src.total!==undefined?src.total:null);
+      var dt=new Date(r.created_at),tm=isNaN(dt.getTime())?'':dt.toLocaleTimeString('ar-EG',{hour:'2-digit',minute:'2-digit'});
+      return '<div style="display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid #f1f5f9;padding:6px 2px;font-size:12px"><span style="flex:1">'+esc(__ACTIVITY_ACTION_NAMES[r.action]||r.action)+' '+esc(__ACTIVITY_TABLE_NAMES[r.table_name]||r.table_name||'')+(label?' — '+esc(String(label).slice(0,60)):'')+(amt!==null?' ('+fmt(amt)+')':'')+'</span><span style="color:#94a3b8;white-space:nowrap">'+esc(fmtDate((r.created_at||'').slice(0,10)))+' '+tm+'</span></div>';
+    }).join(''):'<div class="empty">مفيش نشاط مسجّل</div>';
+  }catch(e){_empDetAct='<div style="color:#dc2626;font-size:12px">تعذّر تحميل السجل: '+esc(e.message)+'</div>';}
+  if(document.getElementById('ed-act')&&(_empDetSec==='all'||_empDetSec==='act'))document.getElementById('ed-act').innerHTML=_empDetAct;
 }
 
 function openOwnerTimeline(){
