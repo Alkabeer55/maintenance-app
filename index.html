@@ -11681,28 +11681,44 @@ function openExpenseTemplatesSettings(){
     '<div style="background:#f8fafc;border-radius:10px;padding:10px;margin-top:10px">'+
     '<div style="font-size:12px;font-weight:800;color:#374151;margin-bottom:6px">+ قالب جديد</div>'+
     fld('et-name','اسم القالب (زي: بنزين العربية)','text','')+
-    '<div class="field"><label>العنوان الرئيسي</label><select id="et-cat" style="width:100%;padding:9px;border:2px solid #e2e8f0;border-radius:9px;font-family:inherit">'+
+    '<div class="field"><label>العنوان الرئيسي</label><select id="et-cat" onchange="_etCatChange()" style="width:100%;padding:9px;border:2px solid #e2e8f0;border-radius:9px;font-family:inherit">'+
     cats.map(function(c){return '<option>'+esc(c)+'</option>';}).join('')+'</select></div>'+
-    fld('et-sub','الفرع (اختياري)','text','')+
+    '<div id="et-emp-wrap" style="display:none"><div class="field"><label>الموظف</label><select id="et-emp" style="width:100%;padding:9px;border:2px solid #e2e8f0;border-radius:9px;font-family:inherit">'+
+    (DB.accounts.employees||[]).filter(function(e){return e.active!==false;}).map(function(e){return '<option value="'+e.id+'">'+esc(e.name)+'</option>';}).join('')+'</select></div>'+
+    '<div class="field"><label>نوع الصرف</label><select id="et-kind" style="width:100%;padding:9px;border:2px solid #e2e8f0;border-radius:9px;font-family:inherit"><option value="advance">💵 سلفة — تتخصم من الراتب الأساسي</option><option value="bonus">🎁 مكافأة — فوق الراتب</option></select></div></div>'+
+    fld('et-sub','الفرع (اختياري)','text','')+'<div id="et-sub-chips" style="display:flex;gap:5px;flex-wrap:wrap;margin:-6px 0 8px"></div>'+
     fld('et-amount','المبلغ الافتراضي (ج)','number','')+
     '<button class="btn btn-orange btn-full" onclick="__runOnce(this,addExpenseTemplate)" style="margin-top:6px">+ إضافة القالب</button>'+
     '</div>'+
     '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal();renderExpensesList()">تم</button></div>';
   openModal();
+  _etCatChange();
+}
+// ⚠️ v249 — اختيار الفئة في الاختصار: فروع الفئة (نفس فروع فورم المصروف) كأزرار، ولو "رواتب" يظهر الموظف ونوع الصرف
+function _etCatChange(){
+  var cat=v('et-cat'),subs=getExpCategories()[cat]||[];
+  var w=document.getElementById('et-emp-wrap');if(w)w.style.display=(cat==='رواتب')?'block':'none';
+  var ch=document.getElementById('et-sub-chips');if(!ch)return;
+  ch.innerHTML=subs.map(function(x,i){return '<button type="button" onclick="document.getElementById(\'et-sub\').value=getExpCategories()[v(\'et-cat\')]['+i+']" style="padding:5px 11px;background:#fff7ed;border:1.5px solid #fed7aa;border-radius:8px;font-family:inherit;font-size:12px;cursor:pointer">'+esc(x)+'</button>';}).join('');
 }
 function _renderExpTmplList(){
   var list=DB.settings.expenseTemplates||[];
   if(!list.length)return '<div class="empty" style="padding:10px 0">مفيش قوالب لسه</div>';
   return list.map(function(t,i){
     return '<div style="display:flex;justify-content:space-between;align-items:center;background:#fff7ed;border-radius:9px;padding:8px 11px;margin-bottom:6px">'+
-      '<span style="font-size:12px;font-weight:700;color:#374151">⚡ '+esc(t.name)+' — '+fmt(t.amount)+' <span style="color:#94a3b8">('+esc(t.category)+(t.sub?' / '+esc(t.sub):'')+')</span></span>'+
+      '<span style="font-size:12px;font-weight:700;color:#374151">⚡ '+esc(t.name)+' — '+fmt(t.amount)+' <span style="color:#94a3b8">('+esc(t.category)+(t.sub?' / '+esc(t.sub):'')+(t.employee_id?' — '+esc(((DB.accounts.employees||[]).find(function(e){return e.id===t.employee_id;})||{}).name||'')+(t.pay_kind==='bonus'?' مكافأة':' سلفة'):'')+')</span></span>'+
       '<button onclick="delExpenseTemplate('+i+')" style="background:none;border:none;color:#dc2626;font-size:14px;cursor:pointer">🗑️</button></div>';
   }).join('');
 }
 async function addExpenseTemplate(){
   var name=v('et-name');if(!name)return showToast('⚠️ اكتب اسم القالب','#dc2626');
   var amount=+v('et-amount')||0;
-  DB.settings.expenseTemplates=(DB.settings.expenseTemplates||[]).concat([{name:name,category:v('et-cat'),sub:v('et-sub'),amount:amount}]);
+  var _cat=v('et-cat'),_isSal=(_cat==='رواتب');
+  if(_isSal&&!v('et-emp'))return showToast('⚠️ اختار الموظف','#dc2626');
+  var _tpl={name:name,category:_cat,sub:v('et-sub'),amount:amount};
+  if(_isSal){_tpl.employee_id=v('et-emp');_tpl.pay_kind=v('et-kind')||'advance';}
+  if(_tpl.sub)addExpSubcategory(_cat,_tpl.sub); // الفرع الجديد يدخل نفس قايمة الفورم
+  DB.settings.expenseTemplates=(DB.settings.expenseTemplates||[]).concat([_tpl]);
   await persist();
   document.getElementById('exp-tmpl-list').innerHTML=_renderExpTmplList();
   document.getElementById('et-name').value='';document.getElementById('et-sub').value='';document.getElementById('et-amount').value='';
