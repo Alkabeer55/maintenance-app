@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v251</title>
+<title>ابو حوده الحلو الجميل v252</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="1448-04-22 — v251";
+<script>var BUILD_STAMP="1448-04-23 — v252";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -54,6 +54,15 @@
       مسار خالص عن طريق confirmAction، الزرار بتاعها لازم __runOnce من أول يوم.
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v252: [🐛 مبلغ مكرر في كشف الحساب + ربط الديون القديمة + شاشة مصروف موحدة + رجوع + القرآن + عملاء بفروع]
+     1) الكشف: الدين القديم "مشترى — تاريخ" / "فاتورة" كان بيتحسب صف مستقل وبيتكرر مع المشترى → دلوقتي بيتربط تلقائي بالمشترى/الفاتورة (نفس الاسم + نفس التاريخ + مبلغ مناسب).
+     2) 🔗 إصلاح ربط الديون القديمة (من الإعدادات): يربط الديون القديمة ويظبط "المدفوع" في المشتريات/الفواتير. والسداد نفسه بقى يربط الدين القديم أوتوماتيك.
+     3) الطباعة: التاريخ الميلادي جنب الهجري + "صيانة:" قبل الخدمات.
+     4) شاشة المصروف واحدة للإضافة والتعديل (الموظف + سلفة/مكافأة + على حساب موظف) + تقرير المصروفات بيجمّع الفروع حسب الفرع زي الراتب حسب الموظف.
+     5) زرار الرجوع بيقفل الشاشة المفتوحة ويرجع للي قبلها بدل ما يخرجك.
+     6) عائلات المكن: النوع (ليزر / إنك جيت) من قايمة الأنواع.
+     7) القرآن: اختيار الشيخ (اللحيدان…) + حفظ مكان التوقف + تشغيل عشوائي + تنزيل بدون نت.
+     8) عملاء بفروع: كل عميل ممكن يكون له فروع، وكشف الحساب يجمّعهم.
 v251: [🧩 توحيد المكن + 📊 تحليل العملاء + 📿 الأدعية في الرئيسية وإيماني]
      1) توحيد أسماء المكن: الأشكال اللي لها نفس الرقم (Mpc2500 / Mpc 2500 / 2500ريكو) بتتجمع، تختار الاسم والشركة والنوع وتوحّد بضغطة،
         وبيتطبق على مكن العملاء (الأصل في model_orig). أي شكل جديد بنفس الرقم بيتحسب تلقائي على نفس العائلة.
@@ -4313,7 +4322,7 @@ var APP_TITLE='ابو حوده الحلو الجميل';
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=251;
+var APP_VERSION=252;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -5451,8 +5460,39 @@ document.addEventListener('focusin', function(e){
   if(!t.closest('#modal-box'))return;
   setTimeout(function(){ __fitModalToViewport(); t.scrollIntoView({block:'center',behavior:'smooth'}); }, 320);
 }, true);
+
+// ⚠️ v252 — زرار الرجوع (التليفون) كان بيرجع للشاشة السابقة ويسيب المودال، فكان "يخرجك" من الصفحة.
+// دلوقتي: لو في نافذة مفتوحة يقفلها (أو يرجع للنافذة اللي قبلها لو انفتحت من نافذة)، وبعدين بس يرجع بين الشاشات.
+var __modalStack=[],__modalCur=null,__modalRestoring=false;
+function __modalSnap(){var t=document.getElementById('modal-title'),b=document.getElementById('modal-body');return t&&b?{title:t.textContent,html:b.innerHTML}:null;}
+function __modalIsOpen(){var o=document.getElementById('modal-overlay');return !!(o&&o.classList.contains('open'));}
+(function(){
+  function init(){
+    var body=document.getElementById('modal-body');if(!body||body.__tracked)return;body.__tracked=true;
+    new MutationObserver(function(){
+      if(__modalRestoring||!__modalIsOpen())return;
+      var cur=__modalSnap();if(!cur)return;
+      if(__modalCur&&__modalCur.title!==cur.title&&__modalStack.length<12)__modalStack.push(__modalCur);
+      __modalCur=cur;
+    }).observe(body,{childList:true});
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+function __modalBack(){
+  if(!__modalIsOpen())return false;
+  if(__modalStack.length){
+    var prev=__modalStack.pop();
+    __modalRestoring=true;
+    document.getElementById('modal-title').textContent=prev.title;
+    document.getElementById('modal-body').innerHTML=prev.html;
+    __modalCur=prev;
+    setTimeout(function(){__modalRestoring=false;},0);
+  }else closeModal();
+  return true;
+}
 function openModal(){document.getElementById('modal-overlay').classList.add('open');setTimeout(__fitModalToViewport,50);}
 function closeModal(){
+  __modalStack=[];__modalCur=null; // v252
   document.getElementById('modal-overlay').classList.remove('open');
   var __ov=document.getElementById('modal-overlay');if(__ov){__ov.style.height='';__ov.style.top='';}
   var __mb=document.getElementById('modal-box');if(__mb)__mb.style.maxHeight='';
@@ -10772,11 +10812,92 @@ function renderDebts(){
 // ⚠️ v246 — شكل الكشف بقى زي كشف الحساب المحاسبي اللي العميل بعت صورته: التاريخ | البيان (الصنف) | الكمية | مدين | دائن | الرصيد
 // الرصيد تراكمي بعد كل سطر. مدين = هو أخد مني / أنا سدّدت له ، دائن = أنا أخدت منه / هو سدّد لي.
 // الرصيد الموجب = "عليه" (هو مديون لي) ، السالب = "له" (أنا مديون له). مجموع (مدين − دائن) = نفس صافي شاشة الديون.
-var _twsName='',_twsDir='all',_twsRange='all',_twsDesc=false;
+
+// ⚠️ v252 — ربط الديون القديمة (من قبل ما source_purchase_id/source_sale_id يتسجلوا): دين "مشترى — 2026-07-14" أو "فاتورة"
+// كان بيظهر في كشف الحساب كصف مستقل جنب المشترى نفسه فالمبلغ بيتكرر. المطابقة: نفس الاسم + نفس التاريخ (أو التاريخ المكتوب في وصف الدين) + مبلغ الدين لا يزيد عن إجمالي المعاملة.
+function _debtDescDate(d){var m=String(d.desc||d.details||'').match(/\d{4}-\d{2}-\d{2}/);return m?m[0]:'';}
+function _linkLegacyDebts(debts,sales,purchs){
+  var claimedS={},claimedP={},map={};
+  debts.forEach(function(d){if(d.source_sale_id)claimedS[d.source_sale_id]=1;if(d.source_purchase_id)claimedP[d.source_purchase_id]=1;});
+  debts.forEach(function(d){
+    if(d.source_sale_id||d.source_purchase_id||d.source==='consignment'||d.source==='fixed_exp')return;
+    var dd=_debtDescDate(d),key=normalizeAr(d.name||''),tot=d.total||0;
+    function best(arr,gt){return arr.sort(function(a,b){return Math.abs(gt(a)-tot)-Math.abs(gt(b)-tot);})[0];}
+    if(d.type==='supplier'){
+      var gP=function(p){return (p.total||0)+(p.extra_cost||0);};
+      var c=purchs.filter(function(p){return !claimedP[p.id]&&normalizeAr(p.supplier||'')===key&&(p.date===d.date||(dd&&p.date===dd))&&tot<=gP(p)+0.01;});
+      if(c.length){var b=best(c,gP);claimedP[b.id]=1;map[d.id]={kind:'purch',id:b.id};}
+    }else if(d.type==='customer'){
+      var gS=function(x){return x.total||0;};
+      var c2=sales.filter(function(x){return !claimedS[x.id]&&normalizeAr(x.customer||'')===key&&(x.date===d.date||(dd&&x.date===dd))&&tot<=gS(x)+0.01;});
+      if(c2.length){var b2=best(c2,gS);claimedS[b2.id]=1;map[d.id]={kind:'sale',id:b2.id};}
+    }
+  });
+  return map;
+}
+// يربط دين واحد (بيتنادى من السداد) ويرجع الحقول اللي اتضافت عشان تتحفظ في السيرفر
+function _autoLinkDebtSync(d){
+  if(d.source_sale_id||d.source_purchase_id)return {};
+  var m=_linkLegacyDebts(DB.debts||[],DB.sales||[],DB.purchases||[])[d.id];
+  if(!m)return {};
+  if(m.kind==='purch'){d.source_purchase_id=m.id;return {source_purchase_id:m.id};}
+  d.source_sale_id=m.id;return {source_sale_id:m.id};
+}
+function openLinkRepair(){
+  var map=_linkLegacyDebts(DB.debts||[],DB.sales||[],DB.purchases||[]);
+  var ids=Object.keys(map);
+  document.getElementById('modal-title').textContent='🔗 إصلاح ربط الديون القديمة';
+  document.getElementById('modal-body').innerHTML=
+    '<div style="background:#eff6ff;border-radius:10px;padding:10px 12px;margin-bottom:10px;font-size:12px;color:#1e40af;line-height:1.8">بيربط الديون القديمة (اللي اتسجلت قبل نظام الربط) بالمشترى/الفاتورة بتاعها، وبيظبط خانة <b>المدفوع</b> فيهم، فتتحل مشكلة "لسه مديون للمورد رغم السداد" وتتصلح كشوف الحساب.</div>'+
+    (ids.length?ids.map(function(id){
+      var d=DB.debts.find(function(x){return x.id===id;}),m=map[id];
+      var doc=m.kind==='purch'?(DB.purchases||[]).find(function(x){return x.id===m.id;}):(DB.sales||[]).find(function(x){return x.id===m.id;});
+      return '<div style="background:#f8fafc;border-radius:9px;padding:8px 11px;margin-bottom:6px;font-size:12px"><b>'+esc(d.name)+'</b> — دين '+fmt(d.total)+' ('+fmt(d.paid||0)+' مسدّد)<br><span style="color:#64748b">← '+(m.kind==='purch'?'مشترى':'فاتورة')+' '+esc(fmtDate(doc.date))+' بإجمالي '+fmt(m.kind==='purch'?(doc.total||0)+(doc.extra_cost||0):doc.total)+'</span></div>';
+    }).join('')+'<button class="btn btn-primary btn-full" style="margin-top:6px" onclick="__runOnce(this,_applyLinkRepair)">🔗 اربط '+ids.length+' دين وظبّط المدفوع</button>'
+    :'<div class="empty">كل الديون مربوطة ✅ — مفيش حاجة تتصلح</div>')+
+    '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+  openModal();
+}
+async function _applyLinkRepair(){
+  var map=_linkLegacyDebts(DB.debts||[],DB.sales||[],DB.purchases||[]),ids=Object.keys(map),pDocs={},sDocs={};
+  for(var i=0;i<ids.length;i++){
+    var id=ids[i],m=map[id],upd=m.kind==='purch'?{source_purchase_id:m.id}:{source_sale_id:m.id};
+    DB.debts=DB.debts.map(function(x){return x.id===id?Object.assign({},x,upd):x;});
+    try{await dbUpdate('debts',id,upd);}catch(e){}
+    if(m.kind==='purch')pDocs[m.id]=1;else sDocs[m.id]=1;
+  }
+  // المدفوع = الإجمالي − المتبقي على الديون المرتبطة
+  for(var pid in pDocs){
+    var pu=DB.purchases.find(function(x){return x.id===pid;});if(!pu)continue;
+    var gT=(pu.total||0)+(pu.extra_cost||0),rem=DB.debts.filter(function(d){return d.source_purchase_id===pid;}).reduce(function(t,d){return t+((d.total||0)-(d.paid||0));},0);
+    var np=Math.max(0,Math.min(gT,gT-rem));
+    DB.purchases=DB.purchases.map(function(x){return x.id===pid?Object.assign({},x,{paid:np}):x;});
+    try{await dbUpdate('purchases',pid,{paid:np});}catch(e){}
+  }
+  for(var sid in sDocs){
+    var sa=DB.sales.find(function(x){return x.id===sid;});if(!sa)continue;
+    var rem2=DB.debts.filter(function(d){return d.source_sale_id===sid;}).reduce(function(t,d){return t+((d.total||0)-(d.paid||0));},0);
+    var np2=Math.max(0,Math.min(sa.total||0,(sa.total||0)-rem2));
+    DB.sales=DB.sales.map(function(x){return x.id===sid?Object.assign({},x,{paid:np2}):x;});
+    try{await dbUpdate('sales',sid,{paid:np2});}catch(e){}
+  }
+  await persist();
+  showToast('✅ اتربط '+ids.length+' دين واتظبط المدفوع','#16a34a');
+  openLinkRepair();
+}
+var _twsName='',_twsDir='all',_twsRange='all',_twsDesc=false,_twsWithBranches=true;
+function _twsNames(){
+  var key=normalizeAr(_twsName||''),set={};set[key]=1;
+  if(_twsWithBranches){var c=(DB.clients||[]).find(function(x){return normalizeAr(x.name)===key;});if(c)_clientBranches(c).forEach(function(b){set[normalizeAr(b.name)]=1;});}
+  return set;
+}
+function _twsHasBranches(){var c=(DB.clients||[]).find(function(x){return normalizeAr(x.name)===normalizeAr(_twsName||'');});return !!(c&&_clientBranches(c).length);}
+function _twsToggleBranches(){_twsWithBranches=!_twsWithBranches;_renderTws();}
+function _gregTxt(iso){var m=String(iso||'').match(/^(\d{4})-(\d{2})-(\d{2})/);return m?m[3]+'/'+m[2]+'/'+m[1]+' م':'';}
 function _twsBalTxt(b){return b>0.001?fmt(b)+' عليه':b<-0.001?fmt(Math.abs(b))+' له':'0';}
 function _twsEntries(){
   var docs=_twsBuild(),E=[],seq=0;
-  function add(date,x,name,qty,debit,credit,first){E.push({date:date||'',seq:seq++,kind:x.kind,id:x.id,title:x.title,name:name,qty:qty,debit:debit,credit:credit,first:first});}
+  function add(date,x,name,qty,debit,credit,first){E.push({date:date||'',seq:seq++,kind:x.kind,id:x.id,title:x.title+((x.who&&normalizeAr(x.who)!==normalizeAr(_twsName||''))?' • '+x.who:''),name:name,qty:qty,debit:debit,credit:credit,first:first});}
   docs.forEach(function(x){
     var isC=x.dir==='customer';
     x.lines.forEach(function(l,i){
@@ -10816,7 +10937,7 @@ function openTwoWayStatement(name){
   if(__isFieldHidden('debts','name')||__isFieldHidden('debts','total')||__isFieldHidden('debts','paid')){
     return showToast('🚫 مفيش صلاحية تشوف تفاصيل الديون. كلم المالك.','#dc2626');
   }
-  _twsName=name;_twsDir='all';_twsRange='all';_twsDesc=false;
+  _twsName=name;_twsDir='all';_twsRange='all';_twsDesc=false;_twsWithBranches=true;
   document.getElementById('modal-title').textContent='⚖️ كشف حساب — '+name;
   document.getElementById('modal-body').innerHTML=
     '<div id="tws-top"></div><div id="tws-list"></div>'+
@@ -10843,7 +10964,7 @@ function _twsTableHtml(E,forPrint){
   rowsE.forEach(function(e){
     var bc=e.bal>0.001?'#15803d':e.bal<-0.001?'#dc2626':'#475569';
     h+='<tr'+((forPrint||e.carry)?'':' onclick="_twsOpenDoc(\''+e.kind+'\',\''+e.id+'\')" style="cursor:pointer"')+'>'+
-      '<td style="'+td+'">'+esc(fmtDate(e.date))+'</td>'+
+      '<td style="'+td+'">'+esc(fmtDate(e.date))+(forPrint&&e.date?'<div style="font-size:10px;color:#64748b">'+_gregTxt(e.date)+'</div>':'')+'</td>'+
       '<td style="'+td+';text-align:right">'+(e.first?'<div style="font-size:9px;color:#94a3b8">'+esc(e.title)+'</div>':'')+esc(e.name||'')+'</td>'+
       '<td style="'+td+'">'+(e.qty!==''?fmtQty(e.qty):'')+'</td>'+
       '<td style="'+td+';color:#15803d;font-weight:700">'+(e.debit?fmt(e.debit):'')+'</td>'+
@@ -10860,8 +10981,8 @@ function _renderTws(){
   var top=document.getElementById('tws-top'),list=document.getElementById('tws-list');
   if(!top||!list)return;
   var E=_twsView(),tt=_twsTot(E);
-  var key=normalizeAr(_twsName),dn=0;
-  (DB.debts||[]).forEach(function(d){if(normalizeAr(d.name||'')===key){var r=(d.total||0)-(d.paid||0);dn+=(d.type==='customer'?r:-r);}});
+  var nset2=_twsNames(),dn=0;
+  (DB.debts||[]).forEach(function(d){if(nset2[normalizeAr(d.name||'')]){var r=(d.total||0)-(d.paid||0);dn+=(d.type==='customer'?r:-r);}});
   function card(dir,bg,bd,col,t1,v){
     return '<div onclick="_twsSetDir(\''+dir+'\')" style="cursor:pointer;flex:1;background:'+bg+';border:2.5px solid '+(_twsDir===dir?col:bd)+';border-radius:12px;padding:8px 4px;text-align:center">'+
       '<div style="font-size:10px;font-weight:800;color:'+col+'">'+t1+'</div><div style="font-size:14px;font-weight:900;color:'+col+'">'+v+'</div></div>';
@@ -10873,6 +10994,7 @@ function _renderTws(){
     card('credit','#dbeafe','#93c5fd','#1d4ed8','دائن',fmt(tt.c))+
     card('all','#fffbeb','#fde68a',netCol,'الرصيد (الكل)',_twsBalTxt(tt.bal))+'</div>'+
     '<div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px">'+[['all','الكل'],['m','الشهر الهجري'],['30','30 يوم'],['90','90 يوم'],['180','6 شهور']].map(function(r){var a=_twsRange===r[0];return '<button type="button" onclick="_twsSetRange(\''+r[0]+'\')" style="padding:5px 10px;border-radius:9px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;border:2px solid '+(a?'#92400e':'#e2e8f0')+';background:'+(a?'#fef3c7':'#fff')+';color:#92400e">'+r[1]+'</button>';}).join('')+
+    (_twsHasBranches()?'<button type="button" onclick="_twsToggleBranches()" style="padding:5px 10px;border-radius:9px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;border:2px solid #c7d2fe;background:'+(_twsWithBranches?'#e0e7ff':'#fff')+';color:#3730a3">'+(_twsWithBranches?'🏢 مع الفروع':'🏢 الرئيسي بس')+'</button>':'')+
     '<button type="button" onclick="_twsToggleOrder()" style="padding:5px 10px;border-radius:9px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;border:2px solid #cbd5e1;background:#f1f5f9;color:#334155">'+(_twsDesc?'⬇️ الأحدث فوق':'⬆️ الأقدم فوق')+'</button></div>'+
     '<div style="font-size:10px;color:#64748b;line-height:1.7;margin-bottom:8px">'+
     '<b style="color:#15803d">مدين</b> = هو أخد مني / أنا سدّدت له &nbsp;•&nbsp; <b style="color:#1d4ed8">دائن</b> = أنا أخدت منه / هو سدّد لي<br>'+
@@ -10885,7 +11007,7 @@ function _twsPrint(){
   var E=_twsView(),tt=_twsTot(E);
   var netCol=tt.bal>0.001?'#15803d':tt.bal<-0.001?'#dc2626':'#475569';
   var sentence=tt.bal>0.001?'الباقي: هو عليه لي '+fmt(tt.bal)+' ج':tt.bal<-0.001?'الباقي: أنا عليّ له '+fmt(Math.abs(tt.bal))+' ج':'الحساب متعادل ✅';
-  var body='<div style="margin-bottom:8px;color:#64748b">تاريخ الكشف: '+esc(fmtDate(today()))+'</div>'+
+  var body='<div style="margin-bottom:8px;color:#64748b">تاريخ الكشف: '+esc(fmtDate(today()))+' — '+_gregTxt(today())+'</div>'+
     '<div style="font-size:11px;color:#475569;margin-bottom:8px">مدين = هو أخد مني / أنا سدّدت له &nbsp;|&nbsp; دائن = أنا أخدت منه / هو سدّد لي &nbsp;|&nbsp; الرصيد: عليه = هو مديون لي ، له = أنا مديون له</div>'+
     _twsTableHtml(E,true)+
     '<div style="border:2px solid '+netCol+';border-radius:10px;padding:10px;text-align:center;font-size:17px;font-weight:900;color:'+netCol+';margin:14px 0">'+sentence+'</div>';
@@ -10903,12 +11025,15 @@ function _twsShareText(){
   else window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank');
 }
 function _twsBuild(){
-  var key=normalizeAr(_twsName||'');
-  function same(n){return normalizeAr(n||'')===key;}
+  var nset=_twsNames();
+  function same(n){return !!nset[normalizeAr(n||'')];}
   var sales=(DB.sales||[]).filter(function(s){return same(s.customer);});
   var purchs=(DB.purchases||[]).filter(function(p){return same(p.supplier);});
   var debts=(DB.debts||[]).filter(function(d){return same(d.name);});
   var sId={},pId={};
+  var lg=_linkLegacyDebts(debts,sales,purchs); // v252
+  function dSale(d){return d.source_sale_id||((lg[d.id]&&lg[d.id].kind==='sale')?lg[d.id].id:null);}
+  function dPur(d){return d.source_purchase_id||((lg[d.id]&&lg[d.id].kind==='purch')?lg[d.id].id:null);}
   sales.forEach(function(s){sId[s.id]=1;});
   purchs.forEach(function(p){pId[p.id]=1;});
   function pays(d){
@@ -10923,29 +11048,29 @@ function _twsBuild(){
     var hasLines=(s.items||[]).length||(s.services||[]).length;
     if(!hasLines&&!(s.total>0))return; // زيارة بدون بيع
     var lines=(s.items||[]).map(function(it){return {name:it.name,qty:it.qty,price:it.price,amt:(it.qty||0)*(it.price||0)};});
-    (s.services||[]).forEach(function(sv){lines.push({name:'🔧 '+(sv.name||'خدمة'),qty:'',price:'',amt:sv.price||0});});
+    (s.services||[]).forEach(function(sv){lines.push({name:'🔧 صيانة: '+(sv.name||'خدمة'),qty:'',price:'',amt:sv.price||0});});
     if((s.discount||0)>0)lines.push({name:'خصم',qty:'',price:'',amt:-s.discount});
     if(!lines.length)lines.push({name:s.note||'مبلغ',qty:'',price:'',amt:s.total||0});
     // ⚠️ v250 — sale.paid بيتزود لما العميل يسدّد الدين، فاستخدامه كـ"دفع وقت الفاتورة" كان بيحسب السدادات مرتين.
     // الصح: الدفع الأصلي = الإجمالي − إجمالي دين الفاتورة (الدين بيتعمل بقيمة المتبقي وقت البيع).
     var pp=[],ldT=0,ldN=0;
-    debts.forEach(function(d){if(d.type==='customer'&&d.source_sale_id===s.id){pp=pp.concat(pays(d));ldT+=(d.total||0);ldN++;}});
+    debts.forEach(function(d){if(d.type==='customer'&&dSale(d)===s.id){pp=pp.concat(pays(d));ldT+=(d.total||0);ldN++;}});
     var upS=ldN?Math.max(0,(s.total||0)-ldT):(s.paid||0);
-    docs.push({dir:'customer',kind:'sale',id:s.id,date:s.date,title:'فاتورة'+(s.serial?' — '+s.serial:'')+(s.model?' ('+s.model+')':''),lines:lines,total:s.total||0,upfront:upS,pays:pp});
+    docs.push({dir:'customer',kind:'sale',id:s.id,date:s.date,who:s.customer,title:'فاتورة'+(s.serial?' — '+s.serial:'')+(s.model?' ('+s.model+')':''),lines:lines,total:s.total||0,upfront:upS,pays:pp});
   });
   purchs.forEach(function(p){
     var lines=(p.items||[]).map(function(it){return {name:it.name,qty:it.qty,price:it.price,amt:(it.qty||0)*(it.price||0)};});
     if((p.extra_cost||0)>0)lines.push({name:'مصاريف إضافية',qty:'',price:'',amt:p.extra_cost});
     var pp=[],ldT=0,ldN=0,gT=(p.total||0)+(p.extra_cost||0);
-    debts.forEach(function(d){if(d.type==='supplier'&&d.source_purchase_id===p.id){pp=pp.concat(pays(d));ldT+=(d.total||0);ldN++;}});
+    debts.forEach(function(d){if(d.type==='supplier'&&dPur(d)===p.id){pp=pp.concat(pays(d));ldT+=(d.total||0);ldN++;}});
     var upP=ldN?Math.max(0,gT-ldT):(p.paid||0); // نفس منطق الفواتير (v250)
-    docs.push({dir:'supplier',kind:'purch',id:p.id,date:p.date,title:'مشترى',lines:lines,total:gT,upfront:upP,pays:pp});
+    docs.push({dir:'supplier',kind:'purch',id:p.id,date:p.date,who:p.supplier,title:'مشترى',lines:lines,total:gT,upfront:upP,pays:pp});
   });
   debts.forEach(function(d){
-    var linked=(d.type==='customer'&&d.source_sale_id&&sId[d.source_sale_id])||(d.type==='supplier'&&d.source_purchase_id&&pId[d.source_purchase_id]);
+    var linked=(d.type==='customer'&&dSale(d)&&sId[dSale(d)])||(d.type==='supplier'&&dPur(d)&&pId[dPur(d)]);
     if(linked)return;
     var t=d.desc||d.details||'دين';
-    docs.push({dir:d.type==='customer'?'customer':'supplier',kind:'debt',id:d.id,date:d.date,title:/^أمانة/.test(t)?'أمانة':'دين مسجّل',lines:[{name:t,qty:'',price:'',amt:d.total||0}],total:d.total||0,upfront:0,pays:pays(d)});
+    docs.push({dir:d.type==='customer'?'customer':'supplier',kind:'debt',id:d.id,date:d.date,who:d.name,title:/^أمانة/.test(t)?'أمانة':'دين مسجّل',lines:[{name:t,qty:'',price:'',amt:d.total||0}],total:d.total||0,upfront:0,pays:pays(d)});
   });
   docs.forEach(function(x){
     x.paid=x.upfront+x.pays.reduce(function(t,p){return t+p.amount;},0);
@@ -11087,9 +11212,10 @@ async function payDebt(id){
   // ⚠️ v175 — سداد بتاريخ داخل شهر مقفول بيغيّر رصيد الكاش المقفول تاريخيًا، فممنوع برضه
   if(_blockIfClosedMonth(v('pay-date')))return;
   var d=DB.debts.find(function(x){return x.id===id;});if(!d)return;
+  var _lk=_autoLinkDebtSync(d); // v252 — ربط الدين القديم قبل السداد
   var newPaid=Math.min((d.paid||0)+amount,d.total);
   var payments=(d.payments||[]).concat([{amount:amount,date:v('pay-date'),collected_by:(window.__currentProfile?window.__currentProfile.id:null)}]); // v161 — 2.10: مين حصّل السداد
-  var update={paid:newPaid,payments:payments};
+  var update=Object.assign({paid:newPaid,payments:payments},_lk);
   DB.debts=DB.debts.map(function(x){return x.id===id?Object.assign({},x,update):x;});
   await persist();
   // إصلاح جذري v102: أهم سبب لمشكلة "المبلغ بيجمع غلط في النقدية بعد السداد" — تسجيل
@@ -11164,6 +11290,7 @@ async function payGroupDebts(name,type){
   var remaining=amount,updated=0;
   for(var i=0;i<debts.length&&remaining>0;i++){
     var d=debts[i];
+    var _lk2=_autoLinkDebtSync(d); // v252
     var rem=d.total-(d.paid||0);
     var toAdd=Math.min(remaining,rem);
     var newPaid=(d.paid||0)+toAdd;
@@ -11171,7 +11298,7 @@ async function payGroupDebts(name,type){
     DB.debts=DB.debts.map(function(x){return x.id===d.id?Object.assign({},x,{paid:newPaid,payments:newPayments}):x;});
     // إصلاح جذري v102: نفس مشكلة payDebt — السداد الجماعي كان بيحدّث كل دين محليًا بس
     // من غير ما يبعت التحديث لجدول debts على السيرفر، فكان بيتمسح مع أي مزامنة لاحقة.
-    await dbUpdate('debts',d.id,{paid:newPaid,payments:newPayments});
+    await dbUpdate('debts',d.id,Object.assign({paid:newPaid,payments:newPayments},_lk2));
     // إصلاح جذري: نفس تحديث sale.paid هنا كمان لكل فاتورة مرتبطة بدين اتسدد
     if(d.source_sale_id){
       var sale=DB.sales.find(function(s){return s.id===d.source_sale_id;});
@@ -11575,7 +11702,7 @@ function addExpSubcategory(cat,sub){
 
 // ===== مصروف سريع (مدفوع فعلاً) =====
 function openExpenseModal(prefill){
-  document.getElementById('modal-title').textContent=prefill?'💸 نسخ مصروف سابق':'💸 تسجيل مصروف مدفوع';
+  document.getElementById('modal-title').textContent=(prefill&&prefill.editId)?'✏️ تعديل مصروف':(prefill?'💸 نسخ مصروف سابق':'💸 تسجيل مصروف مدفوع');
   var cats=getExpCategories();
   var catNames=Object.keys(cats);
   var defaultCat=(prefill&&prefill.type&&catNames.indexOf(prefill.type)!==-1)?prefill.type:(catNames.indexOf('انتقالات')!==-1?'انتقالات':catNames[0]);
@@ -11615,12 +11742,28 @@ function openExpenseModal(prefill){
     '<div class="field"><label>ملاحظات</label>'+
     '<textarea id="exp-note" rows="2" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit;direction:rtl;resize:none;background:#f8fafc;outline:none">'+esc(prefill?prefill.note||'':'')+'</textarea></div>'+
     (window.__isOwner?'<div class="field"><label>👤 المصروف ده على حساب موظف (اختياري)</label><select id="exp-by" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit"><option value="">أنا (على حسابي)</option>'+(DB.accounts.employees||[]).filter(function(e){return e.linked_profile_id;}).map(function(e){return '<option value="'+e.linked_profile_id+'">'+esc(e.name)+'</option>';}).join('')+'</select></div>':'')+
-    dateField('exp-date','📅 التاريخ',null)+
+    dateField('exp-date','📅 التاريخ',(prefill&&prefill.date)?prefill.date:null)+
     '<div class="modal-actions">'+
-    '<button class="btn btn-orange btn-full" onclick="__runOnce(this,function(){saveExpense(false)})">✅ تسجيل (وأضف تاني)</button>'+
-    '<button class="btn btn-outline btn-full" onclick="__runOnce(this,function(){saveExpense(true)})">✅ تسجيل وخروج (تم)</button></div>';
+    ((prefill&&prefill.editId)?
+      '<button class="btn btn-orange btn-full" onclick="__runOnce(this,function(){return saveExpense(true,'+jsStr(prefill.editId)+')})">💾 حفظ التعديل</button>'+
+      '<button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>'
+    :
+      '<button class="btn btn-orange btn-full" onclick="__runOnce(this,function(){saveExpense(false)})">💾 حفظ وإضافة تاني</button>'+
+      '<button class="btn btn-outline btn-full" onclick="__runOnce(this,function(){saveExpense(true)})">💾 حفظ وإغلاق</button></div>');
   openModal();
-  setTimeout(onExpCatChange,50);
+  setTimeout(function(){
+    onExpCatChange();
+    // ⚠️ v252 — في وضع التعديل: نرجّع الموظف ونوع الصرف وصاحب المصروف
+    if(prefill&&prefill.editId){
+      var eEl=document.getElementById('exp-employee');if(eEl&&prefill.employee_id)eEl.value=prefill.employee_id;
+      var kEl=document.getElementById('exp-pay-kind');
+      if(kEl){
+        if(prefill.official){var o=document.createElement('option');o.value='official';o.textContent='💰 صرف راتب/أجر أساسي (رسمي)';kEl.appendChild(o);kEl.value='official';}
+        else kEl.value=prefill.is_advance?'advance':'bonus';
+      }
+      var bEl=document.getElementById('exp-by');if(bEl&&prefill.created_by)bEl.value=prefill.created_by;
+    }
+  },60);
 }
 
 // ⚠️ v118 — نسخ مصروف سابق مع إمكانية التعديل قبل الحفظ (بيفتح نفس فورم الإضافة معبّى بقيمه)
@@ -11800,8 +11943,8 @@ async function delExpenseTemplate(idx){
   document.getElementById('exp-tmpl-list').innerHTML=_renderExpTmplList();
 }
 
-async function saveExpense(closeAfter){
-  if(!__hasPerm('expenses','can_insert')){
+async function saveExpense(closeAfter,editId){
+  if(!editId&&!__hasPerm('expenses','can_insert')){
     showToast('🚫 مفيش صلاحية إضافة مصروفات. كلم المالك.', '#dc2626');
     return;
   }
@@ -11814,6 +11957,32 @@ async function saveExpense(closeAfter){
   if(sub)addExpSubcategory(type,sub);
   var empId=v('exp-employee');
   var obj;
+  // ⚠️ v252 — وضع التعديل: بنحدّث المصروف الموجود بنفس منطق الإضافة (راتب/سلفة/مكافأة)
+  if(editId){
+    var old=DB.expenses.find(function(x){return x.id===editId;});if(!old)return;
+    var upd={amount:amount,type:type,subcategory:sub,date:v('exp-date')};
+    var kind=v('exp-pay-kind');
+    var emp2=(type==='رواتب'&&empId)?(DB.accounts.employees||[]).find(function(e){return e.id===empId;}):null;
+    if(emp2){
+      var adv=(kind==='official')?false:(kind!=='bonus');
+      upd.employee_id=empId;upd.source='salary';
+      if(kind!=='official'){upd.is_advance=adv;upd.official_pay=false;}
+      upd.note=(note?note+' — ':'')+esc(emp2.name);
+      upd.label=(kind==='official'?'رواتب':(adv?'سلفة':'رواتب'))+' — '+esc(emp2.name)+(sub?' ('+sub+')':'');
+    }else{
+      upd.note=note;upd.label=type+(sub?' — '+sub:'')+(note?' ('+note+')':'');
+      if(old.source==='salary'&&type!=='رواتب'){upd.source='manual';upd.employee_id=null;upd.is_advance=false;}
+    }
+    var byEl=document.getElementById('exp-by');
+    if(window.__isOwner&&byEl&&byEl.value)upd.created_by=byEl.value;
+    DB.expenses=DB.expenses.map(function(e){return e.id===editId?Object.assign({},e,upd):e;});
+    await persist();
+    await dbUpdate('expenses',editId,upd);
+    closeModal();renderHome();renderExpensesList();_refreshExpensesView();
+    if(typeof _accountingTab!=='undefined'&&_accountingTab==='employees')renderAccounting();
+    showToast('✅ اتحفظ التعديل','#16a34a');
+    return;
+  }
   if(type==='رواتب'&&empId){
     var emp=(DB.accounts.employees||[]).find(function(e){return e.id===empId;});
     if(emp){
@@ -12332,27 +12501,14 @@ async function execClearExpenses(type){
 
 // ===== تعديل مصروف =====
 function openEditExpenseModal(id){
+  // ⚠️ v252 — شاشة واحدة للإضافة والتعديل (فيها الموظف وسلفة/مكافأة وعلى حساب موظف) بدل الشاشة الناقصة القديمة
   var e=DB.expenses.find(function(x){return x.id===id;});if(!e)return;
-  var cats=getExpCategories();
-  var types=Object.keys(cats);
-  document.getElementById('modal-title').textContent='✏️ تعديل المصروف';
-  document.getElementById('modal-body').innerHTML=
-    fld('edit-exp-amount','المبلغ (ج)','number',e.amount,'',true)+
-    '<div class="field"><label>العنوان الرئيسي</label>'+
-    '<select id="edit-exp-type" onchange="onEditExpCatChange()" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit">'+
-    types.map(function(t){return '<option'+(e.type===t?' selected':'')+'>'+t+'</option>';}).join('')+
-    '</select></div>'+
-    '<div class="field"><label>الفرع (اختياري)</label>'+
-    '<div id="edit-exp-sub-chips" style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:6px"></div>'+
-    '<input id="edit-exp-sub" type="text" value="'+esc(e.subcategory||'')+'" placeholder="مثال: مكافآت، كهرباء..." style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit;background:#f8fafc;outline:none;direction:rtl"></div>'+
-    '<div class="field"><label>ملاحظات</label>'+
-    '<textarea id="edit-exp-note" rows="2" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit;direction:rtl;resize:none;background:#f8fafc;outline:none">'+esc(e.note||'')+'</textarea></div>'+
-    dateField('edit-exp-date','📅 التاريخ',e.date)+
-    '<div class="modal-actions">'+
-    '<button class="btn btn-orange btn-full" onclick="saveEditExpense(\''+id+'\')">حفظ</button>'+
-    '<button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
-  openModal();
-  setTimeout(onEditExpCatChange,50);
+  var note=e.note||'';
+  if(e.employee_id){
+    var emp=(DB.accounts.employees||[]).find(function(x){return x.id===e.employee_id;});
+    if(emp){var suf=' — '+emp.name;if(note.slice(-suf.length)===suf)note=note.slice(0,-suf.length);else if(note===emp.name)note='';}
+  }
+  openExpenseModal({editId:id,amount:e.amount,type:e.type,sub:e.subcategory,note:note,date:e.date,employee_id:e.employee_id,is_advance:e.is_advance===true,official:(e.official_pay===true||e.wage_type==='daily'),created_by:e.created_by});
 }
 
 function onEditExpCatChange(){
@@ -15105,8 +15261,8 @@ function renderExpensesReport(){
     // ⚠️ v176 — نفس فكرة تجميع الرواتب بالضبط، بس للالتزامات الدورية (fixed_exp): كل التزام
     // (زي "إيجار المحل" أو "اشتراك الإنترنت") بقى ليه مجموعة قابلة للطي لوحده، بدل ما يبان
     // كسطر منفصل مكرر كل شهر تحت نوعه العام من غير أي تجميع (عكس الرواتب اللي كانت مجمّعة أصلاً).
+    // ⚠️ v252 — الفروع بتتجمّع حسب الفرع زي الراتب حسب الموظف: التزامات ثابتة أولًا، وبعدها كل فرع بإجماليه
     var fixedItems=items.filter(function(e){return e.source==='fixed_exp'&&e.fixed_exp_id;});
-    if(!fixedItems.length)return null;
     var byCommitment={};
     fixedItems.forEach(function(e){
       var key=e.fixed_exp_id;
@@ -15114,9 +15270,18 @@ function renderExpensesReport(){
       if(!byCommitment[key])byCommitment[key]={label:label,items:[],total:0,icon:'📌'};
       byCommitment[key].items.push(e);byCommitment[key].total+=e.amount;
     });
-    // مصاريف يدوية عادية بنفس النوع (مش مرتبطة بالتزام دوري) تتجمع في مجموعة واحدة بره التزامات الدورية
-    var manualItems=items.filter(function(e){return!(e.source==='fixed_exp'&&e.fixed_exp_id);});
-    if(manualItems.length)byCommitment['__manual__']={label:'مصاريف يدوية أخرى',items:manualItems,total:manualItems.reduce(function(s,e){return s+e.amount;},0),icon:'✍️'};
+    var restItems=items.filter(function(e){return !(e.source==='fixed_exp'&&e.fixed_exp_id);});
+    var bySub={};
+    restItems.forEach(function(e){
+      var sb=(e.subcategory||'').trim(),h=0;
+      for(var ci=0;ci<sb.length;ci++){h=((h<<5)-h+sb.charCodeAt(ci))|0;}
+      var key='__s'+(sb?Math.abs(h):'none');
+      if(!bySub[key])bySub[key]={label:sb||'بدون فرع',items:[],total:0,icon:sb?'🏷️':'📄'};
+      bySub[key].items.push(e);bySub[key].total+=e.amount;
+    });
+    var subKeys=Object.keys(bySub);
+    if(!fixedItems.length&&subKeys.length===1&&subKeys[0]==='__snone')return null; // كله من غير فرع → عرض عادي
+    subKeys.sort(function(a,b2){return bySub[b2].total-bySub[a].total;}).forEach(function(k){byCommitment[k]=bySub[k];});
     return byCommitment;
   }
 
@@ -17292,9 +17457,9 @@ function openModelFamiliesSettings(){
   ensureModelGroupsDefaults();
   _mfCl=_mfClusters();_mfSel={};
   _mfCl.forEach(function(c,i){_mfSel[i]={};c.items.forEach(function(r){_mfSel[i][r]=true;});});
-  var companies=DB.settings.companies||[],groups=DB.settings.modelGroups;
+  var companies=DB.settings.companies||[],groups=(DB.settings.techTypes||[]).map(function(t){return {id:t,name:t};}); // v252 — النوع من أنواع الفنية (ليزر / إنك جيت)
   function coSel(id,val){return '<select id="'+id+'" style="flex:1;min-width:90px;padding:7px;border:1.5px solid #e2e8f0;border-radius:8px;font-family:inherit;font-size:12px"><option value="">— الشركة —</option>'+companies.map(function(c){return '<option value="'+esc(c)+'"'+(val===c?' selected':'')+'>'+esc(c)+'</option>';}).join('')+'</select>';}
-  function gpSel(id,val){return '<select id="'+id+'" style="flex:1;min-width:90px;padding:7px;border:1.5px solid #e2e8f0;border-radius:8px;font-family:inherit;font-size:12px"><option value="">— النوع —</option>'+groups.map(function(g){return '<option value="'+g.id+'"'+(val===g.id?' selected':'')+'>'+esc(g.name)+'</option>';}).join('')+'</select>';}
+  function gpSel(id,val){return '<select id="'+id+'" style="flex:1;min-width:90px;padding:7px;border:1.5px solid #e2e8f0;border-radius:8px;font-family:inherit;font-size:12px"><option value="">— النوع (ليزر / إنك جيت) —</option>'+groups.map(function(g){return '<option value="'+g.id+'"'+(val===g.id?' selected':'')+'>'+esc(g.name)+'</option>';}).join('')+'</select>';}
   function card(c,i){
     var best=c.items.slice().sort(function(a,b){return (c.raws[b]-c.raws[a])||(b.length-a.length);})[0];
     return '<div style="background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:12px;padding:9px 11px;margin-bottom:9px">'+
@@ -17311,7 +17476,7 @@ function openModelFamiliesSettings(){
   var multi=[],single=[];
   _mfCl.forEach(function(c,i){(c.items.length>1?multi:single).push({c:c,i:i});});
   var famsHtml=groups.concat([{id:'',name:'بدون نوع'}]).map(function(g){
-    var fams=(DB.settings.modelFamilies||[]).filter(function(f){return (f.groupId||'')===(g.id||'');});
+    var fams=(DB.settings.modelFamilies||[]).filter(function(f){return (f.tech_type||'')===(g.id||'');});
     if(!fams.length)return '';
     return '<div style="margin-bottom:10px"><div style="font-size:12px;font-weight:900;background:#f1f5f9;border-radius:7px;padding:5px 9px;margin-bottom:5px">🗂️ '+esc(g.name)+'</div>'+
       fams.map(function(f){
@@ -17321,7 +17486,7 @@ function openModelFamiliesSettings(){
           '<button onclick="delModelFamily(\''+f.id+'\')" style="background:none;border:none;color:#dc2626;font-size:13px;cursor:pointer">🗑️</button></div></div>'+
           '<div style="display:flex;gap:6px;margin-bottom:5px;flex-wrap:wrap">'+
           '<select onchange="_mfMeta(\''+f.id+'\',\'company\',this.value)" style="flex:1;min-width:90px;padding:6px;border:1.5px solid #ddd6fe;border-radius:8px;font-family:inherit;font-size:11.5px"><option value="">— الشركة —</option>'+companies.map(function(c){return '<option value="'+esc(c)+'"'+(f.company===c?' selected':'')+'>'+esc(c)+'</option>';}).join('')+'</select>'+
-          '<select onchange="_mfMeta(\''+f.id+'\',\'groupId\',this.value)" style="flex:1;min-width:90px;padding:6px;border:1.5px solid #ddd6fe;border-radius:8px;font-family:inherit;font-size:11.5px"><option value="">— النوع —</option>'+groups.map(function(g2){return '<option value="'+g2.id+'"'+(f.groupId===g2.id?' selected':'')+'>'+esc(g2.name)+'</option>';}).join('')+'</select></div>'+
+          '<select onchange="_mfMeta(\''+f.id+'\',\'tech_type\',this.value)" style="flex:1;min-width:90px;padding:6px;border:1.5px solid #ddd6fe;border-radius:8px;font-family:inherit;font-size:11.5px"><option value="">— النوع (ليزر / إنك جيت) —</option>'+groups.map(function(g2){return '<option value="'+g2.id+'"'+(f.tech_type===g2.id?' selected':'')+'>'+esc(g2.name)+'</option>';}).join('')+'</select></div>'+
           (f.variants||[]).map(function(vr,vi){return '<div style="display:flex;justify-content:space-between;align-items:center;padding:2px 0;font-size:11px;color:#5b21b6"><span>↳ '+esc(vr)+'</span><button onclick="removeVariantFromFamily(\''+f.id+'\','+vi+')" style="background:none;border:none;color:#dc2626;font-size:10px;cursor:pointer">✖</button></div>';}).join('')+
           '<div style="display:flex;gap:5px;margin-top:5px"><input id="addv-'+f.id+'" type="text" placeholder="+ شكل كتابة تاني" style="flex:1;padding:5px 8px;border:1.5px solid #ddd6fe;border-radius:7px;font-family:inherit;font-size:11px"><button onclick="addVariantToFamily(\''+f.id+'\')" style="background:#7c3aed;color:#fff;border:none;border-radius:7px;padding:5px 10px;font-size:11px;cursor:pointer">+</button></div></div>';
       }).join('')+'</div>';
@@ -17342,7 +17507,7 @@ async function _mfUnify(i){
   var name=(v('mfc-name-'+i)||'').trim();if(!name)return showToast('⚠️ اكتب الاسم الموحد','#dc2626');
   var sel=Object.keys(_mfSel[i]||{});if(!sel.length)return showToast('⚠️ اختار شكل واحد على الأقل','#dc2626');
   var variants=sel.slice();if(variants.map(normalizeAr).indexOf(normalizeAr(name))<0)variants.push(name);
-  var fam={id:genId(),name:name,groupId:v('mfc-gp-'+i)||'',company:v('mfc-co-'+i)||'',variants:variants};
+  var fam={id:genId(),name:name,groupId:'',tech_type:v('mfc-gp-'+i)||'',company:v('mfc-co-'+i)||'',variants:variants};
   DB.settings.modelFamilies=(DB.settings.modelFamilies||[]).concat([fam]);
   var n=await _mfApplyToClients();
   await persist();
@@ -17376,8 +17541,7 @@ async function _mfApplyToClients(){
     if(!touched)return c;
     var nc=Object.assign({},c,{machines:ms});upd.push(nc);return nc;
   });
-  await persist();
-  for(var i=0;i<upd.length;i++){try{await dbUpdate('clients',upd[i].id,{machines:upd[i].machines});}catch(e){}}
+  await persist(); // العملاء بيتزامنوا كلهم مع persist() — مفيش جدول clients منفصل
   return changed;
 }
 async function _mfApplyAll(){
@@ -17396,7 +17560,7 @@ function _msRows(){
     (c.machines||[]).forEach(function(m){
       if((m.status||'active')!=='active')return;
       var raw=m.model||'',f=_famOf(raw);
-      rows.push({c:c,model:f?f.name:(raw||'بدون موديل'),company:(f&&f.company)||_guessCompany(raw)||'غير محدد',type:(f&&f.groupId&&groups[f.groupId])||'غير محدد'});
+      rows.push({c:c,model:f?f.name:(raw||'بدون موديل'),company:(f&&f.company)||_guessCompany(raw)||'غير محدد',type:(f&&(f.tech_type||(f.groupId&&groups[f.groupId])))||'غير محدد'});
     });
   });
   return rows;
@@ -17621,6 +17785,7 @@ function renderSettings(){
     '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:4px;padding-bottom:8px;border-bottom:2px solid #e2e8f0">🖨️ عائلات وموديلات المكن</div>'+
     '<div style="font-size:11px;color:#94a3b8;margin-bottom:10px">اجمع الموديلات المتشابهة (زي "1102" و"1102w") تحت عائلة واحدة عشان الإحصائيات تبقى دقيقة.</div>'+
     '<button class="settings-btn" style="background:#ede9fe;color:#7c3aed" onclick="openModelFamiliesSettings()">🖨️ إدارة العائلات</button>'+
+    '<button class="settings-btn" style="background:#eff6ff;color:#1e40af;margin-top:8px" onclick="openLinkRepair()">🔗 إصلاح ربط الديون القديمة</button>'+
     '</div>'+
     '<div class="card">'+
     '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:4px;padding-bottom:8px;border-bottom:2px solid #e2e8f0">🗄️ مدة الانتقال التلقائي للاستوك</div>'+
@@ -18207,7 +18372,7 @@ function _renderQuranList(el,list){
   var _lastRead=_getQuranLastRead();
   var _favCount=_getQuranFavorites().length;
   el.innerHTML=
-    '<div style="padding:12px 14px 6px">'+
+    '<div style="padding:12px 14px 6px">'+_quranResumeHtml()+
     (_lastRead&&_lastRead.number!==undefined?
       '<div onclick="openQuranSurah('+_lastRead.number+')" style="background:linear-gradient(135deg,#0f766e,#134e4a);color:#fff;border-radius:12px;padding:12px 14px;margin-bottom:10px;cursor:pointer;display:flex;justify-content:space-between;align-items:center">'+
       '<div><div style="font-size:11px;opacity:.85">📖 كمّل من حيث وقفت</div><div style="font-size:14px;font-weight:900">'+esc((_lastRead.name||'').replace(/^سورة /,''))+'</div></div>'+
@@ -18542,6 +18707,211 @@ function _saveJournalEntry(date,surah,ayah,surahName,text){
   closeModal();
 }
 
+// ⚠️ v252 — القرآن: اختيار الشيخ + حفظ مكان التوقف + تشغيل عشوائي + تنزيل للاستماع بدون نت.
+// الصوت: العفاسي من islamic.network ، وباقي القراء من mp3quran.net (قايمتهم بتتحمّل من API الموقع وتتحفظ في الجهاز).
+// بدون نت: السورة المتنزلة بتتخزن في Cache Storage (مش LocalStorage) وبتشتغل من الجهاز مباشرة. لازم التطبيق يتفتح مرة بنت.
+var _QR_BUILTIN=[
+  {id:'lhdan',name:'محمد اللحيدان',server:'https://server8.mp3quran.net/lhdan/'},
+  {id:'alafasy',name:'مشاري العفاسي',cdn:true}
+];
+var _quranSeek=0,_quranAutoplay=false,__qBlobUrl=null,__qPosLast=0,__qRetried=false;
+function _qPad(n){return ('00'+n).slice(-3);}
+function _qReciter(){return LS.get('mc8_quran_reciter',null)||_QR_BUILTIN[0];}
+function _qUrl(n,r){
+  r=r||_qReciter();
+  if(r.cdn)return 'https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/'+n+'.mp3';
+  return String(r.server||'').replace(/\/?$/,'/')+_qPad(n)+'.mp3';
+}
+async function _qCachedSrc(url){
+  try{
+    if(!window.caches)return url;
+    var c=await caches.open('mc8-quran-audio'),r=await c.match(url);
+    if(!r)return url;
+    var b=await r.blob();
+    if(__qBlobUrl){try{URL.revokeObjectURL(__qBlobUrl);}catch(e){}}
+    __qBlobUrl=URL.createObjectURL(b);
+    return __qBlobUrl;
+  }catch(e){return url;}
+}
+async function _qIsCached(url){try{if(!window.caches)return false;var c=await caches.open('mc8-quran-audio');return !!(await c.match(url));}catch(e){return false;}}
+function _quranSavePos(force){
+  var a=document.getElementById('quran-audio-player');if(!a||!_quranCurrentSurah)return;
+  var now=Date.now();if(!force&&now-__qPosLast<4000)return;
+  if(!(a.currentTime>0)&&!force)return;
+  __qPosLast=now;
+  LS.set('mc8_quran_pos',{n:_quranCurrentSurah,t:Math.floor(a.currentTime||0),d:Math.floor(a.duration||0),r:_qReciter().id,ts:now});
+}
+document.addEventListener('visibilitychange',function(){if(document.hidden)_quranSavePos(true);});
+window.addEventListener('pagehide',function(){_quranSavePos(true);});
+async function _quranAttachAudio(number,autoplay){
+  var a=document.getElementById('quran-audio-player');if(!a)return;
+  var url=_qUrl(number),src=await _qCachedSrc(url);
+  if(_quranCurrentSurah!==number)return;
+  __qRetried=false;
+  a.onloadedmetadata=function(){if(_quranSeek>0&&a.duration&&_quranSeek<a.duration){a.currentTime=_quranSeek;}_quranSeek=0;};
+  a.ontimeupdate=function(){_quranSavePos(false);};
+  a.onpause=function(){_quranSavePos(true);};
+  a.onerror=function(){_quranAudioFailed(number,a);};
+  a.src=src;
+  if(autoplay)a.play().catch(function(){showToast('▶️ اضغط تشغيل عشان الصوت يبدأ','#64748b');});
+  _quranRefreshDlBtn(number);
+}
+// لو رابط الشيخ مش شغال نحاول نجيب الرابط الصح من API الموقع مرة واحدة
+async function _quranAudioFailed(number,a){
+  if(__qRetried)return showToast('⚠️ الصوت مش شغال — اتأكد من النت أو نزّل السورة قبل كده','#dc2626');
+  __qRetried=true;
+  var r=_qReciter();if(r.cdn)return;
+  try{
+    var found=await _qResolveByName(r.name);
+    if(found&&found.server&&found.server!==r.server){
+      LS.set('mc8_quran_reciter',found);
+      a.src=_qUrl(number,found);a.play().catch(function(){});
+    }else showToast('⚠️ الصوت مش شغال — اتأكد من النت','#dc2626');
+  }catch(e){showToast('⚠️ الصوت مش شغال — اتأكد من النت','#dc2626');}
+}
+async function _qLoadReciters(force){
+  var cached=LS.get('mc8_quran_reciters',null);
+  if(cached&&cached.length&&!force)return cached;
+  var res=await fetch('https://mp3quran.net/api/v3/reciters?language=ar');
+  var json=await res.json();
+  var list=(json.reciters||[]).map(function(r){
+    var ms=(r.moshaf||[]).slice().sort(function(a,b){return (b.surah_total||0)-(a.surah_total||0);});
+    var m=ms[0];if(!m||!m.server)return null;
+    return {id:'mq'+r.id,name:r.name,server:m.server};
+  }).filter(Boolean);
+  if(!list.length)throw new Error('empty');
+  LS.set('mc8_quran_reciters',list);
+  return list;
+}
+async function _qResolveByName(name){
+  var list=await _qLoadReciters(true);
+  var key=normalizeAr(String(name||'').replace(/^(الشيخ|القارئ)\s*/,''));
+  return list.find(function(x){return normalizeAr(x.name).indexOf(key)!==-1||key.indexOf(normalizeAr(x.name))!==-1;})||null;
+}
+var _qPickQ='';
+function _quranPickReciter(){
+  _qPickQ='';
+  document.getElementById('modal-title').textContent='🎙️ اختيار الشيخ';
+  document.getElementById('modal-body').innerHTML=
+    '<input type="text" placeholder="🔍 دوّر على شيخ..." oninput="_qPickQ=this.value;_renderReciterList()" style="width:100%;padding:9px 12px;border:2px solid #e2e8f0;border-radius:11px;font-size:13px;font-family:inherit;background:#f8fafc;outline:none;margin-bottom:8px">'+
+    '<div id="qr-list"></div>'+
+    '<button class="btn btn-sm btn-full" style="background:#eff6ff;color:#1e40af;border:none;margin:8px 0" onclick="__runOnce(this,_quranRefreshReciters)">🌐 حمّل قايمة كل القراء (محتاج نت)</button>'+
+    '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+  openModal();_renderReciterList();
+}
+async function _quranRefreshReciters(){
+  try{await _qLoadReciters(true);showToast('✅ اتحمّلت قايمة القراء','#16a34a');_renderReciterList();}
+  catch(e){showToast('⚠️ مقدرتش أحمّل القايمة — اتأكد من النت','#dc2626');}
+}
+function _renderReciterList(){
+  var el=document.getElementById('qr-list');if(!el)return;
+  var cur=_qReciter().id,q=normalizeAr(_qPickQ||'');
+  var all=_QR_BUILTIN.concat(LS.get('mc8_quran_reciters',[])||[]);
+  var seen={},rows=all.filter(function(r){if(seen[r.id])return false;seen[r.id]=1;return !q||normalizeAr(r.name).indexOf(q)!==-1;}).slice(0,120);
+  el.innerHTML=rows.map(function(r){
+    var act=r.id===cur;
+    return '<div onclick="_quranSetReciter('+jsStr(r.id)+')" style="cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:'+(act?'#ccfbf1':'#f8fafc')+';border:2px solid '+(act?'#0f766e':'transparent')+';border-radius:10px;padding:9px 12px;margin-bottom:5px;font-size:13px"><b>'+esc(r.name)+'</b><span>'+(act?'✅':'')+'</span></div>';
+  }).join('')||'<div class="empty">مفيش نتايج — اضغط "حمّل قايمة كل القراء"</div>';
+}
+function _quranSetReciter(id){
+  var all=_QR_BUILTIN.concat(LS.get('mc8_quran_reciters',[])||[]);
+  var r=all.find(function(x){return x.id===id;});if(!r)return;
+  LS.set('mc8_quran_reciter',r);
+  showToast('🎙️ الشيخ: '+r.name,'#16a34a');
+  closeModal();
+  if(_quranCurrentSurah){var n=_quranCurrentSurah;_quranRenderedFor=null;_quranSeek=0;renderQuranScreen();}
+  else renderQuranScreen();
+}
+function _quranSetMode(m){LS.set('mc8_quran_mode',m);var sel=document.getElementById('quran-mode');if(sel)sel.value=m;showToast(m==='rand'?'🎲 الوضع: عشوائي':'➡️ الوضع: بالترتيب','#64748b');}
+function _quranRandomSurah(exclude){
+  var recent=LS.get('mc8_quran_recent',[])||[],n,tries=0;
+  do{n=1+Math.floor(Math.random()*114);tries++;}while((n===exclude||recent.indexOf(n)!==-1)&&tries<60);
+  recent.push(n);if(recent.length>20)recent.shift();LS.set('mc8_quran_recent',recent);
+  return n;
+}
+function _quranStartRandom(){
+  LS.set('mc8_quran_mode','rand');_quranAutoNext=true;
+  var n=_quranRandomSurah(_quranCurrentSurah);
+  _quranSeek=0;_quranAutoplay=true;
+  openQuranSurah(n);
+}
+function _quranResume(){
+  var pos=LS.get('mc8_quran_pos',null);if(!pos||!pos.n)return;
+  _quranSeek=pos.t||0;_quranAutoplay=true;openQuranSurah(pos.n);
+}
+function _quranResumeHtml(){
+  var pos=LS.get('mc8_quran_pos',null);
+  var r=_qReciter(),mode=LS.get('mc8_quran_mode','seq');
+  var nm=pos&&pos.n?(QURAN_SURAH_NAMES[pos.n-1]||('سورة '+pos.n)):'';
+  var mm=pos&&pos.t?(Math.floor(pos.t/60)+':'+('0'+(pos.t%60)).slice(-2)):'';
+  return (pos&&pos.n?'<div onclick="_quranResume()" style="background:linear-gradient(135deg,#7c3aed,#4c1d95);color:#fff;border-radius:12px;padding:12px 14px;margin-bottom:8px;cursor:pointer;display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:11px;opacity:.85">▶️ كمّل من حيث وقفت</div><div style="font-size:14px;font-weight:900">سورة '+esc(String(nm).replace(/^سورة\s*/,''))+(mm?' — '+mm:'')+'</div></div><span style="font-size:20px">▶️</span></div>':'')+
+    '<div style="display:flex;gap:8px;margin-bottom:8px">'+
+    '<button onclick="_quranStartRandom()" style="flex:1;background:#fff7ed;color:#c2410c;border:1.5px solid #fed7aa;border-radius:12px;padding:10px;font-family:inherit;font-size:12.5px;font-weight:800;cursor:pointer">🎲 تشغيل عشوائي</button>'+
+    '<button onclick="_quranPickReciter()" style="flex:1;background:#ecfeff;color:#0e7490;border:1.5px solid #a5f3fc;border-radius:12px;padding:10px;font-family:inherit;font-size:12.5px;font-weight:800;cursor:pointer">🎙️ '+esc(r.name)+'</button>'+
+    '<button onclick="_quranOfflineManager()" style="background:#f0fdf4;color:#15803d;border:1.5px solid #bbf7d0;border-radius:12px;padding:10px 12px;font-family:inherit;font-size:13px;font-weight:800;cursor:pointer">📥</button></div>';
+}
+function _quranReaderControls(number){
+  var mode=LS.get('mc8_quran_mode','seq');
+  return '<div style="display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap">'+
+    '<button onclick="_quranPickReciter()" style="flex:1;min-width:120px;background:#ecfeff;color:#0e7490;border:1.5px solid #a5f3fc;border-radius:10px;padding:8px;font-family:inherit;font-size:12px;font-weight:800;cursor:pointer">🎙️ '+esc(_qReciter().name)+'</button>'+
+    '<select id="quran-mode" onchange="_quranSetMode(this.value)" style="flex:1;min-width:110px;padding:8px;border:1.5px solid #e2e8f0;border-radius:10px;font-family:inherit;font-size:12px;font-weight:700"><option value="seq"'+(mode!=='rand'?' selected':'')+'>➡️ بالترتيب</option><option value="rand"'+(mode==='rand'?' selected':'')+'>🎲 عشوائي</option></select>'+
+    '<button id="quran-dl-btn" onclick="__runOnce(this,function(){return _quranDownloadAudio('+number+')})" style="flex:1;min-width:120px;background:#f0fdf4;color:#15803d;border:1.5px solid #bbf7d0;border-radius:10px;padding:8px;font-family:inherit;font-size:12px;font-weight:800;cursor:pointer">⬇️ نزّلها بدون نت</button></div>';
+}
+async function _quranRefreshDlBtn(number){
+  var b=document.getElementById('quran-dl-btn');if(!b)return;
+  if(await _qIsCached(_qUrl(number))){b.textContent='✅ متنزّلة (بدون نت)';b.style.background='#dcfce7';}
+}
+async function _quranDownloadAudio(number){
+  var b=document.getElementById('quran-dl-btn'),url=_qUrl(number);
+  if(!window.caches)return showToast('⚠️ المتصفح مش بيدعم التنزيل بدون نت','#dc2626');
+  if(await _qIsCached(url)){showToast('✅ السورة متنزّلة بالفعل','#16a34a');return;}
+  if(b)b.textContent='⏳ جاري التنزيل...';
+  try{
+    var res=await fetch(url);
+    if(!res.ok)throw new Error('http '+res.status);
+    var blob=await res.blob();
+    var c=await caches.open('mc8-quran-audio');
+    await c.put(url,new Response(blob,{headers:{'Content-Type':'audio/mpeg'}}));
+    try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist();}catch(e){}
+    showToast('✅ اتنزّلت — هتشتغل من غير نت','#16a34a');
+    if(b){b.textContent='✅ متنزّلة (بدون نت)';b.style.background='#dcfce7';}
+  }catch(e){
+    if(b)b.textContent='⬇️ نزّلها بدون نت';
+    showToast('⚠️ فشل التنزيل — النت أو إعدادات السيرفر ('+((e&&e.message)||'')+')','#dc2626');
+  }
+}
+async function _quranOfflineManager(){
+  var cached=[];
+  try{if(window.caches){var c=await caches.open('mc8-quran-audio');var ks=await c.keys();cached=ks.map(function(k){return k.url;});}}catch(e){}
+  var textN=0;for(var i=1;i<=114;i++){if(LS.get('mc8_quran_surah_'+i,null))textN++;}
+  document.getElementById('modal-title').textContent='📥 القرآن بدون نت';
+  document.getElementById('modal-body').innerHTML=
+    '<div style="background:#f0fdf4;border-radius:10px;padding:10px 12px;margin-bottom:10px;font-size:12px;color:#166534;line-height:1.9">'+
+    '📖 نص القرآن المتخزن: <b>'+textN+' / 114</b> سورة<br>🎧 سور صوتية متنزّلة: <b>'+cached.length+'</b></div>'+
+    '<button class="btn btn-primary btn-full" style="margin-bottom:8px" onclick="__runOnce(this,_quranDownloadAllText)">📖 نزّل نص القرآن كامل (بدون نت)</button>'+
+    '<div id="qdl-progress" style="font-size:12px;color:#64748b;margin-bottom:8px"></div>'+
+    (cached.length?'<div style="font-size:12px;font-weight:800;margin:10px 0 6px">🎧 المتنزّل:</div>'+cached.map(function(u){
+      var m=u.match(/(\d{1,3})\.mp3/),n=m?parseInt(m[1],10):0;
+      return '<div style="display:flex;justify-content:space-between;align-items:center;background:#f8fafc;border-radius:9px;padding:7px 11px;margin-bottom:5px;font-size:12px"><span>سورة '+esc(String(QURAN_SURAH_NAMES[n-1]||n).replace(/^سورة\s*/,''))+'</span><button onclick="_quranDelCached('+jsStr(u)+')" style="background:none;border:none;color:#dc2626;cursor:pointer;font-size:14px">🗑️</button></div>';
+    }).join(''):'<div class="empty">لسه مفيش سور صوتية متنزّلة — افتح سورة واضغط "نزّلها بدون نت"</div>')+
+    '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+  openModal();
+}
+async function _quranDelCached(u){try{var c=await caches.open('mc8-quran-audio');await c.delete(u);}catch(e){}_quranOfflineManager();}
+async function _quranDownloadAllText(){
+  var el=document.getElementById('qdl-progress'),fail=0;
+  for(var i=1;i<=114;i++){
+    if(LS.get('mc8_quran_surah_'+i,null))continue;
+    if(el)el.textContent='⏳ جاري تحميل سورة '+i+' من 114...';
+    try{await _getQuranSurahText(i);}catch(e){fail++;if(fail>5){if(el)el.textContent='⚠️ توقف — اتأكد من النت وكمّل بعدين';return;}}
+  }
+  if(el)el.textContent='✅ نص القرآن كله متخزن على الجهاز';
+  showToast('✅ نص القرآن بقى متاح بدون نت','#16a34a');
+}
+function _quranNextSurah(){
+  return LS.get('mc8_quran_mode','seq')==='rand'?_quranRandomSurah(_quranCurrentSurah):_quranCurrentSurah+1;
+}
+
 function openQuranSurah(number){
   _quranCurrentSurah=number;
   _quranRenderedFor=null; // فتح سورة (حتى لو نفسها) لازم يبني الشاشة من جديد
@@ -18563,14 +18933,13 @@ function _renderQuranReader(el,number){
     '<div class="empty">⏳ جاري تحميل السورة...</div></div>';
   _getQuranSurahText(number).then(function(data){
     if(_quranCurrentSurah!==number)return; // المستخدم رجع/غيّر السورة قبل ما التحميل يخلص
-    var audioUrl='https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/'+number+'.mp3';
     el.innerHTML=
       '<div style="padding:14px">'+
       '<div onclick="backToQuranList()" style="color:#2563eb;font-weight:700;font-size:13px;margin-bottom:10px;cursor:pointer">← رجوع لقائمة السور</div>'+
       '<div style="text-align:center;margin-bottom:10px">'+
       '<div id="quran-reader-title" style="font-size:20px;font-weight:900;color:#0f766e">'+esc(data.name)+'</div>'+
       '</div>'+
-      '<audio id="quran-audio-player" controls preload="none" style="width:100%;margin-bottom:8px" src="'+audioUrl+'" onended="_quranAudioEnded()"></audio>'+
+      '<audio id="quran-audio-player" controls preload="none" style="width:100%;margin-bottom:8px" onended="_quranAudioEnded()"></audio>'+_quranReaderControls(number)+
       '<label style="display:flex;align-items:center;gap:6px;justify-content:center;margin-bottom:14px;cursor:pointer"><input type="checkbox" id="quran-autonext" '+(_quranAutoNext?'checked':'')+' onchange="_quranAutoNext=this.checked" style="width:15px;height:15px"><span style="font-size:11.5px;color:#64748b;font-weight:700">▶️ تشغيل متواصل — تبدأ السورة اللي بعدها أوتوماتيك</span></label>'+
       '<div id="quran-reader-text" style="background:#fff;border-radius:14px;padding:18px 16px;box-shadow:0 2px 10px rgba(0,0,0,.05);font-size:19px;line-height:2.6;text-align:justify;font-family:inherit">'+
       data.ayahs.map(function(a){
@@ -18580,9 +18949,11 @@ function _renderQuranReader(el,number){
       '</div>'+
       '<div style="font-size:10.5px;color:#94a3b8;text-align:center;margin-top:8px">💡 اضغط على أي آية عشان تقرا تفسيرها أو تحطها في المفضلة</div>'+
       '</div>';
-    _quranRenderedFor=number; // ⚠️ v222 — علّم إن السورة دي اتبنت، عشان الدخول/الخروج مايكسرش الصوت
+    _quranRenderedFor=number;
+    _quranAttachAudio(number,_quranAutoplay);_quranAutoplay=false;
   }).catch(function(e){
     if(_quranCurrentSurah!==number)return;
+    _quranAttachAudio(number,_quranAutoplay);_quranAutoplay=false; // v252 — الصوت يشتغل حتى لو النص مش متحمل
     el.innerHTML='<div style="padding:14px">'+
       '<div onclick="backToQuranList()" style="color:#2563eb;font-weight:700;font-size:13px;margin-bottom:10px;cursor:pointer">← رجوع لقائمة السور</div>'+
       '<div class="empty">⚠️ محتاج اتصال نت عشان تفتح السورة دي لأول مرة. بعد كده هتتخزن وتقرا حتى من غير نت.</div>'+
@@ -18594,21 +18965,27 @@ function _renderQuranReader(el,number){
 // من جديد) عشان المتصفح يقبل يشغّل تلقائي من غير ما يحتاج ضغطة جديدة من المستخدم —
 // المتصفحات بتمنع autoplay لعنصر جديد، لكن بتسمح لعنصر موجود يكمل تشغيل في نفس السياق.
 function _quranAudioEnded(){
-  if(!_quranAutoNext||_quranCurrentSurah>=114)return;
-  var next=_quranCurrentSurah+1;
+  if(!_quranAutoNext)return;
+  var rand=(LS.get('mc8_quran_mode','seq')==='rand');
+  if(!rand&&_quranCurrentSurah>=114)return;
+  var next=_quranNextSurah();
   _quranCurrentSurah=next;
+  LS.set('mc8_quran_pos',{n:next,t:0,d:0,r:_qReciter().id,ts:Date.now()});
+  var sInfo=(window.__quranSurahList||[]).find(function(x){return x.number===next;});
+  _setQuranLastRead(next,sInfo?sInfo.name:('سورة '+next));
   _getQuranSurahText(next).then(function(data){
     if(_quranCurrentSurah!==next)return;
     var titleEl=document.getElementById('quran-reader-title');
     var textEl=document.getElementById('quran-reader-text');
-    var audioEl=document.getElementById('quran-audio-player');
-    if(!audioEl)return; // المستخدم خرج من شاشة القرآن
+    if(!document.getElementById('quran-audio-player'))return;
     if(titleEl)titleEl.textContent=data.name;
-    if(textEl)textEl.innerHTML=data.ayahs.map(function(a){return esc(a.text)+' <span style="color:#0f766e;font-size:13px;font-weight:800">﴿'+a.n+'﴾</span>';}).join(' ');
-    audioEl.src='https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/'+next+'.mp3';
-    _quranRenderedFor=next; // ⚠️ v222 — حدّث العلامة عشان دخول/خروج من الشاشة بعد كده مايرجّعش يبني من الأول
-    audioEl.play().catch(function(){/* لو المتصفح منع التشغيل التلقائي، هيفضل واقف لحد ما المستخدم يدوس تشغيل بنفسه */});
-  }).catch(function(){});
+    if(textEl)textEl.innerHTML=data.ayahs.map(function(a){return esc(a.text)+' <span style="color:#0f766e;font-size:13px;font-weight:800">'+a.n+'</span>';}).join(' ');
+    _quranRenderedFor=next;
+    _quranAttachAudio(next,true);
+  }).catch(function(){
+    if(_quranCurrentSurah!==next)return;
+    _quranRenderedFor=next;_quranAttachAudio(next,true);
+  });
 }
 
 // ============================================================
@@ -20341,6 +20718,8 @@ function _clientCard(c){
     '<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:3px">'+
     '<span style="font-weight:900;font-size:15px;cursor:pointer" onclick="openLedger(decodeURIComponent(\''+encodeURIComponent(c.name)+'\'))">'+esc(c.name)+'</span>'+
     (c.code?'<span style="background:#eef2ff;color:#4338ca;border-radius:6px;padding:2px 7px;font-size:10px;font-weight:800">🆔 '+esc(c.code)+'</span>':'')+
+    (c.parent_id?'<span style="background:#fef3c7;color:#92400e;border-radius:6px;padding:2px 8px;font-size:10px;font-weight:800">🏢 فرع: '+esc(((DB.clients||[]).find(function(x){return x.id===c.parent_id;})||{}).name||'')+'</span>':'')+
+    (_clientBranches(c).length?'<span style="background:#e0e7ff;color:#3730a3;border-radius:6px;padding:2px 8px;font-size:10px;font-weight:800">🏢 '+_clientBranches(c).length+' فروع</span>':'')+
     '<span style="background:'+cSt.bg+';color:'+cSt.color+';border-radius:6px;padding:2px 8px;font-size:10px;font-weight:700">'+cSt.icon+' '+cSt.label+'</span>'+
     (c.priceType==='wholesale'?'<span style="background:#ede9fe;color:#5b21b6;border-radius:6px;padding:2px 8px;font-size:10px;font-weight:800">💼 جملة</span>':'')+
     (isStale?'<span style="background:#fee2e2;color:#dc2626;border-radius:6px;padding:2px 8px;font-size:10px;font-weight:700">⏰ غير مستخدم</span>':'')+
@@ -20356,6 +20735,8 @@ function _clientCard(c){
     (inactiveMach>0?'<span style="background:#fee2e2;color:#dc2626;border-radius:6px;padding:2px 7px;font-size:10px;font-weight:700">⚠️ '+inactiveMach+' غير نشطة</span>':'')+
     '</div></div>'+
     '<div style="display:flex;gap:4px;flex-shrink:0">'+
+    '<button class="btn-ic" style="background:#fffbeb;padding:6px 9px;font-size:12px" onclick="openTwoWayStatement('+jsStr(c.name)+')">⚖️</button>'+
+    (c.parent_id?'':'<button class="btn-ic" style="background:#e0e7ff;padding:6px 9px;font-size:11px;font-weight:800" onclick="openAddClientModal(\''+cid+'\')">🏢+</button>')+
     '<button class="btn-ic" style="background:#f5f3ff;padding:6px 9px" onclick="printClient(\''+cid+'\')">🖨️</button>'+
     '<button class="btn-ic" style="background:#dbeafe;padding:6px 9px" onclick="openEditClientModal(\''+cid+'\')">✏️</button>'+
     '<button class="btn-ic" style="background:'+cSt.bg+';padding:6px 9px;font-size:12px" onclick="cycleClientStatus(\''+cid+'\')">'+cSt.icon+'</button>'+
@@ -20458,6 +20839,7 @@ function openEditClientModal(id){
     fld('ecl-phone','الهاتف','tel',c.phone||'')+
     fld('ecl-address','العنوان','text',c.address||'')+
     fld('ecl-notes','ملاحظات','text',c.notes||'')+
+    (_clientBranches(c).length?'<div style="background:#e0e7ff;border-radius:10px;padding:8px 11px;margin-bottom:10px;font-size:12px;color:#3730a3">🏢 عنده '+_clientBranches(c).length+' فروع: '+_clientBranches(c).map(function(b){return esc(b.name);}).join('، ')+'</div>':_parentSelectHtml('ecl-parent',c.parent_id||'',c.id))+
     '<div class="field"><label>الحالة</label>'+
     _renderStatusBtns('ecl-status',CLIENT_STATUSES,c.status||'active')+
     '</div>'+
@@ -20473,7 +20855,7 @@ function openEditClientModal(id){
 async function saveEditClient(id){
   var name=v('ecl-name');if(!name)return showToast('⚠️ الاسم مطلوب','#dc2626');
   DB.clients=DB.clients.map(function(c){
-    return c.id===id?Object.assign({},c,{name:name,phone:v('ecl-phone'),address:v('ecl-address'),notes:v('ecl-notes'),status:v('ecl-status-val')||'active',priceType:v('ecl-price-type-val')||'retail'}):c;
+    return c.id===id?Object.assign({},c,{name:name,phone:v('ecl-phone'),address:v('ecl-address'),notes:v('ecl-notes'),status:v('ecl-status-val')||'active',priceType:v('ecl-price-type-val')||'retail',parent_id:(document.getElementById('ecl-parent')?(v('ecl-parent')||null):c.parent_id)}):c;
   });
   await persist();closeModal();renderClients();showToast('✅ تم التعديل','#16a34a');
 }
@@ -20969,13 +21351,23 @@ function _renderSupplierAnalysisTab(s){
     }).join('');
 }
 
-function openAddClientModal(){
+
+// ⚠️ v252 — عملاء بفروع: كل فرع عميل مستقل (باسمه وماكنه وديونه) لكنه متعلّم بـ parent_id على العميل الرئيسي.
+// كشف الحساب للرئيسي بيجمّع فروعه (وفيه زرار يقفله)، وكشف الفرع لوحده بيفضل لوحده.
+function _clientBranches(c){return (DB.clients||[]).filter(function(x){return x.parent_id===c.id;});}
+function _parentSelectHtml(id,selected,selfId){
+  var opts=(DB.clients||[]).filter(function(x){return !x.parent_id&&x.id!==selfId;}).sort(function(a,b){return normalizeAr(a.name)<normalizeAr(b.name)?-1:1;});
+  return '<div class="field"><label>🏢 فرع تابع لعميل رئيسي (اختياري)</label><select id="'+id+'" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit"><option value="">— عميل رئيسي مستقل —</option>'+
+    opts.map(function(x){return '<option value="'+x.id+'"'+(selected===x.id?' selected':'')+'>'+esc(x.name)+'</option>';}).join('')+'</select></div>';
+}
+function openAddClientModal(parentId){
   document.getElementById('modal-title').textContent='+ عميل جديد';
   document.getElementById('modal-body').innerHTML=
-    fld('ncl-name','اسم العميل','text','','',true)+
+    fld('ncl-name','اسم العميل','text',(parentId?(((DB.clients||[]).find(function(x){return x.id===parentId;})||{}).name||'')+' — فرع ':''),'',true)+
     fld('ncl-phone','رقم الهاتف','tel','')+
     fld('ncl-address','العنوان','text','')+
     fld('ncl-notes','ملاحظات','text','')+
+    _parentSelectHtml('ncl-parent',parentId||'',null)+
     '<div class="field"><label>نوع التسعير</label>'+
     _renderStatusBtns('ncl-price-type',PRICE_TYPES,'retail')+
     '</div>'+
@@ -20986,7 +21378,7 @@ function openAddClientModal(){
 }
 async function saveNewClient(){
   var name=v('ncl-name');if(!name)return showToast('⚠️ الاسم مطلوب','#dc2626');
-  DB.clients.unshift({id:genId(),code:genClientCode(),name:name,phone:v('ncl-phone'),address:v('ncl-address'),notes:v('ncl-notes'),status:'active',priceType:v('ncl-price-type-val')||'retail',machines:[]});
+  DB.clients.unshift({id:genId(),code:genClientCode(),name:name,phone:v('ncl-phone'),address:v('ncl-address'),notes:v('ncl-notes'),status:'active',priceType:v('ncl-price-type-val')||'retail',parent_id:v('ncl-parent')||null,machines:[]});
   addArchive('customers',name);await persist();closeModal();renderClients();showToast('✅ تم إضافة العميل','#16a34a');
 }
 
@@ -21640,7 +22032,7 @@ function _empLedTable(list,forPrint){
   var h='<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse"><thead><tr><th style="'+th+'">التاريخ</th><th style="'+th+'">البيان</th>'+
     '<th style="'+th+';color:#dc2626">اتصرف له</th><th style="'+th+'">الإجمالي التراكمي</th></tr></thead><tbody>';
   list.forEach(function(e){
-    h+='<tr'+(forPrint?'':' onclick="openEditExpenseModal(\''+e.id+'\')" style="cursor:pointer"')+'><td style="'+td+'">'+esc(fmtDate(e.date))+'</td>'+
+    h+='<tr'+(forPrint?'':' onclick="openEditExpenseModal(\''+e.id+'\')" style="cursor:pointer"')+'><td style="'+td+'">'+esc(fmtDate(e.date))+(forPrint&&e.date?'<div style="font-size:10px;color:#64748b">'+_gregTxt(e.date)+'</div>':'')+'</td>'+
       '<td style="'+td+';text-align:right">'+e.label+(e.note?'<div style="font-size:9px;color:#94a3b8">'+esc(e.note)+'</div>':'')+'</td>'+
       '<td style="'+td+';color:#dc2626;font-weight:700">'+fmt(e.amount)+'</td><td style="'+td+';font-weight:800">'+fmt(e.run)+'</td></tr>';
   });
@@ -21689,7 +22081,7 @@ function _renderEmpLed(){
 function _empLedPrint(){
   var emp=(DB.accounts.employees||[]).find(function(e){return e.id===_empLedId;});if(!emp)return;
   var m=_empMonthBox(emp);
-  var body='<div style="margin-bottom:8px;color:#64748b">تاريخ الكشف: '+esc(fmtDate(today()))+(_empLedMonth?' — الشهر الهجري الحالي':'')+'</div>'+
+  var body='<div style="margin-bottom:8px;color:#64748b">تاريخ الكشف: '+esc(fmtDate(today()))+' — '+_gregTxt(today())+(_empLedMonth?' — الشهر الهجري الحالي':'')+'</div>'+
     '<table style="width:100%;border-collapse:collapse;margin-bottom:10px"><tbody>'+
     '<tr><td style="padding:5px;border:1px solid #e2e8f0">'+(m.isDaily?'أجر الأيام المكتسب (الشهر الحالي)':'الراتب المستحق (الشهر الحالي)')+'</td><td style="padding:5px;border:1px solid #e2e8f0"><b>'+fmt(m.due)+'</b></td></tr>'+
     '<tr><td style="padding:5px;border:1px solid #e2e8f0">اتصرف (راتب/أجر)</td><td style="padding:5px;border:1px solid #e2e8f0">'+fmt(m.sal)+'</td></tr>'+
@@ -22905,6 +23297,7 @@ try{
   history.pushState({trap:true},'','');
   history.pushState({trap:true},'','');
   window.addEventListener('popstate', function(e){
+    if(__modalBack()){history.pushState({trap:true},'','');return;} // v252 — النافذة المفتوحة الأول
     if(_navHistory.length>1){
       navigateBack();
       history.pushState({trap:true},'','');
