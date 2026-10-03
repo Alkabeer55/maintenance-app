@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v252</title>
+<title>ابو حوده الحلو الجميل v253</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="1448-04-23 — v252";
+<script>var BUILD_STAMP="1448-04-24 — v253";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -54,6 +54,11 @@
       مسار خالص عن طريق confirmAction، الزرار بتاعها لازم __runOnce من أول يوم.
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v253: [🧮 تقدير الصيانة في التحرك + 🏢 الشركات وفروعها وتقريرها]
+     1) التحرك: "📋 المطلوب عمله" قايمة مرقّمة (checkbox + سعر شغل اختياري) + "🧮 قطع غيار مقدّرة" من المخزن من غير خصم + إجمالي تقديري للصيانة كلها.
+        الفاتورة من التحرك بتاخد القطع والشغل بأسعار التقدير. بيتخزن في movements.todo / movements.est_parts.
+     2) العملاء: الشركة بتظهر كمجموعة وتحتها فروعها (كل فرع عميل بماكنه) + 📊 تقرير الشركة: إجمالي الشركة وإجمالي كل فرع لوحده (مبيعات/مدفوع/متبقي/ربح/مكن/تحركات) + طباعة.
+     SQL: ALTER TABLE movements ADD COLUMN IF NOT EXISTS todo jsonb DEFAULT '[]'::jsonb; ALTER TABLE movements ADD COLUMN IF NOT EXISTS est_parts jsonb DEFAULT '[]'::jsonb;
 v252: [🐛 مبلغ مكرر في كشف الحساب + ربط الديون القديمة + شاشة مصروف موحدة + رجوع + القرآن + عملاء بفروع]
      1) الكشف: الدين القديم "مشترى — تاريخ" / "فاتورة" كان بيتحسب صف مستقل وبيتكرر مع المشترى → دلوقتي بيتربط تلقائي بالمشترى/الفاتورة (نفس الاسم + نفس التاريخ + مبلغ مناسب).
      2) 🔗 إصلاح ربط الديون القديمة (من الإعدادات): يربط الديون القديمة ويظبط "المدفوع" في المشتريات/الفواتير. والسداد نفسه بقى يربط الدين القديم أوتوماتيك.
@@ -4322,7 +4327,7 @@ var APP_TITLE='ابو حوده الحلو الجميل';
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=252;
+var APP_VERSION=253;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -13489,10 +13494,117 @@ async function removeCarriedDay(id,dateVal){
 
 var _movId=null,_movParts=[];
 
+// ⚠️ v253 — تقدير الصيانة داخل التحرك: قايمة "المطلوب عمله" مرقّمة (زي المهمات، بسعر شغل اختياري) + قطع غيار مقدّرة
+// من المنتجات من غير أي خصم من المخزون، وإجمالي تقديري للصيانة كلها. الفاتورة لما تتعمل من التحرك بتاخد القطع والشغل بأسعار التقدير.
+var _movTodo=[],_movEst=[];
+function _movEstTotals(){
+  var p=_movEst.reduce(function(t,x){return t+(x.qty||0)*(+x.price||0);},0);
+  var w=_movTodo.reduce(function(t,x){return t+(+x.price||0);},0);
+  return {p:p,w:w,t:p+w};
+}
+function _movFindProduct(name){var k=normalizeAr(name||'');return (DB.products||[]).find(function(p){return normalizeAr(p.name)===k;});}
+function _movEstDefaultPrice(prod,qty){
+  var cn=(document.getElementById('mov-customer')||{}).value||'';
+  var c=cn?(DB.clients||[]).find(function(x){return normalizeAr(x.name)===normalizeAr(cn);}):null;
+  var ws=!!(c&&c.priceType==='wholesale'&&_wsCfg().enabled);
+  return _wsPrice(prod,qty||1,ws);
+}
+function _movEstimateHtml(){
+  var inp='padding:8px 10px;border:2px solid #e2e8f0;border-radius:9px;font-size:13px;font-family:inherit;background:#fff;outline:none';
+  var todoRows=_movTodo.map(function(t,i){
+    return '<div style="display:flex;align-items:center;gap:6px;padding:6px 0;border-bottom:1px solid #e0e7ff">'+
+      '<span style="background:#4338ca;color:#fff;border-radius:50%;min-width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900">'+(i+1)+'</span>'+
+      '<input type="checkbox" '+(t.done?'checked':'')+' onchange="_movTodoToggle('+i+')" style="width:18px;height:18px">'+
+      '<span style="flex:1;font-size:13px;'+(t.done?'text-decoration:line-through;color:#94a3b8':'')+'">'+esc(t.text)+'</span>'+
+      '<input type="number" step="any" value="'+(t.price?t.price:'')+'" placeholder="سعر" onchange="_movTodoPrice('+i+',this.value)" style="width:70px;'+inp+';padding:6px 7px;text-align:center">'+
+      '<button type="button" onclick="_movTodoDel('+i+')" style="background:#fee2e2;border:none;border-radius:6px;padding:3px 7px;color:#dc2626;cursor:pointer;font-size:11px">✖</button></div>';
+  }).join('');
+  var estRows=_movEst.map(function(x,i){
+    var prod=x.productId?(DB.products||[]).find(function(p){return p.id===x.productId;}):null;
+    var short=prod&&prod.qty<x.qty;
+    return '<div style="padding:7px 0;border-bottom:1px solid #fed7aa">'+
+      '<div style="display:flex;justify-content:space-between;align-items:center;gap:6px;font-size:13px"><b style="flex:1">'+esc(x.name)+'</b>'+
+      '<button type="button" onclick="_movEstDel('+i+')" style="background:#fee2e2;border:none;border-radius:6px;padding:3px 7px;color:#dc2626;cursor:pointer;font-size:11px">✖</button></div>'+
+      '<div style="display:flex;align-items:center;gap:6px;margin-top:4px">'+
+      '<button type="button" onclick="_movEstQty('+i+',-1)" style="background:#fee2e2;border:none;border-radius:6px;width:24px;height:24px;cursor:pointer;font-weight:900;color:#dc2626">−</button>'+
+      '<b style="min-width:20px;text-align:center">'+fmtQty(x.qty)+'</b>'+
+      '<button type="button" onclick="_movEstQty('+i+',1)" style="background:#dcfce7;border:none;border-radius:6px;width:24px;height:24px;cursor:pointer;font-weight:900;color:#15803d">+</button>'+
+      '<span style="font-size:11px;color:#64748b">×</span>'+
+      '<input type="number" step="any" value="'+(x.price||'')+'" onchange="_movEstPrice('+i+',this.value)" style="width:78px;'+inp+';padding:6px 7px;text-align:center">'+
+      '<b style="flex:1;text-align:left;color:#c2410c;font-size:13px">'+fmt((x.qty||0)*(+x.price||0))+' ج</b></div>'+
+      (short?'<div style="font-size:10.5px;color:#dc2626;margin-top:3px">⚠️ المتاح في المخزن '+fmtQty(prod.qty)+' بس</div>':'')+
+      (!x.productId?'<div style="font-size:10.5px;color:#94a3b8;margin-top:3px">قطعة خارج المخزن</div>':'')+'</div>';
+  }).join('');
+  var dl=(DB.products||[]).map(function(p){return '<option value="'+esc(p.name)+'">('+fmtQty(p.qty||0)+' متاح — '+fmt(p.sell_price||0)+' ج)</option>';}).join('');
+  return '<div style="background:#eef2ff;border:1.5px solid #c7d2fe;border-radius:12px;padding:11px 12px;margin-bottom:10px">'+
+    '<div style="font-size:13px;font-weight:900;color:#3730a3;margin-bottom:6px">📋 المطلوب عمله <span style="font-size:10.5px;color:#6366f1;font-weight:700">(مرقّم — والسعر اختياري)</span></div>'+
+    (todoRows||'<div style="font-size:11px;color:#94a3b8;padding:4px 0">لسه مفيش بنود — اكتب أول بند تحت</div>')+
+    '<div style="display:flex;gap:6px;margin-top:8px"><input id="mov-todo-text" type="text" placeholder="مثال: تغيير فيوزر" style="flex:1;'+inp+'">'+
+    '<input id="mov-todo-price" type="number" step="any" placeholder="سعر" style="width:70px;'+inp+';text-align:center">'+
+    '<button type="button" onclick="_movTodoAdd()" style="background:#4338ca;color:#fff;border:none;border-radius:9px;padding:0 14px;font-family:inherit;font-size:16px;font-weight:900;cursor:pointer">+</button></div></div>'+
+    '<div style="background:#fff7ed;border:1.5px solid #fed7aa;border-radius:12px;padding:11px 12px;margin-bottom:10px">'+
+    '<div style="font-size:13px;font-weight:900;color:#c2410c;margin-bottom:2px">🧮 قطع غيار مقدّرة</div>'+
+    '<div style="font-size:10.5px;color:#9a3412;margin-bottom:6px">🔒 بتتحسب في التقدير بس — <b>مش بتتخصم من المخزون</b></div>'+
+    (estRows||'<div style="font-size:11px;color:#94a3b8;padding:4px 0">لسه ما اخترتش قطع</div>')+
+    '<datalist id="mov-est-list">'+dl+'</datalist>'+
+    '<div style="display:flex;gap:6px;margin-top:8px"><input id="mov-est-name" type="text" list="mov-est-list" placeholder="اسم القطعة..." autocomplete="off" style="flex:1;'+inp+'">'+
+    '<input id="mov-est-qty" type="number" step="any" value="1" style="width:52px;'+inp+';text-align:center">'+
+    '<button type="button" onclick="_movEstAdd()" style="background:#ea580c;color:#fff;border:none;border-radius:9px;padding:0 14px;font-family:inherit;font-size:16px;font-weight:900;cursor:pointer">+</button></div>'+
+    '<input id="mov-est-price" type="number" step="any" placeholder="سعر مخصوص للقطعة (اختياري — الافتراضي سعر المخزن)" style="width:100%;margin-top:6px;'+inp+'"></div>'+
+    '<div id="mov-est-summary">'+_movEstSummaryHtml()+'</div>';
+}
+function _movEstSummaryHtml(){
+  var t=_movEstTotals();
+  if(!_movEst.length&&!_movTodo.some(function(x){return +x.price>0;}))return '';
+  return '<div style="background:linear-gradient(135deg,#065f46,#047857);border-radius:12px;padding:11px 14px;margin-bottom:12px;color:#fff">'+
+    '<div style="font-size:11px;opacity:.85">💰 تقدير الصيانة كلها (تقريبي)</div>'+
+    '<div style="display:flex;justify-content:space-between;font-size:12px;margin-top:5px"><span>قطع الغيار</span><b>'+fmt(t.p)+' ج</b></div>'+
+    '<div style="display:flex;justify-content:space-between;font-size:12px;margin-top:2px"><span>الشغل / الخدمات</span><b>'+fmt(t.w)+' ج</b></div>'+
+    '<div style="display:flex;justify-content:space-between;font-size:17px;font-weight:900;margin-top:6px;border-top:1px solid rgba(255,255,255,.3);padding-top:6px"><span>الإجمالي</span><span>'+fmt(t.t)+' ج</span></div></div>';
+}
+function _movEstRefreshSummary(){var el=document.getElementById('mov-est-summary');if(el)el.innerHTML=_movEstSummaryHtml();}
+function _movTodoAdd(){
+  var text=(v('mov-todo-text')||'').trim();if(!text)return showToast('⚠️ اكتب البند','#dc2626');
+  _movTodo.push({id:genId(),text:text,price:+v('mov-todo-price')||0,done:false});
+  _restoreMovFields();
+  setTimeout(function(){var e=document.getElementById('mov-todo-text');if(e)e.focus();},60);
+}
+function _movTodoToggle(i){if(_movTodo[i]){_movTodo[i].done=!_movTodo[i].done;_restoreMovFields();}}
+function _movTodoPrice(i,val){if(_movTodo[i]){_movTodo[i].price=+val||0;_movEstRefreshSummary();}}
+function _movTodoDel(i){_movTodo.splice(i,1);_restoreMovFields();}
+function _movEstAdd(){
+  var name=(v('mov-est-name')||'').trim();if(!name)return showToast('⚠️ اكتب أو اختار القطعة','#dc2626');
+  var qty=+v('mov-est-qty')||1,prod=_movFindProduct(name);
+  var ov=v('mov-est-price');
+  var price=ov!==''&&ov!=null?(+ov||0):(prod?_movEstDefaultPrice(prod,qty):0);
+  var ex=_movEst.find(function(x){return prod?x.productId===prod.id:(!x.productId&&normalizeAr(x.name)===normalizeAr(name));});
+  if(ex){ex.qty=roundQty((ex.qty||0)+qty);if(ov!==''&&ov!=null)ex.price=price;}
+  else _movEst.push({productId:prod?prod.id:null,name:prod?prod.name:name,qty:qty,price:price});
+  _restoreMovFields();
+  setTimeout(function(){var e=document.getElementById('mov-est-name');if(e)e.focus();},60);
+}
+function _movEstQty(i,d){if(_movEst[i]){_movEst[i].qty=Math.max(1,roundQty((_movEst[i].qty||1)+d));_restoreMovFields();}}
+function _movEstPrice(i,val){if(_movEst[i]){_movEst[i].price=+val||0;_restoreMovFields();}}
+function _movEstDel(i){_movEst.splice(i,1);_restoreMovFields();}
+// يملا الفاتورة من تقدير التحرك (القطع من المخزن بأسعار التقدير، والبنود المسعّرة كخدمات)
+function _movFillSaleFromEst(m){
+  (m.est_parts||[]).forEach(function(x){
+    var prod=x.productId?(DB.products||[]).find(function(p){return p.id===x.productId;}):null;
+    if(prod){
+      var ex=_saleItems.find(function(it){return it.productId===prod.id;});
+      if(ex){ex.qty=roundQty(ex.qty+(x.qty||1));}
+      else _saleItems.push({productId:prod.id,name:prod.name,qty:x.qty||1,price:(+x.price||0),buyPrice:prod.landed_cost||prod.buy_price});
+    }else _saleServices.push({name:'قطعة: '+x.name+(x.qty>1?' ×'+fmtQty(x.qty):''),price:(x.qty||1)*(+x.price||0)});
+  });
+  (m.todo||[]).forEach(function(t){if(+t.price>0)_saleServices.push({name:t.text,price:+t.price});});
+}
+
 function openMovementModal(id){
   _movId=id||null;
   var m=id?(DB.movements||[]).find(function(x){return x.id===id;}):null;
   _movParts=m&&m.parts?m.parts.map(function(p){return Object.assign({},p);}):[];
+  _movTodo=m&&m.todo?m.todo.map(function(t){return Object.assign({},t);}):[];
+  _movEst=m&&m.est_parts?m.est_parts.map(function(t){return Object.assign({},t);}):[];
   document.getElementById('modal-title').textContent=m?'تعديل العطل':'تسجيل عطل جديد';
   renderMovementBody(m);openModal();
 }
@@ -13547,6 +13659,7 @@ function renderMovementBody(m){
     '<button onclick="addMovPartManual()" style="background:#ea580c;color:#fff;border:none;border-radius:9px;padding:9px 13px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer">+</button>'+
     '</div></div>'+
     partsHtml+
+    _movEstimateHtml()+
     // ⚠️ v203 — "دفعة تحت الحساب": لما العميل يدفع فلوس مقدمًا على شغل لسه مش نهائي (السعر
     // هيتحدد بعدين)، بنسجلها هنا للتوثيق بس — من غير ما تدخل في حسابات الكاش دلوقتي، عشان
     // منحسبش إيراد لسه مش نهائي. لما تعمل الفاتورة النهائية من نفس التحرك (✅ إنهاء + فاتورة)،
@@ -13625,15 +13738,15 @@ function saveFaultType(){
 }
 
 function _restoreMovFields(){
-  var saved={cust:v('mov-customer'),dev:v('mov-device'),ser:v('mov-serial'),fault:v('mov-fault-input'),desc:v('mov-desc'),stat:v('mov-status')};
+  var ids=['mov-customer','mov-device','mov-serial','mov-fault-input','mov-desc','mov-status','mov-parts-needed','mov-assigned','mov-counter','mov-color-counter','mov-part-name'];
+  var saved={};ids.forEach(function(id){var e=document.getElementById(id);if(e)saved[id]=e.value;});
+  var sd=(document.getElementById('mov-sched-day')||{}).value||'';
   var m=_movId?(DB.movements||[]).find(function(x){return x.id===_movId;}):null;
+  var sc=document.getElementById('modal-box')||document.getElementById('modal-body');var top=sc?sc.scrollTop:0;
   renderMovementBody(m);
-  if(document.getElementById('mov-customer'))document.getElementById('mov-customer').value=saved.cust;
-  if(document.getElementById('mov-device'))document.getElementById('mov-device').value=saved.dev;
-  if(document.getElementById('mov-serial'))document.getElementById('mov-serial').value=saved.ser;
-  if(document.getElementById('mov-fault-input'))document.getElementById('mov-fault-input').value=saved.fault;
-  if(document.getElementById('mov-desc'))document.getElementById('mov-desc').value=saved.desc;
-  if(document.getElementById('mov-status'))document.getElementById('mov-status').value=saved.stat;
+  ids.forEach(function(id){var e=document.getElementById(id);if(e&&saved[id]!==undefined)e.value=saved[id];});
+  if(sd)updateDateField('mov-sched-day',sd);
+  if(sc)sc.scrollTop=top;
 }
 
 // ===== Autocomplete العملاء في التحركات من دفتر العملاء =====
@@ -13809,7 +13922,7 @@ async function saveMovement(){
       // v98: [تعديل] شالنا خانتي "تاريخ الاستلام" و"موعد مجدوَل" من الفورم بناءً على طلب العميل.
       // تاريخ الاستلام بقى بياخد تاريخ النهاردة تلقائيًا لأي تحرك جديد، وبيفضل زي ما هو
       // عند التعديل (مبيتصفرش). "موعد مجدوَل" بردو بيفضل زي ما كان عند التعديل بدل ما يتصفر.
-      status:status,parts:_movParts.slice(),
+      status:status,parts:_movParts.slice(),todo:_movTodo.slice(),est_parts:_movEst.slice(),
       opened_at:existingMov?existingMov.opened_at:today(),
       scheduled_date:existingMov?(existingMov.scheduled_date||null):null,
       parts_needed:v('mov-parts-needed')||null,
@@ -14058,12 +14171,13 @@ async function confirmCloseMovement(id,addInvoice){
       // ⚠️ v203 — تحصيل الدفعة تحت الحساب تلقائيًا في خانة "المدفوع" (بيقدر يعدّلها يدوي لو عايز)
       if(advTotal>0&&document.getElementById('sale-paid'))document.getElementById('sale-paid').value=advTotal;
       // إضافة قطع الغيار المستخدمة في العطل تلقائياً للفاتورة لو موجودة
-      if(m.parts&&m.parts.length){
-        m.parts.forEach(function(part){
+      if((m.parts&&m.parts.length)||(m.est_parts&&m.est_parts.length)||(m.todo&&m.todo.some(function(t){return +t.price>0;}))){
+        (m.parts||[]).forEach(function(part){
           var prod=DB.products.find(function(p){return normalizeAr(p.name)===normalizeAr(part.name);});
           if(prod){_saleItems.push({productId:prod.id,name:prod.name,qty:part.qty||1,price:_effectiveSellPrice(prod),buyPrice:prod.buy_price});}
           else{_saleServices.push({name:'قطعة: '+part.name,price:0});}
         });
+        _movFillSaleFromEst(m); // v253 — التقدير
         renderSaleBody(null);
         document.getElementById('sale-customer').value=m.customer||'';
         if(document.getElementById('sale-serial'))document.getElementById('sale-serial').value=m.serial||'';
@@ -14092,6 +14206,17 @@ async function delMovement(id){
 }
 
 // ===== DETAIL =====
+function _movDetailEstimateHtml(m){
+  var todo=m.todo||[],est=m.est_parts||[];
+  if(!todo.length&&!est.length)return '';
+  var p=est.reduce(function(t,x){return t+(x.qty||0)*(+x.price||0);},0),w=todo.reduce(function(t,x){return t+(+x.price||0);},0);
+  return '<div style="background:#eef2ff;border-radius:10px;padding:9px 11px;margin:6px 0 8px">'+
+    (todo.length?'<div style="font-size:12px;font-weight:800;color:#3730a3;margin-bottom:4px">📋 المطلوب عمله</div>'+todo.map(function(t,i){
+      return '<div style="font-size:12px;padding:2px 0;'+(t.done?'text-decoration:line-through;color:#94a3b8':'')+'">'+(i+1)+'. '+(t.done?'✅ ':'')+esc(t.text)+(t.price?' — <b>'+fmt(t.price)+' ج</b>':'')+'</div>';}).join(''):'')+
+    (est.length?'<div style="font-size:12px;font-weight:800;color:#c2410c;margin:6px 0 4px">🧮 قطع مقدّرة (بدون خصم مخزون)</div>'+est.map(function(x){
+      return '<div style="font-size:12px;padding:2px 0">• '+esc(x.name)+' × '+fmtQty(x.qty)+' = <b>'+fmt((x.qty||0)*(+x.price||0))+' ج</b></div>';}).join(''):'')+
+    ((p+w)>0?'<div style="font-weight:900;font-size:13px;color:#065f46;margin-top:6px;border-top:1px solid #c7d2fe;padding-top:5px">💰 التقدير: '+fmt(p+w)+' ج</div>':'')+'</div>';
+}
 function openMovementDetail(id){
   var m=(DB.movements||[]).find(function(x){return x.id===id;});if(!m)return;
   var days=daysBetween(m.opened_at,m.closed_at);
@@ -14114,6 +14239,7 @@ function openMovementDetail(id){
     '<div class="card" style="margin-bottom:10px">'+
     '<div style="font-weight:700;font-size:13px;margin-bottom:8px">🔧 '+esc(m.fault_type||'—')+'</div>'+
     (m.fault_desc?'<div style="font-size:12px;color:#64748b;margin-bottom:8px">'+esc(m.fault_desc)+'</div>':'')+
+    _movDetailEstimateHtml(m)+
     (m.parts&&m.parts.length?'<div style="font-size:12px;font-weight:700;color:#ea580c;margin-bottom:4px">🔩 قطع الغيار:</div>'+
       m.parts.map(function(p){return '<div style="font-size:12px">• '+esc(p.name)+(p.qty>1?' × '+p.qty:'')+'</div>';}).join(''):'')+'</div>'+
     // ⚠️ v240 — الأحدث فوق (كان بيتعرض بترتيب الإدخال العادي فالجديد يطلع تحت خالص)
@@ -14480,12 +14606,13 @@ async function confirmSchedDone(id){
         if(document.getElementById('sale-model'))document.getElementById('sale-model').value=m.device||'';
         if(document.getElementById('sale-note'))document.getElementById('sale-note').value=(m.fault_type||'')+(m.fault_desc?' — '+m.fault_desc:'');
         // إضافة قطع الغيار تلقائياً لو موجودة
-        if(m.parts&&m.parts.length){
-          m.parts.forEach(function(part){
+        if((m.parts&&m.parts.length)||(m.est_parts&&m.est_parts.length)||(m.todo&&m.todo.some(function(t){return +t.price>0;}))){
+          (m.parts||[]).forEach(function(part){
             var prod=DB.products.find(function(p){return normalizeAr(p.name)===normalizeAr(part.name);});
             if(prod){_saleItems.push({productId:prod.id,name:prod.name,qty:part.qty||1,price:prod.sell_price,buyPrice:prod.buy_price});}
             else{_saleServices.push({name:'قطعة: '+part.name,price:0});}
           });
+          _movFillSaleFromEst(m); // v253
           renderSaleBody(null);
           document.getElementById('sale-customer').value=m.customer||'';
           if(document.getElementById('sale-serial'))document.getElementById('sale-serial').value=m.serial||'';
@@ -20698,7 +20825,24 @@ function _renderClientsList(el){
   else if(_clientsSort==='machines')list.sort(function(a,b){return(b.machines||[]).length-(a.machines||[]).length;});
   else list.sort(function(a,b){return (b.date||b.created_at||'')>(a.date||a.created_at||'')?1:(b.date||b.created_at||'')<(a.date||a.created_at||'')?-1:0;});
 
-  listEl.innerHTML=list.length?list.map(function(c){return _clientCard(c);}).join(''):'<div class="empty">لا توجد نتائج</div>';
+  // ⚠️ v253 — الشركة كمجموعة: كارت الشركة وتحته فروعها (كل فرع عميل بماكنه)
+  var inList={};list.forEach(function(c){inList[c.id]=1;});
+  var byId={};allC.forEach(function(c){byId[c.id]=c;});
+  var done={},html=[];
+  list.forEach(function(c){
+    var root=(c.parent_id&&byId[c.parent_id])?byId[c.parent_id]:c;
+    if(done[root.id])return;done[root.id]=1;
+    var kids=_clientBranches(root).filter(function(k){return inList[k.id];});
+    if(!kids.length&&!_clientBranches(root).length){html.push(_clientCard(root));return;}
+    var allKids=_clientBranches(root),mach=(root.machines||[]).length+allKids.reduce(function(t,k){return t+(k.machines||[]).length;},0);
+    html.push('<div style="background:#eef2ff;border-radius:16px;padding:8px;margin-bottom:12px;border:1.5px solid #c7d2fe">'+
+      '<div style="display:flex;justify-content:space-between;align-items:center;gap:6px;padding:4px 6px 8px"><div style="font-size:12px;font-weight:900;color:#3730a3">🏢 شركة — '+allKids.length+' فروع • '+mach+' مكنة</div>'+
+      '<div style="display:flex;gap:5px"><button onclick="openCompanyReport('+jsStr(root.id)+')" style="background:#4338ca;color:#fff;border:none;border-radius:8px;padding:5px 10px;font-family:inherit;font-size:11px;font-weight:800;cursor:pointer">📊 تقرير الشركة</button>'+
+      '<button onclick="openAddClientModal('+jsStr(root.id)+')" style="background:#fff;color:#4338ca;border:1.5px solid #c7d2fe;border-radius:8px;padding:5px 10px;font-family:inherit;font-size:11px;font-weight:800;cursor:pointer">🏢+ فرع</button></div></div>'+
+      _clientCard(root)+
+      kids.map(function(k){return '<div style="margin-right:16px;border-right:3px solid #a5b4fc;padding-right:8px">'+_clientCard(k)+'</div>';}).join('')+'</div>');
+  });
+  listEl.innerHTML=html.length?html.join(''):'<div class="empty">لا يوجد عملاء</div>';
 }
 
 function _clientCard(c){
@@ -21359,6 +21503,106 @@ function _parentSelectHtml(id,selected,selfId){
   var opts=(DB.clients||[]).filter(function(x){return !x.parent_id&&x.id!==selfId;}).sort(function(a,b){return normalizeAr(a.name)<normalizeAr(b.name)?-1:1;});
   return '<div class="field"><label>🏢 فرع تابع لعميل رئيسي (اختياري)</label><select id="'+id+'" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit"><option value="">— عميل رئيسي مستقل —</option>'+
     opts.map(function(x){return '<option value="'+x.id+'"'+(selected===x.id?' selected':'')+'>'+esc(x.name)+'</option>';}).join('')+'</select></div>';
+}
+
+// ⚠️ v253 — 🏢 الشركات: العميل الرئيسي = الشركة، وكل فرع عميل مستقل (باسمه وماكنه وفواتيره وديونه) متعلّم بـ parent_id.
+// قائمة العملاء بتعرض الشركة كمجموعة وتحتها فروعها. تقرير الشركة بيجيب إجمالي الشركة (كل الفروع + الرئيسي) وإجمالي كل فرع لوحده.
+var _crId='',_crRange='all',_crSort='sales';
+function _crMembers(root){return [root].concat(_clientBranches(root));}
+function _crCutoff(){
+  if(_crRange==='all')return '';
+  function iso(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+  if(_crRange==='m'){
+    var last=iso(new Date());
+    for(var i=0;i<31;i++){var x=new Date();x.setDate(x.getDate()-i);var sx=iso(x);if(isInCurrentHijriMonth(sx))last=sx;else break;}
+    return last;
+  }
+  var d=new Date();d.setDate(d.getDate()-(+_crRange));return iso(d);
+}
+function _crStats(c,cut){
+  var key=normalizeAr(c.name||'');
+  var sales=(DB.sales||[]).filter(function(s){return normalizeAr(s.customer||'')===key&&(!cut||(s.date||'')>=cut);});
+  var movs=(DB.movements||[]).filter(function(m){return normalizeAr(m.customer||'')===key&&(!cut||(m.opened_at||'')>=cut);});
+  var total=0,paid=0,cost=0;
+  sales.forEach(function(s){
+    total+=(s.total||0);paid+=Math.min(s.paid||0,s.total||0);
+    (s.items||[]).forEach(function(it){cost+=(it.qty||0)*(it.buyPrice||0);});
+  });
+  var debt=0;
+  (DB.debts||[]).forEach(function(d){if(d.type==='customer'&&normalizeAr(d.name||'')===key)debt+=Math.max(0,(d.total||0)-(d.paid||0));});
+  var machines=(c.machines||[]).filter(function(m){return (m.status||'active')==='active';}).length;
+  return {name:c.name,id:c.id,machines:machines,invoices:sales.length,movs:movs.length,sales:total,paid:paid,debt:debt,profit:total-cost};
+}
+function openCompanyReport(rootId){
+  var root=(DB.clients||[]).find(function(x){return x.id===rootId;});if(!root)return;
+  if(root.parent_id){var pr=(DB.clients||[]).find(function(x){return x.id===root.parent_id;});if(pr)root=pr;}
+  _crId=root.id;_crRange='all';_crSort='sales';
+  document.getElementById('modal-title').textContent='📊 تقرير شركة — '+root.name;
+  document.getElementById('modal-body').innerHTML='<div id="cr-body"></div>'+
+    '<div class="modal-actions"><button class="btn btn-sm" style="background:#f5f3ff;color:#7c3aed;border:none;flex:1" onclick="_crPrint()">🖨️ PDF / طباعة</button>'+
+    '<button class="btn btn-outline btn-full" style="flex:1" onclick="closeModal()">إغلاق</button></div>';
+  openModal();_renderCR();
+}
+function _crSetRange(r){_crRange=r;_renderCR();}
+function _crSetSort(k){_crSort=k;_renderCR();}
+function _crData(){
+  var root=(DB.clients||[]).find(function(x){return x.id===_crId;});if(!root)return null;
+  var cut=_crCutoff();
+  var rows=_crMembers(root).map(function(c,i){var st=_crStats(c,cut);st.isRoot=(i===0);return st;});
+  var tot={machines:0,invoices:0,movs:0,sales:0,paid:0,debt:0,profit:0};
+  rows.forEach(function(r){Object.keys(tot).forEach(function(k){tot[k]+=r[k];});});
+  var rootRow=rows[0],hasRootActivity=rootRow.invoices||rootRow.movs||rootRow.machines||rootRow.debt;
+  var list=rows.filter(function(r,i){return i>0||hasRootActivity;});
+  var k=_crSort;
+  list.sort(function(a,b){return (b[k]||0)-(a[k]||0);});
+  return {root:root,rows:list,tot:tot,cut:cut,branches:rows.length-1};
+}
+function _crRowOpen(id){
+  var c=(DB.clients||[]).find(function(x){return x.id===id;});if(!c)return;
+  openTwoWayStatement(c.name);
+}
+function _renderCR(){
+  var el=document.getElementById('cr-body');if(!el)return;
+  var D=_crData();if(!D)return;
+  var t=D.tot;
+  function card(k,icon,label,val,col,bg){
+    var act=_crSort===k;
+    return '<div onclick="_crSetSort(\''+k+'\')" style="cursor:pointer;flex:1;background:'+bg+';border:2.5px solid '+(act?col:'transparent')+';border-radius:12px;padding:8px 4px;text-align:center"><div style="font-size:10px;color:'+col+';font-weight:800">'+icon+' '+label+'</div><div style="font-size:14px;font-weight:900;color:'+col+'">'+fmt(val)+'</div></div>';
+  }
+  var th='padding:6px 4px;background:#f1f5f9;border:1px solid #cbd5e1;font-size:10px;text-align:center',td='padding:6px 4px;border:1px solid #e2e8f0;font-size:11px;text-align:center';
+  el.innerHTML=
+    '<div style="background:#eef2ff;border-radius:10px;padding:8px 12px;margin-bottom:8px;font-size:12px;color:#3730a3;font-weight:800">🏢 '+esc(D.root.name)+' — '+D.branches+' فروع</div>'+
+    '<div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px">'+[['all','الكل'],['m','الشهر الهجري'],['30','30 يوم'],['90','90 يوم'],['365','سنة']].map(function(r){var a=_crRange===r[0];return '<button type="button" onclick="_crSetRange(\''+r[0]+'\')" style="padding:5px 10px;border-radius:9px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;border:2px solid '+(a?'#3730a3':'#e2e8f0')+';background:'+(a?'#e0e7ff':'#fff')+';color:#3730a3">'+r[1]+'</button>';}).join('')+'</div>'+
+    '<div style="font-size:11px;font-weight:800;color:#475569;margin-bottom:5px">إجمالي الشركة (اضغط كارت للترتيب بيه)</div>'+
+    '<div style="display:flex;gap:6px;margin-bottom:6px">'+card('sales','🧾','المبيعات',t.sales,'#15803d','#dcfce7')+card('paid','💵','المدفوع',t.paid,'#1d4ed8','#dbeafe')+card('debt','⏳','المتبقي',t.debt,'#dc2626','#fee2e2')+'</div>'+
+    '<div style="display:flex;gap:6px;margin-bottom:10px">'+card('profit','📈','الربح',t.profit,'#7c3aed','#ede9fe')+card('machines','🖨️','المكن',t.machines,'#0e7490','#cffafe')+card('movs','🔧','التحركات',t.movs,'#c2410c','#ffedd5')+'</div>'+
+    '<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse"><thead><tr><th style="'+th+'">الفرع</th><th style="'+th+'">مكن</th><th style="'+th+'">فواتير</th><th style="'+th+'">المبيعات</th><th style="'+th+'">المدفوع</th><th style="'+th+'">المتبقي</th><th style="'+th+'">الربح</th></tr></thead><tbody>'+
+    D.rows.map(function(r){
+      return '<tr onclick="_crRowOpen('+jsStr(r.id)+')" style="cursor:pointer"><td style="'+td+';text-align:right;font-weight:800">'+(r.isRoot?'🏢 ':'📍 ')+esc(r.name)+(r.isRoot?' <span style="font-size:9px;color:#64748b">(الرئيسي)</span>':'')+'</td><td style="'+td+'">'+r.machines+'</td><td style="'+td+'">'+r.invoices+'</td><td style="'+td+';color:#15803d;font-weight:700">'+fmt(r.sales)+'</td><td style="'+td+'">'+fmt(r.paid)+'</td><td style="'+td+';color:'+(r.debt>0?'#dc2626':'#475569')+';font-weight:700">'+fmt(r.debt)+'</td><td style="'+td+';color:#7c3aed">'+fmt(r.profit)+'</td></tr>';
+    }).join('')+
+    '</tbody><tfoot><tr style="background:#fef3c7;font-weight:900"><td style="'+td+';text-align:right">🏢 إجمالي الشركة</td><td style="'+td+'">'+t.machines+'</td><td style="'+td+'">'+t.invoices+'</td><td style="'+td+'">'+fmt(t.sales)+'</td><td style="'+td+'">'+fmt(t.paid)+'</td><td style="'+td+';color:#dc2626">'+fmt(t.debt)+'</td><td style="'+td+'">'+fmt(t.profit)+'</td></tr></tfoot></table></div>'+
+    '<div style="font-size:10px;color:#94a3b8;margin-top:6px;line-height:1.7">اضغط على أي فرع لفتح كشف حسابه. الفلتر بيأثر على المبيعات والفواتير والتحركات والربح؛ <b>المتبقي</b> بيعرض كل الديون الحالية.</div>';
+}
+function _crPrint(){
+  var D=_crData();if(!D)return;
+  var t=D.tot,th='padding:6px;background:#f1f5f9;border:1px solid #cbd5e1;font-size:12px',td='padding:6px;border:1px solid #e2e8f0;font-size:12px;text-align:center';
+  var body='<div style="margin-bottom:8px;color:#64748b">تاريخ التقرير: '+esc(fmtDate(today()))+' — '+_gregTxt(today())+(D.cut?' — من '+esc(fmtDate(D.cut)):'')+'</div>'+
+    '<table style="width:100%;border-collapse:collapse"><thead><tr><th style="'+th+'">الفرع</th><th style="'+th+'">المكن</th><th style="'+th+'">الفواتير</th><th style="'+th+'">المبيعات</th><th style="'+th+'">المدفوع</th><th style="'+th+'">المتبقي</th><th style="'+th+'">الربح</th></tr></thead><tbody>'+
+    D.rows.map(function(r){return '<tr><td style="'+td+';text-align:right"><b>'+esc(r.name)+'</b>'+(r.isRoot?' (الرئيسي)':'')+'</td><td style="'+td+'">'+r.machines+'</td><td style="'+td+'">'+r.invoices+'</td><td style="'+td+'">'+fmt(r.sales)+'</td><td style="'+td+'">'+fmt(r.paid)+'</td><td style="'+td+'">'+fmt(r.debt)+'</td><td style="'+td+'">'+fmt(r.profit)+'</td></tr>';}).join('')+
+    '<tr style="background:#fef3c7;font-weight:900"><td style="'+td+';text-align:right">إجمالي الشركة</td><td style="'+td+'">'+t.machines+'</td><td style="'+td+'">'+t.invoices+'</td><td style="'+td+'">'+fmt(t.sales)+'</td><td style="'+td+'">'+fmt(t.paid)+'</td><td style="'+td+'">'+fmt(t.debt)+'</td><td style="'+td+'">'+fmt(t.profit)+'</td></tr></tbody></table>';
+  printSection('📊 تقرير شركة — '+esc(D.root.name),body);
+}
+// اختيار شركة من قايمة الشركات (من التقارير)
+function openCompaniesPicker(){
+  var roots=(DB.clients||[]).filter(function(c){return !c.parent_id&&_clientBranches(c).length;});
+  document.getElementById('modal-title').textContent='🏢 تقارير الشركات';
+  document.getElementById('modal-body').innerHTML=
+    (roots.length?roots.map(function(c){
+      var st=_crMembers(c).map(function(x){return _crStats(x,'');}),sales=st.reduce(function(t,x){return t+x.sales;},0),debt=st.reduce(function(t,x){return t+x.debt;},0);
+      return '<div onclick="openCompanyReport('+jsStr(c.id)+')" style="cursor:pointer;background:#f8fafc;border-right:4px solid #4338ca;border-radius:12px;padding:11px 13px;margin-bottom:8px"><div style="display:flex;justify-content:space-between"><b style="font-size:14px">🏢 '+esc(c.name)+'</b><span style="font-size:11px;color:#64748b">'+_clientBranches(c).length+' فروع</span></div><div style="font-size:12px;margin-top:4px;color:#475569">مبيعات <b style="color:#15803d">'+fmt(sales)+'</b> — متبقي <b style="color:#dc2626">'+fmt(debt)+'</b></div></div>';
+    }).join(''):'<div class="empty">مفيش شركات لسه — من شاشة العملاء دوس 🏢+ على أي عميل لإضافة فرع ليه</div>')+
+    '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+  openModal();
 }
 function openAddClientModal(parentId){
   document.getElementById('modal-title').textContent='+ عميل جديد';
@@ -23185,6 +23429,7 @@ function renderMore(){
       items:[
         {icon:'👥',label:'تقرير المهندسين',action:'openEmployeesReport()',color:'#fff7ed',tc:'#c2410c',ownerOnly:true},
         {icon:'📊',label:'تحليل مكن العملاء',action:'openMachineStats()',color:'#ecfeff',tc:'#0e7490'},
+        {icon:'🏢',label:'تقارير الشركات',action:'openCompaniesPicker()',color:'#eef2ff',tc:'#3730a3'},
         {icon:'📒',label:'الحسابات',screen:'accounting',color:'#fdf2f8',tc:'#86198f'},
         {icon:'🔧',label:'تقرير التحركات',screen:'movements-report',color:'#fdf2f8',tc:'#86198f'},
         {icon:'📋',label:'تقرير المهمات',screen:'tasks-report',color:'#f0fdf4',tc:'#15803d'},
