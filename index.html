@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v249</title>
+<title>ابو حوده الحلو الجميل v251</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="1448-04-21 — v249";
+<script>var BUILD_STAMP="1448-04-22 — v251";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -54,6 +54,20 @@
       مسار خالص عن طريق confirmAction، الزرار بتاعها لازم __runOnce من أول يوم.
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v251: [🧩 توحيد المكن + 📊 تحليل العملاء + 📿 الأدعية في الرئيسية وإيماني]
+     1) توحيد أسماء المكن: الأشكال اللي لها نفس الرقم (Mpc2500 / Mpc 2500 / 2500ريكو) بتتجمع، تختار الاسم والشركة والنوع وتوحّد بضغطة،
+        وبيتطبق على مكن العملاء (الأصل في model_orig). أي شكل جديد بنفس الرقم بيتحسب تلقائي على نفس العائلة.
+     2) 📊 تحليل عملاء المكن: عدد العملاء حسب النوع/الشركة/الموديل (فلاتر قابلة للضغط) + قايمة العملاء + إرسال عرض للمحددين.
+     3) رسالة العرض المجمّعة بقت بتستخدم العائلات الموحدة.
+     4) الأدعية بتظهر في الشاشة الرئيسية بالتبادل العشوائي مع الآيات (اضغط الكارت للتبديل)، وزرار أرشيف الأدعية في شاشة إيماني.
+v250: [🐛 خطأ كشف الحساب + سداد المشتريات + جملة على التكلفة + أدعية + رسالة عرض + تحسينات الكشوف]
+     1) خطأ كشف الحساب: المدفوع وقت الفاتورة كان بيتحسب فيه سدادات الدين تاني (لأن sale.paid بيتزود عند السداد) → بقى يتحسب من (الإجمالي − دين الفاتورة).
+     2) سداد دين المشتريات (فردي وجماعي) بقى يحدّث purchase.paid زي الفواتير.
+     3) سعر الجملة: ربح فوق التكلفة بنسبة (15%) أو مبلغ (20) — عام من ⚙️ أو لكل صنف. الأولوية: شريحة ← ربح الصنف ← سعر ثابت ← ربح عام.
+     4) الكشوف: فلتر فترة (الشهر الهجري/30/90/180 يوم) مع "رصيد مُرحَّل" + زرار ترتيب (أقدم/أحدث فوق) للعملاء والموظفين.
+     5) فورم المصروف (للمالك): "على حساب موظف" يحدد مين المصروف بتاعه.
+     6) 📿 أرشيف الأدعية (قسم الإيمان) + 📣 رسالة عرض مجمّعة لعملاء نوع مكنة (قسم العمليات).
+     SQL: ALTER TABLE products ADD COLUMN IF NOT EXISTS wholesale_markup text;
 v249: [👤 صفحة المهندس الشاملة + ⚡ توحيد اختصارات المصروفات]
      صفحة المهندس: كروت قابلة للضغط (فواتير/تحركات/مصروفات/سحب مخزن/مشتريات/تحصيل/سجل) + سجل نشاطه من السيرفر.
      اختصارات المصروفات: الفرع بقى اختيار من نفس فروع فورم المصروف (chips) + لو الفئة "رواتب" تختار الموظف ونوع الصرف (سلفة/مكافأة)
@@ -4299,7 +4313,7 @@ var APP_TITLE='ابو حوده الحلو الجميل';
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=249;
+var APP_VERSION=251;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -5987,12 +6001,7 @@ function renderHome(){
   // بالتسلسل (نفس الآية ثابتة طول اليوم، وبتتغيّر عشوائي بكرة).
   var verseEl=document.getElementById('home-verse');
   if(verseEl){
-    var v_=_todayVerse();
-    verseEl.innerHTML='<div style="background:linear-gradient(135deg,#0f766e,#134e4a);border-radius:14px;padding:16px 18px;margin:0 0 12px;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,.08)">'+
-      '<div style="color:#5eead4;font-size:11px;font-weight:700;margin-bottom:8px">📖 آية اليوم</div>'+
-      '<div style="color:#fff;font-size:15px;font-weight:700;line-height:1.9">'+esc(v_.text)+'</div>'+
-      '<div style="color:#99f6e4;font-size:11px;margin-top:8px">'+esc(v_.ref)+'</div>'+
-      '</div>';
+    verseEl.innerHTML=_spiritHtml(); // v251 — آية أو دعاء بالتبادل العشوائي
   }
   // ⚠️ v220 — مواعيد الصلاة على الرئيسية كمان (مش بس الإعدادات) — بتظهر بس لو المستخدم
   // فعّلها وحدد موقعه من الإعدادات؛ غير كده الكارت مايظهرش خالص.
@@ -6855,6 +6864,8 @@ function openProductModal(id){
     '<label style="font-size:12px;color:#5b21b6;margin-top:8px;display:block">📦 شرائح الكمية (اختياري) — من كمية = سعر</label>'+
     '<input id="prod-ws-tiers" type="text" value="'+esc(_tiersToText(p))+'" placeholder="10=90, 50=85" style="width:100%;padding:9px 12px;border:2px solid #ddd6fe;border-radius:9px;font-size:13px;font-family:inherit;margin-top:5px;direction:ltr;text-align:left">'+
     '<div style="font-size:10px;color:#7c3aed;margin-top:3px">مثال: 10=90, 50=85 يعني من 10 قطع بـ90 ومن 50 قطعة بـ85 (بتشتغل لما الجملة شغّالة)</div>'+
+    '<label style="font-size:12px;color:#5b21b6;margin-top:8px;display:block">💹 ربح الجملة فوق التكلفة (اختياري) — نسبة أو مبلغ</label>'+
+    '<input id="prod-ws-markup" type="text" value="'+esc(p&&p.wholesale_markup?p.wholesale_markup:'')+'" placeholder="15% أو 20" style="width:100%;padding:9px 12px;border:2px solid #ddd6fe;border-radius:9px;font-size:13px;font-family:inherit;margin-top:5px;direction:ltr;text-align:left">'+
     '</div>'+
 
     '<div id="scrap-field" style="display:'+(isMachine?'block':'none')+'">'+
@@ -6952,6 +6963,7 @@ async function saveProduct(){
     sell_price:+v('prod-sell')||0,
     wholesale_price:+v('prod-wholesale')||0,
     wholesale_tiers:_tiersFromText(v('prod-ws-tiers')),
+    wholesale_markup:(v('prod-ws-markup')||'').trim(),
     scrap_price:+v('prod-scrap')||0
   };
   if(!_prodId){ obj.created_at=today(); obj.source='manual'; } // ⚠️ v127 — تسجيل تاريخ ومصدر الإضافة (يدوي/مشتريات) لأول مرة
@@ -8488,7 +8500,7 @@ async function saveBundleDraft(){
 // ترتيب الأولوية لما الجملة شغّالة: شريحة الكمية ← سعر الجملة الثابت ← نسبة الخصم العامة ← القطاعي.
 // الجملة تلقائية لو العميل نوعه "جملة" (priceType) إلا لو اتحددت يدويًا على الفاتورة (_saleWS).
 var _saleWS=null,_wsSnap=null; // null=تلقائي حسب العميل ، true=جملة ، false=قطاعي
-function _wsCfg(){var w=(DB.settings&&DB.settings.wholesale)||{};return {enabled:w.enabled!==false,pct:+w.pct||0};}
+function _wsCfg(){var w=(DB.settings&&DB.settings.wholesale)||{};return {enabled:w.enabled!==false,markup:String(w.markup==null?'':w.markup)};}
 function _wsTiers(p){
   var t=p&&p.wholesale_tiers;
   if(typeof t==='string'){try{t=JSON.parse(t);}catch(e){t=[];}}
@@ -8507,14 +8519,27 @@ function _saleIsWholesale(){
   var c=(DB.clients||[]).find(function(x){return normalizeAr(x.name)===normalizeAr(cn);});
   return !!(c&&c.priceType==='wholesale');
 }
+// ⚠️ v250 — الجملة بقت "ربح فوق التكلفة": نسبة (15%) أو مبلغ ثابت (20) بيتزاد على ثمن التكلفة (مش خصم من القطاعي)
+function _parseMarkup(t){
+  t=String(t==null?'':t).trim().replace(/٪/g,'%');
+  if(!t)return null;
+  var pct=/%$/.test(t),n=parseFloat(t.replace(/[^\d.]/g,''));
+  if(!(n>0))return null;
+  return {pct:pct,n:n};
+}
+function _markupPrice(p,t){
+  var m=_parseMarkup(t);if(!m)return null;
+  var cost=p.landed_cost||p.buy_price||0;if(!(cost>0))return null;
+  return Math.round((m.pct?cost*(1+m.n/100):cost+m.n)*100)/100;
+}
 function _wsPrice(p,qty,ws){
   if(!p)return 0;
   if(!ws)return p.sell_price;
   var t=_wsTiers(p);
   for(var i=0;i<t.length;i++){if(qty>=t[i].min)return t[i].price;}
+  var mp=_markupPrice(p,p.wholesale_markup);if(mp!==null)return mp;
   if(p.wholesale_price>0)return p.wholesale_price;
-  var pct=_wsCfg().pct;
-  if(pct>0)return Math.round(p.sell_price*(1-pct/100)*100)/100;
+  mp=_markupPrice(p,_wsCfg().markup);if(mp!==null)return mp;
   return p.sell_price;
 }
 function _effectiveSellPrice(p,qty){return _wsPrice(p,qty||1,_saleIsWholesale());}
@@ -8551,11 +8576,11 @@ function _wsOpenSettings(){
   document.getElementById('modal-title').textContent='⚙️ إعدادات البيع بالجملة';
   document.getElementById('modal-body').innerHTML=
     '<div style="background:#f5f3ff;border-radius:10px;padding:10px 12px;margin-bottom:12px;font-size:12px;color:#5b21b6;line-height:1.8">'+
-    'لما الجملة تكون شغّالة، السعر بيتحدد بالترتيب: <b>شريحة الكمية</b> ← <b>سعر الجملة الثابت للصنف</b> ← <b>نسبة الخصم</b> اللي تحت ← سعر القطاعي.</div>'+
+    'لما الجملة تكون شغّالة، السعر بيتحدد بالترتيب: <b>شريحة الكمية</b> ← <b>ربح الصنف</b> ← <b>سعر الجملة الثابت</b> ← <b>الربح العام</b> اللي تحت ← سعر القطاعي.</div>'+
     '<div class="field"><label>تشغيل نظام الجملة</label><select id="ws-enabled" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit">'+
     '<option value="1"'+(cfg.enabled?' selected':'')+'>✅ شغّال</option><option value="0"'+(!cfg.enabled?' selected':'')+'>⛔ متوقف (الكل قطاعي)</option></select></div>'+
-    fld('ws-pct','نسبة خصم الجملة على سعر القطاعي (%)','number',cfg.pct||'','مثال: 10 يعني الجملة أرخص 10%. اتركها فاضية لو مش عايز نسبة')+
-    '<div style="font-size:11px;color:#64748b;margin-bottom:10px">سعر الجملة الثابت وشرائح الكمية بتتحط من شاشة تعديل الصنف.</div>'+
+    fld('ws-markup','الربح العام فوق التكلفة (نسبة أو مبلغ)','text',cfg.markup,'مثال: 15% أو 20')+
+    '<div style="font-size:11px;color:#64748b;margin-bottom:10px">اكتب <b>15%</b> يعني التكلفة + 15% ، أو <b>20</b> يعني التكلفة + 20 جنيه. بيتطبق على الأصناف اللي ليها تكلفة. ربح مخصوص لصنف وشرائح الكمية بتتحط من شاشة الصنف.</div>'+
     '<div class="modal-actions"><button class="btn btn-primary btn-full" onclick="_wsSaveSettings()">💾 حفظ</button>'+
     '<button class="btn btn-outline btn-full" onclick="_wsBack()">رجوع</button></div>';
 }
@@ -8565,10 +8590,10 @@ function _wsBack(){
   renderSaleBody(s);_restoreSaleFields(_wsSnap||{});_wsSnap=null;
 }
 async function _wsSaveSettings(){
-  var pct=+v('ws-pct')||0;
-  if(pct<0||pct>=100)return showToast('⚠️ النسبة لازم تكون من 0 لـ 99','#dc2626');
+  var mk=String(v('ws-markup')||'').trim();
+  if(mk&&!_parseMarkup(mk))return showToast('⚠️ اكتب نسبة (15%) أو مبلغ (20)','#dc2626');
   var oldPrices=_saleItems.map(function(it){var p=it.productId?DB.products.find(function(x){return x.id===it.productId;}):null;return p?_wsPrice(p,it.qty,_saleIsWholesale()):null;});
-  DB.settings.wholesale={enabled:v('ws-enabled')!=='0',pct:pct};
+  DB.settings.wholesale={enabled:v('ws-enabled')!=='0',markup:mk};
   await persist();
   _saleItems.forEach(function(it,i){
     var p=it.productId?DB.products.find(function(x){return x.id===it.productId;}):null;
@@ -10747,7 +10772,7 @@ function renderDebts(){
 // ⚠️ v246 — شكل الكشف بقى زي كشف الحساب المحاسبي اللي العميل بعت صورته: التاريخ | البيان (الصنف) | الكمية | مدين | دائن | الرصيد
 // الرصيد تراكمي بعد كل سطر. مدين = هو أخد مني / أنا سدّدت له ، دائن = أنا أخدت منه / هو سدّد لي.
 // الرصيد الموجب = "عليه" (هو مديون لي) ، السالب = "له" (أنا مديون له). مجموع (مدين − دائن) = نفس صافي شاشة الديون.
-var _twsName='',_twsDir='all';
+var _twsName='',_twsDir='all',_twsRange='all',_twsDesc=false;
 function _twsBalTxt(b){return b>0.001?fmt(b)+' عليه':b<-0.001?fmt(Math.abs(b))+' له':'0';}
 function _twsEntries(){
   var docs=_twsBuild(),E=[],seq=0;
@@ -10766,12 +10791,32 @@ function _twsEntries(){
   var bal=0;E.forEach(function(e){bal+=e.debit-e.credit;e.bal=bal;});
   return E;
 }
-function _twsTot(E){var d=0,c=0;E.forEach(function(e){d+=e.debit;c+=e.credit;});return {d:d,c:c,bal:d-c};}
+function _twsTot(E){var d=0,c=0,o=(E.length&&E[0].carry)?E[0].bal:0;E.forEach(function(e){d+=e.debit;c+=e.credit;});return {d:d,c:c,bal:o+d-c};}
+// ⚠️ v250 — فلتر الفترة: الحركات قبل بداية الفترة بتتلخّص في سطر "رصيد مُرحَّل" عشان الرصيد يفضل صحيح
+function _twsCutoff(){
+  if(_twsRange==='all')return '';
+  function iso(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+  if(_twsRange==='m'){
+    var last=iso(new Date());
+    for(var i=0;i<31;i++){var x=new Date();x.setDate(x.getDate()-i);var sx=iso(x);if(isInCurrentHijriMonth(sx))last=sx;else break;}
+    return last;
+  }
+  var d=new Date();d.setDate(d.getDate()-(+_twsRange));return iso(d);
+}
+function _twsView(){
+  var E=_twsEntries(),cut=_twsCutoff();
+  if(!cut)return E;
+  var before=E.filter(function(e){return (e.date||'')<cut;}),after=E.filter(function(e){return (e.date||'')>=cut;});
+  if(before.length)after.unshift({date:cut,seq:-1,kind:'',id:'',title:'',name:'رصيد مُرحَّل من قبل',qty:'',debit:0,credit:0,first:false,carry:true,bal:before[before.length-1].bal});
+  return after;
+}
+function _twsSetRange(r){_twsRange=r;_renderTws();}
+function _twsToggleOrder(){_twsDesc=!_twsDesc;_renderTws();}
 function openTwoWayStatement(name){
   if(__isFieldHidden('debts','name')||__isFieldHidden('debts','total')||__isFieldHidden('debts','paid')){
     return showToast('🚫 مفيش صلاحية تشوف تفاصيل الديون. كلم المالك.','#dc2626');
   }
-  _twsName=name;_twsDir='all';
+  _twsName=name;_twsDir='all';_twsRange='all';_twsDesc=false;
   document.getElementById('modal-title').textContent='⚖️ كشف حساب — '+name;
   document.getElementById('modal-body').innerHTML=
     '<div id="tws-top"></div><div id="tws-list"></div>'+
@@ -10789,15 +10834,15 @@ function _twsOpenDoc(kind,id){
   else openEditDebtModal(id);
 }
 function _twsTableHtml(E,forPrint){
-  var tt=_twsTot(E);
+  var tt=_twsTot(E),rowsE=_twsDesc?E.slice().reverse():E;
   var th='padding:6px 4px;background:#f1f5f9;border:1px solid #cbd5e1;font-size:'+(forPrint?'12':'10')+'px;text-align:center';
   var td='padding:5px 4px;border:1px solid #e2e8f0;font-size:'+(forPrint?'12':'11')+'px;text-align:center';
   var h='<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse"><thead><tr>'+
     '<th style="'+th+'">التاريخ</th><th style="'+th+'">البيان</th><th style="'+th+'">الكمية</th>'+
     '<th style="'+th+';color:#15803d">مدين</th><th style="'+th+';color:#1d4ed8">دائن</th><th style="'+th+'">الرصيد</th></tr></thead><tbody>';
-  E.forEach(function(e){
+  rowsE.forEach(function(e){
     var bc=e.bal>0.001?'#15803d':e.bal<-0.001?'#dc2626':'#475569';
-    h+='<tr'+(forPrint?'':' onclick="_twsOpenDoc(\''+e.kind+'\',\''+e.id+'\')" style="cursor:pointer"')+'>'+
+    h+='<tr'+((forPrint||e.carry)?'':' onclick="_twsOpenDoc(\''+e.kind+'\',\''+e.id+'\')" style="cursor:pointer"')+'>'+
       '<td style="'+td+'">'+esc(fmtDate(e.date))+'</td>'+
       '<td style="'+td+';text-align:right">'+(e.first?'<div style="font-size:9px;color:#94a3b8">'+esc(e.title)+'</div>':'')+esc(e.name||'')+'</td>'+
       '<td style="'+td+'">'+(e.qty!==''?fmtQty(e.qty):'')+'</td>'+
@@ -10814,7 +10859,7 @@ function _twsTableHtml(E,forPrint){
 function _renderTws(){
   var top=document.getElementById('tws-top'),list=document.getElementById('tws-list');
   if(!top||!list)return;
-  var E=_twsEntries(),tt=_twsTot(E);
+  var E=_twsView(),tt=_twsTot(E);
   var key=normalizeAr(_twsName),dn=0;
   (DB.debts||[]).forEach(function(d){if(normalizeAr(d.name||'')===key){var r=(d.total||0)-(d.paid||0);dn+=(d.type==='customer'?r:-r);}});
   function card(dir,bg,bd,col,t1,v){
@@ -10827,6 +10872,8 @@ function _renderTws(){
     card('debit','#dcfce7','#86efac','#15803d','مدين',fmt(tt.d))+
     card('credit','#dbeafe','#93c5fd','#1d4ed8','دائن',fmt(tt.c))+
     card('all','#fffbeb','#fde68a',netCol,'الرصيد (الكل)',_twsBalTxt(tt.bal))+'</div>'+
+    '<div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px">'+[['all','الكل'],['m','الشهر الهجري'],['30','30 يوم'],['90','90 يوم'],['180','6 شهور']].map(function(r){var a=_twsRange===r[0];return '<button type="button" onclick="_twsSetRange(\''+r[0]+'\')" style="padding:5px 10px;border-radius:9px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;border:2px solid '+(a?'#92400e':'#e2e8f0')+';background:'+(a?'#fef3c7':'#fff')+';color:#92400e">'+r[1]+'</button>';}).join('')+
+    '<button type="button" onclick="_twsToggleOrder()" style="padding:5px 10px;border-radius:9px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;border:2px solid #cbd5e1;background:#f1f5f9;color:#334155">'+(_twsDesc?'⬇️ الأحدث فوق':'⬆️ الأقدم فوق')+'</button></div>'+
     '<div style="font-size:10px;color:#64748b;line-height:1.7;margin-bottom:8px">'+
     '<b style="color:#15803d">مدين</b> = هو أخد مني / أنا سدّدت له &nbsp;•&nbsp; <b style="color:#1d4ed8">دائن</b> = أنا أخدت منه / هو سدّد لي<br>'+
     'الرصيد: <b>عليه</b> = هو مديون لي &nbsp;•&nbsp; <b>له</b> = أنا مديون له</div>'+
@@ -10835,7 +10882,7 @@ function _renderTws(){
   list.innerHTML=shown.length?_twsTableHtml(shown,false)+'<div style="font-size:10px;color:#94a3b8;margin-top:5px">اضغط على أي سطر لفتح أصله للتعديل. الرصيد تراكمي دايمًا حتى مع الفلتر.</div>':'<div class="empty">لا توجد معاملات</div>';
 }
 function _twsPrint(){
-  var E=_twsEntries(),tt=_twsTot(E);
+  var E=_twsView(),tt=_twsTot(E);
   var netCol=tt.bal>0.001?'#15803d':tt.bal<-0.001?'#dc2626':'#475569';
   var sentence=tt.bal>0.001?'الباقي: هو عليه لي '+fmt(tt.bal)+' ج':tt.bal<-0.001?'الباقي: أنا عليّ له '+fmt(Math.abs(tt.bal))+' ج':'الحساب متعادل ✅';
   var body='<div style="margin-bottom:8px;color:#64748b">تاريخ الكشف: '+esc(fmtDate(today()))+'</div>'+
@@ -10845,9 +10892,10 @@ function _twsPrint(){
   printSection('⚖️ كشف حساب — '+esc(_twsName),body);
 }
 function _twsShareText(){
-  var E=_twsEntries(),tt=_twsTot(E);
+  var E=_twsView(),tt=_twsTot(E);
   var txt='⚖️ كشف حساب — '+_twsName+'\n📅 '+fmtDate(today())+'\n(مدين = هو أخد مني/سدّدت له ، دائن = أنا أخدت منه/سدّد لي)\n\n';
   E.forEach(function(e){
+    if(e.carry){txt+='🔹 '+e.name+' | الرصيد '+_twsBalTxt(e.bal)+'\n';return;}
     txt+=fmtDate(e.date)+' | '+(e.name||'')+(e.qty!==''?' ×'+fmtQty(e.qty):'')+' | '+(e.debit?'مدين '+fmt(e.debit):'دائن '+fmt(e.credit))+' | الرصيد '+_twsBalTxt(e.bal)+'\n';
   });
   txt+='\nالإجمالي: مدين '+fmt(tt.d)+' — دائن '+fmt(tt.c)+'\n⚖️ '+(tt.bal>0.001?'هو عليه لي '+fmt(tt.bal)+' ج':tt.bal<-0.001?'أنا عليّ له '+fmt(Math.abs(tt.bal))+' ج':'متعادلين ✅');
@@ -10878,16 +10926,20 @@ function _twsBuild(){
     (s.services||[]).forEach(function(sv){lines.push({name:'🔧 '+(sv.name||'خدمة'),qty:'',price:'',amt:sv.price||0});});
     if((s.discount||0)>0)lines.push({name:'خصم',qty:'',price:'',amt:-s.discount});
     if(!lines.length)lines.push({name:s.note||'مبلغ',qty:'',price:'',amt:s.total||0});
-    var pp=[];
-    debts.forEach(function(d){if(d.type==='customer'&&d.source_sale_id===s.id)pp=pp.concat(pays(d));});
-    docs.push({dir:'customer',kind:'sale',id:s.id,date:s.date,title:'فاتورة'+(s.serial?' — '+s.serial:'')+(s.model?' ('+s.model+')':''),lines:lines,total:s.total||0,upfront:s.paid||0,pays:pp});
+    // ⚠️ v250 — sale.paid بيتزود لما العميل يسدّد الدين، فاستخدامه كـ"دفع وقت الفاتورة" كان بيحسب السدادات مرتين.
+    // الصح: الدفع الأصلي = الإجمالي − إجمالي دين الفاتورة (الدين بيتعمل بقيمة المتبقي وقت البيع).
+    var pp=[],ldT=0,ldN=0;
+    debts.forEach(function(d){if(d.type==='customer'&&d.source_sale_id===s.id){pp=pp.concat(pays(d));ldT+=(d.total||0);ldN++;}});
+    var upS=ldN?Math.max(0,(s.total||0)-ldT):(s.paid||0);
+    docs.push({dir:'customer',kind:'sale',id:s.id,date:s.date,title:'فاتورة'+(s.serial?' — '+s.serial:'')+(s.model?' ('+s.model+')':''),lines:lines,total:s.total||0,upfront:upS,pays:pp});
   });
   purchs.forEach(function(p){
     var lines=(p.items||[]).map(function(it){return {name:it.name,qty:it.qty,price:it.price,amt:(it.qty||0)*(it.price||0)};});
     if((p.extra_cost||0)>0)lines.push({name:'مصاريف إضافية',qty:'',price:'',amt:p.extra_cost});
-    var pp=[];
-    debts.forEach(function(d){if(d.type==='supplier'&&d.source_purchase_id===p.id)pp=pp.concat(pays(d));});
-    docs.push({dir:'supplier',kind:'purch',id:p.id,date:p.date,title:'مشترى',lines:lines,total:(p.total||0)+(p.extra_cost||0),upfront:p.paid||0,pays:pp});
+    var pp=[],ldT=0,ldN=0,gT=(p.total||0)+(p.extra_cost||0);
+    debts.forEach(function(d){if(d.type==='supplier'&&d.source_purchase_id===p.id){pp=pp.concat(pays(d));ldT+=(d.total||0);ldN++;}});
+    var upP=ldN?Math.max(0,gT-ldT):(p.paid||0); // نفس منطق الفواتير (v250)
+    docs.push({dir:'supplier',kind:'purch',id:p.id,date:p.date,title:'مشترى',lines:lines,total:gT,upfront:upP,pays:pp});
   });
   debts.forEach(function(d){
     var linked=(d.type==='customer'&&d.source_sale_id&&sId[d.source_sale_id])||(d.type==='supplier'&&d.source_purchase_id&&pId[d.source_purchase_id]);
@@ -11056,6 +11108,15 @@ async function payDebt(id){
       await dbUpdate('sales',sale.id,{paid:newSalePaid});
     }
   }
+  // ⚠️ v250 — نفس منطق الفواتير: سداد دين المشترى يحدّث paid بتاعه
+  if(d.source_purchase_id){
+    var pu=DB.purchases.find(function(x){return x.id===d.source_purchase_id;});
+    if(pu){
+      var newPuPaid=Math.min((pu.total||0)+(pu.extra_cost||0),(pu.paid||0)+amount);
+      DB.purchases=DB.purchases.map(function(x){return x.id===pu.id?Object.assign({},x,{paid:newPuPaid}):x;});
+      await dbUpdate('purchases',pu.id,{paid:newPuPaid});
+    }
+  }
   await persist();
   closeModal();renderDebts();renderHome();
   showToast('✅ تم تسجيل السداد','#16a34a');
@@ -11118,6 +11179,14 @@ async function payGroupDebts(name,type){
         var newSalePaid=Math.min(sale.total,(sale.paid||0)+toAdd);
         DB.sales=DB.sales.map(function(s){return s.id===sale.id?Object.assign({},s,{paid:newSalePaid}):s;});
         await dbUpdate('sales',sale.id,{paid:newSalePaid});
+      }
+    }
+    if(d.source_purchase_id){
+      var pu=DB.purchases.find(function(x){return x.id===d.source_purchase_id;});
+      if(pu){
+        var newPuPaid=Math.min((pu.total||0)+(pu.extra_cost||0),(pu.paid||0)+toAdd);
+        DB.purchases=DB.purchases.map(function(x){return x.id===pu.id?Object.assign({},x,{paid:newPuPaid}):x;});
+        await dbUpdate('purchases',pu.id,{paid:newPuPaid});
       }
     }
     remaining-=toAdd;updated++;
@@ -11545,6 +11614,7 @@ function openExpenseModal(prefill){
 
     '<div class="field"><label>ملاحظات</label>'+
     '<textarea id="exp-note" rows="2" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit;direction:rtl;resize:none;background:#f8fafc;outline:none">'+esc(prefill?prefill.note||'':'')+'</textarea></div>'+
+    (window.__isOwner?'<div class="field"><label>👤 المصروف ده على حساب موظف (اختياري)</label><select id="exp-by" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit"><option value="">أنا (على حسابي)</option>'+(DB.accounts.employees||[]).filter(function(e){return e.linked_profile_id;}).map(function(e){return '<option value="'+e.linked_profile_id+'">'+esc(e.name)+'</option>';}).join('')+'</select></div>':'')+
     dateField('exp-date','📅 التاريخ',null)+
     '<div class="modal-actions">'+
     '<button class="btn btn-orange btn-full" onclick="__runOnce(this,function(){saveExpense(false)})">✅ تسجيل (وأضف تاني)</button>'+
@@ -11769,7 +11839,7 @@ async function saveExpense(closeAfter){
   }
   var label=type+(sub?' — '+sub:'')+(note?' ('+note+')':'');
   obj={id:genId(),label:label,amount:amount,type:type,subcategory:sub,note:note,date:v('exp-date'),source:'manual',
-    created_by:window.__currentProfile?window.__currentProfile.id:null}; // v164
+    created_by:((window.__isOwner&&(document.getElementById('exp-by')||{}).value)||(window.__currentProfile?window.__currentProfile.id:null))}; // v164 + v250 (على حساب موظف)
   DB.expenses.unshift(obj);
   await persist();
   await dbUpsert('expenses',obj);
@@ -17167,93 +17237,221 @@ function ensureModelGroupsDefaults(){
   if(!DB.settings.modelFamilies)DB.settings.modelFamilies=[];
 }
 // يرجّع اسم "العائلة" لو الموديل الخام ده متربط بيها، وإلا يرجّع الاسم الخام زي ما هو
-function canonicalModelFamily(raw){
-  if(!raw)return 'غير محدد';
-  ensureModelGroupsDefaults();
-  var qn=normalizeAr(raw);
-  var fam=(DB.settings.modelFamilies||[]).find(function(f){
-    return(f.variants||[]).some(function(v){return normalizeAr(v)===qn;});
-  });
-  return fam?fam.name:raw;
-}
 // استخراج "نواة" رقمية/حروفية من الموديل عشان نقترح تجميع الأسماء المتشابهة على بعض
 function _modelCore(raw){
   return (raw||'').toUpperCase().replace(/[^A-Z0-9\u0621-\u064A]/g,'');
 }
 
-function openModelFamiliesSettings(){
+// ⚠️ v251 — توحيد أسماء المكن (عائلات الموديلات) بشكل أذكى: Mpc2500 / Mpc 2500 / 2500ريكو بيتجمعوا تحت نفس المفتاح الرقمي،
+// وتوحّدهم بضغطة واحدة مع اختيار الشركة والنوع، وبيتطبّق على مكن العملاء (الاسم الأصلي بيتحفظ في model_orig).
+function _digitsEn(s){return String(s||'').replace(/[٠-٩]/g,function(d){return '٠١٢٣٤٥٦٧٨٩'.indexOf(d);});}
+function _modelDigitKey(raw){
+  var m=_digitsEn(raw).match(/\d{3,}/g);
+  return m?m.slice().sort(function(a,b){return b.length-a.length;})[0]:'';
+}
+function _famOf(raw){
+  if(!raw)return null;
   ensureModelGroupsDefaults();
-  _mfSelected={};
-  var raws={}; // raw model -> count
+  var qn=normalizeAr(raw),fams=DB.settings.modelFamilies||[];
+  var ex=fams.find(function(f){return normalizeAr(f.name)===qn||(f.variants||[]).some(function(v){return normalizeAr(v)===qn;});});
+  if(ex)return ex;
+  var k=_modelDigitKey(raw);if(!k)return null;
+  var hits=fams.filter(function(f){return _modelDigitKey(f.name)===k||(f.variants||[]).some(function(v){return _modelDigitKey(v)===k;});});
+  return hits.length===1?hits[0]:null; // مطابقة بالرقم بس لو عائلة واحدة بس تطابق
+}
+function canonicalModelFamily(raw){
+  if(!raw)return 'بدون موديل';
+  var f=_famOf(raw);
+  return f?f.name:raw;
+}
+function _guessCompany(raw){
+  var r=String(raw||''),low=r.toLowerCase(),found='';
+  var map=[['ريكو','Ricoh'],['ricoh','Ricoh'],['aficio','Ricoh'],['اتش بي','HP'],['hp','HP'],['كانون','Canon'],['canon','Canon'],['كيوسيرا','Kyocera'],['kyocera','Kyocera'],['زيروكس','Xerox'],['xerox','Xerox'],['ابسون','Epson'],['إبسون','Epson'],['epson','Epson'],['براذر','Brother'],['brother','Brother'],['سامسونج','Samsung'],['samsung','Samsung'],['شارب','Sharp'],['sharp','Sharp']];
+  for(var i=0;i<map.length&&!found;i++){if(low.indexOf(map[i][0])!==-1)found=map[i][1];}
+  if(!found&&/(^|[^a-z])mp\s?c?\s?\d/i.test(r))found='Ricoh';
+  if(!found)return '';
+  var list=DB.settings.companies||[];
+  var hit=list.find(function(c){return String(c).toLowerCase()===found.toLowerCase();});
+  return hit||found;
+}
+var _mfCl=[],_mfSel={};
+function _mfClusters(){
+  var raws={};
   (DB.clients||[]).forEach(function(c){(c.machines||[]).forEach(function(m){if(m.model)raws[m.model]=(raws[m.model]||0)+1;});});
   (DB.movements||[]).forEach(function(m){if(m.device)raws[m.device]=(raws[m.device]||0)+1;});
-  var mapped={};
-  (DB.settings.modelFamilies||[]).forEach(function(f){(f.variants||[]).forEach(function(v){mapped[normalizeAr(v)]=true;});});
-  var unmapped=Object.keys(raws).filter(function(r){return!mapped[normalizeAr(r)];});
-  // تجميع مبدئي بالتشابه (نفس النواة الرقمية/الحروفية) — اقتراح بس، مش دمج تلقائي
-  var clusters={};
-  unmapped.forEach(function(r){
-    var core=_modelCore(r).replace(/[A-Z]+$/,''); // نتجاهل حروف الذيل زي DN/W/S عشان التجميع يبقى أوسع شوية
-    var key=core||_modelCore(r);
-    if(!clusters[key])clusters[key]=[];
-    clusters[key].push(r);
+  var fams=DB.settings.modelFamilies||[],mapped={};
+  fams.forEach(function(f){mapped[normalizeAr(f.name)]=true;(f.variants||[]).forEach(function(v){mapped[normalizeAr(v)]=true;});});
+  var cl={};
+  Object.keys(raws).filter(function(r){return !mapped[normalizeAr(r)];}).forEach(function(r){
+    var k=_modelDigitKey(r)||('x:'+_modelCore(r));
+    (cl[k]=cl[k]||{key:k,items:[],raws:raws}).items.push(r);
   });
-
-  document.getElementById('modal-title').textContent='🖨️ عائلات وموديلات';
+  return Object.keys(cl).map(function(k){return cl[k];}).sort(function(a,b){return b.items.length-a.items.length;});
+}
+function openModelFamiliesSettings(){
+  ensureModelGroupsDefaults();
+  _mfCl=_mfClusters();_mfSel={};
+  _mfCl.forEach(function(c,i){_mfSel[i]={};c.items.forEach(function(r){_mfSel[i][r]=true;});});
+  var companies=DB.settings.companies||[],groups=DB.settings.modelGroups;
+  function coSel(id,val){return '<select id="'+id+'" style="flex:1;min-width:90px;padding:7px;border:1.5px solid #e2e8f0;border-radius:8px;font-family:inherit;font-size:12px"><option value="">— الشركة —</option>'+companies.map(function(c){return '<option value="'+esc(c)+'"'+(val===c?' selected':'')+'>'+esc(c)+'</option>';}).join('')+'</select>';}
+  function gpSel(id,val){return '<select id="'+id+'" style="flex:1;min-width:90px;padding:7px;border:1.5px solid #e2e8f0;border-radius:8px;font-family:inherit;font-size:12px"><option value="">— النوع —</option>'+groups.map(function(g){return '<option value="'+g.id+'"'+(val===g.id?' selected':'')+'>'+esc(g.name)+'</option>';}).join('')+'</select>';}
+  function card(c,i){
+    var best=c.items.slice().sort(function(a,b){return (c.raws[b]-c.raws[a])||(b.length-a.length);})[0];
+    return '<div style="background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:12px;padding:9px 11px;margin-bottom:9px">'+
+      (c.key.indexOf('x:')===0?'':'<div style="font-size:10.5px;color:#64748b;margin-bottom:4px">🔢 الرقم المشترك: <b>'+esc(c.key)+'</b></div>')+
+      c.items.map(function(r){
+        return '<label style="display:flex;align-items:center;gap:7px;padding:3px 0;font-size:12.5px;cursor:pointer"><input type="checkbox" checked onchange="_mfClTog('+i+','+jsStr(r)+',this.checked)" style="width:16px;height:16px"><span style="flex:1">'+esc(r)+'</span><span style="color:#94a3b8;font-size:10.5px">('+c.raws[r]+')</span></label>';
+      }).join('')+
+      '<input id="mfc-name-'+i+'" type="text" value="'+esc(best)+'" placeholder="الاسم الموحد" style="width:100%;margin:7px 0 6px;padding:8px 10px;border:2px solid #ddd6fe;border-radius:9px;font-family:inherit;font-size:13px">'+
+      '<div style="display:flex;gap:6px;margin-bottom:6px;flex-wrap:wrap">'+coSel('mfc-co-'+i,_guessCompany(best))+gpSel('mfc-gp-'+i,'')+'</div>'+
+      '<button class="btn btn-orange btn-full btn-sm" onclick="__runOnce(this,function(){return _mfUnify('+i+')})">✅ وحّد المحدد تحت الاسم ده</button>'+
+      ((DB.settings.modelFamilies||[]).length?'<div style="display:flex;gap:6px;margin-top:6px"><select id="mfc-ex-'+i+'" style="flex:1;padding:7px;border:1.5px solid #e2e8f0;border-radius:8px;font-family:inherit;font-size:12px"><option value="">…أو ضمّهم لعائلة موجودة</option>'+(DB.settings.modelFamilies||[]).map(function(f){return '<option value="'+f.id+'">'+esc(f.name)+'</option>';}).join('')+'</select><button class="btn btn-sm" style="background:#ede9fe;color:#5b21b6;border:none" onclick="__runOnce(this,function(){return _mfJoin('+i+')})">ضمّ</button></div>':'')+
+      '</div>';
+  }
+  var multi=[],single=[];
+  _mfCl.forEach(function(c,i){(c.items.length>1?multi:single).push({c:c,i:i});});
+  var famsHtml=groups.concat([{id:'',name:'بدون نوع'}]).map(function(g){
+    var fams=(DB.settings.modelFamilies||[]).filter(function(f){return (f.groupId||'')===(g.id||'');});
+    if(!fams.length)return '';
+    return '<div style="margin-bottom:10px"><div style="font-size:12px;font-weight:900;background:#f1f5f9;border-radius:7px;padding:5px 9px;margin-bottom:5px">🗂️ '+esc(g.name)+'</div>'+
+      fams.map(function(f){
+        return '<div style="background:#ede9fe;border-radius:9px;padding:8px 11px;margin-bottom:6px">'+
+          '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px"><span style="font-size:12.5px;font-weight:800;color:#4338ca">🖨️ '+esc(f.name)+'</span><div style="display:flex;gap:4px">'+
+          '<button onclick="renameModelFamily(\''+f.id+'\')" style="background:none;border:none;color:#2563eb;font-size:13px;cursor:pointer">✏️</button>'+
+          '<button onclick="delModelFamily(\''+f.id+'\')" style="background:none;border:none;color:#dc2626;font-size:13px;cursor:pointer">🗑️</button></div></div>'+
+          '<div style="display:flex;gap:6px;margin-bottom:5px;flex-wrap:wrap">'+
+          '<select onchange="_mfMeta(\''+f.id+'\',\'company\',this.value)" style="flex:1;min-width:90px;padding:6px;border:1.5px solid #ddd6fe;border-radius:8px;font-family:inherit;font-size:11.5px"><option value="">— الشركة —</option>'+companies.map(function(c){return '<option value="'+esc(c)+'"'+(f.company===c?' selected':'')+'>'+esc(c)+'</option>';}).join('')+'</select>'+
+          '<select onchange="_mfMeta(\''+f.id+'\',\'groupId\',this.value)" style="flex:1;min-width:90px;padding:6px;border:1.5px solid #ddd6fe;border-radius:8px;font-family:inherit;font-size:11.5px"><option value="">— النوع —</option>'+groups.map(function(g2){return '<option value="'+g2.id+'"'+(f.groupId===g2.id?' selected':'')+'>'+esc(g2.name)+'</option>';}).join('')+'</select></div>'+
+          (f.variants||[]).map(function(vr,vi){return '<div style="display:flex;justify-content:space-between;align-items:center;padding:2px 0;font-size:11px;color:#5b21b6"><span>↳ '+esc(vr)+'</span><button onclick="removeVariantFromFamily(\''+f.id+'\','+vi+')" style="background:none;border:none;color:#dc2626;font-size:10px;cursor:pointer">✖</button></div>';}).join('')+
+          '<div style="display:flex;gap:5px;margin-top:5px"><input id="addv-'+f.id+'" type="text" placeholder="+ شكل كتابة تاني" style="flex:1;padding:5px 8px;border:1.5px solid #ddd6fe;border-radius:7px;font-family:inherit;font-size:11px"><button onclick="addVariantToFamily(\''+f.id+'\')" style="background:#7c3aed;color:#fff;border:none;border-radius:7px;padding:5px 10px;font-size:11px;cursor:pointer">+</button></div></div>';
+      }).join('')+'</div>';
+  }).join('');
+  document.getElementById('modal-title').textContent='🧩 توحيد أسماء المكن';
   document.getElementById('modal-body').innerHTML=
-    '<div style="background:#eef2ff;border-radius:10px;padding:9px 12px;margin-bottom:12px;font-size:11.5px;color:#4338ca">'+
-    '💡 دي موديلاتك الفعلية المسجّلة، مجمّعة كاقتراح حسب التشابه. اختار الأسماء اللي هي فعلاً نفس الموديل ودمجهم في عائلة واحدة.</div>'+
-
-    (Object.keys(clusters).length?Object.keys(clusters).sort(function(a,b){return clusters[b].length-clusters[a].length;}).map(function(key){
-      var items=clusters[key];
-      return '<div style="background:#f8fafc;border-radius:10px;padding:9px 11px;margin-bottom:8px">'+
-        items.map(function(r){
-          return '<label style="display:flex;align-items:center;gap:7px;padding:3px 0;font-size:12.5px;cursor:pointer">'+
-            '<input type="checkbox" onchange="_mfToggle('+jsStr(r)+',this.checked)" style="width:16px;height:16px">'+
-            '<span>'+esc(r)+'</span><span style="color:#94a3b8;font-size:10.5px">('+raws[r]+')</span></label>';
-        }).join('')+
-        '</div>';
-    }).join(''):'<div class="empty">مفيش موديلات جديدة محتاجة تجميع 🎉</div>')+
-
-    '<div style="background:#fff7ed;border-radius:10px;padding:10px;margin:12px 0">'+
-    '<div style="font-size:12px;font-weight:800;color:#9a3412;margin-bottom:6px">دمج المحدد في عائلة</div>'+
-    fld('mf-name','اسم العائلة (زي: ريكو MP 2554)','text','')+
-    '<div class="field"><label>المجموعة (الشركة)</label><select id="mf-group" style="width:100%;padding:9px;border:2px solid #e2e8f0;border-radius:9px;font-family:inherit">'+
-    DB.settings.modelGroups.map(function(g){return '<option value="'+g.id+'">'+esc(g.name)+'</option>';}).join('')+
-    '</select></div>'+
-    '<button class="btn btn-orange btn-full" onclick="__runOnce(this,mergeModelFamily)">🔗 دمج المحدد</button>'+
-    '</div>'+
-
-    (DB.settings.modelFamilies.length?'<div style="font-size:12px;font-weight:800;color:#374151;margin:10px 0 6px">العائلات الحالية</div>'+
-    DB.settings.modelGroups.map(function(g){
-      var fams=DB.settings.modelFamilies.filter(function(f){return f.groupId===g.id;});
-      if(!fams.length)return'';
-      return '<div style="margin-bottom:10px">'+
-        '<div style="font-size:12px;font-weight:900;color:#0f172a;background:#f1f5f9;border-radius:7px;padding:5px 9px;margin-bottom:5px">🏭 '+esc(g.name)+'</div>'+
-        fams.map(function(f){
-          return '<div style="background:#ede9fe;border-radius:9px;padding:8px 11px;margin-bottom:6px">'+
-            '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">'+
-            '<span style="font-size:12.5px;font-weight:800;color:#4338ca">🖨️ '+esc(f.name)+'</span>'+
-            '<div style="display:flex;gap:4px">'+
-            '<button onclick="renameModelFamily(\''+f.id+'\')" style="background:none;border:none;color:#2563eb;font-size:12px;cursor:pointer">✏️</button>'+
-            '<button onclick="delModelFamily(\''+f.id+'\')" style="background:none;border:none;color:#dc2626;font-size:12px;cursor:pointer">🗑️</button>'+
-            '</div></div>'+
-            (f.variants||[]).map(function(vr,vi){
-              return '<div style="display:flex;justify-content:space-between;align-items:center;padding:2px 0;font-size:11px;color:#5b21b6">'+
-                '<span>• '+esc(vr)+'</span>'+
-                '<button onclick="removeVariantFromFamily(\''+f.id+'\','+vi+')" style="background:none;border:none;color:#dc2626;font-size:10px;cursor:pointer">✕</button></div>';
-            }).join('')+
-            '<div style="display:flex;gap:5px;margin-top:5px">'+
-            '<input id="addv-'+f.id+'" type="text" placeholder="+ أضف اسم موديل آخر لنفس العائلة" style="flex:1;padding:5px 8px;border:1.5px solid #ddd6fe;border-radius:7px;font-family:inherit;font-size:11px">'+
-            '<button onclick="addVariantToFamily(\''+f.id+'\')" style="background:#7c3aed;color:#fff;border:none;border-radius:7px;padding:5px 10px;font-size:11px;cursor:pointer">+</button>'+
-            '</div></div>';
-        }).join('')+
-        '</div>';
-    }).join(''):'')+
-
-    '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">تم</button></div>';
+    '<div style="background:#eef2ff;border-radius:10px;padding:9px 12px;margin-bottom:10px;font-size:11.5px;color:#4338ca;line-height:1.8">الأشكال اللي ليها <b>نفس الرقم</b> (زي Mpc2500 و Mpc 2500 و 2500ريكو) متجمعة لك تحت بعض. راجع، اختار الاسم والشركة والنوع، واضغط توحيد — وبيتطبق على مكن العملاء أوتوماتيك.</div>'+
+    '<div style="display:flex;gap:8px;margin-bottom:12px"><button class="btn btn-sm" style="flex:1;background:#dcfce7;color:#15803d;border:none" onclick="openMachineStats()">📊 تحليل عملاء المكن</button>'+
+    '<button class="btn btn-sm" style="flex:1;background:#fff7ed;color:#c2410c;border:none" onclick="__runOnce(this,_mfApplyAll)">🔁 طبّق على كل العملاء</button></div>'+
+    (multi.length?'<div style="font-size:12.5px;font-weight:900;color:#9a3412;margin-bottom:6px">🔀 مقترح توحيدها ('+multi.length+')</div>'+multi.map(function(x){return card(x.c,x.i);}).join(''):'<div class="empty">مفيش أشكال متشابهة محتاجة توحيد ✅</div>')+
+    (single.length?'<details style="margin:8px 0"><summary style="font-size:12.5px;font-weight:800;color:#475569;cursor:pointer">🖨️ موديلات منفردة ('+single.length+') — حدد شركتها ونوعها</summary><div style="margin-top:8px">'+single.map(function(x){return card(x.c,x.i);}).join('')+'</div></details>':'')+
+    (famsHtml?'<div style="font-size:12.5px;font-weight:900;color:#374151;margin:12px 0 6px">✅ العائلات الموحّدة</div>'+famsHtml:'')+
+    '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
   openModal();
 }
+function _mfClTog(i,raw,on){if(!_mfSel[i])_mfSel[i]={};if(on)_mfSel[i][raw]=true;else delete _mfSel[i][raw];}
+async function _mfUnify(i){
+  var name=(v('mfc-name-'+i)||'').trim();if(!name)return showToast('⚠️ اكتب الاسم الموحد','#dc2626');
+  var sel=Object.keys(_mfSel[i]||{});if(!sel.length)return showToast('⚠️ اختار شكل واحد على الأقل','#dc2626');
+  var variants=sel.slice();if(variants.map(normalizeAr).indexOf(normalizeAr(name))<0)variants.push(name);
+  var fam={id:genId(),name:name,groupId:v('mfc-gp-'+i)||'',company:v('mfc-co-'+i)||'',variants:variants};
+  DB.settings.modelFamilies=(DB.settings.modelFamilies||[]).concat([fam]);
+  var n=await _mfApplyToClients();
+  await persist();
+  showToast('✅ اتوحّدوا'+(n?' — اتعدّل '+n+' مكنة عند العملاء':''),'#16a34a');
+  openModelFamiliesSettings();
+}
+async function _mfJoin(i){
+  var fid=v('mfc-ex-'+i);if(!fid)return showToast('⚠️ اختار العائلة','#dc2626');
+  var sel=Object.keys(_mfSel[i]||{});if(!sel.length)return showToast('⚠️ اختار شكل واحد على الأقل','#dc2626');
+  DB.settings.modelFamilies=DB.settings.modelFamilies.map(function(f){return f.id===fid?Object.assign({},f,{variants:(f.variants||[]).concat(sel)}):f;});
+  var n=await _mfApplyToClients();
+  await persist();
+  showToast('✅ اتضموا'+(n?' — اتعدّل '+n+' مكنة':''),'#16a34a');
+  openModelFamiliesSettings();
+}
+async function _mfMeta(fid,field,val){
+  DB.settings.modelFamilies=DB.settings.modelFamilies.map(function(f){if(f.id!==fid)return f;var o={};o[field]=val;return Object.assign({},f,o);});
+  await persist();showToast('✅ اتحفظ','#16a34a');
+}
+// يعيد كتابة اسم الموديل في مكن العملاء للاسم الموحد (الاسم الأصلي بيتحفظ في model_orig). بيرجع عدد المكن اللي اتغيرت.
+async function _mfApplyToClients(){
+  var changed=0,upd=[];
+  DB.clients=(DB.clients||[]).map(function(c){
+    var touched=false;
+    var ms=(c.machines||[]).map(function(m){
+      if(!m.model)return m;
+      var f=_famOf(m.model);
+      if(f&&m.model!==f.name){touched=true;changed++;return Object.assign({},m,{model_orig:m.model_orig||m.model,model:f.name});}
+      return m;
+    });
+    if(!touched)return c;
+    var nc=Object.assign({},c,{machines:ms});upd.push(nc);return nc;
+  });
+  await persist();
+  for(var i=0;i<upd.length;i++){try{await dbUpdate('clients',upd[i].id,{machines:upd[i].machines});}catch(e){}}
+  return changed;
+}
+async function _mfApplyAll(){
+  var n=await _mfApplyToClients();
+  showToast(n?'✅ اتعدّل '+n+' مكنة عند العملاء':'كل المكن موحّدة بالفعل','#16a34a');
+  openModelFamiliesSettings();
+}
+
+// ⚠️ v251 — 📊 تحليل عملاء المكن: عدد العملاء حسب النوع / الشركة / الموديل (فلاتر قابلة للضغط زي قطع الغيار)
+var _msType='',_msCompany='',_msModel='';
+function _msRows(){
+  ensureModelGroupsDefaults();
+  var groups={};DB.settings.modelGroups.forEach(function(g){groups[g.id]=g.name;});
+  var rows=[];
+  (DB.clients||[]).forEach(function(c){
+    (c.machines||[]).forEach(function(m){
+      if((m.status||'active')!=='active')return;
+      var raw=m.model||'',f=_famOf(raw);
+      rows.push({c:c,model:f?f.name:(raw||'بدون موديل'),company:(f&&f.company)||_guessCompany(raw)||'غير محدد',type:(f&&f.groupId&&groups[f.groupId])||'غير محدد'});
+    });
+  });
+  return rows;
+}
+function openMachineStats(){_msType='';_msCompany='';_msModel='';
+  document.getElementById('modal-title').textContent='📊 تحليل عملاء المكن';
+  document.getElementById('modal-body').innerHTML='<div id="ms-body"></div><div class="modal-actions"><button class="btn btn-sm" style="background:#fff7ed;color:#c2410c;border:none;flex:1" onclick="openModelFamiliesSettings()">🧩 توحيد الأسماء</button><button class="btn btn-outline btn-full" style="flex:1" onclick="closeModal()">إغلاق</button></div>';
+  openModal();_renderMS();
+}
+function _msSet(k,val){
+  if(k==='type')_msType=(_msType===val?'':val);else if(k==='company')_msCompany=(_msCompany===val?'':val);else _msModel=(_msModel===val?'':val);
+  _renderMS();
+}
+function _msClients(){
+  var rows=_msRows().filter(function(r){return (!_msType||r.type===_msType)&&(!_msCompany||r.company===_msCompany)&&(!_msModel||r.model===_msModel);});
+  var by={};rows.forEach(function(r){(by[r.c.id]=by[r.c.id]||{c:r.c,models:{}}).models[r.model]=(by[r.c.id].models[r.model]||0)+1;});
+  return Object.keys(by).map(function(k){return by[k];}).sort(function(a,b){return normalizeAr(a.c.name)<normalizeAr(b.c.name)?-1:1;});
+}
+function _renderMS(){
+  var el=document.getElementById('ms-body');if(!el)return;
+  var all=_msRows();
+  function facet(field,sel,skip){
+    var cnt={};
+    all.forEach(function(r){
+      if(skip!=='type'&&_msType&&r.type!==_msType)return;
+      if(skip!=='company'&&_msCompany&&r.company!==_msCompany)return;
+      if(skip!=='model'&&_msModel&&r.model!==_msModel)return;
+      (cnt[r[field]]=cnt[r[field]]||{})[r.c.id]=1;
+    });
+    return Object.keys(cnt).map(function(k){return {k:k,n:Object.keys(cnt[k]).length};}).sort(function(a,b){return b.n-a.n;});
+  }
+  function chips(title,key,field,sel){
+    var f=facet(field,sel,key==='type'?'type':key==='company'?'company':'model');
+    var lim=key==='model'?40:60;
+    return '<div style="font-size:12px;font-weight:800;color:#475569;margin:10px 0 5px">'+title+'</div><div style="display:flex;gap:6px;flex-wrap:wrap;max-height:'+(key==='model'?'170px':'auto')+';overflow-y:auto">'+
+      (f.slice(0,lim).map(function(x){var a=sel===x.k;return '<button type="button" onclick="_msSet(\''+key+'\','+jsStr(x.k).replace(/"/g,'&quot;')+')" style="padding:6px 11px;border-radius:9px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer;border:2px solid '+(a?'#0f766e':'#e2e8f0')+';background:'+(a?'#ccfbf1':'#fff')+';color:#0f766e">'+esc(x.k)+' ('+x.n+')</button>';}).join('')||'<span class="empty">لا توجد بيانات</span>')+'</div>';
+  }
+  var cl=_msClients();
+  var allC={};all.forEach(function(r){allC[r.c.id]=1;});
+  el.innerHTML=
+    '<div style="display:flex;gap:7px;margin-bottom:6px"><div style="flex:1;background:#dcfce7;border-radius:10px;padding:8px;text-align:center"><div style="font-size:10px;color:#15803d;font-weight:700">عملاء عندهم مكن</div><b style="font-size:17px;color:#15803d">'+Object.keys(allC).length+'</b></div>'+
+    '<div style="flex:1;background:#ede9fe;border-radius:10px;padding:8px;text-align:center"><div style="font-size:10px;color:#5b21b6;font-weight:700">إجمالي المكن</div><b style="font-size:17px;color:#5b21b6">'+all.length+'</b></div>'+
+    '<div style="flex:1;background:#fffbeb;border-radius:10px;padding:8px;text-align:center"><div style="font-size:10px;color:#92400e;font-weight:700">المحدد دلوقتي</div><b style="font-size:17px;color:#92400e">'+cl.length+'</b></div></div>'+
+    chips('🗂️ النوع','type','type',_msType)+chips('🏭 الشركة','company','company',_msCompany)+chips('🖨️ الموديل','model','model',_msModel)+
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin:14px 0 6px"><div style="font-size:12px;font-weight:800;color:#475569">👥 العملاء ('+cl.length+')</div>'+
+    (cl.length?'<button class="btn btn-sm" style="background:#ede9fe;color:#5b21b6;border:none" onclick="_msBulk()">📣 ابعت عرض للمحددين</button>':'')+'</div>'+
+    (cl.length?cl.slice(0,150).map(function(x){
+      return '<div onclick="closeModal();openLedger('+jsStr(x.c.name).replace(/"/g,'&quot;')+')" style="cursor:pointer;display:flex;justify-content:space-between;gap:8px;background:#f8fafc;border-radius:9px;padding:8px 11px;margin-bottom:5px;font-size:12px"><b>'+esc(x.c.name)+'</b><span style="color:#64748b;text-align:left">'+Object.keys(x.models).map(function(k){return esc(k)+(x.models[k]>1?' ×'+x.models[k]:'');}).join(' ، ')+'</span></div>';
+    }).join(''):'<div class="empty">لا يوجد عملاء بالفلتر ده</div>');
+}
+function _msBulk(){
+  var cl=_msClients(),label=_msModel||_msCompany||_msType||'المكن';
+  openBulkOfferFor(cl.map(function(x){return x.c.id;}),label);
+}
+
 var _mfSelected={};
 function _mfToggle(raw,checked){if(checked)_mfSelected[raw]=true;else delete _mfSelected[raw];}
 async function mergeModelFamily(){
@@ -17850,6 +18048,35 @@ var QURAN_VERSES=[
   {text:'إِنَّ اللَّهَ لَا يُضِيعُ أَجْرَ الْمُحْسِنِينَ',ref:'سورة التوبة: 120'},
   {text:'وَاصْبِرْ وَمَا صَبْرُكَ إِلَّا بِاللَّهِ',ref:'سورة النحل: 127'}
 ];
+
+// ⚠️ v251 — بطاقة الرئيسية بتبدّل عشوائيًا بين آية ودعاء من أرشيفك (بالتبادل: لو الأخيرة آية الجاية دعاء). بتتغير كل ما تفتح التطبيق
+// أو بعد 15 دقيقة، أو بالضغط عليها. لو الأرشيف فاضي بتفضل آية اليوم زي ما كانت.
+var _spiritState=null;
+function _spiritPick(){
+  var duas=(DB.settings&&DB.settings.duas)||[];
+  if(!duas.length){var tv=_todayVerse();return {kind:'verse',title:'آية اليوم',text:tv.text,ref:tv.ref,ts:Date.now()};}
+  var last=_spiritState?_spiritState.kind:(Math.random()<0.5?'verse':'dua');
+  var kind=last==='verse'?'dua':'verse';
+  if(kind==='dua'){
+    var d=duas[Math.floor(Math.random()*duas.length)];
+    return {kind:'dua',title:'📿 '+(d.title||'دعاء'),text:d.text,ref:d.source||'',ts:Date.now()};
+  }
+  var v=QURAN_VERSES[Math.floor(Math.random()*QURAN_VERSES.length)];
+  return {kind:'verse',title:'📖 آية',text:v.text,ref:v.ref,ts:Date.now()};
+}
+function _spiritHtml(){
+  if(!_spiritState||Date.now()-_spiritState.ts>15*60*1000)_spiritState=_spiritPick();
+  var st=_spiritState,dua=st.kind==='dua';
+  return '<div onclick="_spiritNext()" style="cursor:pointer;background:linear-gradient(135deg,'+(dua?'#7c3aed,#4c1d95':'#0f766e,#134e4a')+');border-radius:14px;padding:16px 18px;margin:0 0 12px;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,.08)">'+
+    '<div style="color:'+(dua?'#ddd6fe':'#5eead4')+';font-size:11px;font-weight:700;margin-bottom:8px">'+esc(st.title)+'</div>'+
+    '<div style="color:#fff;font-size:15px;font-weight:700;line-height:1.9;white-space:pre-wrap">'+esc(st.text)+'</div>'+
+    (st.ref?'<div style="color:'+(dua?'#ede9fe':'#99f6e4')+';font-size:11px;margin-top:8px">'+esc(st.ref)+'</div>':'')+
+    '<div style="color:rgba(255,255,255,.45);font-size:9.5px;margin-top:8px">اضغط للتبديل</div></div>';
+}
+function _spiritNext(){
+  _spiritState=_spiritPick();
+  var el=document.getElementById('home-verse');if(el)el.innerHTML=_spiritHtml();
+}
 function _todayVerse(){
   // ⚠️ v220 — اختيار عشوائي (مش تسلسلي) بس ثابت طول نفس اليوم — بذرة عشوائية من رقم
   // التاريخ نفسه (نفس الفكرة اللي بتستخدمها تطبيقات كتير لـ"عشوائي لكن ثابت اليوم ده")
@@ -17994,6 +18221,7 @@ function _renderQuranList(el,list){
     '<div style="display:flex;gap:8px;margin-bottom:10px">'+
     '<button onclick="_showQuranTopicsList()" style="flex:1;background:#eef2ff;color:#4338ca;border:1.5px solid #c7d2fe;border-radius:12px;padding:11px;font-family:inherit;font-size:12.5px;font-weight:800;cursor:pointer">📚 مواضيعي ('+_getQuranTopics().filter(function(t){return !t.archived;}).length+')</button>'+
     '<button onclick="_showDailyJournal()" style="flex:1;background:#f0fdf4;color:#15803d;border:1.5px solid #bbf7d0;border-radius:12px;padding:11px;font-family:inherit;font-size:12.5px;font-weight:800;cursor:pointer">📅 دفتر التدبر</button>'+
+    '<button onclick="openDuaArchive()" style="flex:1;background:#f5f3ff;color:#6d28d9;border:1.5px solid #ddd6fe;border-radius:12px;padding:11px;font-family:inherit;font-size:12.5px;font-weight:800;cursor:pointer">📿 أرشيف الأدعية ('+((DB.settings.duas||[]).length)+')</button>'+
     '</div>'+
     '</div>'+
     '<div style="padding:0 14px 14px">'+
@@ -21219,7 +21447,159 @@ function _investorCard(inv){
 // ⚠️ v247 — كشف حساب الموظف بشكل الدفتر (طلب العميل: "وكما شاشة الموظفين"). مصدره مصروفات الرواتب (source=salary + employee_id):
 // official_pay أو أجر يومي = صرف راتب ، is_advance = سلفة ، غير كده = مكافأة/بدل. مفيش سجل "استحقاق شهري" متخزن،
 // فالمستحق بيتحسب للشهر الهجري الحالي بس (الراتب الحالي، أو الأجر اليومي × أيام الحضور) وبيظهر في صندوق الشهر.
-var _empLedId='',_empLedKind='all',_empLedMonth=false;
+// ⚠️ v250 — 📿 أرشيف الأدعية: بيتخزّن في الإعدادات (DB.settings.duas). بحث + تصنيفات قابلة للضغط + مفضلة + نسخ.
+var _duaCat='all',_duaQ='',_duaEditId=null;
+function _duaList(){return DB.settings.duas||(DB.settings.duas=[]);}
+function openDuaArchive(){
+  _duaCat='all';_duaQ='';
+  document.getElementById('modal-title').textContent='📿 أرشيف الأدعية';
+  document.getElementById('modal-body').innerHTML=
+    '<input type="text" placeholder="🔍 دوّر في الأدعية..." oninput="_duaQ=this.value;_renderDua()" style="width:100%;padding:9px 12px;border:2px solid #e2e8f0;border-radius:11px;font-size:13px;font-family:inherit;background:#f8fafc;outline:none;margin-bottom:8px">'+
+    '<div id="dua-chips" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px"></div><div id="dua-list"></div>'+
+    '<div class="modal-actions"><button class="btn btn-primary btn-full" onclick="_duaForm(null)">➕ إضافة دعاء</button>'+
+    '<button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+  openModal();_renderDua();
+}
+function _duaSetCat(c){_duaCat=c;_renderDua();}
+function _renderDua(){
+  var all=_duaList(),cats={};
+  all.forEach(function(d){var c=d.cat||'أخرى';cats[c]=(cats[c]||0)+1;});
+  var chip=function(k,l,n){var a=_duaCat===k;return '<button type="button" onclick="_duaSetCat('+jsStr(k)+')" style="padding:5px 11px;border-radius:9px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer;border:2px solid '+(a?'#0f766e':'#e2e8f0')+';background:'+(a?'#ccfbf1':'#fff')+';color:#0f766e">'+l+' ('+n+')</button>';};
+  var favN=all.filter(function(d){return d.fav;}).length;
+  document.getElementById('dua-chips').innerHTML=chip('all','الكل',all.length)+chip('__fav','⭐ المفضلة',favN)+Object.keys(cats).map(function(c){return chip(c,esc(c),cats[c]);}).join('');
+  var q=normalizeAr(_duaQ||'');
+  var rows=all.filter(function(d){
+    if(_duaCat==='__fav'&&!d.fav)return false;
+    if(_duaCat!=='all'&&_duaCat!=='__fav'&&(d.cat||'أخرى')!==_duaCat)return false;
+    return !q||normalizeAr((d.title||'')+' '+(d.text||'')).indexOf(q)!==-1;
+  });
+  document.getElementById('dua-list').innerHTML=rows.length?rows.map(function(d){
+    return '<div style="background:#f0fdfa;border:1.5px solid #99f6e4;border-radius:12px;padding:10px 12px;margin-bottom:8px">'+
+      '<div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><b style="font-size:13px;color:#0f766e;flex:1">'+esc(d.title||'دعاء')+'</b>'+
+      '<span onclick="_duaFav('+jsStr(d.id)+')" style="cursor:pointer;font-size:18px">'+(d.fav?'⭐':'☆')+'</span></div>'+
+      '<div style="font-size:14px;line-height:2;white-space:pre-wrap;margin:6px 0">'+esc(d.text||'')+'</div>'+
+      (d.source?'<div style="font-size:11px;color:#64748b">📖 '+esc(d.source)+'</div>':'')+
+      '<div style="display:flex;gap:6px;margin-top:7px"><button class="btn btn-sm" style="background:#ccfbf1;color:#0f766e;border:none;flex:1" onclick="_duaCopy('+jsStr(d.id)+')">📋 نسخ</button>'+
+      '<button class="btn btn-sm" style="background:#dbeafe;color:#1e40af;border:none" onclick="_duaForm('+jsStr(d.id)+')">✏️</button>'+
+      '<button class="btn btn-sm" style="background:#fee2e2;color:#dc2626;border:none" onclick="_duaDel('+jsStr(d.id)+')">🗑️</button></div></div>';
+  }).join(''):'<div class="empty">'+(all.length?'لا توجد نتائج':'مفيش أدعية لسه — اضغط ➕ إضافة دعاء')+'</div>';
+}
+function _duaForm(id){
+  _duaEditId=id;
+  var d=id?_duaList().find(function(x){return x.id===id;}):null;
+  var cats=[];_duaList().forEach(function(x){var c=x.cat||'أخرى';if(cats.indexOf(c)<0)cats.push(c);});
+  ['أذكار الصباح','أذكار المساء','الاستخارة','الرزق','الهم والحزن','للوالدين'].forEach(function(c){if(cats.indexOf(c)<0)cats.push(c);});
+  document.getElementById('modal-title').textContent=d?'✏️ تعديل دعاء':'➕ دعاء جديد';
+  document.getElementById('modal-body').innerHTML=
+    fld('dua-title','عنوان الدعاء','text',d?d.title:'','مثال: دعاء الاستخارة')+
+    '<div class="field"><label>التصنيف</label><input id="dua-cat" list="dua-cats" type="text" value="'+esc(d?d.cat||'':'')+'" placeholder="اختار أو اكتب تصنيف جديد" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit">'+
+    '<datalist id="dua-cats">'+cats.map(function(c){return '<option value="'+esc(c)+'">';}).join('')+'</datalist></div>'+
+    '<div class="field"><label>نص الدعاء</label><textarea id="dua-text" rows="6" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit;direction:rtl;line-height:1.9">'+esc(d?d.text||'':'')+'</textarea></div>'+
+    fld('dua-source','المصدر (اختياري)','text',d?d.source:'','مثال: رواه البخاري')+
+    '<div class="modal-actions"><button class="btn btn-primary btn-full" onclick="_duaSave()">💾 حفظ</button><button class="btn btn-outline btn-full" onclick="openDuaArchive()">رجوع</button></div>';
+}
+async function _duaSave(){
+  var text=(document.getElementById('dua-text').value||'').trim();
+  if(!text)return showToast('⚠️ اكتب نص الدعاء','#dc2626');
+  var rec={title:v('dua-title')||text.slice(0,30),cat:v('dua-cat')||'أخرى',text:text,source:v('dua-source')};
+  var list=_duaList();
+  if(_duaEditId){var d=list.find(function(x){return x.id===_duaEditId;});if(d)Object.assign(d,rec);}
+  else list.unshift(Object.assign({id:genId(),fav:false,added:today()},rec));
+  await persist();showToast('✅ اتحفظ','#16a34a');openDuaArchive();
+}
+async function _duaFav(id){var d=_duaList().find(function(x){return x.id===id;});if(!d)return;d.fav=!d.fav;await persist();_renderDua();}
+function _duaDel(id){confirmAction('تمسح الدعاء ده؟',async function(){DB.settings.duas=_duaList().filter(function(x){return x.id!==id;});await persist();_renderDua();});}
+function _duaCopy(id){
+  var d=_duaList().find(function(x){return x.id===id;});if(!d)return;
+  var t=(d.title?d.title+'\n':'')+d.text+(d.source?'\n('+d.source+')':'');
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){showToast('📋 اتنسخ','#16a34a');});}
+  else if(navigator.share){navigator.share({text:t}).catch(function(){});}
+}
+
+// ⚠️ v250 — 📣 رسالة عرض مجمّعة لعملاء نوع مكنة معين. واتساب مبيسمحش بإرسال جماعي أوتوماتيك، فبنفتح محادثة كل عميل برسالته جاهزة وتدوس "التالي".
+var _bulkModel='',_bulkQ='',_bulkSel={},_bulkMsg='',_bulkIdx=0;
+function _bulkPhone(p){var d=String(p||'').replace(/\D/g,'');if(!d)return '';if(d.indexOf('00')===0)d=d.slice(2);if(d.charAt(0)==='0')d='20'+d.slice(1);return d;}
+var _bulkPreset=null; // v251 — قائمة عملاء جاهزة جاية من شاشة التحليل
+function _bulkModels(){
+  var m={};
+  (DB.clients||[]).forEach(function(c){
+    var seen={};
+    (c.machines||[]).forEach(function(x){
+      if((x.status||'active')!=='active'||!x.model)return;
+      var k=canonicalModelFamily(x.model);if(seen[k])return;seen[k]=1;m[k]=(m[k]||0)+1;
+    });
+  });
+  return Object.keys(m).sort(function(a,b){return m[b]-m[a];}).map(function(k){return {model:k,n:m[k]};});
+}
+function _bulkClients(){
+  if(_bulkPreset)return (DB.clients||[]).filter(function(c){return _bulkPreset.ids.indexOf(c.id)!==-1;});
+  if(!_bulkModel)return [];
+  var key=normalizeAr(_bulkModel);
+  return (DB.clients||[]).filter(function(c){return (c.machines||[]).some(function(x){return (x.status||'active')==='active'&&x.model&&normalizeAr(canonicalModelFamily(x.model))===key;});});
+}
+function openBulkOfferFor(ids,label){
+  _bulkPreset={ids:ids,label:label};
+  openBulkOffer();
+  _bulkModel=label;_bulkSel={};_bulkClients().forEach(function(c){if(_bulkPhone(c.phone))_bulkSel[c.id]=1;});
+  _renderBulk();
+}
+function openBulkOffer(){
+  _bulkPreset=null;_bulkModel='';_bulkQ='';_bulkSel={};_bulkIdx=0;
+  if(!_bulkMsg)_bulkMsg='أهلًا {الاسم} 👋\nعندنا عرض خاص لأصحاب مكنة {الموديل}:\n\n(اكتب العرض هنا)\n\nمركز صيانة كامل أبو حودة';
+  document.getElementById('modal-title').textContent='📣 عرض لعملاء نوع مكنة';
+  document.getElementById('modal-body').innerHTML='<div id="bk-body"></div>'+
+    '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+  openModal();_renderBulk();
+}
+function _bulkPick(m){_bulkModel=m;_bulkIdx=0;_bulkSel={};_bulkClients().forEach(function(c){if(_bulkPhone(c.phone))_bulkSel[c.id]=1;});_renderBulk();}
+function _bulkTog(id){if(_bulkSel[id])delete _bulkSel[id];else _bulkSel[id]=1;_bulkIdx=0;_renderBulk();}
+function _bulkText(c){return _bulkMsg.replace(/\{الاسم\}/g,c.name||'').replace(/\{الموديل\}/g,_bulkModel);}
+function _bulkSend(id){
+  var c=(DB.clients||[]).find(function(x){return x.id===id;});if(!c)return;
+  var ph=_bulkPhone(c.phone);if(!ph)return showToast('⚠️ مفيش رقم للعميل ده','#dc2626');
+  window.open('https://wa.me/'+ph+'?text='+encodeURIComponent(_bulkText(c)),'_blank');
+}
+function _bulkNext(){
+  var list=_bulkClients().filter(function(c){return _bulkSel[c.id]&&_bulkPhone(c.phone);});
+  if(_bulkIdx>=list.length)return showToast('✅ خلصت كل العملاء المحددين','#16a34a');
+  _bulkSend(list[_bulkIdx].id);_bulkIdx++;_renderBulk();
+}
+function _renderBulk(){
+  var el=document.getElementById('bk-body');if(!el)return;
+  var models=_bulkModels(),q=normalizeAr(_bulkQ||'');
+  var chips=models.filter(function(m){return !q||normalizeAr(m.model).indexOf(q)!==-1;}).map(function(m){
+    var a=_bulkModel===m.model;
+    return '<button type="button" onclick="_bulkPick('+jsStr(m.model)+')" style="padding:6px 11px;border-radius:9px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer;border:2px solid '+(a?'#7c3aed':'#e2e8f0')+';background:'+(a?'#ede9fe':'#fff')+';color:#5b21b6">'+esc(m.model)+' ('+m.n+')</button>';
+  }).join('');
+  var cl=_bulkClients(),selN=cl.filter(function(c){return _bulkSel[c.id]&&_bulkPhone(c.phone);}).length;
+  el.innerHTML=
+    '<div style="font-size:12px;font-weight:800;color:#5b21b6;margin-bottom:6px">1) اختار نوع المكنة</div>'+
+    '<input type="text" value="'+esc(_bulkQ)+'" placeholder="🔍 دوّر في الموديلات..." oninput="_bulkQ=this.value;_renderBulkChipsOnly()" style="width:100%;padding:9px 12px;border:2px solid #e2e8f0;border-radius:11px;font-size:13px;font-family:inherit;background:#f8fafc;outline:none;margin-bottom:8px">'+
+    '<div id="bk-chips" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;max-height:130px;overflow-y:auto">'+(chips||'<div class="empty">مفيش مكن مسجلة للعملاء</div>')+'</div>'+
+    (_bulkModel?
+      '<div style="font-size:12px;font-weight:800;color:#5b21b6;margin-bottom:6px">2) نص العرض (استخدم {الاسم} و {الموديل})</div>'+
+      '<textarea oninput="_bulkMsg=this.value" rows="6" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:13px;font-family:inherit;direction:rtl;line-height:1.8">'+esc(_bulkMsg)+'</textarea>'+
+      '<div style="font-size:12px;font-weight:800;color:#5b21b6;margin:12px 0 6px">3) العملاء ('+selN+' من '+cl.length+' محدد)</div>'+
+      cl.map(function(c){
+        var ph=_bulkPhone(c.phone),on=!!_bulkSel[c.id];
+        return '<div style="display:flex;align-items:center;gap:8px;background:#f8fafc;border-radius:9px;padding:7px 10px;margin-bottom:5px;font-size:12px;opacity:'+(ph?1:.55)+'">'+
+          '<input type="checkbox" '+(on?'checked':'')+(ph?'':' disabled')+' onchange="_bulkTog('+jsStr(c.id)+')" style="width:18px;height:18px">'+
+          '<span style="flex:1"><b>'+esc(c.name)+'</b><br><span style="color:#64748b">'+(ph?esc(c.phone):'⚠️ مفيش رقم')+'</span></span>'+
+          (ph?'<button class="btn btn-sm" style="background:#dcfce7;color:#15803d;border:none" onclick="_bulkSend('+jsStr(c.id)+')">📲</button>':'')+'</div>';
+      }).join('')+
+      '<button class="btn btn-primary btn-full" style="margin-top:8px" onclick="_bulkNext()" '+(selN?'':'disabled')+'>📲 ابعت للتالي ('+Math.min(_bulkIdx+1,selN)+' / '+selN+')</button>'+
+      '<div style="font-size:10px;color:#94a3b8;margin-top:5px">كل ضغطة بتفتح واتساب برسالة العميل جاهزة — اضغط إرسال ثم ارجع للتطبيق وكمّل.</div>'
+    :'<div class="empty">اختار نوع مكنة الأول</div>');
+}
+function _renderBulkChipsOnly(){
+  var q=normalizeAr(_bulkQ||''),box=document.getElementById('bk-chips');if(!box)return;
+  box.innerHTML=_bulkModels().filter(function(m){return !q||normalizeAr(m.model).indexOf(q)!==-1;}).map(function(m){
+    var a=_bulkModel===m.model;
+    return '<button type="button" onclick="_bulkPick('+jsStr(m.model)+')" style="padding:6px 11px;border-radius:9px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer;border:2px solid '+(a?'#7c3aed':'#e2e8f0')+';background:'+(a?'#ede9fe':'#fff')+';color:#5b21b6">'+esc(m.model)+' ('+m.n+')</button>';
+  }).join('')||'<div class="empty">لا توجد نتائج</div>';
+}
+
+var _empLedId='',_empLedKind='all',_empLedMonth=false,_empLedDesc=false;
 function _empLedEntries(){
   var emp=(DB.accounts.employees||[]).find(function(e){return e.id===_empLedId;});
   var suf=emp?' ('+esc(emp.name)+')':'';
@@ -21237,11 +21617,11 @@ function _empLedShown(){
   var all=_empLedEntries();
   var list=all.filter(function(e){return (_empLedKind==='all'||e.kind===_empLedKind)&&(!_empLedMonth||isInCurrentHijriMonth(e.date));});
   var run=0;list.forEach(function(e){run+=e.amount;e.run=run;});
-  return list;
+  return _empLedDesc?list.slice().reverse():list; // v250 — الإجمالي التراكمي بيتحسب بالأقدم أولًا حتى لو العرض معكوس
 }
 function openEmployeeStatement(empId){
   var emp=(DB.accounts.employees||[]).find(function(e){return e.id===empId;});if(!emp)return;
-  _empLedId=empId;_empLedKind='all';_empLedMonth=false;
+  _empLedId=empId;_empLedKind='all';_empLedMonth=false;_empLedDesc=false;
   document.getElementById('modal-title').textContent='📒 كشف حساب — '+emp.name;
   document.getElementById('modal-body').innerHTML='<div id="el-top"></div><div id="el-list"></div>'+
     '<div class="modal-actions" style="flex-wrap:wrap">'+
@@ -21251,6 +21631,7 @@ function openEmployeeStatement(empId){
   openModal();_renderEmpLed();
 }
 function _empLedSetKind(k){_empLedKind=k;_renderEmpLed();}
+function _empLedToggleOrder(){_empLedDesc=!_empLedDesc;_renderEmpLed();}
 function _empLedToggleMonth(){_empLedMonth=!_empLedMonth;_renderEmpLed();}
 function _empLedTable(list,forPrint){
   var th='padding:6px 4px;background:#f1f5f9;border:1px solid #cbd5e1;font-size:'+(forPrint?'12':'10')+'px;text-align:center';
@@ -21292,6 +21673,7 @@ function _renderEmpLed(){
     card('advance','#fff7ed','#fdba74','#c2410c','💵 سلف',sum('advance'))+
     card('bonus','#ede9fe','#c4b5fd','#7c3aed','🎁 مكافآت',sum('bonus'))+
     card('all','#fffbeb','#fde68a','#92400e','الكل (اتصرف)',sum('all'))+'</div>'+
+    '<div onclick="_empLedToggleOrder()" style="cursor:pointer;text-align:center;background:#f1f5f9;border-radius:10px;padding:7px;font-size:12px;font-weight:700;color:#334155;margin-bottom:8px">'+(_empLedDesc?'⬇️ الترتيب: الأحدث فوق — اضغط للأقدم فوق':'⬆️ الترتيب: الأقدم فوق — اضغط للأحدث فوق')+'</div>'+
     '<div onclick="_empLedToggleMonth()" style="cursor:pointer;text-align:center;background:#f1f5f9;border-radius:10px;padding:7px;font-size:12px;font-weight:700;color:#334155;margin-bottom:8px">'+
     (_empLedMonth?'📅 المعروض: الشهر الهجري الحالي — اضغط لعرض كل الأشهر':'📅 المعروض: كل الأشهر — اضغط لعرض الشهر الحالي فقط')+'</div>'+
     '<div style="background:#f0fdf4;border-radius:10px;padding:9px 11px;margin-bottom:10px;font-size:12px;line-height:1.9">'+
@@ -22389,7 +22771,8 @@ function renderMore(){
       key:'faith',title:'🕌 إيماني',icon:'🕌',
       // ⚠️ v220 — القرآن الكريم (قراءة + استماع)، متاح للكل بدون قيود صلاحيات
       items:[
-        {icon:'📖',label:'القرآن الكريم',screen:'quran',color:'#f0fdfa',tc:'#0f766e'}
+        {icon:'📖',label:'القرآن الكريم',screen:'quran',color:'#f0fdfa',tc:'#0f766e'},
+        {icon:'📿',label:'أرشيف الأدعية',action:'openDuaArchive()',color:'#f0fdfa',tc:'#0f766e'}
       ]
     },
     ops:{
@@ -22402,12 +22785,14 @@ function renderMore(){
         {icon:'🏭',label:'أرشيف الموردين',screen:'suppliers',color:'#fff7ed',tc:'#c2410c'},
         {icon:'🔩',label:'تفكيك اسكراب',screen:'scrap',color:'#fee2e2',tc:'#dc2626'},
         {icon:'💳',label:'الديون',screen:'debts',color:'#fee2e2',tc:'#dc2626'},
+        {icon:'📣',label:'عرض لعملاء مكنة',action:'openBulkOffer()',color:'#ede9fe',tc:'#5b21b6'},
       ]
     },
     reports:{
       key:'reports',title:'📊 كل التقارير والإحصائيات (الأساس)',icon:'📊',
       items:[
         {icon:'👥',label:'تقرير المهندسين',action:'openEmployeesReport()',color:'#fff7ed',tc:'#c2410c',ownerOnly:true},
+        {icon:'📊',label:'تحليل مكن العملاء',action:'openMachineStats()',color:'#ecfeff',tc:'#0e7490'},
         {icon:'📒',label:'الحسابات',screen:'accounting',color:'#fdf2f8',tc:'#86198f'},
         {icon:'🔧',label:'تقرير التحركات',screen:'movements-report',color:'#fdf2f8',tc:'#86198f'},
         {icon:'📋',label:'تقرير المهمات',screen:'tasks-report',color:'#f0fdf4',tc:'#15803d'},
