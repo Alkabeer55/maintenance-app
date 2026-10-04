@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v253</title>
+<title>ابو حوده الحلو الجميل v254</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="1448-04-24 — v253";
+<script>var BUILD_STAMP="1448-04-24 — v254";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -54,6 +54,12 @@
       مسار خالص عن طريق confirmAction، الزرار بتاعها لازم __runOnce من أول يوم.
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v254: [🐛 تحركات "المرتبة" بترجع بعد المسح + 🐛 فورم التحرك بيمسح البيانات + 🧩 ترتيب شاشة التحرك]
+     1) المرتبة: المزامنة كانت بتدمج قايمة الجهاز مع السيرفر كاتحاد (أي حاجة اتمسحت محليًا بترجع من السيرفر)، وكمان أي جهاز بيرفع قايمته القديمة مع أي حفظ.
+        دلوقتي: آخر تعديل هو اللي يكسب (بتوقيت لكل قايمة) + مفيش رفع غير لما القايمة تتغير فعلًا + تنضيف الـids الميتة + مسح التحرك بيشيله من المرتبة.
+     2) فورم التحرك: أي إعادة رسم (إضافة نوع عطل، دفعة مقدمة، بند، قطعة...) كانت بتمسح الحقول — دلوقتي كل الحقول بتتحفظ وترجع وبيفضل مكان السكرول.
+     3) شاشة التحرك مقسّمة لأقسام قابلة للطي (العميل/الجهاز/العطل/الوصف/التقدير/القطع/المرتبة/الدفعات/السحب/المهندس/الحالة)
+        + زرار ⚙️ ترتيب الشاشة: تحرّك الأقسام لفوق/تحت وتخفي اللي مش محتاجه، والاختيار بيتحفظ.
 v253: [🧮 تقدير الصيانة في التحرك + 🏢 الشركات وفروعها وتقريرها]
      1) التحرك: "📋 المطلوب عمله" قايمة مرقّمة (checkbox + سعر شغل اختياري) + "🧮 قطع غيار مقدّرة" من المخزن من غير خصم + إجمالي تقديري للصيانة كلها.
         الفاتورة من التحرك بتاخد القطع والشغل بأسعار التقدير. بيتخزن في movements.todo / movements.est_parts.
@@ -3219,17 +3225,41 @@ input:checked+.slider:before{transform:translateX(-20px)}
     });
     return Object.values(byId);
   }
-  // v156 — دمج بسيط لمصفوفة IDs (زي scheduled_list): اتحاد بدون تكرار
-  function __mergeIdList(localArr, serverArr){
+  // ⚠️ v254 — قوائم المرتبة (scheduled_list/map/carried): آخر تعديل يكسب بدل الاتحاد.
+  // السبب القديم: __mergeIdList اتحاد، فأي تحرك اتشال من المرتبة بيرجع تاني من السيرفر، وأي جهاز كان بيرفع قايمته القديمة مع أي حفظ.
+  var __LWW_KEYS = ['scheduled_list','scheduled_map','scheduled_carried'];
+  function __bizBlank(k){ return k==='scheduled_list' ? [] : {}; }
+  function __bizTs(){ return LS.get('mc8_biz_ts',{}) || {}; }
+  function __bizSig(){ return LS.get('mc8_biz_sig',{}) || {}; }
+  function __bizTouch(){
+    var ts=__bizTs(), sig=__bizSig(), changed=false;
+    __LWW_KEYS.forEach(function(k){
+      var cur=JSON.stringify(DB[k]||__bizBlank(k));
+      if(sig[k]!==cur){
+        if(sig[k]!==undefined) ts[k]=new Date().toISOString(); // أول تشغيل: بنسجّل التوقيع بس
+        sig[k]=cur; changed=true;
+      }
+    });
+    if(changed){ LS.set('mc8_biz_ts',ts); LS.set('mc8_biz_sig',sig); }
+  }
+  function __mergeIdList(localArr, serverArr){ // لقوائم تانية غير المرتبة
     var seen = {}; var result = [];
     (localArr||[]).concat(serverArr||[]).forEach(function(x){
       if(!seen[x]){ seen[x]=true; result.push(x); }
     });
     return result;
   }
-  // v156 — دمج كائن/خريطة (زي scheduled_map): يفضّل قيمة السيرفر لو موجودة لنفس المفتاح
   function __mergeMap(localObj, serverObj){
     return Object.assign({}, localObj||{}, serverObj||{});
+  }
+  // يشيل من المرتبة أي id لتحرك مش موجود
+  function __pruneScheduled(){
+    var ids={}; (DB.movements||[]).forEach(function(m){ ids[m.id]=1; });
+    if((DB.movements||[]).length===0) return; // مفيش تحركات متحمّلة لسه — ما نمسحش حاجة
+    DB.scheduled_list=(DB.scheduled_list||[]).filter(function(id){ return ids[id]; });
+    ['scheduled_map','scheduled_carried'].forEach(function(k){
+      var o=DB[k]||{}; Object.keys(o).forEach(function(id){ if(!ids[id]) delete o[id]; });
+    });
   }
 
   async function __pullAllFromServer(){
@@ -3430,6 +3460,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
   ];
   var __bizBlobPushTimer = null;
   function __scheduleBizBlobPush(){
+    try{ __bizTouch(); }catch(e){}
     if(!window.__currentProfile || typeof sb === 'undefined') return;
     if(__bizBlobPushTimer) clearTimeout(__bizBlobPushTimer);
     __bizBlobPushTimer = setTimeout(__pushBizBlobsToServer, 1200);
@@ -3455,12 +3486,17 @@ input:checked+.slider:before{transform:translateX(-20px)}
         for(var j=i;j<__BIZ_BLOBS.length;j++)__queueForSync('__bizblob__', __BIZ_BLOBS[j].id, __BIZ_BLOBS[j].id);
         break;
       }
+      var __isLww = __LWW_KEYS.indexOf(b.key)!==-1;
+      if(__isLww){ // v254 — ما نرفعش قايمة ما اتغيّرتش من آخر رفع (عشان ما نكتبش فوق تعديل جهاز تاني بنسخة قديمة)
+        var __pushed=LS.get('mc8_biz_pushed',{})||{};
+        if(__pushed[b.key]===JSON.stringify(DB[b.key]||__bizBlank(b.key))) continue;
+      }
       try{
         var payload = {
           id: b.id,
           data: DB[b.key] || (b.type==='map'?{}:[]),
           updated_by: window.__currentProfile.id,
-          updated_at: new Date().toISOString()
+          updated_at: (__isLww && __bizTs()[b.key]) ? __bizTs()[b.key] : new Date().toISOString()
         };
         var res = await sb.from('business_state').upsert(payload);
         if(res.error){
@@ -3469,6 +3505,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
           __queueForSync('__bizblob__', b.id, b.id);
         }else{
           __dequeueSync('__bizblob__', b.id);
+          if(__isLww){ var __p2=LS.get('mc8_biz_pushed',{})||{}; __p2[b.key]=JSON.stringify(DB[b.key]||__bizBlank(b.key)); LS.set('mc8_biz_pushed',__p2); }
         }
       }catch(e){
         console.warn('خطأ في مزامنة '+b.key+':', e);
@@ -3486,16 +3523,29 @@ input:checked+.slider:before{transform:translateX(-20px)}
         var serverData = res.data.data;
         if(b.type==='idArr'){
           DB[b.key] = __mergeServerRows(DB[b.key]||[], serverData, null, b.keyField);
-        }else if(b.type==='idList'){
-          DB[b.key] = __mergeIdList(DB[b.key]||[], serverData);
-        }else if(b.type==='map'){
-          DB[b.key] = __mergeMap(DB[b.key]||{}, serverData);
+        }else if(__LWW_KEYS.indexOf(b.key)!==-1){
+          // ⚠️ v254 — آخر تعديل يكسب
+          var __ts=__bizTs(), __sig=__bizSig(), __lts=__ts[b.key]||'', __sts=(res.data.updated_at||'');
+          if(__lts && __lts > __sts){
+            // تعديلنا المحلي أحدث من السيرفر → نحتفظ بيه وهيترفع
+            var __pu=LS.get('mc8_biz_pushed',{})||{}; delete __pu[b.key]; LS.set('mc8_biz_pushed',__pu);
+          }else if(!__lts){
+            // أول مرة بعد التحديث: اتحاد مرة واحدة (عشان ما نخسرش حاجة) وبعدها آخر تعديل يكسب
+            DB[b.key] = (b.type==='idList') ? __mergeIdList(DB[b.key]||[], serverData) : __mergeMap(DB[b.key]||{}, serverData);
+            __ts[b.key]=new Date().toISOString(); __sig[b.key]=JSON.stringify(DB[b.key]); LS.set('mc8_biz_ts',__ts); LS.set('mc8_biz_sig',__sig);
+          }else{
+            // السيرفر أحدث → ناخد نسخته كاملة (ده اللي بيخلي المسح يثبت)
+            DB[b.key] = serverData;
+            __ts[b.key]=__sts; __sig[b.key]=JSON.stringify(serverData); LS.set('mc8_biz_ts',__ts); LS.set('mc8_biz_sig',__sig);
+            var __pu2=LS.get('mc8_biz_pushed',{})||{}; __pu2[b.key]=JSON.stringify(serverData); LS.set('mc8_biz_pushed',__pu2);
+          }
         }
       }catch(e){
         console.warn('فشل سحب '+b.key+' من السيرفر:', e);
         __reportError('فشل تحميل "'+b.key+'"', (e&&e.message)?e.message:String(e));
       }
     }
+    try{ __pruneScheduled(); }catch(ePr){}
     // v158 — الإعدادات، الأرشيف، وعداد التحركات (دمج مخصص لكل واحد)
     try{
       var setRes = await sb.from('business_state').select('data').eq('id','settings').maybeSingle();
@@ -4327,7 +4377,7 @@ var APP_TITLE='ابو حوده الحلو الجميل';
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=253;
+var APP_VERSION=254;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -13606,10 +13656,11 @@ function openMovementModal(id){
   _movTodo=m&&m.todo?m.todo.map(function(t){return Object.assign({},t);}):[];
   _movEst=m&&m.est_parts?m.est_parts.map(function(t){return Object.assign({},t);}):[];
   document.getElementById('modal-title').textContent=m?'تعديل العطل':'تسجيل عطل جديد';
+  _movFormFresh=true;_movLayoutEdit=false; // v254 — فورم جديد: ما نستردش حقول قديمة
   renderMovementBody(m);openModal();
 }
 
-function renderMovementBody(m){
+function _renderMovementBodyRaw(m){
   var faultTypes=getFaultTypes();
   var partsHtml='';
   if(_movParts.length){
@@ -13658,7 +13709,7 @@ function renderMovementBody(m){
     '<input id="mov-part-name" type="text" placeholder="اسم القطعة..." autocomplete="off" style="flex:1;padding:9px 12px;border:2px solid #e2e8f0;border-radius:9px;font-size:13px;font-family:inherit;background:#f8fafc;outline:none">'+
     '<button onclick="addMovPartManual()" style="background:#ea580c;color:#fff;border:none;border-radius:9px;padding:9px 13px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer">+</button>'+
     '</div></div>'+
-    partsHtml+
+    (partsHtml?'<div id="mov-parts-list">'+partsHtml+'</div>':'')+
     _movEstimateHtml()+
     // ⚠️ v203 — "دفعة تحت الحساب": لما العميل يدفع فلوس مقدمًا على شغل لسه مش نهائي (السعر
     // هيتحدد بعدين)، بنسجلها هنا للتوثيق بس — من غير ما تدخل في حسابات الكاش دلوقتي، عشان
@@ -13737,16 +13788,152 @@ function saveFaultType(){
   var inp=document.getElementById('mov-fault-input');if(inp)inp.value=val;
 }
 
+
+// ⚠️ v254 — فورم التحرك: (1) أي إعادة رسم بتحفظ كل الحقول وترجّعها (قبل كده إضافة نوع عطل/دفعة مقدمة كانت بتمسح الباقي)
+// (2) الشاشة مقسّمة لأقسام قابلة للطي والترتيب، والترتيب/الإخفاء/الطي بيتحفظوا في الجهاز.
+var _movFormFresh=false,_movLayoutEdit=false;
+var _MOV_SECS=[
+  {k:'customer',t:'👤 العميل',ids:['mov-customer'],core:true,open:true},
+  {k:'device',t:'🖨️ الجهاز والسيريال',ids:['mov-device','mov-serial'],open:true},
+  {k:'fault',t:'⚠️ العطل',ids:['mov-fault-input'],open:true},
+  {k:'desc',t:'📄 وصف العطل',ids:['mov-desc'],open:true},
+  {k:'estimate',t:'🧮 المطلوب وتقدير الصيانة',ids:['mov-todo-text','mov-est-name','mov-est-summary'],open:false},
+  {k:'manualparts',t:'🔩 قطع مطلوبة',ids:['mov-part-name','mov-parts-list'],open:false},
+  {k:'partsneeded',t:'📝 ملاحظة قطع مطلوبة',ids:['mov-parts-needed'],open:false},
+  {k:'sched',t:'📅 موعد "المرتبة"',ids:['mov-sched-day'],open:false},
+  {k:'advance',t:'💵 دفعات مقدمة',ids:['mov-adv-amount'],open:false},
+  {k:'withdraw',t:'📦 سحب قطع من المخزن',ids:['wd-part-name'],open:false},
+  {k:'assigned',t:'👷 المهندس المسؤول',ids:['mov-assigned'],open:true},
+  {k:'status',t:'🏷️ الحالة',ids:['mov-status'],core:true,open:true}
+];
+function _movSnapshot(){
+  var o={};
+  Array.prototype.forEach.call(document.querySelectorAll('#modal-body input[id],#modal-body textarea[id],#modal-body select[id]'),function(e){
+    if(e.type==='file')return;
+    o[e.id]=(e.type==='checkbox')?e.checked:e.value;
+  });
+  return o;
+}
+function _movRestoreSnapshot(o){
+  Object.keys(o).forEach(function(id){
+    var e=document.getElementById(id);if(!e)return;
+    if(e.type==='checkbox')e.checked=o[id];else e.value=o[id];
+  });
+  if(o['mov-sched-day'])updateDateField('mov-sched-day',o['mov-sched-day']);
+}
+function renderMovementBody(m){
+  var fresh=_movFormFresh||!document.getElementById('mov-customer');
+  _movFormFresh=false;
+  var snap=fresh?null:_movSnapshot();
+  var sc=document.getElementById('modal-box'),top=(!fresh&&sc)?sc.scrollTop:0;
+  _renderMovementBodyRaw(m);
+  if(snap)_movRestoreSnapshot(snap);
+  _movApplyLayout(m);
+  if(sc&&!fresh)sc.scrollTop=top;
+}
+function _movLayoutCfg(){var c=LS.get('mc8_mov_form',null)||{};c.order=c.order||[];c.hidden=c.hidden||{};c.open=c.open||{};return c;}
+function _movSecOrder(cfg){
+  var keys=_MOV_SECS.map(function(x){return x.k;});
+  var out=(cfg.order||[]).filter(function(k){return keys.indexOf(k)!==-1;});
+  keys.forEach(function(k){if(out.indexOf(k)===-1)out.push(k);});
+  return out;
+}
+function _movSecKeyOf(el){
+  for(var i=0;i<_MOV_SECS.length;i++){
+    var ids=_MOV_SECS[i].ids;
+    for(var j=0;j<ids.length;j++){if(el.id===ids[j]||el.querySelector('[id="'+ids[j]+'"]'))return _MOV_SECS[i].k;}
+  }
+  return null;
+}
+function _movSecBadge(k,m){
+  if(k==='estimate'){var t=_movEstTotals(),n=_movTodo.length+_movEst.length;return n?n+' بند'+(t.t>0?' • '+fmt(t.t)+' ج':''):'';}
+  if(k==='manualparts')return _movParts.length?_movParts.length+' قطعة':'';
+  if(k==='advance'){var a=(m&&m.advance_payments)||[];return a.length?fmt(a.reduce(function(s,p){return s+(p.amount||0);},0))+' ج':'';}
+  if(k==='sched')return (document.getElementById('mov-sched-day')||{}).value?'✔ محدد':'';
+  if(k==='partsneeded')return ((document.getElementById('mov-parts-needed')||{}).value||'').trim()?'✔':'';
+  return '';
+}
+function _movApplyLayout(m){
+  var body=document.getElementById('modal-body');if(!body)return;
+  var kids=Array.prototype.slice.call(body.children),actions=null,secEls={},info=[];
+  kids.forEach(function(el){
+    if(el.classList&&el.classList.contains('modal-actions')){actions=el;return;}
+    var k=_movSecKeyOf(el);
+    if(!k){info.push(el);return;}
+    (secEls[k]=secEls[k]||[]).push(el);
+  });
+  var cfg=_movLayoutCfg(),order=_movSecOrder(cfg);
+  while(body.firstChild)body.removeChild(body.firstChild);
+  var bar=document.createElement('div');
+  bar.style.cssText='display:flex;gap:6px;margin-bottom:10px';
+  bar.innerHTML='<button type="button" onclick="_movToggleLayoutEdit()" style="flex:1;padding:8px;border-radius:10px;border:1.5px solid '+(_movLayoutEdit?'#7c3aed':'#e2e8f0')+';background:'+(_movLayoutEdit?'#ede9fe':'#f8fafc')+';color:#6d28d9;font-family:inherit;font-size:12px;font-weight:800;cursor:pointer">'+(_movLayoutEdit?'✅ تم الترتيب':'⚙️ ترتيب الشاشة')+'</button>'+
+    '<button type="button" onclick="_movSecAll(false)" style="padding:8px 12px;border-radius:10px;border:1.5px solid #e2e8f0;background:#f8fafc;color:#475569;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer">طي الكل</button>'+
+    '<button type="button" onclick="_movSecAll(true)" style="padding:8px 12px;border-radius:10px;border:1.5px solid #e2e8f0;background:#f8fafc;color:#475569;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer">فتح الكل</button>';
+  body.appendChild(bar);
+  if(_movLayoutEdit){
+    var hint=document.createElement('div');
+    hint.style.cssText='font-size:11px;color:#6d28d9;background:#f5f3ff;border-radius:9px;padding:7px 10px;margin-bottom:8px;line-height:1.7';
+    hint.innerHTML='حرّك الأقسام بالأسهم ⬆️⬇️ أو اخفي اللي مش محتاجه 👁. العميل والحالة مينفعش يتخفوا. <a href="#" onclick="_movResetLayout();return false" style="color:#dc2626;font-weight:800">↺ رجّع الترتيب الأصلي</a>';
+    body.appendChild(hint);
+  }
+  info.forEach(function(el){body.appendChild(el);});
+  order.forEach(function(k,idx){
+    var els=secEls[k];if(!els)return;
+    var def=_MOV_SECS.filter(function(x){return x.k===k;})[0];
+    var hidden=!!cfg.hidden[k]&&!def.core;
+    if(hidden&&!_movLayoutEdit)return;
+    var hasData=false;
+    if(k==='estimate')hasData=(_movTodo.length+_movEst.length)>0;
+    else if(k==='manualparts')hasData=_movParts.length>0;
+    else if(k==='advance')hasData=!!(m&&(m.advance_payments||[]).length);
+    else if(k==='sched'||k==='partsneeded')hasData=!!_movSecBadge(k,m);
+    var open=(cfg.open[k]!==undefined)?cfg.open[k]:(def.open||hasData);
+    var wrap=document.createElement('div');
+    wrap.id='mov-sec-'+k;wrap.setAttribute('data-open',open?'1':'0');
+    wrap.style.cssText='border:1.5px solid '+(hidden?'#fecaca':'#e2e8f0')+';border-radius:13px;margin-bottom:9px;background:#fff;overflow:hidden;'+(hidden?'opacity:.55;':'');
+    var h=document.createElement('div');
+    h.style.cssText='display:flex;align-items:center;gap:6px;padding:9px 11px;background:#f8fafc;cursor:pointer';
+    var badge=_movSecBadge(k,m);
+    h.innerHTML='<span style="flex:1;font-size:13px;font-weight:900;color:#334155">'+def.t+'</span>'+
+      (badge?'<span style="background:#dcfce7;color:#15803d;border-radius:7px;padding:1px 8px;font-size:10.5px;font-weight:800">'+badge+'</span>':'')+
+      (_movLayoutEdit?
+        '<button type="button" onclick="event.stopPropagation();_movSecMove(\''+k+'\',-1)" style="background:#e0e7ff;border:none;border-radius:7px;padding:3px 8px;cursor:pointer">⬆️</button>'+
+        '<button type="button" onclick="event.stopPropagation();_movSecMove(\''+k+'\',1)" style="background:#e0e7ff;border:none;border-radius:7px;padding:3px 8px;cursor:pointer">⬇️</button>'+
+        (def.core?'':'<button type="button" onclick="event.stopPropagation();_movSecHide(\''+k+'\')" style="background:'+(hidden?'#fee2e2':'#f1f5f9')+';border:none;border-radius:7px;padding:3px 8px;cursor:pointer">'+(hidden?'🙈':'👁')+'</button>')
+      :'<span class="mov-chev" style="color:#94a3b8;font-size:12px">'+(open?'▲':'▼')+'</span>');
+    h.onclick=function(){if(!_movLayoutEdit)_movSecToggle(k);};
+    var b=document.createElement('div');
+    b.className='mov-sec-b';b.style.cssText='padding:10px 11px 2px;display:'+((open||_movLayoutEdit)?'block':'none');
+    if(_movLayoutEdit)b.style.display='none';
+    els.forEach(function(el){b.appendChild(el);});
+    wrap.appendChild(h);wrap.appendChild(b);body.appendChild(wrap);
+  });
+  if(actions)body.appendChild(actions);
+}
+function _movSecToggle(k){
+  var w=document.getElementById('mov-sec-'+k);if(!w)return;
+  var open=w.getAttribute('data-open')!=='1';
+  w.setAttribute('data-open',open?'1':'0');
+  var b=w.querySelector('.mov-sec-b');if(b)b.style.display=open?'block':'none';
+  var c=w.querySelector('.mov-chev');if(c)c.textContent=open?'▲':'▼';
+  var cfg=_movLayoutCfg();cfg.open[k]=open;LS.set('mc8_mov_form',cfg);
+}
+function _movSecAll(open){
+  var cfg=_movLayoutCfg();_MOV_SECS.forEach(function(d){cfg.open[d.k]=open;});LS.set('mc8_mov_form',cfg);
+  _movRelayout();
+}
+function _movRelayout(){var m=_movId?(DB.movements||[]).find(function(x){return x.id===_movId;}):null;renderMovementBody(m);}
+function _movToggleLayoutEdit(){_movLayoutEdit=!_movLayoutEdit;_movRelayout();}
+function _movSecMove(k,dir){
+  var cfg=_movLayoutCfg(),order=_movSecOrder(cfg),i=order.indexOf(k),j=i+dir;
+  if(i<0||j<0||j>=order.length)return;
+  var t=order[i];order[i]=order[j];order[j]=t;cfg.order=order;LS.set('mc8_mov_form',cfg);_movRelayout();
+}
+function _movSecHide(k){var cfg=_movLayoutCfg();cfg.hidden[k]=!cfg.hidden[k];LS.set('mc8_mov_form',cfg);_movRelayout();}
+function _movResetLayout(){LS.set('mc8_mov_form',{order:[],hidden:{},open:{}});_movRelayout();}
 function _restoreMovFields(){
-  var ids=['mov-customer','mov-device','mov-serial','mov-fault-input','mov-desc','mov-status','mov-parts-needed','mov-assigned','mov-counter','mov-color-counter','mov-part-name'];
-  var saved={};ids.forEach(function(id){var e=document.getElementById(id);if(e)saved[id]=e.value;});
-  var sd=(document.getElementById('mov-sched-day')||{}).value||'';
   var m=_movId?(DB.movements||[]).find(function(x){return x.id===_movId;}):null;
-  var sc=document.getElementById('modal-box')||document.getElementById('modal-body');var top=sc?sc.scrollTop:0;
-  renderMovementBody(m);
-  ids.forEach(function(id){var e=document.getElementById(id);if(e&&saved[id]!==undefined)e.value=saved[id];});
-  if(sd)updateDateField('mov-sched-day',sd);
-  if(sc)sc.scrollTop=top;
+  renderMovementBody(m); // v254 — الحفظ والاسترجاع بقوا جوه renderMovementBody نفسها
 }
 
 // ===== Autocomplete العملاء في التحركات من دفتر العملاء =====
@@ -14200,6 +14387,10 @@ async function delMovement(id){
   Object.keys(DB.schedule).forEach(function(d){
     DB.schedule[d]=(DB.schedule[d]||[]).filter(function(x){return x!==id;});
   });
+  // v254 — يتشال كمان من المرتبة (قايمة + يوم + مرحّل) عشان ما يرجعش
+  DB.scheduled_list=(DB.scheduled_list||[]).filter(function(x){return x!==id;});
+  if(DB.scheduled_map)delete DB.scheduled_map[id];
+  if(DB.scheduled_carried)delete DB.scheduled_carried[id];
   await dbDelete('movements',id,__oldMv);
   await persist();
   renderMovements();showToast('🗑️ تم الحذف','#64748b');
