@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v254</title>
+<title>ابو حوده الحلو الجميل v257</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="1448-04-24 — v254";
+<script>var BUILD_STAMP="1448-04-26 — v257";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -54,6 +54,21 @@
       مسار خالص عن طريق confirmAction، الزرار بتاعها لازم __runOnce من أول يوم.
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v257: [🤝 ربط المستثمرين بالكاش والتقارير + تبويب "المبيعات"]
+     1) إيداع المستثمر ودفعه بقوا بيدخلوا رصيد الكاش وقايمة التدفق النقدي والميزانية (زي رأس مال المستثمرين العاديين).
+     2) تقرير الأرباح: كارت معلومات "بضاعة المستثمرين" (ربحها، نصيب كل مستثمر، ربحي منها) — صافي الربح نفسه ما اتغيّرش.
+     3) المستثمرين العاديين (نسبة من صافي الربح): الأساس بقى الصافي بعد خصم نصيب مستثمري البضاعة (قابل للإيقاف من شاشة المستثمرين) — في توزيع الأرباح وفي "توزيع صافي الربح".
+     4) صفحة المستثمر: تبويب 🧾 المبيعات = اتباع إيه من دفعاته (تاريخ/صنف/كمية/عميل/بيع/ربح/نصيبه) بفلتر لكل دفعة، والسطر بيفتح الفاتورة. + علامة 🤝 على الفواتير.
+v256: [🤝 نظام المستثمرين]
+     مستثمر (اسم/تليفون/نسبته من الربح) ← إيداعات ومدفوعات له ← "دفعات بضاعة" (من مشترى أو من المخزن) بتكلفة كل صنف ونسبة لكل دفعة.
+     في الفاتورة: لكل سطر قائمة "بضاعتي / 🤝 مستثمر — دفعة (متبقي N)". ربحه = (سعر البيع الفعلي − تكلفة الدفعة) × نسبته على اللي اتباع من دفعاته بس.
+     كل الأرقام بتتحسب من الفواتير (مفيش نسخة مكررة) فلو فاتورة اتعدّلت أو اتمسحت الحساب بيتظبط. المستحق له = رأس المال + ربحه − المدفوع.
+     كشف دفتر + PDF + واتساب. بيتزامن بين الأجهزة بنفس نظام "آخر تعديل يكسب". دخول المستثمر بحسابه = المرحلة الجاية (محتاج Supabase).
+v255: [🛡️ حارس عام ضد مسح البيانات في كل الفورم + 👁️ معاينة التحرك]
+     1) حارس الفورم العام: أي نافذة بتتعاد رسمها وهي مفتوحة (من أي زرار جواها) بيحتفظ باللي كتبته ويرجّعه — في الفاتورة والمشترى والعميل والصنف
+        والمصروف والتفكيك وغيرهم، مش التحرك بس. الحقل اللي الكود يفضّيه بعد الإضافة بيفضل فاضي.
+     2) تصليح من عندي: بعد إضافة بند/قطعة مقدّرة/دفعة مقدمة في التحرك، الحقول كانت بتفضل مكتوب فيها (من v254) — بقت بتتفضّى.
+     3) 👁️ معاينة سريعة على كارت التحرك (الرئيسية والمرتبة): ورقة صغيرة بتعرض كل بيانات التحرك للقراءة من غير ما القايمة تكبر.
 v254: [🐛 تحركات "المرتبة" بترجع بعد المسح + 🐛 فورم التحرك بيمسح البيانات + 🧩 ترتيب شاشة التحرك]
      1) المرتبة: المزامنة كانت بتدمج قايمة الجهاز مع السيرفر كاتحاد (أي حاجة اتمسحت محليًا بترجع من السيرفر)، وكمان أي جهاز بيرفع قايمته القديمة مع أي حفظ.
         دلوقتي: آخر تعديل هو اللي يكسب (بتوقيت لكل قايمة) + مفيش رفع غير لما القايمة تتغير فعلًا + تنضيف الـids الميتة + مسح التحرك بيشيله من المرتبة.
@@ -3227,8 +3242,8 @@ input:checked+.slider:before{transform:translateX(-20px)}
   }
   // ⚠️ v254 — قوائم المرتبة (scheduled_list/map/carried): آخر تعديل يكسب بدل الاتحاد.
   // السبب القديم: __mergeIdList اتحاد، فأي تحرك اتشال من المرتبة بيرجع تاني من السيرفر، وأي جهاز كان بيرفع قايمته القديمة مع أي حفظ.
-  var __LWW_KEYS = ['scheduled_list','scheduled_map','scheduled_carried'];
-  function __bizBlank(k){ return k==='scheduled_list' ? [] : {}; }
+  var __LWW_KEYS = ['scheduled_list','scheduled_map','scheduled_carried','investors','inv_batches'];
+  function __bizBlank(k){ return (k==='scheduled_list'||k==='investors'||k==='inv_batches') ? [] : {}; }
   function __bizTs(){ return LS.get('mc8_biz_ts',{}) || {}; }
   function __bizSig(){ return LS.get('mc8_biz_sig',{}) || {}; }
   function __bizTouch(){
@@ -3456,7 +3471,9 @@ input:checked+.slider:before{transform:translateX(-20px)}
     {key:'daily_archive',       id:'daily_archive',       type:'idArr',  keyField:'work_date'},
     {key:'scheduled_list',      id:'scheduled_list',      type:'idList'},
     {key:'scheduled_map',       id:'scheduled_map',       type:'map'},
-    {key:'scheduled_carried',   id:'scheduled_carried',   type:'map'}
+    {key:'scheduled_carried',   id:'scheduled_carried',   type:'map'},
+    {key:'investors',           id:'investors',           type:'lwwArr', keyField:'id'},
+    {key:'inv_batches',         id:'inv_batches',         type:'lwwArr', keyField:'id'}
   ];
   var __bizBlobPushTimer = null;
   function __scheduleBizBlobPush(){
@@ -3531,7 +3548,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
             var __pu=LS.get('mc8_biz_pushed',{})||{}; delete __pu[b.key]; LS.set('mc8_biz_pushed',__pu);
           }else if(!__lts){
             // أول مرة بعد التحديث: اتحاد مرة واحدة (عشان ما نخسرش حاجة) وبعدها آخر تعديل يكسب
-            DB[b.key] = (b.type==='idList') ? __mergeIdList(DB[b.key]||[], serverData) : __mergeMap(DB[b.key]||{}, serverData);
+            DB[b.key] = (b.type==='lwwArr') ? __mergeServerRows(DB[b.key]||[], serverData, null, b.keyField) : ((b.type==='idList') ? __mergeIdList(DB[b.key]||[], serverData) : __mergeMap(DB[b.key]||{}, serverData));
             __ts[b.key]=new Date().toISOString(); __sig[b.key]=JSON.stringify(DB[b.key]); LS.set('mc8_biz_ts',__ts); LS.set('mc8_biz_sig',__sig);
           }else{
             // السيرفر أحدث → ناخد نسخته كاملة (ده اللي بيخلي المسح يثبت)
@@ -4377,7 +4394,7 @@ var APP_TITLE='ابو حوده الحلو الجميل';
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=254;
+var APP_VERSION=257;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -4390,6 +4407,7 @@ var DB = {
   archive:{customers:[],suppliers:[],products:[],expDescs:[],serials:[],models:[]},
   settings:{partTypes:['جديد','مع انك','ليزر','استعمال خارجي','استعمال داخلي'],machineTypes:['جديد','استعمال خارجي','عرض للبيع','اسكراب'],companies:['HP','Ricoh','Kyocera','Xerox','Epson','Canon'],techTypes:['انك جيت','ليزر'],appName:'مركز الصيانة'},
   inventory_snapshots:[],
+  investors:[], inv_batches:[], // v256
   scheduled_list:[], // IDs الأعطال المرتبة في القائمة اليومية بترتيب المستخدم
   scheduled_map:{},  // {id: work_date} يوم العمل لكل عطل
   daily_archive:[], // snapshot لليوميات السابقة بعد يومين
@@ -4444,8 +4462,12 @@ function loadDB(){
       DB.daily_archive       = data.daily_archive       || [];
       DB.stocktakes          = data.stocktakes          || [];
       DB.suppliers            = data.suppliers            || [];
+      DB.investors            = data.investors            || [];
+      DB.inv_batches          = data.inv_batches          || [];
     }
     if(!DB.suppliers) DB.suppliers=[];
+    if(!DB.investors) DB.investors=[];
+    if(!DB.inv_batches) DB.inv_batches=[];
     if(!DB.stocktakes) DB.stocktakes=[];
     if(!DB.part_withdrawals) DB.part_withdrawals=[];
     if(!DB.settings) DB.settings={};
@@ -4557,6 +4579,8 @@ function persist(){
       scheduled_carried:DB.scheduled_carried||{},
       daily_archive:DB.daily_archive||[],
       stocktakes:DB.stocktakes||[],
+      investors:DB.investors||[],
+      inv_batches:DB.inv_batches||[],
       savedAt: new Date().toISOString()
     };
     // احفظ نسخة قبل الكتابة للـundo
@@ -5547,7 +5571,7 @@ function __modalBack(){
 }
 function openModal(){document.getElementById('modal-overlay').classList.add('open');setTimeout(__fitModalToViewport,50);}
 function closeModal(){
-  __modalStack=[];__modalCur=null; // v252
+  __modalStack=[];__modalCur=null;try{window.__formGuardReset&&window.__formGuardReset();}catch(e){} // v252/v255
   document.getElementById('modal-overlay').classList.remove('open');
   var __ov=document.getElementById('modal-overlay');if(__ov){__ov.style.height='';__ov.style.top='';}
   var __mb=document.getElementById('modal-box');if(__mb)__mb.style.maxHeight='';
@@ -8075,6 +8099,7 @@ function renderSales(){
       (__hC?'<span style="font-weight:900;font-size:14px;color:#94a3b8">🔒 عميل</span>':'<span style="font-weight:900;font-size:14px;cursor:pointer;color:#0f172a" onclick="openLedger(\''+esc(s.customer)+'\')">'+esc(s.customer)+'</span>')+
       (__hSt?'':'<span style="font-size:10px;background:'+sb+';color:'+sc+';border-radius:6px;padding:2px 8px;font-weight:700">'+s.status+'</span>')+
       (__hPm?'':'<span style="font-size:10px;background:#f1f5f9;color:#374151;border-radius:6px;padding:2px 6px">'+pmIcon(pm)+' '+pm+'</span>')+
+      ((s.items||[]).some(function(i){return i.inv_batch;})?'<span style="font-size:10px;background:#d1fae5;color:#047857;border-radius:6px;padding:2px 7px;font-weight:800">🤝 مستثمر</span>':'')+
       '</div>'+
       '<div style="font-size:11px;color:#94a3b8;margin-bottom:4px">'+esc(fmtDate(s.date))+
       (window.__isOwner&&s.created_by&&s.created_by!==window.__currentProfile.id?' <span style="background:#ede9fe;color:#6d28d9;border-radius:6px;padding:1px 6px;font-weight:700">👤 '+esc(_employeeNameById(s.created_by)||'موظف')+'</span>':'')+
@@ -8150,7 +8175,7 @@ function renderSaleBody(s){
   if(_saleItems.length||_saleServices.length){
     itemsHtml='<div class="items-list">'+
       _saleItems.map(function(it,i){
-        return '<div class="items-list-row">'+
+        return '<div class="items-list-row" style="flex-wrap:wrap">'+
           '<span style="flex:1;font-size:13px">'+esc(it.name)+'</span>'+
           '<div style="display:flex;align-items:center;gap:5px">'+
           '<button onclick="chgQty('+i+',-1)" style="background:#fee2e2;border:none;border-radius:6px;width:26px;height:26px;cursor:pointer;font-size:14px;font-weight:900;color:#dc2626">−</button>'+
@@ -8158,7 +8183,7 @@ function renderSaleBody(s){
           '<button onclick="chgQty('+i+',1)" style="background:#dcfce7;border:none;border-radius:6px;width:26px;height:26px;cursor:pointer;font-size:14px;font-weight:900;color:#16a34a">+</button>'+
           '<b style="color:#16a34a;min-width:50px;text-align:left;font-size:12px">'+fmt(it.qty*it.price)+'</b>'+
           '<button onclick="rmSaleItem('+i+')" style="background:#fee2e2;border:none;border-radius:6px;padding:2px 6px;cursor:pointer;font-size:11px;color:#dc2626">✕</button>'+
-          '</div></div>';
+          '</div>'+_invSourceHtml(it,i)+'</div>';
       }).join('')+
       _saleServices.map(function(sv,i){
         return '<div class="items-list-row" style="background:#fef9f0">'+
@@ -8854,6 +8879,7 @@ async function saveSale(){
   var paid=+v('sale-paid')||0;
   var isVisitOnly=!_saleItems.length&&!_saleServices.length&&!paid; // سجل زيارة بدون بيع
   if(!_saleItems.length&&!_saleServices.length&&paid)total=paid;
+  var _invErr=_invValidateSale();if(_invErr)return showToast(_invErr,'#dc2626'); // v256
   var status=isVisitOnly?'زيارة':(paid>=total?'مدفوع':paid>0?'جزئي':'غير مدفوع');
   var pm=v('sale-payment-method')||_salePayMethod||'كاش';
   var newPhone=v('new-customer-phone')||'';
@@ -12920,7 +12946,7 @@ function renderMovements(){
     }
     var contentHtml=
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px">'+
-      '<div>'+num+'<b style="font-size:14px">'+custDisp+'</b> '+_localSyncBadgeHTML('movements',m.id)+'</div>'+
+      '<div>'+num+'<b style="font-size:14px">'+custDisp+'</b> '+_localSyncBadgeHTML('movements',m.id)+_movPeekBtn(m.id)+'</div>'+
       (__hSt?'':'<span style="background:'+sc(m.status)+'22;color:'+sc(m.status)+';border-radius:5px;padding:1px 6px;font-size:10px;font-weight:800">'+esc(m.status)+'</span>')+
       '</div>'+
       '<div style="font-size:11px;color:#64748b;margin-bottom:3px">'+
@@ -13043,7 +13069,7 @@ function renderScheduledList(){
       '<span style="background:#0f172a;color:#fff;border-radius:3px;padding:0 4px;font-size:10px;font-weight:900;flex-shrink:0">'+(i+1)+'</span>'+
       '<div style="flex:1;min-width:0">'+
       '<div style="display:flex;justify-content:space-between;align-items:center">'+
-      '<b style="font-size:13px">'+esc(m.customer)+'</b>'+
+      '<span><b style="font-size:13px">'+esc(m.customer)+'</b>'+_movPeekBtn(m.id)+'</span>'+
       '<span style="background:'+sc(m.status)+'22;color:'+sc(m.status)+';border-radius:4px;padding:0 5px;font-size:10px;font-weight:700;flex-shrink:0">'+m.status+'</span>'+
       '</div>'+
       '<div style="font-size:11px;color:#64748b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+
@@ -13616,6 +13642,7 @@ function _movEstRefreshSummary(){var el=document.getElementById('mov-est-summary
 function _movTodoAdd(){
   var text=(v('mov-todo-text')||'').trim();if(!text)return showToast('⚠️ اكتب البند','#dc2626');
   _movTodo.push({id:genId(),text:text,price:+v('mov-todo-price')||0,done:false});
+  ['mov-todo-text','mov-todo-price'].forEach(function(i){var e=document.getElementById(i);if(e)e.value='';});
   _restoreMovFields();
   setTimeout(function(){var e=document.getElementById('mov-todo-text');if(e)e.focus();},60);
 }
@@ -13630,6 +13657,7 @@ function _movEstAdd(){
   var ex=_movEst.find(function(x){return prod?x.productId===prod.id:(!x.productId&&normalizeAr(x.name)===normalizeAr(name));});
   if(ex){ex.qty=roundQty((ex.qty||0)+qty);if(ov!==''&&ov!=null)ex.price=price;}
   else _movEst.push({productId:prod?prod.id:null,name:prod?prod.name:name,qty:qty,price:price});
+  ['mov-est-name','mov-est-price'].forEach(function(i){var e=document.getElementById(i);if(e)e.value='';});var _qe=document.getElementById('mov-est-qty');if(_qe)_qe.value='1';
   _restoreMovFields();
   setTimeout(function(){var e=document.getElementById('mov-est-name');if(e)e.focus();},60);
 }
@@ -13791,6 +13819,508 @@ function saveFaultType(){
 
 // ⚠️ v254 — فورم التحرك: (1) أي إعادة رسم بتحفظ كل الحقول وترجّعها (قبل كده إضافة نوع عطل/دفعة مقدمة كانت بتمسح الباقي)
 // (2) الشاشة مقسّمة لأقسام قابلة للطي والترتيب، والترتيب/الإخفاء/الطي بيتحفظوا في الجهاز.
+// ⚠️ v255 — حارس الفورم العام: أي نافذة بتتعاد رسمها وهي مفتوحة (إضافة بند/دفعة/نوع... أو أي زرار جوه الفورم) بنحفظ اللي كتبته ونرجّعه.
+// القاعدة: بنرجّع الحقل بس لو (اتكتب فيه حاجة) و(القيمة الافتراضية فيه ما اتغيّرتش بعد الرسم) — يعني الكود ما قصدش يغيّره.
+// الحقل اللي الكود يفضّيه بعد الإضافة (بيتفضّى قبل الرسم) مش بيتسترجع.
+(function(){
+  var lastTitle=null;
+  function defSel(sel){
+    for(var i=0;i<sel.options.length;i++){if(sel.options[i].defaultSelected)return sel.options[i].value;}
+    return sel.options.length?sel.options[0].value:'';
+  }
+  function snap(body){
+    var out=[];
+    Array.prototype.forEach.call(body.querySelectorAll('input[id],textarea[id],select[id]'),function(e){
+      var t=e.type;
+      if(t==='file'||t==='hidden'||t==='password'||t==='button'||t==='submit')return;
+      if(t==='checkbox'||t==='radio'){if(e.checked!==e.defaultChecked)out.push({id:e.id,t:'c',v:e.checked,d:e.defaultChecked});return;}
+      if(e.tagName==='SELECT'){var d=defSel(e);if(e.value!==d)out.push({id:e.id,t:'s',v:e.value,d:d});return;}
+      if(e.value!==e.defaultValue)out.push({id:e.id,t:'i',v:e.value,d:e.defaultValue});
+    });
+    return out;
+  }
+  function restore(body,items){
+    items.forEach(function(it){
+      var e=body.querySelector('[id="'+it.id+'"]');if(!e)return;
+      if(it.t==='c'){if(e.checked===e.defaultChecked&&e.defaultChecked===it.d)e.checked=it.v;}
+      else if(it.t==='s'){if(defSel(e)===it.d&&e.value===it.d){e.value=it.v;if(e.value!==it.v)e.value=it.d;}}
+      else if(e.value===e.defaultValue&&e.defaultValue===it.d){e.value=it.v;}
+    });
+  }
+  window.__formGuardReset=function(){lastTitle=null;};
+  function install(){
+    var body=document.getElementById('modal-body');if(!body||body.__guard)return;body.__guard=true;
+    var desc=Object.getOwnPropertyDescriptor(Element.prototype,'innerHTML');
+    Object.defineProperty(body,'innerHTML',{configurable:true,
+      get:function(){return desc.get.call(this);},
+      set:function(v){
+        var title=(document.getElementById('modal-title')||{}).textContent||'';
+        var ov=document.getElementById('modal-overlay');
+        var items=null,box=document.getElementById('modal-box'),top=box?box.scrollTop:0;
+        if(lastTitle!==null&&title===lastTitle&&ov&&ov.classList.contains('open')&&!window.__formGuardOff){
+          try{items=snap(this);}catch(e){items=null;}
+        }
+        desc.set.call(this,v);
+        lastTitle=title;
+        if(items&&items.length){try{restore(this,items);}catch(e){} if(box)box.scrollTop=top;}
+      }});
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install);else install();
+})();
+
+// ⚠️ v255 — 👁️ معاينة سريعة للتحرك: ورقة صغيرة من تحت بتعرض بيانات التحرك للقراءة بس، ومبتاخدش مساحة في القايمة
+// (بتتفتح بأيقونة العين على الكارت وبتتقفل بالضغط بره أو زرار الرجوع).
+var __peekOpen=false;
+function _movPeekRow(label,val){
+  if(val===undefined||val===null||String(val).trim()==='')return '';
+  return '<div style="display:flex;gap:8px;padding:5px 0;border-bottom:1px solid #f1f5f9;font-size:13px"><span style="color:#64748b;min-width:78px;flex-shrink:0">'+label+'</span><b style="flex:1;word-break:break-word">'+val+'</b></div>';
+}
+function _movPeek(id){
+  var m=(DB.movements||[]).find(function(x){return x.id===id;});if(!m)return;
+  _movPeekClose();
+  var c=(DB.clients||[]).find(function(x){return normalizeAr(x.name)===normalizeAr(m.customer||'');});
+  var eng='';
+  if(m.assigned_to){var emp=(DB.accounts.employees||[]).find(function(e){return e.linked_profile_id===m.assigned_to;});eng=emp?emp.name:'';}
+  var est=m.est_parts||[],todo=m.todo||[],ep=est.reduce(function(t,x){return t+(x.qty||0)*(+x.price||0);},0),ew=todo.reduce(function(t,x){return t+(+x.price||0);},0);
+  var adv=(m.advance_payments||[]).reduce(function(t,p){return t+(p.amount||0);},0);
+  var logs=(m.log||[]).slice(-3).reverse();
+  var h='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">'+
+    '<div style="font-size:15px;font-weight:900">'+(m.seq_num?'<span style="background:#0f172a;color:#fff;border-radius:5px;padding:1px 7px;font-size:12px">#'+m.seq_num+'</span> ':'')+esc(m.customer||'')+'</div>'+
+    '<span style="background:#eef2ff;color:#3730a3;border-radius:7px;padding:2px 9px;font-size:11px;font-weight:800">'+esc(m.status||'')+'</span></div>'+
+    _movPeekRow('📞 التليفون',c&&c.phone?esc(c.phone):'')+
+    _movPeekRow('🖨️ الجهاز',esc(m.device||''))+
+    _movPeekRow('🔢 السيريال',esc(m.serial||''))+
+    _movPeekRow('⚠️ العطل',esc(m.fault_type||''))+
+    _movPeekRow('📄 الوصف',esc(m.fault_desc||''))+
+    _movPeekRow('📊 العداد',esc([m.counter,m.color_counter].filter(Boolean).join(' / ')))+
+    _movPeekRow('📅 فتح',m.opened_at?esc(fmtDate(m.opened_at)):'')+
+    _movPeekRow('📌 موعد',m.sched_day?esc(fmtDate(m.sched_day)):'')+
+    _movPeekRow('👷 المهندس',esc(eng))+
+    _movPeekRow('📝 قطع مطلوبة',esc(m.parts_needed||''))+
+    (m.parts&&m.parts.length?_movPeekRow('🔩 قطع',esc(m.parts.map(function(p){return p.name+(p.qty>1?' ×'+fmtQty(p.qty):'');}).join('، '))):'')+
+    (todo.length?_movPeekRow('📋 المطلوب',todo.map(function(t,i){return (i+1)+'. '+(t.done?'✅ ':'')+esc(t.text)+(t.price?' ('+fmt(t.price)+')':'');}).join('<br>')):'')+
+    (est.length?_movPeekRow('🧮 مقدّر',est.map(function(x){return esc(x.name)+' ×'+fmtQty(x.qty);}).join('، ')):'')+
+    ((ep+ew)>0?_movPeekRow('💰 التقدير','<span style="color:#065f46">'+fmt(ep+ew)+' ج</span>'):'')+
+    (adv>0?_movPeekRow('💵 مقدم','<span style="color:#15803d">'+fmt(adv)+' ج</span>'):'')+
+    (logs.length?_movPeekRow('🕘 آخر ملاحظات',logs.map(function(l){return esc((l.note||'').slice(0,80));}).join('<br>')):'');
+  var ov=document.createElement('div');
+  ov.id='mov-peek';
+  ov.style.cssText='position:fixed;inset:0;z-index:99999;background:rgba(15,23,42,.45);display:flex;align-items:flex-end;justify-content:center';
+  ov.onclick=function(e){if(e.target===ov)_movPeekClose();};
+  ov.innerHTML='<div style="background:#fff;width:100%;max-width:560px;max-height:72vh;overflow-y:auto;border-radius:20px 20px 0 0;padding:14px 16px 18px;box-shadow:0 -6px 24px rgba(0,0,0,.2);direction:rtl;font-family:inherit">'+
+    '<div style="width:44px;height:4px;background:#cbd5e1;border-radius:3px;margin:0 auto 10px"></div>'+h+
+    '<div style="display:flex;gap:8px;margin-top:12px">'+
+    '<button onclick="_movPeekClose();openMovementDetail('+jsStr(id)+')" style="flex:1;background:#eef2ff;color:#3730a3;border:none;border-radius:10px;padding:10px;font-family:inherit;font-size:13px;font-weight:800;cursor:pointer">📂 التفاصيل الكاملة</button>'+
+    '<button onclick="_movPeekClose()" style="background:#f1f5f9;color:#475569;border:none;border-radius:10px;padding:10px 18px;font-family:inherit;font-size:13px;font-weight:800;cursor:pointer">إغلاق</button></div></div>';
+  document.body.appendChild(ov);__peekOpen=true;
+}
+function _movPeekClose(){
+  var o=document.getElementById('mov-peek');
+  if(o){o.parentNode.removeChild(o);__peekOpen=false;return true;}
+  __peekOpen=false;return false;
+}
+function _movPeekBtn(id){
+  return '<button type="button" onclick="event.stopPropagation();_movPeek(\''+id+'\')" title="معاينة" style="background:#f1f5f9;border:none;border-radius:7px;padding:1px 7px;font-size:12px;cursor:pointer;margin-right:4px">👁️</button>';
+}
+
+// ⚠️ v256 — 🤝 نظام المستثمرين. التصميم: المستثمر بيودّع فلوس، وأنا بعمل له "دفعة بضاعة" (من مشترى أو من المخزن) بتكلفة كل صنف.
+// ربحه بيتحسب بس على اللي اتباع من دفعاته: (سعر البيع الفعلي − تكلفة الدفعة) × نسبته. الباقي من بضاعتي مش بيدخل حسابه.
+// مفيش حاجة بتتخزّن مكررة: كمية المباع وأرباح الدفعة بتتحسب من الفواتير مباشرة (فلو الفاتورة اتعدّلت أو اتمسحت الحساب بيتظبط لوحده).
+// حقل الفاتورة: items[].inv_batch = id الدفعة (فاضي = بضاعتي).
+var _invId='',_invView='batches',_invListArch=false,_invTmp=[],_invBatchEditId=null;
+function _invList(){return DB.investors||(DB.investors=[]);}
+function _invBatches(){return DB.inv_batches||(DB.inv_batches=[]);}
+function _invById(id){return _invList().find(function(x){return x.id===id;});}
+function _invBatchStats(b,excludeSaleId){
+  var items=(b.items||[]).map(function(x){return {productId:x.productId,name:x.name,qty:+x.qty||0,cost:+x.cost||0,sold:0,rev:0};});
+  var rows=[],revenue=0,soldCost=0;
+  (DB.sales||[]).forEach(function(s){
+    if(excludeSaleId&&s.id===excludeSaleId)return;
+    var sub=(s.items||[]).reduce(function(t,i){return t+(i.qty||0)*(i.price||0);},0);
+    var f=sub>0?Math.max(0,sub-(s.discount||0))/sub:1;
+    (s.items||[]).forEach(function(it){
+      if(it.inv_batch!==b.id)return;
+      var bi=items.find(function(x){return x.productId===it.productId;});
+      var q=it.qty||0,rv=q*(it.price||0)*f,c=q*(bi?bi.cost:(it.buyPrice||0));
+      if(bi){bi.sold+=q;bi.rev+=rv;}
+      revenue+=rv;soldCost+=c;
+      rows.push({date:s.date,sale:s.id,customer:s.customer,name:it.name,qty:q,rev:rv,cost:c,profit:rv-c});
+    });
+  });
+  var deployed=items.reduce(function(t,x){return t+x.qty*x.cost;},0);
+  var profit=revenue-soldCost,pct=+b.pct||0,share=Math.round(profit*pct)/100;
+  var remQty=items.reduce(function(t,x){return t+Math.max(0,x.qty-x.sold);},0),totQty=items.reduce(function(t,x){return t+x.qty;},0);
+  return {items:items,rows:rows,deployed:deployed,revenue:revenue,soldCost:soldCost,profit:profit,share:share,owner:profit-share,remCost:deployed-soldCost,remQty:remQty,totQty:totQty,soldQty:totQty-remQty};
+}
+function _invStats(inv){
+  var bs=_invBatches().filter(function(b){return b.investor_id===inv.id;}).map(function(b){return {b:b,st:_invBatchStats(b)};});
+  var dep=0,pay=0;
+  (inv.ledger||[]).forEach(function(e){if(e.type==='deposit')dep+=(+e.amount||0);else if(e.type==='payout')pay+=(+e.amount||0);});
+  var T={dep:dep,pay:pay,deployed:0,profit:0,share:0,remCost:0,soldCost:0,revenue:0};
+  bs.forEach(function(x){T.deployed+=x.st.deployed;T.profit+=x.st.profit;T.share+=x.st.share;T.remCost+=x.st.remCost;T.soldCost+=x.st.soldCost;T.revenue+=x.st.revenue;});
+  T.unspent=dep-T.deployed;           // فلوس مودعة لسه ما اتحوّلتش لبضاعة (ممكن تبقى سالبة = اشتريت له أكتر من المودع)
+  T.owed=dep+T.share-pay;             // المستحق له = رأس المال + ربحه − اللي اتدفع
+  return {bs:bs,T:T};
+}
+function _invRemaining(batch,productId,excludeSaleId,extraUsed){
+  var st=_invBatchStats(batch,excludeSaleId),bi=st.items.find(function(x){return x.productId===productId;});
+  if(!bi)return 0;
+  return Math.max(0,bi.qty-bi.sold-(extraUsed||0));
+}
+// ===== في الفاتورة: مصدر كل سطر =====
+function _invOpenBatchesFor(productId){
+  return _invBatches().filter(function(b){
+    if(b.closed)return false;
+    var inv=_invById(b.investor_id);if(!inv||inv.archived)return false;
+    return (b.items||[]).some(function(x){return x.productId===productId;});
+  });
+}
+function _invSourceHtml(it,idx){
+  if(!it.productId||!_invList().length)return '';
+  var bs=_invOpenBatchesFor(it.productId);
+  if(!bs.length&&!it.inv_batch)return '';
+  var opts='<option value="">بضاعتي</option>'+bs.map(function(b){
+    var used=0;_saleItems.forEach(function(o,j){if(j!==idx&&o.inv_batch===b.id&&o.productId===it.productId)used+=o.qty||0;});
+    var rem=_invRemaining(b,it.productId,_saleId,used),inv=_invById(b.investor_id);
+    return '<option value="'+b.id+'"'+(it.inv_batch===b.id?' selected':'')+'>🤝 '+esc(inv.name)+' — '+esc(b.title||'دفعة')+' (متبقي '+fmtQty(rem)+')</option>';
+  }).join('');
+  return '<div style="margin-top:3px"><select onchange="_invPick('+idx+',this.value)" style="max-width:100%;padding:3px 6px;border:1.5px solid '+(it.inv_batch?'#6ee7b7':'#e2e8f0')+';border-radius:7px;font-family:inherit;font-size:11px;background:'+(it.inv_batch?'#ecfdf5':'#fff')+';color:#047857">'+opts+'</select></div>';
+}
+function _invPick(idx,val){if(_saleItems[idx]){_saleItems[idx].inv_batch=val||null;_wsRerender();}}
+function _invValidateSale(){
+  var used={};
+  for(var i=0;i<_saleItems.length;i++){
+    var it=_saleItems[i];if(!it.inv_batch)continue;
+    var b=_invBatches().find(function(x){return x.id===it.inv_batch;});
+    if(!b)continue;
+    var k=b.id+'|'+it.productId;used[k]=(used[k]||0)+(it.qty||0);
+    var rem=_invRemaining(b,it.productId,_saleId,0);
+    if(used[k]>rem+0.0001)return '⚠️ '+it.name+': المتاح من دفعة المستثمر '+fmtQty(rem)+' بس';
+  }
+  return '';
+}
+// ===== الشاشة الرئيسية =====
+// ⚠️ v257 — ربط المستثمرين بالتقارير: نصيب مستثمري البضاعة بيتحسب من الفواتير في الفترة، وبيتعرض كمعلومة في تقرير الأرباح
+// (صافي الربح نفسه ما بيتغيّرش — بيتسجّل كامل زي أي بيع). المستثمرين "العاديين" (حسابات ← مستثمرين، نسبة من صافي الربح) بيتحسبوا
+// على الصافي بعد خصم نصيب مستثمري البضاعة (لأنه فلوس مستحقة لحد تاني)، وده بيتقفل/يتفتح من شاشة المستثمرين.
+function _invExclOn(){return !(DB.settings&&DB.settings.invExcludeBatchShare===false);}
+function _invSalesShare(sales){
+  var bm={};_invBatches().forEach(function(b){bm[b.id]=b;});
+  var out={share:0,profit:0,rev:0,byInv:{}};
+  (sales||[]).forEach(function(s){
+    var sub=(s.items||[]).reduce(function(t,i){return t+(i.qty||0)*(i.price||0);},0);
+    var f=sub>0?Math.max(0,sub-(s.discount||0))/sub:1;
+    (s.items||[]).forEach(function(it){
+      if(!it.inv_batch)return;
+      var b=bm[it.inv_batch];if(!b)return;
+      var bi=(b.items||[]).find(function(x){return x.productId===it.productId;});
+      var q=it.qty||0,rv=q*(it.price||0)*f,pr=rv-q*(bi?(+bi.cost||0):(it.buyPrice||0)),sh=pr*(+b.pct||0)/100;
+      out.profit+=pr;out.rev+=rv;out.share+=sh;
+      var inv=_invById(b.investor_id);if(!inv)return;
+      var o=out.byInv[inv.id]||(out.byInv[inv.id]={name:inv.name,share:0,profit:0});
+      o.share+=sh;o.profit+=pr;
+    });
+  });
+  out.share=Math.round(out.share);out.profit=Math.round(out.profit);
+  Object.keys(out.byInv).forEach(function(k){out.byInv[k].share=Math.round(out.byInv[k].share);});
+  return out;
+}
+function _invBatchNote(ps){
+  var r=_invSalesShare(ps);if(!(r.share>0)||!_invList().length)return '';
+  var ex=_invExclOn();
+  return '<div style="background:#ecfdf5;border:1.5px solid #6ee7b7;border-radius:11px;padding:9px 12px;margin-top:10px;font-size:12px;color:#065f46;line-height:1.9">'+
+    '<div style="font-weight:900">🤝 بضاعة المستثمرين في الفترة دي</div>'+
+    '<div style="display:flex;justify-content:space-between"><span>ربح بضاعتهم (داخل صافي الربح)</span><b>'+fmt(r.profit)+'</b></div>'+
+    Object.keys(r.byInv).map(function(k){var o=r.byInv[k];return '<div style="display:flex;justify-content:space-between"><span>• نصيب '+esc(o.name)+' (مستحق له)</span><b style="color:#7c3aed">'+fmt(o.share)+'</b></div>';}).join('')+
+    '<div style="display:flex;justify-content:space-between;border-top:1px dashed #6ee7b7;margin-top:3px;padding-top:3px"><span>ربحي أنا من بضاعتهم</span><b>'+fmt(r.profit-r.share)+'</b></div>'+
+    '<div style="font-size:10.5px;color:#047857;margin-top:3px">'+(ex?'نصيبهم متخصوم من الأساس اللي بيتوزع على المستثمرين العاديين.':'نصيبهم محسوب جوه الأساس اللي بيتوزع على المستثمرين العاديين (إيقاف الخصم من شاشة المستثمرين).')+'</div></div>';
+}
+function _invSetExcl(on){DB.settings.invExcludeBatchShare=!!on;persist();_renderInvList();showToast(on?'✅ نصيب مستثمري البضاعة بيتخصم من أساس توزيع المستثمرين العاديين':'⛔ الأساس بقى صافي الربح كامل','#16a34a');}
+function _invSalesView(inv,S){
+  var rows=[];
+  S.bs.forEach(function(x){x.st.rows.forEach(function(r){rows.push({date:r.date,sale:r.sale,customer:r.customer,name:r.name,qty:r.qty,rev:r.rev,profit:r.profit,share:Math.round(r.profit*(+x.b.pct||0))/100,batch:x.b.title||'دفعة',bid:x.b.id,pct:+x.b.pct||0});});});
+  rows.sort(function(a,b){return (b.date||'')>(a.date||'')?1:(b.date||'')<(a.date||'')?-1:0;});
+  var f=window.__invSalesBatch||'';
+  var chips='<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px"><button type="button" onclick="_invSalesFilter(\'\')" style="padding:5px 11px;border-radius:9px;font-family:inherit;font-size:11.5px;font-weight:700;cursor:pointer;border:2px solid '+(!f?'#047857':'#e2e8f0')+';background:'+(!f?'#d1fae5':'#fff')+';color:#047857">الكل ('+rows.length+')</button>'+
+    S.bs.map(function(x){var a=f===x.b.id;return '<button type="button" onclick="_invSalesFilter(\''+x.b.id+'\')" style="padding:5px 11px;border-radius:9px;font-family:inherit;font-size:11.5px;font-weight:700;cursor:pointer;border:2px solid '+(a?'#047857':'#e2e8f0')+';background:'+(a?'#d1fae5':'#fff')+';color:#047857">'+esc(x.b.title||'دفعة')+' ('+x.st.rows.length+')</button>';}).join('')+'</div>';
+  var shown=rows.filter(function(r){return !f||r.bid===f;});
+  var tot=shown.reduce(function(t,r){t.q+=r.qty;t.rev+=r.rev;t.p+=r.profit;t.s+=r.share;return t;},{q:0,rev:0,p:0,s:0});
+  var th='padding:6px 3px;background:#f1f5f9;border:1px solid #cbd5e1;font-size:10px;text-align:center',td='padding:5px 3px;border:1px solid #e2e8f0;font-size:11px;text-align:center';
+  return chips+(shown.length?'<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse"><thead><tr><th style="'+th+'">التاريخ</th><th style="'+th+'">الصنف</th><th style="'+th+'">الكمية</th><th style="'+th+'">العميل</th><th style="'+th+'">البيع</th><th style="'+th+'">الربح</th><th style="'+th+'">نصيبه</th></tr></thead><tbody>'+
+    shown.map(function(r){return '<tr onclick="closeModal();openSaleModal('+jsStr(r.sale)+')" style="cursor:pointer"><td style="'+td+'">'+esc(fmtDate(r.date))+'</td><td style="'+td+';text-align:right">'+esc(r.name)+(f?'':'<div style="font-size:9px;color:#94a3b8">'+esc(r.batch)+'</div>')+'</td><td style="'+td+'">'+fmtQty(r.qty)+'</td><td style="'+td+'">'+esc(r.customer||'')+'</td><td style="'+td+'">'+fmt(r.rev)+'</td><td style="'+td+'">'+fmt(r.profit)+'</td><td style="'+td+';color:#7c3aed;font-weight:700">'+fmt(r.share)+'</td></tr>';}).join('')+
+    '</tbody><tfoot><tr style="background:#fef3c7;font-weight:900"><td style="'+td+'" colspan="2">الإجمالي</td><td style="'+td+'">'+fmtQty(tot.q)+'</td><td style="'+td+'"></td><td style="'+td+'">'+fmt(tot.rev)+'</td><td style="'+td+'">'+fmt(tot.p)+'</td><td style="'+td+'">'+fmt(tot.s)+'</td></tr></tfoot></table></div><div style="font-size:10px;color:#94a3b8;margin-top:5px">اضغط على أي سطر لفتح الفاتورة.</div>':'<div class="empty">لسه ما اتباعش حاجة من دفعاته</div>');
+}
+function _invSalesFilter(id){window.__invSalesBatch=id;_renderInv();}
+
+function openInvestors(){
+  _invListArch=false;
+  document.getElementById('modal-title').textContent='🤝 المستثمرين';
+  document.getElementById('modal-body').innerHTML='<div id="inv-body"></div>'+
+    '<div class="modal-actions"><button class="btn btn-primary btn-full" onclick="_invForm(null)">➕ مستثمر جديد</button><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+  openModal();_renderInvList();
+}
+function _invToggleArch(){_invListArch=!_invListArch;_renderInvList();}
+function _renderInvList(){
+  var el=document.getElementById('inv-body');if(!el)return;
+  var all=_invList(),rows=all.filter(function(i){return !!i.archived===_invListArch;});
+  var tot={dep:0,share:0,owed:0,rem:0};
+  all.filter(function(i){return !i.archived;}).forEach(function(i){var s=_invStats(i).T;tot.dep+=s.dep;tot.share+=s.share;tot.owed+=s.owed;tot.rem+=s.remCost;});
+  var card=function(l,v,c,bg){return '<div style="flex:1;background:'+bg+';border-radius:11px;padding:8px 4px;text-align:center"><div style="font-size:10px;font-weight:800;color:'+c+'">'+l+'</div><div style="font-size:14px;font-weight:900;color:'+c+'">'+fmt(v)+'</div></div>';};
+  el.innerHTML=
+    '<div style="display:flex;gap:6px;margin-bottom:6px">'+card('رأس المال','dep'==='x'?0:tot.dep,'#1d4ed8','#dbeafe')+card('بضاعة معاه','rem'==='x'?0:tot.rem,'#c2410c','#ffedd5')+'</div>'+
+    '<div style="display:flex;gap:6px;margin-bottom:10px">'+card('أرباحهم',tot.share,'#7c3aed','#ede9fe')+card('المستحق لهم',tot.owed,'#047857','#d1fae5')+'</div>'+
+    '<div onclick="_invSetExcl('+(_invExclOn()?'false':'true')+')" style="cursor:pointer;background:'+(_invExclOn()?'#ecfdf5':'#fef2f2')+';border:1.5px solid '+(_invExclOn()?'#6ee7b7':'#fca5a5')+';border-radius:10px;padding:8px 11px;font-size:11.5px;font-weight:700;color:'+(_invExclOn()?'#047857':'#b91c1c')+';margin-bottom:8px;line-height:1.7">'+(_invExclOn()?'✅ توزيع أرباح المستثمرين العاديين: بعد خصم نصيب مستثمري البضاعة':'⛔ توزيع أرباح المستثمرين العاديين: على صافي الربح كامل')+' <span style="font-weight:500;opacity:.8">(اضغط للتغيير)</span></div>'+
+    '<div onclick="_invToggleArch()" style="cursor:pointer;text-align:center;background:#f1f5f9;border-radius:10px;padding:7px;font-size:12px;font-weight:700;color:#334155;margin-bottom:8px">'+(_invListArch?'📦 المعروض: المؤرشفين — اضغط للنشطين':'👥 المعروض: النشطين — اضغط للمؤرشفين')+'</div>'+
+    (rows.length?rows.map(function(i){
+      var s=_invStats(i).T;
+      return '<div onclick="openInvestor('+jsStr(i.id)+')" style="cursor:pointer;background:#f8fafc;border-right:4px solid #059669;border-radius:12px;padding:10px 12px;margin-bottom:8px">'+
+        '<div style="display:flex;justify-content:space-between;align-items:center"><b style="font-size:14px">🤝 '+esc(i.name)+'</b><span style="font-size:11px;background:#d1fae5;color:#047857;border-radius:7px;padding:1px 8px;font-weight:800">'+fmtQty(i.pct||0)+'% من الربح</span></div>'+
+        '<div style="display:flex;gap:10px;flex-wrap:wrap;font-size:12px;margin-top:5px;color:#475569"><span>رأس المال <b>'+fmt(s.dep)+'</b></span><span>ربحه <b style="color:#7c3aed">'+fmt(s.share)+'</b></span><span>له <b style="color:#047857">'+fmt(s.owed)+'</b></span></div></div>';
+    }).join(''):'<div class="empty">'+(_invListArch?'مفيش مؤرشفين':'مفيش مستثمرين لسه — اضغط ➕ مستثمر جديد')+'</div>');
+}
+function _invForm(id){
+  var i=id?_invById(id):null;
+  document.getElementById('modal-title').textContent=i?'✏️ تعديل مستثمر':'➕ مستثمر جديد';
+  document.getElementById('modal-body').innerHTML=
+    fld('iv-name','اسم المستثمر','text',i?i.name:'','',true)+
+    fld('iv-phone','التليفون (واتساب)','tel',i?i.phone:'')+
+    fld('iv-pct','نسبته من ربح بضاعته (%)','number',i?i.pct:'', 'مثال: 40 يعني ليه 40% من صافي ربح اللي اتباع من دفعاته')+
+    fld('iv-note','ملاحظات','text',i?i.note:'')+
+    '<div class="modal-actions"><button class="btn btn-primary btn-full" onclick="__runOnce(this,function(){return _invSave('+jsStr(id||'')+')})">💾 حفظ</button>'+
+    (i?'<button class="btn btn-sm" style="background:#fff7ed;color:#c2410c;border:none" onclick="_invArchive('+jsStr(id)+')">'+(i.archived?'↩️ إرجاع':'📦 أرشفة')+'</button>':'')+
+    '<button class="btn btn-outline btn-full" onclick="'+(i?'openInvestor('+jsStr(id)+')':'openInvestors()')+'">رجوع</button></div>';
+}
+async function _invSave(id){
+  var name=(v('iv-name')||'').trim(),pct=+v('iv-pct');
+  if(!name)return showToast('⚠️ اكتب الاسم','#dc2626');
+  if(!(pct>=0&&pct<=100))return showToast('⚠️ النسبة من 0 لـ 100','#dc2626');
+  var dupe=_invList().find(function(x){return normalizeAr(x.name)===normalizeAr(name)&&x.id!==id;});
+  if(dupe)return showToast('⚠️ فيه مستثمر بنفس الاسم','#dc2626');
+  if(id){var i=_invById(id);i.name=name;i.phone=v('iv-phone');i.pct=pct;i.note=v('iv-note');}
+  else{var n={id:genId(),name:name,phone:v('iv-phone'),pct:pct,note:v('iv-note'),created:today(),ledger:[]};_invList().push(n);id=n.id;}
+  await persist();showToast('✅ اتحفظ','#16a34a');openInvestor(id);
+}
+async function _invArchive(id){var i=_invById(id);if(!i)return;i.archived=!i.archived;await persist();openInvestors();}
+// ===== صفحة المستثمر =====
+function openInvestor(id){
+  var inv=_invById(id);if(!inv)return;
+  _invId=id;_invView='batches';
+  document.getElementById('modal-title').textContent='🤝 '+inv.name;
+  document.getElementById('modal-body').innerHTML='<div id="iv-top"></div><div id="iv-list"></div>'+
+    '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px">'+
+    '<button class="btn btn-sm" style="flex:1;background:#dbeafe;color:#1d4ed8;border:none" onclick="_invMoney(\'deposit\')">➕ إيداع</button>'+
+    '<button class="btn btn-sm" style="flex:1;background:#fee2e2;color:#dc2626;border:none" onclick="_invMoney(\'payout\')">💸 دفع له</button>'+
+    '<button class="btn btn-sm" style="flex:1;background:#ffedd5;color:#c2410c;border:none" onclick="_invBatchForm(null)">📦 دفعة بضاعة</button></div>'+
+    '<div class="modal-actions" style="flex-wrap:wrap"><button class="btn btn-sm" style="background:#f5f3ff;color:#7c3aed;border:none;flex:1" onclick="_invPrint()">🖨️ PDF</button>'+
+    '<button class="btn btn-sm" style="background:#dcfce7;color:#15803d;border:none;flex:1" onclick="_invShare()">📲 واتساب</button>'+
+    '<button class="btn btn-sm" style="background:#f1f5f9;color:#475569;border:none" onclick="_invForm('+jsStr(id)+')">✏️</button>'+
+    '<button class="btn btn-outline btn-full" style="flex:1" onclick="openInvestors()">‹ رجوع</button></div>';
+  openModal();_renderInv();
+}
+function _invSetView(v_){_invView=v_;if(v_!=='sales')window.__invSalesBatch='';_renderInv();}
+function _invLedger(inv,S){
+  var E=[];
+  (inv.ledger||[]).forEach(function(e){
+    if(e.type==='deposit')E.push({date:e.date,name:'💰 إيداع رأس مال'+(e.note?' — '+e.note:''),credit:+e.amount||0,debit:0,id:e.id,kind:'led'});
+    else if(e.type==='payout')E.push({date:e.date,name:'💸 اتدفع له'+(e.note?' — '+e.note:''),credit:0,debit:+e.amount||0,id:e.id,kind:'led'});
+  });
+  S.bs.forEach(function(x){
+    var pct=+x.b.pct||0;
+    x.st.rows.forEach(function(r){
+      var sh=Math.round(r.profit*pct)/100;
+      E.push({date:r.date,name:'📈 بيع '+r.name+' ×'+fmtQty(r.qty)+' — '+(x.b.title||'دفعة')+' (ربح '+fmt(r.profit)+' × '+fmtQty(pct)+'%)',credit:sh,debit:0,kind:'sale'});
+    });
+  });
+  E.forEach(function(e,i){e.seq=i;});
+  E.sort(function(a,b){return (a.date||'')<(b.date||'')?-1:(a.date||'')>(b.date||'')?1:a.seq-b.seq;});
+  var bal=0;E.forEach(function(e){bal+=e.credit-e.debit;e.bal=bal;});
+  return E;
+}
+function _renderInv(){
+  var inv=_invById(_invId);if(!inv)return;
+  var top=document.getElementById('iv-top'),list=document.getElementById('iv-list');if(!top||!list)return;
+  var S=_invStats(inv),T=S.T;
+  function card(k,l,v_,c,bg){var a=_invView===k;return '<div onclick="_invSetView(\''+k+'\')" style="cursor:pointer;flex:1;background:'+bg+';border:2.5px solid '+(a?c:'transparent')+';border-radius:12px;padding:8px 4px;text-align:center"><div style="font-size:10px;font-weight:800;color:'+c+'">'+l+'</div><div style="font-size:14px;font-weight:900;color:'+c+'">'+fmt(v_)+'</div></div>';}
+  top.innerHTML=
+    '<div style="display:flex;gap:6px;margin-bottom:6px"><div style="flex:1;background:#d1fae5;border-radius:12px;padding:9px;text-align:center"><div style="font-size:11px;font-weight:800;color:#047857">⚖️ المستحق له دلوقتي</div><div style="font-size:19px;font-weight:900;color:#047857">'+fmt(T.owed)+' ج</div></div></div>'+
+    '<div style="display:flex;gap:6px;margin-bottom:6px">'+card('ledger','💰 رأس المال',T.dep,'#1d4ed8','#dbeafe')+card('sales','📈 ربحه',T.share,'#7c3aed','#ede9fe')+card('ledger','💸 اتدفع له',T.pay,'#dc2626','#fee2e2')+'</div>'+
+    '<div style="display:flex;gap:6px;margin-bottom:8px">'+card('batches','📦 في بضاعة',T.remCost,'#c2410c','#ffedd5')+card('batches','💵 فلوس لسه مصرفتهاش',T.unspent,T.unspent<0?'#dc2626':'#0e7490','#cffafe')+'</div>'+
+    '<div style="display:flex;gap:6px;margin-bottom:8px">'+[['batches','📦 الدفعات'],['sales','🧾 المبيعات'],['ledger','📒 الكشف']].map(function(t){var a=_invView===t[0];return '<button type="button" onclick="_invSetView(\''+t[0]+'\')" style="flex:1;padding:8px;border-radius:10px;border:2px solid '+(a?'#047857':'#e2e8f0')+';background:'+(a?'#d1fae5':'#fff')+';color:#047857;font-family:inherit;font-size:12.5px;font-weight:800;cursor:pointer">'+t[1]+'</button>';}).join('')+'</div>'+
+    (T.unspent<-0.001?'<div style="background:#fef2f2;border:1px solid #fca5a5;border-radius:9px;padding:7px 9px;font-size:11px;color:#b91c1c;margin-bottom:8px">⚠️ اشتريت له بضاعة أكتر من اللي أودعه بـ'+fmt(-T.unspent)+' ج. سجّل إيداع الفرق عشان الحساب يبقى دقيق.</div>':'');
+  if(_invView==='sales'){list.innerHTML=_invSalesView(inv,S);return;}
+  if(_invView==='ledger'){
+    var E=_invLedger(inv,S),th='padding:6px 3px;background:#f1f5f9;border:1px solid #cbd5e1;font-size:10px;text-align:center',td='padding:5px 3px;border:1px solid #e2e8f0;font-size:11px;text-align:center';
+    list.innerHTML=E.length?'<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse"><thead><tr><th style="'+th+'">التاريخ</th><th style="'+th+'">البيان</th><th style="'+th+';color:#047857">دائن (له)</th><th style="'+th+';color:#dc2626">مدين (اتدفع)</th><th style="'+th+'">المستحق</th></tr></thead><tbody>'+
+      E.map(function(e){return '<tr><td style="'+td+'">'+esc(fmtDate(e.date))+'</td><td style="'+td+';text-align:right">'+esc(e.name)+'</td><td style="'+td+';color:#047857;font-weight:700">'+(e.credit?fmt(e.credit):'')+'</td><td style="'+td+';color:#dc2626;font-weight:700">'+(e.debit?fmt(e.debit):'')+'</td><td style="'+td+';font-weight:800">'+fmt(e.bal)+'</td></tr>';}).join('')+
+      '</tbody><tfoot><tr style="background:#fef3c7;font-weight:900"><td style="'+td+'" colspan="4">المستحق له</td><td style="'+td+'">'+fmt(T.owed)+'</td></tr></tfoot></table></div>':'<div class="empty">مفيش حركات لسه</div>';
+    return;
+  }
+  list.innerHTML=S.bs.length?S.bs.slice().reverse().map(function(x){
+    var b=x.b,st=x.st,pctDone=st.totQty?Math.round(st.soldQty/st.totQty*100):0;
+    return '<div style="background:#fff;border:1.5px solid #e2e8f0;border-right:4px solid '+(b.closed?'#94a3b8':'#ea580c')+';border-radius:12px;padding:10px 12px;margin-bottom:8px">'+
+      '<div style="display:flex;justify-content:space-between;align-items:center;gap:6px"><b style="font-size:13px">📦 '+esc(b.title||'دفعة')+'</b><span style="font-size:11px;color:#64748b">'+esc(fmtDate(b.date))+' • '+fmtQty(b.pct)+'%</span></div>'+
+      '<div style="background:#f1f5f9;border-radius:6px;height:7px;margin:7px 0;overflow:hidden"><div style="background:#ea580c;height:7px;width:'+pctDone+'%"></div></div>'+
+      '<div style="display:flex;gap:10px;flex-wrap:wrap;font-size:11.5px;color:#475569"><span>مدفوع <b>'+fmt(st.deployed)+'</b></span><span>اتباع <b>'+fmtQty(st.soldQty)+'/'+fmtQty(st.totQty)+'</b></span><span>باقي بضاعة <b style="color:#c2410c">'+fmt(st.remCost)+'</b></span></div>'+
+      '<div style="display:flex;gap:10px;flex-wrap:wrap;font-size:11.5px;margin-top:3px"><span>ربح الدفعة <b style="color:#0f172a">'+fmt(st.profit)+'</b></span><span>ربحه <b style="color:#7c3aed">'+fmt(st.share)+'</b></span><span>ربحي <b style="color:#047857">'+fmt(st.owner)+'</b></span></div>'+
+      '<div style="font-size:11px;color:#64748b;margin-top:5px">'+st.items.map(function(i){return esc(i.name)+' ('+fmtQty(Math.max(0,i.qty-i.sold))+'/'+fmtQty(i.qty)+')';}).join(' • ')+'</div>'+
+      '<div style="display:flex;gap:6px;margin-top:7px"><button class="btn btn-sm" style="background:#eef2ff;color:#3730a3;border:none;flex:1" onclick="_invBatchForm('+jsStr(b.id)+')">✏️ تعديل / إضافة أصناف</button>'+
+      '<button class="btn btn-sm" style="background:'+(b.closed?'#dcfce7':'#f1f5f9')+';color:#475569;border:none" onclick="_invBatchClose('+jsStr(b.id)+')">'+(b.closed?'↩️ فتح':'🔒 قفل')+'</button></div></div>';
+  }).join(''):'<div class="empty">مفيش دفعات بضاعة لسه — اضغط 📦 دفعة بضاعة</div>';
+}
+// ===== إيداع / دفع =====
+function _invMoney(type){
+  var inv=_invById(_invId);if(!inv)return;
+  document.getElementById('modal-title').textContent=(type==='deposit'?'➕ إيداع من ':'💸 دفع لـ ')+inv.name;
+  document.getElementById('modal-body').innerHTML=
+    fld('iv-amt',type==='deposit'?'المبلغ اللي استلمته':'المبلغ اللي دفعته له','number','','',true)+
+    dateField('iv-date','التاريخ',null)+
+    fld('iv-mnote','ملاحظة','text','')+
+    '<div class="modal-actions"><button class="btn btn-primary btn-full" onclick="__runOnce(this,function(){return _invMoneySave(\''+type+'\')})">💾 حفظ</button><button class="btn btn-outline btn-full" onclick="openInvestor('+jsStr(_invId)+')">رجوع</button></div>';
+}
+async function _invMoneySave(type){
+  var inv=_invById(_invId),amt=+v('iv-amt');
+  if(!inv||!(amt>0))return showToast('⚠️ اكتب مبلغ صحيح','#dc2626');
+  if(type==='payout'){var T=_invStats(inv).T;if(amt>T.owed+0.001&&!confirm('المبلغ أكبر من المستحق له ('+fmt(T.owed)+' ج). تكمل؟'))return;}
+  (inv.ledger=inv.ledger||[]).push({id:genId(),type:type,amount:amt,date:v('iv-date')||today(),note:v('iv-mnote')});
+  await persist();showToast('✅ اتسجّل','#16a34a');openInvestor(_invId);
+}
+// ===== دفعة بضاعة =====
+function _invFreeStock(productId,excludeBatchId){
+  var p=(DB.products||[]).find(function(x){return x.id===productId;});if(!p)return 0;
+  var alloc=0;
+  _invBatches().forEach(function(b){
+    if(b.id===excludeBatchId||b.closed)return;
+    var st=_invBatchStats(b),bi=st.items.find(function(x){return x.productId===productId;});
+    if(bi)alloc+=Math.max(0,bi.qty-bi.sold);
+  });
+  return Math.max(0,(p.qty||0)-alloc);
+}
+function _invBatchForm(batchId){
+  _invBatchEditId=batchId;
+  var inv=_invById(_invId),b=batchId?_invBatches().find(function(x){return x.id===batchId;}):null;
+  if(!inv)return;
+  _invTmp=b?(b.items||[]).map(function(x){return Object.assign({},x);}):[];
+  var purchases=(DB.purchases||[]).slice().sort(function(a,c){return (c.date||'')>(a.date||'')?1:-1;}).slice(0,40);
+  document.getElementById('modal-title').textContent=(b?'✏️ تعديل دفعة — ':'📦 دفعة بضاعة — ')+inv.name;
+  document.getElementById('modal-body').innerHTML=
+    fld('ib-title','اسم الدفعة','text',b?b.title:'','مثال: شحنة تونر أكتوبر')+
+    fld('ib-pct','نسبة المستثمر من ربح الدفعة (%)','number',b?b.pct:inv.pct,'')+
+    dateField('ib-date','تاريخ الدفعة',b?b.date:null)+
+    '<div style="background:#fff7ed;border:1.5px solid #fed7aa;border-radius:12px;padding:10px 12px;margin-bottom:10px">'+
+    '<div style="font-size:12.5px;font-weight:900;color:#c2410c;margin-bottom:6px">🛒 استورد من مشترى (الأفضل: اشتري الأول بفلوسه ثم اربطه هنا)</div>'+
+    '<select id="ib-purch" style="width:100%;padding:9px;border:2px solid #e2e8f0;border-radius:10px;font-family:inherit;font-size:13px"><option value="">— اختار مشترى —</option>'+
+    purchases.map(function(p){return '<option value="'+p.id+'">'+esc(fmtDate(p.date))+' — '+esc(p.supplier||'')+' — '+fmt((p.total||0)+(p.extra_cost||0))+' ج</option>';}).join('')+'</select>'+
+    '<button type="button" class="btn btn-sm btn-full" style="margin-top:6px;background:#ffedd5;color:#c2410c;border:none" onclick="_invImportPurch()">📥 هات أصناف المشترى ده</button></div>'+
+    '<div id="ib-items"></div>'+
+    '<datalist id="ib-prods">'+(DB.products||[]).map(function(p){return '<option value="'+esc(p.name)+'">('+fmtQty(p.qty||0)+' في المخزن)</option>';}).join('')+'</datalist>'+
+    '<div style="display:flex;gap:6px;margin:8px 0"><input id="ib-pname" list="ib-prods" placeholder="اسم الصنف من المخزن..." autocomplete="off" style="flex:1;padding:9px;border:2px solid #e2e8f0;border-radius:10px;font-family:inherit;font-size:13px">'+
+    '<input id="ib-pqty" type="number" step="any" placeholder="كمية" style="width:62px;padding:9px;border:2px solid #e2e8f0;border-radius:10px;font-family:inherit;font-size:13px;text-align:center">'+
+    '<input id="ib-pcost" type="number" step="any" placeholder="تكلفة" style="width:70px;padding:9px;border:2px solid #e2e8f0;border-radius:10px;font-family:inherit;font-size:13px;text-align:center">'+
+    '<button type="button" onclick="_invAddItem()" style="background:#ea580c;color:#fff;border:none;border-radius:10px;padding:0 14px;font-size:17px;font-weight:900;cursor:pointer">+</button></div>'+
+    '<div style="font-size:10.5px;color:#94a3b8;margin-bottom:8px">التكلفة = تكلفة القطعة الواحدة على المستثمر (لو سبتها فاضية بتاخد تكلفة الصنف من المخزن).</div>'+
+    '<div class="modal-actions"><button class="btn btn-primary btn-full" onclick="__runOnce(this,_invBatchSave)">💾 حفظ الدفعة</button>'+
+    (b&&!_invBatchStats(b).rows.length?'<button class="btn btn-sm" style="background:#fee2e2;color:#dc2626;border:none" onclick="_invBatchDel('+jsStr(batchId)+')">🗑️</button>':'')+
+    '<button class="btn btn-outline btn-full" onclick="openInvestor('+jsStr(_invId)+')">رجوع</button></div>';
+  _renderInvItems();
+}
+function _renderInvItems(){
+  var el=document.getElementById('ib-items');if(!el)return;
+  var b=_invBatchEditId?_invBatches().find(function(x){return x.id===_invBatchEditId;}):null,st=b?_invBatchStats(b):null;
+  var tot=_invTmp.reduce(function(t,x){return t+(+x.qty||0)*(+x.cost||0);},0);
+  el.innerHTML=_invTmp.length?'<div style="background:#f8fafc;border-radius:11px;padding:6px 10px;margin-bottom:6px">'+_invTmp.map(function(x,i){
+    var sold=st?((st.items.find(function(y){return y.productId===x.productId;})||{}).sold||0):0;
+    return '<div style="display:flex;align-items:center;gap:6px;padding:5px 0;border-bottom:1px solid #e2e8f0;font-size:12.5px"><span style="flex:1"><b>'+esc(x.name)+'</b><br><span style="color:#64748b;font-size:11px">'+fmtQty(x.qty)+' × '+fmt(x.cost)+' = '+fmt((x.qty||0)*(x.cost||0))+(sold?' • اتباع '+fmtQty(sold):'')+'</span></span>'+
+      '<button type="button" onclick="_invItemQty('+i+',-1)" style="background:#fee2e2;border:none;border-radius:6px;width:24px;height:24px;cursor:pointer;color:#dc2626;font-weight:900">−</button>'+
+      '<button type="button" onclick="_invItemQty('+i+',1)" style="background:#dcfce7;border:none;border-radius:6px;width:24px;height:24px;cursor:pointer;color:#16a34a;font-weight:900">+</button>'+
+      '<button type="button" onclick="_invItemDel('+i+')" style="background:#fee2e2;border:none;border-radius:6px;padding:2px 7px;cursor:pointer;color:#dc2626;font-size:11px">✖</button></div>';
+  }).join('')+'<div style="text-align:left;font-weight:900;font-size:13px;padding-top:6px;color:#c2410c">إجمالي الدفعة: '+fmt(tot)+' ج</div></div>':'<div style="font-size:11px;color:#94a3b8;padding:4px 0">لسه ما فيش أصناف</div>';
+}
+function _invAddItem(){
+  var name=(v('ib-pname')||'').trim();if(!name)return showToast('⚠️ اختار الصنف','#dc2626');
+  var p=(DB.products||[]).find(function(x){return normalizeAr(x.name)===normalizeAr(name);});
+  if(!p)return showToast('⚠️ الصنف مش موجود في المخزن','#dc2626');
+  var qty=+v('ib-pqty')||0;if(!(qty>0))return showToast('⚠️ اكتب الكمية','#dc2626');
+  var cost=+v('ib-pcost')||p.landed_cost||p.buy_price||0;if(!(cost>0))return showToast('⚠️ اكتب التكلفة','#dc2626');
+  var ex=_invTmp.find(function(x){return x.productId===p.id;});
+  if(ex){ex.qty=roundQty(ex.qty+qty);ex.cost=cost;}else _invTmp.push({productId:p.id,name:p.name,qty:qty,cost:cost});
+  ['ib-pname','ib-pqty','ib-pcost'].forEach(function(i){var e=document.getElementById(i);if(e)e.value='';});
+  _renderInvItems();
+}
+function _invItemQty(i,d){if(_invTmp[i]){_invTmp[i].qty=Math.max(0.01,roundQty((_invTmp[i].qty||0)+d));_renderInvItems();}}
+function _invItemDel(i){
+  var b=_invBatchEditId?_invBatches().find(function(x){return x.id===_invBatchEditId;}):null;
+  if(b){var st=_invBatchStats(b),bi=st.items.find(function(y){return y.productId===_invTmp[i].productId;});if(bi&&bi.sold>0)return showToast('⚠️ الصنف ده اتباع منه، مينفعش يتشال','#dc2626');}
+  _invTmp.splice(i,1);_renderInvItems();
+}
+function _invImportPurch(){
+  var id=v('ib-purch');if(!id)return showToast('⚠️ اختار مشترى','#dc2626');
+  var pu=(DB.purchases||[]).find(function(x){return x.id===id;});if(!pu)return;
+  var sub=(pu.items||[]).reduce(function(t,i){return t+(i.qty||0)*(i.price||0);},0),extra=pu.extra_cost||0,added=0;
+  (pu.items||[]).forEach(function(it){
+    var p=it.productId?(DB.products||[]).find(function(x){return x.id===it.productId;}):(DB.products||[]).find(function(x){return normalizeAr(x.name)===normalizeAr(it.name);});
+    if(!p)return;
+    var line=(it.qty||0)*(it.price||0),cost=(it.price||0)+(sub>0&&it.qty?extra*(line/sub)/it.qty:0);
+    cost=Math.round(cost*100)/100;
+    var ex=_invTmp.find(function(x){return x.productId===p.id;});
+    if(ex){ex.qty=roundQty(ex.qty+(it.qty||0));ex.cost=cost;}else _invTmp.push({productId:p.id,name:p.name,qty:it.qty||0,cost:cost});
+    added++;
+  });
+  if(!document.getElementById('ib-title').value)document.getElementById('ib-title').value='مشترى '+(pu.supplier||'')+' '+fmtDate(pu.date);
+  window.__invPurchId=id;
+  showToast(added?'✅ اتضافت '+added+' أصناف':'⚠️ مفيش أصناف قابلة للإضافة','#16a34a');
+  _renderInvItems();
+}
+async function _invBatchSave(){
+  var inv=_invById(_invId);if(!inv)return;
+  var pct=+v('ib-pct');if(!(pct>=0&&pct<=100))return showToast('⚠️ النسبة من 0 لـ 100','#dc2626');
+  if(!_invTmp.length)return showToast('⚠️ ضيف صنف واحد على الأقل','#dc2626');
+  var b=_invBatchEditId?_invBatches().find(function(x){return x.id===_invBatchEditId;}):null;
+  for(var i=0;i<_invTmp.length;i++){
+    var x=_invTmp[i],free=_invFreeStock(x.productId,b?b.id:null);
+    if(x.qty>free+0.0001)return showToast('⚠️ '+x.name+': المتاح للتخصيص '+fmtQty(free)+' بس (باقي المخزن متخصص لدفعات تانية أو مش موجود)','#dc2626');
+  }
+  var rec={title:v('ib-title')||'دفعة',pct:pct,date:v('ib-date')||today(),items:_invTmp.map(function(x){return {productId:x.productId,name:x.name,qty:+x.qty,cost:+x.cost};})};
+  if(b){
+    var st=_invBatchStats(b);
+    for(var j=0;j<rec.items.length;j++){var bi=st.items.find(function(y){return y.productId===rec.items[j].productId;});if(bi&&rec.items[j].qty<bi.sold-0.0001)return showToast('⚠️ '+rec.items[j].name+': الكمية أقل من المباع ('+fmtQty(bi.sold)+')','#dc2626');}
+    st.items.forEach(function(bi){if(bi.sold>0&&!rec.items.some(function(y){return y.productId===bi.productId;}))rec.items.push({productId:bi.productId,name:bi.name,qty:bi.sold,cost:bi.cost});});
+    Object.assign(b,rec);
+  }else{
+    rec.id=genId();rec.investor_id=inv.id;rec.created=today();if(window.__invPurchId)rec.purchase_id=window.__invPurchId;
+    _invBatches().push(rec);
+  }
+  window.__invPurchId=null;
+  await persist();showToast('✅ اتحفظت الدفعة','#16a34a');openInvestor(_invId);
+}
+async function _invBatchClose(id){var b=_invBatches().find(function(x){return x.id===id;});if(!b)return;b.closed=!b.closed;await persist();_renderInv();}
+function _invBatchDel(id){confirmAction('تمسح الدفعة دي؟ (مفيش مبيعات عليها)',async function(){DB.inv_batches=_invBatches().filter(function(x){return x.id!==id;});await persist();openInvestor(_invId);});}
+// ===== طباعة ومشاركة =====
+function _invPrint(){
+  var inv=_invById(_invId);if(!inv)return;
+  var S=_invStats(inv),T=S.T,E=_invLedger(inv,S);
+  var th='padding:6px;background:#f1f5f9;border:1px solid #cbd5e1;font-size:12px',td='padding:6px;border:1px solid #e2e8f0;font-size:12px;text-align:center';
+  var body='<div style="margin-bottom:8px;color:#64748b">تاريخ الكشف: '+esc(fmtDate(today()))+' — '+_gregTxt(today())+'</div>'+
+    '<table style="width:100%;border-collapse:collapse;margin-bottom:10px"><tbody>'+
+    [['💰 رأس المال المودع',T.dep],['📦 بضاعة متبقية بتكلفتها',T.remCost],['📈 ربحه من المبيعات ('+fmtQty(inv.pct||0)+'% — بحسب كل دفعة)',T.share],['💸 اتدفع له',T.pay]].map(function(r){return '<tr><td style="'+td+';text-align:right">'+r[0]+'</td><td style="'+td+'"><b>'+fmt(r[1])+'</b></td></tr>';}).join('')+
+    '<tr style="background:#d1fae5"><td style="'+td+';text-align:right"><b>⚖️ المستحق له</b></td><td style="'+td+'"><b>'+fmt(T.owed)+' ج</b></td></tr></tbody></table>'+
+    (S.bs.length?'<h3 style="margin:14px 0 6px">📦 الدفعات</h3><table style="width:100%;border-collapse:collapse"><thead><tr><th style="'+th+'">الدفعة</th><th style="'+th+'">مدفوع</th><th style="'+th+'">اتباع</th><th style="'+th+'">ربح الدفعة</th><th style="'+th+'">نسبته</th><th style="'+th+'">ربحه</th></tr></thead><tbody>'+
+      S.bs.map(function(x){return '<tr><td style="'+td+';text-align:right">'+esc(x.b.title||'دفعة')+'<br><span style="font-size:10px;color:#64748b">'+esc(fmtDate(x.b.date))+' — '+_gregTxt(x.b.date)+'</span></td><td style="'+td+'">'+fmt(x.st.deployed)+'</td><td style="'+td+'">'+fmtQty(x.st.soldQty)+'/'+fmtQty(x.st.totQty)+'</td><td style="'+td+'">'+fmt(x.st.profit)+'</td><td style="'+td+'">'+fmtQty(x.b.pct)+'%</td><td style="'+td+'"><b>'+fmt(x.st.share)+'</b></td></tr>';}).join('')+'</tbody></table>':'')+
+    '<h3 style="margin:14px 0 6px">📒 كشف الحساب</h3><table style="width:100%;border-collapse:collapse"><thead><tr><th style="'+th+'">التاريخ</th><th style="'+th+'">البيان</th><th style="'+th+'">دائن (له)</th><th style="'+th+'">مدين (اتدفع)</th><th style="'+th+'">المستحق</th></tr></thead><tbody>'+
+    E.map(function(e){return '<tr><td style="'+td+'">'+esc(fmtDate(e.date))+'<div style="font-size:10px;color:#64748b">'+_gregTxt(e.date)+'</div></td><td style="'+td+';text-align:right">'+esc(e.name)+'</td><td style="'+td+'">'+(e.credit?fmt(e.credit):'')+'</td><td style="'+td+'">'+(e.debit?fmt(e.debit):'')+'</td><td style="'+td+'"><b>'+fmt(e.bal)+'</b></td></tr>';}).join('')+
+    '<tr style="background:#fef3c7;font-weight:900"><td style="'+td+'" colspan="4">المستحق له</td><td style="'+td+'">'+fmt(T.owed)+'</td></tr></tbody></table>';
+  printSection('🤝 كشف حساب مستثمر — '+esc(inv.name),body);
+}
+function _invShare(){
+  var inv=_invById(_invId);if(!inv)return;
+  var S=_invStats(inv),T=S.T;
+  var txt='🤝 كشف حساب — '+inv.name+'\n📅 '+fmtDate(today())+' ('+_gregTxt(today())+')\n\n💰 رأس المال: '+fmt(T.dep)+'\n📦 بضاعة متبقية: '+fmt(T.remCost)+'\n📈 ربحك من المبيعات: '+fmt(T.share)+'\n💸 اتدفعلك: '+fmt(T.pay)+'\n⚖️ المستحق لك: '+fmt(T.owed)+' ج\n';
+  if(S.bs.length){txt+='\n📦 الدفعات:\n';S.bs.forEach(function(x){txt+='• '+(x.b.title||'دفعة')+' — اتباع '+fmtQty(x.st.soldQty)+'/'+fmtQty(x.st.totQty)+' — ربحك '+fmt(x.st.share)+'\n';});}
+  var ph=_bulkPhone(inv.phone);
+  if(navigator.share){navigator.share({text:txt}).catch(function(){});}
+  else window.open('https://wa.me/'+(ph||'')+'?text='+encodeURIComponent(txt),'_blank');
+}
+
+
 var _movFormFresh=false,_movLayoutEdit=false;
 var _MOV_SECS=[
   {k:'customer',t:'👤 العميل',ids:['mov-customer'],core:true,open:true},
@@ -14038,6 +14568,7 @@ function addMovAdvancePayment(id){
   dbUpdate('movements',id,{advance_payments:newList});
   persist();
   var m=DB.movements.find(function(x){return x.id===id;});
+  ['mov-adv-amount','mov-adv-note'].forEach(function(i){var e=document.getElementById(i);if(e)e.value='';});
   renderMovementBody(m);
   showToast('✅ اتسجلت الدفعة — هتتحط تلقائي في الفاتورة النهائية','#16a34a');
 }
@@ -14058,6 +14589,7 @@ function addMovPartManual(){
   var name=v('mov-part-name');if(!name.trim())return showToast('⚠️ اكتب اسم القطعة','#dc2626');
   var ex=_movParts.find(function(p){return normalizeAr(p.name)===normalizeAr(name);});
   if(ex)ex.qty++;else _movParts.push({name:name.trim(),qty:1});
+  var _pn=document.getElementById('mov-part-name');if(_pn)_pn.value='';
   _restoreMovFields();
 }
 function chgMovPartQty(idx,delta){_movParts[idx].qty=Math.max(1,_movParts[idx].qty+delta);_restoreMovFields();}
@@ -15230,7 +15762,8 @@ var _ledgerSignFilter=null;
 function _activeInvestorsExist(){
   return((DB.accounts&&DB.accounts.investors)||[]).some(function(i){return i.status!=='inactive';});
 }
-function _ownerShareBreakdown(net){
+function _ownerShareBreakdown(net,ps){
+  var _bsh=(ps&&_invExclOn())?_invSalesShare(ps).share:0;net=net-_bsh; // v257 — الأساس بعد نصيب مستثمري البضاعة
   var activeInv=((DB.accounts&&DB.accounts.investors)||[]).filter(function(i){return i.status!=='inactive';});
   var totalInvPct=activeInv.reduce(function(s,i){return s+i.profit_share_pct;},0);
   var ownerPct=100-totalInvPct;
@@ -15290,7 +15823,8 @@ function renderPeriodReport(){
       '<div><div style="font-weight:900;font-size:15px;color:#0f172a">'+profitLabel(net,'صافي ربح النشاط','صافي خسارة النشاط')+'</div>'+
       '<div style="font-size:11px;color:#64748b">هامش الصافي: '+netPct+'%</div></div>'+
       '<div style="font-size:22px;font-weight:900;color:'+(net>=0?'#15803d':'#dc2626')+'">'+fmt(net)+'</div></div>'+
-      (_activeInvestorsExist()?_ownerShareBreakdown(net):'')+
+      _invBatchNote(ps)+
+      (_activeInvestorsExist()?_ownerShareBreakdown(net,ps):'')+
       '</div>'
     )+
 
@@ -15953,6 +16487,14 @@ if(!DB.accounts.employee_leaves) DB.accounts.employee_leaves=[]; // v177
 
 // ===== حساب أرقام المركز المالي عند تاريخ معيّن (يُستخدم في العرض الحالي وفي اللقطات) =====
 // asOfDate: 'YYYY-MM-DD' أو null = حتى الآن (كل البيانات بدون فلترة تاريخ)
+function _invCashTotals(asOf){
+  var dep=0,pay=0;
+  (DB.investors||[]).forEach(function(inv){(inv.ledger||[]).forEach(function(e){
+    if(asOf&&(e.date||'')>asOf)return;
+    if(e.type==='deposit')dep+=(+e.amount||0);else if(e.type==='payout')pay+=(+e.amount||0);
+  });});
+  return {dep:dep,pay:pay};
+}
 function _computeBalanceSheet(asOfDate){
   var acc=DB.accounts||{};
   var sales=asOfDate?DB.sales.filter(function(s){return(s.date||'')<=asOfDate;}):DB.sales;
@@ -16017,13 +16559,14 @@ function _computeBalanceSheet(asOfDate){
   // بالظبط زي totalInventoryCashOut (خصم من الكاش)، ثابتة دائماً زي الرصيد الافتتاحي.
   var openingInventoryValue=acc.opening_inventory_value||0;
   // فلوس داخلة للخزنة بخلاف المبيعات: مساهمات رأس مال (صاحب المشروع + المستثمرين)
-  var capitalIn=(acc.capital||[]).filter(function(c){return!asOfDate||(c.date||'')<=asOfDate;}).reduce(function(s,c){return s+c.amount;},0)+
+  var capitalIn=_invCashTotals(asOfDate).dep+(acc.capital||[]).filter(function(c){return!asOfDate||(c.date||'')<=asOfDate;}).reduce(function(s,c){return s+c.amount;},0)+
     (acc.investors||[]).reduce(function(s,i){return s+(i.capital_contributions||[]).filter(function(c){return!asOfDate||(c.date||'')<=asOfDate;}).reduce(function(ss,c){return ss+c.amount;},0);},0);
   // الأصول الثابتة (قيمتها = ما تم دفعه فعلياً من الخزنة لشرائها)
   var fixedAssets=(acc.fixed_assets||[]).filter(function(a){return!asOfDate||(a.purchase_date||'')<=asOfDate;}).reduce(function(s,a){return s+a.value;},0);
   // فلوس خارجة من الخزنة بخلاف المخزون/المصاريف: شراء أصول ثابتة + مسحوبات أرباح (صاحب المشروع + المستثمرين)
   var ownerDrawsOut=(acc.profit_cycles||[]).filter(function(c){return!asOfDate||(c.date_created||'')<=asOfDate;}).reduce(function(s,c){return s+(c.owner_draw||0);},0);
-  var invWithdrawsOut=(acc.investors||[]).reduce(function(s,i){return s+(i.withdrawals||[]).filter(function(w){return!asOfDate||(w.date||'')<=asOfDate;}).reduce(function(ss,w){return ss+w.amount;},0);},0);
+  var _bi=_invCashTotals(asOfDate); // v257 — مستثمري البضاعة
+  var invWithdrawsOut=_bi.pay+(acc.investors||[]).reduce(function(s,i){return s+(i.withdrawals||[]).filter(function(w){return!asOfDate||(w.date||'')<=asOfDate;}).reduce(function(ss,w){return ss+w.amount;},0);},0);
 
   var suppDebt=debts.filter(function(d){return d.type==='supplier';}).reduce(function(s,d){return s+debtRemainingAt(d);},0);
   // البادئة الثابتة "مشترى — " بتتحط تلقائياً في وصف كل دين مورد طالع من شاشة المشتريات
@@ -16131,7 +16674,7 @@ function _computeBalanceSheet(asOfDate){
   var totalExp=expenses.reduce(function(s,x){return s+x.amount;},0);
   var totalHistoricalProfit=totalSales-totalCos-totalExp;
 
-  var invCapital=(acc.investors||[]).reduce(function(s,i){
+  var invCapital=(_bi.dep-_bi.pay)+(acc.investors||[]).reduce(function(s,i){
     return s+(i.capital_contributions||[]).filter(function(c){return!asOfDate||(c.date||'')<=asOfDate;}).reduce(function(ss,c){return ss+c.amount;},0);
   },0);
   // ملاحظة: الأرباح المحتجزة (owner/investors) مخزّنة كرصيد حالي فقط بدون سجل تاريخي تفصيلي،
@@ -16538,7 +17081,7 @@ function _renderBalanceSheetHTML(d,acc){
     _bsRow('رأس مال صاحب المشروع',d.ownerCapital)+
     _bsRow('أرباح محتجزة (صاحب)',d.ownerRetained)+
     _bsRow('أرباح العمليات',d.retainedEarnings)+
-    ((acc.investors||[]).length?_bsRow('رأس مال المستثمرين',d.invCapital):'')+
+    (((acc.investors||[]).length||(DB.investors||[]).length)?_bsRow('رأس مال المستثمرين',d.invCapital):'')+
     ((acc.investors||[]).length&&d.invRetained?_bsRow('أرباح محتجزة (مستثمرون)',d.invRetained):'')+
     (d.equityAdj?_bsRow('تسويات دفترية',d.equityAdj):'')+
     _bsTotal('إجمالي حقوق الملكية',d.totalEquity,'#15803d')+
@@ -19737,6 +20280,8 @@ function importBackup(input){
         if(data.scheduled_list)DB.scheduled_list=data.scheduled_list;
         if(data.scheduled_map)DB.scheduled_map=data.scheduled_map;
         if(data.scheduled_carried)DB.scheduled_carried=data.scheduled_carried;
+        if(data.investors)DB.investors=data.investors;
+        if(data.inv_batches)DB.inv_batches=data.inv_batches;
         if(data.daily_archive)DB.daily_archive=data.daily_archive;
         if(data.stocktakes)DB.stocktakes=data.stocktakes;
         persist().then(function(){
@@ -19774,7 +20319,7 @@ async function clearAllData(){
   DB.inventory_snapshots=[];
   DB.scheduled_list=[];
   DB.scheduled_map={};
-  DB.scheduled_carried={};
+  DB.scheduled_carried={};DB.investors=[];DB.inv_batches=[];
   DB.daily_archive=[];
   DB.stocktakes=[];
   await persist();renderHome();navigate('home');
@@ -23026,7 +23571,8 @@ function _updatePcProfitBox(){
   var totalSales=ps.reduce(function(s,x){return s+x.total;},0);
   var totalCos=ps.reduce(function(s,sale){return s+(sale.items||[]).reduce(function(ss,i){return ss+i.qty*(i.buyPrice||i.buy_price||0);},0);},0);
   var totalExp=pe.reduce(function(s,x){return s+x.amount;},0);
-  var suggestedProfit=Math.max(0,totalSales-totalCos-totalExp);
+  var _bShare=_invExclOn()?_invSalesShare(ps).share:0;
+  var suggestedProfit=Math.max(0,totalSales-totalCos-totalExp-_bShare);
   var box=document.getElementById('pc-profit-box');
   if(box)box.innerHTML='<div style="background:#f0fdf4;border-radius:10px;padding:10px 12px;margin-bottom:12px">'+
     '<div style="font-size:11px;color:#64748b;margin-bottom:3px">📊 صافي الربح لهذه الفترة فقط (تلقائي)</div>'+
@@ -23621,6 +24167,7 @@ function renderMore(){
         {icon:'👥',label:'تقرير المهندسين',action:'openEmployeesReport()',color:'#fff7ed',tc:'#c2410c',ownerOnly:true},
         {icon:'📊',label:'تحليل مكن العملاء',action:'openMachineStats()',color:'#ecfeff',tc:'#0e7490'},
         {icon:'🏢',label:'تقارير الشركات',action:'openCompaniesPicker()',color:'#eef2ff',tc:'#3730a3'},
+        {icon:'🤝',label:'المستثمرين',action:'openInvestors()',color:'#ecfdf5',tc:'#047857',ownerOnly:true},
         {icon:'📒',label:'الحسابات',screen:'accounting',color:'#fdf2f8',tc:'#86198f'},
         {icon:'🔧',label:'تقرير التحركات',screen:'movements-report',color:'#fdf2f8',tc:'#86198f'},
         {icon:'📋',label:'تقرير المهمات',screen:'tasks-report',color:'#f0fdf4',tc:'#15803d'},
@@ -23733,6 +24280,7 @@ try{
   history.pushState({trap:true},'','');
   history.pushState({trap:true},'','');
   window.addEventListener('popstate', function(e){
+    if(__peekOpen&&_movPeekClose()){history.pushState({trap:true},'','');return;} // v255
     if(__modalBack()){history.pushState({trap:true},'','');return;} // v252 — النافذة المفتوحة الأول
     if(_navHistory.length>1){
       navigateBack();
