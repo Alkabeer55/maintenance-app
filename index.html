@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v257</title>
+<title>ابو حوده الحلو الجميل v258</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="1448-04-26 — v257";
+<script>var BUILD_STAMP="1448-04-27 — v258";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -54,6 +54,13 @@
       مسار خالص عن طريق confirmAction، الزرار بتاعها لازم __runOnce من أول يوم.
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v258: [🤝 فصل رأس المال/الأرباح في المستثمرين + 🧾 كشف الديون بتفصيل الفواتير]
+     1) المستثمر (بضاعة): رأس المال / ربحه الكلي / أرباح مسحوبة (profit) / رأس مال مردود (capital_return) / المتبقي. الدفع بتقسيم تلقائي (أرباح أولًا) أو يدوي، ومينفعش رأس المال يبقى سالب. السجلات القديمة (payout) بتتقسم عند العرض.
+     2) المستثمر العادي: بقى فيه "رد رأس مال" منفصل عن "سحب أرباح" (سحب الأرباح زي ما هو).
+     3) ربح مستثمر البضاعة بقى بنفس تكلفة التطبيق (تكلفة سطر الفاتورة) → بيتطابق مع قائمة الدخل. تكلفة الدفعة معلومة (رأس المال) بس. البيع فوق المتبقي في الدفعة بقى تحذير مش منع.
+     4) المركز المالي: نصيب مستثمري البضاعة اتشال من الأرباح المبقاة وبقى "أرباح مستحقة لمستثمري البضاعة" (التزام)، ورأس مالهم المتبقي في رأس مال المستثمرين. صافي الربح ما اتغيّرش.
+     5) تقرير الأرباح: "توزيع الربح" بالأربع خانات (صافي محاسبي / حصة مستثمري البضاعة / المتاح للتوزيع / حصة العاديين والمالك).
+     6) كشف حساب الدين: زرار 🧾 تفصيل الفواتير (التاريخ | البيان | الصنف | الكمية | القيمة | المدفوع | المتبقي) + طباعة الدين (printDebtGroup) بنفس التفصيل.
 v257: [🤝 ربط المستثمرين بالكاش والتقارير + تبويب "المبيعات"]
      1) إيداع المستثمر ودفعه بقوا بيدخلوا رصيد الكاش وقايمة التدفق النقدي والميزانية (زي رأس مال المستثمرين العاديين).
      2) تقرير الأرباح: كارت معلومات "بضاعة المستثمرين" (ربحها، نصيب كل مستثمر، ربحي منها) — صافي الربح نفسه ما اتغيّرش.
@@ -4394,7 +4401,7 @@ var APP_TITLE='ابو حوده الحلو الجميل';
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=257;
+var APP_VERSION=258;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -8879,7 +8886,7 @@ async function saveSale(){
   var paid=+v('sale-paid')||0;
   var isVisitOnly=!_saleItems.length&&!_saleServices.length&&!paid; // سجل زيارة بدون بيع
   if(!_saleItems.length&&!_saleServices.length&&paid)total=paid;
-  var _invErr=_invValidateSale();if(_invErr)return showToast(_invErr,'#dc2626'); // v256
+  var _invErr=_invValidateSale();if(_invErr&&!confirm(_invErr+'\nالمخزون واحد — تكمل البيع برضه؟'))return; // v256/v258 تحذير بدل منع
   var status=isVisitOnly?'زيارة':(paid>=total?'مدفوع':paid>0?'جزئي':'غير مدفوع');
   var pm=v('sale-payment-method')||_salePayMethod||'كاش';
   var newPhone=v('new-customer-phone')||'';
@@ -10966,7 +10973,64 @@ async function _applyLinkRepair(){
   showToast('✅ اتربط '+ids.length+' دين واتظبط المدفوع','#16a34a');
   openLinkRepair();
 }
-var _twsName='',_twsDir='all',_twsRange='all',_twsDesc=false,_twsWithBranches=true;
+// ⚠️ v258 — كشف الديون بتفصيل الفواتير: لكل عملية (فاتورة بيع/شراء/دين) سطر رأس بإجمالي ومدفوع ومتبقي، وتحته كل صنف (كمية وقيمة)، وبعدها الدفعات.
+// عرض فقط: الأرقام كلها من نفس _twsBuild (ما فيش حساب جديد). المدفوع/المتبقي على مستوى الفاتورة لأن الدفع بيتم على الفاتورة كلها.
+function _twsDocsTable(docs,forPrint){
+  var th='padding:6px 4px;background:#f1f5f9;border:1px solid #cbd5e1;font-size:'+(forPrint?'12':'10')+'px;text-align:center';
+  var td='padding:5px 4px;border:1px solid #e2e8f0;font-size:'+(forPrint?'12':'11')+'px;text-align:center';
+  var N=function(x){return fmt(Math.round(x*100)/100);};
+  function dateCell(d){return esc(fmtDate(d))+(forPrint&&d?'<div style="font-size:10px;color:#64748b">'+_gregTxt(d)+'</div>':'');}
+  function section(dir,title,col){
+    var ds=docs.filter(function(x){return x.dir===dir;});if(!ds.length)return {h:'',t:{v:0,p:0,r:0}};
+    var tot={v:0,p:0,r:0},h='<tr><td colspan="7" style="'+td+';background:'+(dir==='customer'?'#dcfce7':'#fee2e2')+';font-weight:900;color:'+col+';text-align:right">'+title+'</td></tr>';
+    ds.forEach(function(x){
+      tot.v+=x.total;tot.p+=x.paid;tot.r+=x.rem;
+      var open=forPrint?'':' onclick="_twsOpenDoc(\''+x.kind+'\',\''+x.id+'\')" style="cursor:pointer"';
+      h+='<tr'+open+' style="background:#f8fafc;cursor:'+(forPrint?'default':'pointer')+'"><td style="'+td+'">'+dateCell(x.date)+'</td><td style="'+td+';text-align:right;font-weight:800" colspan="3">'+esc(x.title)+((x.who&&normalizeAr(x.who)!==normalizeAr(_twsName||''))?' • '+esc(x.who):'')+'</td>'+
+        '<td style="'+td+';font-weight:800">'+N(x.total)+'</td><td style="'+td+';font-weight:800;color:#16a34a">'+N(x.paid)+'</td><td style="'+td+';font-weight:900;color:'+(x.rem>0.001?col:'#16a34a')+'">'+(x.rem>0.001?N(x.rem):'✅ مسدّد')+'</td></tr>';
+      x.lines.forEach(function(l){
+        h+='<tr'+open+'><td style="'+td+'"></td><td style="'+td+'"></td><td style="'+td+';text-align:right">'+esc(l.name||'')+'</td><td style="'+td+'">'+((l.qty!==''&&l.qty!=null)?fmtQty(l.qty):'')+'</td><td style="'+td+'">'+N(l.amt)+'</td><td style="'+td+'"></td><td style="'+td+'"></td></tr>';
+      });
+      if(x.upfront>0)h+='<tr><td style="'+td+'">'+dateCell(x.date)+'</td><td style="'+td+';text-align:right;color:#16a34a" colspan="4">↳ '+(dir==='customer'?'دفع وقت الفاتورة':'سدّدت له وقت المشترى')+'</td><td style="'+td+';color:#16a34a">'+N(x.upfront)+'</td><td style="'+td+'"></td></tr>';
+      x.pays.forEach(function(p){
+        h+='<tr><td style="'+td+'">'+dateCell(p.date)+'</td><td style="'+td+';text-align:right;color:#16a34a" colspan="4">↳ '+(dir==='customer'?'سدّد لي':'سدّدت له')+'</td><td style="'+td+';color:#16a34a">'+N(p.amount)+'</td><td style="'+td+'"></td></tr>';
+      });
+    });
+    h+='<tr style="background:#fef3c7;font-weight:900"><td style="'+td+';text-align:right" colspan="4">إجمالي '+title+'</td><td style="'+td+'">'+N(tot.v)+'</td><td style="'+td+'">'+N(tot.p)+'</td><td style="'+td+'">'+N(tot.r)+'</td></tr>';
+    return {h:h,t:tot};
+  }
+  var a=section('customer','🟢 هو أخد مني','#15803d'),b=section('supplier','🔴 أنا أخدت منه','#dc2626');
+  var net=a.t.r-b.t.r;
+  var head='<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse"><thead><tr><th style="'+th+'">التاريخ</th><th style="'+th+'">البيان</th><th style="'+th+'">الصنف</th><th style="'+th+'">الكمية</th><th style="'+th+'">قيمة الصنف / الفاتورة</th><th style="'+th+'">المدفوع</th><th style="'+th+'">المتبقي</th></tr></thead><tbody>';
+  var foot=(a.h&&b.h?'<tr style="background:#e0e7ff;font-weight:900"><td style="'+td+';text-align:right" colspan="6">⚖️ الصافي بين الاتنين</td><td style="'+td+'">'+(net>0.001?'هو عليه لي '+N(net):net<-0.001?'أنا عليّ له '+N(-net):'متعادلين')+'</td></tr>':'')+'</tbody></table></div>';
+  return {html:(a.h||b.h)?head+a.h+b.h+foot:'<div class="empty">لا توجد معاملات</div>',a:a.t,b:b.t,net:net};
+}
+function printDebtGroup(name,type){
+  var saveN=_twsName,saveB=_twsWithBranches;
+  _twsName=name;_twsWithBranches=false;
+  var dir=(type==='supplier')?'supplier':'customer';
+  var docs=_twsBuild().filter(function(x){return x.dir===dir&&x.hasDebt;});
+  _twsName=saveN;_twsWithBranches=saveB;
+  var T=_twsDocsTable(docs,true);
+  var body='<div style="margin-bottom:8px;color:#64748b">تاريخ الكشف: '+esc(fmtDate(today()))+' — '+_gregTxt(today())+'</div>'+T.html;
+  printSection('كشف حساب ديون '+esc(name)+' ('+(type==='supplier'?'مورد':'عميل')+')',body);
+}
+
+function _twsToggleMode(){_twsMode=(_twsMode==='docs')?'ledger':'docs';_renderTws();}
+function _twsDocsFiltered(){
+  var cut=_twsCutoff();
+  var docs=_twsBuild().filter(function(x){return (!cut||(x.date||'')>=cut)&&(_twsDir==='all'||(_twsDir==='debit'?x.dir==='customer':x.dir==='supplier'));});
+  if(_twsDesc)docs.reverse();
+  return docs;
+}
+function _twsPrintDocs(){
+  var T=_twsDocsTable(_twsDocsFiltered(),true);
+  var sentence=T.net>0.001?'الباقي: هو عليه لي '+fmt(Math.round(T.net*100)/100)+' ج':T.net<-0.001?'الباقي: أنا عليّ له '+fmt(Math.round(-T.net*100)/100)+' ج':'الحساب متعادل ✅';
+  var col=T.net>0.001?'#15803d':T.net<-0.001?'#dc2626':'#475569';
+  printSection('⚖️ كشف حساب — '+esc(_twsName),'<div style="margin-bottom:8px;color:#64748b">تاريخ الكشف: '+esc(fmtDate(today()))+' — '+_gregTxt(today())+'</div>'+T.html+'<div style="border:2px solid '+col+';border-radius:10px;padding:10px;text-align:center;font-size:17px;font-weight:900;color:'+col+';margin:14px 0">'+sentence+'</div>');
+}
+
+var _twsName='',_twsDir='all',_twsRange='all',_twsDesc=false,_twsWithBranches=true,_twsMode='ledger';
 function _twsNames(){
   var key=normalizeAr(_twsName||''),set={};set[key]=1;
   if(_twsWithBranches){var c=(DB.clients||[]).find(function(x){return normalizeAr(x.name)===key;});if(c)_clientBranches(c).forEach(function(b){set[normalizeAr(b.name)]=1;});}
@@ -11018,7 +11082,7 @@ function openTwoWayStatement(name){
   if(__isFieldHidden('debts','name')||__isFieldHidden('debts','total')||__isFieldHidden('debts','paid')){
     return showToast('🚫 مفيش صلاحية تشوف تفاصيل الديون. كلم المالك.','#dc2626');
   }
-  _twsName=name;_twsDir='all';_twsRange='all';_twsDesc=false;_twsWithBranches=true;
+  _twsName=name;_twsDir='all';_twsRange='all';_twsDesc=false;_twsWithBranches=true;_twsMode='ledger';
   document.getElementById('modal-title').textContent='⚖️ كشف حساب — '+name;
   document.getElementById('modal-body').innerHTML=
     '<div id="tws-top"></div><div id="tws-list"></div>'+
@@ -11076,15 +11140,18 @@ function _renderTws(){
     card('all','#fffbeb','#fde68a',netCol,'الرصيد (الكل)',_twsBalTxt(tt.bal))+'</div>'+
     '<div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px">'+[['all','الكل'],['m','الشهر الهجري'],['30','30 يوم'],['90','90 يوم'],['180','6 شهور']].map(function(r){var a=_twsRange===r[0];return '<button type="button" onclick="_twsSetRange(\''+r[0]+'\')" style="padding:5px 10px;border-radius:9px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;border:2px solid '+(a?'#92400e':'#e2e8f0')+';background:'+(a?'#fef3c7':'#fff')+';color:#92400e">'+r[1]+'</button>';}).join('')+
     (_twsHasBranches()?'<button type="button" onclick="_twsToggleBranches()" style="padding:5px 10px;border-radius:9px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;border:2px solid #c7d2fe;background:'+(_twsWithBranches?'#e0e7ff':'#fff')+';color:#3730a3">'+(_twsWithBranches?'🏢 مع الفروع':'🏢 الرئيسي بس')+'</button>':'')+
+    '<button type="button" onclick="_twsToggleMode()" style="padding:5px 10px;border-radius:9px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;border:2px solid #fed7aa;background:'+(_twsMode==='docs'?'#ffedd5':'#fff')+';color:#c2410c">'+(_twsMode==='docs'?'📒 عرض الدفتر':'🧾 تفصيل الفواتير')+'</button>'+
     '<button type="button" onclick="_twsToggleOrder()" style="padding:5px 10px;border-radius:9px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;border:2px solid #cbd5e1;background:#f1f5f9;color:#334155">'+(_twsDesc?'⬇️ الأحدث فوق':'⬆️ الأقدم فوق')+'</button></div>'+
     '<div style="font-size:10px;color:#64748b;line-height:1.7;margin-bottom:8px">'+
     '<b style="color:#15803d">مدين</b> = هو أخد مني / أنا سدّدت له &nbsp;•&nbsp; <b style="color:#1d4ed8">دائن</b> = أنا أخدت منه / هو سدّد لي<br>'+
     'الرصيد: <b>عليه</b> = هو مديون لي &nbsp;•&nbsp; <b>له</b> = أنا مديون له</div>'+
     (Math.abs(tt.bal-dn)>0.5?'<div style="background:#fef2f2;border:1px solid #fca5a5;border-radius:9px;padding:7px 9px;font-size:11px;color:#b91c1c;margin-bottom:8px">⚠️ الكشف مختلف '+fmt(Math.abs(tt.bal-dn))+' ج عن شاشة الديون — غالبًا دين اتعدل يدويًا. راجعه قبل ما تبعت الكشف.</div>':'');
+  if(_twsMode==='docs'){list.innerHTML=_twsDocsTable(_twsDocsFiltered(),false).html+'<div style="font-size:10px;color:#94a3b8;margin-top:5px">المدفوع والمتبقي على مستوى الفاتورة (الدفع بيتم على الفاتورة كلها). اضغط على أي فاتورة لفتحها.</div>';return;}
   var shown=E.filter(function(e){return _twsDir==='all'||(_twsDir==='debit'?e.debit>0:e.credit>0);});
   list.innerHTML=shown.length?_twsTableHtml(shown,false)+'<div style="font-size:10px;color:#94a3b8;margin-top:5px">اضغط على أي سطر لفتح أصله للتعديل. الرصيد تراكمي دايمًا حتى مع الفلتر.</div>':'<div class="empty">لا توجد معاملات</div>';
 }
 function _twsPrint(){
+  if(_twsMode==='docs'){_twsPrintDocs();return;}
   var E=_twsView(),tt=_twsTot(E);
   var netCol=tt.bal>0.001?'#15803d':tt.bal<-0.001?'#dc2626':'#475569';
   var sentence=tt.bal>0.001?'الباقي: هو عليه لي '+fmt(tt.bal)+' ج':tt.bal<-0.001?'الباقي: أنا عليّ له '+fmt(Math.abs(tt.bal))+' ج':'الحساب متعادل ✅';
@@ -11137,7 +11204,7 @@ function _twsBuild(){
     var pp=[],ldT=0,ldN=0;
     debts.forEach(function(d){if(d.type==='customer'&&dSale(d)===s.id){pp=pp.concat(pays(d));ldT+=(d.total||0);ldN++;}});
     var upS=ldN?Math.max(0,(s.total||0)-ldT):(s.paid||0);
-    docs.push({dir:'customer',kind:'sale',id:s.id,date:s.date,who:s.customer,title:'فاتورة'+(s.serial?' — '+s.serial:'')+(s.model?' ('+s.model+')':''),lines:lines,total:s.total||0,upfront:upS,pays:pp});
+    docs.push({dir:'customer',kind:'sale',id:s.id,date:s.date,who:s.customer,title:'فاتورة'+(s.serial?' — '+s.serial:'')+(s.model?' ('+s.model+')':''),lines:lines,total:s.total||0,upfront:upS,pays:pp,hasDebt:ldN>0});
   });
   purchs.forEach(function(p){
     var lines=(p.items||[]).map(function(it){return {name:it.name,qty:it.qty,price:it.price,amt:(it.qty||0)*(it.price||0)};});
@@ -11145,13 +11212,13 @@ function _twsBuild(){
     var pp=[],ldT=0,ldN=0,gT=(p.total||0)+(p.extra_cost||0);
     debts.forEach(function(d){if(d.type==='supplier'&&dPur(d)===p.id){pp=pp.concat(pays(d));ldT+=(d.total||0);ldN++;}});
     var upP=ldN?Math.max(0,gT-ldT):(p.paid||0); // نفس منطق الفواتير (v250)
-    docs.push({dir:'supplier',kind:'purch',id:p.id,date:p.date,who:p.supplier,title:'مشترى',lines:lines,total:gT,upfront:upP,pays:pp});
+    docs.push({dir:'supplier',kind:'purch',id:p.id,date:p.date,who:p.supplier,title:'مشترى',lines:lines,total:gT,upfront:upP,pays:pp,hasDebt:ldN>0});
   });
   debts.forEach(function(d){
     var linked=(d.type==='customer'&&dSale(d)&&sId[dSale(d)])||(d.type==='supplier'&&dPur(d)&&pId[dPur(d)]);
     if(linked)return;
     var t=d.desc||d.details||'دين';
-    docs.push({dir:d.type==='customer'?'customer':'supplier',kind:'debt',id:d.id,date:d.date,who:d.name,title:/^أمانة/.test(t)?'أمانة':'دين مسجّل',lines:[{name:t,qty:'',price:'',amt:d.total||0}],total:d.total||0,upfront:0,pays:pays(d)});
+    docs.push({dir:d.type==='customer'?'customer':'supplier',kind:'debt',id:d.id,date:d.date,who:d.name,title:/^أمانة/.test(t)?'أمانة':'دين مسجّل',lines:[{name:t,qty:'',price:'',amt:d.total||0}],total:d.total||0,upfront:0,pays:pays(d),hasDebt:true});
   });
   docs.forEach(function(x){
     x.paid=x.upfront+x.pays.reduce(function(t,p){return t+p.amount;},0);
@@ -11176,28 +11243,6 @@ function printDebt(id){
 
 // ⚠️ v241 — كانت طباعة "كشف الحساب" بتحشر كل المعاملات في سطر نصي واحد مفصول بـ"|"، غير
 // قابل للقراءة فعليًا في ورقة مطبوعة. بقت جدول حقيقي عمود لكل بيانة، زي كشف حساب بنكي.
-function printDebtGroup(name,type){
-  var rawList=(DB.debts||[]).filter(function(d){return normalizeAr(d.name)===normalizeAr(name)&&d.type===type;})
-    .sort(function(a,b){return(a.date||'')<(b.date||'')?-1:1;});
-  var totalDebt=rawList.reduce(function(s,d){return s+(d.total||0);},0);
-  var totalPaid=rawList.reduce(function(s,d){return s+(d.paid||0);},0);
-  var rowsHtml=rawList.map(function(d){
-    var dRem=(d.total||0)-(d.paid||0);
-    return '<tr>'+
-      '<td>'+esc(fmtDate(d.date))+'</td>'+
-      '<td>'+esc(d.desc||d.details||'—')+'</td>'+
-      '<td>'+(_isDebtLinked(d)?'🧾 فاتورة':'✍️ يدوي')+'</td>'+
-      '<td>'+fmt(d.total)+'</td>'+
-      '<td>'+fmt(d.paid||0)+'</td>'+
-      '<td>'+fmt(dRem)+'</td>'+
-      '</tr>';
-  }).join('');
-  var body='<table><thead><tr><th>التاريخ</th><th>الوصف</th><th>المصدر</th><th>الإجمالي</th><th>المسدد</th><th>المتبقي</th></tr></thead><tbody>'+
-    rowsHtml+
-    '<tr style="font-weight:900;border-top:2px solid #333"><td colspan="3">الإجمالي</td><td>'+fmt(totalDebt)+'</td><td>'+fmt(totalPaid)+'</td><td>'+fmt(totalDebt-totalPaid)+'</td></tr>'+
-    '</tbody></table>';
-  printSection('💰 كشف حساب — '+name+' ('+(type==='supplier'?'مورد':'عميل')+')',body);
-}
 
 function toggleDebtDetails(id){
   var el=document.getElementById(id);if(!el)return;
@@ -13931,37 +13976,6 @@ var _invId='',_invView='batches',_invListArch=false,_invTmp=[],_invBatchEditId=n
 function _invList(){return DB.investors||(DB.investors=[]);}
 function _invBatches(){return DB.inv_batches||(DB.inv_batches=[]);}
 function _invById(id){return _invList().find(function(x){return x.id===id;});}
-function _invBatchStats(b,excludeSaleId){
-  var items=(b.items||[]).map(function(x){return {productId:x.productId,name:x.name,qty:+x.qty||0,cost:+x.cost||0,sold:0,rev:0};});
-  var rows=[],revenue=0,soldCost=0;
-  (DB.sales||[]).forEach(function(s){
-    if(excludeSaleId&&s.id===excludeSaleId)return;
-    var sub=(s.items||[]).reduce(function(t,i){return t+(i.qty||0)*(i.price||0);},0);
-    var f=sub>0?Math.max(0,sub-(s.discount||0))/sub:1;
-    (s.items||[]).forEach(function(it){
-      if(it.inv_batch!==b.id)return;
-      var bi=items.find(function(x){return x.productId===it.productId;});
-      var q=it.qty||0,rv=q*(it.price||0)*f,c=q*(bi?bi.cost:(it.buyPrice||0));
-      if(bi){bi.sold+=q;bi.rev+=rv;}
-      revenue+=rv;soldCost+=c;
-      rows.push({date:s.date,sale:s.id,customer:s.customer,name:it.name,qty:q,rev:rv,cost:c,profit:rv-c});
-    });
-  });
-  var deployed=items.reduce(function(t,x){return t+x.qty*x.cost;},0);
-  var profit=revenue-soldCost,pct=+b.pct||0,share=Math.round(profit*pct)/100;
-  var remQty=items.reduce(function(t,x){return t+Math.max(0,x.qty-x.sold);},0),totQty=items.reduce(function(t,x){return t+x.qty;},0);
-  return {items:items,rows:rows,deployed:deployed,revenue:revenue,soldCost:soldCost,profit:profit,share:share,owner:profit-share,remCost:deployed-soldCost,remQty:remQty,totQty:totQty,soldQty:totQty-remQty};
-}
-function _invStats(inv){
-  var bs=_invBatches().filter(function(b){return b.investor_id===inv.id;}).map(function(b){return {b:b,st:_invBatchStats(b)};});
-  var dep=0,pay=0;
-  (inv.ledger||[]).forEach(function(e){if(e.type==='deposit')dep+=(+e.amount||0);else if(e.type==='payout')pay+=(+e.amount||0);});
-  var T={dep:dep,pay:pay,deployed:0,profit:0,share:0,remCost:0,soldCost:0,revenue:0};
-  bs.forEach(function(x){T.deployed+=x.st.deployed;T.profit+=x.st.profit;T.share+=x.st.share;T.remCost+=x.st.remCost;T.soldCost+=x.st.soldCost;T.revenue+=x.st.revenue;});
-  T.unspent=dep-T.deployed;           // فلوس مودعة لسه ما اتحوّلتش لبضاعة (ممكن تبقى سالبة = اشتريت له أكتر من المودع)
-  T.owed=dep+T.share-pay;             // المستحق له = رأس المال + ربحه − اللي اتدفع
-  return {bs:bs,T:T};
-}
 function _invRemaining(batch,productId,excludeSaleId,extraUsed){
   var st=_invBatchStats(batch,excludeSaleId),bi=st.items.find(function(x){return x.productId===productId;});
   if(!bi)return 0;
@@ -14004,27 +14018,6 @@ function _invValidateSale(){
 // (صافي الربح نفسه ما بيتغيّرش — بيتسجّل كامل زي أي بيع). المستثمرين "العاديين" (حسابات ← مستثمرين، نسبة من صافي الربح) بيتحسبوا
 // على الصافي بعد خصم نصيب مستثمري البضاعة (لأنه فلوس مستحقة لحد تاني)، وده بيتقفل/يتفتح من شاشة المستثمرين.
 function _invExclOn(){return !(DB.settings&&DB.settings.invExcludeBatchShare===false);}
-function _invSalesShare(sales){
-  var bm={};_invBatches().forEach(function(b){bm[b.id]=b;});
-  var out={share:0,profit:0,rev:0,byInv:{}};
-  (sales||[]).forEach(function(s){
-    var sub=(s.items||[]).reduce(function(t,i){return t+(i.qty||0)*(i.price||0);},0);
-    var f=sub>0?Math.max(0,sub-(s.discount||0))/sub:1;
-    (s.items||[]).forEach(function(it){
-      if(!it.inv_batch)return;
-      var b=bm[it.inv_batch];if(!b)return;
-      var bi=(b.items||[]).find(function(x){return x.productId===it.productId;});
-      var q=it.qty||0,rv=q*(it.price||0)*f,pr=rv-q*(bi?(+bi.cost||0):(it.buyPrice||0)),sh=pr*(+b.pct||0)/100;
-      out.profit+=pr;out.rev+=rv;out.share+=sh;
-      var inv=_invById(b.investor_id);if(!inv)return;
-      var o=out.byInv[inv.id]||(out.byInv[inv.id]={name:inv.name,share:0,profit:0});
-      o.share+=sh;o.profit+=pr;
-    });
-  });
-  out.share=Math.round(out.share);out.profit=Math.round(out.profit);
-  Object.keys(out.byInv).forEach(function(k){out.byInv[k].share=Math.round(out.byInv[k].share);});
-  return out;
-}
 function _invBatchNote(ps){
   var r=_invSalesShare(ps);if(!(r.share>0)||!_invList().length)return '';
   var ex=_invExclOn();
@@ -14036,21 +14029,241 @@ function _invBatchNote(ps){
     '<div style="font-size:10.5px;color:#047857;margin-top:3px">'+(ex?'نصيبهم متخصوم من الأساس اللي بيتوزع على المستثمرين العاديين.':'نصيبهم محسوب جوه الأساس اللي بيتوزع على المستثمرين العاديين (إيقاف الخصم من شاشة المستثمرين).')+'</div></div>';
 }
 function _invSetExcl(on){DB.settings.invExcludeBatchShare=!!on;persist();_renderInvList();showToast(on?'✅ نصيب مستثمري البضاعة بيتخصم من أساس توزيع المستثمرين العاديين':'⛔ الأساس بقى صافي الربح كامل','#16a34a');}
+function _invSalesFilter(id){window.__invSalesBatch=id;_renderInv();}
+
+// ⚠️ v258 — إعادة ضبط المستثمرين: فصل (رأس المال / الربح المستحق / أرباح مسحوبة / رأس مال مردود)، تكلفة الربح بنفس نظام التطبيق (buyPrice السطر)،
+// والمستحق من ربح البضاعة بقى التزام منفصل في الميزانية (مش جوه أرباح المشروع). صافي الربح المحاسبي ما بيتغيّرش.
+function _invBatchStats(b,excludeSaleId,asOf){
+  var items=(b.items||[]).map(function(x){return {productId:x.productId,name:x.name,qty:+x.qty||0,cost:+x.cost||0,sold:0,rev:0};});
+  var rows=[],revenue=0,soldCost=0,capSold=0;
+  (DB.sales||[]).forEach(function(s){
+    if(excludeSaleId&&s.id===excludeSaleId)return;
+    if(asOf&&(s.date||'')>asOf)return;
+    var sub=(s.items||[]).reduce(function(t,i){return t+(i.qty||0)*(i.price||0);},0);
+    var f=sub>0?Math.max(0,sub-(s.discount||0))/sub:1;
+    (s.items||[]).forEach(function(it){
+      if(it.inv_batch!==b.id)return;
+      var bi=items.find(function(x){return x.productId===it.productId;});
+      var q=it.qty||0,rv=q*(it.price||0)*f;
+      var uc=it.buyPrice||it.buy_price||0;if(!uc&&bi)uc=bi.cost; // نفس تكلفة نظام التطبيق (تكلفة سطر الفاتورة)، وتكلفة الدفعة احتياطي بس
+      var c=q*uc;
+      if(bi){bi.sold+=q;bi.rev+=rv;capSold+=q*bi.cost;}
+      revenue+=rv;soldCost+=c;
+      rows.push({date:s.date,sale:s.id,customer:s.customer,name:it.name,qty:q,rev:rv,cost:c,profit:rv-c});
+    });
+  });
+  var deployed=items.reduce(function(t,x){return t+x.qty*x.cost;},0);
+  var profit=revenue-soldCost,pct=+b.pct||0,share=Math.round(profit*pct)/100;
+  var remQty=items.reduce(function(t,x){return t+Math.max(0,x.qty-x.sold);},0),totQty=items.reduce(function(t,x){return t+x.qty;},0);
+  return {items:items,rows:rows,deployed:deployed,revenue:revenue,soldCost:soldCost,capSold:capSold,profit:profit,share:share,owner:profit-share,remCost:deployed-capSold,remQty:remQty,totQty:totQty,soldQty:totQty-remQty};
+}
+// تقسيم دفتر المستثمر: إيداع / سحب أرباح (profit) / رد رأس مال (capital_return) / دفع قديم (payout → أرباح أولًا ثم رأس مال)
+function _invSplit(inv,share,asOf){
+  var dep=0,pw=0,cr=0,legacy=0;
+  (inv.ledger||[]).forEach(function(e){
+    if(asOf&&(e.date||'')>asOf)return;
+    var a=+e.amount||0;
+    if(e.type==='deposit')dep+=a;
+    else if(e.type==='profit')pw+=a;
+    else if(e.type==='capital_return')cr+=a;
+    else if(e.type==='payout')legacy+=a;
+  });
+  if(legacy>0){var lp=Math.min(legacy,Math.max(0,share-pw));pw+=lp;cr+=legacy-lp;}
+  return {dep:dep,pw:pw,cr:cr,legacy:legacy};
+}
+function _invStats(inv,asOf){
+  var bs=_invBatches().filter(function(b){return b.investor_id===inv.id;}).map(function(b){return {b:b,st:_invBatchStats(b,null,asOf)};});
+  var T={deployed:0,profit:0,share:0,remCost:0,soldCost:0,revenue:0};
+  bs.forEach(function(x){T.deployed+=x.st.deployed;T.profit+=x.st.profit;T.share+=x.st.share;T.remCost+=x.st.remCost;T.soldCost+=x.st.soldCost;T.revenue+=x.st.revenue;});
+  var sp=_invSplit(inv,T.share,asOf);
+  T.dep=sp.dep;T.pw=sp.pw;T.cr=sp.cr;T.pay=sp.pw+sp.cr;
+  T.capRem=T.dep-T.cr;            // رأس المال المتبقي له
+  T.profRem=T.share-T.pw;         // الأرباح المتبقية له (مستحقة)
+  T.owed=T.capRem+T.profRem;      // إجمالي المستحق له
+  T.capCash=T.capRem-T.remCost;   // رأس مال سايل (مش متحوّل لبضاعة)
+  T.unspent=T.capCash;
+  return {bs:bs,T:T};
+}
+function _invAsOf(asOf){
+  var A={dep:0,pw:0,cr:0,share:0};
+  _invList().forEach(function(inv){var t=_invStats(inv,asOf).T;A.dep+=t.dep;A.pw+=t.pw;A.cr+=t.cr;A.share+=t.share;});
+  return A;
+}
+function _invCashTotals(asOf){var a=_invAsOf(asOf);return {dep:a.dep,pay:a.pw+a.cr};}
+function _invLedger(inv,S){
+  var E=[];
+  (inv.ledger||[]).forEach(function(e){
+    var a=+e.amount||0,n=e.note?' — '+e.note:'';
+    if(e.type==='deposit')E.push({date:e.date,name:'💰 إيداع رأس مال'+n,credit:a,debit:0,id:e.id,kind:'led'});
+    else if(e.type==='profit')E.push({date:e.date,name:'💸 سحب أرباح'+n,credit:0,debit:a,id:e.id,kind:'led'});
+    else if(e.type==='capital_return')E.push({date:e.date,name:'↩️ رد رأس مال'+n,credit:0,debit:a,id:e.id,kind:'led'});
+    else if(e.type==='payout')E.push({date:e.date,name:'💸 اتدفع له (سجل قديم)'+n,credit:0,debit:a,id:e.id,kind:'led'});
+  });
+  S.bs.forEach(function(x){
+    var pct=+x.b.pct||0;
+    x.st.rows.forEach(function(r){
+      var sh=Math.round(r.profit*pct)/100;
+      E.push({date:r.date,name:'📈 بيع '+r.name+' ×'+fmtQty(r.qty)+' — '+(x.b.title||'دفعة')+' (ربح '+fmt(Math.round(r.profit*100)/100)+' × '+fmtQty(pct)+'%)',credit:sh,debit:0,kind:'sale'});
+    });
+  });
+  E.forEach(function(e,i){e.seq=i;});
+  E.sort(function(a,b){return (a.date||'')<(b.date||'')?-1:(a.date||'')>(b.date||'')?1:a.seq-b.seq;});
+  var bal=0;E.forEach(function(e){bal+=e.credit-e.debit;e.bal=bal;});
+  return E;
+}
+function _invSalesShare(sales){
+  var bm={};_invBatches().forEach(function(b){bm[b.id]=b;});
+  var out={share:0,profit:0,rev:0,byInv:{}};
+  (sales||[]).forEach(function(s){
+    var sub=(s.items||[]).reduce(function(t,i){return t+(i.qty||0)*(i.price||0);},0);
+    var f=sub>0?Math.max(0,sub-(s.discount||0))/sub:1;
+    (s.items||[]).forEach(function(it){
+      if(!it.inv_batch)return;
+      var b=bm[it.inv_batch];if(!b)return;
+      var bi=(b.items||[]).find(function(x){return x.productId===it.productId;});
+      var uc=it.buyPrice||it.buy_price||0;if(!uc&&bi)uc=+bi.cost||0;
+      var q=it.qty||0,rv=q*(it.price||0)*f,pr=rv-q*uc,sh=pr*(+b.pct||0)/100;
+      out.profit+=pr;out.rev+=rv;out.share+=sh;
+      var inv=_invById(b.investor_id);if(!inv)return;
+      var o=out.byInv[inv.id]||(out.byInv[inv.id]={name:inv.name,share:0,profit:0});
+      o.share+=sh;o.profit+=pr;
+    });
+  });
+  out.share=Math.round(out.share);out.profit=Math.round(out.profit);
+  Object.keys(out.byInv).forEach(function(k){out.byInv[k].share=Math.round(out.byInv[k].share);out.byInv[k].profit=Math.round(out.byInv[k].profit);});
+  return out;
+}
+// توزيع الربح للعلم: صافي الربح المحاسبي ثابت، والباقي بيوضح مين ياخد إيه (من غير ازدواج)
+function _invProfitSplit(net,ps){
+  var regs=((DB.accounts&&DB.accounts.investors)||[]).filter(function(i){return i.status!=='inactive';});
+  if(!_invList().length&&!regs.length)return '';
+  var bs=_invSalesShare(ps||[]),ex=_invExclOn(),bsh=bs.share;
+  var dist=ex?net-bsh:net;
+  var totalPct=regs.reduce(function(s,i){return s+(+i.profit_share_pct||0);},0),ownerPct=100-totalPct;
+  function row(l,v,c,bold){return '<div style="display:flex;justify-content:space-between;gap:8px;font-size:12px;padding:3px 0'+(bold?';font-weight:900;border-top:1px dashed #cbd5e1;margin-top:3px;padding-top:5px':'')+'"><span>'+l+'</span><b style="color:'+(c||'#0f172a')+'">'+fmt(v)+'</b></div>';}
+  var h='<div style="border:1.5px solid #bbf7d0;background:#f0fdf4;border-radius:12px;padding:10px 12px;margin-top:10px">'+
+    '<div style="font-size:12px;font-weight:900;color:#166534;margin-bottom:4px">📊 توزيع الربح <span style="font-weight:500;color:#15803d">(للعلم — صافي الربح المحاسبي ما بيتغيّرش)</span></div>'+
+    row('صافي الربح المحاسبي',net,'#0f172a',false);
+  if(Object.keys(bs.byInv).length){
+    h+=row('ربح بضاعة المستثمرين (داخل الصافي)',bs.profit,'#475569',false);
+    Object.keys(bs.byInv).forEach(function(k){var o=bs.byInv[k];h+=row('• نصيب '+esc(o.name)+' (حقه)',o.share,'#7c3aed',false);});
+    h+=row('• نصيب المشروع من بضاعتهم',bs.profit-bs.share,'#047857',false);
+  }
+  h+=row('الربح المتاح للتوزيع'+(ex?'':' (بدون خصم نصيب مستثمري البضاعة)'),dist,'#2563eb',true);
+  regs.forEach(function(i){h+=row(esc(i.name)+' — مستثمر عادي ('+i.profit_share_pct+'%)',Math.round(dist*i.profit_share_pct/100),'#7c3aed',false);});
+  h+=row('حصة المالك ('+ownerPct.toFixed(1)+'%)',Math.round(dist*ownerPct/100),'#2563eb',false);
+  h+='<div style="font-size:10.5px;color:#15803d;margin-top:4px;line-height:1.7">'+(bsh?(ex?'نصيب مستثمري البضاعة بيتشال من الأساس، فمتتوزعش مرتين على المستثمرين العاديين.':'⚠️ الخصم موقوف: نصيب مستثمري البضاعة داخل أساس توزيع المستثمرين العاديين.'):'مفيش بضاعة مستثمرين اتباعت في الفترة دي.')+'</div></div>';
+  return h;
+}
+// ===== شاشة المستثمرين =====
+function _renderInvList(){
+  var el=document.getElementById('inv-body');if(!el)return;
+  var all=_invList(),rows=all.filter(function(i){return !!i.archived===_invListArch;});
+  var tot={cap:0,prof:0,owed:0,rem:0};
+  all.filter(function(i){return !i.archived;}).forEach(function(i){var s=_invStats(i).T;tot.cap+=s.capRem;tot.prof+=s.profRem;tot.owed+=s.owed;tot.rem+=s.remCost;});
+  var card=function(l,v,c,bg){return '<div style="flex:1;background:'+bg+';border-radius:11px;padding:8px 4px;text-align:center"><div style="font-size:10px;font-weight:800;color:'+c+'">'+l+'</div><div style="font-size:14px;font-weight:900;color:'+c+'">'+fmt(v)+'</div></div>';};
+  el.innerHTML=
+    '<div style="display:flex;gap:6px;margin-bottom:6px">'+card('رأس المال المتبقي',tot.cap,'#1d4ed8','#dbeafe')+card('رأس مال في بضاعة',tot.rem,'#c2410c','#ffedd5')+'</div>'+
+    '<div style="display:flex;gap:6px;margin-bottom:10px">'+card('أرباح مستحقة لهم',tot.prof,'#7c3aed','#ede9fe')+card('إجمالي المستحق لهم',tot.owed,'#047857','#d1fae5')+'</div>'+
+    '<div onclick="_invSetExcl('+(_invExclOn()?'false':'true')+')" style="cursor:pointer;background:'+(_invExclOn()?'#ecfdf5':'#fef2f2')+';border:1.5px solid '+(_invExclOn()?'#6ee7b7':'#fca5a5')+';border-radius:10px;padding:8px 11px;font-size:11.5px;font-weight:700;color:'+(_invExclOn()?'#047857':'#b91c1c')+';margin-bottom:8px;line-height:1.7">'+(_invExclOn()?'✅ توزيع أرباح المستثمرين العاديين: بعد خصم نصيب مستثمري البضاعة':'⛔ توزيع أرباح المستثمرين العاديين: على صافي الربح كامل')+' <span style="font-weight:500;opacity:.8">(اضغط للتغيير)</span></div>'+
+    '<div onclick="_invToggleArch()" style="cursor:pointer;text-align:center;background:#f1f5f9;border-radius:10px;padding:7px;font-size:12px;font-weight:700;color:#334155;margin-bottom:8px">'+(_invListArch?'📦 المعروض: المؤرشفين — اضغط للنشطين':'👥 المعروض: النشطين — اضغط للمؤرشفين')+'</div>'+
+    (rows.length?rows.map(function(i){
+      var s=_invStats(i).T;
+      return '<div onclick="openInvestor('+jsStr(i.id)+')" style="cursor:pointer;background:#f8fafc;border-right:4px solid #059669;border-radius:12px;padding:10px 12px;margin-bottom:8px">'+
+        '<div style="display:flex;justify-content:space-between;align-items:center"><b style="font-size:14px">🤝 '+esc(i.name)+'</b><span style="font-size:11px;background:#d1fae5;color:#047857;border-radius:7px;padding:1px 8px;font-weight:800">'+fmtQty(i.pct||0)+'% من الربح</span></div>'+
+        '<div style="display:flex;gap:10px;flex-wrap:wrap;font-size:12px;margin-top:5px;color:#475569"><span>رأس المال <b>'+fmt(s.capRem)+'</b></span><span>أرباح متبقية <b style="color:#7c3aed">'+fmt(s.profRem)+'</b></span><span>له <b style="color:#047857">'+fmt(s.owed)+'</b></span></div></div>';
+    }).join(''):'<div class="empty">'+(_invListArch?'مفيش مؤرشفين':'مفيش مستثمرين لسه — اضغط ➕ مستثمر جديد')+'</div>');
+}
 function _invSalesView(inv,S){
   var rows=[];
-  S.bs.forEach(function(x){x.st.rows.forEach(function(r){rows.push({date:r.date,sale:r.sale,customer:r.customer,name:r.name,qty:r.qty,rev:r.rev,profit:r.profit,share:Math.round(r.profit*(+x.b.pct||0))/100,batch:x.b.title||'دفعة',bid:x.b.id,pct:+x.b.pct||0});});});
+  S.bs.forEach(function(x){x.st.rows.forEach(function(r){var sh=Math.round(r.profit*(+x.b.pct||0))/100;rows.push({date:r.date,sale:r.sale,customer:r.customer,name:r.name,qty:r.qty,rev:r.rev,cost:r.cost,profit:r.profit,share:sh,proj:r.profit-sh,batch:x.b.title||'دفعة',bid:x.b.id});});});
   rows.sort(function(a,b){return (b.date||'')>(a.date||'')?1:(b.date||'')<(a.date||'')?-1:0;});
   var f=window.__invSalesBatch||'';
-  var chips='<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px"><button type="button" onclick="_invSalesFilter(\'\')" style="padding:5px 11px;border-radius:9px;font-family:inherit;font-size:11.5px;font-weight:700;cursor:pointer;border:2px solid '+(!f?'#047857':'#e2e8f0')+';background:'+(!f?'#d1fae5':'#fff')+';color:#047857">الكل ('+rows.length+')</button>'+
-    S.bs.map(function(x){var a=f===x.b.id;return '<button type="button" onclick="_invSalesFilter(\''+x.b.id+'\')" style="padding:5px 11px;border-radius:9px;font-family:inherit;font-size:11.5px;font-weight:700;cursor:pointer;border:2px solid '+(a?'#047857':'#e2e8f0')+';background:'+(a?'#d1fae5':'#fff')+';color:#047857">'+esc(x.b.title||'دفعة')+' ('+x.st.rows.length+')</button>';}).join('')+'</div>';
+  var chip=function(id,l,n){var a=(f===id);return '<button type="button" onclick="_invSalesFilter(\''+id+'\')" style="padding:5px 11px;border-radius:9px;font-family:inherit;font-size:11.5px;font-weight:700;cursor:pointer;border:2px solid '+(a?'#047857':'#e2e8f0')+';background:'+(a?'#d1fae5':'#fff')+';color:#047857">'+l+' ('+n+')</button>';};
+  var chips='<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">'+chip('','الكل',rows.length)+S.bs.map(function(x){return chip(x.b.id,esc(x.b.title||'دفعة'),x.st.rows.length);}).join('')+'</div>';
   var shown=rows.filter(function(r){return !f||r.bid===f;});
-  var tot=shown.reduce(function(t,r){t.q+=r.qty;t.rev+=r.rev;t.p+=r.profit;t.s+=r.share;return t;},{q:0,rev:0,p:0,s:0});
-  var th='padding:6px 3px;background:#f1f5f9;border:1px solid #cbd5e1;font-size:10px;text-align:center',td='padding:5px 3px;border:1px solid #e2e8f0;font-size:11px;text-align:center';
-  return chips+(shown.length?'<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse"><thead><tr><th style="'+th+'">التاريخ</th><th style="'+th+'">الصنف</th><th style="'+th+'">الكمية</th><th style="'+th+'">العميل</th><th style="'+th+'">البيع</th><th style="'+th+'">الربح</th><th style="'+th+'">نصيبه</th></tr></thead><tbody>'+
-    shown.map(function(r){return '<tr onclick="closeModal();openSaleModal('+jsStr(r.sale)+')" style="cursor:pointer"><td style="'+td+'">'+esc(fmtDate(r.date))+'</td><td style="'+td+';text-align:right">'+esc(r.name)+(f?'':'<div style="font-size:9px;color:#94a3b8">'+esc(r.batch)+'</div>')+'</td><td style="'+td+'">'+fmtQty(r.qty)+'</td><td style="'+td+'">'+esc(r.customer||'')+'</td><td style="'+td+'">'+fmt(r.rev)+'</td><td style="'+td+'">'+fmt(r.profit)+'</td><td style="'+td+';color:#7c3aed;font-weight:700">'+fmt(r.share)+'</td></tr>';}).join('')+
-    '</tbody><tfoot><tr style="background:#fef3c7;font-weight:900"><td style="'+td+'" colspan="2">الإجمالي</td><td style="'+td+'">'+fmtQty(tot.q)+'</td><td style="'+td+'"></td><td style="'+td+'">'+fmt(tot.rev)+'</td><td style="'+td+'">'+fmt(tot.p)+'</td><td style="'+td+'">'+fmt(tot.s)+'</td></tr></tfoot></table></div><div style="font-size:10px;color:#94a3b8;margin-top:5px">اضغط على أي سطر لفتح الفاتورة.</div>':'<div class="empty">لسه ما اتباعش حاجة من دفعاته</div>');
+  var tot=shown.reduce(function(t,r){t.q+=r.qty;t.rev+=r.rev;t.c+=r.cost;t.p+=r.profit;t.s+=r.share;t.j+=r.proj;return t;},{q:0,rev:0,c:0,p:0,s:0,j:0});
+  var th='padding:6px 3px;background:#f1f5f9;border:1px solid #cbd5e1;font-size:10px;text-align:center;white-space:nowrap',td='padding:5px 3px;border:1px solid #e2e8f0;font-size:11px;text-align:center';
+  var N=function(x){return fmt(Math.round(x*100)/100);};
+  return chips+(shown.length?'<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse"><thead><tr><th style="'+th+'">التاريخ</th><th style="'+th+'">الصنف</th><th style="'+th+'">كمية</th><th style="'+th+'">العميل</th><th style="'+th+'">البيع</th><th style="'+th+'">التكلفة</th><th style="'+th+'">الربح</th><th style="'+th+'">نصيبه</th><th style="'+th+'">المشروع</th></tr></thead><tbody>'+
+    shown.map(function(r){return '<tr onclick="closeModal();openSaleModal('+jsStr(r.sale)+')" style="cursor:pointer"><td style="'+td+'">'+esc(fmtDate(r.date))+'</td><td style="'+td+';text-align:right">'+esc(r.name)+(f?'':'<div style="font-size:9px;color:#94a3b8">'+esc(r.batch)+'</div>')+'</td><td style="'+td+'">'+fmtQty(r.qty)+'</td><td style="'+td+'">'+esc(r.customer||'')+'</td><td style="'+td+'">'+N(r.rev)+'</td><td style="'+td+'">'+N(r.cost)+'</td><td style="'+td+'">'+N(r.profit)+'</td><td style="'+td+';color:#7c3aed;font-weight:700">'+N(r.share)+'</td><td style="'+td+';color:#047857">'+N(r.proj)+'</td></tr>';}).join('')+
+    '</tbody><tfoot><tr style="background:#fef3c7;font-weight:900"><td style="'+td+'" colspan="2">الإجمالي</td><td style="'+td+'">'+fmtQty(tot.q)+'</td><td style="'+td+'"></td><td style="'+td+'">'+N(tot.rev)+'</td><td style="'+td+'">'+N(tot.c)+'</td><td style="'+td+'">'+N(tot.p)+'</td><td style="'+td+'">'+N(tot.s)+'</td><td style="'+td+'">'+N(tot.j)+'</td></tr></tfoot></table></div><div style="font-size:10px;color:#94a3b8;margin-top:5px">التكلفة = تكلفة الصنف في الفاتورة (نفس نظام تكلفة التطبيق). اضغط على أي سطر لفتح الفاتورة.</div>':'<div class="empty">لسه ما اتباعش حاجة من دفعاته</div>');
 }
-function _invSalesFilter(id){window.__invSalesBatch=id;_renderInv();}
+// ===== دفع للمستثمر: أرباح / رد رأس مال / تلقائي =====
+function _invMoney(type){if(type==='payout')return _invPayModal();
+  var inv=_invById(_invId);if(!inv)return;
+  document.getElementById('modal-title').textContent='➕ إيداع من '+inv.name;
+  document.getElementById('modal-body').innerHTML=
+    fld('iv-amt','المبلغ اللي استلمته (رأس مال)','number','','',true)+
+    dateField('iv-date','التاريخ',null)+
+    fld('iv-mnote','ملاحظة','text','')+
+    '<div class="modal-actions"><button class="btn btn-primary btn-full" onclick="__runOnce(this,function(){return _invMoneySave(\'deposit\')})">💾 حفظ</button><button class="btn btn-outline btn-full" onclick="openInvestor('+jsStr(_invId)+')">رجوع</button></div>';
+}
+function _invPaySplit(T,amt,mode){
+  var pr=Math.max(0,T.profRem),pf,cp,err='';
+  if(mode==='profit'){pf=amt;cp=0;}else if(mode==='capital'){pf=0;cp=amt;}else{pf=Math.min(amt,pr);cp=amt-pf;}
+  if(pf>pr+0.001)err='المبلغ أكبر من الأرباح المتاحة ('+fmt(pr)+')';
+  else if(cp>T.capRem+0.001)err='المبلغ أكبر من المستحق له'+(mode==='capital'?' من رأس المال (':' (')+fmt(mode==='capital'?T.capRem:pr+T.capRem)+')';
+  return {pf:Math.round(pf*100)/100,cp:Math.round(cp*100)/100,err:err};
+}
+function _invPayModal(){
+  var inv=_invById(_invId);if(!inv)return;var T=_invStats(inv).T;
+  document.getElementById('modal-title').textContent='💸 دفع لـ '+inv.name;
+  document.getElementById('modal-body').innerHTML=
+    '<div style="display:flex;gap:6px;margin-bottom:10px"><div style="flex:1;background:#ede9fe;border-radius:10px;padding:8px;text-align:center"><div style="font-size:10px;color:#6d28d9;font-weight:800">أرباح متاحة للسحب</div><b style="color:#6d28d9;font-size:15px">'+fmt(Math.max(0,T.profRem))+'</b></div>'+
+    '<div style="flex:1;background:#dbeafe;border-radius:10px;padding:8px;text-align:center"><div style="font-size:10px;color:#1d4ed8;font-weight:800">رأس مال متبقي</div><b style="color:#1d4ed8;font-size:15px">'+fmt(T.capRem)+'</b></div></div>'+
+    fld('iv-amt','المبلغ اللي دفعته له','number','','',true)+
+    '<div class="field"><label>نوع الدفع</label><select id="iv-ptype" onchange="_invPayPreview()" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit">'+
+    '<option value="auto">تلقائي (أرباح الأول ثم رد رأس مال)</option><option value="profit">سحب أرباح بس</option><option value="capital">رد رأس مال بس</option></select></div>'+
+    '<div id="iv-pprev" style="font-size:12px;border-radius:10px;padding:8px 11px;margin-bottom:10px;background:#f8fafc;color:#475569;line-height:1.8">اكتب المبلغ لتظهر المعاينة</div>'+
+    dateField('iv-date','التاريخ',null)+
+    fld('iv-mnote','ملاحظة','text','')+
+    '<div class="modal-actions"><button class="btn btn-primary btn-full" onclick="__runOnce(this,_invPaySave)">💾 حفظ</button><button class="btn btn-outline btn-full" onclick="openInvestor('+jsStr(_invId)+')">رجوع</button></div>';
+  var a=document.getElementById('iv-amt');if(a)a.oninput=_invPayPreview;
+}
+function _invPayPreview(){
+  var inv=_invById(_invId),el=document.getElementById('iv-pprev');if(!inv||!el)return;
+  var amt=+v('iv-amt')||0;if(!(amt>0)){el.textContent='اكتب المبلغ لتظهر المعاينة';return;}
+  var T=_invStats(inv).T,sp=_invPaySplit(T,amt,v('iv-ptype')||'auto');
+  el.innerHTML=sp.err?'<span style="color:#dc2626;font-weight:800">⚠️ '+sp.err+'</span>':'💸 سحب أرباح: <b style="color:#6d28d9">'+fmt(sp.pf)+'</b> &nbsp;|&nbsp; ↩️ رد رأس مال: <b style="color:#1d4ed8">'+fmt(sp.cp)+'</b><br>رأس المال بعدها: <b>'+fmt(T.capRem-sp.cp)+'</b> • الأرباح المتبقية: <b>'+fmt(T.profRem-sp.pf)+'</b> • مفيش حاجة بتتسجل كمصروف';
+}
+async function _invPaySave(){
+  var inv=_invById(_invId),amt=+v('iv-amt');
+  if(!inv||!(amt>0))return showToast('⚠️ اكتب مبلغ صحيح','#dc2626');
+  var T=_invStats(inv).T,sp=_invPaySplit(T,amt,v('iv-ptype')||'auto');
+  if(sp.err)return showToast('⚠️ '+sp.err,'#dc2626');
+  var date=v('iv-date')||today(),note=v('iv-mnote'),grp=genId();
+  inv.ledger=inv.ledger||[];
+  if(sp.pf>0)inv.ledger.push({id:genId(),type:'profit',amount:sp.pf,date:date,note:note,grp:grp});
+  if(sp.cp>0)inv.ledger.push({id:genId(),type:'capital_return',amount:sp.cp,date:date,note:note,grp:grp});
+  await persist();showToast('✅ اتسجّل: أرباح '+fmt(sp.pf)+' • رأس مال '+fmt(sp.cp),'#16a34a');openInvestor(_invId);
+}
+
+function _invPrint(){
+  var inv=_invById(_invId);if(!inv)return;
+  var S=_invStats(inv),T=S.T,E=_invLedger(inv,S);
+  var th='padding:6px;background:#f1f5f9;border:1px solid #cbd5e1;font-size:12px',td='padding:6px;border:1px solid #e2e8f0;font-size:12px;text-align:center';
+  var N=function(x){return fmt(Math.round(x*100)/100);};
+  var body='<div style="margin-bottom:8px;color:#64748b">تاريخ الكشف: '+esc(fmtDate(today()))+' — '+_gregTxt(today())+'</div>'+
+    '<table style="width:100%;border-collapse:collapse;margin-bottom:10px"><tbody>'+
+    [['💰 رأس المال المودع',T.dep],['↩️ رأس مال مردود',T.cr],['💰 رأس المال المتبقي',T.capRem],['📈 إجمالي ربحه ('+fmtQty(inv.pct||0)+'% — بحسب كل دفعة)',T.share],['💸 أرباح مسحوبة',T.pw],['🧮 أرباح متبقية',T.profRem],['📦 رأس مال في بضاعة لسه',T.remCost]].map(function(r){return '<tr><td style="'+td+';text-align:right">'+r[0]+'</td><td style="'+td+'"><b>'+N(r[1])+'</b></td></tr>';}).join('')+
+    '<tr style="background:#d1fae5"><td style="'+td+';text-align:right"><b>⚖️ إجمالي المستحق له (رأس مال + أرباح)</b></td><td style="'+td+'"><b>'+N(T.owed)+' ج</b></td></tr></tbody></table>'+
+    (S.bs.length?'<h3 style="margin:14px 0 6px">📦 الدفعات</h3><table style="width:100%;border-collapse:collapse"><thead><tr><th style="'+th+'">الدفعة</th><th style="'+th+'">رأس مال الدفعة</th><th style="'+th+'">اتباع</th><th style="'+th+'">ربح الدفعة</th><th style="'+th+'">نسبته</th><th style="'+th+'">نصيبه</th><th style="'+th+'">نصيب المشروع</th></tr></thead><tbody>'+
+      S.bs.map(function(x){return '<tr><td style="'+td+';text-align:right">'+esc(x.b.title||'دفعة')+'<br><span style="font-size:10px;color:#64748b">'+esc(fmtDate(x.b.date))+' — '+_gregTxt(x.b.date)+'</span></td><td style="'+td+'">'+N(x.st.deployed)+'</td><td style="'+td+'">'+fmtQty(x.st.soldQty)+'/'+fmtQty(x.st.totQty)+'</td><td style="'+td+'">'+N(x.st.profit)+'</td><td style="'+td+'">'+fmtQty(x.b.pct)+'%</td><td style="'+td+'"><b>'+N(x.st.share)+'</b></td><td style="'+td+'">'+N(x.st.owner)+'</td></tr>';}).join('')+'</tbody></table>':'')+
+    '<h3 style="margin:14px 0 6px">📒 كشف الحساب</h3><table style="width:100%;border-collapse:collapse"><thead><tr><th style="'+th+'">التاريخ</th><th style="'+th+'">البيان</th><th style="'+th+'">دائن (له)</th><th style="'+th+'">مدين (اتدفع)</th><th style="'+th+'">المستحق</th></tr></thead><tbody>'+
+    E.map(function(e){return '<tr><td style="'+td+'">'+esc(fmtDate(e.date))+'<div style="font-size:10px;color:#64748b">'+_gregTxt(e.date)+'</div></td><td style="'+td+';text-align:right">'+esc(e.name)+'</td><td style="'+td+'">'+(e.credit?N(e.credit):'')+'</td><td style="'+td+'">'+(e.debit?N(e.debit):'')+'</td><td style="'+td+'"><b>'+N(e.bal)+'</b></td></tr>';}).join('')+
+    '<tr style="background:#fef3c7;font-weight:900"><td style="'+td+'" colspan="4">المستحق له</td><td style="'+td+'">'+N(T.owed)+'</td></tr></tbody></table>';
+  printSection('🤝 كشف حساب مستثمر — '+esc(inv.name),body);
+}
+function _invShare(){
+  var inv=_invById(_invId);if(!inv)return;
+  var S=_invStats(inv),T=S.T,N=function(x){return fmt(Math.round(x*100)/100);};
+  var txt='🤝 كشف حساب — '+inv.name+'\n📅 '+fmtDate(today())+' ('+_gregTxt(today())+')\n\n💰 رأس المال المودع: '+N(T.dep)+'\n↩️ مردود: '+N(T.cr)+'\n💰 رأس المال المتبقي: '+N(T.capRem)+'\n\n📈 إجمالي ربحك: '+N(T.share)+'\n💸 أرباح مسحوبة: '+N(T.pw)+'\n🧮 أرباح متبقية: '+N(T.profRem)+'\n\n📦 رأس مال في بضاعة لسه: '+N(T.remCost)+'\n⚖️ المستحق لك (رأس مال + أرباح): '+N(T.owed)+' ج\n';
+  if(S.bs.length){txt+='\n📦 الدفعات:\n';S.bs.forEach(function(x){txt+='• '+(x.b.title||'دفعة')+' — اتباع '+fmtQty(x.st.soldQty)+'/'+fmtQty(x.st.totQty)+' — نصيبك '+N(x.st.share)+'\n';});}
+  var ph=_bulkPhone(inv.phone);
+  if(navigator.share){navigator.share({text:txt}).catch(function(){});}
+  else window.open('https://wa.me/'+(ph||'')+'?text='+encodeURIComponent(txt),'_blank');
+}
 
 function openInvestors(){
   _invListArch=false;
@@ -14060,24 +14273,6 @@ function openInvestors(){
   openModal();_renderInvList();
 }
 function _invToggleArch(){_invListArch=!_invListArch;_renderInvList();}
-function _renderInvList(){
-  var el=document.getElementById('inv-body');if(!el)return;
-  var all=_invList(),rows=all.filter(function(i){return !!i.archived===_invListArch;});
-  var tot={dep:0,share:0,owed:0,rem:0};
-  all.filter(function(i){return !i.archived;}).forEach(function(i){var s=_invStats(i).T;tot.dep+=s.dep;tot.share+=s.share;tot.owed+=s.owed;tot.rem+=s.remCost;});
-  var card=function(l,v,c,bg){return '<div style="flex:1;background:'+bg+';border-radius:11px;padding:8px 4px;text-align:center"><div style="font-size:10px;font-weight:800;color:'+c+'">'+l+'</div><div style="font-size:14px;font-weight:900;color:'+c+'">'+fmt(v)+'</div></div>';};
-  el.innerHTML=
-    '<div style="display:flex;gap:6px;margin-bottom:6px">'+card('رأس المال','dep'==='x'?0:tot.dep,'#1d4ed8','#dbeafe')+card('بضاعة معاه','rem'==='x'?0:tot.rem,'#c2410c','#ffedd5')+'</div>'+
-    '<div style="display:flex;gap:6px;margin-bottom:10px">'+card('أرباحهم',tot.share,'#7c3aed','#ede9fe')+card('المستحق لهم',tot.owed,'#047857','#d1fae5')+'</div>'+
-    '<div onclick="_invSetExcl('+(_invExclOn()?'false':'true')+')" style="cursor:pointer;background:'+(_invExclOn()?'#ecfdf5':'#fef2f2')+';border:1.5px solid '+(_invExclOn()?'#6ee7b7':'#fca5a5')+';border-radius:10px;padding:8px 11px;font-size:11.5px;font-weight:700;color:'+(_invExclOn()?'#047857':'#b91c1c')+';margin-bottom:8px;line-height:1.7">'+(_invExclOn()?'✅ توزيع أرباح المستثمرين العاديين: بعد خصم نصيب مستثمري البضاعة':'⛔ توزيع أرباح المستثمرين العاديين: على صافي الربح كامل')+' <span style="font-weight:500;opacity:.8">(اضغط للتغيير)</span></div>'+
-    '<div onclick="_invToggleArch()" style="cursor:pointer;text-align:center;background:#f1f5f9;border-radius:10px;padding:7px;font-size:12px;font-weight:700;color:#334155;margin-bottom:8px">'+(_invListArch?'📦 المعروض: المؤرشفين — اضغط للنشطين':'👥 المعروض: النشطين — اضغط للمؤرشفين')+'</div>'+
-    (rows.length?rows.map(function(i){
-      var s=_invStats(i).T;
-      return '<div onclick="openInvestor('+jsStr(i.id)+')" style="cursor:pointer;background:#f8fafc;border-right:4px solid #059669;border-radius:12px;padding:10px 12px;margin-bottom:8px">'+
-        '<div style="display:flex;justify-content:space-between;align-items:center"><b style="font-size:14px">🤝 '+esc(i.name)+'</b><span style="font-size:11px;background:#d1fae5;color:#047857;border-radius:7px;padding:1px 8px;font-weight:800">'+fmtQty(i.pct||0)+'% من الربح</span></div>'+
-        '<div style="display:flex;gap:10px;flex-wrap:wrap;font-size:12px;margin-top:5px;color:#475569"><span>رأس المال <b>'+fmt(s.dep)+'</b></span><span>ربحه <b style="color:#7c3aed">'+fmt(s.share)+'</b></span><span>له <b style="color:#047857">'+fmt(s.owed)+'</b></span></div></div>';
-    }).join(''):'<div class="empty">'+(_invListArch?'مفيش مؤرشفين':'مفيش مستثمرين لسه — اضغط ➕ مستثمر جديد')+'</div>');
-}
 function _invForm(id){
   var i=id?_invById(id):null;
   document.getElementById('modal-title').textContent=i?'✏️ تعديل مستثمر':'➕ مستثمر جديد';
@@ -14118,35 +14313,17 @@ function openInvestor(id){
   openModal();_renderInv();
 }
 function _invSetView(v_){_invView=v_;if(v_!=='sales')window.__invSalesBatch='';_renderInv();}
-function _invLedger(inv,S){
-  var E=[];
-  (inv.ledger||[]).forEach(function(e){
-    if(e.type==='deposit')E.push({date:e.date,name:'💰 إيداع رأس مال'+(e.note?' — '+e.note:''),credit:+e.amount||0,debit:0,id:e.id,kind:'led'});
-    else if(e.type==='payout')E.push({date:e.date,name:'💸 اتدفع له'+(e.note?' — '+e.note:''),credit:0,debit:+e.amount||0,id:e.id,kind:'led'});
-  });
-  S.bs.forEach(function(x){
-    var pct=+x.b.pct||0;
-    x.st.rows.forEach(function(r){
-      var sh=Math.round(r.profit*pct)/100;
-      E.push({date:r.date,name:'📈 بيع '+r.name+' ×'+fmtQty(r.qty)+' — '+(x.b.title||'دفعة')+' (ربح '+fmt(r.profit)+' × '+fmtQty(pct)+'%)',credit:sh,debit:0,kind:'sale'});
-    });
-  });
-  E.forEach(function(e,i){e.seq=i;});
-  E.sort(function(a,b){return (a.date||'')<(b.date||'')?-1:(a.date||'')>(b.date||'')?1:a.seq-b.seq;});
-  var bal=0;E.forEach(function(e){bal+=e.credit-e.debit;e.bal=bal;});
-  return E;
-}
 function _renderInv(){
   var inv=_invById(_invId);if(!inv)return;
   var top=document.getElementById('iv-top'),list=document.getElementById('iv-list');if(!top||!list)return;
   var S=_invStats(inv),T=S.T;
   function card(k,l,v_,c,bg){var a=_invView===k;return '<div onclick="_invSetView(\''+k+'\')" style="cursor:pointer;flex:1;background:'+bg+';border:2.5px solid '+(a?c:'transparent')+';border-radius:12px;padding:8px 4px;text-align:center"><div style="font-size:10px;font-weight:800;color:'+c+'">'+l+'</div><div style="font-size:14px;font-weight:900;color:'+c+'">'+fmt(v_)+'</div></div>';}
   top.innerHTML=
-    '<div style="display:flex;gap:6px;margin-bottom:6px"><div style="flex:1;background:#d1fae5;border-radius:12px;padding:9px;text-align:center"><div style="font-size:11px;font-weight:800;color:#047857">⚖️ المستحق له دلوقتي</div><div style="font-size:19px;font-weight:900;color:#047857">'+fmt(T.owed)+' ج</div></div></div>'+
-    '<div style="display:flex;gap:6px;margin-bottom:6px">'+card('ledger','💰 رأس المال',T.dep,'#1d4ed8','#dbeafe')+card('sales','📈 ربحه',T.share,'#7c3aed','#ede9fe')+card('ledger','💸 اتدفع له',T.pay,'#dc2626','#fee2e2')+'</div>'+
-    '<div style="display:flex;gap:6px;margin-bottom:8px">'+card('batches','📦 في بضاعة',T.remCost,'#c2410c','#ffedd5')+card('batches','💵 فلوس لسه مصرفتهاش',T.unspent,T.unspent<0?'#dc2626':'#0e7490','#cffafe')+'</div>'+
+    '<div style="display:flex;gap:6px;margin-bottom:6px"><div style="flex:1;background:#d1fae5;border-radius:12px;padding:9px;text-align:center"><div style="font-size:11px;font-weight:800;color:#047857">⚖️ إجمالي المستحق له (رأس مال + أرباح)</div><div style="font-size:19px;font-weight:900;color:#047857">'+fmt(Math.round(T.owed*100)/100)+' ج</div></div></div>'+
+    '<div style="display:flex;gap:6px;margin-bottom:6px">'+card('ledger','💰 رأس المال المتبقي',T.capRem,'#1d4ed8','#dbeafe')+card('sales','📈 إجمالي ربحه',T.share,'#7c3aed','#ede9fe')+card('ledger','💸 أرباح مسحوبة',T.pw,'#ea580c','#ffedd5')+'</div>'+
+    '<div style="display:flex;gap:6px;margin-bottom:8px">'+card('ledger','↩️ رأس مال مردود',T.cr,'#0e7490','#cffafe')+card('ledger','🧮 أرباح متبقية',T.profRem,'#6d28d9','#f5f3ff')+card('batches','📦 رأس مال في بضاعة',T.remCost,'#c2410c','#fff7ed')+'</div>'+
     '<div style="display:flex;gap:6px;margin-bottom:8px">'+[['batches','📦 الدفعات'],['sales','🧾 المبيعات'],['ledger','📒 الكشف']].map(function(t){var a=_invView===t[0];return '<button type="button" onclick="_invSetView(\''+t[0]+'\')" style="flex:1;padding:8px;border-radius:10px;border:2px solid '+(a?'#047857':'#e2e8f0')+';background:'+(a?'#d1fae5':'#fff')+';color:#047857;font-family:inherit;font-size:12.5px;font-weight:800;cursor:pointer">'+t[1]+'</button>';}).join('')+'</div>'+
-    (T.unspent<-0.001?'<div style="background:#fef2f2;border:1px solid #fca5a5;border-radius:9px;padding:7px 9px;font-size:11px;color:#b91c1c;margin-bottom:8px">⚠️ اشتريت له بضاعة أكتر من اللي أودعه بـ'+fmt(-T.unspent)+' ج. سجّل إيداع الفرق عشان الحساب يبقى دقيق.</div>':'');
+    (T.capCash<-0.001?'<div style="background:#fffbeb;border:1px solid #fde68a;border-radius:9px;padding:7px 9px;font-size:11px;color:#92400e;margin-bottom:8px">ℹ️ بضاعة بتكلفة '+fmt(Math.round(T.remCost))+' عندك أكتر من رأس المال المتبقي له بـ'+fmt(Math.round(-T.capCash))+' ج (الفرق ممول من عندك). لو ده غلط راجع الإيداعات أو رد رأس المال.</div>':'');
   if(_invView==='sales'){list.innerHTML=_invSalesView(inv,S);return;}
   if(_invView==='ledger'){
     var E=_invLedger(inv,S),th='padding:6px 3px;background:#f1f5f9;border:1px solid #cbd5e1;font-size:10px;text-align:center',td='padding:5px 3px;border:1px solid #e2e8f0;font-size:11px;text-align:center';
@@ -14168,15 +14345,6 @@ function _renderInv(){
   }).join(''):'<div class="empty">مفيش دفعات بضاعة لسه — اضغط 📦 دفعة بضاعة</div>';
 }
 // ===== إيداع / دفع =====
-function _invMoney(type){
-  var inv=_invById(_invId);if(!inv)return;
-  document.getElementById('modal-title').textContent=(type==='deposit'?'➕ إيداع من ':'💸 دفع لـ ')+inv.name;
-  document.getElementById('modal-body').innerHTML=
-    fld('iv-amt',type==='deposit'?'المبلغ اللي استلمته':'المبلغ اللي دفعته له','number','','',true)+
-    dateField('iv-date','التاريخ',null)+
-    fld('iv-mnote','ملاحظة','text','')+
-    '<div class="modal-actions"><button class="btn btn-primary btn-full" onclick="__runOnce(this,function(){return _invMoneySave(\''+type+'\')})">💾 حفظ</button><button class="btn btn-outline btn-full" onclick="openInvestor('+jsStr(_invId)+')">رجوع</button></div>';
-}
 async function _invMoneySave(type){
   var inv=_invById(_invId),amt=+v('iv-amt');
   if(!inv||!(amt>0))return showToast('⚠️ اكتب مبلغ صحيح','#dc2626');
@@ -14295,30 +14463,6 @@ async function _invBatchSave(){
 async function _invBatchClose(id){var b=_invBatches().find(function(x){return x.id===id;});if(!b)return;b.closed=!b.closed;await persist();_renderInv();}
 function _invBatchDel(id){confirmAction('تمسح الدفعة دي؟ (مفيش مبيعات عليها)',async function(){DB.inv_batches=_invBatches().filter(function(x){return x.id!==id;});await persist();openInvestor(_invId);});}
 // ===== طباعة ومشاركة =====
-function _invPrint(){
-  var inv=_invById(_invId);if(!inv)return;
-  var S=_invStats(inv),T=S.T,E=_invLedger(inv,S);
-  var th='padding:6px;background:#f1f5f9;border:1px solid #cbd5e1;font-size:12px',td='padding:6px;border:1px solid #e2e8f0;font-size:12px;text-align:center';
-  var body='<div style="margin-bottom:8px;color:#64748b">تاريخ الكشف: '+esc(fmtDate(today()))+' — '+_gregTxt(today())+'</div>'+
-    '<table style="width:100%;border-collapse:collapse;margin-bottom:10px"><tbody>'+
-    [['💰 رأس المال المودع',T.dep],['📦 بضاعة متبقية بتكلفتها',T.remCost],['📈 ربحه من المبيعات ('+fmtQty(inv.pct||0)+'% — بحسب كل دفعة)',T.share],['💸 اتدفع له',T.pay]].map(function(r){return '<tr><td style="'+td+';text-align:right">'+r[0]+'</td><td style="'+td+'"><b>'+fmt(r[1])+'</b></td></tr>';}).join('')+
-    '<tr style="background:#d1fae5"><td style="'+td+';text-align:right"><b>⚖️ المستحق له</b></td><td style="'+td+'"><b>'+fmt(T.owed)+' ج</b></td></tr></tbody></table>'+
-    (S.bs.length?'<h3 style="margin:14px 0 6px">📦 الدفعات</h3><table style="width:100%;border-collapse:collapse"><thead><tr><th style="'+th+'">الدفعة</th><th style="'+th+'">مدفوع</th><th style="'+th+'">اتباع</th><th style="'+th+'">ربح الدفعة</th><th style="'+th+'">نسبته</th><th style="'+th+'">ربحه</th></tr></thead><tbody>'+
-      S.bs.map(function(x){return '<tr><td style="'+td+';text-align:right">'+esc(x.b.title||'دفعة')+'<br><span style="font-size:10px;color:#64748b">'+esc(fmtDate(x.b.date))+' — '+_gregTxt(x.b.date)+'</span></td><td style="'+td+'">'+fmt(x.st.deployed)+'</td><td style="'+td+'">'+fmtQty(x.st.soldQty)+'/'+fmtQty(x.st.totQty)+'</td><td style="'+td+'">'+fmt(x.st.profit)+'</td><td style="'+td+'">'+fmtQty(x.b.pct)+'%</td><td style="'+td+'"><b>'+fmt(x.st.share)+'</b></td></tr>';}).join('')+'</tbody></table>':'')+
-    '<h3 style="margin:14px 0 6px">📒 كشف الحساب</h3><table style="width:100%;border-collapse:collapse"><thead><tr><th style="'+th+'">التاريخ</th><th style="'+th+'">البيان</th><th style="'+th+'">دائن (له)</th><th style="'+th+'">مدين (اتدفع)</th><th style="'+th+'">المستحق</th></tr></thead><tbody>'+
-    E.map(function(e){return '<tr><td style="'+td+'">'+esc(fmtDate(e.date))+'<div style="font-size:10px;color:#64748b">'+_gregTxt(e.date)+'</div></td><td style="'+td+';text-align:right">'+esc(e.name)+'</td><td style="'+td+'">'+(e.credit?fmt(e.credit):'')+'</td><td style="'+td+'">'+(e.debit?fmt(e.debit):'')+'</td><td style="'+td+'"><b>'+fmt(e.bal)+'</b></td></tr>';}).join('')+
-    '<tr style="background:#fef3c7;font-weight:900"><td style="'+td+'" colspan="4">المستحق له</td><td style="'+td+'">'+fmt(T.owed)+'</td></tr></tbody></table>';
-  printSection('🤝 كشف حساب مستثمر — '+esc(inv.name),body);
-}
-function _invShare(){
-  var inv=_invById(_invId);if(!inv)return;
-  var S=_invStats(inv),T=S.T;
-  var txt='🤝 كشف حساب — '+inv.name+'\n📅 '+fmtDate(today())+' ('+_gregTxt(today())+')\n\n💰 رأس المال: '+fmt(T.dep)+'\n📦 بضاعة متبقية: '+fmt(T.remCost)+'\n📈 ربحك من المبيعات: '+fmt(T.share)+'\n💸 اتدفعلك: '+fmt(T.pay)+'\n⚖️ المستحق لك: '+fmt(T.owed)+' ج\n';
-  if(S.bs.length){txt+='\n📦 الدفعات:\n';S.bs.forEach(function(x){txt+='• '+(x.b.title||'دفعة')+' — اتباع '+fmtQty(x.st.soldQty)+'/'+fmtQty(x.st.totQty)+' — ربحك '+fmt(x.st.share)+'\n';});}
-  var ph=_bulkPhone(inv.phone);
-  if(navigator.share){navigator.share({text:txt}).catch(function(){});}
-  else window.open('https://wa.me/'+(ph||'')+'?text='+encodeURIComponent(txt),'_blank');
-}
 
 
 var _movFormFresh=false,_movLayoutEdit=false;
@@ -15823,8 +15967,7 @@ function renderPeriodReport(){
       '<div><div style="font-weight:900;font-size:15px;color:#0f172a">'+profitLabel(net,'صافي ربح النشاط','صافي خسارة النشاط')+'</div>'+
       '<div style="font-size:11px;color:#64748b">هامش الصافي: '+netPct+'%</div></div>'+
       '<div style="font-size:22px;font-weight:900;color:'+(net>=0?'#15803d':'#dc2626')+'">'+fmt(net)+'</div></div>'+
-      _invBatchNote(ps)+
-      (_activeInvestorsExist()?_ownerShareBreakdown(net,ps):'')+
+      _invProfitSplit(net,ps)+
       '</div>'
     )+
 
@@ -16487,14 +16630,6 @@ if(!DB.accounts.employee_leaves) DB.accounts.employee_leaves=[]; // v177
 
 // ===== حساب أرقام المركز المالي عند تاريخ معيّن (يُستخدم في العرض الحالي وفي اللقطات) =====
 // asOfDate: 'YYYY-MM-DD' أو null = حتى الآن (كل البيانات بدون فلترة تاريخ)
-function _invCashTotals(asOf){
-  var dep=0,pay=0;
-  (DB.investors||[]).forEach(function(inv){(inv.ledger||[]).forEach(function(e){
-    if(asOf&&(e.date||'')>asOf)return;
-    if(e.type==='deposit')dep+=(+e.amount||0);else if(e.type==='payout')pay+=(+e.amount||0);
-  });});
-  return {dep:dep,pay:pay};
-}
 function _computeBalanceSheet(asOfDate){
   var acc=DB.accounts||{};
   var sales=asOfDate?DB.sales.filter(function(s){return(s.date||'')<=asOfDate;}):DB.sales;
@@ -16565,7 +16700,7 @@ function _computeBalanceSheet(asOfDate){
   var fixedAssets=(acc.fixed_assets||[]).filter(function(a){return!asOfDate||(a.purchase_date||'')<=asOfDate;}).reduce(function(s,a){return s+a.value;},0);
   // فلوس خارجة من الخزنة بخلاف المخزون/المصاريف: شراء أصول ثابتة + مسحوبات أرباح (صاحب المشروع + المستثمرين)
   var ownerDrawsOut=(acc.profit_cycles||[]).filter(function(c){return!asOfDate||(c.date_created||'')<=asOfDate;}).reduce(function(s,c){return s+(c.owner_draw||0);},0);
-  var _bi=_invCashTotals(asOfDate); // v257 — مستثمري البضاعة
+  var _bi=_invCashTotals(asOfDate),_ba=_invAsOf(asOfDate); // v257 — مستثمري البضاعة
   var invWithdrawsOut=_bi.pay+(acc.investors||[]).reduce(function(s,i){return s+(i.withdrawals||[]).filter(function(w){return!asOfDate||(w.date||'')<=asOfDate;}).reduce(function(ss,w){return ss+w.amount;},0);},0);
 
   var suppDebt=debts.filter(function(d){return d.type==='supplier';}).reduce(function(s,d){return s+debtRemainingAt(d);},0);
@@ -16666,7 +16801,8 @@ function _computeBalanceSheet(asOfDate){
 
   var pendingCommitments=(!asOfDate&&typeof _pendingFixedCommitments==='function')?_pendingFixedCommitments():[];
   var pendingTotal=pendingCommitments.reduce(function(s,p){return s+p.amount;},0);
-  var totalLiabilities=suppDebt+pendingTotal;
+  var batchInvDue=_ba.share-_ba.pw; // v258 — أرباح مستحقة لمستثمري البضاعة (التزام)
+  var totalLiabilities=suppDebt+pendingTotal+batchInvDue;
 
   var ownerCapital=(acc.capital||[]).filter(function(c){return!asOfDate||(c.date||'')<=asOfDate;}).reduce(function(s,c){return s+c.amount;},0);
   var totalSales=sales.reduce(function(s,x){return s+x.total;},0);
@@ -16674,8 +16810,9 @@ function _computeBalanceSheet(asOfDate){
   var totalExp=expenses.reduce(function(s,x){return s+x.amount;},0);
   var totalHistoricalProfit=totalSales-totalCos-totalExp;
 
-  var invCapital=(_bi.dep-_bi.pay)+(acc.investors||[]).reduce(function(s,i){
-    return s+(i.capital_contributions||[]).filter(function(c){return!asOfDate||(c.date||'')<=asOfDate;}).reduce(function(ss,c){return ss+c.amount;},0);
+  var invCapital=(_ba.dep-_ba.cr)+(acc.investors||[]).reduce(function(s,i){
+    return s+(i.capital_contributions||[]).filter(function(c){return!asOfDate||(c.date||'')<=asOfDate;}).reduce(function(ss,c){return ss+c.amount;},0)
+      -(i.withdrawals||[]).filter(function(w){return w.type==='capital_return'&&(!asOfDate||(w.date||'')<=asOfDate);}).reduce(function(ss,w){return ss+w.amount;},0); // v258 رد رأس المال
   },0);
   // ملاحظة: الأرباح المحتجزة (owner/investors) مخزّنة كرصيد حالي فقط بدون سجل تاريخي تفصيلي،
   // فعند الحساب لتاريخ ماضٍ نعتمد على دورات التوزيع المسجّلة بتاريخ <= asOfDate كأفضل تقريب متاح.
@@ -16684,7 +16821,7 @@ function _computeBalanceSheet(asOfDate){
     return s+(c.distributions||[]).reduce(function(ss,d){return ss+(d.amount||0);},0)+(c.owner_share||0);
   },0);
   var undistributedProfit=Math.max(0,totalHistoricalProfit-totalDistributedAllTime);
-  var retainedEarnings=undistributedProfit;
+  var retainedEarnings=undistributedProfit-_ba.share; // v258 — نصيب مستثمري البضاعة اتشال من أرباح المشروع
 
   // الأرباح المحتجزة الفعلية لصاحب المشروع وللمستثمرين — نقرأها من الرصيد المحفوظ مباشرة
   // (يُحدَّث هذا الرصيد بدقة عند كل توزيع/حذف دورة في saveProfitCycle/deleteProfitCycle)
@@ -16709,7 +16846,7 @@ function _computeBalanceSheet(asOfDate){
     cash:cash,cashIsNegative:cashIsNegative,inventory:inventory,custDebt:custDebt,rec:rec,totalCurrent:totalCurrent,
     fixedAssets:fixedAssets,totalAssets:totalAssets,
     suppDebt:suppDebt,pendingTotal:pendingTotal,totalLiabilities:totalLiabilities,
-    ownerCapital:ownerCapital,retainedEarnings:retainedEarnings,invCapital:invCapital,
+    ownerCapital:ownerCapital,retainedEarnings:retainedEarnings,invCapital:invCapital,batchInvDue:batchInvDue,batchInvShare:_ba.share,
     invRetained:invRetained,ownerRetained:ownerRetained,openingBalance:openingBalance,equityAdj:equityAdj,totalEquity:totalEquity,
     totalLiabEquity:totalLiabEquity,diff:diff,
     // بنود معادلة النقدية الفردية (لعرضها في نافذة "معادلة النقدية" جنب كل بند)
@@ -17076,6 +17213,7 @@ function _renderBalanceSheetHTML(d,acc){
     accSection('خصوم متداولة','#dc2626')+
     _bsRow('ذمم دائنة (موردين)',d.suppDebt)+
     (d.pendingTotal?_bsRow('التزامات شهرية معلّقة',d.pendingTotal):'')+
+    (d.batchInvDue?_bsRow('أرباح مستحقة لمستثمري البضاعة',d.batchInvDue):'')+
     _bsTotal('إجمالي الخصوم',d.totalLiabilities,'#dc2626')+
     accSection('حقوق الملكية','#15803d')+
     _bsRow('رأس مال صاحب المشروع',d.ownerCapital)+
@@ -22745,11 +22883,65 @@ function _invKpi(label,val,color,bg){
     '<div style="font-size:14px;font-weight:900;color:'+color+'">'+val+'</div></div>';
 }
 
+// ⚠️ v258 — المستثمر العادي: دلوقتي في "رد رأس مال" (capital_return) منفصل عن "سحب أرباح" (profit). الأرباح بتتسحب من المحتجز، ورد رأس المال من رأس المال المتبقي.
+function _oiCapRem(inv){
+  var c=(inv.capital_contributions||[]).reduce(function(s,x){return s+(+x.amount||0);},0);
+  var r=(inv.withdrawals||[]).filter(function(w){return w.type==='capital_return';}).reduce(function(s,w){return s+(+w.amount||0);},0);
+  return c-r;
+}
+function openInvestorWithdrawModal(invId){
+  var inv=(DB.accounts.investors||[]).find(function(i){return i.id===invId;});if(!inv)return;
+  window.__oiId=invId;
+  var retained=(DB.accounts.retained_earnings.investors||{})[invId]||0,capRem=_oiCapRem(inv);
+  document.getElementById('modal-title').textContent='💸 سحب / رد رأس مال — '+inv.name;
+  document.getElementById('modal-body').innerHTML=
+    '<div style="display:flex;gap:6px;margin-bottom:10px"><div style="flex:1;background:#f0fdf4;border-radius:10px;padding:8px;text-align:center"><div style="font-size:10px;color:#15803d;font-weight:800">أرباح متاحة للسحب</div><b style="color:#15803d;font-size:15px">'+fmt(retained)+'</b></div>'+
+    '<div style="flex:1;background:#dbeafe;border-radius:10px;padding:8px;text-align:center"><div style="font-size:10px;color:#1d4ed8;font-weight:800">رأس مال متبقي</div><b style="color:#1d4ed8;font-size:15px">'+fmt(capRem)+'</b></div></div>'+
+    fld('wdraw-amount','المبلغ','number',retained>0?retained:'')+
+    '<div class="field"><label>نوع العملية</label><select id="wdraw-type" onchange="_oiPayPreview()" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit">'+
+    '<option value="profit">سحب أرباح</option><option value="auto">تلقائي (أرباح الأول ثم رد رأس مال)</option><option value="capital">رد رأس مال</option></select></div>'+
+    '<div id="wdraw-prev" style="font-size:12px;border-radius:10px;padding:8px 11px;margin-bottom:10px;background:#f8fafc;color:#475569;line-height:1.8"></div>'+
+    dateField('wdraw-date','التاريخ',null)+
+    fld('wdraw-note','ملاحظة','text','')+
+    '<div class="modal-actions">'+
+    '<button class="btn btn-green btn-full" onclick="__runOnce(this,function(){return saveInvestorWithdraw(\''+invId+'\');})">💾 تسجيل</button>'+
+    '<button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
+  openModal();
+  var a=document.getElementById('wdraw-amount');if(a)a.oninput=_oiPayPreview;
+  _oiPayPreview();
+}
+function _oiPayPreview(){
+  var inv=(DB.accounts.investors||[]).find(function(i){return i.id===window.__oiId;}),el=document.getElementById('wdraw-prev');if(!inv||!el)return;
+  var amt=+v('wdraw-amount')||0;if(!(amt>0)){el.textContent='اكتب المبلغ لتظهر المعاينة';return;}
+  var retained=(DB.accounts.retained_earnings.investors||{})[inv.id]||0,capRem=_oiCapRem(inv);
+  var sp=_invPaySplit({profRem:retained,capRem:capRem},amt,v('wdraw-type')||'profit');
+  el.innerHTML=sp.err?'<span style="color:#dc2626;font-weight:800">⚠️ '+sp.err+'</span>':'💸 سحب أرباح: <b style="color:#15803d">'+fmt(sp.pf)+'</b> &nbsp;|&nbsp; ↩️ رد رأس مال: <b style="color:#1d4ed8">'+fmt(sp.cp)+'</b><br>مفيش حاجة بتتسجل كمصروف، والنقدية هتنقص بالمبلغ كله.';
+}
+async function saveInvestorWithdraw(invId){
+  var amount=+v('wdraw-amount');
+  if(!amount||amount<=0)return showToast('اكتب مبلغ صحيح','#dc2626');
+  var inv=(DB.accounts.investors||[]).find(function(i){return i.id===invId;});if(!inv)return;
+  var retained=(DB.accounts.retained_earnings.investors||{})[invId]||0,capRem=_oiCapRem(inv);
+  var sp=_invPaySplit({profRem:retained,capRem:capRem},amount,v('wdraw-type')||'profit');
+  if(sp.err)return showToast('⚠️ '+sp.err,'#dc2626');
+  var date=v('wdraw-date'),note=v('wdraw-note'),entries=[];
+  if(sp.pf>0)entries.push({id:genId(),amount:sp.pf,date:date,note:note,type:'profit'});
+  if(sp.cp>0)entries.push({id:genId(),amount:sp.cp,date:date,note:note,type:'capital_return'});
+  DB.accounts.investors=DB.accounts.investors.map(function(i){
+    if(i.id!==invId)return i;
+    return Object.assign({},i,{withdrawals:(i.withdrawals||[]).concat(entries)});
+  });
+  DB.accounts.retained_earnings.investors[invId]=retained-sp.pf;
+  await persist();closeModal();renderAccounting();
+  showToast('✅ اتسجّل: أرباح '+fmt(sp.pf)+' • رأس مال '+fmt(sp.cp),'#16a34a');
+}
+
 function _investorCard(inv){
   var contributions=inv.capital_contributions||[];
   var totalCap=contributions.reduce(function(s,c){return s+c.amount;},0);
   var withdrawals=inv.withdrawals||[];
-  var totalWithdrawn=withdrawals.reduce(function(s,w){return s+w.amount;},0);
+  var totalWithdrawn=withdrawals.filter(function(w){return w.type!=='capital_return';}).reduce(function(s,w){return s+w.amount;},0);
+  var capReturned=withdrawals.filter(function(w){return w.type==='capital_return';}).reduce(function(s,w){return s+w.amount;},0);
   var retained=(DB.accounts.retained_earnings.investors||{})[inv.id]||0;
   var isActive=inv.status!=='inactive';
 
@@ -22775,10 +22967,12 @@ function _investorCard(inv){
 
     // الأرقام
     '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px">'+
-    _invStat('رأس المال',fmt(totalCap),'#7c3aed')+
-    _invStat('إجمالي أرباحه',fmt(totalEarned),'#15803d')+
-    _invStat('سحب فعلي',fmt(totalWithdrawn),'#ea580c')+
-    _invStat('محتجز له',fmt(retained),'#854d0e')+
+    _invStat('رأس المال المودع',fmt(totalCap),'#7c3aed')+
+    _invStat('رأس مال مردود',fmt(capReturned),'#0e7490')+
+    _invStat('رأس المال المتبقي',fmt(totalCap-capReturned),'#1d4ed8')+
+    _invStat('إجمالي الأرباح',fmt(totalEarned),'#15803d')+
+    _invStat('أرباح مسحوبة',fmt(totalWithdrawn),'#ea580c')+
+    _invStat('أرباح متبقية',fmt(retained),'#854d0e')+
     '</div>'+
 
     // سجل المساهمات
@@ -22797,7 +22991,7 @@ function _investorCard(inv){
       '<div style="font-size:11px;font-weight:700;color:#9a3412;margin-bottom:5px">💰 سجل السحب</div>'+
       withdrawals.slice().reverse().map(function(w){
         return '<div style="display:flex;justify-content:space-between;font-size:12px;padding:3px 0;border-bottom:1px solid #fed7aa">'+
-          '<span style="color:#9a3412">'+esc(fmtDate(w.date))+(w.note?' — '+esc(w.note):'')+'</span>'+
+          '<span style="color:#9a3412">'+esc(fmtDate(w.date))+(w.type==='capital_return'?'↩️ رد رأس مال ':'💸 أرباح ')+(w.note?' — '+esc(w.note):'')+'</span>'+
           '<b style="color:#ea580c">'+fmt(w.amount)+'</b></div>';
       }).join('')+'</div>':'')+
 
@@ -23423,39 +23617,7 @@ async function saveAddCapital(invId){
 }
 
 // سحب المستثمر
-function openInvestorWithdrawModal(invId){
-  var inv=(DB.accounts.investors||[]).find(function(i){return i.id===invId;});if(!inv)return;
-  var retained=(DB.accounts.retained_earnings.investors||{})[invId]||0;
-  document.getElementById('modal-title').textContent='💰 سحب — '+esc(inv.name);
-  // ⚠️ v205 — زرار السحب كان بينفّذ saveInvestorWithdraw مباشرة من غير __runOnce، يعني
-  // ضغطة مزدوجة أو بطء في الاستجابة ممكن تسجل سحبين بدل واحد وتخصم من الأرباح المحتجزة مرتين
-  document.getElementById('modal-body').innerHTML=
-    '<div style="background:#f0fdf4;border-radius:10px;padding:10px 12px;margin-bottom:12px">'+
-    '<div style="font-size:13px;font-weight:700;color:#15803d">أرباح محتجزة متاحة</div>'+
-    '<div style="font-size:22px;font-weight:900;color:#15803d">'+fmt(retained)+'</div></div>'+
-    fld('wdraw-amount','مبلغ السحب (ج)','number',retained>0?retained:'')+
-    dateField('wdraw-date','📅 التاريخ',null)+
-    fld('wdraw-note','ملاحظة','text','')+
-    '<div class="modal-actions">'+
-    '<button class="btn btn-green btn-full" onclick="__runOnce(this,function(){return saveInvestorWithdraw(\''+invId+'\');})">✅ تأكيد السحب</button>'+
-    '<button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
-  openModal();
-}
 
-async function saveInvestorWithdraw(invId){
-  var amount=+v('wdraw-amount');
-  if(!amount||amount<=0)return showToast('⚠️ المبلغ مطلوب','#dc2626');
-  var retained=(DB.accounts.retained_earnings.investors||{})[invId]||0;
-  if(amount>retained)return showToast('⚠️ المبلغ أكبر من الأرباح المحتجزة ('+fmt(retained)+')','#dc2626');
-  DB.accounts.investors=DB.accounts.investors.map(function(i){
-    if(i.id!==invId)return i;
-    var withdrawals=(i.withdrawals||[]).concat([{id:genId(),amount:amount,date:v('wdraw-date'),note:v('wdraw-note'),type:'profit'}]);
-    return Object.assign({},i,{withdrawals:withdrawals});
-  });
-  DB.accounts.retained_earnings.investors[invId]=retained-amount;
-  await persist();closeModal();renderAccounting();
-  showToast('✅ تم تسجيل السحب','#16a34a');
-}
 
 // ===== توزيع الأرباح =====
 var _pcPeriod=_makePeriodState();
