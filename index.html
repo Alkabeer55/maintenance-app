@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v258</title>
+<title>ابو حوده الحلو الجميل v259</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="1448-04-27 — v258";
+<script>var BUILD_STAMP="1448-04-28 — v259";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -51,9 +51,23 @@
       فعليًا بيتكرر عند الاستخدام الحقيقي. زرارات الحذف والإغلاق/التأكيد اللي بتعدي على
       confirmAction() محمية تلقائيًا (زرار "تأكيد" نفسه بيتعطّل بعد أول ضغطة — v206)، فمش
       محتاجة __runOnce إضافي بنفسها. أي دالة جديدة بتنشئ سجل (genId()+push/unshift) ومالهاش
+    10) ⚠️ v259 — حقل الإدخال ما يتعادش رسمه أبدًا أثناء الكتابة: أي شاشة فيها حقل بحث/إدخال بيحدّث قايمة
+       لازم الحقل يبقى برّه الحاوية اللي بتتعاد رسمها (innerHTML)، والنتايج في div مستقل (id واضح).
+       غير كده الكيبورد بيقفل مع كل حرف (باج بحث القرآن + أرشيف التحركات). الحل المرجعي: renderMovements
+       (الحقل ثابت) و_quranUpdateResults / _archUpdateResults. أي oninput جديد لازم يمشي على النمط ده.
+       (ولو الحقل لازم يفضل جوه الحاوية: __keepInput(id,renderFn) كحل أخير — الديون/الجرد.)
+    11) ⚠️ v259 — الفلتر/البحث يتجرّب في كل التابات اللي بتعرض نفس النوع من القوائم (الكل/المرتبة/الأرشيف...)
+       قبل التسليم، والعدّاد اللي فوق القايمة لازم يحسب بعد تطبيق الفلتر والبحث (مش قبله). وأي إصلاح لعيب
+       بيتعمل له فحص شامل لباقي التطبيق عن نفس النمط، ويتسجّل في الـ Changelog.
       مسار خالص عن طريق confirmAction، الزرار بتاعها لازم __runOnce من أول يوم.
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v259: [🐛 بحث القرآن + فلتر أرشيف التحركات + 📜 قواعد جديدة في الدستور]
+     1) بحث القرآن: الكيبورد كان بيقفل مع كل حرف لأن الدالة بتعيد رسم حقل البحث نفسه. النتايج بس بقت هي اللي بتتعاد رسمها.
+     2) أرشيف التحركات: نفس العيب — البحث كان بيتصفّر والفلتر بيتلخبط. دلوقتي حقل البحث وأزرار الفلتر ثابتين والنتايج والعدّاد بس بيتحدّثوا، والعدّاد بقى بيحسب بعد البحث، والبحث بيشمل الجهاز والسيريال ونوع العطل.
+     3) الديون وأرشيف الديون والجرد: حقل البحث فيها جوه الحاوية المتعاد رسمها → بقت بتحافظ على نفس عنصر الحقل (__keepInput) بدل ما تفتح الكيبورد من جديد بعد ٣٥٠ مللي.
+     4) تفكيك الخردة (سعر الشراء): الإدخال كان بيعيد رسم الشاشة مع كل رقم → بقى بيحدّث القيمة وقت الكتابة ويعيد الرسم بعد ما تخلّص.
+     5) الدستور: قاعدتين جداد (10 و11) عشان نفس الأخطاء ما تتكررش.
 v258: [🤝 فصل رأس المال/الأرباح في المستثمرين + 🧾 كشف الديون بتفصيل الفواتير]
      1) المستثمر (بضاعة): رأس المال / ربحه الكلي / أرباح مسحوبة (profit) / رأس مال مردود (capital_return) / المتبقي. الدفع بتقسيم تلقائي (أرباح أولًا) أو يدوي، ومينفعش رأس المال يبقى سالب. السجلات القديمة (payout) بتتقسم عند العرض.
      2) المستثمر العادي: بقى فيه "رد رأس مال" منفصل عن "سحب أرباح" (سحب الأرباح زي ما هو).
@@ -4401,7 +4415,7 @@ var APP_TITLE='ابو حوده الحلو الجميل';
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=258;
+var APP_VERSION=259;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -7549,15 +7563,9 @@ var _stShowDepleted=false; // ⚠️ v214 — إخفاء الأصناف الخل
 // رسم الـ<input> نفسه من الصفر (innerHTML كامل) فيقفل الكيبورد فورًا. نفس حل بحث الديون
 // بالظبط: تأخير بسيط (debounce) + إرجاع الفوكس والمؤشر بعد إعادة الرسم.
 var _stSearchTimer=null;
-function onStSearchInput(val){
-  _stSearch=val;
-  clearTimeout(_stSearchTimer);
-  _stSearchTimer=setTimeout(function(){
-    renderStocktake();
-    var inp=document.getElementById('st-search');
-    if(inp){inp.focus();var len=inp.value.length;inp.setSelectionRange(len,len);}
-  },350);
-}
+function onStSearchInput(val){_stSearch=val;clearTimeout(_stSearchTimer);_stSearchTimer=setTimeout(function(){__keepInput('st-search',renderStocktake);},350);}
+function onDebtArchiveSearchInput(val){_debtArchiveSearch=val;clearTimeout(_debtArchiveSearchTimer);_debtArchiveSearchTimer=setTimeout(function(){__keepInput('debt-archive-search-input',renderDebtsArchive);},350);}
+function onDebtSearchInput(val){_debtSearch=val;clearTimeout(_debtSearchTimer);_debtSearchTimer=setTimeout(function(){__keepInput('debt-search-input',renderDebts);},350);}
 function renderStocktake(){
   var el=document.getElementById('inv-stocktake-body');if(!el)return;
   var st=_activeStocktake();
@@ -10580,15 +10588,6 @@ function confirmPurchImport(){
 // ===== أرشيف الديون المسدّدة بالكامل — مع بحث لمعرفة تاريخ التعامل مع أي عميل/تاجر =====
 var _debtArchiveSearch='';
 var _debtArchiveSearchTimer=null;
-function onDebtArchiveSearchInput(val){
-  _debtArchiveSearch=val;
-  clearTimeout(_debtArchiveSearchTimer);
-  _debtArchiveSearchTimer=setTimeout(function(){
-    renderDebtsArchive();
-    var inp=document.getElementById('debt-archive-search-input');
-    if(inp){inp.focus();var len=inp.value.length;inp.setSelectionRange(len,len);}
-  },350);
-}
 function renderDebtsArchive(){
   var el=document.getElementById('debts-list');if(!el)return;
   var filterEl=document.getElementById('debts-period-filter');if(filterEl)filterEl.innerHTML='';
@@ -10684,16 +10683,6 @@ function _isDebtLinked(d){
   // ⚠️ v174 — بعد إضافة source_purchase_id، بقينا نتحقق منه أولاً (الأدق)، وفحص النص
   // "مشترى — " فاضل بس fallback للديون القديمة اللي اتسجلت قبل الإصلاح ومفيهاش الحقل ده.
   return !!d.source_sale_id||!!d.source_purchase_id||String(d.details||d.desc||'').indexOf('مشترى — ')===0;
-}
-function onDebtSearchInput(val){
-  _debtSearch=val;
-  clearTimeout(_debtSearchTimer);
-  _debtSearchTimer=setTimeout(function(){
-    renderDebts();
-    // نرجّع الفوكس ونحط المؤشر في آخر النص بعد إعادة الرسم، عشان لوحة المفاتيح متقفلش
-    var inp=document.getElementById('debt-search-input');
-    if(inp){inp.focus();var len=inp.value.length;inp.setSelectionRange(len,len);}
-  },350);
 }
 function renderDebts(){
   var tab=currentDebtTab;
@@ -15150,64 +15139,61 @@ function openDailyArchiveDetail(idx){
 
 // ===== ARCHIVE =====
 var _archStatusFilter='منتهي'; // فلتر فرعي داخل الأرشيف: منتهي | ملغي | الكل
-function setArchStatusFilter(f){_archStatusFilter=f;renderMovementsArchive();}
-
 function renderMovementsArchive(){
+  // ⚠️ v259 — الفلتر/البحث كان بيتصفّر: الدالة كانت بتعيد رسم الحاوية كلها بما فيها حقل البحث (فيرجع فاضي ويقفل الكيبورد).
+  // دلوقتي الهيكل (أزرار الفلتر + حقل البحث) بيتبني مرة واحدة، والعدّاد والنتايج بس هما اللي بيتعاد رسمهم.
   var el=document.getElementById('movements-archive-body');if(!el)return;
   var doneAll=(DB.movements||[]).filter(function(m){return m.status==='منتهي';});
   var canceledAll=(DB.movements||[]).filter(function(m){return m.status==='ملغي';});
   var dailyArchiveAll=(DB.daily_archive||[]);
-
-  // فلتر فرعي: منتهي / ملغي / الكل / يوميات (كرت مستقل، مش ملحق آخر الصفحة)
-  var subFilters='<div style="padding:12px 14px 0"><div style="display:flex;gap:5px;margin-bottom:10px;flex-wrap:wrap">'+
+  if(!document.getElementById('arch-search')||!document.getElementById('arch-results')){
+    el.innerHTML='<div id="arch-chips" style="padding:12px 14px 0"></div>'+
+      '<div id="arch-searchbox" style="padding:0 14px"><input id="arch-search" type="text" placeholder="🔍 بحث باسم العميل..." oninput="_archUpdateResults()" '+
+      'style="width:100%;padding:9px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:13px;font-family:inherit;background:#f8fafc;outline:none;box-sizing:border-box">'+
+      '<div id="arch-count" style="font-size:12px;color:#64748b;margin:8px 0 0"></div></div>'+
+      '<div id="arch-results" style="padding:10px 0 14px"></div>';
+  }
+  document.getElementById('arch-chips').innerHTML='<div style="display:flex;gap:5px;margin-bottom:10px;flex-wrap:wrap">'+
     [['منتهي','✅ منتهي ('+doneAll.length+')'],['ملغي','🚫 ملغي ('+canceledAll.length+')'],['الكل','الكل ('+(doneAll.length+canceledAll.length)+')'],['يوميات','📅 يوميات ('+dailyArchiveAll.length+')']].map(function(f){
       var active=_archStatusFilter===f[0];
-      return '<button onclick="setArchStatusFilter(\''+f[0]+'\')" style="flex:1;min-width:70px;padding:7px 4px;border:2px solid '+(active?'#374151':'#e2e8f0')+';border-radius:9px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;background:'+(active?'#0f172a':'#fff')+';color:'+(active?'#fff':'#64748b')+'">'+f[1]+'</button>';
-    }).join('')+
-    '</div></div>';
-
-  // ===== تاب اليوميات: شاشة مستقلة تمامًا، مش ملحقة تحت باقي الأرشيف =====
+      return '<button onclick="setArchStatusFilter(\''+f[0]+'\')" style="flex:1;min-width:70px;padding:7px 4px;border:2px solid '+(active?'#374151':'#e2e8f0')+';border-radius:9px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;background:'+(active?'#374151':'#fff')+';color:'+(active?'#fff':'#64748b')+'">'+f[1]+'</button>';
+    }).join('')+'</div>';
+  _archUpdateResults();
+}
+function _archUpdateResults(){
+  var res=document.getElementById('arch-results');if(!res)return;
+  var box=document.getElementById('arch-searchbox'),cnt=document.getElementById('arch-count');
   if(_archStatusFilter==='يوميات'){
-    var dailyArchive=dailyArchiveAll.slice().sort(function(a,b){return b.work_date>a.work_date?1:-1;});
-    var dailyHtml='<div style="padding:0 14px 14px">'+
+    if(box)box.style.display='none';
+    var dailyArchive=(DB.daily_archive||[]).slice().sort(function(a,b){return b.work_date>a.work_date?1:-1;});
+    res.innerHTML='<div style="padding:0 14px 14px">'+
       (dailyArchive.length?dailyArchive.map(function(day,di){
         var doneInDay=day.items.filter(function(it){return it.status==='منتهي';}).length;
-        return '<div onclick="openDailyArchiveDetail('+di+')" style="background:#fff;border-radius:11px;padding:12px 14px;margin-bottom:8px;box-shadow:0 2px 8px rgba(0,0,0,.06);cursor:pointer;display:flex;justify-content:space-between;align-items:center;border-right:4px solid #86198f">'+
+        return '<div onclick="openDailyArchiveDetail('+di+')" style="background:#fff;border-radius:11px;padding:12px 14px;margin-bottom:8px;box-shadow:0 2px 8px rgba(0,0,0,.06);cursor:pointer;display:flex;justify-content:space-between;align-items:center">'+
           '<div><div style="font-size:13px;font-weight:900">'+esc(day.label)+'</div>'+
           '<div style="font-size:11px;color:#94a3b8">'+day.items.length+' عطل — '+doneInDay+' منتهي</div></div>'+
           '<span style="font-size:18px;color:#94a3b8">←</span></div>';
       }).join(''):'<div class="empty" style="font-size:12px">لا توجد يوميات مؤرشفة بعد — بتظهر تلقائياً بعد يومين من تاريخ العمل</div>')+
       '</div>';
-    el.innerHTML=subFilters+dailyHtml;
     return;
   }
-
+  if(box)box.style.display='block';
+  var doneAll=(DB.movements||[]).filter(function(m){return m.status==='منتهي';});
+  var canceledAll=(DB.movements||[]).filter(function(m){return m.status==='ملغي';});
   var shown=_archStatusFilter==='منتهي'?doneAll:_archStatusFilter==='ملغي'?canceledAll:doneAll.concat(canceledAll);
   shown=shown.slice().sort(function(a,b){return (b.closed_order||0)-(a.closed_order||0);});
-
-  if(!shown.length){
-    el.innerHTML=subFilters+'<div style="padding:0 14px"><div class="empty">لا توجد أعطال بهذا الفلتر</div></div>';
-    return;
-  }
-  // تجميع بالأيام (closed_at)
-  var groups={};var groupOrder=[];
+  var q=normalizeAr(((document.getElementById('arch-search')||{}).value||'').trim());
+  if(q)shown=shown.filter(function(m){return normalizeAr(m.customer||'').includes(q)||normalizeAr(m.device||'').includes(q)||normalizeAr(m.serial||'').includes(q)||normalizeAr(m.fault_type||'').includes(q);});
+  if(cnt)cnt.innerHTML='إجمالي المعروض: <b>'+shown.length+'</b>';
+  if(!shown.length){res.innerHTML='<div style="padding:0 14px"><div class="empty">'+(q?'مفيش نتيجة للبحث ده':'لا توجد أعطال بهذا الفلتر')+'</div></div>';return;}
+  var groups={},groupOrder=[];
   shown.forEach(function(m){
     var dayKey=m.closed_at||m.opened_at||'';
     if(!groups[dayKey]){groups[dayKey]=[];groupOrder.push(dayKey);}
     groups[dayKey].push(m);
   });
-
-  var searchHtml=subFilters+'<div style="padding:0 14px">'+
-    '<input id="arch-search" type="text" placeholder="🔍 بحث باسم العميل..." oninput="renderMovementsArchive()" '+
-    'style="width:100%;padding:9px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:13px;font-family:inherit;background:#f8fafc;outline:none;box-sizing:border-box">'+
-    '<div style="font-size:12px;color:#64748b;margin:8px 0 0">إجمالي المعروض: <b>'+shown.length+'</b></div></div>';
-
-  var qEl=document.getElementById('arch-search');
-  var q=qEl?normalizeAr(qEl.value.trim()):'';
-
-  var groupsHtml=groupOrder.map(function(dayKey){
-    var dayMovs=groups[dayKey].filter(function(m){return !q||normalizeAr(m.customer||'').includes(q);});
-    if(!dayMovs.length)return '';
+  res.innerHTML=groupOrder.map(function(dayKey){
+    var dayMovs=groups[dayKey];
     return '<div style="margin-bottom:12px">'+
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;padding:0 14px">'+
       '<span style="font-size:12px;font-weight:900;color:#15803d">'+fmtDate(dayKey)+'</span>'+
@@ -15233,9 +15219,10 @@ function renderMovementsArchive(){
       }).join('')+
       '</div>';
   }).join('');
-
-  el.innerHTML=searchHtml+'<div style="padding:10px 0 14px">'+groupsHtml+'</div>';
 }
+
+function setArchStatusFilter(f){_archStatusFilter=f;renderMovementsArchive();}
+
 // ===== MOVEMENTS REPORT =====
 function renderMovementsReport(){
   var el=document.getElementById('movements-report-body');if(!el)return;
@@ -19365,6 +19352,38 @@ function _runTadabburSearch(){
       resEl.innerHTML='<div class="empty">⚠️ فشل البحث — تأكد من اتصال النت وحاول تاني</div>';
     });
 }
+// ⚠️ v259 — بحث القرآن: كل حرف كان بيعيد رسم الحاوية كلها بما فيها حقل البحث نفسه → الكيبورد يقفل. دلوقتي النتايج بس هي اللي بتتعاد رسمها.
+// ⚠️ v259 — حل أخير (best-effort) لشاشات بتبني حقل البحث جوه الحاوية اللي بتتعاد رسمها (الديون، أرشيف الديون، الجرد):
+// بنحتفظ بعنصر الحقل الأصلي ونرجّعه مكان الجديد في نفس اللحظة ونرجّع التركيز والمؤشر، فالكيبورد مبيقفلش.
+// الأفضل دايمًا (قاعدة 10): فصل الحقل عن النتايج زي بحث القرآن وأرشيف التحركات.
+function __keepInput(id,renderFn){
+  var old=document.getElementById(id),had=!!(old&&document.activeElement===old),pos=0;
+  try{pos=old?old.selectionStart:0;}catch(e){}
+  renderFn();
+  var nw=document.getElementById(id);
+  if(old&&nw&&nw!==old&&nw.parentNode){nw.parentNode.replaceChild(old,nw);}
+  var cur=document.getElementById(id);
+  if(had&&cur){cur.focus();try{cur.setSelectionRange(pos,pos);}catch(e){}}
+}
+function _quranSurahRows(list){
+  var q=normalizeAr((_quranSearch||'').trim());
+  var filtered=q?list.filter(function(s){return normalizeAr(s.name).includes(q)||String(s.number)===q;}):list;
+  return filtered.map(function(s){
+    return '<div onclick="openQuranSurah('+s.number+')" style="background:#fff;border-radius:12px;padding:12px 14px;margin-bottom:8px;box-shadow:0 2px 8px rgba(0,0,0,.05);display:flex;justify-content:space-between;align-items:center;cursor:pointer">'+
+      '<div style="display:flex;align-items:center;gap:10px">'+
+      '<div style="width:32px;height:32px;border-radius:50%;background:#f0fdfa;color:#0f766e;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800">'+s.number+'</div>'+
+      '<div><div style="font-size:14px;font-weight:800;color:#0f172a">سورة '+esc(s.name.replace(/^سورة /,''))+'</div>'+
+      (s.ayahs?'<div style="font-size:10px;color:#94a3b8">'+s.ayahs+' آية'+(s.type?' — '+s.type:'')+'</div>':'')+
+      '</div></div>'+
+      '<span style="color:#cbd5e1">←</span>'+
+      '</div>';
+  }).join('')+(filtered.length?'':'<div class="empty">مفيش نتيجة</div>');
+}
+function _quranUpdateResults(){
+  var r=document.getElementById('quran-surah-results');
+  if(r)r.innerHTML=_quranSurahRows(window.__quranSurahList||[]);
+}
+
 function _renderQuranList(el,list){
   var q=normalizeAr((_quranSearch||'').trim());
   var filtered=q?list.filter(function(s){return normalizeAr(s.name).includes(q)||String(s.number)===q;}):list;
@@ -19377,7 +19396,7 @@ function _renderQuranList(el,list){
       '<div><div style="font-size:11px;opacity:.85">📖 كمّل من حيث وقفت</div><div style="font-size:14px;font-weight:900">'+esc((_lastRead.name||'').replace(/^سورة /,''))+'</div></div>'+
       '<span style="font-size:18px">←</span></div>'
     :'')+
-    '<input id="quran-search-input" type="text" placeholder="🔍 دوّر على اسم سورة أو رقمها" value="'+esc(_quranSearch)+'" oninput="_quranSearch=this.value;_renderQuranList(document.getElementById(\'quran-body\'),window.__quranSurahList||[])" style="width:100%;padding:11px 14px;border:1.5px solid #e2e8f0;border-radius:12px;font-family:inherit;font-size:13px;margin-bottom:8px">'+
+    '<input id="quran-search-input" type="text" placeholder="🔍 دوّر على اسم سورة أو رقمها" value="'+esc(_quranSearch)+'" oninput="_quranSearch=this.value;_quranUpdateResults()" style="width:100%;padding:11px 14px;border:1.5px solid #e2e8f0;border-radius:12px;font-family:inherit;font-size:13px;margin-bottom:8px">'+
     '<div style="display:flex;gap:8px;margin-bottom:8px">'+
     '<button onclick="_quranTadabburMode=true;renderQuranScreen()" style="flex:1;background:#0f766e;color:#fff;border:none;border-radius:12px;padding:11px;font-family:inherit;font-size:12.5px;font-weight:800;cursor:pointer">📿 بحث بكلمة (تدبر)</button>'+
     '<button onclick="_showQuranFavorites()" style="flex:1;background:#fff7ed;color:#c2410c;border:1.5px solid #fed7aa;border-radius:12px;padding:11px;font-family:inherit;font-size:12.5px;font-weight:800;cursor:pointer">⭐ المفضلة ('+_favCount+')</button>'+
@@ -19388,19 +19407,7 @@ function _renderQuranList(el,list){
     '<button onclick="openDuaArchive()" style="flex:1;background:#f5f3ff;color:#6d28d9;border:1.5px solid #ddd6fe;border-radius:12px;padding:11px;font-family:inherit;font-size:12.5px;font-weight:800;cursor:pointer">📿 أرشيف الأدعية ('+((DB.settings.duas||[]).length)+')</button>'+
     '</div>'+
     '</div>'+
-    '<div style="padding:0 14px 14px">'+
-    filtered.map(function(s){
-      return '<div onclick="openQuranSurah('+s.number+')" style="background:#fff;border-radius:12px;padding:12px 14px;margin-bottom:8px;box-shadow:0 2px 8px rgba(0,0,0,.05);display:flex;justify-content:space-between;align-items:center;cursor:pointer">'+
-        '<div style="display:flex;align-items:center;gap:10px">'+
-        '<div style="width:32px;height:32px;border-radius:50%;background:#f0fdfa;color:#0f766e;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800">'+s.number+'</div>'+
-        '<div><div style="font-size:14px;font-weight:800;color:#0f172a">سورة '+esc(s.name.replace(/^سورة /,''))+'</div>'+
-        (s.ayahs?'<div style="font-size:10px;color:#94a3b8">'+s.ayahs+' آية'+(s.type?' — '+s.type:'')+'</div>':'')+
-        '</div></div>'+
-        '<span style="color:#cbd5e1">←</span>'+
-        '</div>';
-    }).join('')+
-    (filtered.length?'':'<div class="empty">مفيش نتيجة</div>')+
-    '</div>';
+    '<div id="quran-surah-results" style="padding:0 14px 14px">'+_quranSurahRows(list)+'</div>';
 }
 // ⚠️ v229 — تدبر إضافي: آخر موضع قراءة (تلقائي) + مفضلة الآيات + تفسير مبسّط
 // (التفسير الميسر) لكل آية. كل ده بيتخزن محليًا على الجهاز (localStorage) لأنها
@@ -21177,7 +21184,7 @@ function renderExtractBody(m){
         '<div style="display:flex;flex-direction:column;gap:2px">'+
         '<input type="number" step="any" id="ex-buy-'+i+'" value="'+(it.buy_price||0)+'" placeholder="شراء" title="سعر الشراء (تكلفة القطعة)" '+
         'style="width:62px;padding:3px 5px;border:2px solid #fed7aa;border-radius:6px;font-size:11px;font-family:inherit;text-align:center" '+
-        'oninput="_scrapExtractItems['+i+'].buy_price=+this.value;_scrapExtractItems['+i+']._manualBuy=true;renderExtractBody(_curExtractMachine())">'+
+        'oninput="_scrapExtractItems['+i+'].buy_price=+this.value;_scrapExtractItems['+i+']._manualBuy=true" onchange="renderExtractBody(_curExtractMachine())">'+
         '<input type="number" step="any" id="ex-price-'+i+'" value="'+it.sell_price+'" placeholder="بيع" title="سعر البيع" '+
         'style="width:62px;padding:3px 5px;border:2px solid #e2e8f0;border-radius:6px;font-size:11px;font-family:inherit;text-align:center" '+
         'oninput="_scrapExtractItems['+i+'].sell_price=+this.value">'+
