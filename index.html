@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v259</title>
+<title>ابو حوده الحلو الجميل v260</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="1448-04-28 — v259";
+<script>var BUILD_STAMP="1448-04-29 — v260";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -59,9 +59,19 @@
     11) ⚠️ v259 — الفلتر/البحث يتجرّب في كل التابات اللي بتعرض نفس النوع من القوائم (الكل/المرتبة/الأرشيف...)
        قبل التسليم، والعدّاد اللي فوق القايمة لازم يحسب بعد تطبيق الفلتر والبحث (مش قبله). وأي إصلاح لعيب
        بيتعمل له فحص شامل لباقي التطبيق عن نفس النمط، ويتسجّل في الـ Changelog.
+    12) ⚠️ v260 — قبل ما تبني قسم جديد: ابحث في الكود عن قسم قديم بنفس الغرض وادمج/اربط بدل ما تعمل نسخة موازية
+       (درس المستثمرين: اتبنى نظام جديد جنب نظام الحسابات القديم وفضلوا منفصلين). ويتسجّل أي ربط في الـ Changelog.
       مسار خالص عن طريق confirmAction، الزرار بتاعها لازم __runOnce من أول يوم.
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v260: [🤝 توحيد المستثمرين والعملاء + 🐛 تحذيرات سجل الأخطاء]
+     1) شاشة واحدة (الحسابات ← مستثمرون): كارت مستثمر الشراكة بقى فيه حساب البضاعة المربوط بيه (رأس مال/أرباح/مستحق) + إجمالي المستحق له (شراكة + بضاعة).
+        مستثمرو البضاعة اللي من غير حساب شراكة بيظهروا تحت وفيهم "ربط". الربط تلقائي بالاسم + يدوي، والبيانات متنقلتش ولا اتمسحت (acc_id / client_id بس).
+     2) ربط بالعملاء: علامة 🤝 مستثمر على كارت العميل، وفي كشف ⚖️ سطر مستحقاته وصافي الحسابين.
+     3) المركز المالي: أرباح المستثمرين المستحقة (شراكة وبضاعة) بقت كلها التزام، وفضل رأس مالهم في حقوق الملكية. الميزانية لسه متوازنة.
+     4) تقارير ← 🤝 المستثمرين بقت بتفتح نفس الشاشة الموحدة.
+     5) سجل الأخطاء: (أ) مكن الاسكراب كان ليها معرفات قديمة (mc_…) فمنتجات الاسكراب بتتشال منها scrap_source عند الرفع — اتضافت للترحيل التلقائي للـ UUID وبتتحدّث الروابط.
+        (ب) تنبيه "مفيش نت" (×52) كان بيفضل بعد رجوع النت — بقى بيتمسح لوحده لما الطابور يتفضى. (ج) تنبيه المعرّف القديم بيتسجل مرة واحدة بس.
 v259: [🐛 بحث القرآن + فلتر أرشيف التحركات + 📜 قواعد جديدة في الدستور]
      1) بحث القرآن: الكيبورد كان بيقفل مع كل حرف لأن الدالة بتعيد رسم حقل البحث نفسه. النتايج بس بقت هي اللي بتتعاد رسمها.
      2) أرشيف التحركات: نفس العيب — البحث كان بيتصفّر والفلتر بيتلخبط. دلوقتي حقل البحث وأزرار الفلتر ثابتين والنتايج والعدّاد بس بيتحدّثوا، والعدّاد بقى بيحسب بعد البحث، والبحث بيشمل الجهاز والسيريال ونوع العطل.
@@ -4415,7 +4425,7 @@ var APP_TITLE='ابو حوده الحلو الجميل';
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=259;
+var APP_VERSION=260;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -4775,6 +4785,17 @@ function setSyncStatus(msg,color){
 // بيتحفظ في localStorage عشان لو حصل الخطأ والشاشة اتقفلت أو اتعمل رفرش، الأخطاء تفضل موجودة.
 var __errLog = (function(){ try{ return JSON.parse(localStorage.getItem('mc8_error_log')||'[]'); }catch(e){ return []; } })();
 function __saveErrLog(){ try{ localStorage.setItem('mc8_error_log', JSON.stringify(__errLog)); }catch(e){} }
+// ⚠️ v260 — تنبيه "مفيش نت" بيفضل في سجل الأخطاء حتى بعد ما النت يرجع وكل التغييرات تتزامن: بنمسحه لما الطابور يفضى والنت شغال.
+function __clearOfflineNotice(){
+  try{
+    if(typeof navigator!=='undefined'&&navigator.onLine===false)return;
+    var i=__errLog.findIndex(function(e){return e&&e.context==='__offline_pending__';});
+    if(i>-1){__errLog.splice(i,1);__saveErrLog();try{__renderErrorBanner();}catch(e2){}}
+  }catch(e){}
+}
+function __legacyOnce(table,fields){
+  try{var k='mc8_legacy_warned',m=JSON.parse(localStorage.getItem(k)||'{}'),sig=table+'|'+fields.join(',');if(m[sig])return false;m[sig]=1;localStorage.setItem(k,JSON.stringify(m));return true;}catch(e){return true;}
+}
 function __reportError(context, message){
   try{
     // ⚠️ v180 — إصلاح جذري: أي فشل مزامنة سببه ضعف/انقطاع النت (TypeError: Failed to
@@ -4998,7 +5019,8 @@ async function __ensureFreshSession(force){
   }
 }
 async function __drainSyncQueue(manual){
-  if(__draining || !__syncQueue.length) return;
+  if(__draining) return;
+  if(!__syncQueue.length){ __clearOfflineNotice(); return; } // v260
   if(typeof sb === 'undefined' || !window.__currentProfile) return;
   if(typeof navigator!=='undefined' && navigator.onLine===false && !manual) return;
   var sessionOk = await __ensureFreshSession();
@@ -5051,6 +5073,7 @@ async function __drainSyncQueue(manual){
     await __sleep(60);
   }
   __draining = false;
+  if(!__syncQueue.length) __clearOfflineNotice(); // v260
 }
 if(typeof window!=='undefined'){
   window.addEventListener('online', function(){ __drainSyncQueue(); });
@@ -5215,7 +5238,7 @@ async function __pushRowToServer(table, row){
       console.warn('أعمدة اتشالت تلقائيًا من '+table+' (مش موجودة في السيرفر):', strippedFields.join('، '));
       __reportError('تنبيه: عمود ناقص في جدول "'+table+'"', 'الأعمدة دي محفوظة على جهازك بس ومش بتوصل للسيرفر: '+strippedFields.join('، ')+'. لو دي بيانات مهمة، لازم تتضاف كأعمدة في قاعدة البيانات.');
     }
-    if(clearedIdFields.length){
+    if(clearedIdFields.length&&__legacyOnce(table,clearedIdFields)){
       __reportError('تنبيه: معرّف قديم غير صالح في "'+table+'"', 'الحقول دي كانت بصيغة قديمة (قبل نظام UUID) فاتشالت عشان السجل يتزامن: '+clearedIdFields.join('، ')+'.');
     }
     if(res.error){
@@ -5290,6 +5313,10 @@ function __migrateLegacyIds(){
           rec.id = newId;
         }
       });
+    });
+    // v260 — مكن الاسكراب (DB.scrap_machines) ليها معرفات قديمة برضه، فنرحّلها عشان scrap_source/scrap_machine_id في المنتجات تتحدّث معاها
+    (DB.scrap_machines||[]).forEach(function(rec){
+      if(rec && rec.id && !uuidRe.test(String(rec.id))){var nid=genId();idMap[String(rec.id)]=nid;rec.id=nid;}
     });
     var fixedCount = Object.keys(idMap).length;
     if(fixedCount===0) return;
@@ -11135,6 +11162,7 @@ function _renderTws(){
     '<b style="color:#15803d">مدين</b> = هو أخد مني / أنا سدّدت له &nbsp;•&nbsp; <b style="color:#1d4ed8">دائن</b> = أنا أخدت منه / هو سدّد لي<br>'+
     'الرصيد: <b>عليه</b> = هو مديون لي &nbsp;•&nbsp; <b>له</b> = أنا مديون له</div>'+
     (Math.abs(tt.bal-dn)>0.5?'<div style="background:#fef2f2;border:1px solid #fca5a5;border-radius:9px;padding:7px 9px;font-size:11px;color:#b91c1c;margin-bottom:8px">⚠️ الكشف مختلف '+fmt(Math.abs(tt.bal-dn))+' ج عن شاشة الديون — غالبًا دين اتعدل يدويًا. راجعه قبل ما تبعت الكشف.</div>':'');
+  top.innerHTML+=_twsInvNote(tt.bal); // v260 — لو العميل مستثمر كمان
   if(_twsMode==='docs'){list.innerHTML=_twsDocsTable(_twsDocsFiltered(),false).html+'<div style="font-size:10px;color:#94a3b8;margin-top:5px">المدفوع والمتبقي على مستوى الفاتورة (الدفع بيتم على الفاتورة كلها). اضغط على أي فاتورة لفتحها.</div>';return;}
   var shown=E.filter(function(e){return _twsDir==='all'||(_twsDir==='debit'?e.debit>0:e.credit>0);});
   list.innerHTML=shown.length?_twsTableHtml(shown,false)+'<div style="font-size:10px;color:#94a3b8;margin-top:5px">اضغط على أي سطر لفتح أصله للتعديل. الرصيد تراكمي دايمًا حتى مع الفلتر.</div>':'<div class="empty">لا توجد معاملات</div>';
@@ -14017,11 +14045,160 @@ function _invBatchNote(ps){
     '<div style="display:flex;justify-content:space-between;border-top:1px dashed #6ee7b7;margin-top:3px;padding-top:3px"><span>ربحي أنا من بضاعتهم</span><b>'+fmt(r.profit-r.share)+'</b></div>'+
     '<div style="font-size:10.5px;color:#047857;margin-top:3px">'+(ex?'نصيبهم متخصوم من الأساس اللي بيتوزع على المستثمرين العاديين.':'نصيبهم محسوب جوه الأساس اللي بيتوزع على المستثمرين العاديين (إيقاف الخصم من شاشة المستثمرين).')+'</div></div>';
 }
-function _invSetExcl(on){DB.settings.invExcludeBatchShare=!!on;persist();_renderInvList();showToast(on?'✅ نصيب مستثمري البضاعة بيتخصم من أساس توزيع المستثمرين العاديين':'⛔ الأساس بقى صافي الربح كامل','#16a34a');}
 function _invSalesFilter(id){window.__invSalesBatch=id;_renderInv();}
 
 // ⚠️ v258 — إعادة ضبط المستثمرين: فصل (رأس المال / الربح المستحق / أرباح مسحوبة / رأس مال مردود)، تكلفة الربح بنفس نظام التطبيق (buyPrice السطر)،
 // والمستحق من ربح البضاعة بقى التزام منفصل في الميزانية (مش جوه أرباح المشروع). صافي الربح المحاسبي ما بيتغيّرش.
+// ⚠️ v260 — توحيد المستثمرين: شاشة واحدة (الحسابات ← مستثمرون) بتعرض المستثمر بحسابه كامل (شراكة بنسبة من صافي الربح + حساب بضاعة/دفعات)
+// والبيانات متنقلتش ولا اتمسحت: الربط بحقول بس (acc_id يربط مستثمر البضاعة بمستثمر الشراكة، client_id يربط أي مستثمر بعميل).
+function _invLinkedNew(oldInv){return _invList().find(function(n){return n.acc_id===oldInv.id;});}
+function _invLinkedOld(ni){return (DB.accounts.investors||[]).find(function(o){return o.id===ni.acc_id;});}
+function _invAutoLink(){
+  var cn=0,cc=0,olds=DB.accounts.investors||[],news=_invList(),clients=DB.clients||[];
+  news.forEach(function(ni){
+    if(ni.acc_id)return;
+    var o=olds.find(function(x){return normalizeAr(x.name)===normalizeAr(ni.name)&&!news.some(function(z){return z!==ni&&z.acc_id===x.id;});});
+    if(o){ni.acc_id=o.id;cn++;}
+  });
+  function tryClient(rec){
+    if(rec.client_id)return;
+    var c=clients.find(function(x){return normalizeAr(x.name)===normalizeAr(rec.name);});
+    if(c){rec.client_id=c.id;cc++;}
+  }
+  olds.forEach(tryClient);news.forEach(tryClient);
+  if(cn||cc){try{persist();}catch(e){}}
+  return {inv:cn,cli:cc};
+}
+function _invClientOf(oldInv,ni){
+  var id=(oldInv&&oldInv.client_id)||(ni&&ni.client_id)||(ni&&_invLinkedOld(ni)&&_invLinkedOld(ni).client_id);
+  return id?(DB.clients||[]).find(function(c){return c.id===id;}):null;
+}
+function _clientIsInvestor(c){
+  return (DB.accounts.investors||[]).some(function(o){return o.client_id===c.id;})||_invList().some(function(n){return n.client_id===c.id;});
+}
+function _invOldDue(inv){return _oiCapRem(inv)+((DB.accounts.retained_earnings.investors||{})[inv.id]||0);}
+function _invUnifiedBlock(inv){
+  var ni=_invLinkedNew(inv),cli=_invClientOf(inv,ni),N=function(x){return fmt(Math.round(x*100)/100);},h='';
+  if(ni){
+    var T=_invStats(ni).T;
+    h+='<div style="background:#ecfdf5;border:1.5px solid #6ee7b7;border-radius:11px;padding:9px 11px;margin-bottom:8px">'+
+      '<div style="display:flex;justify-content:space-between;align-items:center;gap:6px"><b style="font-size:12.5px;color:#047857">📦 حساب البضاعة ('+fmtQty(ni.pct||0)+'% من ربح دفعاته)</b><button class="btn btn-sm" style="background:#d1fae5;color:#047857;border:none;border-radius:8px" onclick="openInvestor('+jsStr(ni.id)+')">فتح</button></div>'+
+      '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:6px;font-size:11px;text-align:center;color:#065f46"><div>رأس مال<br><b>'+N(T.capRem)+'</b></div><div>أرباح متبقية<br><b>'+N(T.profRem)+'</b></div><div>له<br><b>'+N(T.owed)+'</b></div></div>'+
+      '<div style="border-top:1px dashed #6ee7b7;margin-top:6px;padding-top:5px;font-size:12px;font-weight:900;color:#065f46">⚖️ إجمالي المستحق له (شراكة + بضاعة): '+N(_invOldDue(inv)+T.owed)+' ج</div></div>';
+  }else{
+    h+='<button class="btn btn-sm btn-full" style="background:#ecfdf5;color:#047857;border:1.5px dashed #6ee7b7;border-radius:9px;margin-bottom:8px" onclick="_invCreateGoodsAcc('+jsStr(inv.id)+')">📦 فتح حساب بضاعة (دفعات) لنفس المستثمر</button>';
+  }
+  if(cli){
+    h+='<div style="background:#fffbeb;border:1.5px solid #fde68a;border-radius:11px;padding:8px 11px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;gap:6px;font-size:12px"><span>👤 هو عميل كمان: <b>'+esc(cli.name)+'</b></span><span style="display:flex;gap:5px">'+
+      '<button class="btn btn-sm" style="background:#fef3c7;color:#92400e;border:none;border-radius:8px" onclick="openTwoWayStatement('+jsStr(cli.name)+')">⚖️ كشفه</button>'+
+      '<button class="btn btn-sm" style="background:#f1f5f9;color:#475569;border:none;border-radius:8px" onclick="_invUnlinkClient(\'old\','+jsStr(inv.id)+')">فك الربط</button></span></div>';
+  }else{
+    h+='<button class="btn btn-sm btn-full" style="background:#fffbeb;color:#92400e;border:1.5px dashed #fde68a;border-radius:9px;margin-bottom:8px" onclick="_invLinkClientPick(\'old\','+jsStr(inv.id)+')">🔗 ربطه بعميل (لو هو عميل عندك كمان)</button>';
+  }
+  return h;
+}
+function _invUnlinkedBlock(){
+  var rows=_invList().filter(function(n){return !n.archived&&!_invLinkedOld(n);}),N=function(x){return fmt(Math.round(x*100)/100);};
+  if(!rows.length)return '';
+  return '<div style="margin-top:14px"><div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:8px">🤝 مستثمرو بضاعة (من غير حساب شراكة)</div>'+rows.map(function(n){
+    var T=_invStats(n).T,cli=_invClientOf(null,n);
+    return '<div style="background:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 2px 10px rgba(0,0,0,.06);margin-bottom:10px;border-right:4px solid #059669">'+
+      '<div style="display:flex;justify-content:space-between;align-items:center;gap:6px"><div><b style="font-size:15px">'+esc(n.name)+'</b>'+(n.phone?'<div style="font-size:12px;color:#64748b">📱 '+esc(n.phone)+'</div>':'')+'</div><span style="background:#d1fae5;color:#047857;border-radius:7px;padding:2px 9px;font-size:12px;font-weight:700">'+fmtQty(n.pct||0)+'% من ربح الدفعات</span></div>'+
+      '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin:8px 0;font-size:11px;text-align:center;color:#065f46"><div>رأس مال<br><b>'+N(T.capRem)+'</b></div><div>أرباح متبقية<br><b>'+N(T.profRem)+'</b></div><div>له<br><b>'+N(T.owed)+'</b></div></div>'+
+      (cli?'<div style="font-size:12px;margin-bottom:6px">👤 عميل كمان: <b>'+esc(cli.name)+'</b> <a href="#" onclick="openTwoWayStatement('+jsStr(cli.name)+');return false" style="color:#92400e;font-weight:800">⚖️ كشفه</a></div>':'')+
+      '<div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn btn-sm" style="flex:1;background:#d1fae5;color:#047857;border:none;border-radius:9px" onclick="openInvestor('+jsStr(n.id)+')">📂 فتح الحساب</button>'+
+      '<button class="btn btn-sm" style="flex:1;background:#eef2ff;color:#4338ca;border:none;border-radius:9px" onclick="_invLinkOldPick('+jsStr(n.id)+')">🔗 ربط بمستثمر شراكة</button>'+
+      (cli?'':'<button class="btn btn-sm" style="flex:1;background:#fffbeb;color:#92400e;border:none;border-radius:9px" onclick="_invLinkClientPick(\'new\','+jsStr(n.id)+')">🔗 ربط بعميل</button>')+'</div></div>';
+  }).join('')+'</div>';
+}
+function _invHubSummary(){
+  var news=_invList().filter(function(n){return !n.archived;}),ex=_invExclOn();
+  var tot=news.reduce(function(t,n){var T=_invStats(n).T;t.owed+=T.owed;t.rem+=T.remCost;return t;},{owed:0,rem:0});
+  if(!news.length&&!_invList().length)return '';
+  return '<div style="display:flex;gap:8px;margin-bottom:10px"><div style="flex:1;background:#d1fae5;border-radius:11px;padding:8px;text-align:center"><div style="font-size:10px;color:#047857;font-weight:800">🤝 مستثمرو بضاعة ('+news.length+')</div><b style="color:#047857;font-size:15px">'+fmt(Math.round(tot.owed))+'</b><div style="font-size:9.5px;color:#059669">مستحق لهم</div></div>'+
+    '<div style="flex:1;background:#ffedd5;border-radius:11px;padding:8px;text-align:center"><div style="font-size:10px;color:#c2410c;font-weight:800">📦 رأس مال في بضاعة</div><b style="color:#c2410c;font-size:15px">'+fmt(Math.round(tot.rem))+'</b></div></div>'+
+    '<div onclick="_invSetExcl('+(ex?'false':'true')+')" style="cursor:pointer;background:'+(ex?'#ecfdf5':'#fef2f2')+';border:1.5px solid '+(ex?'#6ee7b7':'#fca5a5')+';border-radius:10px;padding:8px 11px;font-size:11.5px;font-weight:700;color:'+(ex?'#047857':'#b91c1c')+';margin-bottom:10px;line-height:1.7">'+(ex?'✅ توزيع أرباح الشراكة: بعد خصم نصيب مستثمري البضاعة':'⛔ توزيع أرباح الشراكة: على صافي الربح كامل')+' <span style="font-weight:500;opacity:.8">(اضغط للتغيير)</span></div>';
+}
+function _invSetExcl(on){
+  DB.settings.invExcludeBatchShare=!!on;persist();
+  if(document.getElementById('inv-body'))_renderInvList();else if(typeof renderAccounting==='function')renderAccounting();
+  showToast(on?'✅ نصيب مستثمري البضاعة بيتخصم من أساس توزيع أرباح الشراكة':'⛔ الأساس بقى صافي الربح كامل','#16a34a');
+}
+async function _invCreateGoodsAcc(oldId){
+  var o=(DB.accounts.investors||[]).find(function(i){return i.id===oldId;});if(!o)return;
+  if(_invLinkedNew(o))return showToast('⚠️ عنده حساب بضاعة بالفعل','#dc2626');
+  var n={id:genId(),name:o.name,phone:o.phone||'',pct:0,note:'',created:today(),ledger:[],acc_id:o.id,client_id:o.client_id||null};
+  _invList().push(n);await persist();
+  _invId=n.id;_invForm(n.id);openModal();
+}
+function _invLinkBar(inv){
+  var o=_invLinkedOld(inv),cli=_invClientOf(o,inv);
+  return '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;font-size:11.5px">'+
+    (o?'<span style="background:#dbeafe;color:#1e40af;border-radius:8px;padding:4px 9px;font-weight:700">🔗 شراكة: '+fmtQty(o.profit_share_pct||0)+'% من صافي الربح</span>':'<button type="button" onclick="_invLinkOldPick('+jsStr(inv.id)+')" style="background:#eef2ff;color:#4338ca;border:none;border-radius:8px;padding:4px 9px;font-family:inherit;font-weight:700;cursor:pointer">🔗 ربط بمستثمر شراكة</button>')+
+    (cli?'<span style="background:#fffbeb;color:#92400e;border-radius:8px;padding:4px 9px;font-weight:700">👤 عميل: '+esc(cli.name)+'</span>':'<button type="button" onclick="_invLinkClientPick(\'new\','+jsStr(inv.id)+')" style="background:#fffbeb;color:#92400e;border:none;border-radius:8px;padding:4px 9px;font-family:inherit;font-weight:700;cursor:pointer">🔗 ربط بعميل</button>')+'</div>';
+}
+var _icKind='',_icId='',_icQ='';
+function _invLinkClientPick(kind,id){
+  _icKind=kind;_icId=id;_icQ='';
+  document.getElementById('modal-title').textContent='🔗 ربط بعميل';
+  document.getElementById('modal-body').innerHTML=
+    '<input id="ic-q" type="text" placeholder="🔍 دوّر على العميل..." oninput="_icQ=this.value;_invClientResults()" style="width:100%;padding:9px 12px;border:2px solid #e2e8f0;border-radius:11px;font-size:13px;font-family:inherit;background:#f8fafc;outline:none;margin-bottom:8px;box-sizing:border-box">'+
+    '<div id="ic-results"></div><div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
+  openModal();_invClientResults();
+}
+function _invClientResults(){
+  var el=document.getElementById('ic-results');if(!el)return;
+  var q=normalizeAr(_icQ||'');
+  var rows=(DB.clients||[]).filter(function(c){return !q||normalizeAr(c.name).indexOf(q)!==-1;}).sort(function(a,b){return normalizeAr(a.name)<normalizeAr(b.name)?-1:1;}).slice(0,60);
+  el.innerHTML=rows.map(function(c){return '<div onclick="_invLinkClientSave('+jsStr(c.id)+')" style="cursor:pointer;background:#f8fafc;border-radius:10px;padding:9px 12px;margin-bottom:6px;font-size:13px;display:flex;justify-content:space-between"><b>'+esc(c.name)+'</b><span style="color:#64748b;font-size:11px">'+esc(c.phone||'')+'</span></div>';}).join('')||'<div class="empty">مفيش عملاء بالاسم ده</div>';
+}
+async function _invLinkClientSave(cid){
+  var rec=_icKind==='old'?(DB.accounts.investors||[]).find(function(i){return i.id===_icId;}):_invById(_icId);if(!rec)return;
+  rec.client_id=cid;
+  if(_icKind==='old'){var n=_invLinkedNew(rec);if(n)n.client_id=cid;}else{var o=_invLinkedOld(rec);if(o)o.client_id=cid;}
+  await persist();closeModal();showToast('✅ اتربط بالعميل','#16a34a');
+  if(_icKind==='new')openInvestor(_icId);else if(typeof renderAccounting==='function')renderAccounting();
+}
+async function _invUnlinkClient(kind,id){
+  var rec=kind==='old'?(DB.accounts.investors||[]).find(function(i){return i.id===id;}):_invById(id);if(!rec)return;
+  rec.client_id=null;
+  if(kind==='old'){var n=_invLinkedNew(rec);if(n)n.client_id=null;}else{var o=_invLinkedOld(rec);if(o)o.client_id=null;}
+  window.__noAutoClientLink=true; // ما يتربطش تاني تلقائيًا في نفس الجلسة
+  await persist();showToast('اتفك الربط','#64748b');renderAccounting();
+}
+function _invLinkOldPick(newId){
+  var ni=_invById(newId);if(!ni)return;
+  var free=(DB.accounts.investors||[]).filter(function(o){return !_invLinkedNew(o);});
+  document.getElementById('modal-title').textContent='🔗 ربط بمستثمر شراكة — '+ni.name;
+  document.getElementById('modal-body').innerHTML=(free.length?free.map(function(o){return '<div onclick="_invLinkOldSave('+jsStr(newId)+','+jsStr(o.id)+')" style="cursor:pointer;background:#f8fafc;border-radius:10px;padding:9px 12px;margin-bottom:6px;font-size:13px;display:flex;justify-content:space-between"><b>'+esc(o.name)+'</b><span style="color:#64748b;font-size:11px">'+fmtQty(o.profit_share_pct||0)+'% من صافي الربح</span></div>';}).join(''):'<div class="empty">كل مستثمري الشراكة مربوطين بحسابات بضاعة، أو مفيش مستثمر شراكة لسه.</div>')+
+    '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
+  openModal();
+}
+async function _invLinkOldSave(newId,oldId){
+  var ni=_invById(newId);if(!ni)return;ni.acc_id=oldId;
+  var o=(DB.accounts.investors||[]).find(function(x){return x.id===oldId;});
+  if(o&&!ni.client_id&&o.client_id)ni.client_id=o.client_id;
+  await persist();closeModal();showToast('✅ اتربط','#16a34a');
+  if(document.getElementById('screen-accounting')&&_accountingTab==='investors')renderAccounting();else openInvestor(newId);
+}
+function openInvestorsHub(){
+  try{closeModal();}catch(e){}
+  navigate('accounting');
+  setTimeout(function(){switchAccTab('investors',document.getElementById('acc-tab-investors'));},60);
+}
+function openInvestors(){openInvestorsHub();}
+// كشف الحساب: لو العميل هو مستثمر كمان، نوضّح مستحقاته وصافي الحسابين
+function _twsInvNote(bal){
+  var c=(DB.clients||[]).find(function(x){return normalizeAr(x.name)===normalizeAr(_twsName||'');});if(!c)return '';
+  var olds=(DB.accounts.investors||[]).filter(function(o){return o.client_id===c.id;}),news=_invList().filter(function(n){return n.client_id===c.id;});
+  if(!olds.length&&!news.length)return '';
+  var a=0,b=0;olds.forEach(function(o){a+=_invOldDue(o);});news.forEach(function(n){b+=_invStats(n).T.owed;});
+  var owed=a+b,net=bal-owed,N=function(x){return fmt(Math.round(x*100)/100);};
+  return '<div style="background:#ecfdf5;border:1.5px solid #6ee7b7;border-radius:11px;padding:9px 12px;margin-bottom:8px;font-size:12px;color:#065f46;line-height:1.9">'+
+    '🤝 هو مستثمر عندك كمان — مستحق له <b>'+N(owed)+'</b> ج'+(olds.length&&news.length?' (شراكة '+N(a)+' + بضاعة '+N(b)+')':'')+'<br>'+
+    '⚖️ الصافي بين حساباته (كعميل ومستثمر): <b>'+(net>0.001?'هو عليه لي '+N(net)+' ج':net<-0.001?'أنا عليّ له '+N(-net)+' ج':'متعادلين')+'</b></div>';
+}
+
 function _invBatchStats(b,excludeSaleId,asOf){
   var items=(b.items||[]).map(function(x){return {productId:x.productId,name:x.name,qty:+x.qty||0,cost:+x.cost||0,sold:0,rev:0};});
   var rows=[],revenue=0,soldCost=0,capSold=0;
@@ -14254,13 +14431,6 @@ function _invShare(){
   else window.open('https://wa.me/'+(ph||'')+'?text='+encodeURIComponent(txt),'_blank');
 }
 
-function openInvestors(){
-  _invListArch=false;
-  document.getElementById('modal-title').textContent='🤝 المستثمرين';
-  document.getElementById('modal-body').innerHTML='<div id="inv-body"></div>'+
-    '<div class="modal-actions"><button class="btn btn-primary btn-full" onclick="_invForm(null)">➕ مستثمر جديد</button><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
-  openModal();_renderInvList();
-}
 function _invToggleArch(){_invListArch=!_invListArch;_renderInvList();}
 function _invForm(id){
   var i=id?_invById(id):null;
@@ -14281,7 +14451,7 @@ async function _invSave(id){
   var dupe=_invList().find(function(x){return normalizeAr(x.name)===normalizeAr(name)&&x.id!==id;});
   if(dupe)return showToast('⚠️ فيه مستثمر بنفس الاسم','#dc2626');
   if(id){var i=_invById(id);i.name=name;i.phone=v('iv-phone');i.pct=pct;i.note=v('iv-note');}
-  else{var n={id:genId(),name:name,phone:v('iv-phone'),pct:pct,note:v('iv-note'),created:today(),ledger:[]};_invList().push(n);id=n.id;}
+  else{var n={id:genId(),name:name,phone:v('iv-phone'),pct:pct,note:v('iv-note'),created:today(),ledger:[]};_invList().push(n);id=n.id;_invAutoLink();}
   await persist();showToast('✅ اتحفظ','#16a34a');openInvestor(id);
 }
 async function _invArchive(id){var i=_invById(id);if(!i)return;i.archived=!i.archived;await persist();openInvestors();}
@@ -14307,7 +14477,7 @@ function _renderInv(){
   var top=document.getElementById('iv-top'),list=document.getElementById('iv-list');if(!top||!list)return;
   var S=_invStats(inv),T=S.T;
   function card(k,l,v_,c,bg){var a=_invView===k;return '<div onclick="_invSetView(\''+k+'\')" style="cursor:pointer;flex:1;background:'+bg+';border:2.5px solid '+(a?c:'transparent')+';border-radius:12px;padding:8px 4px;text-align:center"><div style="font-size:10px;font-weight:800;color:'+c+'">'+l+'</div><div style="font-size:14px;font-weight:900;color:'+c+'">'+fmt(v_)+'</div></div>';}
-  top.innerHTML=
+  top.innerHTML=_invLinkBar(inv)+
     '<div style="display:flex;gap:6px;margin-bottom:6px"><div style="flex:1;background:#d1fae5;border-radius:12px;padding:9px;text-align:center"><div style="font-size:11px;font-weight:800;color:#047857">⚖️ إجمالي المستحق له (رأس مال + أرباح)</div><div style="font-size:19px;font-weight:900;color:#047857">'+fmt(Math.round(T.owed*100)/100)+' ج</div></div></div>'+
     '<div style="display:flex;gap:6px;margin-bottom:6px">'+card('ledger','💰 رأس المال المتبقي',T.capRem,'#1d4ed8','#dbeafe')+card('sales','📈 إجمالي ربحه',T.share,'#7c3aed','#ede9fe')+card('ledger','💸 أرباح مسحوبة',T.pw,'#ea580c','#ffedd5')+'</div>'+
     '<div style="display:flex;gap:6px;margin-bottom:8px">'+card('ledger','↩️ رأس مال مردود',T.cr,'#0e7490','#cffafe')+card('ledger','🧮 أرباح متبقية',T.profRem,'#6d28d9','#f5f3ff')+card('batches','📦 رأس مال في بضاعة',T.remCost,'#c2410c','#fff7ed')+'</div>'+
@@ -16824,7 +16994,8 @@ function _computeBalanceSheet(asOfDate){
   // الحقيقية) — لا يمثل حركة نقدية، فلا يجوز أن يؤثر على الكاش، فقط على حقوق الملكية
   var equityAdj=(acc.equity_adjustments||[]).filter(function(a){return!asOfDate||(a.date||'')<=asOfDate;}).reduce(function(s,a){return s+a.amount;},0);
 
-  var totalEquity=ownerCapital+retainedEarnings+invCapital+invRetained+ownerRetained+equityAdj;
+  totalLiabilities+=invRetained; // v260 — أرباح المستثمرين المستحقة (شراكة) بقت التزام، مش حقوق ملكية
+  var totalEquity=ownerCapital+retainedEarnings+invCapital+ownerRetained+equityAdj;
   var totalLiabEquity=totalLiabilities+totalEquity;
   var diff=totalAssets-totalLiabEquity;
 
@@ -17200,14 +17371,14 @@ function _renderBalanceSheetHTML(d,acc){
     accSection('خصوم متداولة','#dc2626')+
     _bsRow('ذمم دائنة (موردين)',d.suppDebt)+
     (d.pendingTotal?_bsRow('التزامات شهرية معلّقة',d.pendingTotal):'')+
-    (d.batchInvDue?_bsRow('أرباح مستحقة لمستثمري البضاعة',d.batchInvDue):'')+
+    (d.invRetained?_bsRow('أرباح مستحقة للمستثمرين (شراكة)',d.invRetained):'')+
+  (d.batchInvDue?_bsRow('أرباح مستحقة لمستثمري البضاعة',d.batchInvDue):'')+
     _bsTotal('إجمالي الخصوم',d.totalLiabilities,'#dc2626')+
     accSection('حقوق الملكية','#15803d')+
     _bsRow('رأس مال صاحب المشروع',d.ownerCapital)+
     _bsRow('أرباح محتجزة (صاحب)',d.ownerRetained)+
     _bsRow('أرباح العمليات',d.retainedEarnings)+
     (((acc.investors||[]).length||(DB.investors||[]).length)?_bsRow('رأس مال المستثمرين',d.invCapital):'')+
-    ((acc.investors||[]).length&&d.invRetained?_bsRow('أرباح محتجزة (مستثمرون)',d.invRetained):'')+
     (d.equityAdj?_bsRow('تسويات دفترية',d.equityAdj):'')+
     _bsTotal('إجمالي حقوق الملكية',d.totalEquity,'#15803d')+
     _bsTotal('الخصوم + حقوق الملكية',d.totalLiabEquity,'#7c3aed')+
@@ -21743,6 +21914,7 @@ function _clientCard(c){
     '<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:3px">'+
     '<span style="font-weight:900;font-size:15px;cursor:pointer" onclick="openLedger(decodeURIComponent(\''+encodeURIComponent(c.name)+'\'))">'+esc(c.name)+'</span>'+
     (c.code?'<span style="background:#eef2ff;color:#4338ca;border-radius:6px;padding:2px 7px;font-size:10px;font-weight:800">🆔 '+esc(c.code)+'</span>':'')+
+    (_clientIsInvestor(c)?'<span style="background:#d1fae5;color:#047857;border-radius:6px;padding:2px 8px;font-size:10px;font-weight:800">🤝 مستثمر</span>':'')+
     (c.parent_id?'<span style="background:#fef3c7;color:#92400e;border-radius:6px;padding:2px 8px;font-size:10px;font-weight:800">🏢 فرع: '+esc(((DB.clients||[]).find(function(x){return x.id===c.parent_id;})||{}).name||'')+'</span>':'')+
     (_clientBranches(c).length?'<span style="background:#e0e7ff;color:#3730a3;border-radius:6px;padding:2px 8px;font-size:10px;font-weight:800">🏢 '+_clientBranches(c).length+' فروع</span>':'')+
     '<span style="background:'+cSt.bg+';color:'+cSt.color+';border-radius:6px;padding:2px 8px;font-size:10px;font-weight:700">'+cSt.icon+' '+cSt.label+'</span>'+
@@ -22827,6 +22999,7 @@ if(!DB.accounts.retained_earnings) DB.accounts.retained_earnings={owner:0,invest
 // ===== RENDER =====
 function renderInvestors(){
   var el=document.getElementById('accounting-body');if(!el)return;
+  _invAutoLink(); // v260 — ربط تلقائي بالاسم
   var inv=DB.accounts.investors||[];
   var cycles=DB.accounts.profit_cycles||[];
   var re=DB.accounts.retained_earnings||{owner:0,investors:{}};
@@ -22867,14 +23040,17 @@ function renderInvestors(){
       '</div>':'')+ 
 
     // أزرار
+    _invHubSummary()+
     '<div style="display:flex;gap:8px;margin-bottom:14px">'+
     '<button class="btn btn-primary btn-full" onclick="openAddInvestorModal()">+ إضافة مستثمر</button>'+
     '<button class="btn btn-green btn-full" onclick="openProfitCycleModal()">📊 توزيع أرباح</button>'+
+    '<button class="btn btn-full" style="background:#ecfdf5;color:#047857;border:none" onclick="_invForm(null)">📦 مستثمر بضاعة</button>'+
     '</div>'+
 
     // قائمة المستثمرين
     (inv.length?inv.map(function(i){return _investorCard(i);}).join('')
       :'<div class="empty">لا يوجد مستثمرون — أضف أول مستثمر</div>')+
+    _invUnlinkedBlock()+
 
     // سجل دورات الأرباح
     (cycles.length?
@@ -23002,6 +23178,7 @@ function _investorCard(inv){
           '<b style="color:#ea580c">'+fmt(w.amount)+'</b></div>';
       }).join('')+'</div>':'')+
 
+    _invUnifiedBlock(inv)+
     '<div style="display:flex;gap:6px;margin-bottom:6px">'+
     '<button class="btn btn-sm btn-full" style="background:#eef2ff;color:#4338ca;border:none;border-radius:9px" onclick="openInvestorTimeline(\''+inv.id+'\')">📜 السجل الكامل</button>'+
     '</div>'+
@@ -24336,7 +24513,7 @@ function renderMore(){
         {icon:'👥',label:'تقرير المهندسين',action:'openEmployeesReport()',color:'#fff7ed',tc:'#c2410c',ownerOnly:true},
         {icon:'📊',label:'تحليل مكن العملاء',action:'openMachineStats()',color:'#ecfeff',tc:'#0e7490'},
         {icon:'🏢',label:'تقارير الشركات',action:'openCompaniesPicker()',color:'#eef2ff',tc:'#3730a3'},
-        {icon:'🤝',label:'المستثمرين',action:'openInvestors()',color:'#ecfdf5',tc:'#047857',ownerOnly:true},
+        {icon:'🤝',label:'المستثمرين',action:'openInvestorsHub()',color:'#ecfdf5',tc:'#047857',ownerOnly:true},
         {icon:'📒',label:'الحسابات',screen:'accounting',color:'#fdf2f8',tc:'#86198f'},
         {icon:'🔧',label:'تقرير التحركات',screen:'movements-report',color:'#fdf2f8',tc:'#86198f'},
         {icon:'📋',label:'تقرير المهمات',screen:'tasks-report',color:'#f0fdf4',tc:'#15803d'},
