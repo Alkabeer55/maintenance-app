@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v260</title>
+<title>ابو حوده الحلو الجميل v262</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="1448-04-29 — v260";
+<script>var BUILD_STAMP="1448-05-01 — v262";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -64,6 +64,23 @@
       مسار خالص عن طريق confirmAction، الزرار بتاعها لازم __runOnce من أول يوم.
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v262: [📊 توزيع الأرباح: أرقام صحيحة + تاريخ توزيع + منع تكرار الفترة + ترحيل الدورات القديمة | 🔄 المزامنة العالقة]
+     1) أرقام صحيحة بس: صافي الربح بيتقرّب لأقرب جنيه، وحصة المستثمر بتتقرّب وحصتك = الباقي، فالمجموع بيطابق الربح بالظبط (قبل كده كان بيضيع كسور).
+     2) تاريخ التوزيع: اتضاف حقل "تاريخ التوزيع" (ممكن يكون قبل النهارده). قبل كده التاريخ كان دايمًا النهارده ومفيش طريقة تحدده.
+     3) فترة "مخصّص": التواريخ المعروضة كانت مش هي اللي في الحالة الفعلية (الحقول بتعرض النهارده والحالة فاضية) فالربح كان بيتحسب على كل البيانات والفترة تتسجل بدون بداية. دلوقتي التوزيع بيقرا التواريخ من الحقول مباشرة من غير ما تحتاج تدوس "تطبيق"، وبيتحقق إن البداية قبل النهاية.
+     4) كتابة الربح يدويًا: زرار "تطبيق"/تغيير الفترة كان بيمسح الرقم اللي كتبته ويرجّع المحسوب — بقى بيحافظ على اللي كتبته.
+     5) حالة الفترة: بقى فيه سطر واضح "✅ الفترة لسه ماتوزّعتش" أو "⚠️ اتوزّعت قبل كده" بتفاصيل الدورات، وعند الحفظ لو فيه تداخل بيسألك تأكيد (يمنع حساب نفس الربح مرتين).
+     6) أول فترة مقترحة بعد آخر دورة: كانت بتتحسب بـUTC (مخالفة للدستور بند 4) وتطلع "بكرة" لو وزّعت النهارده — اتصلحت.
+     7) سجل التوزيعات بقى مترتب بتاريخ التوزيع (الأحدث فوق) بدل ترتيب الإدخال.
+     8) ترحيل الدورات القديمة (v261 صلّح الحفظ الجديد بس): شاشة معاينة بتوري كل دورة سحبت فيها أكتر من حصتك ورصيدها المحتجز اتسجّل غلط، والرصيد قبل/بعد — ما بيتغيّرش حاجة غير لما تدوس "تأكيد". الإصلاح محمي من إن مزامنة السيرفر ترجّعه.
+     9) المزامنة العالقة: (أ) حلقة الإرسال ماكنش فيها حماية — أي خطأ غير متوقع كان بيسيب القفل مقفول للأبد فكل المحاولات بعد كده (حتى الضغط على الإشعار) بترجع فورًا. اتضاف try/finally وفك قفل تلقائي. (ب) عنصر لجدول مش بيتزامن أصلًا كان بيفضل عالق للأبد — بيتشال. (ج) الضغط على "N بانتظار المزامنة" بقى يفتح تفاصيل: إيه العنصر العالق، آخر خطأ، "حاول تاني"، و"تجاهل" لعناصر الصفوف.
+v261: [🐛 توزيع الأرباح (حسابات) + 🎨 تراكب الشريط الأخضر/إشعار المزامنة]
+     1) معاينة التوزيع: "يُحتجز لك" كان بيظهر ضعف الرقم الحقيقي (حصتك ٧٬٤٦١ كان بيظهر ١٤٬٩٢٢) لأن الدالة بتجمع الحصة مرتين. بقى بيعرض اللي هيتحتجز من الدورة دي فعلًا + سطر "إجمالي محتجزك بعد التوزيع" لو فيه رصيد محتجز.
+     2) حفظ التوزيع: لو سحبت أكتر من حصتك (من المحتجز) كان الرصيد المحتجز مابينقصش (retained بتتسجل صفر بالغلط). بقى بيتسجل بالسالب فيتخصم من المحتجز. الدورات القديمة المحفوظة قبل v261 ماتلمسوش (بياناتك زي ما هي).
+     3) كارت الدورة في السجل: بيظهر "مسحوب من المحتجز" لو الدورة سحبت منه.
+     4) النسب: كانت بتتعرض "98.0%" جنب "2%" ومعكوسة "(%98.0)" — بقت موحدة (٩٨% / ٢%) ومعزولة اتجاهيًا فمابتتقلبش في RTL.
+     5) الشريط الأخضر "متصل بالسيرفر" كان بيغطي نص زرار "دمج العملاء" في هيدر الحسابات — اتصغّر وبقى مايستقبلش لمس (pointer-events:none).
+     6) إشعار "N بانتظار المزامنة" كان بيطلع فوق أي نافذة مفتوحة (z-index عالي) ويغطي أزرار "إلغاء/تأكيد" — بقى بيختفي طول ما أي نافذة مفتوحة.
 v260: [🤝 توحيد المستثمرين والعملاء + 🐛 تحذيرات سجل الأخطاء]
      1) شاشة واحدة (الحسابات ← مستثمرون): كارت مستثمر الشراكة بقى فيه حساب البضاعة المربوط بيه (رأس مال/أرباح/مستحق) + إجمالي المستحق له (شراكة + بضاعة).
         مستثمرو البضاعة اللي من غير حساب شراكة بيظهروا تحت وفيهم "ربط". الربط تلقائي بالاسم + يدوي، والبيانات متنقلتش ولا اتمسحت (acc_id / client_id بس).
@@ -1715,7 +1732,9 @@ input:checked+.slider:before{transform:translateX(-20px)}
 #login-msg{margin-top:12px;font-size:13px;text-align:center;min-height:18px}
 #login-msg.err{color:#dc2626}
 #login-msg.ok{color:#16a34a}
-#sync-badge{position:fixed;top:6px;left:6px;z-index:9998;font-size:11px;background:#16a34a;color:#fff;padding:3px 9px;border-radius:20px;display:none}
+#sync-badge{position:fixed;top:2px;left:4px;z-index:9998;font-size:9px;line-height:1.3;background:#16a34a;color:#fff;padding:1px 7px;border-radius:20px;display:none;pointer-events:none;opacity:.92}
+/* ⚠️ v261 — إشعار طابور المزامنة يختفي طول ما أي نافذة مفتوحة (كان بيغطي أزرار إلغاء/تأكيد) */
+#modal-overlay.open ~ #__sync-queue-badge{display:none!important}
 </style>
 <div id="login-gate">
   <div id="login-box">
@@ -3699,6 +3718,13 @@ input:checked+.slider:before{transform:translateX(-20px)}
     arrayKeys.forEach(function(k){
       result[k] = __mergeServerRows(local[k]||[], server[k]||[]);
     });
+    // ⚠️ v262 — دورة اتصحّح محتجزها (ترحيل v262) ما نسمحش لنسخة سيرفر قديمة ترجّع الرقم القديم
+    (local.profit_cycles||[]).forEach(function(lc){
+      if(lc&&lc.retained_fixed_v262){
+        var rc=(result.profit_cycles||[]).find(function(x){return x&&x.id===lc.id;});
+        if(rc){rc.retained=lc.retained;rc.retained_old=lc.retained_old;rc.retained_fixed_v262=true;}
+      }
+    });
     ['retained_earnings','opening_balance','opening_inventory_value','cash_formula_settings'].forEach(function(k){
       if(server[k]!==undefined) result[k]=server[k];
     });
@@ -4425,7 +4451,7 @@ var APP_TITLE='ابو حوده الحلو الجميل';
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=260;
+var APP_VERSION=262;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -4797,6 +4823,7 @@ function __legacyOnce(table,fields){
   try{var k='mc8_legacy_warned',m=JSON.parse(localStorage.getItem(k)||'{}'),sig=table+'|'+fields.join(',');if(m[sig])return false;m[sig]=1;localStorage.setItem(k,JSON.stringify(m));return true;}catch(e){return true;}
 }
 function __reportError(context, message){
+  try{ window.__lastSyncErrs=window.__lastSyncErrs||[]; window.__lastSyncErrs.unshift({t:Date.now(),c:String(context||''),m:String(message||'')}); if(window.__lastSyncErrs.length>8)window.__lastSyncErrs.length=8; }catch(_e0){} // v262
   try{
     // ⚠️ v180 — إصلاح جذري: أي فشل مزامنة سببه ضعف/انقطاع النت (TypeError: Failed to
     // fetch) كان بيتسجل كإنذار أحمر منفصل بنص إنجليزي مخيف لكل جدول لوحده — لو النت
@@ -4973,12 +5000,12 @@ function __renderQueueBadge(){
   if(!el){
     el = document.createElement('div');
     el.id='__sync-queue-badge';
-    el.style.cssText='position:fixed;left:10px;bottom:74px;z-index:99997;background:#1e293b;color:#fbbf24;font-size:11px;font-weight:800;padding:6px 10px;border-radius:20px;box-shadow:0 2px 8px rgba(0,0,0,.3);cursor:pointer;font-family:inherit';
-    el.onclick = function(){ __drainSyncQueue(true); };
+    el.style.cssText='position:fixed;left:10px;bottom:74px;z-index:999;background:#1e293b;color:#fbbf24;font-size:11px;font-weight:800;padding:6px 10px;border-radius:20px;box-shadow:0 2px 8px rgba(0,0,0,.3);cursor:pointer;font-family:inherit';
+    el.onclick = function(){ __showSyncQueueDetails(); };
     document.body.appendChild(el);
   }
   el.style.display='block';
-  el.textContent = '🔄 '+n+' بانتظار المزامنة — دوس للمحاولة';
+  el.textContent = '🔄 '+n+' بانتظار المزامنة — دوس للتفاصيل';
 }
 var __draining = false;
 // v169 — [🐛 إصلاح فوري لباج خطير حصل في v168] النسخة اللي فاتت كانت بتنادي
@@ -5018,8 +5045,13 @@ async function __ensureFreshSession(force){
     return true;
   }
 }
+// ⚠️ v262 — القفل كان بيفضل مقفول للأبد لو حصل أي خطأ غير متوقع في الحلقة (مفيش try/finally)، فكل محاولة بعد كده (حتى الضغط على الإشعار) بترجع فورًا. دلوقتي: try/finally + فك قفل تلقائي لو عدّى أكتر من 60 ثانية.
+var __drainStartedAt = 0;
 async function __drainSyncQueue(manual){
-  if(__draining) return;
+  if(__draining){
+    if(manual && Date.now()-__drainStartedAt>60000){ __draining=false; }
+    else return;
+  }
   if(!__syncQueue.length){ __clearOfflineNotice(); return; } // v260
   if(typeof sb === 'undefined' || !window.__currentProfile) return;
   if(typeof navigator!=='undefined' && navigator.onLine===false && !manual) return;
@@ -5034,10 +5066,13 @@ async function __drainSyncQueue(manual){
     return;
   }
   __draining = true;
+  __drainStartedAt = Date.now();
+  try{
   var items = __syncQueue.slice();
   for(var i=0;i<items.length;i++){
     var q = items[i];
     var ok;
+    try{
     if(q.op==='accounts'){
       await __pushAccountsToServer();
       continue; // __pushAccountsToServer بتتعامل مع الطابور بنفسها (queue/dequeue)
@@ -5067,13 +5102,60 @@ async function __drainSyncQueue(manual){
     }else{
       var row = (DB[q.table]||[]).find(function(r){ return r && r.id===q.id; });
       if(!row){ ok = true; } // اتمسح محليًا بعدين، مفيش داعي نبعته
+      else if(!__SYNCED_TABLES[q.table]){ ok = true; } // ⚠️ v262 — جدول مش بيتزامن أصلًا: كان بيفضل عالق للأبد
       else ok = await __pushRowToServer(q.table, row);
     }
+    }catch(eItem){
+      ok = false;
+      try{ __reportError('فشل عنصر في طابور المزامنة ('+q.table+')', (eItem&&eItem.message)?eItem.message:String(eItem)); }catch(_e1){}
+    }
     if(ok) __dequeueSync(q.table, q.id);
+    else { q.fails=(q.fails||0)+1; q.lastTry=Date.now(); }
     await __sleep(60);
   }
-  __draining = false;
+  }finally{
+    __draining = false;
+    try{ __saveSyncQueue(); }catch(_e2){}
+  }
   if(!__syncQueue.length) __clearOfflineNotice(); // v260
+}
+
+// ⚠️ v262 — تفاصيل الطابور: إيه اللي عالق ولية (قبل كده كان رقم "1" بس من غير أي تفسير)
+var __SQ_LABELS={'__accounts__':'الحسابات (بما فيها توزيع الأرباح)','__clients__':'دفتر العملاء','__scrap__':'سكراب الماكينات','__settings__':'الإعدادات','__archive__':'الأرشيف','__mov_counter__':'عداد التحركات','__bizblob__':'بيانات التشغيل','sales':'فاتورة','products':'منتج','movements':'تحرّك/عطل','expenses':'مصروف','debts':'دين','purchases':'مشتريات','tasks':'مهمة','part_withdrawals':'سحب قطع'};
+function __showSyncQueueDetails(){
+  var list=__syncQueue.slice();
+  if(!list.length){ closeModal(); showToast('✅ مفيش حاجة بانتظار المزامنة','#16a34a'); return; }
+  var errs=(window.__lastSyncErrs||[]).slice(0,3);
+  document.getElementById('modal-title').textContent='🔄 بانتظار المزامنة ('+list.length+')';
+  document.getElementById('modal-body').innerHTML=
+    '<div style="font-size:12px;color:#475569;line-height:1.8;margin-bottom:10px">العناصر دي محفوظة على جهازك بس ولسه ماوصلتش السيرفر.</div>'+
+    list.map(function(q,i){
+      var name=__SQ_LABELS[q.table]||q.table;
+      var opTxt=q.op==='delete'?'حذف':(q.op==='upsert'?'إضافة/تعديل':'رفع نسخة كاملة');
+      var canIgnore=(q.op==='upsert'||q.op==='delete');
+      return '<div style="background:#f8fafc;border-radius:10px;padding:9px 11px;margin-bottom:7px;font-size:12px;line-height:1.8">'+
+        '<div style="font-weight:800">'+esc(name)+' <span style="font-weight:600;color:#64748b">— '+opTxt+'</span></div>'+
+        '<div style="color:#64748b">محاولات فاشلة: '+(q.fails||0)+(q.lastTry?' • آخر محاولة: '+new Date(q.lastTry).toLocaleTimeString('ar-EG'):'')+'</div>'+
+        (canIgnore?'<button onclick="__ignoreSyncItem('+i+')" style="margin-top:4px;background:#fee2e2;color:#dc2626;border:none;border-radius:8px;padding:5px 10px;font-size:11px;font-weight:800;cursor:pointer">تجاهل (يفضل على جهازك بس)</button>':'')+
+        '</div>';
+    }).join('')+
+    (errs.length?'<div style="background:#fef2f2;border-radius:10px;padding:9px 11px;margin:8px 0;font-size:11px;color:#991b1b;line-height:1.7"><b>آخر أخطاء:</b><br>'+errs.map(function(e){return esc(e.c)+' — '+esc(e.m.slice(0,160));}).join('<br>')+'</div>':'')+
+    '<div class="modal-actions"><button class="btn btn-green btn-full" onclick="__retrySyncNow(this)">🔄 حاول تاني دلوقتي</button>'+
+    '<button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+  openModal();
+}
+async function __retrySyncNow(btn){
+  if(btn){btn.disabled=true;btn.textContent='⏳ بحاول...';}
+  try{ await __drainSyncQueue(true); }catch(e){}
+  if(!__syncQueue.length){ closeModal(); showToast('✅ كله اتزامن','#16a34a'); }
+  else __showSyncQueueDetails();
+}
+function __ignoreSyncItem(i){
+  var q=__syncQueue[i]; if(!q)return;
+  confirmAction('تجاهل العنصر ده؟ هيفضل محفوظ على جهازك بس ومش هيتبعت للسيرفر.',function(){
+    __dequeueSync(q.table,q.id);
+    __showSyncQueueDetails();
+  });
 }
 if(typeof window!=='undefined'){
   window.addEventListener('online', function(){ __drainSyncQueue(); });
@@ -23040,6 +23122,7 @@ function renderInvestors(){
       '</div>':'')+ 
 
     // أزرار
+    _pcFixBanner()+
     _invHubSummary()+
     '<div style="display:flex;gap:8px;margin-bottom:14px">'+
     '<button class="btn btn-primary btn-full" onclick="openAddInvestorModal()">+ إضافة مستثمر</button>'+
@@ -23056,7 +23139,7 @@ function renderInvestors(){
     (cycles.length?
       '<div style="margin-top:16px">'+
       '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:10px">📋 سجل توزيعات الأرباح ('+cycles.length+')</div>'+
-      cycles.slice().reverse().map(function(c){return _cycleCard(c);}).join('')+
+      cycles.slice().sort(function(a,b){var x=(a.date_created||'')+'|'+(a.date_to||''),y=(b.date_created||'')+'|'+(b.date_to||'');return x<y?1:x>y?-1:0;}).map(function(c){return _cycleCard(c);}).join('')+
       '</div>':'');
 }
 
@@ -23657,12 +23740,13 @@ function _cycleCard(c){
     (c.distributions||[]).map(function(d){
       var inv=(DB.accounts.investors||[]).find(function(i){return i.id===d.investor_id;});
       return '<div style="display:flex;justify-content:space-between;margin-bottom:4px">'+
-        '<span style="color:#64748b">'+(inv?esc(inv.name):'مستثمر')+' ('+d.share_pct+'%)</span>'+
+        '<span style="color:#64748b">'+(inv?esc(inv.name):'مستثمر')+' ('+_pctTxt(d.share_pct)+')</span>'+
         '<b style="color:#7c3aed">'+fmt(d.amount)+'</b></div>';
     }).join('')+
     '<div style="display:flex;justify-content:space-between;margin-top:5px;padding-top:5px;border-top:1px solid #e2e8f0">'+
     '<span style="color:#64748b">سحبك الفعلي</span><b style="color:#ea580c">'+fmt(c.owner_draw)+'</b></div>'+
     (c.retained>0?'<div style="display:flex;justify-content:space-between"><span style="color:#64748b">محتجز</span><b style="color:#854d0e">'+fmt(c.retained)+'</b></div>':'')+
+    (c.retained<0?'<div style="display:flex;justify-content:space-between"><span style="color:#64748b">مسحوب من المحتجز</span><b style="color:#dc2626">'+fmt(-c.retained)+'</b></div>':'')+
     '</div>'+
     (c.note?'<div style="font-size:11px;color:#64748b;margin-top:6px">📝 '+esc(c.note)+'</div>':'')+
     '</div>';
@@ -23836,6 +23920,8 @@ function openEditProfitCycleModal(id){
   });
 }
 
+// ⚠️ v261 — عرض النسبة: رقم نظيف (٩٨ مش ٩٨.٠) ومعزول اتجاهيًا عشان العلامة % ماتتقلبش في RTL
+function _pctTxt(n){return '<span dir="ltr" style="unicode-bidi:isolate">'+(+(+n||0).toFixed(1))+'%</span>';}
 function openProfitCycleModal(){
   var activeInv=(DB.accounts.investors||[]).filter(function(i){return i.status!=='inactive';});
   if(!activeInv.length)return showToast('⚠️ أضف مستثمر أولاً','#dc2626');
@@ -23846,7 +23932,8 @@ function openProfitCycleModal(){
   if(!_pcPeriod._initialized){
     if(lastCycle&&lastCycle.date_to){
       _pcPeriod.mode='custom';
-      _pcPeriod.from=new Date(new Date(lastCycle.date_to).getTime()+86400000).toISOString().split('T')[0];
+      // ⚠️ v262 — كان بـUTC (toISOString) → اليوم بيتزحزح. دلوقتي محلي، ولو الناتج بعد النهارده بنثبّته على النهارده (توزيع تاني في نفس اليوم)
+      _pcPeriod.from=(function(sd){var q=sd.split('-'),nx=localISO_(new Date(+q[0],+q[1]-1,+q[2]+1));return nx>today()?today():nx;})(lastCycle.date_to);
       _pcPeriod.to=today();
     } else {
       _pcPeriod.mode='all';
@@ -23868,6 +23955,7 @@ function openProfitCycleModal(){
 
     '<div id="pc-period-filter"></div>'+
     '<div id="pc-profit-box"></div>'+
+    '<div id="pc-overlap-box"></div>'+
 
     fld('pc-profit','صافي الربح للفترة (ج) — يُحسب تلقائياً، يمكنك التعديل','number','','',true)+
 
@@ -23883,10 +23971,10 @@ function openProfitCycleModal(){
     '<div style="font-size:12px;font-weight:700;color:#374151;margin-bottom:8px">توزيع النسب</div>'+
     '<div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px;padding-bottom:5px;border-bottom:1px solid #e2e8f0">'+
     '<span>أنت (صاحب المشروع)</span>'+
-    '<b style="color:#2563eb">'+(100-activeInv.reduce(function(s,i){return s+i.profit_share_pct;},0)).toFixed(1)+'%</b></div>'+
+    '<b style="color:#2563eb">'+_pctTxt(100-activeInv.reduce(function(s,i){return s+i.profit_share_pct;},0))+'</b></div>'+
     activeInv.map(function(i){
       return '<div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px">'+
-        '<span>'+esc(i.name)+'</span><b style="color:#7c3aed">'+i.profit_share_pct+'%</b></div>';
+        '<span>'+esc(i.name)+'</span><b style="color:#7c3aed">'+_pctTxt(i.profit_share_pct)+'</b></div>';
     }).join('')+
     '</div>'+
 
@@ -23896,6 +23984,8 @@ function openProfitCycleModal(){
 
     '<button onclick="previewProfitCycle()" style="width:100%;padding:10px;background:#f1f5f9;border:1.5px solid #e2e8f0;border-radius:10px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;margin-bottom:12px;color:#374151">👁️ معاينة التوزيع</button>'+
 
+    dateField('pc-date','📅 تاريخ التوزيع (ممكن يكون قبل النهارده)',today())+
+
     fld('pc-note','ملاحظة','text','')+
 
     // ⚠️ v205 — زرار تأكيد توزيع الأرباح كان بينفّذ saveProfitCycle مباشرة من غير
@@ -23904,11 +23994,30 @@ function openProfitCycleModal(){
     '<button class="btn btn-green btn-full" onclick="__runOnce(this,saveProfitCycle)">✅ تأكيد التوزيع</button>'+
     '<button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
   openModal();
+  window.__pcProfitEdited=false; // ⚠️ v262
   _updatePcProfitBox();
+  var _pcPE=document.getElementById('pc-profit');if(_pcPE)_pcPE.oninput=function(){window.__pcProfitEdited=true;};
 }
 
 // يحسب الربح من الفترة المختارة في _pcPeriod ويعرضه ويعبّي حقل pc-profit تلقائياً
+// ⚠️ v262 — الفترة الفعلية المختارة. في وضع "مخصّص" بنقرا الحقول مباشرة (قبل كده لو ماضغطتش "تطبيق" الحالة كانت فاضية والحقول بتعرض النهارده → ربح على كل البيانات وبداية فترة فاضية)
+function _pcRangeNow(){
+  if(_pcPeriod.mode==='custom'){
+    var f=document.getElementById('_pcPeriod-from'),tt=document.getElementById('_pcPeriod-to');
+    _pcPeriod.from=(f&&f.value)||_pcPeriod.from||today();
+    _pcPeriod.to=(tt&&tt.value)||_pcPeriod.to||today();
+  }
+  return _periodToRange(_pcPeriod);
+}
+// دورات توزيع متداخلة مع الفترة دي (لمنع حساب نفس الربح مرتين)
+function _pcOverlapping(pr){
+  var a=pr.from||'0000-01-01',b=pr.to||'9999-12-31';
+  return (DB.accounts.profit_cycles||[]).filter(function(c){
+    return (c.date_from||'0000-01-01')<=b&&(c.date_to||'9999-12-31')>=a;
+  });
+}
 function _updatePcProfitBox(){
+  if(_pcPeriod.mode==='custom'){_pcPeriod.from=_pcPeriod.from||today();_pcPeriod.to=_pcPeriod.to||today();}
   var filterEl=document.getElementById('pc-period-filter');
   if(filterEl)filterEl.innerHTML=renderPeriodFilterHTML('_pcPeriod','_updatePcProfitBox');
   var r=_periodToRange(_pcPeriod);
@@ -23918,25 +24027,34 @@ function _updatePcProfitBox(){
   var totalCos=ps.reduce(function(s,sale){return s+(sale.items||[]).reduce(function(ss,i){return ss+i.qty*(i.buyPrice||i.buy_price||0);},0);},0);
   var totalExp=pe.reduce(function(s,x){return s+x.amount;},0);
   var _bShare=_invExclOn()?_invSalesShare(ps).share:0;
-  var suggestedProfit=Math.max(0,totalSales-totalCos-totalExp-_bShare);
+  var suggestedProfit=Math.max(0,Math.round(totalSales-totalCos-totalExp-_bShare));
   var box=document.getElementById('pc-profit-box');
   if(box)box.innerHTML='<div style="background:#f0fdf4;border-radius:10px;padding:10px 12px;margin-bottom:12px">'+
     '<div style="font-size:11px;color:#64748b;margin-bottom:3px">📊 صافي الربح لهذه الفترة فقط (تلقائي)</div>'+
     '<div style="font-size:18px;font-weight:900;color:#15803d">'+fmt(suggestedProfit)+'</div>'+
     '<div style="font-size:10px;color:#94a3b8">مبيعات الفترة - تكلفتها - مصاريف الفترة</div></div>';
+  var ovEl=document.getElementById('pc-overlap-box');
+  if(ovEl){
+    var ov=_pcOverlapping(r);
+    ovEl.innerHTML=ov.length
+      ?'<div style="background:#fef2f2;border:1.5px solid #fecaca;border-radius:10px;padding:9px 12px;margin-bottom:12px;font-size:11.5px;color:#991b1b;line-height:1.8">⚠️ الفترة دي (أو جزء منها) <b>اتوزّعت قبل كده</b>:<br>'+ov.map(function(c){return esc(fmtDate(c.date_from)||'من البداية')+' ← '+esc(fmtDate(c.date_to))+' — ربح '+fmt(c.gross_profit);}).join('<br>')+'<br>لو وزّعت تاني هيتحسب نفس الربح مرتين.</div>'
+      :'<div style="background:#f0fdf4;border-radius:10px;padding:7px 12px;margin-bottom:12px;font-size:11.5px;color:#15803d;font-weight:700">✅ الفترة دي لسه ماتوزّعتش</div>';
+  }
   var profitInput=document.getElementById('pc-profit');
-  if(profitInput)profitInput.value=suggestedProfit>0?suggestedProfit:'';
+  // ⚠️ v262 — ماتمسحش الرقم اللي المستخدم كتبه بإيده
+  if(profitInput&&!window.__pcProfitEdited)profitInput.value=suggestedProfit>0?suggestedProfit:'';
 }
 
+// ⚠️ v261 — "يُحتجز لك" كان بيطلع ضعف الرقم (newOwnerRetained-ownerRetained+ownerShare-ownerDraw بيعدّ الحصة مرتين). الصح = ownerShare-actualDraw (نفس اللي saveProfitCycle بيسجله).
 function previewProfitCycle(){
-  var profit=+v('pc-profit');
+  var profit=Math.round(+v('pc-profit')); // ⚠️ v262 — أرقام صحيحة بس
   if(!profit||profit<=0)return showToast('⚠️ أدخل الربح أولاً','#dc2626');
-  var ownerDraw=+v('pc-owner-draw')||0;
+  var ownerDraw=Math.round(+v('pc-owner-draw')||0);
   var includeInvestors=document.getElementById('pc-include-investors')?document.getElementById('pc-include-investors').checked:true;
   var activeInv=includeInvestors?(DB.accounts.investors||[]).filter(function(i){return i.status!=='inactive';}):[];
   var totalInvPct=activeInv.reduce(function(s,i){return s+i.profit_share_pct;},0);
   var ownerPct=100-totalInvPct;
-  var ownerShare=Math.round(profit*ownerPct/100);
+  var ownerShare=profit-activeInv.reduce(function(s,i){return s+Math.round(profit*i.profit_share_pct/100);},0); // ⚠️ v262 — حصتك = الباقي بعد حصص المستثمرين المقرّبة، فالمجموع يطابق الربح
   var re=DB.accounts.retained_earnings||{owner:0,investors:{}};
 
   // لو السحب أكبر من الحصة
@@ -23963,32 +24081,45 @@ function previewProfitCycle(){
     '<div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px;padding-bottom:5px;border-bottom:1.5px solid #e2e8f0">'+
     '<b>صافي الربح</b><b style="color:#15803d">'+fmt(profit)+'</b></div>'+
     '<div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px">'+
-    '<span>حصتك ('+ownerPct.toFixed(1)+'%)</span><b style="color:#2563eb">'+fmt(ownerShare)+'</b></div>'+
+    '<span>حصتك ('+_pctTxt(ownerPct)+')</span><b style="color:#2563eb">'+fmt(ownerShare)+'</b></div>'+
     activeInv.map(function(i){
       var share=Math.round(profit*i.profit_share_pct/100);
       var invRetained=(re.investors||{})[i.id]||0;
       return '<div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px">'+
-        '<span>'+esc(i.name)+' ('+i.profit_share_pct+'%)</span><b style="color:#7c3aed">'+fmt(share)+'</b></div>'+
+        '<span>'+esc(i.name)+' ('+_pctTxt(i.profit_share_pct)+')</span><b style="color:#7c3aed">'+fmt(share)+'</b></div>'+
         (invRetained>0?'<div style="font-size:10px;color:#94a3b8;text-align:left;margin-bottom:3px">محتجز له: '+fmt(invRetained)+' + '+fmt(share)+' = '+fmt(invRetained+share)+'</div>':'');
     }).join('')+
     '<div style="border-top:1.5px solid #e2e8f0;margin-top:6px;padding-top:6px">'+
     '<div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">'+
     '<span>ستسحب أنت</span><b style="color:#ea580c">'+fmt(actualDraw)+'</b></div>'+
     (fromRetained>0?'<div style="font-size:10px;color:#dc2626">منها '+fmt(fromRetained)+' من الأرباح المحتجزة</div>':'')+
-    (ownerShare-actualDraw+fromRetained>0?'<div style="display:flex;justify-content:space-between;font-size:12px;margin-top:3px">'+
-    '<span>يُحتجز لك</span><b style="color:#854d0e">'+fmt(newOwnerRetained-ownerRetained+ownerShare-ownerDraw)+'</b></div>':'')+
+    (ownerShare-actualDraw>0?'<div style="display:flex;justify-content:space-between;font-size:12px;margin-top:3px">'+
+    '<span>يُحتجز لك من الدورة دي</span><b style="color:#854d0e">'+fmt(ownerShare-actualDraw)+'</b></div>':'')+
+    ((ownerRetained>0||fromRetained>0)?'<div style="display:flex;justify-content:space-between;font-size:11px;margin-top:3px;color:#64748b"><span>إجمالي محتجزك بعد التوزيع</span><b>'+fmt(newOwnerRetained)+'</b></div>':'')+
     '</div></div>';
 }
 
-async function saveProfitCycle(){
-  var profit=+v('pc-profit');
+async function saveProfitCycle(skipOverlap){
+  var profit=Math.round(+v('pc-profit')); // ⚠️ v262 — أرقام صحيحة بس
   if(!profit||profit<=0)return showToast('⚠️ أدخل الربح','#dc2626');
-  var ownerDraw=+v('pc-owner-draw')||0;
+  // ⚠️ v262 — تاريخ التوزيع + فحص الفترة + منع تكرار نفس الفترة من غير تأكيد
+  var distDate=v('pc-date')||today();
+  if(distDate>today())return showToast('⚠️ تاريخ التوزيع في المستقبل','#dc2626');
+  var pr=_pcRangeNow();
+  if(pr.from&&pr.to&&pr.from>pr.to)return showToast('⚠️ بداية الفترة بعد نهايتها','#dc2626');
+  if(skipOverlap!==true){
+    var _ovl=_pcOverlapping(pr);
+    if(_ovl.length){
+      confirmAction('الفترة دي (أو جزء منها) اتوزّعت قبل كده ('+_ovl.length+' دورة). متأكد تكمل وتحسب نفس الربح تاني؟',function(){saveProfitCycle(true);});
+      return;
+    }
+  }
+  var ownerDraw=Math.round(+v('pc-owner-draw')||0);
   var includeInvestors=document.getElementById('pc-include-investors')?document.getElementById('pc-include-investors').checked:true;
   var activeInv=includeInvestors?(DB.accounts.investors||[]).filter(function(i){return i.status!=='inactive';}):[];
   var totalInvPct=activeInv.reduce(function(s,i){return s+i.profit_share_pct;},0);
   var ownerPct=100-totalInvPct;
-  var ownerShare=Math.round(profit*ownerPct/100);
+  var ownerShare=profit-activeInv.reduce(function(s,i){return s+Math.round(profit*i.profit_share_pct/100);},0); // ⚠️ v262 — حصتك = الباقي بعد حصص المستثمرين المقرّبة، فالمجموع يطابق الربح
 
   if(!DB.accounts.retained_earnings)DB.accounts.retained_earnings={owner:0,investors:{}};
   var re=DB.accounts.retained_earnings;
@@ -24000,7 +24131,8 @@ async function saveProfitCycle(){
     fromRetained=Math.min(ownerDraw-ownerShare,re.owner||0);
     actualDraw=ownerShare+fromRetained;
   }
-  var ownerRetainedChange=(ownerShare-actualDraw+fromRetained);
+  // ⚠️ v261 — كان +fromRetained فبيلغي خصم السحب من المحتجز (الرصيد مابينقصش). الصح: share - actualDraw (سالب لو سحبت من المحتجز).
+  var ownerRetainedChange=(ownerShare-actualDraw);
 
   // توزيع المستثمرين
   var distributions=activeInv.map(function(i){
@@ -24009,12 +24141,12 @@ async function saveProfitCycle(){
   });
 
   // حفظ الدورة
-  var pr=_periodToRange(_pcPeriod);
+  // (الفترة اتحسبت فوق في pr)
   var cycle={
     id:genId(),
     date_from:pr.from,
     date_to:pr.to||today(),
-    date_created:today(),
+    date_created:distDate,
     gross_profit:profit,
     owner_share:ownerShare,
     owner_draw:actualDraw,
@@ -24036,6 +24168,66 @@ async function saveProfitCycle(){
   _pcPeriod=_makePeriodState();
   closeModal();renderAccounting();
   showToast('✅ تم توزيع الأرباح','#16a34a');
+}
+
+
+// ===== ⚠️ v262 — ترحيل الدورات القديمة (سحب أكتر من الحصة اتسجّل له محتجز غلط قبل v261) =====
+// الصح: retained = owner_share - owner_draw (سالب لو سحبت من المحتجز). بنصلّح بس الدورات اللي owner_draw فيها > owner_share
+// ومحتجزها المسجّل مختلف، وبعد موافقتك بمعاينة. بنحفظ القيمة القديمة في retained_old للمراجعة.
+function _pcFixList(){
+  return (DB.accounts.profit_cycles||[]).filter(function(c){
+    var sh=c.owner_share||0,dr=c.owner_draw||0;
+    return dr>sh&&!c.retained_fixed_v262&&Math.abs((c.retained||0)-(sh-dr))>0.5;
+  });
+}
+function _pcFixBanner(){
+  if(!window.__isOwner)return '';
+  var n=_pcFixList().length;
+  if(!n)return '';
+  return '<div style="background:#fef9c3;border:1.5px solid #fde047;border-radius:12px;padding:11px 13px;margin-bottom:12px;font-size:12px;color:#854d0e;line-height:1.7">🔧 لقيت <b>'+n+'</b> دورة قديمة سحبت فيها أكتر من حصتك ورصيدها المحتجز اتسجّل غلط.<br>'+
+    '<button class="btn btn-primary btn-full" style="margin-top:6px" onclick="openRetainedFixModal()">راجع الأرقام وصحّحها</button></div>';
+}
+function openRetainedFixModal(){
+  if(!window.__isOwner)return showToast('🚫 الترحيل ده للمالك بس','#dc2626');
+  var list=_pcFixList();
+  if(!list.length){showToast('✅ مفيش دورات محتاجة تصحيح','#16a34a');return;}
+  var cycles=DB.accounts.profit_cycles||[];
+  var now=(DB.accounts.retained_earnings||{}).owner||0;
+  var after=cycles.reduce(function(s,c){
+    var f=list.indexOf(c)>-1;
+    return s+(f?((c.owner_share||0)-(c.owner_draw||0)):(c.retained||0));
+  },0);
+  document.getElementById('modal-title').textContent='🔧 ترحيل الدورات القديمة';
+  document.getElementById('modal-body').innerHTML=
+    '<div style="font-size:12px;color:#475569;line-height:1.8;margin-bottom:10px">الدورات دي سحبت فيها أكتر من حصتك (يعني من المحتجز) لكن المحتجز ماتخصمش. هتتصحح بالأرقام دي — <b>مفيش حاجة بتتغيّر غير لما تدوس تأكيد</b>:</div>'+
+    list.map(function(c){
+      var sh=c.owner_share||0,dr=c.owner_draw||0;
+      return '<div style="background:#f8fafc;border-radius:10px;padding:9px 11px;margin-bottom:7px;font-size:12px;line-height:1.8">'+
+        '<div style="font-weight:800">'+esc(fmtDate(c.date_from)||'من البداية')+' ← '+esc(fmtDate(c.date_to))+'</div>'+
+        '<div>حصتك '+fmt(sh)+' • سحبت '+fmt(dr)+'</div>'+
+        '<div>المحتجز المسجّل: <b style="color:#dc2626">'+fmt(c.retained||0)+'</b> ← الصح: <b style="color:#15803d">'+fmt(sh-dr)+'</b></div></div>';
+    }).join('')+
+    '<div style="background:#fffbeb;border:1.5px solid #fde68a;border-radius:10px;padding:10px 12px;margin:10px 0;font-size:13px;line-height:1.9">'+
+    '<div>محتجزك دلوقتي: <b>'+fmt(now)+'</b></div>'+
+    '<div>بعد التصحيح: <b style="color:#15803d">'+fmt(Math.max(0,after))+'</b></div>'+
+    (after<0?'<div style="color:#dc2626;font-size:11.5px">⚠️ مجموع سحوبك من المحتجز أكبر من المحتجز المسجّل ('+fmt(after)+') — الرصيد هيتصفّر. راجع الدورات القديمة قبل التأكيد.</div>':'')+
+    '</div>'+
+    '<div class="modal-actions"><button class="btn btn-green btn-full" onclick="__runOnce(this,applyRetainedFix)">✅ تأكيد التصحيح</button>'+
+    '<button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
+  openModal();
+}
+async function applyRetainedFix(){
+  if(!window.__isOwner)return showToast('🚫 الترحيل ده للمالك بس','#dc2626');
+  var list=_pcFixList();
+  list.forEach(function(c){
+    c.retained_old=c.retained||0;
+    c.retained=(c.owner_share||0)-(c.owner_draw||0);
+    c.retained_fixed_v262=true;
+  });
+  recalcRetainedEarnings();
+  await persist();
+  closeModal();renderAccounting();
+  showToast('✅ اتصحّحت '+list.length+' دورة','#16a34a');
 }
 
 async function deleteProfitCycle(id){
