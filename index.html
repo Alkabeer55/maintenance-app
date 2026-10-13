@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v262</title>
+<title>ابو حوده الحلو الجميل v268</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="1448-05-01 — v262";
+<script>var BUILD_STAMP="1448-05-02 — v268";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -62,8 +62,31 @@
     12) ⚠️ v260 — قبل ما تبني قسم جديد: ابحث في الكود عن قسم قديم بنفس الغرض وادمج/اربط بدل ما تعمل نسخة موازية
        (درس المستثمرين: اتبنى نظام جديد جنب نظام الحسابات القديم وفضلوا منفصلين). ويتسجّل أي ربط في الـ Changelog.
       مسار خالص عن طريق confirmAction، الزرار بتاعها لازم __runOnce من أول يوم.
+    13) ⚠️ v268 — الطبقة المشتركة: أي حساب مالي بيتكرر (إجمالي بنود، تكلفة فاتورة، قيمة مخزون، مدفوع كامل، تقريب)
+        لازم يتكتب مرة واحدة ويتنادى من الطبقة المشتركة (تحت fmt: money / lineTotal / saleCost / invValue / isPaidUp...)
+        ممنوع qty*price أو paid>=total مباشرة. أي تعديل في طريقة الحساب يتعمل في الدالة نفسها فيتغيّر كل مكان.
+    14) ⚠️ v268 — أي دالة جديدة بتنشئ سجل أو بتحرّك فلوس/مخزون لازم تتضاف في __ONCE_GUARDED (آخر بلوك السكريبت الرئيسي)،
+        ده بيحميها من الضغط المتكرر حتى لو الزرار نسي __runOnce. (__runOnce فاضل مطلوب على الزرار — الاتنين مع بعض).
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v268: [🧱 طبقة مشتركة للحسابات | 🛡️ حارس مركزي ضد الضغط المتكرر | 🧮 تقريب كل الإجماليات]
+     1) الطبقة المشتركة (تحت fmt): money / lineTotal / saleItemsSubtotal / purchItemsSubtotal / saleCost / invValue / isPaidUp. استبدلت التكرار: تكلفة الفاتورة (٩ أماكن)، قيمة المخزون (٧)، إجمالي بنود البيع (٦)، المشتريات، وحالة "مدفوع" (فاتورة + مشترى + فلتر المورد). دلوقتي أي تعديل في طريقة الحساب بيتعمل في مكان واحد.
+     2) تقريب لأقرب قرش في: أمانات البيع (consignment)، سعر الخدمة من قطعة، المشتريات المستوردة، تكلفة وإجمالي تفكيك الخردة، التكلفة الإضافية الموزّعة على الصنف.
+     3) الحارس المركزي: 82 دالة (حفظ/دفع/سحب/تأكيد...) اتلفّت مرة واحدة — الضغطة التانية على نفس العملية (نفس الـid) بتتجاهل ومعاها تنبيه. كان فيه ١٩ زرار من غير __runOnce (سداد الموظفين، دفعات مقدمة التحركات، استيراد العملاء، تحويل المخزون الافتتاحي، الجرد...).
+v267: [🧮 غبار الفاصلة العشرية في حفظ المشتريات (تكملة v266)]
+     إجمالي المشترى والتكلفة الإضافية والإجمالي الكلي بقوا بيتقرّبوا لأقرب قرش وقت الحفظ، وإنشاء دين المورد بسماحية نص قرش (قبل كده مشترى كسري مدفوع بالكامل ممكن يتسجّل عليه دين وهمي). نفس السماحية في فلتر مدفوع/دين بدفتر المورد وفي حساب فرق الدين عند تعديل المشترى. مفيش بيانات قديمة اتغيّرت.
+v266: [🧮 غبار الفاصلة العشرية في حفظ فاتورة البيع]
+     إجمالي الفاتورة كان بيتحسب من غير تقريب (qty*price بكميات كسرية)، فممكن ينتج ٠٫٣٠٠٠٠٠٠٠٠٠٠٠٠٠٠٠٤ والمدفوع ٠٫٣ فالحالة تطلع "جزئي" ويظهر دين وهمي. دلوقتي الإجمالي بيتقرّب لأقرب قرش وحالة "مدفوع" بسماحية نص قرش. اتجرّب رقميًا قبل/بعد. (فيه ٤١ مكان تانيين بيحسبوا qty*price من غير تقريب؛ اللي اتفحص منهم عرض وإحصائيات بس. لسه ما اتراجعش حفظ المشتريات والتحركات واحدة واحدة.)
+v265: [🔢 عرض الأرقام بكسرين | 🖨️ كشف توزيع الأرباح]
+     1) fmt() كانت بتعرض لحد ٣ كسور (١٠٠٠÷٣ = ٣٣٣٫٣٣٣) في ~٥٤٠ مكان — بقت كسرين بحد أقصى. عرض بس، مفيش رقم مخزّن اتغيّر ولا إجمالي اتقرّب.
+     2) زرار 🖨️ على كارت كل دورة توزيع: كشف (الفترة، تاريخ التوزيع هجري+ميلادي، صافي الربح، حصة كل واحد، الإجمالي، سحب المالك والمحتجز) بنفس نظام الطباعة/PDF الموجود.
+     3) فُحص كود التوزيع بتاريخ قديم (saveProfitCycle): date_created=تاريخ التوزيع المختار، والمستقبل مرفوض، والزرار محمي بـ__runOnce — مفيش عيب في الكود.
+v264: [🛡️ حماية رصيد المحتجز بعد المزامنة | 🔌 فتح التطبيق من غير نت لو سكريبت Supabase ماحمّلش]
+     (أ) فتح التطبيق من غير نت وكاش المتصفح فاضي: سطر createClient كان بيرمي خطأ ويوقف كل بلوك المزامنة والدخول (متغيرات الدمج وفحص الجلسة والدخول الأوفلاين ماكانوش بيشتغلوا) فبوابة الدخول كانت بتفضل مقفولة رغم وجود بيانات محلية ومستخدم محفوظ. اتأكد بتجربة فعلية قبل/بعد (قبل: البوابة ظاهرة + خطأ، بعد: دخول أوفلاين بالبروفايل المحفوظ من غير أخطاء). الحل: try/catch حوالين createClient وsb بيفضل undefined (فحوصات typeof sb الموجودة شغالة زي ما هي).
+     (ب) رصيد المحتجز:
+     بعد سحب "الحسابات" من السيرفر، رصيد المحتجز (المالك + المستثمرين) كان بيتاخد جاهز من السيرفر زي ما هو (سطر retained_earnings في __mergeAccounts) — لو نسخة السيرفر أقدم، الرصيد كان بيبان غلط في شاشات بتقرا الرقم مباشرة (سحب المستثمر، الرئيسية قبل أول رسم). دلوقتي recalcRetainedEarnings() بتتنادى فورًا بعد الدمج، فالرصيد دايمًا = مجموع الدورات. ما بيغيّرش أي رقم اتعرض قبل كده في الرئيسية/الحسابات (الاتنين كانوا بيعيدوا الحساب وقت الفتح) — بس بيقفل الثغرة في الباقي. ما اتلمسش أي بيانات مخزّنة.
+v263: [🔄 السبب الجذري لعنصر "بانتظار المزامنة (1)" اللي مابيروحش — "بيانات التشغيل / رفع نسخة كاملة"، محاولات فاشلة 0]
+     __pushBizBlobsToServer كانت بتتخطى (continue) أي قايمة LWW ماتغيّرتش من آخر رفع ناجح — عشان ماتكتبش فوق جهاز تاني — لكن من غير ما تشيل العنصر من الطابور. العنصر بيتحط في الطابور لما النت يفصل (بيتحط كل القوايم)، وبعد رجوع النت القوايم اللي اتغيّرت بتترفع وتتشال، واللي ماتغيّرتش بتفضل عالقة للأبد بصفر محاولات فاشلة (عشان كده "حاول تاني" ماكانش بيعمل حاجة). دلوقتي: لو القايمة ماتغيّرتش يبقى السيرفر عنده نفس النسخة فبنشيلها من الطابور. كمان تفاصيل الطابور بقت بتعرض اسم القايمة بالظبط.
 v262: [📊 توزيع الأرباح: أرقام صحيحة + تاريخ توزيع + منع تكرار الفترة + ترحيل الدورات القديمة | 🔄 المزامنة العالقة]
      1) أرقام صحيحة بس: صافي الربح بيتقرّب لأقرب جنيه، وحصة المستثمر بتتقرّب وحصتك = الباقي، فالمجموع بيطابق الربح بالظبط (قبل كده كان بيضيع كسور).
      2) تاريخ التوزيع: اتضاف حقل "تاريخ التوزيع" (ممكن يكون قبل النهارده). قبل كده التاريخ كان دايمًا النهارده ومفيش طريقة تحدده.
@@ -3029,7 +3052,12 @@ input:checked+.slider:before{transform:translateX(-20px)}
   // إعدادات الاتصال بالسيرفر المركزي
   var SB_URL = 'https://simqakfxywglgevhcgbr.supabase.co';
   var SB_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho';
-  var sb = window.supabase.createClient(SB_URL, SB_ANON_KEY);
+  // ⚠️ v264 — لو سكريبت Supabase من الـ CDN ماحمّلش (فتح التطبيق من غير نت وكاش المتصفح فاضي)، السطر ده كان بيرمي خطأ ويوقف باقي البلوك:
+  // كل المتغيرات اللي بعده (__PROTECTED_NONEMPTY_FIELDS, __LWW_KEYS...) وفحص الجلسة/الدخول الأوفلاين ماكانوش بيشتغلوا، وبوابة الدخول تفضل مقفولة حتى لو عندك بيانات محلية.
+  // دلوقتي sb بيفضل undefined (وكل فحوصات typeof sb==='undefined' الموجودة بتشتغل زي ما هي) والباقي بيكمّل عادي.
+  var sb;
+  try{ sb = window.supabase.createClient(SB_URL, SB_ANON_KEY); }
+  catch(_eSb){ sb = undefined; console.warn('Supabase SDK مش محمّل — وضع أوفلاين محلي:', _eSb); }
   window.__currentProfile = null; // هيتحط فيه: {full_name, role_id, branch_id, id}
 
   function __showLoginMsg(msg, type){
@@ -3375,6 +3403,8 @@ input:checked+.slider:before{transform:translateX(-20px)}
         var accRes = await sb.from('business_state').select('data, updated_at').eq('id','accounts').maybeSingle();
         if(!accRes.error && accRes.data && accRes.data.data){
           DB.accounts = __mergeAccounts(DB.accounts, accRes.data.data);
+          // ⚠️ v264 — رصيد المحتجز (المالك + كل مستثمر) بيتعاد حسابه من الدورات فورًا بعد السحب من السيرفر؛ __mergeAccounts بيدي الرصيد الجاهز من السيرفر (ممكن يكون أقدم) والدورات هي مصدر الحقيقة.
+          try{ if(typeof recalcRetainedEarnings==='function') recalcRetainedEarnings(); }catch(_eRe){ console.warn('recalcRetainedEarnings after sync:',_eRe); }
         }
       }catch(eAcc){
         console.warn('فشل سحب الحسابات من السيرفر:', eAcc);
@@ -3556,7 +3586,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
       var __isLww = __LWW_KEYS.indexOf(b.key)!==-1;
       if(__isLww){ // v254 — ما نرفعش قايمة ما اتغيّرتش من آخر رفع (عشان ما نكتبش فوق تعديل جهاز تاني بنسخة قديمة)
         var __pushed=LS.get('mc8_biz_pushed',{})||{};
-        if(__pushed[b.key]===JSON.stringify(DB[b.key]||__bizBlank(b.key))) continue;
+        if(__pushed[b.key]===JSON.stringify(DB[b.key]||__bizBlank(b.key))){ __dequeueSync('__bizblob__', b.id); continue; } // ⚠️ v263 — ماتغيّرتش = السيرفر عنده نفس النسخة → نشيلها من الطابور (كانت بتفضل عالقة للأبد)
       }
       try{
         var payload = {
@@ -4451,7 +4481,7 @@ var APP_TITLE='ابو حوده الحلو الجميل';
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=262;
+var APP_VERSION=268;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -5130,7 +5160,7 @@ function __showSyncQueueDetails(){
   document.getElementById('modal-body').innerHTML=
     '<div style="font-size:12px;color:#475569;line-height:1.8;margin-bottom:10px">العناصر دي محفوظة على جهازك بس ولسه ماوصلتش السيرفر.</div>'+
     list.map(function(q,i){
-      var name=__SQ_LABELS[q.table]||q.table;
+      var name=(__SQ_LABELS[q.table]||q.table)+(q.table==='__bizblob__'?' ('+q.id+')':'');
       var opTxt=q.op==='delete'?'حذف':(q.op==='upsert'?'إضافة/تعديل':'رفع نسخة كاملة');
       var canIgnore=(q.op==='upsert'||q.op==='delete');
       return '<div style="background:#f8fafc;border-radius:10px;padding:9px 11px;margin-bottom:7px;font-size:12px;line-height:1.8">'+
@@ -5762,7 +5792,26 @@ function selAC(id,value){
 }
 
 function v(id){var el=document.getElementById(id);return el?el.value:'';}
-function fmt(n){return(n||0).toLocaleString('ar-EG')+' ج';}
+// ⚠️ v265 — عرض بكسرين عشريين كحد أقصى (كان 3 فبيظهر ٣٣٣٫٣٣٣). عرض بس — مفيش أي رقم مخزّن اتغيّر.
+function fmt(n){return(n||0).toLocaleString('ar-EG',{maximumFractionDigits:2})+' ج';}
+// ═════════ 🧱 الطبقة المشتركة (v268) — أي حساب مالي مكرر لازم يعدّي من هنا ═════════
+// قول "عدّل في المشترك" = أعدّل الدالة هنا مرة واحدة فتتغيّر كل الأماكن اللي بتستخدمها.
+// الدالة            | بتعمل إيه
+// money(n)          | تقريب لأقرب قرش (الأرقام بتتخزّن بيها) — يمنع ٠٫٣٠٠٠٠٠٠٠٠٠٤
+// lineTotal(q,p)    | كمية × سعر مقرّبة
+// saleItemsSubtotal(items) / purchItemsSubtotal(items) | إجمالي بنود فاتورة / مشترى
+// saleCost(sale)    | تكلفة بضاعة فاتورة بيع (سعر الشراء وقت البيع)
+// invValue(products)| قيمة مخزون بسعر الشراء
+// salesCost(list)   | تكلفة بضاعة مجموعة فواتير
+// isPaidUp(paid,total) | هل اتدفع كامل؟ (سماحية نص قرش)
+function money(n){return Math.round((+n||0)*100)/100;}
+function lineTotal(q,p){return money((+q||0)*(+p||0));}
+function saleItemsSubtotal(items){return money((items||[]).reduce(function(t,i){return t+(+i.qty||0)*(+i.price||0);},0));}
+function purchItemsSubtotal(items){return money((items||[]).reduce(function(t,i){return t+(+i.qty||0)*(+i.price||0);},0));}
+function saleCost(sale){return money(((sale&&sale.items)||[]).reduce(function(t,i){return t+(+i.qty||0)*(i.buyPrice||i.buy_price||0);},0));}
+function invValue(products){return money((products||[]).reduce(function(t,p){return t+(+p.qty||0)*(p.buy_price||0);},0));}
+function isPaidUp(paid,total){return (+paid||0)>=money(total)-0.005;}
+function salesCost(list){return money((list||[]).reduce(function(t,sale){return t+saleCost(sale);},0));} // تكلفة بضاعة مجموعة فواتير
 // ⚠️ v202 — الكميات الكسرية: roundQty بتتحط حوالين أي عملية جمع/طرح على qty عشان تمنع
 // أخطاء الفاصلة العشرية المتراكمة (زي 0.1+0.2 اللي بتطلع 0.30000000000000004 في JS)،
 // وfmtQty بتعرض الكمية من غير أصفار زيادة (2.500 → 2.5، لكن 3 تفضل 3 مش 3.0).
@@ -6285,7 +6334,7 @@ function renderHome(){
   var monthSales=DB.sales.filter(function(s){var d=s.date||'';return d>=hMonthRange.start&&d<=hMonthRange.end;});
   var ts=monthSales.reduce(function(s,x){return s+x.total;},0);
   // تكلفة البضاعة المباعة فعلياً (نفس منطق التقارير) — مش كل المشتريات
-  var tcos=monthSales.reduce(function(s,sale){return s+(sale.items||[]).reduce(function(ss,i){return ss+i.qty*(i.buyPrice||i.buy_price||0);},0);},0);
+  var tcos=salesCost(monthSales);
   var te=DB.expenses.filter(function(x){var d=x.date||'';return d>=hMonthRange.start&&d<=hMonthRange.end;}).reduce(function(s,x){return s+x.amount;},0);
   var td=DB.debts.reduce(function(s,d){return s+(d.total-(d.paid||0));},0); // الديون تفضل إجمالي كل الوقت (مش مرتبطة بشهر معين)
   var totalProfit=ts-tcos-te;
@@ -6545,7 +6594,7 @@ function renderInventory(){
   // v139 — إخفاء أسعار الشراء/التكلفة عن أي موظف غير المالك (وغير المستثنى "يشوف كل حاجة")
   var _invShowCost=!__isFieldHidden('products','buy_price');
 
-  var totalVal=DB.products.reduce(function(s,p){return s+p.qty*(p.buy_price||0);},0);
+  var totalVal=invValue(DB.products);
   var lowStock=DB.products.filter(function(p){return p.qty<=(p.min_qty||0)&&p.qty>0;});
   var outStock=DB.products.filter(function(p){return p.qty===0;});
   var deadStock=DB.products.filter(isDeadStock);
@@ -6842,10 +6891,10 @@ function renderInventoryStats(){
   // مش ملكك بالكامل أو مش عندك فعليًا، وده كان بيضخّم رقم "قيمة المخزون" غلط. مع زرار
   // بيوريك القيمة شاملة الأمانة كمان لمين عايز يشوفها.
   var ownedProducts=products.filter(function(p){return !p.consignment;});
-  var totalVal=ownedProducts.reduce(function(s,p){return s+p.qty*(p.buy_price||0);},0);
+  var totalVal=invValue(ownedProducts);
   // قطع/ماكينات الاسكراب تُباع بسعر الاسكراب (scrap_price) لا بسعر البيع العادي (sell_price غالباً 0 لأنها لا تُباع كوحدة كاملة)
   var totalSellVal=ownedProducts.reduce(function(s,p){return s+p.qty*(p.unit==='اسكراب'?(p.scrap_price||0):(p.sell_price||0));},0);
-  var totalValIncl=products.reduce(function(s,p){return s+p.qty*(p.buy_price||0);},0);
+  var totalValIncl=invValue(products);
   var totalSellValIncl=products.reduce(function(s,p){return s+p.qty*(p.unit==='اسكراب'?(p.scrap_price||0):(p.sell_price||0));},0);
   var consignCount=products.length-ownedProducts.length;
   var showIncl=!!_invStatsIncludeConsignment;
@@ -7525,7 +7574,7 @@ async function saveConsignmentOutSale(id){
   var p=DB.products.find(function(x){return x.id===id;});if(!p)return;
   var qty=roundQty(+v('cons-sale-qty')); // ⚠️ v205 — roundQty() على الكمية
   if(!qty||qty<=0||qty>p.qty)return showToast('⚠️ الكمية غير صحيحة (المتاح عنده: '+p.qty+')','#dc2626');
-  var total=qty*(p.consignment_price||0);
+  var total=lineTotal(qty,p.consignment_price);
   DB.products=DB.products.map(function(x){return x.id===id?Object.assign({},x,{qty:roundQty(x.qty-qty)}):x;});
   await dbUpdate('products',id,{qty:roundQty(p.qty-qty)});
   var debtObj={id:genId(),type:'customer',name:p.consignment_party,desc:'أمانة عنده: '+p.name+' × '+qty,details:'أمانة عنده: '+p.name+' × '+qty,total:total,paid:0,date:today(),payments:[],source:'consignment'};
@@ -7573,7 +7622,7 @@ async function saveReturnConsignment(id){
 // مسار تعديل الفاتورة (كانت الدالة دي أصلاً بتتنادى بس عند إنشاء فاتورة جديدة).
 async function _handleConsignmentInSale(prod,qtySold,saleId){
   if(!prod||prod.consignment!=='in'||!qtySold)return;
-  var total=qtySold*(prod.consignment_cost||0);
+  var total=lineTotal(qtySold,prod.consignment_cost);
   if(total<=0)return;
   var debtObj={id:genId(),type:'supplier',name:prod.consignment_party,desc:'أمانة: '+prod.name+' × '+fmtQty(qtySold),details:'أمانة: '+prod.name+' × '+fmtQty(qtySold),total:total,paid:0,date:today(),payments:[],source:'consignment',source_sale_id:saleId||null,consignment_product_id:prod.id};
   DB.debts.unshift(debtObj);
@@ -8289,7 +8338,7 @@ function openSaleModal(id){
 
 // ===== body الفاتورة =====
 function renderSaleBody(s){
-  var subtotal=_saleItems.reduce(function(t,i){return t+i.qty*i.price;},0)+
+  var subtotal=saleItemsSubtotal(_saleItems)+
     _saleServices.reduce(function(t,sv){return t+sv.price;},0);
   var disc=+v('sale-discount')||0;
   var total=Math.max(0,subtotal-disc);
@@ -8542,7 +8591,7 @@ async function saveQsRows(){
 
 // ===== تحديث قائمة البنود فقط بدون مسح الحقول =====
 function _refreshSaleItems(){
-  var subtotal=_saleItems.reduce(function(t,i){return t+i.qty*i.price;},0)+
+  var subtotal=saleItemsSubtotal(_saleItems)+
     _saleServices.reduce(function(t,sv){return t+sv.price;},0);
   var disc=+v('sale-discount')||0;
   var total=Math.max(0,subtotal-disc);
@@ -8592,7 +8641,7 @@ function _restoreSaleFields(vals){
 var _paidManuallyEdited=false;
 function onPaidManualEdit(){_paidManuallyEdited=true;}
 function autoFillPaid(){
-  var subtotal=_saleItems.reduce(function(t,i){return t+i.qty*i.price;},0)+
+  var subtotal=saleItemsSubtotal(_saleItems)+
     _saleServices.reduce(function(t,sv){return t+sv.price;},0);
   if(!subtotal)return; // لا تعبئة لو مفيش بنود (سجل زيارة فقط)
   var disc=+v('sale-discount')||0;
@@ -8956,14 +9005,14 @@ function rmSaleService(idx){
 
 function updateSaleDiscount(){
   var disc=+v('sale-discount')||0;
-  var sub=_saleItems.reduce(function(t,i){return t+i.qty*i.price;},0)+_saleServices.reduce(function(t,sv){return t+sv.price;},0);
+  var sub=saleItemsSubtotal(_saleItems)+_saleServices.reduce(function(t,sv){return t+sv.price;},0);
   if(sub>0&&document.getElementById('sale-discount-pct'))
     document.getElementById('sale-discount-pct').value=disc?Math.round(disc/sub*100):'';
   if(!_saleId&&!_paidManuallyEdited)autoFillPaid();
 }
 function updateSaleDiscountPct(){
   var pct=+v('sale-discount-pct')||0;
-  var sub=_saleItems.reduce(function(t,i){return t+i.qty*i.price;},0)+_saleServices.reduce(function(t,sv){return t+sv.price;},0);
+  var sub=saleItemsSubtotal(_saleItems)+_saleServices.reduce(function(t,sv){return t+sv.price;},0);
   if(document.getElementById('sale-discount'))
     document.getElementById('sale-discount').value=pct?Math.round(sub*pct/100):'';
   if(!_saleId&&!_paidManuallyEdited)autoFillPaid();
@@ -8996,15 +9045,15 @@ async function saveSale(){
     var __oldSaleForGuard=DB.sales.find(function(x){return x.id===_saleId;});
     if(__oldSaleForGuard&&_blockIfClosedMonth(__oldSaleForGuard.date))return;
   }
-  var subtotal=_saleItems.reduce(function(t,i){return t+i.qty*i.price;},0)+
+  var subtotal=saleItemsSubtotal(_saleItems)+
     _saleServices.reduce(function(t,sv){return t+sv.price;},0);
   var disc=+v('sale-discount')||0;
-  var total=Math.max(0,subtotal-disc);
+  var total=Math.max(0,Math.round((subtotal-disc)*100)/100); // ⚠️ v266 — تقريب لأقرب قرش: غبار الفاصلة العشرية (٠٫١×٣ = ٠٫٣٠٠٠٠٠٠٠٠٠٠٠٠٠٠٠٤) كان بيخلّي فاتورة مدفوعة بالكامل تتسجّل "جزئي"
   var paid=+v('sale-paid')||0;
   var isVisitOnly=!_saleItems.length&&!_saleServices.length&&!paid; // سجل زيارة بدون بيع
   if(!_saleItems.length&&!_saleServices.length&&paid)total=paid;
   var _invErr=_invValidateSale();if(_invErr&&!confirm(_invErr+'\nالمخزون واحد — تكمل البيع برضه؟'))return; // v256/v258 تحذير بدل منع
-  var status=isVisitOnly?'زيارة':(paid>=total?'مدفوع':paid>0?'جزئي':'غير مدفوع');
+  var status=isVisitOnly?'زيارة':(isPaidUp(paid,total)?'مدفوع':paid>0?'جزئي':'غير مدفوع'); // v266 — سماحية نص قرش
   var pm=v('sale-payment-method')||_salePayMethod||'كاش';
   var newPhone=v('new-customer-phone')||'';
 
@@ -10154,7 +10203,7 @@ function _purchRestoreState(st,pur){
 }
 
 function renderPurchBody(p){
-  var subtotal=_purchItems.reduce(function(s,i){return s+i.qty*i.price;},0);
+  var subtotal=purchItemsSubtotal(_purchItems);
   var extraCost=+v('purch-extra-cost')||0;
   var totalQty=_purchItems.reduce(function(s,i){return s+i.qty;},0);
   var perUnitExtra=totalQty>0?extraCost/totalQty:0;
@@ -10422,11 +10471,13 @@ async function savePurchase(){
     if(__oldPurchForGuard&&_blockIfClosedMonth(__oldPurchForGuard.date))return;
   }
 
-  var subtotal=_purchItems.reduce(function(s,i){return s+i.qty*i.price;},0);
-  var extraCost=+v('purch-extra-cost')||0;
+  // ⚠️ v267 — تقريب لأقرب قرش: qty*price بكميات كسرية كان بيخزّن إجمالي فيه غبار عشري (٠٫٣٠٠٠٠٠٠٠٠٠٠٠٠٠٠٠٤)
+  // فمشترى مدفوع بالكامل ممكن يتسجّل عليه دين وهمي (paid<grandTotal). نفس علاج v266 في فاتورة البيع.
+  var subtotal=purchItemsSubtotal(_purchItems);
+  var extraCost=money(+v('purch-extra-cost')||0);
   var totalQty=_purchItems.reduce(function(s,i){return s+i.qty;},0);
   var perUnitExtra=totalQty>0?extraCost/totalQty:0;
-  var grandTotal=subtotal+extraCost;
+  var grandTotal=money(subtotal+extraCost);
 
   var paidStr=v('purch-paid');
   var paid=paidStr===''?0:(+paidStr||0);
@@ -10473,8 +10524,8 @@ async function savePurchase(){
     // حتى لو اتغيّر الإجمالي أو المدفوع. دلوقتي بنلاقي الدين المرتبط (لو موجود) ونصحح قيمته.
     var oldGrandTotal=(oldP&&((oldP.total||0)+(oldP.extra_cost||0)))||0;
     var oldPaidAtPurchase=(oldP&&oldP.paid)||0;
-    var oldDebtAmount=Math.max(0,oldGrandTotal-oldPaidAtPurchase);
-    var newDebtAmount=Math.max(0,grandTotal-paid);
+    var oldDebtAmount=Math.max(0,Math.round((oldGrandTotal-oldPaidAtPurchase)*100)/100); // v267 تقريب
+    var newDebtAmount=Math.max(0,Math.round((grandTotal-paid)*100)/100); // v267 تقريب
     var oldDetailsStr='مشترى — '+((oldP&&oldP.date)||'');
     // ⚠️ v174 — الأولوية للربط بـsource_purchase_id (دقيق ومايتأثرش بتغيير التاريخ/الوصف)،
     // وفحص النص القديم فاضل بس fallback لو الدين اتسجل قبل إضافة الحقل ده.
@@ -10529,8 +10580,8 @@ async function savePurchase(){
         addArchive('products',item.name);
       }
     }
-    if(paid<grandTotal){
-      var debtAmount=grandTotal-paid;
+    if(!isPaidUp(paid,grandTotal)){ // v267/v268 — سماحية نص قرش
+      var debtAmount=Math.round((grandTotal-paid)*100)/100;
       var debt={id:genId(),type:'supplier',name:supplier,supplier_id:supObj?supObj.id:null,source_purchase_id:obj.id,
         desc:'مشترى — '+v('purch-date'),
         details:'مشترى — '+v('purch-date'),
@@ -10542,7 +10593,7 @@ async function savePurchase(){
   addArchive('suppliers',supplier);
   await persist();
   closeModal();renderPurchases();renderHome();
-  var debtMsg=(!_purchId&&paid<grandTotal)?' — 💳 دين '+fmt(grandTotal-paid)+' تم تسجيله':'';
+  var debtMsg=(!_purchId&&!isPaidUp(paid,grandTotal))?' — 💳 دين '+fmt(grandTotal-paid)+' تم تسجيله':'';
   showToast(_purchId?'✅ تم التعديل':('✅ تم حفظ المشترى'+debtMsg),'#16a34a');
 }
 
@@ -12471,7 +12522,7 @@ function _netProfitThisMonth(){
   var pe=DB.expenses.filter(function(e){return isInCurrentHijriMonth(e.date);});
   var pAdj=(DB.accounts.inventory_adjustments||[]).filter(function(a){return isInCurrentHijriMonth(a.date);});
   var rev=ps.reduce(function(s,x){return s+x.total;},0);
-  var cos=ps.reduce(function(s,sale){return s+(sale.items||[]).reduce(function(ss,i){return ss+i.qty*(i.buyPrice||i.buy_price||0);},0);},0);
+  var cos=salesCost(ps);
   var exp=pe.reduce(function(s,x){return s+x.amount;},0);
   var adj=pAdj.reduce(function(s,x){return s+x.amount;},0);
   return rev-cos-exp+adj;
@@ -13816,7 +13867,7 @@ function _movFillSaleFromEst(m){
       var ex=_saleItems.find(function(it){return it.productId===prod.id;});
       if(ex){ex.qty=roundQty(ex.qty+(x.qty||1));}
       else _saleItems.push({productId:prod.id,name:prod.name,qty:x.qty||1,price:(+x.price||0),buyPrice:prod.landed_cost||prod.buy_price});
-    }else _saleServices.push({name:'قطعة: '+x.name+(x.qty>1?' ×'+fmtQty(x.qty):''),price:(x.qty||1)*(+x.price||0)});
+    }else _saleServices.push({name:'قطعة: '+x.name+(x.qty>1?' ×'+fmtQty(x.qty):''),price:lineTotal(x.qty||1,x.price)});
   });
   (m.todo||[]).forEach(function(t){if(+t.price>0)_saleServices.push({name:t.text,price:+t.price});});
 }
@@ -14668,7 +14719,7 @@ function _invImportPurch(){
   (pu.items||[]).forEach(function(it){
     var p=it.productId?(DB.products||[]).find(function(x){return x.id===it.productId;}):(DB.products||[]).find(function(x){return normalizeAr(x.name)===normalizeAr(it.name);});
     if(!p)return;
-    var line=(it.qty||0)*(it.price||0),cost=(it.price||0)+(sub>0&&it.qty?extra*(line/sub)/it.qty:0);
+    var line=(it.qty||0)*(it.price||0),cost=money((it.price||0)+(sub>0&&it.qty?extra*(line/sub)/it.qty:0));
     cost=Math.round(cost*100)/100;
     var ex=_invTmp.find(function(x){return x.productId===p.id;});
     if(ex){ex.qty=roundQty(ex.qty+(it.qty||0));ex.cost=cost;}else _invTmp.push({productId:p.id,name:p.name,qty:it.qty||0,cost:cost});
@@ -16068,7 +16119,7 @@ function renderFinancialLedger(){
   // مبيعات (إيراد + تكلفة البضاعة المباعة معًا)
   DB.sales.forEach(function(s){
     if(!s.date||!inRange(s.date))return;
-    var cost=(s.items||[]).reduce(function(ss,i){return ss+i.qty*(i.buyPrice||i.buy_price||0);},0);
+    var cost=saleCost(s);
     events.push({date:s.date,icon:'🧾',type:'بيع',desc:'فاتورة — '+(s.customer||'—'),amount:s.total,sign:1,cost:cost,sub:'تكلفة البضاعة: '+fmt(cost)+' — إجمالي ربح الفاتورة: '+fmt(s.total-cost),nav:'openSaleModal('+jsStr(s.id)+')'});
   });
   // مشتريات
@@ -16164,7 +16215,7 @@ function _ownerShareBreakdown(net,ps){
 function renderPeriodReport(){
   var ps=filterSalesByPeriod(),pe=filterExpByPeriod(),pp=filterPurchByPeriod();
   var rev=ps.reduce(function(s,x){return s+x.total;},0);
-  var cos=ps.reduce(function(s,sale){return s+(sale.items||[]).reduce(function(ss,item){return ss+item.qty*(item.buyPrice||item.buy_price||0);},0);},0);
+  var cos=salesCost(ps);
   var srvRev=ps.reduce(function(s,sale){return s+(sale.services||[]).reduce(function(ss,sv){return ss+sv.price;},0);},0);
   var gross=rev-cos,grossPct=rev>0?Math.round(gross/rev*100):0;
   var expByType={};pe.forEach(function(e){expByType[e.type]=(expByType[e.type]||0)+e.amount;});
@@ -16744,7 +16795,7 @@ function renderFullAnalysis(){
   var pe=DB.expenses.filter(function(e){return(!r.from||e.date>=r.from)&&(!r.to||e.date<=r.to);});
   var pp=DB.purchases.filter(function(p){return(!r.from||p.date>=r.from)&&(!r.to||p.date<=r.to);});
   var rev=ps.reduce(function(s,x){return s+x.total;},0);
-  var cos=ps.reduce(function(s,sale){return s+(sale.items||[]).reduce(function(ss,i){return ss+i.qty*(i.buyPrice||i.buy_price||0);},0);},0);
+  var cos=salesCost(ps);
   var exp=pe.reduce(function(s,x){return s+x.amount;},0);
   var gross=rev-cos,net=gross-exp;
   var gm=rev>0?Math.round(gross/rev*100):0;
@@ -16889,12 +16940,12 @@ function _computeBalanceSheet(asOfDate){
   if(asOfDate){
     var snaps=(DB.inventory_snapshots||[]).filter(function(s){return s.asOf<=asOfDate;}).sort(function(a,b){return a.asOf<b.asOf?1:-1;});
     if(snaps.length){
-      inventory=snaps[0].products.reduce(function(s,p){return s+p.qty*(p.buy_price||0);},0);
+      inventory=invValue(snaps[0].products);
     }else{
-      inventory=DB.products.reduce(function(s,p){return s+p.qty*(p.buy_price||0);},0);
+      inventory=invValue(DB.products);
     }
   }else{
-    inventory=DB.products.reduce(function(s,p){return s+p.qty*(p.buy_price||0);},0);
+    inventory=invValue(DB.products);
   }
   // ⚠️ إصلاح جذري v104 — أخطر عيب في صميم معادلة النقدية من الأساس (السبب الحقيقي لمشكلة
   // "قطعة غيار تكلفتها 200 وبتتباع بـ400 والنقدية بتبقى 600 بدل 200 الصح"):
@@ -17045,7 +17096,7 @@ function _computeBalanceSheet(asOfDate){
 
   var ownerCapital=(acc.capital||[]).filter(function(c){return!asOfDate||(c.date||'')<=asOfDate;}).reduce(function(s,c){return s+c.amount;},0);
   var totalSales=sales.reduce(function(s,x){return s+x.total;},0);
-  var totalCos=sales.reduce(function(s,sale){return s+(sale.items||[]).reduce(function(ss,i){return ss+i.qty*(i.buyPrice||i.buy_price||0);},0);},0);
+  var totalCos=salesCost(sales);
   var totalExp=expenses.reduce(function(s,x){return s+x.amount;},0);
   var totalHistoricalProfit=totalSales-totalCos-totalExp;
 
@@ -17554,8 +17605,8 @@ function renderFinancialAnalysis(){
   var d=_computeBalanceSheet(null); // الوضع الحالي
 
   // ===== 1) بضاعة أول الفترة (المعادلة المتحقق منها: المخزون الحالي + تكلفة كل المبيعات − قيمة المشتريات) =====
-  var currentInv=DB.products.reduce(function(s,p){return s+p.qty*(p.buy_price||0);},0);
-  var totalCogsAllTime=DB.sales.reduce(function(s,sale){return s+(sale.items||[]).reduce(function(ss,i){return ss+i.qty*(i.buyPrice||i.buy_price||0);},0);},0);
+  var currentInv=invValue(DB.products);
+  var totalCogsAllTime=salesCost(DB.sales);
   var totalPurchasesAllTime=(DB.purchases||[]).reduce(function(s,p){return s+(p.total||0);},0);
   var openingStock=currentInv+totalCogsAllTime-totalPurchasesAllTime;
 
@@ -17710,7 +17761,7 @@ function _costStructure(acc){
   var totalMonthly=totalSalaries+fixedExp+varExp;
 
   var totalSales=DB.sales.reduce(function(s,x){return s+x.total;},0);
-  var totalCos=DB.sales.reduce(function(s,sale){return s+(sale.items||[]).reduce(function(ss,i){return ss+i.qty*(i.buyPrice||i.buy_price||0);},0);},0);
+  var totalCos=salesCost(DB.sales);
   var grossProfit=totalSales-totalCos;
   var gm=totalSales>0?Math.round(grossProfit/totalSales*100):0;
   var breakEven=gm>0?Math.round(totalMonthly/(gm/100)):0;
@@ -18613,7 +18664,7 @@ function convertOpeningInventoryToPurchase(){
     var items=DB.products.filter(function(p){return(p.qty||0)>0;}).map(function(p){
       return {productId:p.id,name:p.name,qty:p.qty,buyPrice:p.buy_price||0};
     });
-    var itemsTotal=items.reduce(function(s,i){return s+i.qty*i.buyPrice;},0);
+    var itemsTotal=money(items.reduce(function(s,i){return s+i.qty*i.buyPrice;},0));
     // نضمن إن الكاش يفضل بالظبط زي ما هو: paid=val دايمًا (بغض النظر عن فرق بسيط في تقييم الأصناف)
     var extraCost=val-itemsTotal;
     var supObj=getOrCreateSupplier('رصيد افتتاحي');
@@ -21421,8 +21472,8 @@ function renderExtractBody(m){
   var avgRate=autoQty?Math.round(remaining/autoQty):0;
   _scrapExtractItems.forEach(function(it){if(!it._manualBuy)it.buy_price=avgRate;});
 
-  var totalCostAuto=_scrapExtractItems.reduce(function(s,i){return s+i.qty*(i.buy_price||0);},0);
-  var totalSellAuto=_scrapExtractItems.reduce(function(s,i){return s+i.qty*(i.sell_price||0);},0);
+  var totalCostAuto=money(_scrapExtractItems.reduce(function(s,i){return s+i.qty*(i.buy_price||0);},0));
+  var totalSellAuto=money(_scrapExtractItems.reduce(function(s,i){return s+i.qty*(i.sell_price||0);},0));
 
   listEl.innerHTML='<div style="background:#f8fafc;border-radius:10px;padding:9px 11px;margin-bottom:10px">'+
     '<div style="font-size:11px;font-weight:700;color:#64748b;margin-bottom:6px">✅ القطع المراد إضافتها ('+_scrapExtractItems.length+'):</div>'+
@@ -22524,8 +22575,8 @@ function renderSupplierLedger(id){
   var purchases=_supplierPurchases(s.name);
   if(_supLedgerFrom)purchases=purchases.filter(function(p){return(p.date||'')>=_supLedgerFrom;});
   if(_supLedgerTo)purchases=purchases.filter(function(p){return(p.date||'')<=_supLedgerTo;});
-  if(_supLedgerStatus==='paid')purchases=purchases.filter(function(p){return(p.paid||0)>=((p.total||0)+(p.extra_cost||0));});
-  else if(_supLedgerStatus==='debt')purchases=purchases.filter(function(p){return(p.paid||0)<((p.total||0)+(p.extra_cost||0));});
+  if(_supLedgerStatus==='paid')purchases=purchases.filter(function(p){return isPaidUp(p.paid,(p.total||0)+(p.extra_cost||0));});
+  else if(_supLedgerStatus==='debt')purchases=purchases.filter(function(p){return !isPaidUp(p.paid,(p.total||0)+(p.extra_cost||0));});
   var debts=_supplierDebts(s.name);
   var allPayments=[];
   debts.forEach(function(d){(d.payments||[]).forEach(function(pay){allPayments.push(Object.assign({},pay,{debtId:d.id,debtDetails:d.details||d.desc||''}));});});
@@ -23721,6 +23772,25 @@ function _invStat(label,val,color){
     '<div style="font-size:13px;font-weight:900;color:'+color+'">'+val+'</div></div>';
 }
 
+// ⚠️ v265 — كشف توزيع الدورة للطباعة/PDF (الفترة، الربح، حصة كل واحد) — للمشاركة مع الشريك. قراءة بس، مابيغيّرش بيانات.
+function printProfitCycle(id){
+  var c=(DB.accounts.profit_cycles||[]).find(function(x){return x.id===id;});
+  if(!c)return showToast('⚠️ الدورة غير موجودة','#dc2626');
+  var rows='',sum=c.owner_share||0;
+  rows+='<tr><td>أنا (المالك)</td><td style="direction:ltr;text-align:center">—</td><td style="text-align:center">'+fmt(c.owner_share||0)+'</td></tr>';
+  (c.distributions||[]).forEach(function(d){
+    var inv=(DB.accounts.investors||[]).find(function(i){return i.id===d.investor_id;});
+    sum+=d.amount||0;
+    rows+='<tr><td>'+(inv?esc(inv.name):'مستثمر')+'</td><td style="text-align:center">'+esc(_pctTxt(d.share_pct))+'</td><td style="text-align:center">'+fmt(d.amount||0)+'</td></tr>';
+  });
+  rows+='<tr style="font-weight:900;background:#f1f5f9"><td>الإجمالي</td><td></td><td style="text-align:center">'+fmt(sum)+'</td></tr>';
+  var body='<div style="margin-bottom:8px;color:#64748b">الفترة: '+esc(fmtDate(c.date_from))+' ← '+esc(fmtDate(c.date_to))+'<br>تاريخ التوزيع: '+esc(fmtDate(c.date_created))+' — '+_gregTxt(c.date_created)+'</div>'+
+    '<div style="font-size:15px;font-weight:900;margin:8px 0">صافي الربح: '+fmt(c.gross_profit||0)+'</div>'+
+    '<table style="width:100%;border-collapse:collapse" border="1" cellpadding="6"><tr style="background:#e2e8f0"><th>الاسم</th><th>النسبة</th><th>الحصة</th></tr>'+rows+'</table>'+
+    '<div style="margin-top:8px">سحب المالك الفعلي: <b>'+fmt(c.owner_draw||0)+'</b>'+((c.retained||0)>0?' — محتجز: <b>'+fmt(c.retained)+'</b>':(c.retained||0)<0?' — مسحوب من المحتجز: <b>'+fmt(-c.retained)+'</b>':'')+'</div>'+
+    (c.note?'<div style="margin-top:6px;color:#64748b">📝 '+esc(c.note)+'</div>':'');
+  printSection('📊 كشف توزيع أرباح',body);
+}
 function _cycleCard(c){
   var ownerShare=c.owner_share||0;
   return '<div style="background:#fff;border-radius:12px;padding:12px 14px;box-shadow:0 1px 6px rgba(0,0,0,.06);margin-bottom:8px;border-right:4px solid #15803d">'+
@@ -23730,6 +23800,7 @@ function _cycleCard(c){
     '<div style="font-size:11px;color:#94a3b8">تاريخ التوزيع: '+esc(fmtDate(c.date_created))+'</div>'+
     '</div>'+
     '<div style="display:flex;gap:5px">'+
+    '<button onclick="printProfitCycle(\''+c.id+'\')" style="background:#f1f5f9;border:none;border-radius:7px;padding:4px 8px;cursor:pointer;font-size:12px;color:#334155">🖨️</button>'+
     '<button onclick="openEditProfitCycleModal(\''+c.id+'\')" style="background:#dbeafe;border:none;border-radius:7px;padding:4px 8px;cursor:pointer;font-size:12px;color:#1e40af">✏️</button>'+
     '<button onclick="deleteProfitCycle(\''+c.id+'\')" style="background:#fee2e2;border:none;border-radius:7px;padding:4px 8px;cursor:pointer;font-size:12px;color:#dc2626">🗑️</button>'+
     '</div>'+
@@ -24024,7 +24095,7 @@ function _updatePcProfitBox(){
   var ps=DB.sales.filter(function(s){return(!r.from||s.date>=r.from)&&(!r.to||s.date<=r.to);});
   var pe=DB.expenses.filter(function(e){return(!r.from||e.date>=r.from)&&(!r.to||e.date<=r.to);});
   var totalSales=ps.reduce(function(s,x){return s+x.total;},0);
-  var totalCos=ps.reduce(function(s,sale){return s+(sale.items||[]).reduce(function(ss,i){return ss+i.qty*(i.buyPrice||i.buy_price||0);},0);},0);
+  var totalCos=salesCost(ps);
   var totalExp=pe.reduce(function(s,x){return s+x.amount;},0);
   var _bShare=_invExclOn()?_invSalesShare(ps).share:0;
   var suggestedProfit=Math.max(0,Math.round(totalSales-totalCos-totalExp-_bShare));
@@ -24783,6 +24854,38 @@ function switchMovTab(tab,el){
 // اللي بيتم استدعاؤها من جوه saveProduct وباقي دوال التعديل مباشرة
 // (شوف تعريف dbUpsert/dbUpdate/dbDelete في أول الملف)
 // ============================================================
+
+// ═════════ 🛡️ v268 — الحارس المركزي ضد الضغط المتكرر ═════════
+// بدل ما كل زرار يتلف بـ__runOnce لوحده (وكان فيه ١٩ زرار ناسيينهم)، الدوال اللي بتسجّل/بتحرّك فلوس
+// بتتلف هنا مرة واحدة: لو اتنفّذت من ضغطة مستخدم حقيقية ولسه شغالة (أو خلصت من أقل من ٠٫٦ ثانية)
+// بنفس الأرقام (id) → الضغطة التانية بتتتجاهل. أي دالة جديدة بتنشئ سجل: ضيف اسمها في __ONCE_GUARDED.
+// الاستدعاء من الكود (مش ضغطة) مش بيتأثر. اختلاف الـid (فاتورتين مختلفتين) مش بيتمنع.
+var __ONCE_GUARDED=["__giveEmpCashAdvance", "__settleEmpCashBalance", "__undoLastCashAdvance", "_applyLinkRepair", "_duaSave", "_invBatchDel", "_invBatchSave", "_invCreateGoodsAcc", "_invMoneySave", "_invPaySave", "_invSave", "_mfUnify", "_movTodoAdd", "_wsSaveSettings", "addExpenseTemplate", "addMovAdvancePayment", "approveStocktake", "confirmAutoBalanceDiff", "confirmCloseMovement", "confirmContinueMovement", "confirmExtractParts", "confirmMarkLeave", "confirmMyAttendance", "confirmPayAdvance", "confirmPayDailyWage", "confirmPayFixedExp", "confirmPaySalary", "confirmSchedDone", "convertOpeningInventoryToPurchase", "delScrapMachine", "deleteAllArchivedDebts", "duplicateTask", "execMergeProducts", "finishExtractForSale", "importBaseClients", "markSaleItemDamaged", "mergeModelFamily", "openDeleteSaleModal", "payDebt", "payGroupDebts", "quickLogExpense", "removeMovAdvancePayment", "saveAddCapital", "saveAsset", "saveBalanceSnapshot", "saveBatchExpenses", "saveBundleDraft", "saveCapital", "saveConsignmentOutSale", "saveDebt", "saveEditCapital", "saveEditDebt", "saveEditExpense", "saveEditFixedExp", "saveEditReceivable", "saveEmpIncrement", "saveEmployee", "saveExpense", "saveFixedExp", "saveGiveConsignment", "saveIncrement", "saveInventorySnapshot", "saveInvestorWithdraw", "saveLog", "saveMachine", "saveMovement", "saveNewClient", "saveNewInvestor", "saveProduct", "saveProfitCycle", "savePurchase", "saveReceivable", "saveReceiveConsignment", "saveReturnConsignment", "saveSale", "saveScrapMachine", "saveSupplier", "saveTask", "setExtraIncome", "startStocktake", "syncSalesWithDebts", "withdrawPartForMovement"];
+(function(){
+  var busy={};
+  function wrap(name){
+    var orig=window[name];
+    if(typeof orig!=='function'||orig.__guarded)return;
+    var w=function(){
+      var ev=window.event,user=!!(ev&&ev.isTrusted);
+      if(!user)return orig.apply(this,arguments);
+      var key=name+'|';
+      try{key+=JSON.stringify(Array.prototype.slice.call(arguments));}catch(e){}
+      if(busy[key]==='lock'){try{showToast('⏳ العملية شغالة — استنى لحظة','#d97706');}catch(e2){}return;}
+      if(busy[key]==='sync')return orig.apply(this,arguments); // استدعاء ذاتي داخل نفس الضغطة
+      busy[key]='sync';
+      var res;
+      try{res=orig.apply(this,arguments);}catch(e){delete busy[key];throw e;}
+      busy[key]='lock';
+      var free=function(){setTimeout(function(){delete busy[key];},res&&typeof res.then==='function'?400:600);};
+      if(res&&typeof res.then==='function')res.then(free,free);else free();
+      return res;
+    };
+    w.__guarded=true;w.__orig=orig;
+    window[name]=w;
+  }
+  __ONCE_GUARDED.forEach(wrap);
+})();
 </script>
 
 <script>
