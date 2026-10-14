@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v268</title>
+<title>ابو حوده الحلو الجميل v272</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="1448-05-02 — v268";
+<script>var BUILD_STAMP="1448-05-03 — v272";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -69,6 +69,16 @@
         ده بيحميها من الضغط المتكرر حتى لو الزرار نسي __runOnce. (__runOnce فاضل مطلوب على الزرار — الاتنين مع بعض).
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v272: [⏱️ عداد زيارة العميل على التحرك]
+     زرار ▶️ دخول / ⏹️ خروج على كارت التحرك (الكل + المرتبة) وفي شاشة التحرك: بيسجّل ساعة الدخول والخروج ويحسب المدة، وتفضل الزيارات متسجّلة (ممكن أكتر من زيارة لنفس التحرك) مع الإجمالي. عدّاد واحد بس شغال في نفس الوقت (دخول على تحرك جديد بيقفل القديم)، وإنهاء/إلغاء التحرك بيقفل العداد تلقائيًا. الوقت الفعلي عند العميل بيظهر في تفاصيل التحرك المنتهي. الزرار ليه خيار إخفاء في إعدادات أزرار الكروت. ⚠️ لازم SQL: ALTER TABLE movements ADD COLUMN IF NOT EXISTS visit_logs jsonb DEFAULT '[]'::jsonb; (من غيره بيتحفظ على الموبايل بس ومش بيتزامن).
+v271: [🛡️ الطباعة لما المتصفح يمنع النافذة]
+     طباعة الفاتورة وطباعة أي شاشة (كشوف الحساب، التقارير...) كانت بتفتح نافذة جديدة وتكتب فيها مباشرة — لو الموبايل منع النافذة (شائع جدًا في الكروم) كانت بتحصل رسالة خطأ برمجي من غير أي تنبيه ليك. دلوقتي بيظهر تنبيه واضح. وعنوان صفحة الطباعة بقى متأمّن (esc). وتاريخ اليوم الاحتياطي بقى هجري.
+v270: [🧱 تجميع تحديث/حذف الصفوف | 🔧 sw.js v3 | 🧮 متوسط التكلفة]
+     0) متوسط التكلفة المرجّح كان بيتقرّب لأقرب جنيه صحيح في مكانين (أصناف جاية من فاتورة بيع بقطع، وتفكيك الخردة) فمتوسط ٢٫٥ كان بيبقى ٣ — بقى لأقرب قرش زي باقي التطبيق. وخسارة قطعة تالفة (تالف/خطأ) بقت lineTotal.
+     1) patchRow/replaceRow/removeRow في الطبقة المشتركة بدل نفس سطر map/filter اللي كان متكرر في 78 مكان (منتجات، ديون، فواتير، موظفين، جرد...). نفس السلوك بالظبط، بس تعديل طريقة تحديث الصفوف بقى في مكان واحد.
+     2) ملف sw.js الجديد (v3): القديم كان بيمسح كاش تلاوات القرآن المنزّلة (mc8-quran-audio) وبيكاش أي رد من أي موقع. الجديد بيمسح بس كاشات التطبيق القديمة، وبيكاش index.html ومكتبة Supabase بس، وليه مهلة ٤ ثواني للنت الضعيف. ارفعه بجانب index.html.
+v269: [🧮 الجرد والتسوية: نص الجنيه مابقاش بيضيع]
+     عجز/زيادة الجرد (المصروف والإيراد المسجّلين وقيمة الجرد) وفرق تسوية الميزانية كانوا بيتقرّبوا لأقرب جنيه صحيح (Math.round) فنص الجنيه كان بيضيع — بقوا بيتقرّبوا لأقرب قرش بـmoney(). حساب قيمة كل صنف في الجرد بقى بـlineTotal.
 v268: [🧱 طبقة مشتركة للحسابات | 🛡️ حارس مركزي ضد الضغط المتكرر | 🧮 تقريب كل الإجماليات]
      1) الطبقة المشتركة (تحت fmt): money / lineTotal / saleItemsSubtotal / purchItemsSubtotal / saleCost / invValue / isPaidUp. استبدلت التكرار: تكلفة الفاتورة (٩ أماكن)، قيمة المخزون (٧)، إجمالي بنود البيع (٦)، المشتريات، وحالة "مدفوع" (فاتورة + مشترى + فلتر المورد). دلوقتي أي تعديل في طريقة الحساب بيتعمل في مكان واحد.
      2) تقريب لأقرب قرش في: أمانات البيع (consignment)، سعر الخدمة من قطعة، المشتريات المستوردة، تكلفة وإجمالي تفكيك الخردة، التكلفة الإضافية الموزّعة على الصنف.
@@ -573,6 +583,7 @@ v203: [🐛 3 إصلاحات جذرية + ✨ 5 أنظمة جديدة — دفع
      ALTER TABLE tasks ADD COLUMN IF NOT EXISTS subtasks jsonb DEFAULT '[]'::jsonb;
      ALTER TABLE products ADD COLUMN IF NOT EXISTS wholesale_price numeric DEFAULT 0;
      ALTER TABLE movements ADD COLUMN IF NOT EXISTS advance_payments jsonb DEFAULT '[]'::jsonb;
+ALTER TABLE movements ADD COLUMN IF NOT EXISTS visit_logs jsonb DEFAULT '[]'::jsonb;
      ALTER TABLE movements ADD COLUMN IF NOT EXISTS continued_from_id uuid;
      ALTER TABLE movements ADD COLUMN IF NOT EXISTS continued_to_id uuid;
 
@@ -2533,7 +2544,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
   }
   async function __saveEmpMaxDevices(recId){
     var val=+(document.getElementById('emp-maxdev-'+recId).value||0);
-    DB.accounts.employees=DB.accounts.employees.map(function(e){return e.id===recId?Object.assign({},e,{max_devices:val}):e;});
+    DB.accounts.employees=patchRow(DB.accounts.employees,recId,{max_devices:val});
     await persist();
     showToast('✅ اتحفظ','#16a34a');
   }
@@ -2596,7 +2607,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
     var sel=document.getElementById('emp-link-select-'+profileId);
     var salaryEmpId=sel?sel.value:'';
     if(!salaryEmpId)return showToast('⚠️ اختار سجل راتب الأول','#dc2626');
-    DB.accounts.employees=DB.accounts.employees.map(function(e){return e.id===salaryEmpId?Object.assign({},e,{linked_profile_id:profileId}):e;});
+    DB.accounts.employees=patchRow(DB.accounts.employees,salaryEmpId,{linked_profile_id:profileId});
     await persist();
     showToast('✅ اترابطوا','#16a34a');
     __loadEmployeePermsUI();
@@ -3101,7 +3112,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
     if(existing){ existing.last_seen=new Date().toISOString(); }
     else if(devices.length<maxDev){ devices.push({id:devId,label:__deviceLabel(),first_seen:new Date().toISOString(),last_seen:new Date().toISOString()}); }
     else{ return {allowed:false}; }
-    DB.accounts.employees=DB.accounts.employees.map(function(e){return e.id===emp.id?Object.assign({},e,{devices:devices}):e;});
+    DB.accounts.employees=patchRow(DB.accounts.employees,emp.id,{devices:devices});
     return {allowed:true};
   }
 
@@ -4481,7 +4492,7 @@ var APP_TITLE='ابو حوده الحلو الجميل';
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=268;
+var APP_VERSION=272;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -5803,6 +5814,7 @@ function fmt(n){return(n||0).toLocaleString('ar-EG',{maximumFractionDigits:2})+'
 // saleCost(sale)    | تكلفة بضاعة فاتورة بيع (سعر الشراء وقت البيع)
 // invValue(products)| قيمة مخزون بسعر الشراء
 // salesCost(list)   | تكلفة بضاعة مجموعة فواتير
+// patchRow / replaceRow / removeRow (list,id,...) | تعديل/استبدال/حذف صف بالـid في أي قايمة (DB.x=patchRow(DB.x,id,{...}))
 // isPaidUp(paid,total) | هل اتدفع كامل؟ (سماحية نص قرش)
 function money(n){return Math.round((+n||0)*100)/100;}
 function lineTotal(q,p){return money((+q||0)*(+p||0));}
@@ -5811,6 +5823,93 @@ function purchItemsSubtotal(items){return money((items||[]).reduce(function(t,i)
 function saleCost(sale){return money(((sale&&sale.items)||[]).reduce(function(t,i){return t+(+i.qty||0)*(i.buyPrice||i.buy_price||0);},0));}
 function invValue(products){return money((products||[]).reduce(function(t,p){return t+(+p.qty||0)*(p.buy_price||0);},0));}
 function isPaidUp(paid,total){return (+paid||0)>=money(total)-0.005;}
+function patchRow(list,id,patch){return (list||[]).map(function(x){return x.id===id?Object.assign({},x,patch):x;});}   // تعديل صف بالـid (دمج حقول)
+function replaceRow(list,id,obj){return (list||[]).map(function(x){return x.id===id?obj:x;});}                        // استبدال صف كامل بالـid
+function removeRow(list,id){return (list||[]).filter(function(x){return x.id!==id;});}                                // حذف صف بالـid
+// ═════════ ⏱️ v272 — عداد زيارة العميل (دخول/خروج على التحرك) ═════════
+// كل تحرك ليه visit_logs=[{in:ISO,out:ISO|null,by}] — "دخول" بيشغّل العداد و"خروج" بيقفله. مفيش عدّاد شغال في تحركين مع بعض
+// (دخول على تحرك جديد بيقفل القديم). إنهاء/إلغاء التحرك بيقفل العداد تلقائيًا. الوقت بيتعرض بالساعة والدقيقة والتاريخ هجري.
+function visitLogs(m){return (m&&m.visit_logs)||[];}
+function visitRunning(m){var l=visitLogs(m);for(var i=l.length-1;i>=0;i--){if(l[i]&&l[i].in&&!l[i].out)return l[i];}return null;}
+function visitMs(l,now){var a=Date.parse(l.in),b=l.out?Date.parse(l.out):(now||Date.now());return(isNaN(a)||isNaN(b))?0:Math.max(0,b-a);}
+function visitTotalMs(m,now){return visitLogs(m).reduce(function(t,l){return t+visitMs(l,now);},0);}
+function fmtDur(ms){var min=Math.floor((ms||0)/60000),h=Math.floor(min/60),mm=min%60;return(h>0?h.toLocaleString('ar-EG')+' س ':'')+mm.toLocaleString('ar-EG')+' د';}
+function _visitClock(iso){try{return new Date(iso).toLocaleTimeString('ar-EG',{hour:'2-digit',minute:'2-digit'});}catch(e){return '';}}
+function _visitSet(id,logs){
+  var m=(DB.movements||[]).find(function(x){return x.id===id;});if(!m)return;
+  DB.movements=patchRow(DB.movements,id,{visit_logs:logs,customer:m.customer});
+  try{dbUpdate('movements',id,{visit_logs:logs,customer:m.customer});}catch(e){}
+  persist();
+}
+function _visitCloseLogs(m,iso){return visitLogs(m).map(function(l){return(l&&l.in&&!l.out)?Object.assign({},l,{out:iso}):l;});}
+function _visitEndSilently(id){
+  var m=(DB.movements||[]).find(function(x){return x.id===id;});
+  if(m&&visitRunning(m))_visitSet(id,_visitCloseLogs(m,new Date().toISOString()));
+}
+function _visitRefreshUI(id){
+  try{if(typeof _movTab!=='undefined'&&_movTab==='scheduled')renderScheduledList();else renderMovements();}catch(e){}
+  var box=document.getElementById('mov-visit-box');
+  if(box){var m=(DB.movements||[]).find(function(x){return x.id===id;});if(m)box.innerHTML=_visitBoxInner(m);}
+}
+function startVisit(id){
+  var m=(DB.movements||[]).find(function(x){return x.id===id;});if(!m)return;
+  if(visitRunning(m))return showToast('⏱️ العداد شغال بالفعل على التحرك ده','#d97706');
+  var now=new Date().toISOString(),others=[];
+  (DB.movements||[]).forEach(function(o){
+    if(o.id!==id&&visitRunning(o)){_visitSet(o.id,_visitCloseLogs(o,now));others.push(o.customer);}
+  });
+  _visitSet(id,visitLogs(m).concat([{in:now,out:null,by:window.__currentProfile?window.__currentProfile.id:null}]));
+  _visitRefreshUI(id);
+  showToast('▶️ بدأ العداد — '+_visitClock(now)+(others.length?' (اتقفل عداد: '+others.join('، ')+')':''),'#0e7490');
+}
+function endVisit(id){
+  var m=(DB.movements||[]).find(function(x){return x.id===id;});if(!m)return;
+  var run=visitRunning(m);if(!run)return showToast('العداد مش شغال','#d97706');
+  var now=new Date().toISOString();
+  _visitSet(id,_visitCloseLogs(m,now));
+  _visitRefreshUI(id);
+  showToast('⏹️ خرجت — الزيارة '+fmtDur(Date.parse(now)-Date.parse(run.in)),'#16a34a');
+}
+function deleteVisitLog(id,idx){
+  var m=(DB.movements||[]).find(function(x){return x.id===id;});if(!m)return;
+  confirmAction('تحذف الزيارة دي من السجل؟',function(){
+    _visitSet(id,visitLogs(m).filter(function(l,i){return i!==idx;}));
+    _visitRefreshUI(id);
+  });
+}
+function _visitBtn(m,kind,szS){
+  var r=visitRunning(m);
+  var label=r?'<span class="visit-live" data-in="'+esc(r.in)+'" data-pre="⏹️ ">⏹️ '+fmtDur(Date.now()-Date.parse(r.in))+'</span>':'▶️ '+(kind==='all'?'دخول':'');
+  var fn=r?'endVisit':'startVisit';
+  var col=r?'background:#dcfce7;color:#15803d;border:1px solid #86efac':'background:#ecfeff;color:#0e7490;border:1px solid #67e8f9';
+  return kind==='all'
+    ?'<button class="btn btn-sm" style="'+col+';flex:1;font-size:11px" onclick="'+fn+'(\''+m.id+'\')">'+label+'</button>'
+    :'<button class="btn-ic" style="'+col+';'+(szS||'')+'" onclick="'+fn+'(\''+m.id+'\')" title="'+(r?'خروج':'دخول عند العميل')+'">'+label+'</button>';
+}
+function _visitBoxInner(m){
+  var logs=visitLogs(m),r=visitRunning(m),tot=visitTotalMs(m);
+  var head='<label>⏱️ وقت الزيارة عند العميل</label>';
+  var act=r
+    ?'<div style="display:flex;justify-content:space-between;align-items:center;margin:6px 0"><span style="font-size:12px;color:#15803d;font-weight:800">🟢 شغال من '+esc(_visitClock(r.in))+' — <span class="visit-live" data-in="'+esc(r.in)+'" data-pre="">'+fmtDur(Date.now()-Date.parse(r.in))+'</span></span>'+
+     '<button type="button" onclick="endVisit(\''+m.id+'\')" style="background:#15803d;color:#fff;border:none;border-radius:8px;padding:8px 14px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer">⏹️ خرجت</button></div>'
+    :'<div style="margin:6px 0"><button type="button" onclick="startVisit(\''+m.id+'\')" style="background:#0e7490;color:#fff;border:none;border-radius:8px;padding:8px 14px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer">▶️ دخلت عند العميل</button></div>';
+  var list=logs.length?'<div style="margin-top:4px">'+logs.map(function(l,i){return {l:l,i:i};}).reverse().map(function(o){
+    var l=o.l,d=localISO_(new Date(l.in));
+    return '<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid #cffafe;font-size:12px">'+
+      '<span>'+esc(fmtDate(d))+' · '+esc(_visitClock(l.in))+' ← '+(l.out?esc(_visitClock(l.out)):'<b style="color:#15803d">شغال</b>')+' <b style="color:#0e7490">('+fmtDur(visitMs(l))+')</b></span>'+
+      '<button type="button" onclick="deleteVisitLog(\''+m.id+'\','+o.i+')" style="background:#fee2e2;border:none;border-radius:5px;padding:2px 6px;cursor:pointer;font-size:10px;color:#dc2626">✕</button></div>';
+  }).join('')+'<div style="font-weight:900;font-size:13px;color:#0e7490;margin-top:5px">إجمالي الوقت عند العميل: '+fmtDur(tot)+' ('+logs.length.toLocaleString('ar-EG')+' زيارة)</div></div>'
+    :'<div style="font-size:11px;color:#94a3b8">لسه مفيش زيارات مسجّلة</div>';
+  return head+act+list;
+}
+function __visitTick(){
+  try{
+    (DB.movements||[]).forEach(function(m){ if((m.status==='منتهي'||m.status==='ملغي')&&visitRunning(m))_visitEndSilently(m.id); });
+    var els=document.querySelectorAll('.visit-live');
+    for(var i=0;i<els.length;i++){var t=Date.parse(els[i].getAttribute('data-in'));if(!isNaN(t))els[i].textContent=(els[i].getAttribute('data-pre')||'')+fmtDur(Date.now()-t);}
+  }catch(e){}
+}
+setInterval(__visitTick,30000);
 function salesCost(list){return money((list||[]).reduce(function(t,sale){return t+saleCost(sale);},0));} // تكلفة بضاعة مجموعة فواتير
 // ⚠️ v202 — الكميات الكسرية: roundQty بتتحط حوالين أي عملية جمع/طرح على qty عشان تمنع
 // أخطاء الفاصلة العشرية المتراكمة (زي 0.1+0.2 اللي بتطلع 0.30000000000000004 في JS)،
@@ -6542,7 +6641,7 @@ async function applyCompanyGuesses(){
     var box=document.getElementById('cg-'+i);
     if(!box||!box.checked)continue;
     var s=suggestions[i];
-    DB.products=DB.products.map(function(p){return p.id===s.id?Object.assign({},p,{company:s.guess}):p;});
+    DB.products=patchRow(DB.products,s.id,{company:s.guess});
     await dbUpdate('products',s.id,{company:s.guess});
     applied++;
   }
@@ -7275,7 +7374,7 @@ async function saveProduct(){
   // التطبيق (زي تحديث الكمية من المشتريات) كانت أصلاً بتعدي على dbUpdate صح — المنتج
   // نفسه (شاشة تعديل منتج) بس كان ناقصها.
   if(_prodId){
-    DB.products=DB.products.map(function(p){return p.id===_prodId?Object.assign({},p,obj):p;});
+    DB.products=patchRow(DB.products,_prodId,obj);
     await dbUpdate('products',_prodId,obj);
   }else{
     obj.id=genId();
@@ -7534,12 +7633,12 @@ async function saveGiveConsignment(){
   if(!party)return showToast('⚠️ اكتب اسم الطرف','#dc2626');
   if(!qty||qty<=0||qty>src.qty)return showToast('⚠️ الكمية غير صحيحة (المتاح: '+src.qty+')','#dc2626');
   if(!price||price<0)return showToast('⚠️ السعر غير صحيح','#dc2626');
-  DB.products=DB.products.map(function(p){return p.id===src.id?Object.assign({},p,{qty:roundQty(p.qty-qty)}):p;});
+  DB.products=patchRow(DB.products,src.id,{qty:roundQty(p.qty-qty)});
   await dbUpdate('products',src.id,{qty:roundQty(src.qty-qty)});
   var existing=DB.products.find(function(p){return p.consignment==='out'&&p.consignment_party===party&&normalizeAr(p.name)===normalizeAr(src.name);});
   if(existing){
     var mergedQty=roundQty(existing.qty+qty);
-    DB.products=DB.products.map(function(p){return p.id===existing.id?Object.assign({},p,{qty:mergedQty}):p;});
+    DB.products=patchRow(DB.products,existing.id,{qty:mergedQty});
     await dbUpdate('products',existing.id,{qty:mergedQty});
   }else{
     var obj={
@@ -7575,7 +7674,7 @@ async function saveConsignmentOutSale(id){
   var qty=roundQty(+v('cons-sale-qty')); // ⚠️ v205 — roundQty() على الكمية
   if(!qty||qty<=0||qty>p.qty)return showToast('⚠️ الكمية غير صحيحة (المتاح عنده: '+p.qty+')','#dc2626');
   var total=lineTotal(qty,p.consignment_price);
-  DB.products=DB.products.map(function(x){return x.id===id?Object.assign({},x,{qty:roundQty(x.qty-qty)}):x;});
+  DB.products=patchRow(DB.products,id,{qty:roundQty(x.qty-qty)});
   await dbUpdate('products',id,{qty:roundQty(p.qty-qty)});
   var debtObj={id:genId(),type:'customer',name:p.consignment_party,desc:'أمانة عنده: '+p.name+' × '+qty,details:'أمانة عنده: '+p.name+' × '+qty,total:total,paid:0,date:today(),payments:[],source:'consignment'};
   DB.debts.unshift(debtObj);
@@ -7603,10 +7702,10 @@ async function saveReturnConsignment(id){
   if(!qty||qty<=0||qty>p.qty)return showToast('⚠️ الكمية غير صحيحة (المتاح: '+p.qty+')','#dc2626');
   var newQty=roundQty(p.qty-qty);
   if(newQty<=0){
-    DB.products=DB.products.filter(function(x){return x.id!==id;});
+    DB.products=removeRow(DB.products,id);
     await dbDelete('products',id,p);
   }else{
-    DB.products=DB.products.map(function(x){return x.id===id?Object.assign({},x,{qty:newQty}):x;});
+    DB.products=patchRow(DB.products,id,{qty:newQty});
     await dbUpdate('products',id,{qty:newQty});
   }
   await persist();
@@ -7663,10 +7762,10 @@ async function _syncConsignmentDebtsForSale(oldItems,newItems,saleId,saleDate){
       if(existingDebt){
         if((existingDebt.paid||0)>0){
           var zeroedTotal=existingDebt.paid;
-          DB.debts=DB.debts.map(function(d){return d.id===existingDebt.id?Object.assign({},d,{total:zeroedTotal}):d;});
+          DB.debts=patchRow(DB.debts,existingDebt.id,{total:zeroedTotal});
           await dbUpdate('debts',existingDebt.id,{total:zeroedTotal});
         }else{
-          DB.debts=DB.debts.filter(function(d){return d.id!==existingDebt.id;});
+          DB.debts=removeRow(DB.debts,existingDebt.id);
           await dbDelete('debts',existingDebt.id,existingDebt);
         }
       }
@@ -7675,7 +7774,7 @@ async function _syncConsignmentDebtsForSale(oldItems,newItems,saleId,saleDate){
     if(existingDebt){
       var newTotal=Math.max(newTotalOwed,existingDebt.paid||0);
       var upd={total:newTotal,desc:'أمانة: '+prod.name+' × '+fmtQty(newQty),details:'أمانة: '+prod.name+' × '+fmtQty(newQty)};
-      DB.debts=DB.debts.map(function(d){return d.id===existingDebt.id?Object.assign({},d,upd):d;});
+      DB.debts=patchRow(DB.debts,existingDebt.id,upd);
       await dbUpdate('debts',existingDebt.id,upd);
     }else{
       var newDebt={id:genId(),type:'supplier',name:prod.consignment_party,desc:'أمانة: '+prod.name+' × '+fmtQty(newQty),details:'أمانة: '+prod.name+' × '+fmtQty(newQty),total:newTotalOwed,paid:0,date:saleDate||today(),payments:[],source:'consignment',source_sale_id:saleId,consignment_product_id:pid};
@@ -7805,7 +7904,7 @@ async function setStocktakeCount(productId,val){
   var qty=Math.max(0,+val||0);
   // تعديل الرقم يدوياً معناه إنك شفت الصنف فعلاً — يتأكد تلقائياً
   st.items=st.items.map(function(i){return i.productId===productId?Object.assign({},i,{counted_qty:qty,confirmed:true}):i;});
-  DB.stocktakes=DB.stocktakes.map(function(s){return s.id===st.id?st:s;});
+  DB.stocktakes=replaceRow(DB.stocktakes,st.id,st);
   await persist();
   renderStocktake();
 }
@@ -7814,7 +7913,7 @@ async function setStocktakeCount(productId,val){
 async function toggleStocktakeConfirm(productId){
   var st=_activeStocktake();if(!st)return;
   st.items=st.items.map(function(i){return i.productId===productId?Object.assign({},i,{confirmed:!i.confirmed}):i;});
-  DB.stocktakes=DB.stocktakes.map(function(s){return s.id===st.id?st:s;});
+  DB.stocktakes=replaceRow(DB.stocktakes,st.id,st);
   await persist();
   renderStocktake();
 }
@@ -7824,7 +7923,7 @@ async function confirmAllStocktakeItems(){
   var st=_activeStocktake();if(!st)return;
   confirmAction('هيتأكد كل الأصناف بأرقامها الحالية دفعة واحدة. تكمل؟',async function(){
     st.items=st.items.map(function(i){return Object.assign({},i,{confirmed:true});});
-    DB.stocktakes=DB.stocktakes.map(function(s){return s.id===st.id?st:s;});
+    DB.stocktakes=replaceRow(DB.stocktakes,st.id,st);
     await persist();
     renderStocktake();
     showToast('✅ تم تأكيد كل الأصناف','#16a34a');
@@ -7847,7 +7946,7 @@ async function closeStocktake(){
   var unconfirmed=st.items.filter(function(i){return !i.confirmed;});
   var doClose=async function(){
     st.status='closed';st.closed_at=today();
-    DB.stocktakes=DB.stocktakes.map(function(s){return s.id===st.id?st:s;});
+    DB.stocktakes=replaceRow(DB.stocktakes,st.id,st);
     await persist();
     switchInvTab('stocktake');
     renderStocktake();
@@ -7872,7 +7971,7 @@ function editStocktakeDiffCount(stId,productId,newValStr){
   var item=st.items.find(function(i){return i.productId===productId;});if(!item)return;
   item.counted_qty=roundQty(newVal);
   item.confirmed=true;
-  DB.stocktakes=DB.stocktakes.map(function(s){return s.id===stId?st:s;});
+  DB.stocktakes=replaceRow(DB.stocktakes,stId,st);
   persist();
   _refreshStocktakeReportView(stId);
 }
@@ -7904,8 +8003,8 @@ function _renderStocktakeReport(st){
       '</div>';
   }
 
-  var totalShortageVal=shortages.reduce(function(s,i){return s+_stItemUnitCost(i.productId)*(i.system_qty-i.counted_qty);},0);
-  var totalSurplusVal=surplus.reduce(function(s,i){return s+_stItemUnitCost(i.productId)*(i.counted_qty-i.system_qty);},0);
+  var totalShortageVal=money(shortages.reduce(function(s,i){return s+_stItemUnitCost(i.productId)*(i.system_qty-i.counted_qty);},0));
+  var totalSurplusVal=money(surplus.reduce(function(s,i){return s+_stItemUnitCost(i.productId)*(i.counted_qty-i.system_qty);},0));
   var isApproved=st.status==='approved';
 
   var summaryHtml='<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px">'+
@@ -7975,7 +8074,7 @@ function _renderStocktakeReport(st){
 function reopenStocktakeForCounting(id){
   var st=(DB.stocktakes||[]).find(function(x){return x.id===id});if(!st||st.status!=='closed')return;
   st.status='open';
-  DB.stocktakes=DB.stocktakes.map(function(s){return s.id===st.id?st:s;});
+  DB.stocktakes=replaceRow(DB.stocktakes,st.id,st);
   persist();
   renderStocktake();
 }
@@ -7990,8 +8089,8 @@ function confirmApproveStocktake(id){
   var st=(DB.stocktakes||[]).find(function(x){return x.id===id});if(!st)return;
   var shortages=st.items.filter(function(i){return i.counted_qty<i.system_qty;});
   var surplus=st.items.filter(function(i){return i.counted_qty>i.system_qty;});
-  var totalShortageVal=shortages.reduce(function(s,i){return s+_stItemUnitCost(i.productId)*(i.system_qty-i.counted_qty);},0);
-  var totalSurplusVal=surplus.reduce(function(s,i){return s+_stItemUnitCost(i.productId)*(i.counted_qty-i.system_qty);},0);
+  var totalShortageVal=money(shortages.reduce(function(s,i){return s+_stItemUnitCost(i.productId)*(i.system_qty-i.counted_qty);},0));
+  var totalSurplusVal=money(surplus.reduce(function(s,i){return s+_stItemUnitCost(i.productId)*(i.counted_qty-i.system_qty);},0));
   var msg='هيتحدّث المخزون فعلياً بالكميات الجديدة، ومينفعش يترجع بعد كده.';
   if(totalShortageVal>0)msg+='\n📉 عجز '+fmt(totalShortageVal)+' ج هيتسجل كمصروف.';
   if(totalSurplusVal>0)msg+='\n📈 زيادة '+fmt(totalSurplusVal)+' ج هتتسجل كإيراد تسوية.';
@@ -8010,10 +8109,10 @@ async function approveStocktake(id){
     if(i.counted_qty===i.system_qty)return;
     var diff=i.counted_qty-i.system_qty; // سالب = عجز، موجب = زيادة
     var unitCost=_stItemUnitCost(i.productId); // سعر التكلفة (الشراء) — مش سعر البيع
-    var value=Math.abs(diff)*unitCost;
+    var value=lineTotal(Math.abs(diff),unitCost);
     if(diff<0){totalShortageValue+=value;shortageDetails.push(i.name+' (-'+Math.abs(diff)+')');}
     else{totalSurplusValue+=value;surplusDetails.push(i.name+' (+'+diff+')');}
-    DB.products=DB.products.map(function(p){return p.id===i.productId?Object.assign({},p,{qty:i.counted_qty}):p;});
+    DB.products=patchRow(DB.products,i.productId,{qty:i.counted_qty});
     touchedProductIds[i.productId]=true;
   });
 
@@ -8023,7 +8122,7 @@ async function approveStocktake(id){
   if(totalShortageValue>0){
     shortageExpense={
       id:genId(),label:'عجز مخزون — جرد '+fmtDate(st.started_at),
-      amount:Math.round(totalShortageValue),type:'عجز مخزون',
+      amount:money(totalShortageValue),type:'عجز مخزون',
       note:shortageDetails.join('، '),date:today(),
       source:'stocktake',stocktake_id:st.id
     };
@@ -8036,16 +8135,16 @@ async function approveStocktake(id){
     if(!DB.accounts.inventory_adjustments)DB.accounts.inventory_adjustments=[];
     DB.accounts.inventory_adjustments.push({
       id:genId(),label:'زيادة مخزون — جرد '+fmtDate(st.started_at),
-      amount:Math.round(totalSurplusValue),
+      amount:money(totalSurplusValue),
       note:surplusDetails.join('، '),date:today(),
       stocktake_id:st.id
     });
   }
 
   st.status='approved';st.approved_at=today();
-  st.shortage_value=Math.round(totalShortageValue);
-  st.surplus_value=Math.round(totalSurplusValue);
-  DB.stocktakes=DB.stocktakes.map(function(s){return s.id===st.id?st:s;});
+  st.shortage_value=money(totalShortageValue);
+  st.surplus_value=money(totalSurplusValue);
+  DB.stocktakes=replaceRow(DB.stocktakes,st.id,st);
   await persist();
   // ⚠️ v209 — باج جذري: كانت بتحدّث DB.products و DB.expenses محليًا بس (من غير
   // dbUpdate/dbUpsert) — الاتنين جداول "متزامنة صف بصف" (__SYNCED_TABLES)، فـpersist()
@@ -8919,10 +9018,10 @@ async function markSaleItemDamaged(idx){
     var prod=DB.products.find(function(p){return p.id===it.productId;});
     if(prod){
       var newQty=Math.max(0,prod.qty-it.qty);
-      DB.products=DB.products.map(function(p){return p.id===it.productId?Object.assign({},p,{qty:newQty}):p;});
+      DB.products=patchRow(DB.products,it.productId,{qty:newQty});
       await dbUpdate('products',it.productId,{qty:newQty});
     }
-    var lossAmount=it.qty*(it.buyPrice||0);
+    var lossAmount=lineTotal(it.qty,it.buyPrice);
     var expObj={id:genId(),label:'تالف/خطأ — '+it.name,amount:lossAmount,type:'تالف/خطأ',
       note:'قطعة "'+esc(it.name)+'" ×'+it.qty+' — تسجيل خطأ أثناء فاتورة العميل: '+esc(custName),
       date:today(),source:'damaged_item',customer:custName,item_name:it.name,qty:it.qty};
@@ -9120,7 +9219,7 @@ async function saveSale(){
       // هو سجل تاريخي لما اتفكك فعلياً من الماكينة، بغض النظر عن مصير القطعة بعد كده.
       // المخزون المتاح للبيع (DB.products) هو اللي اتصحح فوق بالفعل.
 
-      DB.sales=DB.sales.map(function(s){return s.id===_saleId?Object.assign({},s,obj):s;});
+      DB.sales=patchRow(DB.sales,_saleId,obj);
       await dbUpdate('sales',_saleId,obj);
 
       // ===== 2) تصحيح الدين المرتبط بالفاتورة (لو موجود) =====
@@ -9129,7 +9228,7 @@ async function saveSale(){
       if(linkedDebt){
         if(newRemaining<=0){
           // الفاتورة بقت متسددة بالكامل بعد التعديل — احذف الدين لو ماكانش مدفوع منه حاجة يدوياً زيادة عن الأصل
-          DB.debts=DB.debts.filter(function(d){return d.id!==linkedDebt.id;});
+          DB.debts=removeRow(DB.debts,linkedDebt.id);
           await dbDelete('debts',linkedDebt.id,linkedDebt);
         }else{
           DB.debts=DB.debts.map(function(d){
@@ -9166,7 +9265,7 @@ async function saveSale(){
         var prod=DB.products.find(function(p){return p.id===item.productId;});
         if(prod){
           var newQty=roundQty(Math.max(0,prod.qty-item.qty));
-          DB.products=DB.products.map(function(p){return p.id===item.productId?Object.assign({},p,{qty:newQty}):p;});
+          DB.products=patchRow(DB.products,item.productId,{qty:newQty});
           await dbUpdate('products',item.productId,{qty:newQty});
           await _handleConsignmentInSale(prod,item.qty,obj.id); // ⚠️ v200/v205 — دين المورد التلقائي لو العنصر أمانة مستلمة، مربوط بالفاتورة
         }
@@ -9702,8 +9801,8 @@ async function finishExtractForSale(){
     var productId;
     if(existing){
       var newQty=roundQty(existing.qty+item.qty);
-      var avgBuy=newQty>0?Math.round((existing.qty*(existing.buy_price||0)+item.qty*item.buy_price)/newQty):0;
-      DB.products=DB.products.map(function(p){return p.id===existing.id?Object.assign({},p,{qty:newQty,buy_price:avgBuy}):p;});
+      var avgBuy=newQty>0?money((existing.qty*(existing.buy_price||0)+item.qty*item.buy_price)/newQty):0;
+      DB.products=patchRow(DB.products,existing.id,{qty:newQty,buy_price:avgBuy});
       productId=existing.id;
       item._syncExisting=true; // ⚠️ v209
     }else{
@@ -9922,13 +10021,13 @@ function syncClientFromSale(customer,phone,serial,model,counter,colorCounter){
       var hasIt=(client.machines||[]).some(function(m){return m.serial&&normalizeAr(m.serial)===normalizeAr(serial);});
       if(!hasIt){
         newMachine={id:genId(),model:model||'',serial:serial,counter:counter||'',color_counter:colorCounter||'',date:today(),notes:'',status:'active'};
-        DB.clients=DB.clients.map(function(c){return c.id===client.id?Object.assign({},c,{machines:(c.machines||[]).concat([newMachine])}):c;});
+        DB.clients=patchRow(DB.clients,client.id,{machines:(c.machines||[]).concat([newMachine])});
       }
     }else if(model){
       var hasModel=(client.machines||[]).some(function(m){return m.model&&normalizeAr(m.model)===normalizeAr(model);});
       if(!hasModel){
         newMachine={id:genId(),model:model,serial:'',counter:counter||'',color_counter:colorCounter||'',date:today(),notes:'',status:'active'};
-        DB.clients=DB.clients.map(function(c){return c.id===client.id?Object.assign({},c,{machines:(c.machines||[]).concat([newMachine])}):c;});
+        DB.clients=patchRow(DB.clients,client.id,{machines:(c.machines||[]).concat([newMachine])});
       }
     }
   }
@@ -9953,7 +10052,7 @@ function promptAddClientPhone(clientId,clientName){
 async function saveRemindPhone(clientId){
   var phone=v('remind-phone').trim();
   if(!phone)return showToast('⚠️ اكتب رقم الهاتف أو اضغط تخطي','#dc2626');
-  DB.clients=DB.clients.map(function(c){return c.id===clientId?Object.assign({},c,{phone:phone}):c;});
+  DB.clients=patchRow(DB.clients,clientId,{phone:phone});
   await persist();closeModal();
   showToast('✅ تم حفظ رقم الهاتف','#16a34a');
 }
@@ -9994,10 +10093,10 @@ async function _removeConsignmentDebtsForSale(saleId){
   for(var i=0;i<linked.length;i++){
     var d=linked[i];
     if((d.paid||0)>0){
-      DB.debts=DB.debts.map(function(x){return x.id===d.id?Object.assign({},x,{total:d.paid}):x;});
+      DB.debts=patchRow(DB.debts,d.id,{total:d.paid});
       await dbUpdate('debts',d.id,{total:d.paid});
     }else{
-      DB.debts=DB.debts.filter(function(x){return x.id!==d.id;});
+      DB.debts=removeRow(DB.debts,d.id);
       await dbDelete('debts',d.id,d);
     }
   }
@@ -10011,7 +10110,7 @@ function openDeleteSaleModal(saleId){
     // مفيش دين مرتبط — حذف عادي مع استرجاع المخزون
     confirmAction('هتحذف الفاتورة دي؟',async function(){
       await _restoreStockFromSale(s);
-      DB.sales=DB.sales.filter(function(x){return x.id!==saleId;});
+      DB.sales=removeRow(DB.sales,saleId);
       await persist();
       await dbDelete('sales',saleId,s); // ⚠️ v195 — كان ناقص، نفس باج deleteSaleAndDebt/deleteSaleOnly
       renderSales();renderInventory();renderHome();
@@ -10040,8 +10139,8 @@ async function deleteSaleAndDebt(saleId,debtId){
   await _restoreStockFromSale(s);
   await _removeConsignmentDebtsForSale(saleId); // ⚠️ v205
   var __oldDebt=DB.debts.find(function(x){return x.id===debtId;});
-  DB.sales=DB.sales.filter(function(x){return x.id!==saleId;});
-  DB.debts=DB.debts.filter(function(x){return x.id!==debtId;});
+  DB.sales=removeRow(DB.sales,saleId);
+  DB.debts=removeRow(DB.debts,debtId);
   await persist();
   // ⚠️ v195 — إصلاح جذري: الدالة دي كانت بتمسح الفاتورة والدين من الشاشة والتخزين
   // المحلي بس، من غير ما تنادي dbDelete خالص — يعني السيرفر فاضل عنده نسخة الفاتورة
@@ -10057,7 +10156,7 @@ async function deleteSaleOnly(saleId){
   if(s&&_blockIfClosedMonth(s.date))return; // v175
   await _restoreStockFromSale(s);
   await _removeConsignmentDebtsForSale(saleId); // ⚠️ v205 — كانت ناقصة هنا (اتضافت في deleteSaleAndDebt بس)
-  DB.sales=DB.sales.filter(function(x){return x.id!==saleId;});
+  DB.sales=removeRow(DB.sales,saleId);
   await persist();
   // ⚠️ v195 — نفس إصلاح دالة deleteSaleAndDebt فوق: لازم dbDelete عشان يتمسح من السيرفر فعلاً.
   if(s) await dbDelete('sales',saleId,s);
@@ -10226,7 +10325,7 @@ function renderPurchBody(p){
             var oldQty=existingProd.qty,oldPrice=existingProd.buy_price||0;
             var newAvg=((oldQty*oldPrice)+(it.qty*it.price))/(oldQty+it.qty);
             avgNote='<div style="width:100%;font-size:10px;color:#7c3aed;margin-top:3px;background:#f5f3ff;border-radius:6px;padding:4px 7px">'+
-              '💡 عندك '+oldQty+' قطعة بسعر '+fmt(oldPrice)+' — التطبيق هياخد <b>متوسط مرجّح</b> مش هيستبدل السعر، فسعر التكلفة النهائي هيبقى تقريباً <b>'+fmt(Math.round(newAvg))+' ج</b></div>';
+              '💡 عندك '+oldQty+' قطعة بسعر '+fmt(oldPrice)+' — التطبيق هياخد <b>متوسط مرجّح</b> مش هيستبدل السعر، فسعر التكلفة النهائي هيبقى تقريباً <b>'+fmt(money(newAvg))+' ج</b></div>';
           }
           // ⚠️ v203 — "استكمل بيانات المنتج" لو المنتج الموجود لسه من غير شركة/نوع تقني، بدل
           // ما تضطر تسيب المشترى وتروح تعدّله من المخزون بنفسك. القيم دي بتتحفظ وقت حفظ
@@ -10513,11 +10612,11 @@ async function savePurchase(){
       var prod2=DB.products.find(function(x){return x.id===pid2;});
       if(prod2){
         var newQty2=roundQty(Math.max(0,prod2.qty+delta));
-        DB.products=DB.products.map(function(x){return x.id===pid2?Object.assign({},x,{qty:newQty2}):x;});
+        DB.products=patchRow(DB.products,pid2,{qty:newQty2});
         await dbUpdate('products',pid2,{qty:newQty2});
       }
     }
-    DB.purchases=DB.purchases.map(function(p){return p.id===_purchId?Object.assign({},p,obj):p;});
+    DB.purchases=patchRow(DB.purchases,_purchId,obj);
     await dbUpdate('purchases',_purchId,obj);
 
     // ⚠️ إصلاح v108 — تعديل مشترى كان بيسيب دين المورد المرتبط زي ما هو من غير تحديث،
@@ -10534,13 +10633,13 @@ async function savePurchase(){
     // ⚠️ v109 — ربط المشترى المُعدّل بكود مورد ثابت
     var supObj=getOrCreateSupplier(supplier);
     if(supObj){
-      DB.purchases=DB.purchases.map(function(p){return p.id===_purchId?Object.assign({},p,{supplier_id:supObj.id}):p;});
+      DB.purchases=patchRow(DB.purchases,_purchId,{supplier_id:supObj.id});
       await dbUpdate('purchases',_purchId,{supplier_id:supObj.id});
     }
     if(linkedDebt){
       var newTotal=Math.max(newDebtAmount,linkedDebt.paid||0);
       var updDebt=Object.assign({},linkedDebt,{name:supplier,supplier_id:supObj?supObj.id:linkedDebt.supplier_id,source_purchase_id:_purchId,total:newTotal,date:v('purch-date'),details:'مشترى — '+v('purch-date'),desc:'مشترى — '+v('purch-date')});
-      DB.debts=DB.debts.map(function(d){return d.id===linkedDebt.id?updDebt:d;});
+      DB.debts=replaceRow(DB.debts,linkedDebt.id,updDebt);
       await dbUpdate('debts',linkedDebt.id,updDebt);
     }else if(newDebtAmount>0){
       var newDebt={id:genId(),type:'supplier',name:supplier,supplier_id:supObj?supObj.id:null,source_purchase_id:_purchId,
@@ -10570,7 +10669,7 @@ async function savePurchase(){
           var oldLanded=prod.landed_cost||oldBuy;
           var avgBuy=newQty>0?Math.round(((oldQty*oldBuy+item.qty*item.price)/newQty)*100)/100:item.price;
           var avgLanded=newQty>0?Math.round(((oldQty*oldLanded+item.qty*landedCost)/newQty)*100)/100:landedCost;
-          DB.products=DB.products.map(function(p){return p.id===item.productId?Object.assign({},p,{qty:newQty,buy_price:avgBuy,landed_cost:avgLanded}):p;});
+          DB.products=patchRow(DB.products,item.productId,{qty:newQty,buy_price:avgBuy,landed_cost:avgLanded});
           await dbUpdate('products',item.productId,{qty:newQty,buy_price:avgBuy,landed_cost:avgLanded});
         }
       }else if(item.addToStock){
@@ -11099,7 +11198,7 @@ async function _applyLinkRepair(){
   var map=_linkLegacyDebts(DB.debts||[],DB.sales||[],DB.purchases||[]),ids=Object.keys(map),pDocs={},sDocs={};
   for(var i=0;i<ids.length;i++){
     var id=ids[i],m=map[id],upd=m.kind==='purch'?{source_purchase_id:m.id}:{source_sale_id:m.id};
-    DB.debts=DB.debts.map(function(x){return x.id===id?Object.assign({},x,upd):x;});
+    DB.debts=patchRow(DB.debts,id,upd);
     try{await dbUpdate('debts',id,upd);}catch(e){}
     if(m.kind==='purch')pDocs[m.id]=1;else sDocs[m.id]=1;
   }
@@ -11108,14 +11207,14 @@ async function _applyLinkRepair(){
     var pu=DB.purchases.find(function(x){return x.id===pid;});if(!pu)continue;
     var gT=(pu.total||0)+(pu.extra_cost||0),rem=DB.debts.filter(function(d){return d.source_purchase_id===pid;}).reduce(function(t,d){return t+((d.total||0)-(d.paid||0));},0);
     var np=Math.max(0,Math.min(gT,gT-rem));
-    DB.purchases=DB.purchases.map(function(x){return x.id===pid?Object.assign({},x,{paid:np}):x;});
+    DB.purchases=patchRow(DB.purchases,pid,{paid:np});
     try{await dbUpdate('purchases',pid,{paid:np});}catch(e){}
   }
   for(var sid in sDocs){
     var sa=DB.sales.find(function(x){return x.id===sid;});if(!sa)continue;
     var rem2=DB.debts.filter(function(d){return d.source_sale_id===sid;}).reduce(function(t,d){return t+((d.total||0)-(d.paid||0));},0);
     var np2=Math.max(0,Math.min(sa.total||0,(sa.total||0)-rem2));
-    DB.sales=DB.sales.map(function(x){return x.id===sid?Object.assign({},x,{paid:np2}):x;});
+    DB.sales=patchRow(DB.sales,sid,{paid:np2});
     try{await dbUpdate('sales',sid,{paid:np2});}catch(e){}
   }
   await persist();
@@ -11449,7 +11548,7 @@ async function saveEditDebt(id){
   var __oldDebtForGuard=DB.debts.find(function(x){return x.id===id;});
   if(__oldDebtForGuard&&_blockIfClosedMonth(__oldDebtForGuard.date))return;
   var update={name:v('debt-name-e'),desc:v('debt-desc-e'),details:v('debt-desc-e'),total:+v('debt-total-e')};
-  DB.debts=DB.debts.map(function(d){return d.id===id?Object.assign({},d,update):d;});
+  DB.debts=patchRow(DB.debts,id,update);
   await persist();
   // إصلاح جذري v102: نفس مشكلة saveDebt — التعديل كان بيتحفظ محليًا بس وميتبعتش للسيرفر.
   await dbUpdate('debts',id,update);
@@ -11492,7 +11591,7 @@ async function payDebt(id){
   var newPaid=Math.min((d.paid||0)+amount,d.total);
   var payments=(d.payments||[]).concat([{amount:amount,date:v('pay-date'),collected_by:(window.__currentProfile?window.__currentProfile.id:null)}]); // v161 — 2.10: مين حصّل السداد
   var update=Object.assign({paid:newPaid,payments:payments},_lk);
-  DB.debts=DB.debts.map(function(x){return x.id===id?Object.assign({},x,update):x;});
+  DB.debts=patchRow(DB.debts,id,update);
   await persist();
   // إصلاح جذري v102: أهم سبب لمشكلة "المبلغ بيجمع غلط في النقدية بعد السداد" — تسجيل
   // السداد كان بيتحدث محليًا بس وميتبعتش لجدول debts على السيرفر أبدًا. النتيجة: أي مزامنة
@@ -11506,7 +11605,7 @@ async function payDebt(id){
     var sale=DB.sales.find(function(s){return s.id===d.source_sale_id;});
     if(sale){
       var newSalePaid=Math.min(sale.total,(sale.paid||0)+amount);
-      DB.sales=DB.sales.map(function(s){return s.id===sale.id?Object.assign({},s,{paid:newSalePaid}):s;});
+      DB.sales=patchRow(DB.sales,sale.id,{paid:newSalePaid});
       await dbUpdate('sales',sale.id,{paid:newSalePaid});
     }
   }
@@ -11515,7 +11614,7 @@ async function payDebt(id){
     var pu=DB.purchases.find(function(x){return x.id===d.source_purchase_id;});
     if(pu){
       var newPuPaid=Math.min((pu.total||0)+(pu.extra_cost||0),(pu.paid||0)+amount);
-      DB.purchases=DB.purchases.map(function(x){return x.id===pu.id?Object.assign({},x,{paid:newPuPaid}):x;});
+      DB.purchases=patchRow(DB.purchases,pu.id,{paid:newPuPaid});
       await dbUpdate('purchases',pu.id,{paid:newPuPaid});
     }
   }
@@ -11571,7 +11670,7 @@ async function payGroupDebts(name,type){
     var toAdd=Math.min(remaining,rem);
     var newPaid=(d.paid||0)+toAdd;
     var newPayments=(d.payments||[]).concat([{amount:toAdd,date:payDate}]);
-    DB.debts=DB.debts.map(function(x){return x.id===d.id?Object.assign({},x,{paid:newPaid,payments:newPayments}):x;});
+    DB.debts=patchRow(DB.debts,d.id,{paid:newPaid,payments:newPayments});
     // إصلاح جذري v102: نفس مشكلة payDebt — السداد الجماعي كان بيحدّث كل دين محليًا بس
     // من غير ما يبعت التحديث لجدول debts على السيرفر، فكان بيتمسح مع أي مزامنة لاحقة.
     await dbUpdate('debts',d.id,Object.assign({paid:newPaid,payments:newPayments},_lk2));
@@ -11580,7 +11679,7 @@ async function payGroupDebts(name,type){
       var sale=DB.sales.find(function(s){return s.id===d.source_sale_id;});
       if(sale){
         var newSalePaid=Math.min(sale.total,(sale.paid||0)+toAdd);
-        DB.sales=DB.sales.map(function(s){return s.id===sale.id?Object.assign({},s,{paid:newSalePaid}):s;});
+        DB.sales=patchRow(DB.sales,sale.id,{paid:newSalePaid});
         await dbUpdate('sales',sale.id,{paid:newSalePaid});
       }
     }
@@ -11588,7 +11687,7 @@ async function payGroupDebts(name,type){
       var pu=DB.purchases.find(function(x){return x.id===d.source_purchase_id;});
       if(pu){
         var newPuPaid=Math.min((pu.total||0)+(pu.extra_cost||0),(pu.paid||0)+toAdd);
-        DB.purchases=DB.purchases.map(function(x){return x.id===pu.id?Object.assign({},x,{paid:newPuPaid}):x;});
+        DB.purchases=patchRow(DB.purchases,pu.id,{paid:newPuPaid});
         await dbUpdate('purchases',pu.id,{paid:newPuPaid});
       }
     }
@@ -11793,7 +11892,7 @@ async function toggleSubtask(taskId,idx){
   if(!allDone&&task.status==='done'&&task.auto_done){
     update.status='pending';update.done_at=null;update.auto_done=false;
   }
-  DB.tasks=DB.tasks.map(function(t){return t.id===taskId?Object.assign({},t,update):t;});
+  DB.tasks=patchRow(DB.tasks,taskId,update);
   await dbUpdate('tasks',taskId,update);
   await persist();
   renderTasks();renderHome();
@@ -11859,7 +11958,7 @@ async function saveTask(){
   if(!title)return showToast('⚠️ عنوان المهمة مطلوب','#dc2626');
   var obj={title:title,details:v('task-desc'),desc:v('task-desc'),priority:v('task-priority'),due_date:v('task-due'),status:'pending',assigned_to:v('task-assigned')||null};
   if(_taskId){
-    DB.tasks=DB.tasks.map(function(t){return t.id===_taskId?Object.assign({},t,obj):t;});
+    DB.tasks=patchRow(DB.tasks,_taskId,obj);
     await dbUpdate('tasks',_taskId,obj);
   }else{
     obj.id=genId();
@@ -11892,7 +11991,7 @@ async function markDone(id){
   }
   var note=v('done-note')||'';
   var update={status:'done',done_at:new Date().toISOString(),done_note:note};
-  DB.tasks=DB.tasks.map(function(t){return t.id===id?Object.assign({},t,update):t;});
+  DB.tasks=patchRow(DB.tasks,id,update);
   await dbUpdate('tasks',id,update);
   await persist();
   closeModal();renderTasks();renderHome();
@@ -12251,7 +12350,7 @@ async function saveExpense(closeAfter,editId){
     }
     var byEl=document.getElementById('exp-by');
     if(window.__isOwner&&byEl&&byEl.value)upd.created_by=byEl.value;
-    DB.expenses=DB.expenses.map(function(e){return e.id===editId?Object.assign({},e,upd):e;});
+    DB.expenses=patchRow(DB.expenses,editId,upd);
     await persist();
     await dbUpdate('expenses',editId,upd);
     closeModal();renderHome();renderExpensesList();_refreshExpensesView();
@@ -12805,7 +12904,7 @@ async function saveEditExpense(id){
   if(sub)addExpSubcategory(type,sub);
   var label=type+(sub?' — '+sub:'')+(note?' ('+note+')':'');
   var update={amount:amount,type:type,subcategory:sub,note:note,date:v('edit-exp-date'),label:label};
-  DB.expenses=DB.expenses.map(function(e){return e.id===id?Object.assign({},e,update):e;});
+  DB.expenses=patchRow(DB.expenses,id,update);
   await persist();
   await dbUpdate('expenses',id,update); // ⚠️ v209 — كان ناقص، نفس باج saveProduct بالظبط (تعديل المصروف مكانش بيتزامن مع السيرفر خالص)
   closeModal();renderHome();
@@ -13151,6 +13250,7 @@ function renderMovements(){
       '</div>'+
       (m.status==='ملغي'&&m.cancel_reason?'<div style="font-size:11px;color:#dc2626;background:#fef2f2;border-radius:6px;padding:4px 7px;margin-bottom:4px">🚫 سبب الإلغاء: '+esc(m.cancel_reason)+'</div>':'');
     var actionsArr=[
+      (isOpenState&&_movAct('visit','all')?_visitBtn(m,'all'):''),
       (isOpenState&&_movAct('log','all')?'<button class="btn btn-sm" style="background:#f0fdf4;color:#15803d;border:1px solid #86efac;flex:1;font-size:11px" onclick="openAddLogModal(\''+m.id+'\')">📝 ملاحظة</button>':''),
       (isOpenState&&_movAct('close','all')?'<button class="btn btn-green btn-sm" style="font-size:11px" onclick="closeMovement(\''+m.id+'\')">✅ إنهاء</button>':''),
       (isOpenState&&_movAct('cancel','all')?'<button class="btn btn-sm" style="background:#fef2f2;color:#dc2626;border:1px solid #fecaca;font-size:11px" onclick="openCancelMovementModal(\''+m.id+'\')">🚫 إلغاء</button>':''),
@@ -13274,6 +13374,7 @@ function renderScheduledList(){
       '</div></div>';
     var __szS='font-size:16px;min-width:40px;padding:8px 6px';
     var actionsArr=[
+      (m.status!=='منتهي'&&_movAct('visit','sched')?_visitBtn(m,'sched',__szS):''),
       (m.status!=='منتهي'&&_movAct('log','sched')?'<button class="btn-ic" style="background:#f0fdf4;'+__szS+'" onclick="openAddLogModal(\''+m.id+'\')" title="ملاحظة">📝</button>':''),
       (m.status!=='منتهي'&&_movAct('close','sched')?'<button class="btn-ic" style="background:#dcfce7;'+__szS+'" onclick="closeMovement(\''+m.id+'\')" title="إنهاء">✅</button>':''),
       (m.status!=='منتهي'&&_movAct('carry','sched')?'<button class="btn-ic" style="background:#f5f3ff;'+__szS+'" onclick="openCarryOverModal(\''+m.id+'\')" title="ترحيل">📌</button>':''),
@@ -13425,7 +13526,7 @@ async function toggleStockStatus(id){
   var newStatus=toStock?'في الاستوك':'جاري';
   var logs=(m.log||[]).concat([{date:today(),note:toStock?'اتحط في الاستوك يدويًا':'اترجع من الاستوك يدويًا',status:newStatus,by:window.__currentProfile?window.__currentProfile.id:null}]);
   var update={status:newStatus,log:logs,customer:m.customer}; // ⚠️ v128 — كانت بتتحفظ محليًا بس من غير مزامنة سيرفر خالص
-  DB.movements=DB.movements.map(function(x){return x.id===id?Object.assign({},x,update):x;});
+  DB.movements=patchRow(DB.movements,id,update);
   await persist();
   await dbUpdate('movements',id,update);
   if(_movTab==='scheduled')renderScheduledList();else renderMovements();
@@ -13438,7 +13539,7 @@ async function toggleWaitingStatus(id){
   var newStatus=toWait?'منتظر':'جاري';
   var logs=(m.log||[]).concat([{date:today(),note:toWait?'اتحط منتظر يدويًا':'اترجع من الانتظار يدويًا',status:newStatus,by:window.__currentProfile?window.__currentProfile.id:null}]);
   var update={status:newStatus,log:logs,customer:m.customer};
-  DB.movements=DB.movements.map(function(x){return x.id===id?Object.assign({},x,update):x;});
+  DB.movements=patchRow(DB.movements,id,update);
   await persist();
   await dbUpdate('movements',id,update);
   if(_movTab==='scheduled')renderScheduledList();else renderMovements();
@@ -13529,7 +13630,7 @@ async function removeFromScheduled(id){
   DB.scheduled_list=(DB.scheduled_list||[]).filter(function(x){return x!==id;});
   if(DB.scheduled_map)delete DB.scheduled_map[id];
   if(DB.scheduled_carried)delete DB.scheduled_carried[id];
-  DB.movements=DB.movements.map(function(m){return m.id===id?Object.assign({},m,{sched_day:null}):m;});
+  DB.movements=patchRow(DB.movements,id,{sched_day:null});
   await dbUpdate('movements', id, {sched_day:null});
   await persist();renderScheduledList();
 }
@@ -13934,6 +14035,7 @@ function _renderMovementBodyRaw(m){
     '</div></div>'+
     (partsHtml?'<div id="mov-parts-list">'+partsHtml+'</div>':'')+
     _movEstimateHtml()+
+    (m?'<div class="field" id="mov-visit-box" style="background:#ecfeff;border:1.5px solid #67e8f9;border-radius:11px;padding:11px 13px">'+_visitBoxInner(m)+'</div>':'')+
     // ⚠️ v203 — "دفعة تحت الحساب": لما العميل يدفع فلوس مقدمًا على شغل لسه مش نهائي (السعر
     // هيتحدد بعدين)، بنسجلها هنا للتوثيق بس — من غير ما تدخل في حسابات الكاش دلوقتي، عشان
     // منحسبش إيراد لسه مش نهائي. لما تعمل الفاتورة النهائية من نفس التحرك (✅ إنهاء + فاتورة)،
@@ -14971,7 +15073,7 @@ async function withdrawPartForMovement(movementId){
   if(!window.__currentProfile){msg.textContent='⚠️ لازم تكون مسجل دخول عشان تسحب قطعة';msg.style.color='#dc2626';return;}
 
   var newQty=roundQty(prod.qty-qty);
-  DB.products=DB.products.map(function(p){return p.id===prod.id?Object.assign({},p,{qty:newQty}):p;});
+  DB.products=patchRow(DB.products,prod.id,{qty:newQty});
   await persist();
   await dbUpdate('products',prod.id,{qty:newQty});
 
@@ -15087,7 +15189,7 @@ async function saveMovement(){
     if(isNewlyDone){obj.closed_at=today();obj.closed_order=Date.now();}
     var isNew=!_movId;
     if(_movId){
-      DB.movements=DB.movements.map(function(m){return m.id===_movId?Object.assign({},m,obj):m;});
+      DB.movements=patchRow(DB.movements,_movId,obj);
       await dbUpdate('movements',_movId,obj);
     }else{
       DB.movCounter=(DB.movCounter||0)+1;
@@ -15275,6 +15377,7 @@ async function confirmCancelMovement(id){
 
 async function confirmCloseMovement(id,addInvoice){
   var m=(DB.movements||[]).find(function(x){return x.id===id;});if(!m)return;
+  _visitEndSilently(id); // v272 — قفل عداد الزيارة عند إنهاء التحرك
   var note=v('close-note');
   // إضافة log الإنهاء
   var logEntry={date:today(),note:note||'تم الإنهاء',status:'منتهي',by:window.__currentProfile?window.__currentProfile.id:null};
@@ -15351,7 +15454,7 @@ async function delMovement(id){
     return;
   }
   var __oldMv = DB.movements.find(function(m){return m.id===id;});
-  DB.movements=DB.movements.filter(function(m){return m.id!==id;});
+  DB.movements=removeRow(DB.movements,id);
   Object.keys(DB.schedule).forEach(function(d){
     DB.schedule[d]=(DB.schedule[d]||[]).filter(function(x){return x!==id;});
   });
@@ -15395,6 +15498,7 @@ function openMovementDetail(id){
     '<div style="background:rgba(255,255,255,.15);border-radius:9px;padding:10px;margin-top:10px;text-align:center">'+
     '<div style="font-size:11px;opacity:.7">مدة الإصلاح</div>'+
     '<div style="font-size:24px;font-weight:900">'+days+' يوم</div></div></div>'+
+    (visitTotalMs(m)>0?'<div style="background:#ecfeff;border:1.5px solid #67e8f9;border-radius:12px;padding:10px 12px;margin-bottom:10px;text-align:center"><div style="font-size:11px;color:#0e7490">⏱️ الوقت الفعلي عند العميل ('+visitLogs(m).length.toLocaleString('ar-EG')+' زيارة)</div><div style="font-size:20px;font-weight:900;color:#0e7490">'+fmtDur(visitTotalMs(m))+'</div></div>':'')+
     '<div class="card" style="margin-bottom:10px">'+
     '<div style="font-weight:700;font-size:13px;margin-bottom:8px">🔧 '+esc(m.fault_type||'—')+'</div>'+
     (m.fault_desc?'<div style="font-size:12px;color:#64748b;margin-bottom:8px">'+esc(m.fault_desc)+'</div>':'')+
@@ -15747,7 +15851,7 @@ async function confirmSchedDone(id){
   // تتحفظ فعلاً بنجاح (شوف saveSale). لو "إنهاء فقط"، اقفلها فورًا زي ما كان.
   if(!toSale){ update.status='منتهي'; update.closed_at=today(); }
   else{ _saleFromMovementId=id; }
-  DB.movements=DB.movements.map(function(x){return x.id===id?Object.assign({},x,update):x;});
+  DB.movements=patchRow(DB.movements,id,update);
   await persist();
   await dbUpdate('movements',id,update);
   closeModal();renderSchedule();renderHome();updateMovementsBadge();
@@ -17890,7 +17994,7 @@ async function confirmAutoBalanceDiff(diff){
   // (مثل مخزون افتتاحي مسجَّل بقيمة أقل من الحقيقية) دون أن يزعم دخول/خروج كاش فعلي.
   if(!DB.accounts.equity_adjustments)DB.accounts.equity_adjustments=[];
   DB.accounts.equity_adjustments.push({
-    id:genId(),name:reason,amount:Math.round(diff),
+    id:genId(),name:reason,amount:money(diff),
     note:'تسوية دفترية لفرق ميزانية بقيمة '+fmt(Math.abs(diff))+' ج — لا تمثل حركة نقدية فعلية',
     date:today()
   });
@@ -17942,7 +18046,7 @@ async function saveCapital(){
 }
 
 async function delCapital(id){
-  DB.accounts.capital=DB.accounts.capital.filter(function(c){return c.id!==id;});
+  DB.accounts.capital=removeRow(DB.accounts.capital,id);
   await persist();renderAccounting();showToast('🗑️ تم الحذف','#64748b');
 }
 
@@ -18037,7 +18141,7 @@ async function saveEditAsset(id){
 }
 
 async function delAsset(id){
-  DB.accounts.fixed_assets=DB.accounts.fixed_assets.filter(function(a){return a.id!==id;});
+  DB.accounts.fixed_assets=removeRow(DB.accounts.fixed_assets,id);
   await persist();renderAccounting();showToast('🗑️ تم الحذف','#64748b');
 }
 
@@ -18204,7 +18308,7 @@ async function toggleExpActive(id){
 }
 
 async function delFixedExp(id){
-  DB.accounts.fixed_expenses=DB.accounts.fixed_expenses.filter(function(e){return e.id!==id;});
+  DB.accounts.fixed_expenses=removeRow(DB.accounts.fixed_expenses,id);
   await persist();renderAccounting();showToast('🗑️ تم الحذف','#64748b');
 }
 
@@ -18343,7 +18447,7 @@ async function toggleEmployee(id){
 }
 
 async function delEmployee(id){
-  DB.accounts.employees=DB.accounts.employees.filter(function(e){return e.id!==id;});
+  DB.accounts.employees=removeRow(DB.accounts.employees,id);
   await persist();renderAccounting();showToast('🗑️ تم الحذف','#64748b');
 }
 
@@ -18394,12 +18498,12 @@ async function saveReceivable(){
 }
 
 async function markReceivableReceived(id){
-  DB.accounts.receivables=DB.accounts.receivables.map(function(r){return r.id===id?Object.assign({},r,{status:'received'}):r;});
+  DB.accounts.receivables=patchRow(DB.accounts.receivables,id,{status:'received'});
   await persist();renderAccounting();showToast('✅ تم الاستلام','#16a34a');
 }
 
 async function delReceivable(id){
-  DB.accounts.receivables=DB.accounts.receivables.filter(function(r){return r.id!==id;});
+  DB.accounts.receivables=removeRow(DB.accounts.receivables,id);
   await persist();renderAccounting();showToast('🗑️ تم الحذف','#64748b');
 }
 
@@ -18807,7 +18911,7 @@ async function _mfUnify(i){
 async function _mfJoin(i){
   var fid=v('mfc-ex-'+i);if(!fid)return showToast('⚠️ اختار العائلة','#dc2626');
   var sel=Object.keys(_mfSel[i]||{});if(!sel.length)return showToast('⚠️ اختار شكل واحد على الأقل','#dc2626');
-  DB.settings.modelFamilies=DB.settings.modelFamilies.map(function(f){return f.id===fid?Object.assign({},f,{variants:(f.variants||[]).concat(sel)}):f;});
+  DB.settings.modelFamilies=patchRow(DB.settings.modelFamilies,fid,{variants:(f.variants||[]).concat(sel)});
   var n=await _mfApplyToClients();
   await persist();
   showToast('✅ اتضموا'+(n?' — اتعدّل '+n+' مكنة':''),'#16a34a');
@@ -18918,7 +19022,7 @@ async function mergeModelFamily(){
   openModelFamiliesSettings();
 }
 async function delModelFamily(id){
-  DB.settings.modelFamilies=DB.settings.modelFamilies.filter(function(f){return f.id!==id;});
+  DB.settings.modelFamilies=removeRow(DB.settings.modelFamilies,id);
   await persist();
   openModelFamiliesSettings();
 }
@@ -18933,7 +19037,7 @@ function renameModelFamily(id){
 }
 async function saveRenameModelFamily(id){
   var name=v('rmf-name');if(!name)return;
-  DB.settings.modelFamilies=DB.settings.modelFamilies.map(function(f){return f.id===id?Object.assign({},f,{name:name}):f;});
+  DB.settings.modelFamilies=patchRow(DB.settings.modelFamilies,id,{name:name});
   await persist();closeModal();openModelFamiliesSettings();
 }
 async function removeVariantFromFamily(famId,idx){
@@ -19352,7 +19456,7 @@ async function syncSalesWithDebts(){
     var totalRemainingInDebts=relatedDebts.reduce(function(s,d){return s+(d.total-(d.paid||0));},0);
     var correctPaid=Math.max(0,sale.total-totalRemainingInDebts);
     if(Math.round(correctPaid*100)!==Math.round((sale.paid||0)*100)){
-      DB.sales=DB.sales.map(function(s){return s.id===saleId?Object.assign({},s,{paid:correctPaid}):s;});
+      DB.sales=patchRow(DB.sales,saleId,{paid:correctPaid});
       fixed++;
       fixedSaleIds.push(saleId);
     }
@@ -20499,10 +20603,10 @@ setInterval(_checkPrayerAlerts,20000);
 // عشان تحل مشكلة زحمة المساحة بدل ما الأزرار تتفرض كلها دايمًا
 // ⚠️ v234 — فصلت إعدادات "الكل" عن "مرتبة" (كانا مشتركين في v233) بطلب العميل — كل
 // شاشة ليها مجموعة أزرارها المتاحة، ومفيش داعي نعرض زرار في قايمة شاشة أصلاً مش موجود فيها
-var MOV_ACTIONS_DEFS_ALL=[['log','📝 إضافة ملاحظة'],['close','✅ إنهاء العطل'],['cancel','🚫 إلغاء'],
+var MOV_ACTIONS_DEFS_ALL=[['visit','⏱️ عداد الزيارة (دخول/خروج)'],['log','📝 إضافة ملاحظة'],['close','✅ إنهاء العطل'],['cancel','🚫 إلغاء'],
   ['detail','📋 التفاصيل (للمنتهي)'],['addSched','➕ إضافة للمرتبة'],['stock','🗄️ حالة الاستوك'],
   ['wait','⏳ حالة الانتظار'],['edit','✏️ تعديل'],['del','🗑️ حذف']];
-var MOV_ACTIONS_DEFS_SCHED=[['log','📝 إضافة ملاحظة'],['close','✅ إنهاء العطل'],['carry','📌 ترحيل'],
+var MOV_ACTIONS_DEFS_SCHED=[['visit','⏱️ عداد الزيارة (دخول/خروج)'],['log','📝 إضافة ملاحظة'],['close','✅ إنهاء العطل'],['carry','📌 ترحيل'],
   ['stock','🗄️ حالة الاستوك'],['wait','⏳ حالة الانتظار'],['edit','✏️ تعديل'],['removeSched','✕ إزالة من المرتبة']];
 function _movActsChecklist(scope,defs,title){
   var c=((DB.settings&&DB.settings.movCardActions)||{})[scope]||{};
@@ -20782,7 +20886,8 @@ async function clearAllData(){
 // طباعة عامة لأي بند أو شاشة
 function printSection(title,htmlContent){
   var w=window.open('','_blank');
-  w.document.write('<!DOCTYPE html><html dir="rtl"><head><meta charset="utf-8"><title>'+title+'</title>'+
+  if(!w){showToast('⚠️ المتصفح منع نافذة الطباعة — اسمح بالنوافذ المنبثقة وجرّب تاني','#dc2626');return;} // v271
+  w.document.write('<!DOCTYPE html><html dir="rtl"><head><meta charset="utf-8"><title>'+esc(title)+'</title>'+
     '<style>body{font-family:Tahoma,Arial,sans-serif;direction:rtl;padding:20px;font-size:13px}'+
     '.no-print{display:none}table{width:100%;border-collapse:collapse}'+
     'td,th{border:1px solid #ccc;padding:6px 8px;text-align:right}'+
@@ -20884,6 +20989,7 @@ function printSelectedFromTable(title,columnsDef){
 function printInvoice(id){
   var s=DB.sales.find(function(x){return x.id===id;});if(!s)return;
   var w=window.open('','_blank','width=420,height=650');
+  if(!w){showToast('⚠️ المتصفح منع نافذة الطباعة — اسمح بالنوافذ المنبثقة وجرّب تاني','#dc2626');return;} // v271
   var rows=s.items.map(function(i){
     return '<tr><td style="padding:6px 8px;border-bottom:1px solid #eee">'+esc(i.name)+'</td>'+
       '<td style="padding:6px 8px;border-bottom:1px solid #eee;text-align:center">'+fmtQty(i.qty)+'</td>'+
@@ -21574,7 +21680,7 @@ async function confirmExtractParts(machineId){
         if(p.id!==item.productId)return p;
         var oldQty=p.qty,oldBuy=p.buy_price||0;
         var newQty=roundQty(oldQty+item.qty);
-        var avgBuy=newQty>0?Math.round((oldQty*oldBuy+item.qty*itemBuy)/newQty):0;
+        var avgBuy=newQty>0?money((oldQty*oldBuy+item.qty*itemBuy)/newQty):0;
         return Object.assign({},p,{qty:newQty,buy_price:avgBuy});
       });
       item._syncExisting=true; // ⚠️ v209
@@ -21730,7 +21836,7 @@ window.addEventListener('DOMContentLoaded',function(){
   var el=document.getElementById('today-date');
   if(el){var now=new Date();
     try{el.textContent=_hijri?new Intl.DateTimeFormat('ar-SA-u-ca-islamic-umalqura',{weekday:'long',year:'numeric',month:'long',day:'numeric'}).format(now):now.toLocaleDateString('ar-EG',{weekday:'long',year:'numeric',month:'long',day:'numeric'});}
-    catch(e){el.textContent=now.toLocaleDateString();}
+    catch(e){el.textContent=now.toLocaleDateString('ar-SA-u-ca-islamic-umalqura');}
   }
   // عرض تاريخ ووقت بناء النسخة الحالية — للتأكد من عدم وجود كاش قديم
   var bsEl=document.getElementById('build-stamp');
@@ -22190,7 +22296,7 @@ async function saveEditClient(id){
   await persist();closeModal();renderClients();showToast('✅ تم التعديل','#16a34a');
 }
 async function delClient(id){
-  DB.clients=DB.clients.filter(function(c){return c.id!==id;});
+  DB.clients=removeRow(DB.clients,id);
   await persist();closeModal();renderClients();showToast('🗑️ تم الحذف','#64748b');
 }
 
@@ -22225,8 +22331,8 @@ async function mergeClients(){
     var dup=merged.some(function(x){return x.serial&&m.serial&&normalizeAr(x.serial)===normalizeAr(m.serial);});
     if(!dup)merged.push(m);
   });
-  DB.clients=DB.clients.map(function(c){return c.id===toId?Object.assign({},c,{machines:merged}):c;});
-  DB.clients=DB.clients.filter(function(c){return c.id!==fromId;});
+  DB.clients=patchRow(DB.clients,toId,{machines:merged});
+  DB.clients=removeRow(DB.clients,fromId);
   // تحديث مرجع العميل في التحركات والمبيعات
   DB.movements=(DB.movements||[]).map(function(m){return m.customer===from.name?Object.assign({},m,{customer:to.name}):m;});
   DB.sales=(DB.sales||[]).map(function(s){return s.customer===from.name?Object.assign({},s,{customer:to.name}):s;});
@@ -22539,14 +22645,14 @@ async function saveSupplier(id){
   var notes=v('sup-notes').trim();
   if(id){
     var upd={name:name,phone:phone,location:location,address:address,notes:notes};
-    DB.suppliers=DB.suppliers.map(function(s){return s.id===id?Object.assign({},s,upd):s;});
+    DB.suppliers=patchRow(DB.suppliers,id,upd);
   }else{
     // لو الاسم ده موجود قبل كده (اتسجل تلقائي من مشترى قديم)، نكمّل بياناته بدل ما نعمل تكرار
     var qn=normalizeAr(name);
     var existing=(DB.suppliers||[]).find(function(s){return normalizeAr(s.name)===qn;});
     if(existing){
       var upd2={name:name,phone:phone,location:location,address:address,notes:notes};
-      DB.suppliers=DB.suppliers.map(function(s){return s.id===existing.id?Object.assign({},s,upd2):s;});
+      DB.suppliers=patchRow(DB.suppliers,existing.id,upd2);
       id=existing.id;
     }else{
       var newSup={id:genId(),code:genSupplierCode(),name:name,phone:phone,location:location,address:address,notes:notes,date:today()};
@@ -24515,7 +24621,7 @@ async function confirmPayDailyWage(empId){
   var dateVal=v('dw-date');
   if(_blockIfClosedMonth(dateVal))return;
   var note=v('dw-note')||'راتب يومي '+esc(emp.name);
-  DB.accounts.employees=DB.accounts.employees.map(function(e){return e.id===empId?Object.assign({},e,{last_paid:dateVal}):e;});
+  DB.accounts.employees=patchRow(DB.accounts.employees,empId,{last_paid:dateVal});
   var obj={id:genId(),label:'رواتب — '+note,amount:amount,type:'رواتب',
     note:note+' ('+esc(emp.name)+')',date:dateVal,source:'salary',employee_id:empId,official_pay:false,wage_type:'daily'};
   DB.expenses.unshift(obj);
@@ -24860,7 +24966,7 @@ function switchMovTab(tab,el){
 // بتتلف هنا مرة واحدة: لو اتنفّذت من ضغطة مستخدم حقيقية ولسه شغالة (أو خلصت من أقل من ٠٫٦ ثانية)
 // بنفس الأرقام (id) → الضغطة التانية بتتتجاهل. أي دالة جديدة بتنشئ سجل: ضيف اسمها في __ONCE_GUARDED.
 // الاستدعاء من الكود (مش ضغطة) مش بيتأثر. اختلاف الـid (فاتورتين مختلفتين) مش بيتمنع.
-var __ONCE_GUARDED=["__giveEmpCashAdvance", "__settleEmpCashBalance", "__undoLastCashAdvance", "_applyLinkRepair", "_duaSave", "_invBatchDel", "_invBatchSave", "_invCreateGoodsAcc", "_invMoneySave", "_invPaySave", "_invSave", "_mfUnify", "_movTodoAdd", "_wsSaveSettings", "addExpenseTemplate", "addMovAdvancePayment", "approveStocktake", "confirmAutoBalanceDiff", "confirmCloseMovement", "confirmContinueMovement", "confirmExtractParts", "confirmMarkLeave", "confirmMyAttendance", "confirmPayAdvance", "confirmPayDailyWage", "confirmPayFixedExp", "confirmPaySalary", "confirmSchedDone", "convertOpeningInventoryToPurchase", "delScrapMachine", "deleteAllArchivedDebts", "duplicateTask", "execMergeProducts", "finishExtractForSale", "importBaseClients", "markSaleItemDamaged", "mergeModelFamily", "openDeleteSaleModal", "payDebt", "payGroupDebts", "quickLogExpense", "removeMovAdvancePayment", "saveAddCapital", "saveAsset", "saveBalanceSnapshot", "saveBatchExpenses", "saveBundleDraft", "saveCapital", "saveConsignmentOutSale", "saveDebt", "saveEditCapital", "saveEditDebt", "saveEditExpense", "saveEditFixedExp", "saveEditReceivable", "saveEmpIncrement", "saveEmployee", "saveExpense", "saveFixedExp", "saveGiveConsignment", "saveIncrement", "saveInventorySnapshot", "saveInvestorWithdraw", "saveLog", "saveMachine", "saveMovement", "saveNewClient", "saveNewInvestor", "saveProduct", "saveProfitCycle", "savePurchase", "saveReceivable", "saveReceiveConsignment", "saveReturnConsignment", "saveSale", "saveScrapMachine", "saveSupplier", "saveTask", "setExtraIncome", "startStocktake", "syncSalesWithDebts", "withdrawPartForMovement"];
+var __ONCE_GUARDED=["__giveEmpCashAdvance", "__settleEmpCashBalance", "__undoLastCashAdvance", "_applyLinkRepair", "_duaSave", "_invBatchDel", "_invBatchSave", "_invCreateGoodsAcc", "_invMoneySave", "_invPaySave", "_invSave", "_mfUnify", "_movTodoAdd", "_wsSaveSettings", "addExpenseTemplate", "addMovAdvancePayment", "approveStocktake", "confirmAutoBalanceDiff", "confirmCloseMovement", "confirmContinueMovement", "confirmExtractParts", "confirmMarkLeave", "confirmMyAttendance", "confirmPayAdvance", "confirmPayDailyWage", "confirmPayFixedExp", "confirmPaySalary", "confirmSchedDone", "convertOpeningInventoryToPurchase", "delScrapMachine", "deleteAllArchivedDebts", "deleteVisitLog", "duplicateTask", "endVisit", "execMergeProducts", "finishExtractForSale", "importBaseClients", "markSaleItemDamaged", "mergeModelFamily", "openDeleteSaleModal", "payDebt", "payGroupDebts", "quickLogExpense", "removeMovAdvancePayment", "saveAddCapital", "saveAsset", "saveBalanceSnapshot", "saveBatchExpenses", "saveBundleDraft", "saveCapital", "saveConsignmentOutSale", "saveDebt", "saveEditCapital", "saveEditDebt", "saveEditExpense", "saveEditFixedExp", "saveEditReceivable", "saveEmpIncrement", "saveEmployee", "saveExpense", "saveFixedExp", "saveGiveConsignment", "saveIncrement", "saveInventorySnapshot", "saveInvestorWithdraw", "saveLog", "saveMachine", "saveMovement", "saveNewClient", "saveNewInvestor", "saveProduct", "saveProfitCycle", "savePurchase", "saveReceivable", "saveReceiveConsignment", "saveReturnConsignment", "saveSale", "saveScrapMachine", "saveSupplier", "saveTask", "setExtraIncome", "startStocktake", "startVisit", "syncSalesWithDebts", "withdrawPartForMovement"];
 (function(){
   var busy={};
   function wrap(name){
