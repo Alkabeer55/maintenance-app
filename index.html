@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v272</title>
+<title>ابو حوده الحلو الجميل v275</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="1448-05-03 — v272";
+<script>var BUILD_STAMP="1448-05-03 — v275";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -69,6 +69,16 @@
         ده بيحميها من الضغط المتكرر حتى لو الزرار نسي __runOnce. (__runOnce فاضل مطلوب على الزرار — الاتنين مع بعض).
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v275: [👥 قايمة العملاء الأنظم | 🛒 قايمة أصناف المشتريات]
+     1) العملاء: وضع "مضغوط" (الافتراضي) — سطر واحد لكل عميل (حالة، اسم، عدد المكن، آخر صيانة، 📞 اتصال) والضغط عليه يفتح الكارت الكامل؛ زرار ▤ تفصيلي/☰ مضغوط للتبديل (بيتحفظ). شريط عدّاد فيه إجمالي العملاء والمكن حسب الفلتر الحالي (من الإجمالي) وزرار "مسح الفلاتر ✕". إحصائيات المكن والتنبيهات اتجمّعت في سطر "فلاتر إضافية" قابل للطي (بيفتح لوحده لو فلتر منها شغال)، وكروت الحالات والبحث والترتيب زي ما هم.
+     2) فاتورة المشتريات: نفس علاج الفاتورة (v274) — القايمة والنص ومكان التمرير بيفضلوا بعد إضافة صنف، وعلى كل صنف ✓ ×العدد وزرار "تم ✓".
+v274: [🔎 قايمة اختيار القطع مابتقفلش بعد اختيار قطعة]
+     1) تقدير التحرك: اتشال الـdatalist (اللي كان بيقفل بعد أول اختيار) وحل محله قايمة دوس-وأضف: كل ضغطة بتضيف القطعة والقايمة مفتوحة وعليها ✓ ×العدد، وزرار "تم ✓" يقفلها. الكتابة اليدوية + زرار + لسه شغالين للقطع خارج المخزن.
+     2) سحب قطعة من المخزن: نفس القايمة بس بالاختيار الأول (دوس يزوّد، − ينقّص) وبعدين "📦 سحب المختار" مرة واحدة — عشان الخصم من المخزون ماييجيش بضغطة غلط. نواة السحب بقت دالة واحدة (_wdExecute) مشتركة بين السحب بالاسم والسحب من القايمة.
+     3) الفاتورة: بعد إضافة قطعة القايمة والنص المكتوب ومكان التمرير بيفضلوا (كانت الشاشة بتتعاد رسمها والقايمة تقفل)، وعلى كل قطعة اتضافت ✓ ×العدد وزرار "تم ✓".
+v273: [🏭 تقرير الإنتاج اليومي | 👥 فلاتر قايمة الموظفين]
+     1) تقرير جديد في التقارير: 🏭 الإنتاج اليومي (للمالك) — تحركات اتقفلت + فواتير + إيراد + ربح + قطع مسحوبة + وقت زيارات، لكل مهندس ومقارنة بأمس، بالتنقل بين الأيام (التاريخ هجري). كل كارت بيفتح قايمته، وفلتر المهندس بيشمل التقرير كله. الفاتورة بتتنسب لمهندس التحرك المقفول اللي ليه نفس اسم العميل، وغير كده "مبيعات مباشرة".
+     2) قايمة الموظفين في إدارة الصلاحيات: فلاتر الكل / 🟢 نشط / 🚫 موقوف / 🗃️ مؤرشف بعدّاد + بحث بالاسم (الموظف المختار ماابيختفيش لو الفلتر مايطابقوش).
 v272: [⏱️ عداد زيارة العميل على التحرك]
      زرار ▶️ دخول / ⏹️ خروج على كارت التحرك (الكل + المرتبة) وفي شاشة التحرك: بيسجّل ساعة الدخول والخروج ويحسب المدة، وتفضل الزيارات متسجّلة (ممكن أكتر من زيارة لنفس التحرك) مع الإجمالي. عدّاد واحد بس شغال في نفس الوقت (دخول على تحرك جديد بيقفل القديم)، وإنهاء/إلغاء التحرك بيقفل العداد تلقائيًا. الوقت الفعلي عند العميل بيظهر في تفاصيل التحرك المنتهي. الزرار ليه خيار إخفاء في إعدادات أزرار الكروت. ⚠️ لازم SQL: ALTER TABLE movements ADD COLUMN IF NOT EXISTS visit_logs jsonb DEFAULT '[]'::jsonb; (من غيره بيتحفظ على الموبايل بس ومش بيتزامن).
 v271: [🛡️ الطباعة لما المتصفح يمنع النافذة]
@@ -2174,17 +2184,36 @@ input:checked+.slider:before{transform:translateX(-20px)}
   // ===== v123 — + تغيير وظيفة الموظف + حظر/تفعيل دخوله من نفس المكان =====
   var _permSelectedEmp=null;
   var __ROLE_NAMES = {owner:'المالك', warehouse:'مسؤول مخازن', engineer:'مهندس', customer_service:'خدمة عملاء'};
+  // ===== v273 — فلاتر قائمة الموظفين: الكل / نشط / موقوف / مؤرشف + بحث بالاسم (الموظف المختار مابيختفيش من القايمة) =====
+  var _permEmpFilter='all',_permEmpQ='';
+  function __empStatus(e){return e.archived_at?'archived':(e.is_active===false?'blocked':'active');}
+  function __empOptHtml(e){return '<option value="'+e.id+'"'+(_permSelectedEmp===e.id?' selected':'')+'>'+(e.archived_at?'🗃️ ':'')+(e.is_active===false?'🚫 ':'')+esc(e.full_name)+' ('+(__ROLE_NAMES[e.role_id]||e.role_id)+')</option>';}
+  function __empFltRefresh(){
+    var emps=window.__permEmps||[],q=normalizeAr(_permEmpQ||'');
+    var cnt={all:emps.length,active:0,blocked:0,archived:0};emps.forEach(function(e){cnt[__empStatus(e)]++;});
+    var chips=document.getElementById('emp-flt');
+    if(chips)chips.innerHTML=[['all','الكل'],['active','🟢 نشط'],['blocked','🚫 موقوف'],['archived','🗃️ مؤرشف']].map(function(c){
+      var on=_permEmpFilter===c[0];
+      return '<button type="button" onclick="_permEmpFilter=\''+c[0]+'\';__empFltRefresh()" style="border:1.5px solid '+(on?'#6d28d9':'#e2e8f0')+';background:'+(on?'#ede9fe':'#fff')+';color:'+(on?'#6d28d9':'#64748b')+';border-radius:20px;padding:5px 11px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer">'+c[1]+' ('+cnt[c[0]]+')</button>';
+    }).join('');
+    var sel=document.getElementById('emp-perm-sel');
+    if(sel){
+      var list=emps.filter(function(e){return e.id===_permSelectedEmp||((_permEmpFilter==='all'||__empStatus(e)===_permEmpFilter)&&(!q||normalizeAr(e.full_name||'').indexOf(q)!==-1));});
+      sel.innerHTML='<option value="">'+(list.length?'— اختار موظف —':'مفيش نتايج للفلتر ده')+'</option>'+list.map(__empOptHtml).join('');
+    }
+  }
   async function __loadEmployeePermsUI(){
     var sub=document.getElementById('perm-sub-body');
     try{
       var res = await sb.from('profiles').select('id, full_name, role_id, is_active, archived_at, full_visibility, see_unassigned').neq('role_id','owner');
       var emps = res.data || [];
       if(!emps.length){ sub.innerHTML='<div style="color:#94a3b8;text-align:center;padding:20px">لسه مفيش موظفين.</div>'; return; }
-      var opts='<option value="">— اختار موظف —</option>'+emps.map(function(e){
-        return '<option value="'+e.id+'"'+(_permSelectedEmp===e.id?' selected':'')+'>'+(e.archived_at?'🗃️ ':'')+(e.is_active===false?'🚫 ':'')+esc(e.full_name)+' ('+(__ROLE_NAMES[e.role_id]||e.role_id)+')</option>';
-      }).join('');
-      sub.innerHTML='<select onchange="_permSelectedEmp=this.value||null;__loadEmployeePermsUI()" style="width:100%;padding:10px;border:1.5px solid #e2e8f0;border-radius:9px;font-family:inherit;margin-bottom:12px">'+opts+'</select>'+
+      window.__permEmps=emps;
+      sub.innerHTML='<div id="emp-flt" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px"></div>'+
+        '<input type="search" id="emp-perm-q" value="'+esc(_permEmpQ)+'" placeholder="🔍 بحث بالاسم" oninput="_permEmpQ=this.value;__empFltRefresh()" style="width:100%;padding:9px 10px;border:1.5px solid #e2e8f0;border-radius:9px;font-family:inherit;margin-bottom:8px;box-sizing:border-box">'+
+        '<select id="emp-perm-sel" onchange="_permSelectedEmp=this.value||null;__loadEmployeePermsUI()" style="width:100%;padding:10px;border:1.5px solid #e2e8f0;border-radius:9px;font-family:inherit;margin-bottom:12px"></select>'+
         '<div id="emp-perm-table">'+(_permSelectedEmp?'جاري التحميل...':'')+'</div>';
+      __empFltRefresh();
       if(_permSelectedEmp){
         var emp=emps.find(function(e){return e.id===_permSelectedEmp;});
         // v166 — بدل العمود الطويل، الشاشة بقت أكورديون 5 أقسام قابلة للطي: افتح بس
@@ -4492,7 +4521,7 @@ var APP_TITLE='ابو حوده الحلو الجميل';
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=272;
+var APP_VERSION=275;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -5910,6 +5939,185 @@ function __visitTick(){
   }catch(e){}
 }
 setInterval(__visitTick,30000);
+// ═════════ 🏭 v273 — تقرير الإنتاج اليومي ═════════
+// تعريف "الإنتاج" (قرار v273 — قابل للتعديل): في اليوم المختار =
+//  • تحركات اتقفلت (status=منتهي و closed_at=اليوم) — لكل مهندس (assigned_to)
+//  • فواتير اتسجلت اليوم: عدد + إيراد (total) + ربح (_saleNetProfit) — الفاتورة بتتنسب لمهندس التحرك المقفول اللي ليه نفس اسم العميل، والباقي "مبيعات مباشرة"
+//  • قطع مسحوبة من المخزون اليوم (part_withdrawals) — لمهندس التحرك المرتبط
+//  • وقت الزيارات (عداد دخول/خروج اللي بدأت اليوم)
+// المقارنة بأمس لكل رقم. كل كارت قابل للضغط (يفتح قايمته)، والفلتر بالمهندس بيشمل التقرير كله. التاريخ هجري.
+var _dpDate=null,_dpEng='all';
+function _dpName(id){return id==='__direct'?'مبيعات مباشرة (بدون تحرك)':(id==='__none'?'بدون مهندس':(_employeeNameById(id)||'مهندس'));}
+function _dpCalc(date){
+  var movs=(DB.movements||[]).filter(function(m){return m.status==='منتهي'&&m.closed_at===date;});
+  var sales=(DB.sales||[]).filter(function(s){return s.date===date;});
+  var wds=(DB.part_withdrawals||[]).filter(function(w){return w.withdrawn_at&&localISO_(new Date(w.withdrawn_at))===date;});
+  var by={};
+  function slot(id){id=id||'__none';return by[id]||(by[id]={id:id,movs:[],sales:[],wds:[],visits:[],visitMs:0});}
+  movs.forEach(function(m){slot(m.assigned_to).movs.push(m);});
+  var movByCust={};movs.forEach(function(m){var k=normalizeAr(m.customer||'');if(k&&!movByCust[k])movByCust[k]=m;});
+  sales.forEach(function(s){var m=movByCust[normalizeAr(s.customer||'')];slot(m?m.assigned_to:'__direct').sales.push(s);});
+  wds.forEach(function(w){var m=(DB.movements||[]).find(function(x){return x.id===w.movement_id;});slot(m?m.assigned_to:'__direct').wds.push(w);});
+  (DB.movements||[]).forEach(function(m){
+    var ms=0;visitLogs(m).forEach(function(l){if(l.in&&localISO_(new Date(l.in))===date)ms+=visitMs(l);});
+    if(ms>0){var b=slot(m.assigned_to);b.visits.push({m:m,ms:ms});b.visitMs+=ms;}
+  });
+  var rows=Object.keys(by).map(function(k){
+    var b=by[k];b.name=_dpName(b.id);
+    b.rev=money(b.sales.reduce(function(t,s){return t+(+s.total||0);},0));
+    b.profit=money(b.sales.reduce(function(t,s){return t+_saleNetProfit(s);},0));
+    b.parts=roundQty(b.wds.reduce(function(t,w){return t+(+w.qty||0);},0));
+    return b;
+  }).sort(function(a,b){return b.movs.length-a.movs.length||b.rev-a.rev;});
+  return rows;
+}
+function _dpTot(rows){
+  return rows.reduce(function(t,r){t.movs+=r.movs.length;t.sales+=r.sales.length;t.rev=money(t.rev+r.rev);t.profit=money(t.profit+r.profit);t.parts=roundQty(t.parts+r.parts);t.visitMs+=r.visitMs;return t;},{movs:0,sales:0,rev:0,profit:0,parts:0,visitMs:0});
+}
+function _dpPick(rows){return _dpEng==='all'?rows:rows.filter(function(r){return r.id===_dpEng;});}
+function _dpDelta(cur,prev,money_){
+  var d=cur-prev;if(Math.abs(d)<0.005)return '<span style="color:#94a3b8;font-size:10px">= أمس</span>';
+  return '<span style="color:'+(d>0?'#15803d':'#dc2626')+';font-size:10px;font-weight:800">'+(d>0?'▲ ':'▼ ')+(money_?fmt(Math.abs(d)):Math.abs(d).toLocaleString('ar-EG'))+' عن أمس</span>';
+}
+function openDailyProduction(){
+  if(!window.__isOwner){showToast('🚫 التقرير ده للمالك بس','#dc2626');return;}
+  _dpDate=today();_dpEng='all';_dpRender();openModal();
+}
+function _dpShift(n){var d=new Date(_dpDate+'T12:00:00');d.setDate(d.getDate()+n);_dpDate=localISO_(d);_dpRender();}
+function _dpSetDate(v){if(v){_dpDate=v;_dpRender();}}
+function _dpSetEng(id){_dpEng=id;_dpRender();}
+function _dpRender(){
+  var rowsAll=_dpCalc(_dpDate);
+  var pd=new Date(_dpDate+'T12:00:00');pd.setDate(pd.getDate()-1);
+  var prevAll=_dpCalc(localISO_(pd));
+  var rows=_dpPick(rowsAll),T=_dpTot(rows),P=_dpTot(_dpPick(prevAll));
+  var wd='';try{wd=new Date(_dpDate+'T12:00:00').toLocaleDateString('ar-EG',{weekday:'long'});}catch(e){}
+  var chip=function(on){return 'border:1.5px solid '+(on?'#c2410c':'#e2e8f0')+';background:'+(on?'#ffedd5':'#fff')+';color:'+(on?'#c2410c':'#64748b')+';border-radius:20px;padding:5px 11px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer';};
+  var kpi=function(kind,icon,label,val,delta,col){return '<div onclick="_dpDetail(\''+kind+'\')" style="cursor:pointer;background:#fff;border:1.5px solid '+col+'55;border-radius:12px;padding:10px;text-align:center"><div style="font-size:11px;color:#64748b">'+icon+' '+label+'</div><div style="font-size:20px;font-weight:900;color:'+col+'">'+val+'</div>'+(delta||'')+'</div>';};
+  var engChips='<button type="button" onclick="_dpSetEng(\'all\')" style="'+chip(_dpEng==='all')+'">الكل</button>'+rowsAll.map(function(r){
+    return '<button type="button" onclick="_dpSetEng('+jsStr(r.id)+')" style="'+chip(_dpEng===r.id)+'">'+esc(r.name)+' ('+r.movs.length.toLocaleString('ar-EG')+')</button>';
+  }).join('');
+  document.getElementById('modal-title').textContent='🏭 الإنتاج اليومي';
+  document.getElementById('modal-body').innerHTML=
+    '<div style="display:flex;justify-content:space-between;align-items:center;gap:6px;margin-bottom:8px">'+
+      '<button type="button" onclick="_dpShift(-1)" style="'+chip(false)+'">▶ أمس</button>'+
+      '<div style="text-align:center;flex:1"><div style="font-weight:900;font-size:14px">'+esc(fmtDate(_dpDate))+'</div><div style="font-size:11px;color:#94a3b8">'+esc(wd)+(_dpDate===today()?' — النهاردة':'')+'</div></div>'+
+      '<button type="button" onclick="_dpShift(1)" style="'+chip(false)+'">بكرة ◀</button></div>'+
+    '<div style="display:flex;gap:6px;margin-bottom:10px;align-items:center"><button type="button" onclick="_dpSetDate(today())" style="'+chip(_dpDate===today())+'">النهاردة</button><input type="date" value="'+_dpDate+'" onchange="_dpSetDate(this.value)" style="flex:1;padding:6px 8px;border:1.5px solid #e2e8f0;border-radius:9px;font-family:inherit;font-size:12px"></div>'+
+    '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">'+engChips+'</div>'+
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">'+
+      kpi('movs','✅','تحركات اتقفلت',T.movs.toLocaleString('ar-EG'),_dpDelta(T.movs,P.movs),'#15803d')+
+      kpi('sales','🧾','فواتير',T.sales.toLocaleString('ar-EG'),_dpDelta(T.sales,P.sales),'#1e40af')+
+      kpi('sales','💰','إيراد',fmt(T.rev),_dpDelta(T.rev,P.rev,true),'#0e7490')+
+      kpi('sales','📈','ربح',fmt(T.profit),_dpDelta(T.profit,P.profit,true),'#047857')+
+      kpi('parts','🔩','قطع مسحوبة',fmtQty(T.parts),_dpDelta(T.parts,P.parts),'#c2410c')+
+      kpi('visits','⏱️','وقت الزيارات',fmtDur(T.visitMs),_dpDelta(Math.round(T.visitMs/60000),Math.round(P.visitMs/60000)).replace('عن أمس','د عن أمس'),'#6d28d9')+
+    '</div>'+
+    (rows.length?rows.map(function(r){
+      return '<div onclick="_dpSetEng('+jsStr(r.id)+')" style="cursor:pointer;background:#f8fafc;border:1px solid #e2e8f0;border-radius:11px;padding:9px 11px;margin-bottom:6px"><div style="font-weight:800;font-size:13px;margin-bottom:4px">👤 '+esc(r.name)+'</div>'+
+        '<div style="display:flex;flex-wrap:wrap;gap:4px 12px;font-size:11.5px;color:#475569"><span>✅ '+r.movs.length.toLocaleString('ar-EG')+' تحرك</span><span>🧾 '+r.sales.length.toLocaleString('ar-EG')+' فاتورة</span><span>💰 '+fmt(r.rev)+'</span><span>📈 '+fmt(r.profit)+'</span><span>🔩 '+fmtQty(r.parts)+'</span><span>⏱️ '+fmtDur(r.visitMs)+'</span></div></div>';
+    }).join(''):'<div class="empty">مفيش إنتاج مسجّل في اليوم ده</div>')+
+    '<div style="font-size:10.5px;color:#94a3b8;margin-top:6px">الفاتورة بتتنسب لمهندس التحرك المقفول اللي ليه نفس اسم العميل، وغير كده بتظهر "مبيعات مباشرة". الأرقام بتاريخ الإنهاء/الفاتورة.</div>'+
+    '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+}
+function _dpDetail(kind){
+  var rows=_dpPick(_dpCalc(_dpDate)),items='',title='';
+  var li=function(click,main,sub){return '<div onclick="'+click+'" style="cursor:pointer;background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:9px 11px;margin-bottom:6px"><div style="font-weight:800;font-size:13px">'+main+'</div><div style="font-size:11px;color:#64748b;margin-top:2px">'+sub+'</div></div>';};
+  rows.forEach(function(r){
+    if(kind==='movs'){title='✅ تحركات اتقفلت';r.movs.forEach(function(m){items+=li('closeModal();openMovementDetail('+jsStr(m.id)+')',esc(m.customer||'—'),'👤 '+esc(r.name)+(m.fault_type?' · '+esc(m.fault_type):'')+(visitTotalMs(m)>0?' · ⏱️ '+fmtDur(visitTotalMs(m)):''));});}
+    if(kind==='sales'){title='🧾 فواتير اليوم';r.sales.forEach(function(s){items+=li('closeModal();openSaleModal('+jsStr(s.id)+')',esc(s.customer||'—')+' — '+fmt(+s.total||0),'👤 '+esc(r.name)+' · ربح '+fmt(_saleNetProfit(s)));});}
+    if(kind==='parts'){title='🔩 قطع مسحوبة';r.wds.forEach(function(w){items+=li((w.movement_id?'closeModal();openMovementDetail('+jsStr(w.movement_id)+')':'void 0'),'📦 '+esc(w.product_name||'—')+' × '+fmtQty(w.qty||0),'👤 '+esc(r.name));});}
+    if(kind==='visits'){title='⏱️ وقت الزيارات';r.visits.forEach(function(v){items+=li('closeModal();openMovementDetail('+jsStr(v.m.id)+')',esc(v.m.customer||'—')+' — '+fmtDur(v.ms),'👤 '+esc(r.name));});}
+  });
+  document.getElementById('modal-title').textContent=title||'تفاصيل';
+  document.getElementById('modal-body').innerHTML=(items||'<div class="empty">مفيش بيانات</div>')+'<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="_dpRender()">‹ رجوع</button></div>';
+}
+// ═════════ 🔎 v274 — قايمة اختيار قطع مابتقفلش بعد اختيار قطعة ═════════
+// المشكلة: القايمة كانت بتقفل بعد أول قطعة (datalist في التحرك، وإعادة رسم الفاتورة). دلوقتي:
+//  • تقدير التحرك: دوس على أي قطع — كل ضغطة بتضيف، والقايمة مفتوحة، وعليها ✓ ×العدد.
+//  • سحب من المخزن: دوس لاختيار (دوس تاني يزوّد، − ينقّص) وبعدين "📦 سحب المختار" مرة واحدة (السحب بيخصم مخزون فمفيش خصم بضغطة غلط).
+//  • الفاتورة: القايمة والنص المكتوب والتمرير بيفضلوا بعد كل إضافة.
+var _wdPend={},_wdPendFor=null;
+var _PP={est:{inp:'mov-est-name',box:'mov-est-results',all:true},wd:{inp:'wd-part-name',box:'wd-results',all:false}};
+function _ppShow(mode){
+  var c=_PP[mode],inp=document.getElementById(c.inp),box=document.getElementById(c.box);if(!inp||!box)return;
+  if(mode==='wd'&&_wdPendFor!==_movId){_wdPend={};_wdPendFor=_movId;}
+  var q=normalizeAr(inp.value||'');
+  var list=(DB.products||[]).filter(function(p){
+    return(c.all||p.qty>0)&&(!q||normalizeAr(p.name).indexOf(q)!==-1||(p.aliases||[]).some(function(a){return normalizeAr(a).indexOf(q)!==-1;}));
+  }).slice(0,12);
+  var rows=list.map(function(p){
+    var n=mode==='est'?((_movEst.find(function(x){return x.productId===p.id;})||{}).qty||0):(_wdPend[p.id]||0);
+    var sub=mode==='est'?fmtQty(p.qty||0)+' متاح — '+fmt(p.sell_price||0):fmtQty(p.qty||0)+' متاح';
+    var minus=(mode==='wd'&&n>0)?'<span onclick="event.stopPropagation();_wdTap(\''+p.id+'\',-1)" style="background:#fee2e2;color:#dc2626;border-radius:8px;padding:3px 10px;font-size:13px;font-weight:900">−</span>':'';
+    return '<div onclick="'+(mode==='est'?'_movEstPick':'_wdTap')+'(\''+p.id+'\')" style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 11px;border-bottom:1px solid #f1f5f9;cursor:pointer;background:'+(n>0?'#ecfdf5':'#fff')+'">'+
+      '<div><div style="font-weight:700;font-size:13px">'+esc(p.name)+'</div><div style="font-size:11px;color:#94a3b8">'+sub+'</div></div>'+
+      '<div style="display:flex;gap:6px;align-items:center">'+(n>0?'<span style="background:#16a34a;color:#fff;border-radius:8px;padding:3px 9px;font-size:12px;font-weight:800">✓ ×'+fmtQty(n)+'</span>':'<span style="background:#2563eb;color:#fff;border-radius:8px;padding:3px 10px;font-size:12px;font-weight:700">+ '+(mode==='est'?'إضافة':'اختيار')+'</span>')+minus+'</div></div>';
+  }).join('');
+  var pend=mode==='wd'?Object.keys(_wdPend).filter(function(k){return _wdPend[k]>0;}):[];
+  var bar='<div style="display:flex;gap:6px;padding:8px 10px;background:#f8fafc;position:sticky;top:0;z-index:1;border-bottom:1px solid #e2e8f0">'+
+    (pend.length?'<button type="button" onclick="__runOnce(this,function(){return withdrawPickedParts(\''+_movId+'\');})" style="flex:2;background:#16a34a;color:#fff;border:none;border-radius:9px;padding:8px;font-family:inherit;font-size:12.5px;font-weight:800;cursor:pointer">📦 سحب المختار ('+pend.length.toLocaleString('ar-EG')+')</button>'
+      :'<span style="flex:2;font-size:11px;color:#64748b;align-self:center">'+(mode==='wd'?'اختار القطع (دوس تاني للزيادة) وبعدين اسحب':'دوس على أي قطع — القايمة بتفضل مفتوحة')+'</span>')+
+    '<button type="button" onclick="_ppHide(\''+mode+'\')" style="flex:1;background:#e2e8f0;color:#334155;border:none;border-radius:9px;padding:8px;font-family:inherit;font-size:12.5px;font-weight:800;cursor:pointer">تم ✓</button></div>';
+  box.innerHTML=bar+(rows||'<div style="padding:12px;text-align:center;color:#94a3b8;font-size:12px">مفيش نتايج</div>');
+  box.style.display='block';
+}
+function _ppHide(mode){var b=document.getElementById(_PP[mode].box);if(b)b.style.display='none';}
+function _movEstPick(pid){
+  var prod=(DB.products||[]).find(function(p){return p.id===pid;});if(!prod)return;
+  var qty=+v('mov-est-qty')||1,ov=v('mov-est-price');
+  var price=ov!==''&&ov!=null?(+ov||0):_movEstDefaultPrice(prod,qty);
+  var ex=_movEst.find(function(x){return x.productId===prod.id;});
+  if(ex){ex.qty=roundQty((ex.qty||0)+qty);if(ov!==''&&ov!=null)ex.price=price;}
+  else _movEst.push({productId:prod.id,name:prod.name,qty:qty,price:price});
+  var q1=document.getElementById('mov-est-qty');if(q1)q1.value='1';
+  var p1=document.getElementById('mov-est-price');if(p1)p1.value='';
+  _restoreMovFields();
+  _ppShow('est'); // القايمة تفضل مفتوحة
+}
+function _wdTap(pid,delta){
+  if(_wdPendFor!==_movId){_wdPend={};_wdPendFor=_movId;}
+  var p=(DB.products||[]).find(function(x){return x.id===pid;});if(!p)return;
+  var step=+v('wd-part-qty')||1,cur=_wdPend[pid]||0;
+  var next=roundQty(cur+(delta===-1?-step:step));
+  if(next>p.qty){showToast('⚠️ المتاح '+fmtQty(p.qty)+' بس','#dc2626');next=p.qty;}
+  if(next<=0)delete _wdPend[pid];else _wdPend[pid]=next;
+  _ppShow('wd');
+}
+// تنفيذ سحب قطعة واحدة (مشترك بين السحب بالاسم والسحب من القايمة) — بيرجّع نص الخطأ أو null
+async function _wdExecute(movementId,prod,qty){
+  if(!__hasPerm('part_withdrawals','can_insert'))return 'مفيش صلاحية سحب قطع غيار. كلم المالك.';
+  if(prod.qty<qty)return 'الكمية المتاحة '+prod.qty+' بس';
+  if(!window.__currentProfile)return 'لازم تكون مسجل دخول عشان تسحب قطعة';
+  var newQty=roundQty(prod.qty-qty);
+  DB.products=patchRow(DB.products,prod.id,{qty:newQty});
+  await persist();
+  await dbUpdate('products',prod.id,{qty:newQty});
+  var withdrawal={
+    id:genId(), movement_id:movementId, product_id:prod.id, product_name:prod.name,
+    qty:qty, employee_id:window.__currentProfile.id, employee_name:window.__currentProfile.full_name,
+    withdrawn_at:new Date().toISOString()
+  };
+  DB.part_withdrawals=(DB.part_withdrawals||[]).concat([withdrawal]);
+  await persist();
+  await dbUpsert('part_withdrawals',withdrawal);
+  return null;
+}
+async function withdrawPickedParts(movementId){
+  var msg=document.getElementById('wd-msg');
+  var ids=Object.keys(_wdPend).filter(function(k){return _wdPend[k]>0;});
+  if(!ids.length)return;
+  var done=[],fail=[];
+  for(var i=0;i<ids.length;i++){
+    var prod=(DB.products||[]).find(function(x){return x.id===ids[i];}),qty=_wdPend[ids[i]];
+    var err=prod?await _wdExecute(movementId,prod,qty):'القطعة مش موجودة';
+    if(err)fail.push((prod?prod.name:'؟')+' — '+err);
+    else{done.push(prod.name+' ×'+fmtQty(qty));delete _wdPend[ids[i]];}
+  }
+  if(msg){msg.style.color=fail.length?'#dc2626':'#16a34a';msg.textContent=(done.length?'✅ اتسحب: '+done.join('، '):'')+(fail.length?(done.length?' | ':'')+'⚠️ '+fail.join('، '):'');}
+  if(done.length)showToast('✅ اتسحب '+done.length.toLocaleString('ar-EG')+' قطعة واتسجلت باسمك','#16a34a');
+  _ppShow('wd');
+}
 function salesCost(list){return money((list||[]).reduce(function(t,sale){return t+saleCost(sale);},0));} // تكلفة بضاعة مجموعة فواتير
 // ⚠️ v202 — الكميات الكسرية: roundQty بتتحط حوالين أي عملية جمع/طرح على qty عشان تمنع
 // أخطاء الفاصلة العشرية المتراكمة (زي 0.1+0.2 اللي بتطلع 0.30000000000000004 في JS)،
@@ -8781,13 +8989,14 @@ function filterProds(){
   var res=document.getElementById('prod-results');if(!res)return;
   var list=DB.products.filter(function(p){return!q||normalizeAr(p.name).includes(normalizeAr(q));}).slice(0,8);
   if(!list.length){res.style.display='none';return;}
-  res.innerHTML=list.map(function(p){
+  res.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px;background:#f8fafc;border-bottom:1px solid #e2e8f0;position:sticky;top:0"><span style="font-size:11px;color:#64748b">دوس على أي قطع — القايمة بتفضل مفتوحة</span><span onmousedown="document.getElementById(\'prod-results\').style.display=\'none\'" style="background:#e2e8f0;border-radius:8px;padding:3px 12px;font-size:12px;font-weight:800;cursor:pointer">تم ✓</span></div>'+list.map(function(p){
     var eff=_effectiveSellPrice(p);
     var isWholesale=eff!==p.sell_price;
-    return '<div class="prod-result-item" onmousedown="addProdToSale(\''+p.id+'\')">'+
+    var _inv=_saleItems.find(function(i){return i.productId===p.id;});
+    return '<div class="prod-result-item" onmousedown="addProdToSale(\''+p.id+'\')"'+(_inv?' style="background:#ecfdf5"':'')+'>'+
       '<div><div style="font-weight:700;font-size:14px">'+esc(p.name)+'</div>'+
       '<div style="font-size:12px;color:#94a3b8">متوفر: '+p.qty+' | '+(isWholesale?'<span style="color:#5b21b6;font-weight:800">💼 '+eff+' ج (سعر جملة)</span>':eff+' ج')+'</div></div>'+
-      '<div style="background:#2563eb;color:#fff;border-radius:8px;padding:4px 10px;font-size:12px;font-weight:700">+ إضافة</div></div>';
+      (_inv?'<div style="background:#16a34a;color:#fff;border-radius:8px;padding:4px 10px;font-size:12px;font-weight:800">✓ ×'+fmtQty(_inv.qty)+' + إضافة</div></div>':'<div style="background:#2563eb;color:#fff;border-radius:8px;padding:4px 10px;font-size:12px;font-weight:700">+ إضافة</div></div>');
   }).join('');
   res.style.display='block';
 }
@@ -8997,11 +9206,17 @@ async function _wsSaveSettings(){
 
 function addProdToSale(pid){
   var p=DB.products.find(function(x){return x.id===pid;});if(!p)return;
+  var _q0=v('prod-search'),_sc=document.getElementById('modal-box'),_st=_sc?_sc.scrollTop:0; // v274 — نحتفظ بالنص والتمرير
   var ex=_saleItems.find(function(i){return i.productId===pid;});
   if(ex){var _oq=ex.qty;ex.qty++;_repriceAuto(ex,_oq,_saleIsWholesale());}else _saleItems.push({productId:p.id,name:p.name,qty:1,price:_effectiveSellPrice(p,1),buyPrice:p.landed_cost||p.buy_price});
   var vals=_saveSaleFields();
   var s=_saleId?DB.sales.find(function(x){return x.id===_saleId;}):null;
   renderSaleBody(s);_restoreSaleFields(vals);
+  // v274 — القايمة تفضل مفتوحة بنفس النص عشان تختار قطعة تانية
+  var _inp=document.getElementById('prod-search');if(_inp&&_q0)_inp.value=_q0;
+  filterProds();
+  var _sc2=document.getElementById('modal-box');if(_sc2)_sc2.scrollTop=_st;
+  showToast('✅ اتضافت: '+p.name,'#16a34a');
 }
 
 // ===== تسجيل قطعة كـ"خطأ/تالف" بدل بيعها — بيتم مرة واحدة أثناء تسجيل الفاتورة نفسها =====
@@ -10405,11 +10620,12 @@ function filterPurchProds(){
   var matches=DB.products.filter(function(p){return p.category!=='machine'&&normalizeAr(p.name).includes(normalizeAr(q));}).slice(0,6);
 
   if(matches.length){
-    res.innerHTML=matches.map(function(p){
-      return '<div class="prod-result-item" onmousedown="addProdToPurch(\''+p.id+'\')">'+
+    res.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px;background:#f8fafc;border-bottom:1px solid #e2e8f0"><span style="font-size:11px;color:#64748b">دوس على أي صنف — القايمة بتفضل مفتوحة</span><span onmousedown="document.getElementById(\'purch-prod-results\').style.display=\'none\'" style="background:#e2e8f0;border-radius:8px;padding:3px 12px;font-size:12px;font-weight:800;cursor:pointer">تم ✓</span></div>'+matches.map(function(p){
+      var _inv=_purchItems.find(function(i){return i.productId===p.id;});
+      return '<div class="prod-result-item" onmousedown="addProdToPurch(\''+p.id+'\')"'+(_inv?' style="background:#f5f3ff"':'')+'>'+
         '<div><div style="font-weight:700;font-size:14px">'+esc(p.name)+'</div>'+
         '<div style="font-size:12px;color:#94a3b8">✅ موجود — متوفر: '+p.qty+' | آخر شراء: '+p.buy_price+' ج</div></div>'+
-        '<div style="background:#7c3aed;color:#fff;border-radius:8px;padding:4px 10px;font-size:12px;font-weight:700">+ إضافة</div></div>';
+        (_inv?'<div style="background:#16a34a;color:#fff;border-radius:8px;padding:4px 10px;font-size:12px;font-weight:800">✓ ×'+fmtQty(_inv.qty)+' + إضافة</div></div>':'<div style="background:#7c3aed;color:#fff;border-radius:8px;padding:4px 10px;font-size:12px;font-weight:700">+ إضافة</div></div>');
     }).join('');
     res.style.display='block';
     newBox.style.display='none';
@@ -10460,12 +10676,17 @@ function setPurchItemFillTechType(idx,val){
 
 function addProdToPurch(pid){
   var p=DB.products.find(function(x){return x.id===pid;});if(!p)return;
+  var _q0=v('purch-prod-input'),_sc=document.getElementById('modal-box'),_st=_sc?_sc.scrollTop:0; // v275
   var ex=_purchItems.find(function(i){return i.productId===pid;});
   if(ex)ex.qty++;else _purchItems.push({productId:p.id,name:p.name,qty:1,price:p.buy_price});
   var st=_purchSaveState();
   var pur=_purchId?DB.purchases.find(function(x){return x.id===_purchId;}):null;
   _purchRestoreState(st,pur);
-  var inp=document.getElementById('purch-prod-input');if(inp)inp.value='';
+  // v275 — القايمة تفضل مفتوحة بنفس النص عشان تضيف صنف تاني
+  var inp=document.getElementById('purch-prod-input');if(inp)inp.value=_q0;
+  filterPurchProds();
+  var _sc2=document.getElementById('modal-box');if(_sc2)_sc2.scrollTop=_st;
+  showToast('✅ اتضاف: '+p.name,'#16a34a');
 }
 
 function addNewProdToPurch(addToStock){
@@ -13918,10 +14139,10 @@ function _movEstimateHtml(){
     '<div style="font-size:13px;font-weight:900;color:#c2410c;margin-bottom:2px">🧮 قطع غيار مقدّرة</div>'+
     '<div style="font-size:10.5px;color:#9a3412;margin-bottom:6px">🔒 بتتحسب في التقدير بس — <b>مش بتتخصم من المخزون</b></div>'+
     (estRows||'<div style="font-size:11px;color:#94a3b8;padding:4px 0">لسه ما اخترتش قطع</div>')+
-    '<datalist id="mov-est-list">'+dl+'</datalist>'+
-    '<div style="display:flex;gap:6px;margin-top:8px"><input id="mov-est-name" type="text" list="mov-est-list" placeholder="اسم القطعة..." autocomplete="off" style="flex:1;'+inp+'">'+
+    '<div style="display:flex;gap:6px;margin-top:8px"><input id="mov-est-name" type="text" oninput="_ppShow(\'est\')" onfocus="_ppShow(\'est\')" placeholder="اسم القطعة..." autocomplete="off" style="flex:1;'+inp+'">'+
     '<input id="mov-est-qty" type="number" step="any" value="1" style="width:52px;'+inp+';text-align:center">'+
     '<button type="button" onclick="_movEstAdd()" style="background:#ea580c;color:#fff;border:none;border-radius:9px;padding:0 14px;font-family:inherit;font-size:16px;font-weight:900;cursor:pointer">+</button></div>'+
+    '<div id="mov-est-results" style="display:none;max-height:250px;overflow:auto;border:2px solid #fed7aa;border-radius:11px;background:#fff;margin-top:6px"></div>'+
     '<input id="mov-est-price" type="number" step="any" placeholder="سعر مخصوص للقطعة (اختياري — الافتراضي سعر المخزن)" style="width:100%;margin-top:6px;'+inp+'"></div>'+
     '<div id="mov-est-summary">'+_movEstSummaryHtml()+'</div>';
 }
@@ -14073,13 +14294,12 @@ function _renderMovementBodyRaw(m){
       '<div class="field" style="background:#f0fdf4;border:1.5px solid #86efac;border-radius:11px;padding:11px 13px">'+
       '<label>🔧 سحب قطعة غيار من المخزون <span style="font-size:11px;color:#94a3b8">(بتقلل الكمية تلقائيًا وتتسجل باسمك)</span></label>'+
       '<div style="display:flex;gap:6px;margin-top:6px">'+
-      '<input id="wd-part-name" type="text" placeholder="اسم القطعة..." list="wd-parts-list" autocomplete="off" style="flex:2;padding:9px 12px;border:2px solid #e2e8f0;border-radius:9px;font-size:13px;font-family:inherit;background:#fff;outline:none">'+
-      '<datalist id="wd-parts-list">'+(DB.products||[]).filter(function(p){return p.qty>0;}).map(function(p){return '<option value="'+esc(p.name)+'">('+p.qty+' متاح)</option>';}).join('')+'</datalist>'+
+      '<input id="wd-part-name" type="text" placeholder="اسم القطعة..." oninput="_ppShow(\'wd\')" onfocus="_ppShow(\'wd\')" autocomplete="off" style="flex:2;padding:9px 12px;border:2px solid #e2e8f0;border-radius:9px;font-size:13px;font-family:inherit;background:#fff;outline:none">'+
       '<input id="wd-part-qty" type="number" step="any" value="1" min="0.01" style="width:60px;padding:9px 8px;border:2px solid #e2e8f0;border-radius:9px;font-size:13px;font-family:inherit;text-align:center">'+
       // ⚠️ v205 — زرار سحب قطعة الغيار كان بينفّذ من غير __runOnce — ضغطة مزدوجة أو بطء
       // نت ممكن كانت تسحب نفس القطعة مرتين (تخصم من المخزون مرتين وتسجل سحبين)
       '<button onclick="__runOnce(this,function(){return withdrawPartForMovement(\''+m.id+'\');})" style="background:#16a34a;color:#fff;border:none;border-radius:9px;padding:9px 13px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer">سحب</button>'+
-      '</div><div id="wd-msg" style="font-size:11px;margin-top:6px;min-height:14px"></div>'+
+      '</div><div id="wd-results" style="display:none;max-height:260px;overflow:auto;border:2px solid #86efac;border-radius:11px;background:#fff;margin-top:6px"></div><div id="wd-msg" style="font-size:11px;margin-top:6px;min-height:14px"></div>'+
       '</div>'
     ):'')+
     // v165 — شيلنا حقل "صورة الجهاز" من نموذج التحركة (مش محتاجينه)
@@ -15069,26 +15289,13 @@ async function withdrawPartForMovement(movementId){
   if(!name){msg.textContent='⚠️ اكتب اسم القطعة';msg.style.color='#dc2626';return;}
   var prod=(DB.products||[]).find(function(p){return normalizeAr(p.name)===normalizeAr(name)||(p.aliases||[]).some(function(a){return normalizeAr(a)===normalizeAr(name);});});
   if(!prod){msg.textContent='⚠️ القطعة دي مش موجودة في المخزون';msg.style.color='#dc2626';return;}
-  if(prod.qty<qty){msg.textContent='⚠️ الكمية المتاحة '+prod.qty+' بس';msg.style.color='#dc2626';return;}
-  if(!window.__currentProfile){msg.textContent='⚠️ لازم تكون مسجل دخول عشان تسحب قطعة';msg.style.color='#dc2626';return;}
-
-  var newQty=roundQty(prod.qty-qty);
-  DB.products=patchRow(DB.products,prod.id,{qty:newQty});
-  await persist();
-  await dbUpdate('products',prod.id,{qty:newQty});
-
-  var withdrawal={
-    id:genId(), movement_id:movementId, product_id:prod.id, product_name:prod.name,
-    qty:qty, employee_id:window.__currentProfile.id, employee_name:window.__currentProfile.full_name,
-    withdrawn_at:new Date().toISOString()
-  };
-  DB.part_withdrawals=(DB.part_withdrawals||[]).concat([withdrawal]);
-  await persist();
-  await dbUpsert('part_withdrawals',withdrawal);
+  var err=await _wdExecute(movementId,prod,qty); // v274 — نفس نواة السحب من القايمة
+  if(err){msg.textContent='⚠️ '+err;msg.style.color='#dc2626';return;}
 
   document.getElementById('wd-part-name').value='';
   document.getElementById('wd-part-qty').value='1';
   msg.textContent='✅ اتسحبت '+qty+' × '+prod.name;msg.style.color='#16a34a';
+  var _wr=document.getElementById('wd-results');if(_wr&&_wr.style.display!=='none')_ppShow('wd');
   showToast('✅ تم سحب القطعة وتسجيلها باسمك','#16a34a');
 }
 
@@ -22005,6 +22212,29 @@ function _clientHasNoActivity(clientName){
 }
 
 var _clientsSearch='',_clientsSort='alpha',_clientsFilter='all',_clientsMachineFilter='all';
+// v275 — قايمة العملاء الأنظم: عرض مضغوط (سطر لكل عميل، دوس يفتح الكارت الكامل) + عدّاد وإجمالي + فلاتر إضافية قابلة للطي
+var _clientsCompact=LS.get('mc8_clients_compact',true)!==false,_clientsExpanded={},_clientsMoreOpen=false;
+function _toggleClientRow(id){_clientsExpanded[id]=!_clientsExpanded[id];_renderClientsList(document.getElementById('clients-body'));}
+function _setClientsCompact(v){_clientsCompact=!!v;LS.set('mc8_clients_compact',_clientsCompact);_renderClientsList(document.getElementById('clients-body'));}
+function _clientsClearFilters(){
+  _clientsFilter='all';_clientsMachineFilter='all';_clientsSearch='';
+  var i=document.getElementById('clients-search-input');if(i)i.value='';
+  renderClients();
+}
+function _clientRow(c){
+  var cSt=CLIENT_STATUSES[c.status||'active']||CLIENT_STATUSES.active;
+  var ms=(c.machines||[]).length,stale=_clientIsStale(c.name),days=_clientDaysSinceLastMov(c.name),open=!!_clientsExpanded[c.id];
+  var last=_clientLastMovDate(c.name);
+  var phone=(c.phone&&!__isFieldHidden('clients','phone'))?'<a href="tel:'+esc(c.phone)+'" onclick="event.stopPropagation()" style="background:#dcfce7;color:#15803d;border-radius:8px;padding:5px 9px;font-size:13px;text-decoration:none;flex-shrink:0">📞</a>':'';
+  return '<div style="margin-bottom:6px">'+
+    '<div onclick="_toggleClientRow('+jsStr(c.id)+')" style="background:#fff;border-radius:11px;padding:9px 11px;box-shadow:0 1px 6px rgba(0,0,0,.05);border-right:4px solid '+(stale?'#dc2626':cSt.color)+';display:flex;align-items:center;gap:8px;cursor:pointer;opacity:'+(c.status==='inactive'?'.6':'1')+'">'+
+      '<span style="font-size:15px;flex-shrink:0">'+cSt.icon+'</span>'+
+      '<div style="flex:1;min-width:0"><div style="font-weight:800;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(c.name)+(c.priceType==='wholesale'?' <span style="font-size:9px;background:#ede9fe;color:#5b21b6;border-radius:5px;padding:1px 5px">جملة</span>':'')+(c.parent_id?' <span style="font-size:9px;background:#fef3c7;color:#92400e;border-radius:5px;padding:1px 5px">فرع</span>':'')+'</div>'+
+      '<div style="font-size:10.5px;color:'+(stale?'#dc2626':'#94a3b8')+'">🖨️ '+ms+' • '+(last?'🔧 منذ '+days+' يوم':'🔧 مفيش صيانة')+(stale?' • ⏰':'')+'</div></div>'+
+      phone+'<span style="color:#94a3b8;font-size:12px;flex-shrink:0">'+(open?'▴':'▾')+'</span></div>'+
+    (open?'<div style="margin-top:6px">'+_clientCard(c)+'</div>':'')+'</div>';
+}
+
 function setClientsSort(s){_clientsSort=s;renderClients();}
 
 // ===== RENDER - مع إصلاح مشكلة لوحة المفاتيح =====
@@ -22076,6 +22306,8 @@ function _renderClientsHeader(el){
         '<div style="font-size:9px;font-weight:700;color:'+(a?'rgba(255,255,255,.8)':st.color)+'">'+st.label+'</div></div>';
     }).join('')+
     '</div>'+
+    '<div onclick="_clientsMoreOpen=!_clientsMoreOpen;renderClients()" style="display:flex;justify-content:space-between;align-items:center;background:#f1f5f9;border-radius:10px;padding:8px 11px;margin-bottom:8px;cursor:pointer;font-size:11.5px;font-weight:800;color:#475569"><span>🖨️ المكن ('+totalM+') • ⏰ '+staleCount+' غير مستخدم • 🆕 '+noActivityCount+' بدون نشاط</span><span>فلاتر إضافية '+((_clientsMoreOpen||_clientsMachineFilter!=='all'||_clientsFilter==='stale'||_clientsFilter==='no_activity')?'▴':'▾')+'</span></div>'+
+    ((_clientsMoreOpen||_clientsMachineFilter!=='all'||_clientsFilter==='stale'||_clientsFilter==='no_activity')?(
     '<div style="display:flex;justify-content:space-between;align-items:center;margin:2px 0 6px">'+
     '<span style="font-size:11px;font-weight:800;color:#64748b">🖨️ إحصائيات المكن ('+totalM+')</span>'+
     (_clientsMachineFilter!=='all'?'<span onclick="_clientsMachineFilter=\'all\';renderClients()" style="font-size:10px;color:#2563eb;cursor:pointer;font-weight:700">إلغاء الفلتر ✕</span>':'')+
@@ -22093,7 +22325,7 @@ function _renderClientsHeader(el){
     '<span style="font-size:12px;font-weight:800;color:'+(_clientsFilter==='stale'?'#fff':'#dc2626')+'">⏰ '+staleCount+' عميل لم يطلب صيانة منذ '+STALE_DAYS_THRESHOLD+' يوم فأكتر</span></div>'+
     // ⚠️ v108 — عملاء متسجلين بس مالهمش ولا تحرك ولا فاتورة خالص
     '<div onclick="_clientsFilter=\'no_activity\';renderClients()" style="background:'+(_clientsFilter==='no_activity'?'#78350f':'#fffbeb')+';border-radius:10px;padding:8px;text-align:center;cursor:pointer;margin-bottom:10px;border:2px solid '+(_clientsFilter==='no_activity'?'#78350f':'transparent')+'">'+
-    '<span style="font-size:12px;font-weight:800;color:'+(_clientsFilter==='no_activity'?'#fff':'#78350f')+'">🆕 '+noActivityCount+' عميل مسجّل بس ملوش ولا تحرك ولا فاتورة</span></div>';
+    '<span style="font-size:12px;font-weight:800;color:'+(_clientsFilter==='no_activity'?'#fff':'#78350f')+'">🆕 '+noActivityCount+' عميل مسجّل بس ملوش ولا تحرك ولا فاتورة</span></div>'):'');
 }
 
 function _renderClientsList(el){
@@ -22124,16 +22356,22 @@ function _renderClientsList(el){
     var root=(c.parent_id&&byId[c.parent_id])?byId[c.parent_id]:c;
     if(done[root.id])return;done[root.id]=1;
     var kids=_clientBranches(root).filter(function(k){return inList[k.id];});
-    if(!kids.length&&!_clientBranches(root).length){html.push(_clientCard(root));return;}
+    if(!kids.length&&!_clientBranches(root).length){html.push(_clientsCompact?_clientRow(root):_clientCard(root));return;}
     var allKids=_clientBranches(root),mach=(root.machines||[]).length+allKids.reduce(function(t,k){return t+(k.machines||[]).length;},0);
     html.push('<div style="background:#eef2ff;border-radius:16px;padding:8px;margin-bottom:12px;border:1.5px solid #c7d2fe">'+
       '<div style="display:flex;justify-content:space-between;align-items:center;gap:6px;padding:4px 6px 8px"><div style="font-size:12px;font-weight:900;color:#3730a3">🏢 شركة — '+allKids.length+' فروع • '+mach+' مكنة</div>'+
       '<div style="display:flex;gap:5px"><button onclick="openCompanyReport('+jsStr(root.id)+')" style="background:#4338ca;color:#fff;border:none;border-radius:8px;padding:5px 10px;font-family:inherit;font-size:11px;font-weight:800;cursor:pointer">📊 تقرير الشركة</button>'+
       '<button onclick="openAddClientModal('+jsStr(root.id)+')" style="background:#fff;color:#4338ca;border:1.5px solid #c7d2fe;border-radius:8px;padding:5px 10px;font-family:inherit;font-size:11px;font-weight:800;cursor:pointer">🏢+ فرع</button></div></div>'+
-      _clientCard(root)+
-      kids.map(function(k){return '<div style="margin-right:16px;border-right:3px solid #a5b4fc;padding-right:8px">'+_clientCard(k)+'</div>';}).join('')+'</div>');
+      (_clientsCompact?_clientRow(root):_clientCard(root))+
+      kids.map(function(k){return '<div style="margin-right:16px;border-right:3px solid #a5b4fc;padding-right:8px">'+(_clientsCompact?_clientRow(k):_clientCard(k))+'</div>';}).join('')+'</div>');
   });
-  listEl.innerHTML=html.length?html.join(''):'<div class="empty">لا يوجد عملاء</div>';
+  var totM=list.reduce(function(t,c){return t+(c.machines||[]).length;},0);
+  var anyF=_clientsFilter!=='all'||_clientsMachineFilter!=='all'||!!_clientsSearch;
+  var bar='<div style="display:flex;justify-content:space-between;align-items:center;gap:6px;margin:2px 0 8px;flex-wrap:wrap">'+
+    '<span style="font-size:12px;font-weight:800;color:#334155">👥 '+list.length.toLocaleString('ar-EG')+' عميل • 🖨️ '+totM.toLocaleString('ar-EG')+' مكنة'+(anyF?' <span style="color:#94a3b8;font-weight:600">(من '+allC.length.toLocaleString('ar-EG')+')</span>':'')+'</span>'+
+    '<span style="display:flex;gap:5px">'+(anyF?'<span onclick="_clientsClearFilters()" style="background:#fee2e2;color:#dc2626;border-radius:8px;padding:4px 10px;font-size:11px;font-weight:800;cursor:pointer">مسح الفلاتر ✕</span>':'')+
+    '<span onclick="_setClientsCompact('+(!_clientsCompact)+')" style="background:#e0e7ff;color:#3730a3;border-radius:8px;padding:4px 10px;font-size:11px;font-weight:800;cursor:pointer">'+(_clientsCompact?'▤ تفصيلي':'☰ مضغوط')+'</span></span></div>';
+  listEl.innerHTML=bar+(html.length?html.join(''):'<div class="empty">لا يوجد عملاء</div>');
 }
 
 function _clientCard(c){
@@ -24879,6 +25117,7 @@ function renderMore(){
     reports:{
       key:'reports',title:'📊 كل التقارير والإحصائيات (الأساس)',icon:'📊',
       items:[
+        {icon:'🏭',label:'الإنتاج اليومي',action:'openDailyProduction()',color:'#ffedd5',tc:'#c2410c',ownerOnly:true},
         {icon:'👥',label:'تقرير المهندسين',action:'openEmployeesReport()',color:'#fff7ed',tc:'#c2410c',ownerOnly:true},
         {icon:'📊',label:'تحليل مكن العملاء',action:'openMachineStats()',color:'#ecfeff',tc:'#0e7490'},
         {icon:'🏢',label:'تقارير الشركات',action:'openCompaniesPicker()',color:'#eef2ff',tc:'#3730a3'},
@@ -24966,7 +25205,7 @@ function switchMovTab(tab,el){
 // بتتلف هنا مرة واحدة: لو اتنفّذت من ضغطة مستخدم حقيقية ولسه شغالة (أو خلصت من أقل من ٠٫٦ ثانية)
 // بنفس الأرقام (id) → الضغطة التانية بتتتجاهل. أي دالة جديدة بتنشئ سجل: ضيف اسمها في __ONCE_GUARDED.
 // الاستدعاء من الكود (مش ضغطة) مش بيتأثر. اختلاف الـid (فاتورتين مختلفتين) مش بيتمنع.
-var __ONCE_GUARDED=["__giveEmpCashAdvance", "__settleEmpCashBalance", "__undoLastCashAdvance", "_applyLinkRepair", "_duaSave", "_invBatchDel", "_invBatchSave", "_invCreateGoodsAcc", "_invMoneySave", "_invPaySave", "_invSave", "_mfUnify", "_movTodoAdd", "_wsSaveSettings", "addExpenseTemplate", "addMovAdvancePayment", "approveStocktake", "confirmAutoBalanceDiff", "confirmCloseMovement", "confirmContinueMovement", "confirmExtractParts", "confirmMarkLeave", "confirmMyAttendance", "confirmPayAdvance", "confirmPayDailyWage", "confirmPayFixedExp", "confirmPaySalary", "confirmSchedDone", "convertOpeningInventoryToPurchase", "delScrapMachine", "deleteAllArchivedDebts", "deleteVisitLog", "duplicateTask", "endVisit", "execMergeProducts", "finishExtractForSale", "importBaseClients", "markSaleItemDamaged", "mergeModelFamily", "openDeleteSaleModal", "payDebt", "payGroupDebts", "quickLogExpense", "removeMovAdvancePayment", "saveAddCapital", "saveAsset", "saveBalanceSnapshot", "saveBatchExpenses", "saveBundleDraft", "saveCapital", "saveConsignmentOutSale", "saveDebt", "saveEditCapital", "saveEditDebt", "saveEditExpense", "saveEditFixedExp", "saveEditReceivable", "saveEmpIncrement", "saveEmployee", "saveExpense", "saveFixedExp", "saveGiveConsignment", "saveIncrement", "saveInventorySnapshot", "saveInvestorWithdraw", "saveLog", "saveMachine", "saveMovement", "saveNewClient", "saveNewInvestor", "saveProduct", "saveProfitCycle", "savePurchase", "saveReceivable", "saveReceiveConsignment", "saveReturnConsignment", "saveSale", "saveScrapMachine", "saveSupplier", "saveTask", "setExtraIncome", "startStocktake", "startVisit", "syncSalesWithDebts", "withdrawPartForMovement"];
+var __ONCE_GUARDED=["__giveEmpCashAdvance", "__settleEmpCashBalance", "__undoLastCashAdvance", "_applyLinkRepair", "_duaSave", "_invBatchDel", "_invBatchSave", "_invCreateGoodsAcc", "_invMoneySave", "_invPaySave", "_invSave", "_mfUnify", "_movTodoAdd", "_wsSaveSettings", "addExpenseTemplate", "addMovAdvancePayment", "approveStocktake", "confirmAutoBalanceDiff", "confirmCloseMovement", "confirmContinueMovement", "confirmExtractParts", "confirmMarkLeave", "confirmMyAttendance", "confirmPayAdvance", "confirmPayDailyWage", "confirmPayFixedExp", "confirmPaySalary", "confirmSchedDone", "convertOpeningInventoryToPurchase", "delScrapMachine", "deleteAllArchivedDebts", "deleteVisitLog", "duplicateTask", "endVisit", "execMergeProducts", "finishExtractForSale", "importBaseClients", "markSaleItemDamaged", "mergeModelFamily", "openDeleteSaleModal", "payDebt", "payGroupDebts", "quickLogExpense", "removeMovAdvancePayment", "saveAddCapital", "saveAsset", "saveBalanceSnapshot", "saveBatchExpenses", "saveBundleDraft", "saveCapital", "saveConsignmentOutSale", "saveDebt", "saveEditCapital", "saveEditDebt", "saveEditExpense", "saveEditFixedExp", "saveEditReceivable", "saveEmpIncrement", "saveEmployee", "saveExpense", "saveFixedExp", "saveGiveConsignment", "saveIncrement", "saveInventorySnapshot", "saveInvestorWithdraw", "saveLog", "saveMachine", "saveMovement", "saveNewClient", "saveNewInvestor", "saveProduct", "saveProfitCycle", "savePurchase", "saveReceivable", "saveReceiveConsignment", "saveReturnConsignment", "saveSale", "saveScrapMachine", "saveSupplier", "saveTask", "setExtraIncome", "startStocktake", "startVisit", "syncSalesWithDebts", "withdrawPartForMovement", "withdrawPickedParts"];
 (function(){
   var busy={};
   function wrap(name){
