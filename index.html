@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v275</title>
+<title>ابو حوده الحلو الجميل v282</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="1448-05-03 — v275";
+<script>var BUILD_STAMP="1448-05-05 — v282";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -69,6 +69,31 @@
         ده بيحميها من الضغط المتكرر حتى لو الزرار نسي __runOnce. (__runOnce فاضل مطلوب على الزرار — الاتنين مع بعض).
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v282: [🧠 خبرة موسّعة + استيراد ٣٨٩ مدخل + صور محلية]
+     1) الخبرة بقى فيها: نوع (عطل / برنامج صيانة)، كود، ماركة، موديلات، معنى، أسباب، خطوات، برامج مستخدمة، ملاحظات، صور. البحث بيشمل الكل (ابحث بالكود).
+     2) فلتر نوع (أعطال/برامج) وماركة في القايمة والخريطة.
+     3) زرار 📥 (للمالك): استيراد ملف kb-import.json (٢٠٧ عطل + ١٨٢ برنامج). الاستيراد مرتين مابيكررش.
+     4) الصور بتتخزن على الجهاز (IndexedDB) مش على السيرفر. النص بس بيتزامن. تقدر تضيف صور من الكاميرا/المعرض في فورم الخبرة.
+v281: [🎯 الأهداف والخطط]
+     قسم جديد للمالك (المزيد ← الأهداف والخطط): أهداف قصيرة وطويلة الأمد بتواريخ هجرية. المقياس بيتحسب لوحده من البيانات (مبيعات / صافي ربح الفواتير / عدد التحركات) أو يدوي. شريط تقدم + حالة (ماشي / متأخر عن الخطة / فات الموعد / تحقق) + كروت قابلة للضغط وفلترة + تذكير عند فتح التطبيق لو موعد هدف قرب. بيتزامن من غير SQL.
+v280: [📜 قواعد وقوانين العمل]
+     قسم جديد (المزيد ← قواعد وقوانين العمل): المالك بيضيف ويعدّل ويمسح، والموظف بيقرا. القاعدة ممكن تتعلّم "إلزامي القراءة" فالموظف يضغط "قرأت وموافق" والمالك يشوف مين أكد ومين لسه. لو القاعدة اتعدّلت التأكيدات القديمة بتبطل. كروت قابلة للضغط + فلترة + بحث، بتتزامن من غير SQL (مستندين business_state زي الخبرة).
+v279: [🖨️ عداد كل ماكينة لوحدها + ربط راتب البراء + معرّفات الموظفين القديمة]
+     1) فرق العداد بقى لكل ماكينة (سيريال) بعدادها المنفصل في سجل العميل وفي البحث العام، ولو العداد رجع لورا (تغيير/تصفير) بيظهر تنبيه بدل رقم سالب. الكارت المجمّع بيظهر بس في الاختيار اليدوي.
+     2) معرّفات الموظفين القديمة (mc_...) اتحوّلت لمعرّفات حقيقية وكل المراجع بتتحدّث معاها، ومصروف راتب البراء اتربط بيه واتبعت للسيرفر.
+v278: [🔩 فحص الاسكراب والعدادات + إصلاحات]
+     1) تصفير عداد الأعطال: الرقم الحالي كان بيفضل قديم على الشاشة بعد التصفير (اتصلح).
+     2) الاسكراب: منتج الماكينة في المخزون ماكانش بيتبعت للسيرفر عند الإضافة، وماكانش بيتحدّث عند تعديل الماكينة، وكان بيفضل يتيم عند حذفها (التلاتة اتصلحوا).
+     4) 🧰 جديد: "قطع الغيار المطلوبة" (المزيد ← العمليات): قايمة الأصناف تحت الحد الأدنى + القطع المطلوبة للتحركات المفتوحة ومخزونها مش كفاية، بكروت قابلة للضغط وفلتر وبحث ونسخ للواتساب.
+     3) الاسكراب: فلتر "المستنفدة" كان موجود في الكود من غير أي زرار يوصله — اتضاف زرار قابل للضغط.
+v277: [🛒 المشتريات: كتابة السعر + سعر البيع والجملة + حذف بتسوية المخزون]
+     1) الكتابة في خانة سعر الصنف كانت بتعيد رسم الشاشة كل حرف: بتمسح المورد والمدفوع وبتقفل الكيبورد. دلوقتي الإجمالي بيتحدّث لايف من غير إعادة رسم.
+     2) كل صنف في المشترى فيه خانتين: 🏷️ سعر البيع و📦 سعر الجملة (للجديد والموجود) وبيتحفظوا على المنتج. وصندوق المنتج الجديد فيه سعر جملة.
+     3) حذف المشترى بيسأل: حذف + تسوية المخزون (خصم الكميات/مسح المنتج الجديد) أو حذف المشترى فقط، مع خيار حذف دين المورد المرتبط.
+v276: [🧠 مركز المعرفة: تحليل الأعطال + الخبرة كخريطة ذهنية]
+     🧠 التقارير ← "مركز المعرفة" (للكل)، وكمان زرار "💡 احفظ كخبرة" في تفاصيل أي تحرك (بيملا العطل والعائلة والقطع لوحده).
+     1) 📊 تحليل الأعطال (من التحركات من غير بيانات جديدة): فترة (٣٠/٩٠/سنة/الكل) + فلتر عائلة مكنة؛ أكتر الأعطال بشرايط ومتوسط مدة الإصلاح، الأعطال حسب العائلة، المكن اللي رجعت أكتر من مرة خلال ٩٠ يوم، القطع الأكتر استهلاكًا. كل صف قابل للضغط ويفتح قايمة تحركاته، ومنها لتفاصيل التحرك.
+     2) 💡 الخبرة (عطل ← حل): خريطة ذهنية تفاعلية — الجذر ← عائلة المكنة (لون لكل عائلة) ← العطل ← الحل. دوس على فرع يفتح/يقفل، سحب وقرص وعجلة للتكبير وزراري ＋ － ⤢، بحث لحظي بيضوّي النتايج ويفتح الطريق ليها ويروح لأول نتيجة، وزرار ＋ على أي عقدة يسجّل خبرة تحتها بسرعة (العائلة والعطل جاهزين). وفيه عرض قايمة بديل. الكل يقرا ويضيف؛ التعديل والحذف للمالك أو صاحب الخبرة. بتتزامن كمستند business_state اسمه knowledge (من غير SQL).
 v275: [👥 قايمة العملاء الأنظم | 🛒 قايمة أصناف المشتريات]
      1) العملاء: وضع "مضغوط" (الافتراضي) — سطر واحد لكل عميل (حالة، اسم، عدد المكن، آخر صيانة، 📞 اتصال) والضغط عليه يفتح الكارت الكامل؛ زرار ▤ تفصيلي/☰ مضغوط للتبديل (بيتحفظ). شريط عدّاد فيه إجمالي العملاء والمكن حسب الفلتر الحالي (من الإجمالي) وزرار "مسح الفلاتر ✕". إحصائيات المكن والتنبيهات اتجمّعت في سطر "فلاتر إضافية" قابل للطي (بيفتح لوحده لو فلتر منها شغال)، وكروت الحالات والبحث والترتيب زي ما هم.
      2) فاتورة المشتريات: نفس علاج الفاتورة (v274) — القايمة والنص ومكان التمرير بيفضلوا بعد إضافة صنف، وعلى كل صنف ✓ ×العدد وزرار "تم ✓".
@@ -3360,8 +3385,8 @@ input:checked+.slider:before{transform:translateX(-20px)}
   }
   // ⚠️ v254 — قوائم المرتبة (scheduled_list/map/carried): آخر تعديل يكسب بدل الاتحاد.
   // السبب القديم: __mergeIdList اتحاد، فأي تحرك اتشال من المرتبة بيرجع تاني من السيرفر، وأي جهاز كان بيرفع قايمته القديمة مع أي حفظ.
-  var __LWW_KEYS = ['scheduled_list','scheduled_map','scheduled_carried','investors','inv_batches'];
-  function __bizBlank(k){ return (k==='scheduled_list'||k==='investors'||k==='inv_batches') ? [] : {}; }
+  var __LWW_KEYS = ['scheduled_list','scheduled_map','scheduled_carried','investors','inv_batches','knowledge','work_rules','rules_acks','goals'];
+  function __bizBlank(k){ return (k==='scheduled_list'||k==='investors'||k==='inv_batches'||k==='knowledge'||k==='work_rules'||k==='rules_acks'||k==='goals') ? [] : {}; }
   function __bizTs(){ return LS.get('mc8_biz_ts',{}) || {}; }
   function __bizSig(){ return LS.get('mc8_biz_sig',{}) || {}; }
   function __bizTouch(){
@@ -3593,7 +3618,11 @@ input:checked+.slider:before{transform:translateX(-20px)}
     {key:'scheduled_map',       id:'scheduled_map',       type:'map'},
     {key:'scheduled_carried',   id:'scheduled_carried',   type:'map'},
     {key:'investors',           id:'investors',           type:'lwwArr', keyField:'id'},
-    {key:'inv_batches',         id:'inv_batches',         type:'lwwArr', keyField:'id'}
+    {key:'inv_batches',         id:'inv_batches',         type:'lwwArr', keyField:'id'},
+    {key:'knowledge',           id:'knowledge',           type:'lwwArr', keyField:'id'},
+    {key:'work_rules',          id:'work_rules',          type:'lwwArr', keyField:'id'},
+    {key:'rules_acks',          id:'rules_acks',          type:'lwwArr', keyField:'id'},
+    {key:'goals',               id:'goals',               type:'lwwArr', keyField:'id'}
   ];
   var __bizBlobPushTimer = null;
   function __scheduleBizBlobPush(){
@@ -4521,7 +4550,7 @@ var APP_TITLE='ابو حوده الحلو الجميل';
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=275;
+var APP_VERSION=282;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -4534,7 +4563,7 @@ var DB = {
   archive:{customers:[],suppliers:[],products:[],expDescs:[],serials:[],models:[]},
   settings:{partTypes:['جديد','مع انك','ليزر','استعمال خارجي','استعمال داخلي'],machineTypes:['جديد','استعمال خارجي','عرض للبيع','اسكراب'],companies:['HP','Ricoh','Kyocera','Xerox','Epson','Canon'],techTypes:['انك جيت','ليزر'],appName:'مركز الصيانة'},
   inventory_snapshots:[],
-  investors:[], inv_batches:[], // v256
+  investors:[], inv_batches:[], knowledge:[], work_rules:[], rules_acks:[], goals:[], // v256 / v276 / v280
   scheduled_list:[], // IDs الأعطال المرتبة في القائمة اليومية بترتيب المستخدم
   scheduled_map:{},  // {id: work_date} يوم العمل لكل عطل
   daily_archive:[], // snapshot لليوميات السابقة بعد يومين
@@ -4591,10 +4620,18 @@ function loadDB(){
       DB.suppliers            = data.suppliers            || [];
       DB.investors            = data.investors            || [];
       DB.inv_batches          = data.inv_batches          || [];
+      DB.knowledge            = data.knowledge            || [];
+      DB.work_rules           = data.work_rules           || [];
+      DB.rules_acks           = data.rules_acks           || [];
+      DB.goals                = data.goals                || [];
     }
     if(!DB.suppliers) DB.suppliers=[];
     if(!DB.investors) DB.investors=[];
     if(!DB.inv_batches) DB.inv_batches=[];
+    if(!DB.knowledge) DB.knowledge=[];
+    if(!DB.work_rules) DB.work_rules=[];
+    if(!DB.rules_acks) DB.rules_acks=[];
+    if(!DB.goals) DB.goals=[];
     if(!DB.stocktakes) DB.stocktakes=[];
     if(!DB.part_withdrawals) DB.part_withdrawals=[];
     if(!DB.settings) DB.settings={};
@@ -4708,6 +4745,10 @@ function persist(){
       stocktakes:DB.stocktakes||[],
       investors:DB.investors||[],
       inv_batches:DB.inv_batches||[],
+      knowledge:DB.knowledge||[],
+      work_rules:DB.work_rules||[],
+      rules_acks:DB.rules_acks||[],
+      goals:DB.goals||[],
       savedAt: new Date().toISOString()
     };
     // احفظ نسخة قبل الكتابة للـundo
@@ -5470,8 +5511,13 @@ function __migrateLegacyIds(){
     (DB.scrap_machines||[]).forEach(function(rec){
       if(rec && rec.id && !uuidRe.test(String(rec.id))){var nid=genId();idMap[String(rec.id)]=nid;rec.id=nid;}
     });
+    // v279 — الموظفين (DB.accounts.employees) معرّفاتهم القديمة mc_... مكانتش بتترحّل، فمصروفات الرواتب كانت بتتفصل عن الموظف وقت الرفع للسيرفر
+    ((DB.accounts&&DB.accounts.employees)||[]).forEach(function(rec){
+      if(rec && rec.id && !uuidRe.test(String(rec.id))){var nid2=genId();idMap[String(rec.id)]=nid2;rec.id=nid2;}
+    });
     var fixedCount = Object.keys(idMap).length;
     if(fixedCount===0) return;
+    window.__empFixRows=(DB.expenses||[]).filter(function(e){return e&&e.employee_id&&idMap.hasOwnProperty(String(e.employee_id));}); // v279 — نرفعهم للسيرفر بعد الترحيل
     Object.keys(DB).forEach(function(tbl){
       if(!Array.isArray(DB[tbl])) return;
       DB[tbl].forEach(function(rec){
@@ -5482,11 +5528,39 @@ function __migrateLegacyIds(){
         });
       });
     });
+    // نفس الاستبدال جوه DB.accounts (إجازات، رواتب...) بشكل متداخل
+    (function walk(o,d){
+      if(!o||typeof o!=='object'||d>6)return;
+      Object.keys(o).forEach(function(k){var v=o[k];if(typeof v==='string'){if(idMap.hasOwnProperty(v))o[k]=idMap[v];}else walk(v,d+1);});
+    })(DB.accounts,0);
     persist();
     console.log('__migrateLegacyIds: تم إصلاح '+fixedCount+' معرف قديم تلقائيًا');
   }catch(e){ console.warn('فشل ترحيل المعرفات القديمة', e); }
 }
 
+// ===== v279 — ربط مصروفات الرواتب اليتيمة (employee_id قديم mc_...) بالموظف، ورفعها للسيرفر =====
+function __repairSalaryLinks(){
+  try{
+    var uuidRe=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    var emps=(DB.accounts&&DB.accounts.employees)||[],push=(window.__empFixRows||[]).slice();
+    var left=[];
+    (DB.expenses||[]).forEach(function(e){
+      if(!e||!e.employee_id||uuidRe.test(String(e.employee_id)))return;
+      var n=normalizeAr((e.note||'')+' '+(e.name||''));
+      var hit=emps.filter(function(m){return m.name&&n.includes(normalizeAr(m.name));});
+      if(hit.length===1){e.employee_id=hit[0].id;push.push(e);}else left.push(e);
+    });
+    // لو فضل مصروف واحد بس يتيم: ده راتب البراء (حسب كلام المالك) — بنربطه بيه لو اسمه موجود مرة واحدة
+    if(left.length===1){
+      var br=emps.filter(function(m){return m.name&&normalizeAr(m.name).includes('البراء');});
+      if(br.length===1){left[0].employee_id=br[0].id;push.push(left[0]);}
+    }
+    window.__empFixRows=null;
+    if(!push.length)return;
+    persist();
+    setTimeout(function(){push.forEach(function(e){try{dbUpdate('expenses',e.id,{employee_id:e.employee_id});}catch(x){}});},6000);
+  }catch(e){console.warn('فشل ربط مصروفات الرواتب',e);}
+}
 var _idCounter=0;
 // ⚠️ v110 — دالة انتظار موثوقة لعنصر في الصفحة (بديل عن سلاسل setTimeout الهشة
 // اللي بتفشل لو الموبايل بطيء والفورم ياخد وقت أطول يظهر فيه)
@@ -6118,6 +6192,484 @@ async function withdrawPickedParts(movementId){
   if(done.length)showToast('✅ اتسحب '+done.length.toLocaleString('ar-EG')+' قطعة واتسجلت باسمك','#16a34a');
   _ppShow('wd');
 }
+// ═════════ 🧠 v276 — مركز المعرفة: تحليل الأعطال + الخبرة (عطل ← حل) ═════════
+// تحليل الأعطال بيتحسب من التحركات (مفيش بيانات جديدة): نوع العطل (fault_type) + عائلة المكنة (canonicalModelFamily(device)) +
+// القطع المستخدمة (parts) + الرقم التسلسلي/العميل للمكن المتكررة + مدة الإصلاح (opened_at→closed_at).
+// الخبرة: DB.knowledge=[{id,fault,solution,family,parts,by,by_name,date,updated_at}] — بتتزامن كمستند business_state اسمه knowledge (من غير SQL).
+// الكل يقرا ويضيف؛ التعديل والحذف للمالك أو لصاحب الخبرة.
+var _kcView='map',_kcMapOpen={},_kcMapQ='',_kcMapT={x:0,y:0,k:1},_kcDragged=false,_kcDetail=null,_kcMapLast='';
+var _kcTab='analysis',_kcPeriod=90,_kcFam='all',_kcQ='',_kcDrill=null,_kcOpen={},_kcEditId=null,_kcKbFam='all',_kcKind='all',_kcBrand='all',_kcFormImgs=[],_kcFormOrigImgs=[];
+function _kcFault(m){return (m.fault_type||'').trim()||'غير محدد';}
+function _kcFamily(m){return canonicalModelFamily(m.device||'');}
+function _kcDays(m){if(!m.closed_at||!m.opened_at)return null;var d=(Date.parse(m.closed_at)-Date.parse(m.opened_at))/86400000;return isNaN(d)?null:Math.max(0,d);}
+function _kcPeriodMovs(){
+  var cut=_kcPeriod?localISO_(new Date(Date.now()-_kcPeriod*86400000)):'';
+  return (DB.movements||[]).filter(function(m){return m.status!=='ملغي'&&(!cut||(m.opened_at||'')>=cut);});
+}
+function _kcAnalyze(){
+  var base=_kcPeriodMovs(),famCount={};
+  base.forEach(function(m){var f=_kcFamily(m);famCount[f]=(famCount[f]||0)+1;});
+  var movs=_kcFam==='all'?base:base.filter(function(m){return _kcFamily(m)===_kcFam;});
+  var faults={},fams={},parts={},machines={},dsum=0,dn=0;
+  movs.forEach(function(m){
+    var f=_kcFault(m),fam=_kcFamily(m),d=_kcDays(m);
+    var F=faults[f]||(faults[f]={name:f,movs:[],days:[],fams:{}});F.movs.push(m);if(d!==null){F.days.push(d);dsum+=d;dn++;}F.fams[fam]=(F.fams[fam]||0)+1;
+    var A=fams[fam]||(fams[fam]={name:fam,movs:[],faults:{}});A.movs.push(m);A.faults[f]=(A.faults[f]||0)+1;
+    (m.parts||[]).forEach(function(p){var k=(p.name||'').trim();if(!k)return;var P=parts[k]||(parts[k]={name:k,qty:0,movs:[]});P.qty+=(+p.qty||1);if(P.movs.indexOf(m)===-1)P.movs.push(m);});
+    var key=m.serial?('s:'+normalizeAr(m.serial)):('c:'+normalizeAr(m.customer||'')+'|'+normalizeAr(fam));
+    var M=machines[key]||(machines[key]={key:key,label:(m.serial?m.serial+' — ':'')+(m.device||fam)+' — '+(m.customer||''),movs:[]});M.movs.push(m);
+  });
+  var arr=function(o){return Object.keys(o).map(function(k){return o[k];});};
+  var recurring=arr(machines).filter(function(x){
+    if(x.movs.length<2)return false;
+    var ds=x.movs.map(function(m){return Date.parse(m.opened_at||'');}).filter(function(t){return !isNaN(t);}).sort();
+    for(var i=1;i<ds.length;i++){if((ds[i]-ds[i-1])/86400000<=90)return true;}
+    return false;
+  }).sort(function(a,b){return b.movs.length-a.movs.length;});
+  return {base:base,movs:movs,famCount:famCount,
+    faults:arr(faults).sort(function(a,b){return b.movs.length-a.movs.length;}),
+    fams:arr(fams).sort(function(a,b){return b.movs.length-a.movs.length;}),
+    parts:arr(parts).sort(function(a,b){return b.qty-a.qty;}),
+    recurring:recurring,avgDays:dn?dsum/dn:0};
+}
+function openKnowledgeCenter(tab){_kcTab=tab||'analysis';_kcDrill=null;_kcEditId=null;_kcRender();openModal();}
+function _kcSet(k,val){
+  if(k==='tab')_kcTab=val;else if(k==='period')_kcPeriod=val;else if(k==='fam')_kcFam=val;else if(k==='kbfam')_kcKbFam=val;else if(k==='kind')_kcKind=val;else if(k==='brand')_kcBrand=val;
+  _kcDrill=null;_kcRender();
+}
+function _kcChip(on,c){c=c||'#0e7490';return 'border:1.5px solid '+(on?c:'#e2e8f0')+';background:'+(on?c+'22':'#fff')+';color:'+(on?c:'#64748b')+';border-radius:20px;padding:5px 11px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer';}
+function _kcMovRow(m){
+  var d=_kcDays(m);
+  return '<div onclick="closeModal();openMovementDetail('+jsStr(m.id)+')" style="cursor:pointer;background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:9px 11px;margin-bottom:6px"><div style="font-weight:800;font-size:13px">'+esc(m.customer||'—')+'</div>'+
+    '<div style="font-size:11px;color:#64748b;margin-top:2px">'+esc(m.device||'—')+' · '+esc(_kcFault(m))+' · '+esc(fmtDate(m.opened_at||''))+(d!==null?' · ⏱️ '+d.toLocaleString('ar-EG',{maximumFractionDigits:0})+' يوم':'')+'</div></div>';
+}
+function _kcBar(n,max,col){return '<div style="height:5px;background:#f1f5f9;border-radius:3px;margin-top:4px"><div style="height:5px;width:'+Math.max(4,Math.round(n/max*100))+'%;background:'+col+';border-radius:3px"></div></div>';}
+function _kcOpenDrill(type,key){_kcDrill={type:type,key:key};_kcRender();}
+function _kcRender(){
+  document.getElementById('modal-title').textContent='🧠 مركز المعرفة';
+  var kbN=(DB.knowledge||[]).length;
+  var tabs='<div style="display:flex;gap:6px;margin-bottom:10px"><button type="button" onclick="_kcSet(\'tab\',\'analysis\')" style="flex:1;'+_kcChip(_kcTab==='analysis','#0e7490')+'">📊 تحليل الأعطال</button><button type="button" onclick="_kcSet(\'tab\',\'kb\')" style="flex:1;'+_kcChip(_kcTab==='kb','#6d28d9')+'">💡 الخبرة ('+kbN.toLocaleString('ar-EG')+')</button></div>';
+  document.getElementById('modal-body').innerHTML=tabs+(_kcTab==='analysis'?_kcAnalysisHtml():_kcKbHtml())+'<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+  if(_kcTab==='kb'&&!_kcDetail){if(_kcView==='map'){_kcMapInit();_kcMapRender(true);}else _kcRenderList();}
+  _kbHydrate();
+}
+function _kcAnalysisHtml(){
+  var A=_kcAnalyze();
+  if(_kcDrill){
+    var d=_kcDrill,list=[],title='';
+    if(d.type==='fault'){var F=A.faults.find(function(x){return x.name===d.key;});list=F?F.movs:[];title='🔧 '+d.key;}
+    else if(d.type==='machine'){var M=A.recurring.find(function(x){return x.key===d.key;});list=M?M.movs:[];title='🔁 '+(M?M.label:'');}
+    else if(d.type==='part'){var P=A.parts.find(function(x){return x.name===d.key;});list=P?P.movs:[];title='🔩 '+d.key;}
+    else if(d.type==='family'){var Fm=A.fams.find(function(x){return x.name===d.key;});list=Fm?Fm.movs:[];title='🖨️ '+d.key;}
+    else if(d.type==='recurring'){A.recurring.forEach(function(x){list=list.concat(x.movs);});title='🔁 تحركات المكن المتكررة';}
+    else{list=A.movs;title='📋 كل التحركات في الفترة';}
+    list=list.slice().sort(function(a,b){return (b.opened_at||'')>(a.opened_at||'')?1:-1;});
+    return '<div style="font-weight:900;font-size:14px;margin-bottom:8px">'+esc(title)+' <span style="color:#94a3b8;font-weight:600">('+list.length.toLocaleString('ar-EG')+')</span></div>'+
+      '<div style="display:flex;gap:6px;margin-bottom:8px"><button type="button" onclick="_kcDrill=null;_kcRender()" style="'+_kcChip(false)+'">‹ رجوع</button>'+
+      (d.type==='fault'?'<button type="button" onclick="openKnowledgeForm(null,{fault:'+jsStr(d.key)+'})" style="'+_kcChip(true,'#6d28d9')+'">💡 أضف خبرة للعطل ده</button>':'')+'</div>'+
+      (list.length?list.map(_kcMovRow).join(''):'<div class="empty">مفيش تحركات</div>');
+  }
+  var per=[[30,'٣٠ يوم'],[90,'٩٠ يوم'],[365,'سنة'],[0,'الكل']].map(function(p){return '<button type="button" onclick="_kcSet(\'period\','+p[0]+')" style="'+_kcChip(_kcPeriod===p[0])+'">'+p[1]+'</button>';}).join('');
+  var famChips='<button type="button" onclick="_kcSet(\'fam\',\'all\')" style="'+_kcChip(_kcFam==='all','#c2410c')+'">كل العائلات</button>'+Object.keys(A.famCount).sort(function(a,b){return A.famCount[b]-A.famCount[a];}).slice(0,7).map(function(f){
+    return '<button type="button" onclick="_kcSet(\'fam\','+jsStr(f)+')" style="'+_kcChip(_kcFam===f,'#c2410c')+'">'+esc(f)+' ('+A.famCount[f].toLocaleString('ar-EG')+')</button>';}).join('');
+  var kpi=function(icon,label,val,click,col){return '<div onclick="'+click+'" style="cursor:pointer;background:#fff;border:1.5px solid '+col+'55;border-radius:12px;padding:9px;text-align:center"><div style="font-size:11px;color:#64748b">'+icon+' '+label+'</div><div style="font-size:19px;font-weight:900;color:'+col+'">'+val+'</div></div>';};
+  var maxF=A.faults.length?A.faults[0].movs.length:1;
+  var faultsHtml=A.faults.slice(0,10).map(function(F){
+    var avg=F.days.length?F.days.reduce(function(t,x){return t+x;},0)/F.days.length:null;
+    return '<div onclick="_kcOpenDrill(\'fault\','+jsStr(F.name)+')" style="cursor:pointer;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 11px;margin-bottom:6px"><div style="display:flex;justify-content:space-between;font-size:13px;font-weight:800"><span>'+esc(F.name)+'</span><span style="color:#0e7490">'+F.movs.length.toLocaleString('ar-EG')+'</span></div>'+_kcBar(F.movs.length,maxF,'#0e7490')+(avg!==null?'<div style="font-size:10.5px;color:#94a3b8;margin-top:3px">متوسط الإصلاح: '+avg.toLocaleString('ar-EG',{maximumFractionDigits:1})+' يوم</div>':'')+'</div>';
+  }).join('')||'<div class="empty">مفيش أعطال في الفترة دي</div>';
+  var famsHtml=A.fams.slice(0,8).map(function(Fm){
+    var top=Object.keys(Fm.faults).sort(function(a,b){return Fm.faults[b]-Fm.faults[a];})[0];
+    return '<div onclick="_kcOpenDrill(\'family\','+jsStr(Fm.name)+')" style="cursor:pointer;display:flex;justify-content:space-between;gap:8px;padding:8px 2px;border-bottom:1px solid #f1f5f9;font-size:12.5px"><span style="font-weight:800">'+esc(Fm.name)+' <span style="color:#94a3b8;font-weight:600">('+Fm.movs.length.toLocaleString('ar-EG')+')</span></span><span style="color:#c2410c">أكتر عطل: '+esc(top)+' ×'+Fm.faults[top].toLocaleString('ar-EG')+'</span></div>';
+  }).join('');
+  var recHtml=A.recurring.slice(0,8).map(function(x){
+    var last=x.movs.map(function(m){return m.opened_at||'';}).sort().pop();
+    return '<div onclick="_kcOpenDrill(\'machine\','+jsStr(x.key)+')" style="cursor:pointer;display:flex;justify-content:space-between;gap:8px;padding:8px 2px;border-bottom:1px solid #f1f5f9;font-size:12.5px"><span style="font-weight:700">'+esc(x.label)+'</span><span style="color:#dc2626;white-space:nowrap">'+x.movs.length.toLocaleString('ar-EG')+' مرة · '+esc(fmtDate(last))+'</span></div>';
+  }).join('');
+  var partsHtml=A.parts.slice(0,8).map(function(P){
+    return '<div onclick="_kcOpenDrill(\'part\','+jsStr(P.name)+')" style="cursor:pointer;display:flex;justify-content:space-between;padding:8px 2px;border-bottom:1px solid #f1f5f9;font-size:12.5px"><span style="font-weight:700">'+esc(P.name)+'</span><span style="color:#c2410c">×'+fmtQty(P.qty)+' · '+P.movs.length.toLocaleString('ar-EG')+' تحرك</span></div>';
+  }).join('');
+  var sec=function(t,body){return body?'<div style="font-weight:900;font-size:13px;margin:12px 0 6px">'+t+'</div>'+body:'';};
+  return '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">'+per+'</div><div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">'+famChips+'</div>'+
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">'+
+      kpi('📋','تحركات',A.movs.length.toLocaleString('ar-EG'),"_kcOpenDrill('all','')",'#0e7490')+
+      kpi('🔧','نوع عطل',A.faults.length.toLocaleString('ar-EG'),"void 0",'#6d28d9')+
+      kpi('🔁','مكن متكررة',A.recurring.length.toLocaleString('ar-EG'),"_kcOpenDrill('recurring','')",'#dc2626')+
+      kpi('⏱️','متوسط الإصلاح',A.avgDays?A.avgDays.toLocaleString('ar-EG',{maximumFractionDigits:1})+' يوم':'—',"void 0",'#15803d')+'</div>'+
+    sec('🔧 أكتر الأعطال',faultsHtml)+sec('🖨️ الأعطال حسب العائلة',famsHtml)+sec('🔁 مكن رجعت أكتر من مرة (خلال ٩٠ يوم)',recHtml)+sec('🔩 القطع الأكتر استهلاكًا',partsHtml)+
+    '<div style="font-size:10.5px;color:#94a3b8;margin-top:10px">الأرقام من التحركات (نوع العطل، موديل المكنة، القطع المضافة، تاريخ الفتح والإنهاء). كل صف قابل للضغط.</div>';
+}
+// ---------- الخبرة ----------
+function _kcCanEdit(e){return !!window.__isOwner||(window.__currentProfile&&e.by===window.__currentProfile.id);}
+// ===== v282 — خبرة موسّعة (كود/ماركة/موديلات/معنى/أسباب/برامج) + صور محلية على الجهاز (IndexedDB) + استيراد من ملف =====
+// الصور مابتتزامنش مع السيرفر (توفيرًا للمساحة): بتتخزن في IndexedDB على كل جهاز. النص بس هو اللي بيتزامن.
+var _kbDb=null,_kbImpData=null;
+function _kbOpen(){return new Promise(function(res,rej){
+  if(_kbDb)return res(_kbDb);
+  try{var rq=indexedDB.open('mc8_kbimg',1);rq.onupgradeneeded=function(){rq.result.createObjectStore('imgs');};rq.onsuccess=function(){_kbDb=rq.result;res(_kbDb);};rq.onerror=function(){rej(rq.error);};}catch(e){rej(e);}
+});}
+function kbImgPut(id,data){return _kbOpen().then(function(db){return new Promise(function(res,rej){var tx=db.transaction('imgs','readwrite');tx.objectStore('imgs').put(data,id);tx.oncomplete=function(){res();};tx.onerror=function(){rej(tx.error);};});});}
+function kbImgGet(id){return _kbOpen().then(function(db){return new Promise(function(res,rej){var rq=db.transaction('imgs','readonly').objectStore('imgs').get(id);rq.onsuccess=function(){res(rq.result);};rq.onerror=function(){rej(rq.error);};});});}
+function kbImgDel(id){return _kbOpen().then(function(db){return new Promise(function(res){var tx=db.transaction('imgs','readwrite');tx.objectStore('imgs').delete(id);tx.oncomplete=function(){res();};tx.onerror=function(){res();};});});}
+function _kbImgUsed(id){return (DB.knowledge||[]).some(function(e){return (e.images||[]).indexOf(id)>=0;});}
+function _kbHydrate(){ // بيحمّل الصور من الجهاز في أي <img data-kbimg>
+  document.querySelectorAll('img[data-kbimg]').forEach(function(im){
+    if(im.dataset.done)return;im.dataset.done='1';
+    kbImgGet(im.getAttribute('data-kbimg')).then(function(d){
+      if(d)im.src=d;else{var sp=document.createElement('span');sp.style.cssText='font-size:10px;color:#94a3b8;background:#f1f5f9;border-radius:8px;padding:6px 8px;display:inline-block';sp.textContent='🖼️ الصورة مش على الجهاز ده (استورد الملف)';im.replaceWith(sp);}
+    }).catch(function(){});
+  });
+}
+function _kbZoom(id){
+  kbImgGet(id).then(function(d){if(!d)return;
+    var o=document.createElement('div');o.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:99999;display:flex;align-items:center;justify-content:center;padding:10px';
+    o.onclick=function(){o.remove();};o.innerHTML='<img src="'+d+'" style="max-width:100%;max-height:100%;border-radius:10px">';document.body.appendChild(o);
+  });
+}
+function _kbCompress(file){return new Promise(function(res,rej){
+  var fr=new FileReader();fr.onerror=rej;fr.onload=function(){var im=new Image();im.onerror=rej;im.onload=function(){
+    var m=Math.max(im.width,im.height),k=m>560?560/m:1,c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);
+    c.getContext('2d').drawImage(im,0,0,c.width,c.height);res(c.toDataURL('image/jpeg',0.6));};im.src=fr.result;};fr.readAsDataURL(file);
+});}
+function _kcHay(e){return normalizeAr([e.fault,e.solution,e.parts,e.family,e.code,(e.models||[]).join(' '),e.brand,e.ftype,e.meaning,e.causes,e.steps,e.programs,e.function,e.usage,e.name_en,e.common_fault,e.notes].join(' '));}
+function _kcPass(e,withFam){
+  if(_kcKind!=='all'&&(e.kind||'fault')!==_kcKind)return false;
+  if(_kcBrand!=='all'&&(e.brand||'')!==_kcBrand)return false;
+  if(withFam&&_kcKbFam!=='all'&&(e.family||'')!==_kcKbFam)return false;
+  return true;
+}
+function _kcFilterBar(){
+  var all=DB.knowledge||[],nF=all.filter(function(e){return (e.kind||'fault')==='fault';}).length,nP=all.length-nF,br={};
+  all.forEach(function(e){if(e.brand)br[e.brand]=(br[e.brand]||0)+1;});
+  var kinds='<button type="button" onclick="_kcSet(\'kind\',\'all\')" style="'+_kcChip(_kcKind==='all','#6d28d9')+'">الكل</button><button type="button" onclick="_kcSet(\'kind\',\'fault\')" style="'+_kcChip(_kcKind==='fault','#dc2626')+'">🔧 أعطال ('+nF.toLocaleString('ar-EG')+')</button><button type="button" onclick="_kcSet(\'kind\',\'program\')" style="'+_kcChip(_kcKind==='program','#0e7490')+'">⚙️ برامج ('+nP.toLocaleString('ar-EG')+')</button>';
+  var brands=Object.keys(br).length?'<button type="button" onclick="_kcSet(\'brand\',\'all\')" style="'+_kcChip(_kcBrand==='all','#b45309')+'">كل الماركات</button>'+Object.keys(br).sort(function(a,b){return br[b]-br[a];}).map(function(b){return '<button type="button" onclick="_kcSet(\'brand\','+jsStr(b)+')" style="'+_kcChip(_kcBrand===b,'#b45309')+'">'+esc(b)+' ('+br[b].toLocaleString('ar-EG')+')</button>';}).join(''):'';
+  return '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px">'+kinds+'</div>'+(brands?'<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">'+brands+'</div>':'');
+}
+function _kcExtraHtml(e){ // الحقول الإضافية + الصور (للقايمة والتفاصيل)
+  function blk(ic,t,v,bg,fg){return v?'<div style="font-size:12.5px;white-space:pre-wrap;background:'+(bg||'#f8fafc')+';color:'+(fg||'#334155')+';border-radius:9px;padding:8px 10px;margin-top:6px"><b>'+ic+' '+t+':</b> '+esc(v)+'</div>':'';}
+  var b='';
+  if(e.kind==='program'){
+    b+=blk('⚙️','وظيفة البرنامج',e.function,'#ecfeff','#155e75')+blk('📖','طريقة الاستخدام',e.usage,'#f0fdf4','#14532d')+blk('🔤','الاسم بالإنجليزي',e.name_en)+blk('⚠️','العطل الشائع',e.common_fault,'#fff7ed','#9a3412');
+  }else{
+    b+=blk('📌','معنى العطل',e.meaning)+blk('🔎','الأسباب',e.causes)+blk('🪜','خطوات وإجراءات',e.steps,'#f0fdf4','#14532d')+blk('⚙️','البرامج المستخدمة',e.programs,'#ecfeff','#155e75')+blk('ℹ️','وظيفة البرامج',e.function);
+  }
+  b+=blk('📝','ملاحظات',e.notes,'#fffbeb','#92400e');
+  if((e.images||[]).length)b+='<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">'+e.images.map(function(id){return '<img data-kbimg="'+esc(id)+'" onclick="event.stopPropagation();_kbZoom('+jsStr(id)+')" style="width:84px;height:84px;object-fit:cover;border-radius:9px;border:1.5px solid #e9d5ff;background:#f1f5f9;cursor:zoom-in">';}).join('')+'</div>';
+  return b;
+}
+function _kcBadges(e){
+  var t='';
+  if(e.code)t+='<span style="background:#ede9fe;color:#5b21b6;border-radius:6px;padding:1px 7px;font-size:11px;font-weight:800;direction:ltr;display:inline-block">'+esc(e.code)+'</span> ';
+  if(e.kind==='program')t+='<span style="background:#cffafe;color:#0e7490;border-radius:6px;padding:1px 7px;font-size:10px;font-weight:800">⚙️ برنامج</span> ';
+  else if(e.ftype&&e.ftype!=='كودي'&&e.ftype!=='عطل')t+='<span style="background:#fee2e2;color:#b91c1c;border-radius:6px;padding:1px 7px;font-size:10px;font-weight:800">'+esc(e.ftype)+'</span> ';
+  if(e.brand)t+='<span style="background:#fef3c7;color:#92400e;border-radius:6px;padding:1px 7px;font-size:10px;font-weight:800">'+esc(e.brand)+'</span> ';
+  if((e.models||[]).length)t+='<span style="font-size:10.5px;color:#64748b;direction:ltr;display:inline-block">'+esc(e.models.slice(0,3).join(' · '))+(e.models.length>3?' …':'')+'</span>';
+  return t?'<div style="margin-top:4px">'+t+'</div>':'';
+}
+// ---------- الاستيراد من ملف ----------
+function openKbImport(){
+  if(!window.__isOwner)return showToast('🚫 الاستيراد للمالك بس','#dc2626');
+  _kbImpData=null;
+  document.getElementById('modal-title').textContent='📥 استيراد خبرات من ملف';
+  document.getElementById('modal-body').innerHTML=
+    '<div style="font-size:13px;line-height:1.9;color:#334155;margin-bottom:10px">اختار ملف <b>kb-import.json</b>. الأعطال والبرامج بتتحفظ وبتتزامن مع باقي الأجهزة، لكن <b>الصور بتتخزن على الجهاز ده بس</b> (علشان مساحة السيرفر). لو عايز الصور على جهاز تاني، استورد نفس الملف عليه. الاستيراد أكتر من مرة مابيكررش حاجة.</div>'+
+    '<input type="file" accept=".json,application/json" onchange="kbImpPick(this)" style="width:100%;padding:10px;border:2px dashed #c4b5fd;border-radius:10px;font-family:inherit"><div id="kb-imp-info" style="margin-top:12px"></div>'+
+    '<div class="modal-actions" style="margin-top:12px"><button class="btn btn-outline btn-full" onclick="_kcTab=\'kb\';_kcRender()">رجوع</button></div>';
+}
+function kbImpPick(inp){
+  var f=inp.files&&inp.files[0];if(!f)return;
+  var r=new FileReader();r.onerror=function(){showToast('⚠️ مقدرتش أقرا الملف','#dc2626');};
+  r.onload=function(){
+    try{var d=JSON.parse(r.result);if(!d.entries||!d.entries.length)throw 0;_kbImpData=d;}catch(e){return showToast('⚠️ الملف مش ملف خبرات صالح','#dc2626');}
+    var have={};(DB.knowledge||[]).forEach(function(e){have[e.id]=1;});
+    var nw=d.entries.filter(function(e){return !have[e.id];}),nF=nw.filter(function(e){return e.kind!=='program';}).length;
+    var ik=Object.keys(d.images||{});
+    document.getElementById('kb-imp-info').innerHTML=
+      '<div style="background:#f5f3ff;border-radius:12px;padding:12px;font-size:13px;line-height:2">📄 في الملف: <b>'+d.entries.length+'</b> مدخل<br>🆕 جديد: <b>'+nw.length+'</b> ('+nF+' عطل + '+(nw.length-nF)+' برنامج)<br>♻️ موجود قبل كده: <b>'+(d.entries.length-nw.length)+'</b> (هيتخطى)<br>🖼️ صور هتتحمّل على الجهاز: <b>'+ik.length+'</b></div>'+
+      '<button class="btn btn-primary btn-full" style="margin-top:10px" onclick="__runOnce(this,kbImpApply)">✅ استيراد دلوقتي</button><div id="kb-imp-prog" style="font-size:12px;color:#64748b;margin-top:8px;text-align:center"></div>';
+  };
+  r.readAsText(f,'utf-8');
+}
+async function kbImpApply(){
+  var d=_kbImpData;if(!d||!window.__isOwner)return;
+  var prog=document.getElementById('kb-imp-prog'),ik=Object.keys(d.images||{});
+  try{
+    for(var i=0;i<ik.length;i++){
+      if(await kbImgGet(ik[i])===undefined)await kbImgPut(ik[i],d.images[ik[i]]);
+      if(prog&&i%10===0)prog.textContent='🖼️ تحميل الصور '+(i+1)+' / '+ik.length;
+    }
+  }catch(e){showToast('⚠️ فشل حفظ الصور على الجهاز: '+(e&&e.message||''),'#dc2626');}
+  var have={};(DB.knowledge||[]).forEach(function(e){have[e.id]=1;});
+  var recs=[],now=new Date().toISOString(),td=today();
+  d.entries.forEach(function(e){
+    if(have[e.id])return;
+    var fam='';try{fam=(e.models&&e.models[0])?canonicalModelFamily(e.models[0]):'';}catch(x){}
+    if(!fam||fam==='بدون موديل')fam=e.brand?('عام — '+e.brand):'';
+    var sol=e.kind==='program'?[e.function,e.usage].filter(Boolean).join('\n'):(e.solution||e.steps||e.meaning||e.function||'');
+    recs.push({id:e.id,kind:e.kind||'fault',ftype:e.ftype||'',code:e.code||'',brand:e.brand||'',models:e.models||[],meaning:e.meaning||'',causes:e.causes||'',steps:e.steps||'',programs:e.programs||'',function:e.function||'',usage:e.usage||'',name_en:e.name_en||'',common_fault:e.common_fault||'',notes:e.notes||'',images:e.images||[],fault:e.title||e.code||'بدون عنوان',solution:sol||'—',family:fam,parts:'',by:null,by_name:'استيراد الملفات',date:td,updated_at:now,imported:true});
+  });
+  DB.knowledge=(DB.knowledge||[]).concat(recs);
+  persist();_kbImpData=null;_kcTab='kb';_kcRender();
+  showToast('✅ اتستورد '+recs.length+' مدخل و'+ik.length+' صورة','#16a34a');
+}
+function _kcPickImgs(inp){
+  var fs=[].slice.call(inp.files||[]);if(!fs.length)return;
+  Promise.all(fs.map(function(f){return _kbCompress(f).then(function(d){var id='u-'+Date.now().toString(36)+Math.random().toString(36).slice(2,7);return kbImgPut(id,d).then(function(){_kcFormImgs.push(id);});});}))
+    .then(function(){_kcFormImgsRender();}).catch(function(){showToast('⚠️ مقدرتش أحمّل الصورة','#dc2626');});
+  inp.value='';
+}
+function _kcFormImgsRender(){
+  var el=document.getElementById('kc-imgs');if(!el)return;
+  el.innerHTML=_kcFormImgs.map(function(id,i){return '<div style="position:relative"><img data-kbimg="'+esc(id)+'" style="width:76px;height:76px;object-fit:cover;border-radius:9px;border:1.5px solid #e9d5ff;background:#f1f5f9"><button type="button" onclick="_kcFormImgs.splice('+i+',1);_kcFormImgsRender()" style="position:absolute;top:-6px;left:-6px;width:22px;height:22px;border-radius:50%;border:none;background:#dc2626;color:#fff;font-size:12px;cursor:pointer">✕</button></div>';}).join('');
+  _kbHydrate();
+}
+function _kcKbListHtml(){
+  var list=(DB.knowledge||[]).filter(function(e){return _kcPass(e,false);}),fams={};
+  list.forEach(function(e){var f=e.family||'';fams[f]=(fams[f]||0)+1;});
+  var chips='<button type="button" onclick="_kcSet(\'kbfam\',\'all\')" style="'+_kcChip(_kcKbFam==='all','#6d28d9')+'">الكل ('+list.length.toLocaleString('ar-EG')+')</button>'+Object.keys(fams).sort(function(a,b){return fams[b]-fams[a];}).map(function(f){
+    return '<button type="button" onclick="_kcSet(\'kbfam\','+jsStr(f)+')" style="'+_kcChip(_kcKbFam===f,'#6d28d9')+'">'+esc(f||'عام')+' ('+fams[f].toLocaleString('ar-EG')+')</button>';}).join('');
+  return '<div style="display:flex;gap:6px;margin-bottom:8px"><input type="search" id="kc-q" value="'+esc(_kcQ)+'" placeholder="🔍 ابحث: كود / عطل / حل / قطعة / مكنة" oninput="_kcQ=this.value;_kcRenderList()" style="flex:1;padding:9px 10px;border:1.5px solid #e2e8f0;border-radius:9px;font-family:inherit;box-sizing:border-box"><button type="button" onclick="openKnowledgeForm()" style="background:#6d28d9;color:#fff;border:none;border-radius:9px;padding:0 14px;font-family:inherit;font-weight:800;cursor:pointer">➕ خبرة</button>'+(window.__isOwner?'<button type="button" onclick="openKbImport()" style="background:#fff;color:#6d28d9;border:1.5px solid #6d28d9;border-radius:9px;padding:0 11px;font-family:inherit;font-weight:800;cursor:pointer">📥</button>':'')+'</div>'+_kcFilterBar()+
+    '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;max-height:92px;overflow:auto">'+chips+'</div><div id="kc-list"></div>';
+}
+// ---------- 🗺️ خريطة ذهنية للخبرة (جذر ← عائلة مكنة ← عطل ← حل) — سحب/تكبير/بحث/تسجيل سريع من أي عقدة ----------
+var _MM={rw:112,fw:138,xw:158,sw:224,nh:40,gap:12,cg:46};
+var _MM_PAL=['#7c3aed','#0e7490','#c2410c','#15803d','#be185d','#1d4ed8','#a16207','#475569'];
+function _kcTree(){
+  var fams={};
+  (DB.knowledge||[]).filter(function(e){return _kcPass(e,false);}).forEach(function(e){
+    var f=e.family||'عام',F=fams[f]||(fams[f]={id:'f:'+f,type:'fam',label:f,fam:e.family||'',kids:{},n:0});
+    var k=normalizeAr(e.fault),X=F.kids[k]||(F.kids[k]={id:'x:'+f+'|'+k,type:'fault',label:e.fault,fam:e.family||'',kids:[]});
+    X.kids.push({id:'e:'+e.id,type:'sol',label:e.solution,entry:e,fam:e.family||'',kids:[]});F.n++;
+  });
+  var famArr=Object.keys(fams).sort(function(a,b){return a==='عام'?1:b==='عام'?-1:a.localeCompare(b,'ar');}).map(function(k,i){
+    var F=fams[k];F.col=_MM_PAL[i%_MM_PAL.length];
+    F.kids=Object.keys(F.kids).map(function(x){return F.kids[x];}).sort(function(a,b){return b.kids.length-a.kids.length||a.label.localeCompare(b.label,'ar');});
+    F.kids.forEach(function(X){X.col=F.col;X.kids.forEach(function(S){S.col=F.col;});});
+    return F;});
+  return {id:'root',type:'root',label:'الخبرة',kids:famArr,n:(DB.knowledge||[]).length,col:'#6d28d9'};
+}
+function _kcMapMatch(n,q){
+  if(n.type==='sol'){return _kcHay(n.entry).indexOf(q)!==-1;}
+  return normalizeAr(n.label).indexOf(q)!==-1;
+}
+function _kcMarkSub(n,q){ // n.hit: العقدة نفسها بتطابق — n.sub: فيه تطابق في الفروع
+  n.hit=!!q&&n.type!=='root'&&_kcMapMatch(n,q);n.sub=false;
+  n.kids.forEach(function(k){if(_kcMarkSub(k,q)||k.hit)n.sub=true;});
+  return n.sub;
+}
+function _kcLayout(root,q){
+  var nodes=[],edges=[],row=0,colW=[_MM.rw,_MM.fw,_MM.xw,_MM.sw];
+  function solH(n){var len=(n.label||'').length;return Math.min(4,Math.max(1,Math.ceil(len/26)))*16+16;}
+  function visit(n,d){
+    var open=n.type==='root'||!!_kcMapOpen[n.id]||(!!q&&n.sub);
+    var kids=open?n.kids:[];
+    n.d=d;n.open=open;n.w=colW[d];n.h=n.type==='sol'?solH(n):_MM.nh;
+    if(!kids.length){n.y=row;row+=n.h+_MM.gap;}
+    else{kids.forEach(function(k){visit(k,d+1);});var a=kids[0],b=kids[kids.length-1];n.y=(a.y+a.h/2+b.y+b.h/2)/2-n.h/2;}
+    n.vis=kids;nodes.push(n);
+  }
+  visit(root,0);
+  var maxD=0;nodes.forEach(function(n){if(n.d>maxD)maxD=n.d;});
+  var start=[0],W=0;for(var i=1;i<=maxD;i++)start[i]=start[i-1]+colW[i-1]+_MM.cg;
+  W=start[maxD]+colW[maxD]+16;
+  var H=Math.max(row,60)+8;
+  nodes.forEach(function(n){n.x=W-8-start[n.d]-n.w;});
+  nodes.forEach(function(n){n.vis.forEach(function(k){edges.push({a:n,b:k});});});
+  return {nodes:nodes,edges:edges,W:W,H:H};
+}
+function _kcMapApply(){
+  var L=document.getElementById('kc-map-layer');
+  if(L)L.style.transform='translate('+_kcMapT.x+'px,'+_kcMapT.y+'px) scale('+_kcMapT.k+')';
+}
+function _kcMapFit(L){
+  var box=document.getElementById('kc-map-box');if(!box||!L)return;
+  var cw=box.clientWidth||320,ch=box.clientHeight||400;
+  var k=Math.min(1,cw/L.W,ch/L.H);if(k<0.72)k=0.72; // مايصغّرش أكتر من كده عشان الخط يفضل مقروء — الباقي بالسحب
+  _kcMapT={k:k,x:Math.max(0,(cw-L.W*k)/2)+(L.W*k>cw?cw-L.W*k:0),y:Math.max(6,(ch-L.H*k)/2)};
+  if(L.W*k>cw)_kcMapT.x=cw-L.W*k-4; // الجذر على اليمين: نبدأ منه
+}
+function _kcMapCenterOn(n){
+  var box=document.getElementById('kc-map-box');if(!box||!n)return;
+  var cw=box.clientWidth,ch=box.clientHeight,k=_kcMapT.k;
+  _kcMapT.x=cw/2-(n.x+n.w/2)*k;_kcMapT.y=ch/2-(n.y+n.h/2)*k;
+}
+function _kcMapRender(fit){
+  var box=document.getElementById('kc-map-box');if(!box)return;
+  var q=normalizeAr(_kcMapQ||''),root=_kcTree();
+  _kcMarkSub(root,q);
+  var L=_kcLayout(root,q);
+  var firstHit=null;L.nodes.forEach(function(n){if(n.hit&&(!firstHit||n.y<firstHit.y))firstHit=n;});
+  var svg='<svg width="'+L.W+'" height="'+L.H+'" style="position:absolute;left:0;top:0;pointer-events:none">'+L.edges.map(function(e){
+    var x1=e.a.x,y1=e.a.y+e.a.h/2,x2=e.b.x+e.b.w,y2=e.b.y+e.b.h/2,mx=(x1+x2)/2;
+    return '<path d="M'+x1+','+y1+' C'+mx+','+y1+' '+mx+','+y2+' '+x2+','+y2+'" fill="none" stroke="'+e.b.col+'" stroke-width="'+(e.b.type==='fam'?3:2)+'" opacity="'+(q&&!e.b.hit&&!e.b.sub?.25:.85)+'"/>';
+  }).join('')+'</svg>';
+  var nodesHtml=L.nodes.map(function(n){
+    var dim=q&&!n.hit&&!n.sub,ring=n.hit?'box-shadow:0 0 0 3px #facc15;':'',op=dim?'opacity:.3;':'';
+    var base='position:absolute;direction:rtl;left:'+n.x+'px;top:'+n.y+'px;width:'+n.w+'px;height:'+n.h+'px;box-sizing:border-box;'+op+ring;
+    var plus=(n.type!=='sol')?'<span onclick="event.stopPropagation();_kcAddUnder('+jsStr(n.id)+')" style="position:absolute;left:-9px;top:-9px;width:22px;height:22px;border-radius:50%;background:#fff;color:'+n.col+';border:2px solid '+n.col+';font-size:15px;line-height:18px;text-align:center;font-weight:900;cursor:pointer">+</span>':'';
+    if(n.type==='root')return '<div onclick="_kcMapTap(\'root\')" style="'+base+'background:linear-gradient(135deg,#7c3aed,#4f46e5);color:#fff;border-radius:20px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;cursor:pointer">🧠 '+esc(n.label)+' ('+n.n.toLocaleString('ar-EG')+')'+plus+'</div>';
+    if(n.type==='fam')return '<div onclick="_kcMapTap('+jsStr(n.id)+')" style="'+base+'background:'+n.col+';color:#fff;border-radius:14px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;font-weight:800;font-size:13px;cursor:pointer"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">🖨️ '+esc(n.label)+'</span><span style="background:rgba(255,255,255,.25);border-radius:9px;padding:1px 7px;font-size:11px">'+n.n.toLocaleString('ar-EG')+' '+(n.open?'▾':'◂')+'</span>'+plus+'</div>';
+    if(n.type==='fault')return '<div onclick="_kcMapTap('+jsStr(n.id)+')" style="'+base+'background:#fff;border:2px solid '+n.col+';color:#1e293b;border-radius:12px;display:flex;align-items:center;justify-content:space-between;padding:0 9px;font-weight:700;font-size:12.5px;cursor:pointer"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">🔧 '+esc(n.label)+'</span><span style="color:'+n.col+';font-size:11px;font-weight:800">'+n.kids.length.toLocaleString('ar-EG')+' '+(n.open?'▾':'◂')+'</span>'+plus+'</div>';
+    return '<div onclick="_kcMapTap('+jsStr(n.id)+')" style="'+base+'background:#ecfdf5;border:1.5px solid #86efac;color:#14532d;border-radius:10px;padding:6px 9px;font-size:12px;line-height:16px;overflow:hidden;cursor:pointer;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical">✅ '+esc(n.label)+'</div>';
+  }).join('');
+  box.innerHTML='<div id="kc-map-layer" style="position:absolute;left:0;top:0;width:'+L.W+'px;height:'+L.H+'px;transform-origin:0 0">'+svg+nodesHtml+'</div>'+
+    '<div style="position:absolute;left:8px;bottom:8px;display:flex;flex-direction:column;gap:5px">'+
+      '<button type="button" onclick="_kcMapZoom(1.25)" style="'+_kcMapBtn()+'">＋</button><button type="button" onclick="_kcMapZoom(0.8)" style="'+_kcMapBtn()+'">－</button><button type="button" onclick="_kcMapReset()" style="'+_kcMapBtn()+'">⤢</button></div>';
+  window.__kcLast=L;
+  if(fit)_kcMapFit(L);
+  if(q&&firstHit&&_kcMapLast!==q){_kcMapCenterOn(firstHit);}
+  _kcMapLast=q;
+  _kcMapApply();
+  var cnt=document.getElementById('kc-map-count');
+  if(cnt){var hits=0;L.nodes.forEach(function(n){if(n.hit)hits++;});cnt.textContent=q?(hits?hits.toLocaleString('ar-EG')+' نتيجة':'مفيش نتايج'):'';}
+}
+function _kcMapBtn(){return 'width:34px;height:34px;border-radius:50%;border:none;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,.25);font-size:16px;font-weight:900;color:#4c1d95;cursor:pointer';}
+function _kcMapZoom(f,cx,cy){
+  var box=document.getElementById('kc-map-box');if(!box)return;
+  var T=_kcMapT,k2=Math.min(2.5,Math.max(0.3,T.k*f)),r=k2/T.k;
+  cx=cx==null?box.clientWidth/2:cx;cy=cy==null?box.clientHeight/2:cy;
+  T.x=cx-(cx-T.x)*r;T.y=cy-(cy-T.y)*r;T.k=k2;_kcMapApply();
+}
+function _kcMapReset(){_kcMapRender(true);}
+function _kcMapTap(id){
+  if(_kcDragged){_kcDragged=false;return;}
+  if(id==='root'){var anyOpen=Object.keys(_kcMapOpen).some(function(k){return _kcMapOpen[k];});_kcMapOpen={};
+    if(!anyOpen){(window.__kcLast?window.__kcLast.nodes:[]).forEach(function(n){});(DB.knowledge||[]).forEach(function(e){_kcMapOpen['f:'+(e.family||'عام')]=true;_kcMapOpen['x:'+(e.family||'عام')+'|'+normalizeAr(e.fault)]=true;});}
+    _kcMapRender(true);return;}
+  if(id.indexOf('e:')===0){_kcDetail=id.slice(2);_kcRender();return;}
+  _kcMapOpen[id]=!_kcMapOpen[id];_kcMapRender(false);
+}
+function _kcAddUnder(id){
+  if(_kcDragged){_kcDragged=false;return;}
+  var n=((window.__kcLast&&window.__kcLast.nodes)||[]).find(function(x){return x.id===id;});
+  var pre={};if(n&&n.type==='fam')pre={family:n.fam};if(n&&n.type==='fault')pre={family:n.fam,fault:n.label};
+  openKnowledgeForm(null,pre);
+}
+function _kcMapSearch(val){_kcMapQ=val;_kcMapRender(false);}
+function _kcMapInit(){ // سحب + قرص (pinch) + عجلة الماوس
+  var box=document.getElementById('kc-map-box');if(!box||box.__init)return;box.__init=true;
+  var pts={},last=null,dist0=0;
+  box.addEventListener('pointerdown',function(e){pts[e.pointerId]={x:e.clientX,y:e.clientY};last={x:e.clientX,y:e.clientY,moved:0};dist0=0;});
+  box.addEventListener('pointermove',function(e){
+    if(!pts[e.pointerId])return;
+    var ids=Object.keys(pts),r=box.getBoundingClientRect();
+    if(ids.length===1){
+      var dx=e.clientX-pts[e.pointerId].x,dy=e.clientY-pts[e.pointerId].y;
+      last.moved+=Math.abs(dx)+Math.abs(dy);
+      if(last.moved>8){_kcDragged=true;_kcMapT.x+=dx;_kcMapT.y+=dy;_kcMapApply();}
+    }else if(ids.length===2){
+      pts[e.pointerId]={x:e.clientX,y:e.clientY};
+      var a=pts[ids[0]],b=pts[ids[1]],d=Math.hypot(a.x-b.x,a.y-b.y);
+      if(dist0){_kcDragged=true;_kcMapZoom(d/dist0,(a.x+b.x)/2-r.left,(a.y+b.y)/2-r.top);}
+      dist0=d;return;
+    }
+    pts[e.pointerId]={x:e.clientX,y:e.clientY};
+  });
+  var up=function(e){delete pts[e.pointerId];dist0=0;if(!Object.keys(pts).length)setTimeout(function(){_kcDragged=false;},60);};
+  box.addEventListener('pointerup',up);box.addEventListener('pointercancel',up);box.addEventListener('pointerleave',up);
+  box.addEventListener('wheel',function(e){e.preventDefault();var r=box.getBoundingClientRect();_kcMapZoom(e.deltaY<0?1.12:0.89,e.clientX-r.left,e.clientY-r.top);},{passive:false});
+}
+function _kcKbHtml(){
+  if(_kcDetail){
+    var e=(DB.knowledge||[]).find(function(x){return x.id===_kcDetail;});
+    if(!e){_kcDetail=null;}
+    else{
+      var same=(DB.movements||[]).filter(function(m){return _kcFault(m)===e.fault;}).length;
+      return '<div style="background:#faf5ff;border:1.5px solid #e9d5ff;border-radius:14px;padding:14px"><div style="font-weight:900;font-size:15px;margin-bottom:4px">'+(e.kind==='program'?'⚙️ ':'🔧 ')+esc(e.fault)+'</div>'+_kcBadges(e)+
+        '<div style="font-size:13.5px;color:#14532d;background:#ecfdf5;border-radius:10px;padding:10px;white-space:pre-wrap;margin-top:8px">✅ '+esc(e.solution)+'</div>'+_kcExtraHtml(e)+
+        '<div style="margin-top:10px;font-size:12px;color:#64748b;display:flex;flex-wrap:wrap;gap:4px 14px"><span>🖨️ '+esc(e.family||'عام')+'</span>'+(e.parts?'<span>🔩 '+esc(e.parts)+'</span>':'')+'<span>👤 '+esc(e.by_name||'—')+'</span><span>📅 '+esc(fmtDate(e.date||''))+'</span></div>'+
+        '<div style="display:flex;gap:6px;margin-top:12px;flex-wrap:wrap"><button type="button" onclick="_kcDetail=null;_kcRender()" style="'+_kcChip(false)+'">‹ رجوع للخريطة</button>'+
+        '<button type="button" onclick="_kcDetail=null;_kcOpenDrill(\'fault\','+jsStr(e.fault)+');_kcTab=\'analysis\';_kcRender()" style="'+_kcChip(false,'#0e7490')+'">📊 '+same.toLocaleString('ar-EG')+' تحرك بنفس العطل</button>'+
+        '<button type="button" onclick="openKnowledgeForm(null,{family:'+jsStr(e.family||'')+',fault:'+jsStr(e.fault)+'})" style="'+_kcChip(true,'#15803d')+'">➕ حل تاني للعطل ده</button>'+
+        (_kcCanEdit(e)?'<button type="button" onclick="openKnowledgeForm('+jsStr(e.id)+')" style="'+_kcChip(false)+'">✏️ تعديل</button><button type="button" onclick="deleteKnowledge('+jsStr(e.id)+')" style="border:none;background:#fee2e2;color:#dc2626;border-radius:20px;padding:5px 11px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer">🗑️ حذف</button>':'')+'</div></div>';
+    }
+  }
+  var vt='<div style="display:flex;gap:6px;margin-bottom:8px"><button type="button" onclick="_kcView=\'map\';_kcRender()" style="flex:1;'+_kcChip(_kcView==='map','#6d28d9')+'">🗺️ خريطة</button><button type="button" onclick="_kcView=\'list\';_kcRender()" style="flex:1;'+_kcChip(_kcView==='list','#6d28d9')+'">☰ قايمة</button></div>';
+  if(_kcView==='list')return vt+_kcKbListHtml();
+  var empty=!(DB.knowledge||[]).length;
+  return vt+_kcFilterBar()+'<div style="display:flex;gap:6px;margin-bottom:6px"><input type="search" id="kc-mq" value="'+esc(_kcMapQ)+'" placeholder="🔍 ابحث: عطل / حل / قطعة / مكنة" oninput="_kcMapSearch(this.value)" style="flex:1;padding:9px 10px;border:1.5px solid #e2e8f0;border-radius:9px;font-family:inherit;box-sizing:border-box"><button type="button" onclick="openKnowledgeForm()" style="background:#6d28d9;color:#fff;border:none;border-radius:9px;padding:0 14px;font-family:inherit;font-weight:800;cursor:pointer">➕ خبرة</button></div>'+
+    '<div style="display:flex;justify-content:space-between;font-size:11px;color:#64748b;margin-bottom:5px"><span id="kc-map-count" style="font-weight:800;color:#b45309"></span><span>دوس على فرع يفتح • السحب والقرص للتحريك • + يضيف تحته</span></div>'+
+    '<div id="kc-map-box" style="position:relative;height:56vh;min-height:300px;overflow:hidden;background:radial-gradient(circle at 80% 50%,#f5f3ff,#fff 70%);border:1.5px solid #e9d5ff;border-radius:14px;touch-action:none;direction:ltr"></div>'+
+    (empty?'<div style="font-size:12px;color:#94a3b8;margin-top:8px;text-align:center">لسه مفيش خبرات — دوس ➕ أو "💡 احفظ كخبرة" من تفاصيل أي تحرك، والخريطة بتتبني لوحدها</div>':'');
+}
+function _kcRenderList(){
+  var el=document.getElementById('kc-list');if(!el)return;
+  var q=normalizeAr(_kcQ||'');
+  var list=(DB.knowledge||[]).filter(function(e){
+    if(!_kcPass(e,true))return false;
+    return !q||_kcHay(e).indexOf(q)!==-1;
+  }).sort(function(a,b){return (b.updated_at||b.date||'')>(a.updated_at||a.date||'')?1:-1;});
+  if(!list.length){el.innerHTML='<div class="empty">'+((DB.knowledge||[]).length?'مفيش نتايج':'لسه مفيش خبرات — دوس "➕ خبرة" أو "💡 احفظ كخبرة" من تفاصيل أي تحرك')+'</div>';return;}
+  el.innerHTML=list.map(function(e){
+    var open=!!_kcOpen[e.id];
+    var same=(DB.movements||[]).filter(function(m){return _kcFault(m)===e.fault;}).length;
+    return '<div style="background:#faf5ff;border:1.5px solid #e9d5ff;border-radius:12px;padding:10px 12px;margin-bottom:8px">'+
+      '<div onclick="_kcOpen['+jsStr(e.id)+']=!_kcOpen['+jsStr(e.id)+'];_kcRenderList()" style="cursor:pointer"><div style="display:flex;justify-content:space-between;gap:8px"><div style="font-weight:900;font-size:13.5px">'+(e.kind==='program'?'⚙️ ':'🔧 ')+esc(e.fault)+'</div><span style="color:#94a3b8">'+(open?'▴':'▾')+'</span></div>'+_kcBadges(e)+
+      '<div style="font-size:12.5px;color:#334155;margin-top:5px;white-space:pre-wrap;'+(open?'':'display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden')+'">✅ '+esc(e.solution)+'</div></div>'+
+      (open?_kcExtraHtml(e)+'<div style="margin-top:8px;font-size:11.5px;color:#64748b;display:flex;flex-wrap:wrap;gap:4px 12px">'+(e.family?'<span>🖨️ '+esc(e.family)+'</span>':'<span>🖨️ عام</span>')+(e.parts?'<span>🔩 '+esc(e.parts)+'</span>':'')+'<span>👤 '+esc(e.by_name||'—')+'</span><span>📅 '+esc(fmtDate(e.date||''))+'</span></div>'+
+        '<div style="display:flex;gap:6px;margin-top:9px;flex-wrap:wrap"><button type="button" onclick="_kcOpenDrill(\'fault\','+jsStr(e.fault)+');_kcTab=\'analysis\';_kcRender()" style="'+_kcChip(false,'#0e7490')+'">📊 '+same.toLocaleString('ar-EG')+' تحرك بنفس العطل</button>'+
+        (_kcCanEdit(e)?'<button type="button" onclick="openKnowledgeForm('+jsStr(e.id)+')" style="'+_kcChip(false)+'">✏️ تعديل</button><button type="button" onclick="deleteKnowledge('+jsStr(e.id)+')" style="border:none;background:#fee2e2;color:#dc2626;border-radius:20px;padding:5px 11px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer">🗑️ حذف</button>':'')+'</div>':'')+'</div>';
+  }).join('');
+  _kbHydrate();
+}
+function openKnowledgeFromMovement(id){
+  var m=(DB.movements||[]).find(function(x){return x.id===id;});if(!m)return;
+  openKnowledgeForm(null,{fault:_kcFault(m)==='غير محدد'?'':_kcFault(m),family:_kcFamily(m)==='بدون موديل'?'':_kcFamily(m),parts:(m.parts||[]).map(function(p){return p.name;}).join('، ')});
+  if(!document.getElementById('modal-body'))return;
+}
+function openKnowledgeForm(id,pre){
+  _kcEditId=id||null;
+  var e=id?(DB.knowledge||[]).find(function(x){return x.id===id;}):null;
+  if(id&&(!e||!_kcCanEdit(e)))return showToast('🚫 التعديل لصاحب الخبرة أو المالك','#dc2626');
+  pre=pre||{};
+  var val=function(k){return e?(e[k]||''):(pre[k]||'');};
+  var famNames={};(DB.settings.modelFamilies||[]).forEach(function(f){famNames[f.name]=1;});(DB.movements||[]).forEach(function(m){if(m.device)famNames[_kcFamily(m)]=1;});
+  if(val('family'))famNames[val('family')]=1;
+  var faultNames={};(LS.get('mc8_fault_types',[])||[]).forEach(function(f){faultNames[f]=1;});(DB.movements||[]).forEach(function(m){if(m.fault_type)faultNames[m.fault_type]=1;});
+  document.getElementById('modal-title').textContent=e?'✏️ تعديل خبرة':'💡 خبرة جديدة';
+  document.getElementById('modal-body').innerHTML=
+    '<div class="field"><label>🔧 العطل *</label><input id="kc-fault" type="text" list="kc-fault-list" value="'+esc(val('fault'))+'" placeholder="مثال: فرد ورق / طباعة باهتة"><datalist id="kc-fault-list">'+Object.keys(faultNames).map(function(f){return '<option value="'+esc(f)+'">';}).join('')+'</datalist></div>'+
+    '<div class="field"><label>✅ الحل *</label><textarea id="kc-sol" rows="5" placeholder="اتعمل إيه عشان اتحل؟">'+esc(val('solution'))+'</textarea></div>'+
+    '<div class="field"><label>🖨️ عائلة المكنة</label><select id="kc-fam"><option value="">عام (كل المكن)</option>'+Object.keys(famNames).sort().map(function(f){return '<option value="'+esc(f)+'"'+(val('family')===f?' selected':'')+'>'+esc(f)+'</option>';}).join('')+'</select></div>'+
+    '<div class="field"><label>🔩 القطع المستخدمة (اختياري)</label><input id="kc-parts" type="text" value="'+esc(val('parts'))+'" placeholder="درام، فيوزر..."></div>'+
+    '<details'+((e&&(e.code||e.brand||(e.models||[]).length||e.meaning||e.programs||e.notes||(e.images||[]).length||e.kind==='program'))?' open':'')+' style="margin-bottom:12px;background:#faf5ff;border-radius:12px;padding:8px 12px"><summary style="font-weight:800;color:#6d28d9;cursor:pointer">➕ تفاصيل إضافية (كود / ماركة / برامج / صور)</summary>'+
+    '<div class="field" style="margin-top:8px"><label>📂 النوع</label><select id="kc-kind"><option value="fault"'+(val('kind')!=='program'?' selected':'')+'>🔧 عطل</option><option value="program"'+(val('kind')==='program'?' selected':'')+'>⚙️ برنامج صيانة</option></select></div>'+
+    '<div class="field"><label>🔢 الكود / رقم البرنامج</label><input id="kc-code" type="text" value="'+esc(val('code'))+'" placeholder="مثال: Sc541 / 61.00.00 / 5810" style="direction:ltr"></div>'+
+    '<div class="field"><label>🏷️ الماركة</label><input id="kc-brand" type="text" list="kc-brand-list" value="'+esc(val('brand'))+'" placeholder="ريكو / HP / زيروكس..."><datalist id="kc-brand-list">'+['ريكو','HP','إبسون','زيروكس','كيوسيرا','كونيكا مينولتا','كانون'].map(function(b){return '<option value="'+b+'">';}).join('')+'</datalist></div>'+
+    '<div class="field"><label>🖨️ الموديلات (افصل بينها بفاصلة)</label><input id="kc-models" type="text" value="'+esc((e&&e.models||[]).join('، '))+'" placeholder="Mpc 2500، Mpc 3000" style="direction:ltr"></div>'+
+    '<div class="field"><label>📌 معنى العطل</label><textarea id="kc-meaning" rows="2">'+esc(val('meaning'))+'</textarea></div>'+
+    '<div class="field"><label>⚙️ البرامج المستخدمة</label><input id="kc-programs" type="text" value="'+esc(val('programs'))+'" placeholder="sp5810" style="direction:ltr"></div>'+
+    '<div class="field"><label>📝 ملاحظات</label><textarea id="kc-notes" rows="2">'+esc(val('notes'))+'</textarea></div>'+
+    '<div class="field"><label>🖼️ صور (بتتحفظ على الجهاز ده بس)</label><input type="file" accept="image/*" multiple onchange="_kcPickImgs(this)"><div id="kc-imgs" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"></div></div></details>'+
+    '<div class="modal-actions"><button class="btn btn-outline" onclick="_kcTab=\'kb\';_kcRender()">إلغاء</button><button class="btn btn-primary" onclick="__runOnce(this,saveKnowledge)">💾 حفظ</button></div>';
+  _kcFormOrigImgs=(e&&e.images||[]).slice();_kcFormImgs=_kcFormOrigImgs.slice();_kcFormImgsRender();
+}
+function saveKnowledge(){
+  var fault=v('kc-fault').trim(),sol=v('kc-sol').trim();
+  if(!fault)return showToast('⚠️ اكتب العطل','#dc2626');
+  if(!sol)return showToast('⚠️ اكتب الحل','#dc2626');
+  var prof=window.__currentProfile||{};
+  var rec={fault:fault,solution:sol,family:v('kc-fam')||'',parts:v('kc-parts').trim(),updated_at:new Date().toISOString(),
+    kind:v('kc-kind')||'fault',code:v('kc-code').trim(),brand:v('kc-brand').trim(),models:v('kc-models').split(/[,،\n]/).map(function(x){return x.trim();}).filter(Boolean),
+    meaning:v('kc-meaning').trim(),programs:v('kc-programs').trim(),notes:v('kc-notes').trim(),images:_kcFormImgs.slice()};
+  _kcFormOrigImgs.filter(function(id){return _kcFormImgs.indexOf(id)<0;}).forEach(function(id){setTimeout(function(){if(!_kbImgUsed(id))kbImgDel(id);},400);}); // مسح الصور اللي اتشالت (لو مش مستخدمة في خبرة تانية)
+  DB.knowledge=DB.knowledge||[];
+  if(_kcEditId){
+    var ex=DB.knowledge.find(function(x){return x.id===_kcEditId;});
+    if(!ex||!_kcCanEdit(ex))return showToast('🚫 التعديل لصاحب الخبرة أو المالك','#dc2626');
+    DB.knowledge=patchRow(DB.knowledge,_kcEditId,rec);
+  }else{
+    DB.knowledge=DB.knowledge.concat([Object.assign({id:genId(),by:prof.id||null,by_name:prof.full_name||'',date:today()},rec)]);
+  }
+  persist();
+  _kcEditId=null;_kcTab='kb';_kcDetail=null;_kcRender();
+  showToast('✅ اتحفظت الخبرة','#16a34a');
+}
+function deleteKnowledge(id){
+  var e=(DB.knowledge||[]).find(function(x){return x.id===id;});if(!e)return;
+  if(!_kcCanEdit(e))return showToast('🚫 الحذف لصاحب الخبرة أو المالك','#dc2626');
+  confirmAction('تمسح الخبرة دي؟ (صورها على الجهاز بتتمسح معاها)',function(){var _im=(e.images||[]).slice();DB.knowledge=removeRow(DB.knowledge,id);persist();_im.forEach(function(x){if(!_kbImgUsed(x))kbImgDel(x);});_kcDetail=null;_kcTab='kb';_kcRender();});
+}
 function salesCost(list){return money((list||[]).reduce(function(t,sale){return t+saleCost(sale);},0));} // تكلفة بضاعة مجموعة فواتير
 // ⚠️ v202 — الكميات الكسرية: roundQty بتتحط حوالين أي عملية جمع/طرح على qty عشان تمنع
 // أخطاء الفاصلة العشرية المتراكمة (زي 0.1+0.2 اللي بتطلع 0.30000000000000004 في JS)،
@@ -6470,16 +7022,12 @@ function renderGlobalSearch(){
   var from=_gsPeriod.from||null,to=_gsPeriod.to||null;
   DB.clients.forEach(function(c){
     if(normalizeAr(c.name).includes(qn)){
-      var diff=_customerCounterDiff(c.name,from,to);
+      var _ds=_customerCounterDiffBySerial(c.name,from,to);
       var counterSub='';
-      if(diff){
+      if(_ds.length){
         var periodLabel=(from||to)?'خلال الفترة المحددة':'من أول تعامل';
-        counterSub='<div style="background:#eff6ff;border-radius:8px;padding:6px 9px;margin-top:6px;font-size:11px;color:#1e40af">'+
-          '📊 فرق العداد ('+periodLabel+'): '+
-          (diff.blackDiff!=null?'⚫ '+diff.blackDiff+' ورقة':'')+
-          (diff.colorDiff!=null?(diff.blackDiff!=null?' — ':'')+'🌈 '+diff.colorDiff+' ورقة':'')+
-          '<div style="color:#64748b;margin-top:2px">من '+fmtDate(diff.first.date)+' إلى '+fmtDate(diff.last.date)+'</div>'+
-          '</div>';
+        counterSub='<div style="background:#eff6ff;border-radius:8px;padding:6px 9px;margin-top:6px;font-size:11px;color:#1e40af">📊 فرق العداد ('+periodLabel+') — كل ماكينة لوحدها'+
+          _ds.map(function(cd){return '<div style="margin-top:3px"><b>'+esc(cd.serial)+'</b>: '+(cd.reset?'⚠️ العداد رجع لورا':(cd.blackDiff!=null?'⚫ '+cd.blackDiff:'')+(cd.colorDiff!=null?(cd.blackDiff!=null?' — ':'')+'🌈 '+cd.colorDiff:''))+' ورقة <span style="color:#64748b">('+esc(fmtDate(cd.first.date))+' ← '+esc(fmtDate(cd.last.date))+')</span></div>';}).join('')+'</div>';
       }
       results.push({icon:'📊',label:'تقرير عميل',title:esc(c.name),sub:'عرض التقرير الشامل (فواتير، صيانة، ديون)'+counterSub,action:'openLedger(decodeURIComponent(\''+encodeURIComponent(c.name)+'\'))'});
     }
@@ -9556,7 +10104,9 @@ function _customerCounterDiffBySerial(customerName,fromDate,toDate){
     if(blackDiff==null&&colorDiff==null)return;
     var daysCount=null;
     if(first.date&&last.date){var d1=new Date(first.date),d2=new Date(last.date);daysCount=Math.round((d2-d1)/86400000);}
-    results.push({serial:serial,first:first,last:last,blackDiff:blackDiff,colorDiff:colorDiff,daysCount:daysCount});
+    // v279 — لو القراءة الأخيرة أقل من الأولى (تغيير عداد/تصفير) مينفعش نعرضها كفرق سالب
+    var _rst=(blackDiff!=null&&blackDiff<0)||(colorDiff!=null&&colorDiff<0);
+    results.push({serial:serial,first:first,last:last,blackDiff:blackDiff,colorDiff:colorDiff,daysCount:daysCount,reset:_rst});
   });
   return results;
 }
@@ -9699,6 +10249,8 @@ function renderLedger(customerName){
 
   // فرق العداد — عداد أول قراءة، عداد آخر قراءة، الفرق = الاستهلاك الفعلي، وعدد الأيام
   var isManualCounter=!!(manualFromId&&manualToId);
+  var _showAggCounter=(isManualCounter||!counterDiffBySerial.length);
+  if(_showAggCounter){
   content+='<div class="card" style="margin-bottom:12px;background:#eff6ff;border-color:#bfdbfe">'+
     '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">'+
     '<span style="font-weight:800;font-size:13px;color:#1e40af">📊 فرق العداد</span>'+
@@ -9737,17 +10289,20 @@ function renderLedger(customerName){
       })()
     :'<div style="font-size:12px;color:#94a3b8;text-align:center;padding:6px 0">مفيش كفاية قراءات عداد لحساب الفرق'+(isManualCounter?' — القراءتين المختارتين لازم يكون عندهم عداد':'')+'</div>')+
     '</div>';
+  }
 
   // فرق العداد لكل سيريال لوحده — يظهر فقط لو العميل عنده أكتر من ماكينة (سيريال) مسجلة
-  if(counterDiffBySerial.length>1){
-    content+='<div class="card" style="margin-bottom:12px">'+
-      '<div style="font-weight:800;font-size:13px;margin-bottom:8px;color:#374151">🖨️ فرق العداد لكل ماكينة لوحدها ('+counterDiffBySerial.length+')</div>'+
+  if(counterDiffBySerial.length>=1&&!isManualCounter){
+    content+='<div class="card" style="margin-bottom:12px;background:#eff6ff;border-color:#bfdbfe">'+
+      '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span style="font-weight:800;font-size:13px;color:#1e40af">🖨️ فرق العداد — كل ماكينة لوحدها ('+counterDiffBySerial.length+')</span>'+
+      '<button onclick="openCounterManualPick('+jsStr(customerName)+')" style="background:#fff;color:#1e40af;border:1.5px solid #1e40af;border-radius:7px;padding:4px 9px;font-family:inherit;font-size:10px;font-weight:700;cursor:pointer">✋ اختيار يدوي</button></div>'+
       counterDiffBySerial.map(function(cd){
         return '<div style="background:#f8fafc;border-radius:9px;padding:9px 11px;margin-bottom:6px">'+
           '<div style="font-size:12px;font-weight:800;color:#1e40af;margin-bottom:4px">🔢 '+esc(cd.serial)+'</div>'+
           '<div style="display:flex;gap:14px;font-size:12px;margin-bottom:3px">'+
-          (cd.blackDiff!=null?'<span>⚫ <b>'+cd.blackDiff+'</b> ورقة</span>':'')+
-          (cd.colorDiff!=null?'<span>🌈 <b>'+cd.colorDiff+'</b> ورقة</span>':'')+
+          (cd.reset?'<span style="color:#dc2626;font-weight:800">⚠️ العداد رجع لورا (تغيير أو تصفير) — اختار قراءتين يدويًا</span>':
+          (cd.blackDiff!=null?'<span>⚫ <b>'+cd.blackDiff+'</b> ورقة <span style="color:#94a3b8;font-size:10px">('+cd.first.counter+' ← '+cd.last.counter+')</span></span>':'')+
+          (cd.colorDiff!=null?'<span>🌈 <b>'+cd.colorDiff+'</b> ورقة <span style="color:#94a3b8;font-size:10px">('+cd.first.color+' ← '+cd.last.color+')</span></span>':''))+
           '</div>'+
           '<div style="font-size:10px;color:#94a3b8">من '+esc(fmtDate(cd.first.date))+' إلى '+esc(fmtDate(cd.last.date))+
           (cd.daysCount!=null?' — '+cd.daysCount+' يوم':'')+'</div>'+
@@ -10474,7 +11029,7 @@ function _supplierGroupCard(g){
           '<div style="font-size:11px;color:#94a3b8">'+esc(fmtDate(p.date))+'</div>'+
           '<div style="display:flex;gap:5px">'+
           '<button class="btn-ic" style="background:#ede9fe;padding:4px 7px" onclick="openPurchaseModal(\''+p.id+'\')">✏️</button>'+
-          '<button class="btn-ic" style="background:#fee2e2;padding:4px 7px" onclick="confirmAction(\'هتحذف المشترى ده؟\',function(){delItem(\'purchases\',\''+p.id+'\',renderPurchases)})">🗑️</button>'+
+          '<button class="btn-ic" style="background:#fee2e2;padding:4px 7px" onclick="delPurchaseAsk(\''+p.id+'\')">🗑️</button>'+
           '</div></div>'+
           (__hItems?'':'<div style="font-size:12px;color:#374151;margin-bottom:5px">'+(p.items||[]).map(function(i){return esc(i.name)+' ×'+i.qty;}).join(' | ')+'</div>')+
           (p.extra_cost&&!__hExtra?'<div style="font-size:11px;color:#ea580c;margin-bottom:4px">📦 تكاليف إضافية: '+fmt(p.extra_cost)+'</div>':'')+
@@ -10495,6 +11050,61 @@ function togglePurchGroup(key){
 // ===== فتح مشترى =====
 var _purchId=null,_purchItems=[];
 var _purchQtyEditSnapshot=null; // ⚠️ v205 — لقطة لحقول المشترى (مورد/مدفوع/تكاليف إضافية) قبل فتح خانة الكمية الكسرية، زي نفس أسلوب onExtraCostChange
+
+// ===== v277 — حذف مشترى: يسأل عن تسوية المنتجات المسجلة (المخزون) والدين المرتبط =====
+function _purchStockPlan(p){
+  var plan=[];
+  (p.items||[]).forEach(function(it){
+    if(it.productId&&it.productId!=='__new__'){
+      var pr=DB.products.find(function(x){return x.id===it.productId;});
+      if(pr)plan.push({prod:pr,qty:it.qty,isNew:!!it.newProduct});
+    }else if(it.addToStock){
+      var nn=normalizeAr(it.name||'');
+      var pr2=DB.products.find(function(x){return x.source==='purchase'&&normalizeAr(x.name||'')===nn;});
+      if(pr2)plan.push({prod:pr2,qty:it.qty,isNew:true});
+    }
+  });
+  return plan;
+}
+function delPurchaseAsk(id){
+  var p=DB.purchases.find(function(x){return x.id===id;});if(!p)return;
+  var plan=_purchStockPlan(p);
+  var debt=DB.debts.find(function(d){return d.type==='supplier'&&d.source_purchase_id===id;});
+  var rows=plan.map(function(r){
+    var left=roundQty((r.prod.qty||0)-r.qty);
+    return '<div style="display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid #f1f5f9;font-size:13px"><span>'+esc(r.prod.name)+'</span><b style="color:'+(left<=0&&r.isNew?'#dc2626':'#7c3aed')+'">'+(left<=0&&r.isNew?'هيتمسح من المخزون':'-'+fmtQty(r.qty)+' ← '+fmtQty(Math.max(0,left)))+'</b></div>';
+  }).join('');
+  document.getElementById('modal-title').textContent='🗑️ حذف المشترى';
+  document.getElementById('modal-body').innerHTML=
+    '<div style="font-size:13px;margin-bottom:10px">مشترى <b>'+esc(p.supplier||'')+'</b> — '+fmtDate(p.date)+'</div>'+
+    (plan.length?'<div style="font-size:12px;font-weight:800;color:#475569;margin-bottom:4px">📦 المنتجات المسجلة من المشترى ده:</div><div style="margin-bottom:10px">'+rows+'</div>':'<div style="font-size:12px;color:#94a3b8;margin-bottom:10px">مفيش منتجات مخزون مربوطة بالمشترى ده.</div>')+
+    (debt?'<label style="display:flex;align-items:center;gap:7px;font-size:13px;margin-bottom:12px"><input type="checkbox" id="delp-debt" '+((debt.paid||0)>0?'':'checked')+'> حذف دين المورد المرتبط ('+fmt(debt.total)+(debt.paid>0?' — مدفوع منه '+fmt(debt.paid):'')+')</label>':'')+
+    '<div class="modal-actions" style="flex-direction:column;gap:8px">'+
+    (plan.length?'<button class="btn btn-red btn-full" onclick="__runOnce(this,function(){return delPurchaseExec(\''+id+'\',true)})">حذف المشترى + تسوية المخزون</button>':'')+
+    '<button class="btn btn-outline btn-full" style="color:#dc2626;border-color:#fca5a5" onclick="__runOnce(this,function(){return delPurchaseExec(\''+id+'\',false)})">حذف المشترى فقط (المخزون زي ما هو)</button>'+
+    '<button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
+  openModal();
+}
+async function delPurchaseExec(id,fixStock){
+  var p=DB.purchases.find(function(x){return x.id===id;});if(!p)return;
+  if(!__hasPerm('purchases','can_delete'))return showToast('🚫 مفيش صلاحية حذف مشتريات. كلم المالك.','#dc2626');
+  if(_blockIfClosedMonth(p.date))return;
+  if(fixStock){
+    var plan=_purchStockPlan(p);
+    for(var i=0;i<plan.length;i++){
+      var r=plan[i],left=roundQty((r.prod.qty||0)-r.qty);
+      if(r.isNew&&left<=0){DB.products=DB.products.filter(function(x){return x.id!==r.prod.id;});await dbDelete('products',r.prod.id,r.prod);}
+      else{DB.products=patchRow(DB.products,r.prod.id,{qty:Math.max(0,left)});await dbUpdate('products',r.prod.id,{qty:Math.max(0,left)});}
+    }
+  }
+  var cb=document.getElementById('delp-debt');
+  if(cb&&cb.checked){
+    var d=DB.debts.find(function(x){return x.type==='supplier'&&x.source_purchase_id===id;});
+    if(d){DB.debts=DB.debts.filter(function(x){return x.id!==d.id;});await dbDelete('debts',d.id,d);}
+  }
+  closeModal();
+  await delItem('purchases',id,renderPurchases);
+}
 
 function openPurchaseModal(id){
   _purchId=id||null;
@@ -10563,16 +11173,26 @@ function renderPurchBody(p){
           '<button onclick="chgPurchQty('+i+',-1)" style="background:#fee2e2;border:none;border-radius:6px;width:26px;height:26px;cursor:pointer;font-size:14px;font-weight:900;color:#dc2626">−</button>'+
           '<span onclick="editPurchItemQtyPrompt('+i+')" style="font-weight:900;font-size:14px;min-width:22px;text-align:center;cursor:pointer;text-decoration:underline dotted" title="دوس لتحديد كمية كسرية">'+fmtQty(it.qty)+'</span>'+
           '<button onclick="chgPurchQty('+i+',1)" style="background:#dcfce7;border:none;border-radius:6px;width:26px;height:26px;cursor:pointer;font-size:14px;font-weight:900;color:#16a34a">+</button>'+
-          '<input type="number" step="any" id="pi-price-'+i+'" value="'+it.price+'" style="width:65px;padding:4px 6px;border:2px solid #e2e8f0;border-radius:7px;font-size:13px;font-family:inherit;text-align:center" oninput="updPurchPrice('+i+',this.value)">'+
+          '<input type="number" step="any" id="pi-price-'+i+'" value="'+it.price+'" style="width:65px;padding:4px 6px;border:2px solid #e2e8f0;border-radius:7px;font-size:13px;font-family:inherit;text-align:center" oninput="updPurchPrice('+i+',this.value)" onchange="refreshPurchKeep()">'+
           '<button onclick="rmPurchItem('+i+')" style="background:#fee2e2;border:none;border-radius:6px;padding:2px 6px;cursor:pointer;font-size:11px;color:#dc2626">✕</button>'+
           '</div>'+
+          (function(){
+            var _ep=(!isNew&&it.productId&&it.productId!=='__new__')?DB.products.find(function(pp){return pp.id===it.productId;}):null;
+            var _sv=it.sellPrice!==undefined?it.sellPrice:(_ep?(_ep.sell_price||0):0);
+            var _wv=it.wholesalePrice!==undefined?it.wholesalePrice:(_ep?(_ep.wholesale_price||0):0);
+            var _st='min-width:0;padding:5px 6px;border:2px solid #e2e8f0;border-radius:7px;font-size:12px;font-family:inherit;text-align:center;background:#fff;width:100%';
+            return '<div style="width:100%;display:flex;gap:6px;margin-top:5px">'+
+              '<label style="flex:1;font-size:10px;color:#16a34a;font-weight:700">🏷️ سعر البيع<input type="number" step="any" value="'+(_sv||'')+'" placeholder="بدون تغيير" oninput="setPurchItemSell('+i+',this.value)" style="'+_st+';border-color:#bbf7d0"></label>'+
+              '<label style="flex:1;font-size:10px;color:#b45309;font-weight:700">📦 سعر الجملة<input type="number" step="any" value="'+(_wv||'')+'" placeholder="بدون تغيير" oninput="setPurchItemWholesale('+i+',this.value)" style="'+_st+';border-color:#fde68a"></label>'+
+              '</div>';
+          })()+
           (extraCost>0?'<div style="width:100%;font-size:10px;color:#ea580c;margin-top:3px">💰 الحقيقي: '+it.price+' ج ← بعد التكاليف: <b>'+Math.round(landedPrice)+' ج</b></div>':'')+
           avgNote+
           '</div>';
       }).join('')+
-      '<div class="total-row"><span>إجمالي القطع</span><span style="color:#7c3aed">'+fmt(subtotal)+'</span></div>'+
+      '<div class="total-row"><span>إجمالي القطع</span><span id="pt-sub" style="color:#7c3aed">'+fmt(subtotal)+'</span></div>'+
       (extraCost>0?'<div class="total-row" style="color:#ea580c;font-size:13px"><span>+ تكاليف إضافية</span><span>'+fmt(extraCost)+'</span></div>'+
-        '<div class="total-row" style="border-top:1.5px solid #e2e8f0;padding-top:6px"><span>الإجمالي الكلي</span><span style="color:#0f172a">'+fmt(grandTotal)+'</span></div>':'')+
+        '<div class="total-row" style="border-top:1.5px solid #e2e8f0;padding-top:6px"><span>الإجمالي الكلي</span><span id="pt-grand" style="color:#0f172a">'+fmt(grandTotal)+'</span></div>':'')+
       '</div>';
   }
 
@@ -10643,6 +11263,9 @@ function filterPurchProds(){
       '<div style="margin-bottom:7px">'+
       '<input id="new-prod-sell" type="number" step="any" placeholder="سعر البيع ج (اختياري)" style="width:100%;padding:9px 8px;border:2px solid #bbf7d0;border-radius:9px;font-size:13px;font-family:inherit;background:#fff;outline:none;text-align:center">'+
       '</div>'+
+      '<div style="margin-bottom:7px">'+
+      '<input id="new-prod-wholesale" type="number" step="any" placeholder="سعر الجملة ج (اختياري)" style="width:100%;padding:9px 8px;border:2px solid #fde68a;border-radius:9px;font-size:13px;font-family:inherit;background:#fff;outline:none;text-align:center">'+
+      '</div>'+
       // ⚠️ v203 — تفاصيل إضافية اختيارية (الحالة/الشركة/النوع التقني) لو عايز تحددها من هنا
       // بدل ما تضطر تروح تعدّل المنتج من المخزون بعد كده. لو سبتها فاضية، المنتج بيتحفظ
       // "قطعة غيار / جديد" زي الافتراضي القديم بالظبط — مفيش تغيير في السلوك القديم.
@@ -10694,12 +11317,13 @@ function addNewProdToPurch(addToStock){
   var price=+v('new-prod-price')||0;
   var qty=+v('new-prod-qty')||1;
   var sellPrice=+v('new-prod-sell')||0;
+  var wholesalePrice=+v('new-prod-wholesale')||0;
   var unit=v('new-prod-unit')||'';
   var company=v('new-prod-company')||'';
   var techType=v('new-prod-tech-type')||'';
   if(!name)return showToast('⚠️ اكتب اسم المنتج','#dc2626');
   if(!price)return showToast('⚠️ اكتب السعر','#dc2626');
-  _purchItems.push({productId:addToStock?'__new__':'',name:name,qty:qty,price:price,sellPrice:sellPrice,addToStock:addToStock,newUnit:unit,newCompany:company,newTechType:techType});
+  _purchItems.push({productId:addToStock?'__new__':'',name:name,qty:qty,price:price,sellPrice:sellPrice,wholesalePrice:wholesalePrice,addToStock:addToStock,newUnit:unit,newCompany:company,newTechType:techType});
   var st=_purchSaveState();
   var pur=_purchId?DB.purchases.find(function(x){return x.id===_purchId;}):null;
   _purchRestoreState(st,pur);
@@ -10766,14 +11390,18 @@ function rmPurchItem(idx){
   _purchRestoreState(st,pur);
 }
 function updPurchPrice(idx,val){
+  // v277 — تحديث لايف للإجمالي بدون إعادة رسم (إعادة الرسم كانت بتمسح خانتي المورد والمدفوع وبتقفل الكيبورد)
   _purchItems[idx].price=+val||0;
-  // إعادة رسم بسيطة لتحديث ملحوظة المتوسط المرجّح لايف، مع الحفاظ على التركيز والمؤشر بالحقل
-  var el=document.getElementById('pi-price-'+idx);
-  var selStart=el?el.selectionStart:null;
-  renderPurchBody(_purchId?DB.purchases.find(function(x){return x.id===_purchId;}):null);
-  var el2=document.getElementById('pi-price-'+idx);
-  if(el2){el2.focus();if(selStart!==null)try{el2.setSelectionRange(selStart,selStart);}catch(e){}}
+  var sub=purchItemsSubtotal(_purchItems),ex=+v('purch-extra-cost')||0;
+  var e1=document.getElementById('pt-sub');if(e1)e1.textContent=fmt(sub);
+  var e2=document.getElementById('pt-grand');if(e2)e2.textContent=fmt(sub+ex);
 }
+function refreshPurchKeep(){ // v277 — عند الخروج من الخانة: رسم كامل مع الحفاظ على باقي الخانات
+  var st=_purchSaveState();
+  _purchRestoreState(st,_purchId?DB.purchases.find(function(x){return x.id===_purchId;}):null);
+}
+function setPurchItemSell(idx,val){_purchItems[idx].sellPrice=+val||0;}
+function setPurchItemWholesale(idx,val){_purchItems[idx].wholesalePrice=+val||0;}
 
 async function savePurchase(){
   if(!__hasPerm('purchases', _purchId?'can_update':'can_insert')){
@@ -10837,6 +11465,17 @@ async function savePurchase(){
         await dbUpdate('products',pid2,{qty:newQty2});
       }
     }
+    // v279 — صنف جديد اتضاف أثناء تعديل مشترى قديم كان بيتحفظ في المشترى من غير ما يتسجّل في المخزون
+    var _oldNew=((oldP&&oldP.items)||[]).filter(function(x){return x.productId==='__new__';}).map(function(x){return normalizeAr(x.name||'');});
+    for(var _ni=0;_ni<_purchItems.length;_ni++){
+      var _it=_purchItems[_ni];
+      if(_it.productId==='__new__'&&_it.addToStock&&_oldNew.indexOf(normalizeAr(_it.name||''))<0){
+        var _lc=Math.round((_it.price+perUnitExtra)*100)/100;
+        var _np={id:genId(),name:_it.name,unit:_it.newUnit||'جديد',category:'parts',company:_it.newCompany||'',tech_type:_it.newTechType||'',qty:roundQty(_it.qty),min_qty:0,buy_price:_it.price,landed_cost:_lc,sell_price:_it.sellPrice>0?_it.sellPrice:_it.price,wholesale_price:_it.wholesalePrice>0?_it.wholesalePrice:0,created_at:today(),source:'purchase'};
+        DB.products.push(_np);await dbUpsert('products',_np);addArchive('products',_it.name);
+        _it.productId=_np.id;_it.newProduct=true;
+      }
+    }
     DB.purchases=patchRow(DB.purchases,_purchId,obj);
     await dbUpdate('purchases',_purchId,obj);
 
@@ -10890,16 +11529,21 @@ async function savePurchase(){
           var oldLanded=prod.landed_cost||oldBuy;
           var avgBuy=newQty>0?Math.round(((oldQty*oldBuy+item.qty*item.price)/newQty)*100)/100:item.price;
           var avgLanded=newQty>0?Math.round(((oldQty*oldLanded+item.qty*landedCost)/newQty)*100)/100:landedCost;
-          DB.products=patchRow(DB.products,item.productId,{qty:newQty,buy_price:avgBuy,landed_cost:avgLanded});
-          await dbUpdate('products',item.productId,{qty:newQty,buy_price:avgBuy,landed_cost:avgLanded});
+          var _pu={qty:newQty,buy_price:avgBuy,landed_cost:avgLanded};
+          if(item.sellPrice>0&&item.sellPrice!==prod.sell_price)_pu.sell_price=item.sellPrice; // v277
+          if(item.wholesalePrice!==undefined&&item.wholesalePrice!==(prod.wholesale_price||0))_pu.wholesale_price=item.wholesalePrice;
+          DB.products=patchRow(DB.products,item.productId,_pu);
+          await dbUpdate('products',item.productId,_pu);
         }
       }else if(item.addToStock){
-        var newProd={id:genId(),name:item.name,unit:item.newUnit||'جديد',category:'parts',company:item.newCompany||'',tech_type:item.newTechType||'',qty:roundQty(item.qty),min_qty:0,buy_price:item.price,landed_cost:landedCost,sell_price:item.sellPrice>0?item.sellPrice:item.price,created_at:today(),source:'purchase'};
+        var newProd={id:genId(),name:item.name,unit:item.newUnit||'جديد',category:'parts',company:item.newCompany||'',tech_type:item.newTechType||'',qty:roundQty(item.qty),min_qty:0,buy_price:item.price,landed_cost:landedCost,sell_price:item.sellPrice>0?item.sellPrice:item.price,wholesale_price:item.wholesalePrice>0?item.wholesalePrice:0,created_at:today(),source:'purchase'};
         DB.products.push(newProd);
         await dbUpsert('products',newProd);
         addArchive('products',item.name);
+        item.productId=newProd.id;item.newProduct=true; // v279 — ربط البند بالمنتج (عشان التعديل والحذف يعرفوه)
       }
     }
+    try{await dbUpdate('purchases',obj.id,{items:obj.items});}catch(e){}
     if(!isPaidUp(paid,grandTotal)){ // v267/v268 — سماحية نص قرش
       var debtAmount=Math.round((grandTotal-paid)*100)/100;
       var debt={id:genId(),type:'supplier',name:supplier,supplier_id:supObj?supObj.id:null,source_purchase_id:obj.id,
@@ -15896,6 +16540,7 @@ function renderMovementsReport(){
 async function resetMovCounter(){
   confirmAction('هتصفّر عداد الأعطال؟',async function(){
     DB.movCounter=0;await persist();
+    try{renderSettings();}catch(e){} // v278 — الرقم الحالي كان بيفضل قديم على الشاشة بعد التصفير
     showToast('✅ تم التصفير — التالي هيبدأ من #1','#16a34a');
   });
 }
@@ -21042,6 +21687,10 @@ function importBackup(input){
         if(data.scheduled_carried)DB.scheduled_carried=data.scheduled_carried;
         if(data.investors)DB.investors=data.investors;
         if(data.inv_batches)DB.inv_batches=data.inv_batches;
+        if(data.work_rules)DB.work_rules=data.work_rules;
+        if(data.rules_acks)DB.rules_acks=data.rules_acks;
+        if(data.goals)DB.goals=data.goals;
+        if(data.knowledge)DB.knowledge=data.knowledge;
         if(data.daily_archive)DB.daily_archive=data.daily_archive;
         if(data.stocktakes)DB.stocktakes=data.stocktakes;
         persist().then(function(){
@@ -21079,7 +21728,7 @@ async function clearAllData(){
   DB.inventory_snapshots=[];
   DB.scheduled_list=[];
   DB.scheduled_map={};
-  DB.scheduled_carried={};DB.investors=[];DB.inv_batches=[];
+  DB.scheduled_carried={};DB.investors=[];DB.inv_batches=[];DB.knowledge=[];DB.work_rules=[];DB.rules_acks=[];DB.goals=[];
   DB.daily_archive=[];
   DB.stocktakes=[];
   await persist();renderHome();navigate('home');
@@ -21450,6 +22099,313 @@ if(!DB.scrap_machines) DB.scrap_machines=[];
 // المتبقي من سعر شراء الماكينة الذي لم يتم "استرداده" بعد عبر تكلفة القطع المستخرجة سابقاً.
 // أي قطعة جديدة تُستخرج بعد استرداد كامل سعر الماكينة → تكلفتها صفر = ربح صافي كامل.
 var _extractedPartsFilter='all'; // all | used | unused
+// ===== v278 — قايمة قطع الغيار المطلوبة (ناقصة عن الحد الأدنى + مطلوبة للتحركات المفتوحة) =====
+var _npFilter='all',_npQ='';
+function _neededParts(){
+  var rows={},openMovs=(DB.movements||[]).filter(function(m){return m.status!=='منتهي'&&m.status!=='ملغي';});
+  function row(key,name,prod){
+    if(!rows[key])rows[key]={key:key,name:name,prod:prod||null,stock:prod?(prod.qty||0):0,min:prod?(prod.min_qty||0):0,buy:prod?(prod.landed_cost||prod.buy_price||0):0,needMov:0,movs:[],low:false};
+    return rows[key];
+  }
+  (DB.products||[]).forEach(function(p){
+    if(p.category==='machine')return;
+    if((p.min_qty||0)>0&&(p.qty||0)<=p.min_qty){var r=row(p.id,p.name,p);r.low=true;}
+  });
+  openMovs.forEach(function(m){
+    (m.est_parts||[]).forEach(function(x){
+      var prod=x.productId?(DB.products||[]).find(function(p){return p.id===x.productId;}):null;
+      var key=prod?prod.id:'n:'+normalizeAr(x.name||'');
+      if(!prod&&!x.name)return;
+      var r=row(key,prod?prod.name:x.name,prod);
+      r.needMov=roundQty(r.needMov+(x.qty||1));
+      r.movs.push({cust:m.customer||'',date:m.opened_at,qty:x.qty||1});
+    });
+  });
+  var out=[];
+  Object.keys(rows).forEach(function(k){
+    var r=rows[k];
+    r.shortMov=Math.max(0,roundQty(r.needMov-r.stock));
+    r.forMov=r.shortMov>0;
+    if(!r.low&&!r.forMov)return; // مطلوب للتحرك بس مخزونه كفاية = مش ناقص
+    r.toBuy=Math.max(1,roundQty(Math.max(r.min,r.needMov)-r.stock));
+    r.cost=money(r.toBuy*r.buy);
+    out.push(r);
+  });
+  out.sort(function(a,b){return (a.stock-b.stock)||a.name.localeCompare(b.name,'ar');});
+  return out;
+}
+function openNeededParts(){
+  document.getElementById('modal-title').textContent='🧰 قطع الغيار المطلوبة';
+  _npFilter='all';_npQ='';
+  document.getElementById('modal-body').innerHTML='<div id="np-box"></div>';
+  openModal();renderNeededParts();
+}
+function _npSet(f){_npFilter=f;renderNeededParts();}
+function _npSearch(val){_npQ=val;_npList();}
+function _npCurrent(){
+  var all=_neededParts(),qn=normalizeAr(_npQ||'');
+  return all.filter(function(r){
+    if(_npFilter==='low'&&!r.low)return false;
+    if(_npFilter==='mov'&&!r.forMov)return false;
+    return !qn||normalizeAr(r.name).includes(qn);
+  });
+}
+function _npList(){
+  var el=document.getElementById('np-list');if(!el)return;
+  var list=_npCurrent();
+  var total=money(list.reduce(function(s,r){return s+r.cost;},0));
+  el.innerHTML=(list.length?list.map(function(r,i){
+    var tags=(r.low?'<span style="background:#fee2e2;color:#dc2626;border-radius:6px;padding:1px 7px;font-size:10px;font-weight:800">⚠️ تحت الحد ('+fmtQty(r.min)+')</span> ':'')+
+      (r.forMov?'<span style="background:#dbeafe;color:#1e40af;border-radius:6px;padding:1px 7px;font-size:10px;font-weight:800">🔧 مطلوب للتحركات ×'+fmtQty(r.needMov)+'</span> ':'')+
+      (!r.prod?'<span style="background:#fef9c3;color:#ca8a04;border-radius:6px;padding:1px 7px;font-size:10px;font-weight:800">غير مسجّل في المخزون</span>':'');
+    var movLine=r.movs.length?'<div style="font-size:11px;color:#64748b;margin-top:4px">'+r.movs.slice(0,3).map(function(m){return esc(m.cust)+' ('+fmtDate(m.date)+') ×'+fmtQty(m.qty);}).join(' · ')+(r.movs.length>3?' …':'')+'</div>':'';
+    return '<div onclick="_npOpen('+i+')" style="background:#fff;border-radius:12px;padding:10px 12px;margin-bottom:8px;box-shadow:0 1px 6px rgba(0,0,0,.07);cursor:pointer;border-right:4px solid '+(r.low?'#dc2626':'#2563eb')+'">'+
+      '<div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start"><div style="font-weight:900;font-size:14px;color:#0f172a">'+esc(r.name)+'</div>'+
+      '<div style="text-align:center;background:#f5f3ff;border-radius:9px;padding:3px 9px"><div style="font-size:9px;color:#7c3aed;font-weight:700">اشتري</div><div style="font-size:15px;font-weight:900;color:#7c3aed">'+fmtQty(r.toBuy)+'</div></div></div>'+
+      '<div style="font-size:12px;color:#64748b;margin:3px 0 5px">المتاح: <b style="color:'+(r.stock<=0?'#dc2626':'#0f172a')+'">'+fmtQty(r.stock)+'</b>'+(r.buy?' — آخر تكلفة '+fmt(r.buy)+' ج — تقريبًا '+fmt(r.cost)+' ج':'')+'</div>'+tags+movLine+'</div>';
+  }).join(''):'<div class="empty">'+(_npQ?'مفيش نتيجة للبحث':'✅ مفيش قطع ناقصة أو مطلوبة دلوقتي')+'</div>')+
+  (list.length?'<div style="background:#f5f3ff;border-radius:10px;padding:9px 12px;text-align:center;font-size:13px;font-weight:800;color:#5b21b6;margin-top:4px">'+list.length+' صنف — تكلفة تقريبية '+fmt(total)+' ج</div>':'');
+}
+function renderNeededParts(){
+  var box=document.getElementById('np-box');if(!box)return;
+  var all=_neededParts(),nLow=all.filter(function(r){return r.low;}).length,nMov=all.filter(function(r){return r.forMov;}).length;
+  function card(f,label,n,c,bg){var on=_npFilter===f;return '<div onclick="_npSet(\''+f+'\')" style="flex:1;background:'+(on?c:bg)+';border-radius:11px;padding:8px 4px;text-align:center;cursor:pointer;border:2px solid '+(on?c:'transparent')+'"><div style="font-size:10px;font-weight:700;color:'+(on?'#fff':c)+'">'+label+'</div><div style="font-size:17px;font-weight:900;color:'+(on?'#fff':c)+'">'+n+'</div></div>';}
+  box.innerHTML='<div style="display:flex;gap:6px;margin-bottom:10px">'+card('all','الكل',all.length,'#7c3aed','#f5f3ff')+card('low','تحت الحد',nLow,'#dc2626','#fee2e2')+card('mov','للتحركات',nMov,'#1e40af','#dbeafe')+'</div>'+
+    '<input id="np-q" type="search" value="'+esc(_npQ)+'" placeholder="🔍 ابحث في القايمة..." oninput="_npSearch(this.value)" style="width:100%;padding:9px 12px;border:2px solid #e2e8f0;border-radius:10px;font-family:inherit;font-size:13px;margin-bottom:10px">'+
+    '<div id="np-list"></div>'+
+    '<div class="modal-actions" style="margin-top:10px"><button class="btn btn-green btn-full" onclick="_npCopy()">📋 نسخ القايمة (للواتساب)</button><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+  _npList();
+}
+function _npOpen(i){
+  var r=_npCurrent()[i];if(!r)return;
+  if(r.prod){closeModal();setTimeout(function(){openProductModal(r.prod.id);},50);}
+  else showToast('القطعة دي مش مسجّلة في المخزون — تتسجل أول ما تشتريها','#64748b');
+}
+function _npCopy(){
+  var list=_npCurrent();if(!list.length)return showToast('القايمة فاضية','#64748b');
+  var txt='🧰 قطع الغيار المطلوبة — '+fmtDate(today())+'\n'+list.map(function(r,k){return (k+1)+'. '+r.name+' × '+fmtQty(r.toBuy)+' (المتاح '+fmtQty(r.stock)+')';}).join('\n');
+  try{navigator.clipboard.writeText(txt).then(function(){showToast('✅ اتنسخت القايمة','#16a34a');},function(){showToast('⚠️ مقدرتش أنسخ','#dc2626');});}catch(e){showToast('⚠️ مقدرتش أنسخ','#dc2626');}
+}
+
+// ===== v280 — قواعد وقوانين العمل: المالك يعدّل، الموظف يقرأ، وخيار "إلزامي القراءة" بتأكيد قراءة =====
+// DB.work_rules=[{id,title,body,mandatory,by,date,updated_at}]  DB.rules_acks=[{id:'ruleId|userId',rule_id,user_id,user_name,rule_updated_at,date,updated_at}]
+// بتتزامن كمستندين business_state (من غير SQL). لو الرسالة اتعدّلت بعد التأكيد، التأكيد القديم بيبطل ويطلب تأكيد جديد.
+var _wrFilter='all',_wrQ='',_wrOpen=null,_wrEditId=null;
+function _wrRules(){return DB.work_rules||(DB.work_rules=[]);}
+function _wrMyId(){var p=window.__currentProfile;return p&&p.id?p.id:null;}
+function _wrAckOf(rule,uid){return (DB.rules_acks||[]).find(function(a){return a.rule_id===rule.id&&a.user_id===uid&&(a.rule_updated_at||'')>=(rule.updated_at||'');});}
+function _wrPending(){ // القواعد الإلزامية اللي المستخدم الحالي لسه ماأكدهاش (المالك مستثنى)
+  var uid=_wrMyId();if(window.__isOwner||!uid)return [];
+  return _wrRules().filter(function(r){return r.mandatory&&!_wrAckOf(r,uid);});
+}
+function _wrMissing(rule){ // موظفين مربوطين بحسابات ماأكدوش القاعدة دي (للمالك)
+  var emps=((DB.accounts&&DB.accounts.employees)||[]).filter(function(e){return e.active!==false&&e.linked_profile_id;});
+  return emps.filter(function(e){return !_wrAckOf(rule,e.linked_profile_id);});
+}
+function openWorkRules(){
+  _wrFilter='all';_wrQ='';_wrOpen=null;_wrEditId=null;
+  document.getElementById('modal-title').textContent='📜 قواعد وقوانين العمل';
+  openModal();_wrRender();
+}
+function _wrSet(f){_wrFilter=f;_wrRender();}
+function _wrSearch(val){_wrQ=val;_wrList();}
+function _wrTap(id){_wrOpen=(_wrOpen===id?null:id);_wrList();}
+function _wrVisible(){
+  var qn=normalizeAr(_wrQ||''),pend=_wrPending().map(function(r){return r.id;});
+  return _wrRules().filter(function(r){
+    if(_wrFilter==='mandatory'&&!r.mandatory)return false;
+    if(_wrFilter==='pending'){
+      if(window.__isOwner){if(!(r.mandatory&&_wrMissing(r).length))return false;}
+      else if(pend.indexOf(r.id)<0)return false;
+    }
+    return !qn||normalizeAr((r.title||'')+' '+(r.body||'')).includes(qn);
+  }).sort(function(a,b){return (b.mandatory?1:0)-(a.mandatory?1:0)||(a.date||'').localeCompare(b.date||'');});
+}
+function _wrRender(){
+  var body=document.getElementById('modal-body');if(!body)return;
+  var all=_wrRules(),nMan=all.filter(function(r){return r.mandatory;}).length;
+  var nPend=window.__isOwner?all.filter(function(r){return r.mandatory&&_wrMissing(r).length;}).length:_wrPending().length;
+  function card(f,label,n,c,bg){var on=_wrFilter===f;return '<div onclick="_wrSet(\''+f+'\')" style="flex:1;background:'+(on?c:bg)+';border-radius:11px;padding:8px 4px;text-align:center;cursor:pointer;border:2px solid '+(on?c:'transparent')+'"><div style="font-size:10px;font-weight:700;color:'+(on?'#fff':c)+'">'+label+'</div><div style="font-size:17px;font-weight:900;color:'+(on?'#fff':c)+'">'+n+'</div></div>';}
+  body.innerHTML=
+    (nPend&&!window.__isOwner?'<div style="background:#fef3c7;border:1.5px solid #f59e0b;border-radius:11px;padding:9px 12px;margin-bottom:10px;font-size:12px;font-weight:800;color:#92400e">⚠️ عندك '+nPend+' قاعدة إلزامية محتاجة تأكيد قراءة</div>':'')+
+    '<div style="display:flex;gap:6px;margin-bottom:10px">'+card('all','الكل',all.length,'#b45309','#fef3c7')+card('mandatory','إلزامية',nMan,'#dc2626','#fee2e2')+card('pending',window.__isOwner?'ناقصة تأكيد':'لسه ماأكدتش',nPend,'#1e40af','#dbeafe')+'</div>'+
+    '<input type="search" value="'+esc(_wrQ)+'" placeholder="🔍 ابحث في القواعد..." oninput="_wrSearch(this.value)" style="width:100%;padding:9px 12px;border:2px solid #e2e8f0;border-radius:10px;font-family:inherit;font-size:13px;margin-bottom:10px">'+
+    (window.__isOwner?'<button class="btn btn-primary btn-full" style="margin-bottom:10px" onclick="openWorkRuleForm()">+ قاعدة جديدة</button>':'')+
+    '<div id="wr-list"></div>'+
+    '<div class="modal-actions" style="margin-top:8px"><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+  _wrList();
+}
+function _wrList(){
+  var el=document.getElementById('wr-list');if(!el)return;
+  var list=_wrVisible(),uid=_wrMyId();
+  el.innerHTML=list.length?list.map(function(r,i){
+    var open=_wrOpen===r.id,ack=uid?_wrAckOf(r,uid):null,miss=(window.__isOwner&&r.mandatory)?_wrMissing(r):[];
+    var badge=r.mandatory?(window.__isOwner?(miss.length?'<span style="background:#fee2e2;color:#dc2626;border-radius:6px;padding:1px 7px;font-size:10px;font-weight:800">إلزامية — ناقص '+miss.length+'</span>':'<span style="background:#dcfce7;color:#16a34a;border-radius:6px;padding:1px 7px;font-size:10px;font-weight:800">إلزامية — الكل أكد</span>'):(ack?'<span style="background:#dcfce7;color:#16a34a;border-radius:6px;padding:1px 7px;font-size:10px;font-weight:800">✅ أكدت</span>':'<span style="background:#fee2e2;color:#dc2626;border-radius:6px;padding:1px 7px;font-size:10px;font-weight:800">⚠️ إلزامية — محتاجة تأكيد</span>')):'';
+    var det='';
+    if(open){
+      det='<div style="white-space:pre-wrap;font-size:13px;line-height:1.8;color:#1e293b;margin-top:8px;border-top:1px solid #f1f5f9;padding-top:8px">'+esc(r.body||'')+'</div>'+
+        (window.__isOwner&&r.mandatory?'<div style="font-size:11px;margin-top:8px;color:#475569">'+
+          (((DB.rules_acks||[]).filter(function(a){return a.rule_id===r.id&&(a.rule_updated_at||'')>=(r.updated_at||'');}).map(function(a){return '✅ '+esc(a.user_name||'')+' ('+esc(fmtDate(a.date))+')';}).join(' · '))||'محدش أكد لسه')+
+          (miss.length?'<div style="color:#dc2626;margin-top:3px">⏳ لسه: '+miss.map(function(e){return esc(e.name);}).join('، ')+'</div>':'')+'</div>':'')+
+        (!window.__isOwner&&r.mandatory&&!ack?'<button class="btn btn-green btn-full" style="margin-top:10px" onclick="event.stopPropagation();__runOnce(this,function(){return confirmWorkRule(\''+r.id+'\')})">✅ قرأت وموافق</button>':'')+
+        (window.__isOwner?'<div style="display:flex;gap:8px;margin-top:10px"><button class="btn btn-outline" style="flex:1" onclick="event.stopPropagation();openWorkRuleForm(\''+r.id+'\')">✏️ تعديل</button><button class="btn btn-outline" style="flex:1;color:#dc2626;border-color:#fca5a5" onclick="event.stopPropagation();deleteWorkRule(\''+r.id+'\')">🗑️ حذف</button></div>':'');
+    }
+    return '<div onclick="_wrTap(\''+r.id+'\')" style="background:#fff;border-radius:12px;padding:10px 12px;margin-bottom:8px;box-shadow:0 1px 6px rgba(0,0,0,.07);cursor:pointer;border-right:4px solid '+(r.mandatory?'#dc2626':'#b45309')+'">'+
+      '<div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><div style="font-weight:900;font-size:14px;color:#0f172a">'+(i+1)+'. '+esc(r.title||'')+'</div><span style="color:#94a3b8;font-size:12px">'+(open?'▲':'▼')+'</span></div>'+
+      '<div style="margin-top:4px">'+badge+' <span style="font-size:10px;color:#94a3b8">آخر تعديل: '+esc(fmtDate((r.updated_at||'').slice(0,10)||r.date))+'</span></div>'+det+'</div>';
+  }).join(''):'<div class="empty">'+(_wrQ?'مفيش نتيجة':(window.__isOwner?'مفيش قواعد لسه — اضغط "+ قاعدة جديدة"':'مفيش قواعد في القسم ده'))+'</div>';
+}
+function openWorkRuleForm(id){
+  if(!window.__isOwner)return showToast('🚫 التعديل للمالك بس','#dc2626');
+  _wrEditId=id||null;
+  var r=id?_wrRules().find(function(x){return x.id===id;}):null;
+  document.getElementById('modal-title').textContent=r?'✏️ تعديل قاعدة':'📜 قاعدة جديدة';
+  document.getElementById('modal-body').innerHTML=
+    '<div class="field"><label>📌 العنوان *</label><input id="wr-title" type="text" value="'+esc(r?r.title:'')+'" placeholder="مثال: مواعيد الحضور والانصراف"></div>'+
+    '<div class="field"><label>📝 نص القاعدة *</label><textarea id="wr-body" rows="8" placeholder="اكتب القاعدة بالتفصيل...">'+esc(r?r.body:'')+'</textarea></div>'+
+    '<label style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;margin-bottom:6px"><input type="checkbox" id="wr-man" '+(r&&r.mandatory?'checked':'')+'> إلزامي القراءة (الموظف لازم يأكد إنه قرأها)</label>'+
+    '<div style="font-size:11px;color:#94a3b8;margin-bottom:12px">لو عدّلت قاعدة إلزامية، التأكيدات القديمة بتبطل والموظفين يطلب منهم تأكيد جديد.</div>'+
+    '<div class="modal-actions"><button class="btn btn-outline" onclick="openWorkRules()">إلغاء</button><button class="btn btn-primary" onclick="__runOnce(this,saveWorkRule)">💾 حفظ</button></div>';
+}
+function saveWorkRule(){
+  if(!window.__isOwner)return;
+  var title=v('wr-title').trim(),body=v('wr-body').trim(),man=!!document.getElementById('wr-man').checked;
+  if(!title)return showToast('⚠️ اكتب العنوان','#dc2626');
+  if(!body)return showToast('⚠️ اكتب نص القاعدة','#dc2626');
+  var rec={title:title,body:body,mandatory:man,updated_at:new Date().toISOString()};
+  if(_wrEditId)DB.work_rules=patchRow(_wrRules(),_wrEditId,rec);
+  else DB.work_rules=_wrRules().concat([Object.assign({id:genId(),by:_wrMyId(),date:today()},rec)]);
+  persist();showToast('✅ اتحفظت القاعدة','#16a34a');openWorkRules();
+}
+function deleteWorkRule(id){
+  if(!window.__isOwner)return;
+  confirmAction('تمسح القاعدة دي وتأكيداتها؟',function(){
+    DB.work_rules=_wrRules().filter(function(x){return x.id!==id;});
+    DB.rules_acks=(DB.rules_acks||[]).filter(function(a){return a.rule_id!==id;});
+    persist();_wrOpen=null;openWorkRules();
+  });
+}
+async function confirmWorkRule(id){
+  var r=_wrRules().find(function(x){return x.id===id;}),uid=_wrMyId(),prof=window.__currentProfile||{};
+  if(!r||!uid)return showToast('⚠️ لازم تكون مسجّل دخول','#dc2626');
+  var now=new Date().toISOString(),aid=id+'|'+uid;
+  var rec={id:aid,rule_id:id,user_id:uid,user_name:prof.full_name||'',rule_updated_at:r.updated_at||'',date:today(),updated_at:now};
+  var rest=(DB.rules_acks||[]).filter(function(a){return a.id!==aid;});
+  DB.rules_acks=rest.concat([rec]);
+  persist();showToast('✅ اتسجّل تأكيدك','#16a34a');_wrRender();
+}
+function __wrStartupNudge(){ // تنبيه واحد عند فتح التطبيق لو فيه قواعد إلزامية لسه ماتأكدتش
+  setTimeout(function(){try{var n=_wrPending().length;if(n)showToast('📜 عندك '+n+' قاعدة عمل إلزامية محتاجة تأكيد — المزيد ← قواعد وقوانين العمل','#b45309');}catch(e){}},9000);
+}
+// ===== v281 — الأهداف والخطط (قصيرة وطويلة الأمد) بمقياس بيتحسب من البيانات + تذكير، بالتاريخ الهجري =====
+// DB.goals=[{id,title,kind:'short'|'long',metric:'sales'|'profit'|'movements'|'custom',target,from,to,manual,note,done,date,updated_at}] — بتتزامن كمستند business_state (من غير SQL). للمالك بس.
+var _glFilter='all',_glOpen=null,_glEditId=null;
+var _GL_METRICS={sales:'💰 إجمالي المبيعات',profit:'📈 صافي ربح الفواتير',movements:'🔧 عدد التحركات (الصيانة)',custom:'✍️ يدوي (أنت بتحدّث الرقم)'};
+function _glGoals(){return DB.goals||(DB.goals=[]);}
+function _glValue(g){
+  var f=g.from||'0000-00-00',t=g.to||'9999-99-99';
+  if(g.metric==='sales')return money((DB.sales||[]).filter(function(x){return (x.date||'')>=f&&(x.date||'')<=t;}).reduce(function(a,x){return a+(+x.total||0);},0));
+  if(g.metric==='profit')return money((DB.sales||[]).filter(function(x){return (x.date||'')>=f&&(x.date||'')<=t;}).reduce(function(a,x){return a+_saleNetProfit(x);},0));
+  if(g.metric==='movements')return (DB.movements||[]).filter(function(m){return (m.opened_at||'')>=f&&(m.opened_at||'')<=t&&m.status!=='ملغي';}).length;
+  return +g.manual||0;
+}
+function _glInfo(g){
+  var val=_glValue(g),tg=+g.target||0,pct=tg>0?Math.round(val/tg*100):0,td=today();
+  var days=g.to?Math.round((Date.parse(g.to)-Date.parse(td))/86400000):null;
+  var total=(g.from&&g.to)?Math.max(1,Math.round((Date.parse(g.to)-Date.parse(g.from))/86400000)):null;
+  var elapsed=(g.from&&total)?Math.min(total,Math.max(0,Math.round((Date.parse(td)-Date.parse(g.from))/86400000))):null;
+  var expected=(total&&elapsed!=null)?Math.round(elapsed/total*100):null;
+  var st='run';
+  if(g.done||pct>=100)st='done';else if(days!=null&&days<0)st='late';else if(expected!=null&&pct+10<expected)st='behind';
+  return {val:val,tg:tg,pct:pct,days:days,expected:expected,st:st};
+}
+function openGoals(){
+  if(!window.__isOwner)return showToast('🚫 الأهداف للمالك بس','#dc2626');
+  _glFilter='all';_glOpen=null;
+  document.getElementById('modal-title').textContent='🎯 الأهداف والخطط';
+  openModal();_glRender();
+}
+function _glSet(f){_glFilter=f;_glRender();}
+function _glTap(id){_glOpen=(_glOpen===id?null:id);_glList();}
+function _glVisible(){
+  return _glGoals().filter(function(g){
+    var i=_glInfo(g);
+    if(_glFilter==='short')return g.kind==='short';
+    if(_glFilter==='long')return g.kind==='long';
+    if(_glFilter==='late')return i.st==='late'||i.st==='behind';
+    return true;
+  }).sort(function(a,b){return (a.done?1:0)-(b.done?1:0)||(a.to||'9999').localeCompare(b.to||'9999');});
+}
+function _glRender(){
+  var all=_glGoals(),late=all.filter(function(g){var s=_glInfo(g).st;return s==='late'||s==='behind';}).length;
+  function card(f,label,n,c,bg){var on=_glFilter===f;return '<div onclick="_glSet(\''+f+'\')" style="flex:1;background:'+(on?c:bg)+';border-radius:11px;padding:8px 2px;text-align:center;cursor:pointer;border:2px solid '+(on?c:'transparent')+'"><div style="font-size:10px;font-weight:700;color:'+(on?'#fff':c)+'">'+label+'</div><div style="font-size:17px;font-weight:900;color:'+(on?'#fff':c)+'">'+n+'</div></div>';}
+  document.getElementById('modal-body').innerHTML=
+    '<div style="display:flex;gap:5px;margin-bottom:10px">'+card('all','الكل',all.length,'#0f766e','#ccfbf1')+card('short','قصيرة',all.filter(function(g){return g.kind==='short';}).length,'#2563eb','#dbeafe')+card('long','طويلة',all.filter(function(g){return g.kind==='long';}).length,'#7c3aed','#ede9fe')+card('late','متأخرة',late,'#dc2626','#fee2e2')+'</div>'+
+    '<button class="btn btn-primary btn-full" style="margin-bottom:10px" onclick="openGoalForm()">+ هدف جديد</button>'+
+    '<div id="gl-list"></div><div class="modal-actions" style="margin-top:8px"><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+  _glList();
+}
+function _glList(){
+  var el=document.getElementById('gl-list');if(!el)return;
+  var list=_glVisible();
+  var stTxt={done:['✅ تحقق','#16a34a','#dcfce7'],late:['⚠️ فات الموعد','#dc2626','#fee2e2'],behind:['🐢 متأخر عن الخطة','#ea580c','#ffedd5'],run:['⏳ ماشي','#2563eb','#dbeafe']};
+  el.innerHTML=list.length?list.map(function(g){
+    var i=_glInfo(g),t=stTxt[i.st],open=_glOpen===g.id,w=Math.min(100,i.pct);
+    var det='';
+    if(open){
+      det='<div style="font-size:12px;color:#475569;margin-top:8px;border-top:1px solid #f1f5f9;padding-top:8px;line-height:1.9">'+
+        '📌 المقياس: <b>'+esc(_GL_METRICS[g.metric]||'')+'</b><br>📅 من '+esc(fmtDate(g.from))+' إلى '+esc(fmtDate(g.to))+
+        (i.days!=null?'<br>⏱️ '+(i.days>=0?'فاضل '+i.days+' يوم':'عدّى الموعد بـ'+(-i.days)+' يوم'):'')+
+        (i.expected!=null?'<br>📊 المفروض تكون وصلت '+i.expected+'% دلوقتي':'')+
+        (g.note?'<br>📝 '+esc(g.note):'')+'</div>'+
+        (g.metric==='custom'?'<div style="display:flex;gap:6px;margin-top:8px"><input id="gl-man-'+g.id+'" type="number" step="any" value="'+(+g.manual||0)+'" style="flex:1;padding:8px;border:2px solid #e2e8f0;border-radius:9px;font-family:inherit;text-align:center" onclick="event.stopPropagation()"><button class="btn btn-primary" onclick="event.stopPropagation();updateGoalManual(\''+g.id+'\')">تحديث الرقم</button></div>':'')+
+        '<div style="display:flex;gap:6px;margin-top:8px">'+
+        '<button class="btn btn-outline" style="flex:1" onclick="event.stopPropagation();toggleGoalDone(\''+g.id+'\')">'+(g.done?'↩️ إعادة فتح':'✅ تم')+'</button>'+
+        '<button class="btn btn-outline" style="flex:1" onclick="event.stopPropagation();openGoalForm(\''+g.id+'\')">✏️ تعديل</button>'+
+        '<button class="btn btn-outline" style="flex:1;color:#dc2626;border-color:#fca5a5" onclick="event.stopPropagation();deleteGoal(\''+g.id+'\')">🗑️</button></div>';
+    }
+    return '<div onclick="_glTap(\''+g.id+'\')" style="background:#fff;border-radius:12px;padding:10px 12px;margin-bottom:8px;box-shadow:0 1px 6px rgba(0,0,0,.07);cursor:pointer;border-right:4px solid '+(g.kind==='long'?'#7c3aed':'#2563eb')+'">'+
+      '<div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><div style="font-weight:900;font-size:14px;color:#0f172a">'+esc(g.title||'')+'</div><span style="background:'+t[2]+';color:'+t[1]+';border-radius:6px;padding:1px 7px;font-size:10px;font-weight:800;white-space:nowrap">'+t[0]+'</span></div>'+
+      '<div style="font-size:11px;color:#64748b;margin:4px 0">'+(g.kind==='long'?'طويل الأمد':'قصير الأمد')+' — الموعد '+esc(fmtDate(g.to))+'</div>'+
+      '<div style="height:9px;background:#f1f5f9;border-radius:5px;overflow:hidden"><div style="height:9px;width:'+w+'%;background:'+t[1]+'"></div></div>'+
+      '<div style="display:flex;justify-content:space-between;font-size:12px;margin-top:4px"><b>'+fmt(i.val)+' / '+fmt(i.tg)+'</b><b style="color:'+t[1]+'">'+i.pct+'%</b></div>'+det+'</div>';
+  }).join(''):'<div class="empty">مفيش أهداف '+(_glFilter==='all'?'لسه — اضغط "+ هدف جديد"':'في القسم ده')+'</div>';
+}
+function openGoalForm(id){
+  if(!window.__isOwner)return;
+  _glEditId=id||null;var g=id?_glGoals().find(function(x){return x.id===id;}):null;
+  var td=today();
+  document.getElementById('modal-title').textContent=g?'✏️ تعديل هدف':'🎯 هدف جديد';
+  document.getElementById('modal-body').innerHTML=
+    '<div class="field"><label>🎯 اسم الهدف *</label><input id="gl-title" type="text" value="'+esc(g?g.title:'')+'" placeholder="مثال: مبيعات الشهر"></div>'+
+    '<div class="field"><label>⏳ النوع</label><select id="gl-kind"><option value="short"'+(!g||g.kind==='short'?' selected':'')+'>قصير الأمد</option><option value="long"'+(g&&g.kind==='long'?' selected':'')+'>طويل الأمد</option></select></div>'+
+    '<div class="field"><label>📌 المقياس (بيتحسب لوحده من البيانات)</label><select id="gl-metric">'+Object.keys(_GL_METRICS).map(function(k){return '<option value="'+k+'"'+(g&&g.metric===k?' selected':'')+'>'+_GL_METRICS[k]+'</option>';}).join('')+'</select></div>'+
+    '<div class="field"><label>🏁 الرقم المستهدف *</label><input id="gl-target" type="number" step="any" value="'+(g?g.target:'')+'" placeholder="مثال: 50000"></div>'+
+    dateField('gl-from','📅 من',g?g.from:td)+dateField('gl-to','📅 إلى (الموعد النهائي)',g?g.to:null)+
+    '<div class="field"><label>📝 ملاحظة (اختياري)</label><textarea id="gl-note" rows="2">'+esc(g?g.note||'':'')+'</textarea></div>'+
+    '<div class="modal-actions"><button class="btn btn-outline" onclick="openGoals()">إلغاء</button><button class="btn btn-primary" onclick="__runOnce(this,saveGoal)">💾 حفظ</button></div>';
+}
+function saveGoal(){
+  if(!window.__isOwner)return;
+  var title=v('gl-title').trim(),target=+v('gl-target')||0,from=v('gl-from'),to=v('gl-to');
+  if(!title)return showToast('⚠️ اكتب اسم الهدف','#dc2626');
+  if(!(target>0))return showToast('⚠️ اكتب الرقم المستهدف','#dc2626');
+  if(from&&to&&to<from)return showToast('⚠️ الموعد النهائي قبل تاريخ البداية','#dc2626');
+  var rec={title:title,kind:v('gl-kind'),metric:v('gl-metric'),target:target,from:from,to:to,note:v('gl-note').trim(),updated_at:new Date().toISOString()};
+  if(_glEditId)DB.goals=patchRow(_glGoals(),_glEditId,rec);
+  else DB.goals=_glGoals().concat([Object.assign({id:genId(),done:false,manual:0,date:today()},rec)]);
+  persist();showToast('✅ اتحفظ الهدف','#16a34a');openGoals();
+}
+function updateGoalManual(id){var el=document.getElementById('gl-man-'+id);if(!el)return;DB.goals=patchRow(_glGoals(),id,{manual:+el.value||0,updated_at:new Date().toISOString()});persist();_glRender();}
+function toggleGoalDone(id){var g=_glGoals().find(function(x){return x.id===id;});if(!g)return;DB.goals=patchRow(_glGoals(),id,{done:!g.done,updated_at:new Date().toISOString()});persist();_glRender();}
+function deleteGoal(id){confirmAction('تمسح الهدف ده؟',function(){DB.goals=_glGoals().filter(function(x){return x.id!==id;});persist();_glOpen=null;_glRender();});}
+function __glStartupNudge(){ // تذكير: أهداف موعدها خلال ٧ أيام أو عدّى وماتحققتش (للمالك)
+  setTimeout(function(){try{
+    if(!window.__isOwner)return;
+    var n=_glGoals().filter(function(g){var i=_glInfo(g);return i.st!=='done'&&i.days!=null&&i.days<=7;}).length;
+    if(n)showToast('🎯 '+n+' هدف موعده قرب أو عدّى — المزيد ← الأهداف والخطط','#0f766e');
+  }catch(e){}},11000);
+}
 function openExtractedPartsList(){
   document.getElementById('modal-title').textContent='📦 كل القطع المستخرجة';
   document.getElementById('modal-body').innerHTML='<div id="extracted-parts-body"></div><div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
@@ -21527,7 +22483,8 @@ function renderScrap(){
     '<div style="font-size:18px;font-weight:900;color:#15803d">'+totalParts+'</div></div>'+
     '</div>'+
 
-    '<button class="btn btn-red btn-full" onclick="openAddScrapMachineModal()" style="margin-bottom:14px">+ إضافة ماكينة اسكراب جديدة</button>'+
+    '<button class="btn btn-red btn-full" onclick="openAddScrapMachineModal()" style="margin-bottom:10px">+ إضافة ماكينة اسكراب جديدة</button>'+
+    (depleted.length?'<div onclick="_scrapFilter=(_scrapFilter===\'depleted\'?\'all\':\'depleted\');renderScrap()" style="background:'+(_scrapFilter==='depleted'?'#475569':'#f1f5f9')+';color:'+(_scrapFilter==='depleted'?'#fff':'#475569')+';border-radius:10px;padding:8px 12px;margin-bottom:12px;text-align:center;font-size:12px;font-weight:800;cursor:pointer">🗂️ المستنفدة ('+depleted.length+') — '+(_scrapFilter==='depleted'?'اضغط للرجوع للكل':'اضغط للعرض بس')+'</div>':'<div style="margin-bottom:4px"></div>')+
 
     // الماكينات النشطة
     ((_scrapFilter==='all'||_scrapFilter==='active')&&active.length?
@@ -21717,6 +22674,7 @@ async function saveScrapMachine(){
     scrap_price:+v('scm-price')||0,scrap_machine_id:obj.id
   };
   DB.products.push(prodObj);
+  try{await dbUpsert('products',prodObj);}catch(e){} // v278 — كان بيتحفظ محليًا بس وماكينة المخزون مش بتوصل للسيرفر/الأجهزة التانية
 
   await persist();
   closeModal();renderScrap();
@@ -21969,12 +22927,18 @@ async function saveEditScrapMachine(id){
   DB.scrap_machines=DB.scrap_machines.map(function(m){
     return m.id===id?Object.assign({},m,{name:name,model:v('escm-model'),buy_price:+v('escm-price')||0,note:v('escm-note')}):m;
   });
+  // v278 — منتج الماكينة في المخزون كان بيفضل بالاسم/السعر القديم بعد التعديل
+  var _mp=(DB.products||[]).find(function(p){return p.scrap_machine_id===id&&p.category==='machine';});
+  if(_mp){var _pu={name:name,buy_price:+v('escm-price')||0,scrap_price:+v('escm-price')||0};DB.products=patchRow(DB.products,_mp.id,_pu);try{await dbUpdate('products',_mp.id,_pu);}catch(e){}}
   await persist();closeModal();renderScrap();
   showToast('✅ تم التعديل','#16a34a');
 }
 
 async function delScrapMachine(id){
   DB.scrap_machines=(DB.scrap_machines||[]).filter(function(m){return m.id!==id;});
+  // v278 — حذف الماكينة كان بيسيب منتجها في المخزون يتيم (كمية ١ وسعر الشراء داخل في تقييم المخزون)
+  var _mp=(DB.products||[]).find(function(p){return p.scrap_machine_id===id&&p.category==='machine';});
+  if(_mp){DB.products=DB.products.filter(function(p){return p.id!==_mp.id;});try{await dbDelete('products',_mp.id,_mp);}catch(e){}}
   await persist();renderScrap();
   showToast('🗑️ تم الحذف','#64748b');
 }
@@ -22052,7 +23016,7 @@ window.addEventListener('DOMContentLoaded',function(){
   window.addEventListener('beforeunload',function(){try{persist();}catch(e){}});
   // تحميل البيانات والانطلاق
   loadDB().then(function(){
-    __migrateLegacyIds();ensureMonthlyInventorySnapshot();autoRolloverStale();autoMoveToStock();
+    __migrateLegacyIds();__repairSalaryLinks();__wrStartupNudge();__glStartupNudge();ensureMonthlyInventorySnapshot();autoRolloverStale();autoMoveToStock();
     // v97: دلوقتي بيتأكد إن البيانات المحلية اتحملت وترحيل الـIDs خلص الأول،
     // وبعد كده بس بنتصل بالسيرفر ونسحب وندمج — عشان نمنع تضارب/تكرار السجلات
     if(typeof window.__runSessionCheckAfterLoad === 'function') window.__runSessionCheckAfterLoad();
@@ -25110,6 +26074,9 @@ function renderMore(){
         {icon:'📒',label:'دفتر العملاء',screen:'clients',color:'#dbeafe',tc:'#1e40af'},
         {icon:'🏭',label:'أرشيف الموردين',screen:'suppliers',color:'#fff7ed',tc:'#c2410c'},
         {icon:'🔩',label:'تفكيك اسكراب',screen:'scrap',color:'#fee2e2',tc:'#dc2626'},
+        {icon:'🧰',label:'قطع الغيار المطلوبة',action:'openNeededParts()',color:'#f5f3ff',tc:'#6d28d9'},
+        {icon:'📜',label:'قواعد وقوانين العمل',action:'openWorkRules()',color:'#fef3c7',tc:'#b45309'},
+        {icon:'🎯',label:'الأهداف والخطط',action:'openGoals()',color:'#ccfbf1',tc:'#0f766e',ownerOnly:true},
         {icon:'💳',label:'الديون',screen:'debts',color:'#fee2e2',tc:'#dc2626'},
         {icon:'📣',label:'عرض لعملاء مكنة',action:'openBulkOffer()',color:'#ede9fe',tc:'#5b21b6'},
       ]
@@ -25117,6 +26084,7 @@ function renderMore(){
     reports:{
       key:'reports',title:'📊 كل التقارير والإحصائيات (الأساس)',icon:'📊',
       items:[
+        {icon:'🧠',label:'مركز المعرفة (أعطال وخبرة)',action:'openKnowledgeCenter()',color:'#f5f3ff',tc:'#6d28d9'},
         {icon:'🏭',label:'الإنتاج اليومي',action:'openDailyProduction()',color:'#ffedd5',tc:'#c2410c',ownerOnly:true},
         {icon:'👥',label:'تقرير المهندسين',action:'openEmployeesReport()',color:'#fff7ed',tc:'#c2410c',ownerOnly:true},
         {icon:'📊',label:'تحليل مكن العملاء',action:'openMachineStats()',color:'#ecfeff',tc:'#0e7490'},
@@ -25205,7 +26173,7 @@ function switchMovTab(tab,el){
 // بتتلف هنا مرة واحدة: لو اتنفّذت من ضغطة مستخدم حقيقية ولسه شغالة (أو خلصت من أقل من ٠٫٦ ثانية)
 // بنفس الأرقام (id) → الضغطة التانية بتتتجاهل. أي دالة جديدة بتنشئ سجل: ضيف اسمها في __ONCE_GUARDED.
 // الاستدعاء من الكود (مش ضغطة) مش بيتأثر. اختلاف الـid (فاتورتين مختلفتين) مش بيتمنع.
-var __ONCE_GUARDED=["__giveEmpCashAdvance", "__settleEmpCashBalance", "__undoLastCashAdvance", "_applyLinkRepair", "_duaSave", "_invBatchDel", "_invBatchSave", "_invCreateGoodsAcc", "_invMoneySave", "_invPaySave", "_invSave", "_mfUnify", "_movTodoAdd", "_wsSaveSettings", "addExpenseTemplate", "addMovAdvancePayment", "approveStocktake", "confirmAutoBalanceDiff", "confirmCloseMovement", "confirmContinueMovement", "confirmExtractParts", "confirmMarkLeave", "confirmMyAttendance", "confirmPayAdvance", "confirmPayDailyWage", "confirmPayFixedExp", "confirmPaySalary", "confirmSchedDone", "convertOpeningInventoryToPurchase", "delScrapMachine", "deleteAllArchivedDebts", "deleteVisitLog", "duplicateTask", "endVisit", "execMergeProducts", "finishExtractForSale", "importBaseClients", "markSaleItemDamaged", "mergeModelFamily", "openDeleteSaleModal", "payDebt", "payGroupDebts", "quickLogExpense", "removeMovAdvancePayment", "saveAddCapital", "saveAsset", "saveBalanceSnapshot", "saveBatchExpenses", "saveBundleDraft", "saveCapital", "saveConsignmentOutSale", "saveDebt", "saveEditCapital", "saveEditDebt", "saveEditExpense", "saveEditFixedExp", "saveEditReceivable", "saveEmpIncrement", "saveEmployee", "saveExpense", "saveFixedExp", "saveGiveConsignment", "saveIncrement", "saveInventorySnapshot", "saveInvestorWithdraw", "saveLog", "saveMachine", "saveMovement", "saveNewClient", "saveNewInvestor", "saveProduct", "saveProfitCycle", "savePurchase", "saveReceivable", "saveReceiveConsignment", "saveReturnConsignment", "saveSale", "saveScrapMachine", "saveSupplier", "saveTask", "setExtraIncome", "startStocktake", "startVisit", "syncSalesWithDebts", "withdrawPartForMovement", "withdrawPickedParts"];
+var __ONCE_GUARDED=["saveGoal", "saveWorkRule", "confirmWorkRule", "__giveEmpCashAdvance", "__settleEmpCashBalance", "__undoLastCashAdvance", "_applyLinkRepair", "_duaSave", "_invBatchDel", "_invBatchSave", "_invCreateGoodsAcc", "_invMoneySave", "_invPaySave", "_invSave", "_mfUnify", "_movTodoAdd", "_wsSaveSettings", "addExpenseTemplate", "delPurchaseExec", "addMovAdvancePayment", "approveStocktake", "confirmAutoBalanceDiff", "confirmCloseMovement", "confirmContinueMovement", "confirmExtractParts", "confirmMarkLeave", "confirmMyAttendance", "confirmPayAdvance", "confirmPayDailyWage", "confirmPayFixedExp", "confirmPaySalary", "confirmSchedDone", "convertOpeningInventoryToPurchase", "delScrapMachine", "deleteAllArchivedDebts", "deleteKnowledge", "deleteVisitLog", "duplicateTask", "endVisit", "execMergeProducts", "finishExtractForSale", "importBaseClients", "markSaleItemDamaged", "mergeModelFamily", "openDeleteSaleModal", "payDebt", "payGroupDebts", "quickLogExpense", "removeMovAdvancePayment", "saveAddCapital", "saveAsset", "saveBalanceSnapshot", "saveBatchExpenses", "saveBundleDraft", "saveCapital", "saveConsignmentOutSale", "saveDebt", "saveEditCapital", "saveEditDebt", "saveEditExpense", "saveEditFixedExp", "saveEditReceivable", "saveEmpIncrement", "saveEmployee", "saveExpense", "saveFixedExp", "saveGiveConsignment", "saveIncrement", "saveInventorySnapshot", "saveInvestorWithdraw", "saveKnowledge", "saveLog", "saveMachine", "saveMovement", "saveNewClient", "saveNewInvestor", "saveProduct", "saveProfitCycle", "savePurchase", "saveReceivable", "saveReceiveConsignment", "saveReturnConsignment", "saveSale", "saveScrapMachine", "saveSupplier", "saveTask", "setExtraIncome", "startStocktake", "startVisit", "syncSalesWithDebts", "withdrawPartForMovement", "withdrawPickedParts"];
 (function(){
   var busy={};
   function wrap(name){
