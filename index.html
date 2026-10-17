@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v282</title>
+<title>ابو حوده الحلو الجميل v287</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>var BUILD_STAMP="1448-05-05 — v282";
+<script>/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="1448-05-05 — v287";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -69,6 +69,19 @@
         ده بيحميها من الضغط المتكرر حتى لو الزرار نسي __runOnce. (__runOnce فاضل مطلوب على الزرار — الاتنين مع بعض).
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v287: [💡 تنبيه الخبرة في فورم التحرك + مصروف المهمة (ربط أو رقم يدوي)]
+     1) وإنت بتكتب نوع العطل أو الجهاز أو وصف العطل في فورم التحرك بيظهر كارت "💡 فيه N خبرة ممكن تفيدك" تحت الوصف (لحد ٤)، والضغط على أي خبرة يفتح الحل.
+     2) المصروف في مهام الأهداف بقى اختياري: "✍️ رقم بإيدي" أو "🔗 مربوط بمصروفات" (بتختار من مصروفاتك المسجّلة، ومصروف ماينفعش يتربط بمهمتين).
+v286: [💰 إصلاح "السعر بعد التكاليف" الأقل من سعر الشراء]
+     السبب: شاشة تعديل المنتج كانت بتغيّر سعر الشراء من غير ما تلمس "بعد التكاليف" القديم، فيفضل رقم قديم أقل (شراء ٣٥٠ و"بعد التكاليف" ٢٥٠). دلوقتي: سعر الشراء لما يتغيّر "بعد التكاليف" بيتحرك معاه (مع إبقاء التكاليف الإضافية للوحدة)، وفي خانة جديدة "السعر بعد التكاليف" تتعدّل بإيدك، ومستحيل يبقى أقل من الشراء. وإصلاح تلقائي مرة عند فتح التطبيق للمنتجات القديمة اللي فيها الغلط ده. + ٣٥٤ ملاحظة: عمود visit_logs لازم SQL (شوف الرد).
+v285: [🏷️ تجهيز نسخة للبيع — هوية وسيرفر قابلين للتغيير من كتلة APP_CONFIG]
+     كل اللي بيخص نسختك (اسم التطبيق، اسم النشاط، وصف، لون، رابط ومفتاح Supabase، اسم موظف الإصلاح) بقى في كتلة APP_CONFIG واحدة. سكريبت make_edition.py بيطلّع نسخة لأي عميل بإعدادات تانية ويشيل سجل التعديلات الداخلي ويفحص إن مفيش تسريب من بياناتك.
+v284: [💡 تنبيه الخبرة جوه تفاصيل التحرك]
+     1) تفاصيل أي تحرك بقى فيها كارت "💡 فيه N خبرة ممكن تفيدك للعطل ده" (لحد ٥، بالأقوى): بيطابق كود العطل المكتوب في الوصف/السجل، وموديل المكنة وعائلتها، وكلمات العطل. دوس على خبرة يفتح حلها وصورها في نفس الشاشة.
+     2) زرار "💡 احفظ كخبرة" كان مكتوب في سجل التغييرات بس مش موجود فعليًا في تفاصيل التحرك — اتضاف (بيملا العطل والعائلة والقطع لوحده).
+v283: [🎯 الأهداف = عنوان + سلسلة مهمات ونتائج + مصروفات ومدة وتقييم | 📥 الاستيراد ظاهر في الخريطة]
+     1) زرار 📥 استيراد الخبرة كان ظاهر في عرض القايمة بس — دلوقتي ظاهر في الخريطة كمان.
+     2) الهدف بقى عنوان جوّاه سلسلة مهمات (مسؤول، تواريخ هجرية، ميزانية ومصروف فعلي، حالة بضغطة، ملاحظات) ونتائج (مستهدف/متحقق) وتقييم نجوم + دروس. ملخص: التقدم، المصروف مقابل الميزانية، المدة (المخطط/اللي مضى/الفاضل)، والعائد على المصروف لو المقياس مبيعات/ربح. المقياس التلقائي بقى اختياري.
 v282: [🧠 خبرة موسّعة + استيراد ٣٨٩ مدخل + صور محلية]
      1) الخبرة بقى فيها: نوع (عطل / برنامج صيانة)، كود، ماركة، موديلات، معنى، أسباب، خطوات، برامج مستخدمة، ملاحظات، صور. البحث بيشمل الكل (ابحث بالكود).
      2) فلتر نوع (أعطال/برامج) وماركة في القايمة والخريطة.
@@ -1807,7 +1820,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
 </style>
 <div id="login-gate">
   <div id="login-box">
-    <h2>🔧 أبو حودة الحلو الجميل</h2>
+    <h2>🔧 <span data-appname></span></h2>
     <p class="sub">سجّل دخولك للمتابعة</p>
     <input id="login-name" type="text" placeholder="الاسم بالكامل" style="display:none">
     <input id="login-email" type="email" placeholder="الإيميل" autocomplete="username">
@@ -3115,8 +3128,8 @@ input:checked+.slider:before{transform:translateX(-20px)}
 
 <script>
   // إعدادات الاتصال بالسيرفر المركزي
-  var SB_URL = 'https://simqakfxywglgevhcgbr.supabase.co';
-  var SB_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho';
+  var SB_URL = APP_CONFIG.sbUrl;
+  var SB_ANON_KEY = APP_CONFIG.sbKey;
   // ⚠️ v264 — لو سكريبت Supabase من الـ CDN ماحمّلش (فتح التطبيق من غير نت وكاش المتصفح فاضي)، السطر ده كان بيرمي خطأ ويوقف باقي البلوك:
   // كل المتغيرات اللي بعده (__PROTECTED_NONEMPTY_FIELDS, __LWW_KEYS...) وفحص الجلسة/الدخول الأوفلاين ماكانوش بيشتغلوا، وبوابة الدخول تفضل مقفولة حتى لو عندك بيانات محلية.
   // دلوقتي sb بيفضل undefined (وكل فحوصات typeof sb==='undefined' الموجودة بتشتغل زي ما هي) والباقي بيكمّل عادي.
@@ -4217,7 +4230,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
     <div id="screen-home" class="screen active">
       <!-- ⚠️ v222 — الآية ومواعيد الصلاة نزلوا تحت اسم التطبيق (مش فوقه) بطلب العميل -->
       <div class="hero">
-        <div style="font-size:22px;font-weight:900;margin-bottom:4px">🔧 أبو حودة الحلو الجميل</div>
+        <div style="font-size:22px;font-weight:900;margin-bottom:4px">🔧 <span data-appname></span></div>
         <div id="home-user-name" style="font-size:13px;font-weight:700;opacity:.85;margin-bottom:2px"></div>
         <div id="today-date" style="font-size:12px;opacity:.6"></div>
       </div>
@@ -4500,7 +4513,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
 <script>
 
 // ═══════════════════════════════════════════════════════════════
-// 📖 فهرس الملف — mc-app (ابو حوده الحلو الجميل)
+// 📖 فهرس الملف — mc-app
 // ═══════════════════════════════════════════════════════════════
 // آخر تحديث للفهرس: v45 — الأرقام تقريبية، لو الملف اتعدل بعد كده
 // ممكن تختلف شوية؛ استخدم البحث عن "MODULE: <اسم>" لو الرقم مش مظبوط بالظبط
@@ -4546,11 +4559,11 @@ input:checked+.slider:before{transform:translateX(-20px)}
 
 // ========== MODULE: DB ==========
 // ===== اسم التطبيق ورقم الإصدار — يزيد 1 يدوياً مع كل تحديث =====
-var APP_TITLE='ابو حوده الحلو الجميل';
+var APP_TITLE=APP_CONFIG.name;
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=282;
+var APP_VERSION=287;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -5550,9 +5563,10 @@ function __repairSalaryLinks(){
       var hit=emps.filter(function(m){return m.name&&n.includes(normalizeAr(m.name));});
       if(hit.length===1){e.employee_id=hit[0].id;push.push(e);}else left.push(e);
     });
-    // لو فضل مصروف واحد بس يتيم: ده راتب البراء (حسب كلام المالك) — بنربطه بيه لو اسمه موجود مرة واحدة
+    // لو فضل مصروف واحد بس يتيم: بنربطه بالموظف المحدد في APP_CONFIG.salaryFallbackName لو اسمه موجود مرة واحدة
     if(left.length===1){
-      var br=emps.filter(function(m){return m.name&&normalizeAr(m.name).includes('البراء');});
+      var _fb=APP_CONFIG.salaryFallbackName?normalizeAr(APP_CONFIG.salaryFallbackName):'';
+      var br=_fb?emps.filter(function(m){return m.name&&normalizeAr(m.name).includes(_fb);}):[];
       if(br.length===1){left[0].employee_id=br[0].id;push.push(left[0]);}
     }
     window.__empFixRows=null;
@@ -6587,7 +6601,7 @@ function _kcKbHtml(){
   var vt='<div style="display:flex;gap:6px;margin-bottom:8px"><button type="button" onclick="_kcView=\'map\';_kcRender()" style="flex:1;'+_kcChip(_kcView==='map','#6d28d9')+'">🗺️ خريطة</button><button type="button" onclick="_kcView=\'list\';_kcRender()" style="flex:1;'+_kcChip(_kcView==='list','#6d28d9')+'">☰ قايمة</button></div>';
   if(_kcView==='list')return vt+_kcKbListHtml();
   var empty=!(DB.knowledge||[]).length;
-  return vt+_kcFilterBar()+'<div style="display:flex;gap:6px;margin-bottom:6px"><input type="search" id="kc-mq" value="'+esc(_kcMapQ)+'" placeholder="🔍 ابحث: عطل / حل / قطعة / مكنة" oninput="_kcMapSearch(this.value)" style="flex:1;padding:9px 10px;border:1.5px solid #e2e8f0;border-radius:9px;font-family:inherit;box-sizing:border-box"><button type="button" onclick="openKnowledgeForm()" style="background:#6d28d9;color:#fff;border:none;border-radius:9px;padding:0 14px;font-family:inherit;font-weight:800;cursor:pointer">➕ خبرة</button></div>'+
+  return vt+_kcFilterBar()+'<div style="display:flex;gap:6px;margin-bottom:6px"><input type="search" id="kc-mq" value="'+esc(_kcMapQ)+'" placeholder="🔍 ابحث: عطل / حل / قطعة / مكنة" oninput="_kcMapSearch(this.value)" style="flex:1;padding:9px 10px;border:1.5px solid #e2e8f0;border-radius:9px;font-family:inherit;box-sizing:border-box"><button type="button" onclick="openKnowledgeForm()" style="background:#6d28d9;color:#fff;border:none;border-radius:9px;padding:0 14px;font-family:inherit;font-weight:800;cursor:pointer">➕ خبرة</button>'+(window.__isOwner?'<button type="button" onclick="openKbImport()" style="background:#fff;color:#6d28d9;border:1.5px solid #6d28d9;border-radius:9px;padding:0 11px;font-family:inherit;font-weight:800;cursor:pointer">📥 استيراد</button>':'')+'</div>'+
     '<div style="display:flex;justify-content:space-between;font-size:11px;color:#64748b;margin-bottom:5px"><span id="kc-map-count" style="font-weight:800;color:#b45309"></span><span>دوس على فرع يفتح • السحب والقرص للتحريك • + يضيف تحته</span></div>'+
     '<div id="kc-map-box" style="position:relative;height:56vh;min-height:300px;overflow:hidden;background:radial-gradient(circle at 80% 50%,#f5f3ff,#fff 70%);border:1.5px solid #e9d5ff;border-radius:14px;touch-action:none;direction:ltr"></div>'+
     (empty?'<div style="font-size:12px;color:#94a3b8;margin-top:8px;text-align:center">لسه مفيش خبرات — دوس ➕ أو "💡 احفظ كخبرة" من تفاصيل أي تحرك، والخريطة بتتبني لوحدها</div>':'');
@@ -7945,11 +7959,34 @@ function renderInventoryCompare(){
     rowsHtml+'</div>';
 }
 
+// ===== v286 — "السعر بعد التكاليف" لازم يفضل متوافق مع سعر الشراء =====
+// الغلط: شاشة تعديل المنتج كانت بتغيّر سعر الشراء من غير ما تلمس landed_cost → بيفضل القديم (مثلًا شراء ٣٥٠ و"بعد التكاليف" ٢٥٠).
+function _prodLandedFinal(){
+  var buy=+v('prod-buy')||0,li=v('prod-landed'),ln=(li===''||li==null)?null:(+li||0),old=_prodId?DB.products.find(function(x){return x.id===_prodId;}):null,out;
+  if(old){
+    var untouched=(ln===null)||(_prodLandedAtOpen!==null&&Math.abs(ln-_prodLandedAtOpen)<0.005);
+    if(untouched){var delta=Math.max(0,(+old.landed_cost||+old.buy_price||0)-(+old.buy_price||0));out=buy+delta;} // سعر الشراء اتغيّر: التكاليف الإضافية للوحدة تفضل زي ما هي
+    else out=ln;                                                                                                   // انت غيّرت "بعد التكاليف" بإيدك
+  }else out=(ln!==null?ln:buy);
+  if(out<buy)out=buy; // بعد التكاليف عمره ما يبقى أقل من سعر الشراء
+  return Math.round(out*100)/100;
+}
+function __repairLandedCost(){ // إصلاح تلقائي للمنتجات اللي "بعد التكاليف" فيها أقل من سعر الشراء (حالة مستحيلة)
+  try{
+    var bad=(DB.products||[]).filter(function(p){return p&&(+p.landed_cost)>0&&(+p.buy_price)>0&&(+p.landed_cost)<(+p.buy_price)-0.005;});
+    if(!bad.length)return;
+    bad.forEach(function(p){DB.products=patchRow(DB.products,p.id,{landed_cost:+p.buy_price});});
+    persist();
+    setTimeout(function(){bad.forEach(function(p){try{dbUpdate('products',p.id,{landed_cost:+p.buy_price});}catch(e){}});showToast('🛠️ اتصلح "السعر بعد التكاليف" في '+bad.length+' منتج (كان أقل من سعر الشراء)','#2563eb');},7000);
+  }catch(e){console.warn('فشل إصلاح landed_cost',e);}
+}
 var _prodId=null;
+var _prodLandedAtOpen=null; // v286 — لقطة من "السعر بعد التكاليف" وقت فتح الشاشة (نعرف لو اتغيّر بإيدك)
 var _prodQtyAtOpen=null; // ⚠️ v217 — لقطة من الكمية وقت فتح شاشة التعديل، لحماية من الكتابة فوق كمية اتحدّثت في الخلفية (شوف saveProduct)
 function openProductModal(id){
   _prodId=id||null;
   var p=id?DB.products.find(function(x){return x.id===id;}):null;
+  _prodLandedAtOpen=p?(+p.landed_cost||+p.buy_price||0):null;
   _prodQtyAtOpen=p?p.qty:null; // ⚠️ v217 — انظر شرح الحماية في saveProduct تحت
   var isMachine=p&&p.category==='machine';
   document.getElementById('modal-title').textContent=p?'تعديل المنتج':'إضافة منتج جديد';
@@ -8009,6 +8046,7 @@ function openProductModal(id){
     (p?'<div style="font-size:11px;color:#b45309;background:#fffbeb;border-radius:8px;padding:7px 10px;margin:-6px 0 10px">⚠️ التعديل هنا بيستبدل الكمية بالرقم اللي هتكتبه بالظبط. لو مش قاصد تغييرها سيبها زي ما هي — لتصحيح كمية غلط استخدم شاشة "📋 الجرد" بدل كده، عشان الفرق يتوثق صح.</div>':'')+
     fld('prod-minqty','الحد الأدنى للتنبيه','number',p?(p.min_qty||0):0)+
     fld('prod-buy','سعر الشراء (ج)','number',p?p.buy_price:'')+
+    fld('prod-landed','السعر بعد التكاليف (ج) — لو مفيش تكاليف إضافية سيبه زي سعر الشراء','number',p?(+p.landed_cost||+p.buy_price||''):'')+
     fld('prod-sell','سعر البيع (ج)','number',p?p.sell_price:'')+
     // ⚠️ v203 — سعر الجملة (اختياري): لو محدد، بيتطبق تلقائي على فواتير عملاء "جملة/مهندسين"
     '<div class="field" style="background:#f5f3ff;border-radius:10px;padding:10px">'+
@@ -8113,6 +8151,7 @@ async function saveProduct(){
     subunit_ratio:+v('prod-subunit-ratio')||0,
     qty:roundQty(qty),min_qty:+v('prod-minqty')||0,
     buy_price:+v('prod-buy')||0,
+    landed_cost:_prodLandedFinal(),
     sell_price:+v('prod-sell')||0,
     wholesale_price:+v('prod-wholesale')||0,
     wholesale_tiers:_tiersFromText(v('prod-ws-tiers')),
@@ -14847,6 +14886,7 @@ function openMovementModal(id){
   document.getElementById('modal-title').textContent=m?'تعديل العطل':'تسجيل عطل جديد';
   _movFormFresh=true;_movLayoutEdit=false; // v254 — فورم جديد: ما نستردش حقول قديمة
   renderMovementBody(m);openModal();
+  setTimeout(_movKbHint,80);
 }
 
 function _renderMovementBodyRaw(m){
@@ -16330,6 +16370,53 @@ function _movDetailEstimateHtml(m){
       return '<div style="font-size:12px;padding:2px 0">• '+esc(x.name)+' × '+fmtQty(x.qty)+' = <b>'+fmt((x.qty||0)*(+x.price||0))+' ج</b></div>';}).join(''):'')+
     ((p+w)>0?'<div style="font-weight:900;font-size:13px;color:#065f46;margin-top:6px;border-top:1px solid #c7d2fe;padding-top:5px">💰 التقدير: '+fmt(p+w)+' ج</div>':'')+'</div>';
 }
+// ===== v284 — تنبيه "💡 فيه خبرة للعطل ده" جوه تفاصيل التحرك + زرار "احفظ كخبرة" =====
+var _KB_STOP={};'عطل مشكله مشكلة ماكينه ماكينة مكنه مكنة الماكينه الماكينة المكنه المكنة العطل مش شغال بتعمل بيعمل رساله رسالة'.split(' ').forEach(function(w){_KB_STOP[normalizeAr(w)]=1;});
+function _kbRelated(m){
+  var txt=normalizeAr([m.fault_type,m.fault_desc,(m.log||[]).map(function(l){return l.note;}).join(' ')].join(' ')).toLowerCase(),
+      fam=_kcFamily(m),dev=normalizeAr(m.device||'').toLowerCase().replace(/\s+/g,''),txtSp=txt.replace(/([a-z]+)\s+(?=\d)/g,'$1');
+  var toks=txt.split(/[^\w\u0600-\u06ff.]+/).filter(function(w){return w.length>=3&&!_KB_STOP[w];});
+  var out=[];
+  (DB.knowledge||[]).forEach(function(e){
+    var sc=0,hay=_kcHay(e).toLowerCase();
+    if(e.code){ // مطابقة كود حقيقية (مش جزء من رقم تاني): كود رقمي لازم ٣ خانات+ ويقبل بادئة Sc/Sp/C/E — والأكواد المتعددة (Sc541,Sc542) كل واحد لوحده
+      var hitCode=String(e.code).split(/[,،\/|]+/).some(function(cc){
+        var c=normalizeAr(cc).toLowerCase().replace(/\s+/g,''),num=/^[0-9.\-]+$/.test(c);
+        if(!(c.length>=3||(!num&&c.length>=2)))return false;
+        return new RegExp('(^|[^a-z0-9.])'+(num?'(?:sc|sp|c|e|ox)?':'')+c.replace(/[.*+?^${}()|[\]\\\-]/g,'\\$&')+'(?![a-z0-9])').test(txtSp);
+      });
+      if(hitCode)sc+=6;
+    }
+    if(dev&&(e.models||[]).some(function(mm){var n=normalizeAr(mm).toLowerCase().replace(/\s+/g,'');return n.length>=3&&dev.indexOf(n)>=0;}))sc+=4; // نفس الموديل بالظبط أقوى من العائلة
+    else if(fam&&fam!=='بدون موديل'&&e.family===fam)sc+=2;
+    var hits=0;toks.forEach(function(w){if(hay.indexOf(w)>=0)hits++;});sc+=Math.min(3,hits);
+    if(sc>=4)out.push({e:e,sc:sc});
+  });
+  out.sort(function(a,b){return b.sc-a.sc;});
+  return out.slice(0,5).map(function(x){return x.e;});
+}
+function _mvKbToggle(el){var d=el.nextElementSibling;if(!d)return;d.style.display=(d.style.display==='none'?'block':'none');_kbHydrate();}
+function _kbCardHtml(rel,withSave,mid){
+  if(!rel.length)return withSave?'<button class="btn btn-outline btn-full" style="margin-bottom:10px;color:#6d28d9;border-color:#c4b5fd" onclick="openKnowledgeFromMovement(\''+mid+'\')">💡 احفظ كخبرة</button>':'';
+  return '<div class="card" style="border:1.5px solid #c4b5fd;background:#faf5ff;margin-bottom:10px"><div style="font-weight:800;font-size:13px;color:#6d28d9;margin-bottom:6px">💡 فيه '+rel.length+' خبرة ممكن تفيدك للعطل ده</div>'+
+    rel.map(function(e){
+      return '<div onclick="_mvKbToggle(this)" style="background:#fff;border-radius:10px;padding:8px 10px;margin-bottom:6px;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.06)"><div style="font-weight:800;font-size:12.5px">'+(e.kind==='program'?'⚙️ ':'🔧 ')+esc(e.fault)+' <span style="color:#94a3b8;font-weight:400">▾</span></div>'+_kcBadges(e)+'</div>'+
+        '<div style="display:none;background:#f0fdf4;border-radius:10px;padding:9px 10px;margin:-2px 0 8px"><div style="font-size:12.5px;color:#14532d;white-space:pre-wrap">✅ '+esc(e.solution||'')+'</div>'+(e.parts?'<div style="font-size:11.5px;color:#64748b;margin-top:5px">🔩 '+esc(e.parts)+'</div>':'')+_kcExtraHtml(e)+'</div>';
+    }).join('')+'</div>'+(withSave?'<button class="btn btn-outline btn-full" style="margin-bottom:10px;color:#6d28d9;border-color:#c4b5fd" onclick="openKnowledgeFromMovement(\''+mid+'\')">💡 احفظ كخبرة</button>':'');
+}
+function _mvKbHtml(m){return _kbCardHtml(_kbRelated(m),true,m.id);}
+// تنبيه حي وإنت بتكتب العطل في فورم التحرك (نوع العطل / الجهاز / الوصف)
+var _movKbTimer=null;
+function _movKbHint(){
+  var d=document.getElementById('mov-desc'),ft=document.getElementById('mov-fault-input');if(!d||!ft)return;
+  var box=document.getElementById('mov-kb-hint');
+  if(!box){box=document.createElement('div');box.id='mov-kb-hint';var host=d.closest('.field')||d.parentNode;host.parentNode.insertBefore(box,host.nextSibling);}
+  var dv=document.getElementById('mov-device'),m={fault_type:ft.value||'',fault_desc:d.value||'',device:dv?dv.value:'',log:[]};
+  if(m.fault_type.trim().length<2&&m.fault_desc.trim().length<3){box.innerHTML='';return;}
+  box.innerHTML=_kbCardHtml(_kbRelated(m).slice(0,4),false);
+}
+document.addEventListener('input',function(e){var id=e.target&&e.target.id;if(id==='mov-fault-input'||id==='mov-device'||id==='mov-desc'){clearTimeout(_movKbTimer);_movKbTimer=setTimeout(_movKbHint,450);}});
+document.addEventListener('change',function(e){var id=e.target&&e.target.id;if(id==='mov-fault-input')_movKbHint();});
 function openMovementDetail(id){
   var m=(DB.movements||[]).find(function(x){return x.id===id;});if(!m)return;
   var days=daysBetween(m.opened_at,m.closed_at);
@@ -16356,6 +16443,7 @@ function openMovementDetail(id){
     _movDetailEstimateHtml(m)+
     (m.parts&&m.parts.length?'<div style="font-size:12px;font-weight:700;color:#ea580c;margin-bottom:4px">🔩 قطع الغيار:</div>'+
       m.parts.map(function(p){return '<div style="font-size:12px">• '+esc(p.name)+(p.qty>1?' × '+p.qty:'')+'</div>';}).join(''):'')+'</div>'+
+    _mvKbHtml(m)+
     // ⚠️ v240 — الأحدث فوق (كان بيتعرض بترتيب الإدخال العادي فالجديد يطلع تحت خالص)
     (m.log&&m.log.length?'<div class="card" style="margin-bottom:10px"><div style="font-weight:700;font-size:13px;margin-bottom:10px">📋 سجل العمل ('+m.log.length+')</div>'+
       m.log.slice().reverse().map(function(l,i){
@@ -22297,36 +22385,47 @@ async function confirmWorkRule(id){
 function __wrStartupNudge(){ // تنبيه واحد عند فتح التطبيق لو فيه قواعد إلزامية لسه ماتأكدتش
   setTimeout(function(){try{var n=_wrPending().length;if(n)showToast('📜 عندك '+n+' قاعدة عمل إلزامية محتاجة تأكيد — المزيد ← قواعد وقوانين العمل','#b45309');}catch(e){}},9000);
 }
-// ===== v281 — الأهداف والخطط (قصيرة وطويلة الأمد) بمقياس بيتحسب من البيانات + تذكير، بالتاريخ الهجري =====
-// DB.goals=[{id,title,kind:'short'|'long',metric:'sales'|'profit'|'movements'|'custom',target,from,to,manual,note,done,date,updated_at}] — بتتزامن كمستند business_state (من غير SQL). للمالك بس.
-var _glFilter='all',_glOpen=null,_glEditId=null;
-var _GL_METRICS={sales:'💰 إجمالي المبيعات',profit:'📈 صافي ربح الفواتير',movements:'🔧 عدد التحركات (الصيانة)',custom:'✍️ يدوي (أنت بتحدّث الرقم)'};
+// ===== v283 — الأهداف والخطط: هدف = عنوان + سلسلة مهمات + نتائج + مصروفات + مدة + تقييم (بالتاريخ الهجري، للمالك بس) =====
+// DB.goals=[{id,title,kind,metric,target,budget,from,to,note,done,closed,rating,lessons,manual,tasks:[{id,title,who,status,from,to,doneDate,budget,spent,note}],results:[{id,title,unit,target,actual}]}] — بتتزامن كمستند business_state.
+var _glFilter='all',_glCur=null,_glEditId=null,_glTf='all',_glTaskEdit=null,_glResEdit=null;
+var _GL_METRICS={none:'🚫 بدون مقياس تلقائي (بالمهمات والنتائج بس)',sales:'💰 إجمالي المبيعات',profit:'📈 صافي ربح الفواتير',movements:'🔧 عدد التحركات (الصيانة)',custom:'✍️ يدوي (أنت بتحدّث الرقم)'};
+var _GL_ST={todo:['⏳ لسه','#64748b','#f1f5f9'],doing:['🔨 شغال','#2563eb','#dbeafe'],done:['✅ تم','#16a34a','#dcfce7']};
 function _glGoals(){return DB.goals||(DB.goals=[]);}
+function _glFind(id){return _glGoals().find(function(x){return x.id===id;});}
+function _glSave(id,patch){patch.updated_at=new Date().toISOString();DB.goals=patchRow(_glGoals(),id,patch);persist();}
+function _glDays(a,b){return (a&&b)?Math.round((Date.parse(b)-Date.parse(a))/86400000):null;}
 function _glValue(g){
   var f=g.from||'0000-00-00',t=g.to||'9999-99-99';
   if(g.metric==='sales')return money((DB.sales||[]).filter(function(x){return (x.date||'')>=f&&(x.date||'')<=t;}).reduce(function(a,x){return a+(+x.total||0);},0));
   if(g.metric==='profit')return money((DB.sales||[]).filter(function(x){return (x.date||'')>=f&&(x.date||'')<=t;}).reduce(function(a,x){return a+_saleNetProfit(x);},0));
   if(g.metric==='movements')return (DB.movements||[]).filter(function(m){return (m.opened_at||'')>=f&&(m.opened_at||'')<=t&&m.status!=='ملغي';}).length;
-  return +g.manual||0;
+  if(g.metric==='custom')return +g.manual||0;
+  return 0;
 }
 function _glInfo(g){
-  var val=_glValue(g),tg=+g.target||0,pct=tg>0?Math.round(val/tg*100):0,td=today();
-  var days=g.to?Math.round((Date.parse(g.to)-Date.parse(td))/86400000):null;
-  var total=(g.from&&g.to)?Math.max(1,Math.round((Date.parse(g.to)-Date.parse(g.from))/86400000)):null;
-  var elapsed=(g.from&&total)?Math.min(total,Math.max(0,Math.round((Date.parse(td)-Date.parse(g.from))/86400000))):null;
-  var expected=(total&&elapsed!=null)?Math.round(elapsed/total*100):null;
+  var td=today(),tasks=g.tasks||[],nT=tasks.length,dT=tasks.filter(function(t){return t.status==='done';}).length;
+  var lateT=tasks.filter(function(t){return t.status!=='done'&&t.to&&t.to<td;}).length;
+  var spent=money(tasks.reduce(function(a,t){return a+_glTaskSpent(t);},0)),bT=money(tasks.reduce(function(a,t){return a+(+t.budget||0);},0));
+  var budget=+g.budget>0?+g.budget:bT;
+  var metricOn=!!(g.metric&&g.metric!=='none'&&+g.target>0),val=metricOn?_glValue(g):0,tg=+g.target||0,mpct=metricOn?Math.round(val/tg*100):null;
+  var tpct=nT?Math.round(dT/nT*100):null;
+  var prog=tpct!=null?tpct:(mpct!=null?mpct:0);
+  var days=g.to?_glDays(td,g.to):null,total=_glDays(g.from,g.to);
+  var endRef=g.closed||td,used=g.from?Math.max(0,_glDays(g.from,endRef)):null;
+  var expected=(total&&g.from)?Math.round(Math.min(total,Math.max(0,_glDays(g.from,td)))/total*100):null;
   var st='run';
-  if(g.done||pct>=100)st='done';else if(days!=null&&days<0)st='late';else if(expected!=null&&pct+10<expected)st='behind';
-  return {val:val,tg:tg,pct:pct,days:days,expected:expected,st:st};
+  if(g.done||prog>=100)st='done';else if(days!=null&&days<0)st='late';else if(lateT>0||(expected!=null&&prog+10<expected))st='behind';
+  var roi=(spent>0&&metricOn&&(g.metric==='sales'||g.metric==='profit'))?Math.round(val/spent*100)/100:null;
+  return {val:val,tg:tg,mpct:mpct,metricOn:metricOn,nT:nT,dT:dT,tpct:tpct,lateT:lateT,spent:spent,budget:budget,prog:prog,pct:prog,days:days,total:total,used:used,expected:expected,st:st,roi:roi};
 }
 function openGoals(){
   if(!window.__isOwner)return showToast('🚫 الأهداف للمالك بس','#dc2626');
-  _glFilter='all';_glOpen=null;
+  _glFilter='all';_glCur=null;
   document.getElementById('modal-title').textContent='🎯 الأهداف والخطط';
   openModal();_glRender();
 }
 function _glSet(f){_glFilter=f;_glRender();}
-function _glTap(id){_glOpen=(_glOpen===id?null:id);_glList();}
+function openGoalDetail(id){_glCur=id;_glTf='all';_glRender();}
 function _glVisible(){
   return _glGoals().filter(function(g){
     var i=_glInfo(g);
@@ -22336,69 +22435,187 @@ function _glVisible(){
     return true;
   }).sort(function(a,b){return (a.done?1:0)-(b.done?1:0)||(a.to||'9999').localeCompare(b.to||'9999');});
 }
+var _GL_STT={done:['✅ تحقق','#16a34a','#dcfce7'],late:['⚠️ فات الموعد','#dc2626','#fee2e2'],behind:['🐢 متأخر عن الخطة','#ea580c','#ffedd5'],run:['⏳ ماشي','#2563eb','#dbeafe']};
 function _glRender(){
+  if(_glCur&&_glFind(_glCur))return _glDetail();
+  _glCur=null;
   var all=_glGoals(),late=all.filter(function(g){var s=_glInfo(g).st;return s==='late'||s==='behind';}).length;
   function card(f,label,n,c,bg){var on=_glFilter===f;return '<div onclick="_glSet(\''+f+'\')" style="flex:1;background:'+(on?c:bg)+';border-radius:11px;padding:8px 2px;text-align:center;cursor:pointer;border:2px solid '+(on?c:'transparent')+'"><div style="font-size:10px;font-weight:700;color:'+(on?'#fff':c)+'">'+label+'</div><div style="font-size:17px;font-weight:900;color:'+(on?'#fff':c)+'">'+n+'</div></div>';}
+  document.getElementById('modal-title').textContent='🎯 الأهداف والخطط';
   document.getElementById('modal-body').innerHTML=
     '<div style="display:flex;gap:5px;margin-bottom:10px">'+card('all','الكل',all.length,'#0f766e','#ccfbf1')+card('short','قصيرة',all.filter(function(g){return g.kind==='short';}).length,'#2563eb','#dbeafe')+card('long','طويلة',all.filter(function(g){return g.kind==='long';}).length,'#7c3aed','#ede9fe')+card('late','متأخرة',late,'#dc2626','#fee2e2')+'</div>'+
-    '<button class="btn btn-primary btn-full" style="margin-bottom:10px" onclick="openGoalForm()">+ هدف جديد</button>'+
-    '<div id="gl-list"></div><div class="modal-actions" style="margin-top:8px"><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
-  _glList();
-}
-function _glList(){
-  var el=document.getElementById('gl-list');if(!el)return;
-  var list=_glVisible();
-  var stTxt={done:['✅ تحقق','#16a34a','#dcfce7'],late:['⚠️ فات الموعد','#dc2626','#fee2e2'],behind:['🐢 متأخر عن الخطة','#ea580c','#ffedd5'],run:['⏳ ماشي','#2563eb','#dbeafe']};
+    '<button class="btn btn-primary btn-full" style="margin-bottom:10px" onclick="openGoalForm()">+ هدف جديد</button><div id="gl-list"></div>'+
+    '<div class="modal-actions" style="margin-top:8px"><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+  var list=_glVisible(),el=document.getElementById('gl-list');
   el.innerHTML=list.length?list.map(function(g){
-    var i=_glInfo(g),t=stTxt[i.st],open=_glOpen===g.id,w=Math.min(100,i.pct);
-    var det='';
-    if(open){
-      det='<div style="font-size:12px;color:#475569;margin-top:8px;border-top:1px solid #f1f5f9;padding-top:8px;line-height:1.9">'+
-        '📌 المقياس: <b>'+esc(_GL_METRICS[g.metric]||'')+'</b><br>📅 من '+esc(fmtDate(g.from))+' إلى '+esc(fmtDate(g.to))+
-        (i.days!=null?'<br>⏱️ '+(i.days>=0?'فاضل '+i.days+' يوم':'عدّى الموعد بـ'+(-i.days)+' يوم'):'')+
-        (i.expected!=null?'<br>📊 المفروض تكون وصلت '+i.expected+'% دلوقتي':'')+
-        (g.note?'<br>📝 '+esc(g.note):'')+'</div>'+
-        (g.metric==='custom'?'<div style="display:flex;gap:6px;margin-top:8px"><input id="gl-man-'+g.id+'" type="number" step="any" value="'+(+g.manual||0)+'" style="flex:1;padding:8px;border:2px solid #e2e8f0;border-radius:9px;font-family:inherit;text-align:center" onclick="event.stopPropagation()"><button class="btn btn-primary" onclick="event.stopPropagation();updateGoalManual(\''+g.id+'\')">تحديث الرقم</button></div>':'')+
-        '<div style="display:flex;gap:6px;margin-top:8px">'+
-        '<button class="btn btn-outline" style="flex:1" onclick="event.stopPropagation();toggleGoalDone(\''+g.id+'\')">'+(g.done?'↩️ إعادة فتح':'✅ تم')+'</button>'+
-        '<button class="btn btn-outline" style="flex:1" onclick="event.stopPropagation();openGoalForm(\''+g.id+'\')">✏️ تعديل</button>'+
-        '<button class="btn btn-outline" style="flex:1;color:#dc2626;border-color:#fca5a5" onclick="event.stopPropagation();deleteGoal(\''+g.id+'\')">🗑️</button></div>';
-    }
-    return '<div onclick="_glTap(\''+g.id+'\')" style="background:#fff;border-radius:12px;padding:10px 12px;margin-bottom:8px;box-shadow:0 1px 6px rgba(0,0,0,.07);cursor:pointer;border-right:4px solid '+(g.kind==='long'?'#7c3aed':'#2563eb')+'">'+
+    var i=_glInfo(g),t=_GL_STT[i.st],w=Math.min(100,i.prog);
+    return '<div onclick="openGoalDetail(\''+g.id+'\')" style="background:#fff;border-radius:12px;padding:10px 12px;margin-bottom:8px;box-shadow:0 1px 6px rgba(0,0,0,.07);cursor:pointer;border-right:4px solid '+(g.kind==='long'?'#7c3aed':'#2563eb')+'">'+
       '<div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><div style="font-weight:900;font-size:14px;color:#0f172a">'+esc(g.title||'')+'</div><span style="background:'+t[2]+';color:'+t[1]+';border-radius:6px;padding:1px 7px;font-size:10px;font-weight:800;white-space:nowrap">'+t[0]+'</span></div>'+
-      '<div style="font-size:11px;color:#64748b;margin:4px 0">'+(g.kind==='long'?'طويل الأمد':'قصير الأمد')+' — الموعد '+esc(fmtDate(g.to))+'</div>'+
+      '<div style="font-size:11px;color:#64748b;margin:4px 0">'+(g.kind==='long'?'طويل الأمد':'قصير الأمد')+(g.to?' — الموعد '+esc(fmtDate(g.to)):'')+'</div>'+
       '<div style="height:9px;background:#f1f5f9;border-radius:5px;overflow:hidden"><div style="height:9px;width:'+w+'%;background:'+t[1]+'"></div></div>'+
-      '<div style="display:flex;justify-content:space-between;font-size:12px;margin-top:4px"><b>'+fmt(i.val)+' / '+fmt(i.tg)+'</b><b style="color:'+t[1]+'">'+i.pct+'%</b></div>'+det+'</div>';
+      '<div style="display:flex;justify-content:space-between;font-size:11.5px;margin-top:5px;color:#475569"><span>'+(i.nT?'📋 '+i.dT+'/'+i.nT+' مهمة':'بدون مهمات')+'</span><span>'+(i.spent||i.budget?'💸 '+fmt(i.spent)+(i.budget?' / '+fmt(i.budget):'')+' ج':'')+'</span><b style="color:'+t[1]+'">'+i.prog+'%</b></div></div>';
   }).join(''):'<div class="empty">مفيش أهداف '+(_glFilter==='all'?'لسه — اضغط "+ هدف جديد"':'في القسم ده')+'</div>';
 }
+function _glBox(label,val,sub,c,bg){return '<div style="background:'+bg+';border-radius:11px;padding:9px 6px;text-align:center"><div style="font-size:10px;font-weight:700;color:'+c+'">'+label+'</div><div style="font-size:15px;font-weight:900;color:'+c+';margin:2px 0">'+val+'</div><div style="font-size:10px;color:#64748b">'+sub+'</div></div>';}
+function _glDetail(){
+  var g=_glFind(_glCur),i=_glInfo(g),td=today(),t=_GL_STT[i.st],tasks=g.tasks||[],results=g.results||[];
+  var over=i.budget>0&&i.spent>i.budget;
+  document.getElementById('modal-title').textContent='🎯 '+(g.title||'');
+  var tf=tasks.filter(function(x){
+    if(_glTf==='all')return true;
+    if(_glTf==='late')return x.status!=='done'&&x.to&&x.to<td;
+    return x.status===_glTf;
+  });
+  function chip(f,label,n){var on=_glTf===f;return '<button type="button" onclick="_glTf=\''+f+'\';_glRender()" style="border:none;border-radius:16px;padding:5px 11px;font-family:inherit;font-size:11.5px;font-weight:800;cursor:pointer;background:'+(on?'#0f766e':'#f1f5f9')+';color:'+(on?'#fff':'#475569')+'">'+label+' ('+n+')</button>';}
+  var cnt=function(f){return tasks.filter(function(x){return f==='late'?(x.status!=='done'&&x.to&&x.to<td):x.status===f;}).length;};
+  document.getElementById('modal-body').innerHTML=
+    '<div style="display:flex;gap:6px;margin-bottom:10px"><button class="btn btn-outline" style="flex:0 0 auto" onclick="_glCur=null;_glRender()">← رجوع</button><span style="flex:1;text-align:center;background:'+t[2]+';color:'+t[1]+';border-radius:9px;padding:8px;font-weight:800;font-size:12px">'+t[0]+' — '+i.prog+'%</span><button class="btn btn-outline" style="flex:0 0 auto" onclick="openGoalForm(\''+g.id+'\')">✏️</button><button class="btn btn-outline" style="flex:0 0 auto;color:#dc2626;border-color:#fca5a5" onclick="deleteGoal(\''+g.id+'\')">🗑️</button></div>'+
+    '<div style="height:10px;background:#f1f5f9;border-radius:6px;overflow:hidden;margin-bottom:10px"><div style="height:10px;width:'+Math.min(100,i.prog)+'%;background:'+t[1]+'"></div></div>'+
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">'+
+      _glBox('📋 المهمات',i.nT?i.dT+' / '+i.nT:'—',i.lateT?('⚠️ متأخر '+i.lateT):'ماشي تمام','#0f766e','#ccfbf1')+
+      _glBox('💸 المصروف',fmt(i.spent)+' ج',i.budget?('من ميزانية '+fmt(i.budget)+' — '+(over?'⚠️ زيادة '+fmt(i.spent-i.budget):'فاضل '+fmt(i.budget-i.spent))):'مفيش ميزانية',over?'#dc2626':'#7c3aed',over?'#fee2e2':'#ede9fe')+
+      _glBox('⏱️ المدة',(i.used!=null?i.used+' يوم':'—'),(i.total?'المخطط '+i.total+' يوم'+(i.days!=null&&!g.done?(i.days>=0?' — فاضل '+i.days:' — عدّى '+(-i.days)):''):'من '+esc(fmtDate(g.from))),'#2563eb','#dbeafe')+
+      _glBox(i.metricOn?'📊 المقياس':'🏁 التقييم',i.metricOn?(fmt(i.val)+' / '+fmt(i.tg)):(g.rating?('★'.repeat(g.rating)+'☆'.repeat(5-g.rating)):'—'),i.metricOn?(i.mpct+'%'+(i.roi!=null?' — العائد ×'+i.roi:'')):'لسه ما اتقيّمش','#b45309','#fef3c7')+
+    '</div>'+
+    (i.metricOn&&g.metric==='custom'?'<div style="display:flex;gap:6px;margin-bottom:10px"><input id="gl-man" type="number" step="any" value="'+(+g.manual||0)+'" style="flex:1;padding:8px;border:2px solid #e2e8f0;border-radius:9px;font-family:inherit;text-align:center"><button class="btn btn-primary" onclick="updateGoalManual()">تحديث الرقم المحقق</button></div>':'')+
+    (g.note?'<div style="font-size:12px;background:#f8fafc;border-radius:9px;padding:8px 10px;margin-bottom:10px;white-space:pre-wrap">📝 '+esc(g.note)+'</div>':'')+
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin:8px 0"><b style="font-size:14px">📋 سلسلة المهمات</b><button class="btn btn-primary" style="padding:6px 12px" onclick="openGoalTaskForm()">+ مهمة</button></div>'+
+    '<div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px">'+chip('all','الكل',tasks.length)+chip('todo','لسه',cnt('todo'))+chip('doing','شغال',cnt('doing'))+chip('done','تم',cnt('done'))+chip('late','متأخرة',cnt('late'))+'</div>'+
+    (tf.length?tf.map(function(x,k){
+      var st=_GL_ST[x.status]||_GL_ST.todo,isLate=x.status!=='done'&&x.to&&x.to<td;
+      return '<div onclick="openGoalTaskForm(\''+x.id+'\')" style="background:#fff;border-radius:11px;padding:9px 11px;margin-bottom:7px;box-shadow:0 1px 5px rgba(0,0,0,.07);border-right:4px solid '+(isLate?'#dc2626':st[1])+';cursor:pointer">'+
+        '<div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><div style="font-weight:800;font-size:13px">'+(k+1)+'. '+esc(x.title||'')+'</div><button type="button" onclick="event.stopPropagation();_glTaskNext(\''+x.id+'\')" style="border:none;border-radius:8px;padding:4px 9px;font-family:inherit;font-size:11px;font-weight:800;cursor:pointer;background:'+st[2]+';color:'+st[1]+'">'+st[0]+' ⟳</button></div>'+
+        '<div style="font-size:11px;color:#64748b;margin-top:3px">'+(x.who?'👤 '+esc(x.who)+' • ':'')+(x.from?'من '+esc(fmtDate(x.from)):'')+(x.to?' إلى '+esc(fmtDate(x.to)):'')+(isLate?' <b style="color:#dc2626">⚠️ متأخرة</b>':'')+(x.status==='done'&&x.doneDate?' • خلصت '+esc(fmtDate(x.doneDate)):'')+'</div>'+
+        ((+x.budget||_glTaskSpent(x))?'<div style="font-size:11.5px;margin-top:3px;color:'+((_glTaskSpent(x)>+x.budget&&+x.budget>0)?'#dc2626':'#7c3aed')+'">💸 صرفت '+fmt(_glTaskSpent(x))+(x.budget?' من '+fmt(+x.budget):'')+' ج'+(x.link?' <span style="background:#ede9fe;border-radius:6px;padding:1px 6px;font-size:10px">🔗 '+((x.exp_ids||[]).length)+' مصروف</span>':'')+'</div>':'')+
+        (x.note?'<div style="font-size:11.5px;color:#334155;margin-top:3px;white-space:pre-wrap">📝 '+esc(x.note)+'</div>':'')+'</div>';
+    }).join(''):'<div class="empty" style="padding:12px">مفيش مهمات هنا</div>')+
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin:14px 0 8px"><b style="font-size:14px">🏁 النتائج</b><button class="btn btn-primary" style="padding:6px 12px" onclick="openGoalResultForm()">+ نتيجة</button></div>'+
+    (results.length?results.map(function(r){
+      var pc=(+r.target>0)?Math.round((+r.actual||0)/(+r.target)*100):null;
+      return '<div onclick="openGoalResultForm(\''+r.id+'\')" style="background:#fff;border-radius:11px;padding:9px 11px;margin-bottom:7px;box-shadow:0 1px 5px rgba(0,0,0,.07);cursor:pointer"><div style="display:flex;justify-content:space-between;font-size:13px;font-weight:800"><span>'+esc(r.title||'')+'</span><span style="color:'+(pc!=null&&pc>=100?'#16a34a':'#b45309')+'">'+fmt(+r.actual||0)+(r.target?' / '+fmt(+r.target):'')+' '+esc(r.unit||'')+'</span></div>'+(pc!=null?'<div style="height:7px;background:#f1f5f9;border-radius:4px;overflow:hidden;margin-top:5px"><div style="height:7px;width:'+Math.min(100,pc)+'%;background:'+(pc>=100?'#16a34a':'#f59e0b')+'"></div></div>':'')+'</div>';
+    }).join(''):'<div class="empty" style="padding:12px">مفيش نتائج مسجّلة</div>')+
+    '<div style="margin:14px 0 8px"><b style="font-size:14px">⭐ التقييم والدروس</b></div>'+
+    '<div style="display:flex;gap:6px;justify-content:center;margin-bottom:8px">'+[1,2,3,4,5].map(function(n){return '<button type="button" onclick="_glRate('+n+')" style="border:none;background:none;font-size:26px;cursor:pointer;color:'+((g.rating||0)>=n?'#f59e0b':'#cbd5e1')+'">★</button>';}).join('')+'</div>'+
+    '<textarea rows="3" placeholder="إيه اللي اتعلمته؟ إيه اللي نجح وإيه اللي لازم يتغيّر؟" onchange="_glLessons(this.value)" style="width:100%;padding:9px;border:2px solid #e2e8f0;border-radius:10px;font-family:inherit;font-size:13px;box-sizing:border-box">'+esc(g.lessons||'')+'</textarea>'+
+    '<button class="btn btn-'+(g.done?'outline':'green')+' btn-full" style="margin-top:10px" onclick="toggleGoalDone(\''+g.id+'\')">'+(g.done?'↩️ إعادة فتح الهدف':'🏁 إغلاق الهدف وتثبيت المدة ('+esc(fmtDate(td))+')')+'</button>'+
+    '<div class="modal-actions" style="margin-top:8px"><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+}
+function _glTaskNext(tid){
+  var g=_glFind(_glCur);if(!g)return;var nx={todo:'doing',doing:'done',done:'todo'};
+  _glSave(g.id,{tasks:(g.tasks||[]).map(function(x){if(x.id!==tid)return x;var st=nx[x.status||'todo'];return Object.assign({},x,{status:st,doneDate:st==='done'?today():''});})});_glRender();
+}
+function _glRate(n){var g=_glFind(_glCur);if(!g)return;_glSave(g.id,{rating:(g.rating===n?0:n)});_glRender();}
+function _glLessons(val){var g=_glFind(_glCur);if(!g)return;_glSave(g.id,{lessons:val});}
+function updateGoalManual(){var el=document.getElementById('gl-man');if(!el||!_glCur)return;_glSave(_glCur,{manual:+el.value||0});_glRender();}
+function toggleGoalDone(id){var g=_glFind(id);if(!g)return;_glSave(id,{done:!g.done,closed:g.done?'':today()});_glRender();}
+function deleteGoal(id){confirmAction('تمسح الهدف ده بكل مهماته ونتائجه؟',function(){DB.goals=_glGoals().filter(function(x){return x.id!==id;});persist();_glCur=null;_glRender();});}
 function openGoalForm(id){
   if(!window.__isOwner)return;
-  _glEditId=id||null;var g=id?_glGoals().find(function(x){return x.id===id;}):null;
-  var td=today();
+  _glEditId=id||null;var g=id?_glFind(id):null,td=today();
   document.getElementById('modal-title').textContent=g?'✏️ تعديل هدف':'🎯 هدف جديد';
   document.getElementById('modal-body').innerHTML=
-    '<div class="field"><label>🎯 اسم الهدف *</label><input id="gl-title" type="text" value="'+esc(g?g.title:'')+'" placeholder="مثال: مبيعات الشهر"></div>'+
+    '<div class="field"><label>🎯 عنوان الهدف *</label><input id="gl-title" type="text" value="'+esc(g?g.title:'')+'" placeholder="مثال: فتح فرع جديد / رفع مبيعات الشهر"></div>'+
     '<div class="field"><label>⏳ النوع</label><select id="gl-kind"><option value="short"'+(!g||g.kind==='short'?' selected':'')+'>قصير الأمد</option><option value="long"'+(g&&g.kind==='long'?' selected':'')+'>طويل الأمد</option></select></div>'+
-    '<div class="field"><label>📌 المقياس (بيتحسب لوحده من البيانات)</label><select id="gl-metric">'+Object.keys(_GL_METRICS).map(function(k){return '<option value="'+k+'"'+(g&&g.metric===k?' selected':'')+'>'+_GL_METRICS[k]+'</option>';}).join('')+'</select></div>'+
-    '<div class="field"><label>🏁 الرقم المستهدف *</label><input id="gl-target" type="number" step="any" value="'+(g?g.target:'')+'" placeholder="مثال: 50000"></div>'+
-    dateField('gl-from','📅 من',g?g.from:td)+dateField('gl-to','📅 إلى (الموعد النهائي)',g?g.to:null)+
-    '<div class="field"><label>📝 ملاحظة (اختياري)</label><textarea id="gl-note" rows="2">'+esc(g?g.note||'':'')+'</textarea></div>'+
-    '<div class="modal-actions"><button class="btn btn-outline" onclick="openGoals()">إلغاء</button><button class="btn btn-primary" onclick="__runOnce(this,saveGoal)">💾 حفظ</button></div>';
+    dateField('gl-from','📅 تاريخ البداية',g?g.from:td)+dateField('gl-to','📅 الموعد النهائي',g?g.to:null)+
+    '<div class="field"><label>💸 الميزانية الكلية المتوقعة (اختياري — لو سبتها فاضية بتتحسب من ميزانيات المهمات)</label><input id="gl-budget" type="number" step="any" value="'+(g&&g.budget?g.budget:'')+'"></div>'+
+    '<div class="field"><label>📌 مقياس تلقائي (اختياري)</label><select id="gl-metric">'+Object.keys(_GL_METRICS).map(function(k){return '<option value="'+k+'"'+((g?(g.metric||'none'):'none')===k?' selected':'')+'>'+_GL_METRICS[k]+'</option>';}).join('')+'</select></div>'+
+    '<div class="field"><label>🏁 الرقم المستهدف للمقياس</label><input id="gl-target" type="number" step="any" value="'+(g&&g.target?g.target:'')+'" placeholder="مثال: 50000"></div>'+
+    '<div class="field"><label>📝 وصف / ملاحظات</label><textarea id="gl-note" rows="3">'+esc(g?g.note||'':'')+'</textarea></div>'+
+    '<div class="modal-actions"><button class="btn btn-outline" onclick="_glRender()">إلغاء</button><button class="btn btn-primary" onclick="__runOnce(this,saveGoal)">💾 حفظ</button></div>';
 }
 function saveGoal(){
   if(!window.__isOwner)return;
-  var title=v('gl-title').trim(),target=+v('gl-target')||0,from=v('gl-from'),to=v('gl-to');
-  if(!title)return showToast('⚠️ اكتب اسم الهدف','#dc2626');
-  if(!(target>0))return showToast('⚠️ اكتب الرقم المستهدف','#dc2626');
+  var title=v('gl-title').trim(),target=+v('gl-target')||0,from=v('gl-from'),to=v('gl-to'),metric=v('gl-metric')||'none';
+  if(!title)return showToast('⚠️ اكتب عنوان الهدف','#dc2626');
+  if(metric!=='none'&&!(target>0))return showToast('⚠️ اكتب الرقم المستهدف للمقياس (أو اختار "بدون مقياس")','#dc2626');
   if(from&&to&&to<from)return showToast('⚠️ الموعد النهائي قبل تاريخ البداية','#dc2626');
-  var rec={title:title,kind:v('gl-kind'),metric:v('gl-metric'),target:target,from:from,to:to,note:v('gl-note').trim(),updated_at:new Date().toISOString()};
+  var rec={title:title,kind:v('gl-kind'),metric:metric,target:target,budget:+v('gl-budget')||0,from:from,to:to,note:v('gl-note').trim(),updated_at:new Date().toISOString()};
   if(_glEditId)DB.goals=patchRow(_glGoals(),_glEditId,rec);
-  else DB.goals=_glGoals().concat([Object.assign({id:genId(),done:false,manual:0,date:today()},rec)]);
-  persist();showToast('✅ اتحفظ الهدف','#16a34a');openGoals();
+  else{var ng=Object.assign({id:genId(),done:false,manual:0,tasks:[],results:[],rating:0,lessons:'',date:today()},rec);DB.goals=_glGoals().concat([ng]);_glCur=ng.id;}
+  persist();showToast('✅ اتحفظ الهدف','#16a34a');_glRender();
 }
-function updateGoalManual(id){var el=document.getElementById('gl-man-'+id);if(!el)return;DB.goals=patchRow(_glGoals(),id,{manual:+el.value||0,updated_at:new Date().toISOString()});persist();_glRender();}
-function toggleGoalDone(id){var g=_glGoals().find(function(x){return x.id===id;});if(!g)return;DB.goals=patchRow(_glGoals(),id,{done:!g.done,updated_at:new Date().toISOString()});persist();_glRender();}
-function deleteGoal(id){confirmAction('تمسح الهدف ده؟',function(){DB.goals=_glGoals().filter(function(x){return x.id!==id;});persist();_glOpen=null;_glRender();});}
+var _gtLink=false,_gtExp=[],_gtDraft=null;
+function _glTaskSpent(t){ // المصروف الفعلي للمهمة: مربوط بمصروفات حقيقية أو رقم بإيدك
+  if(t&&t.link){var ids=t.exp_ids||[];return money((DB.expenses||[]).filter(function(e){return ids.indexOf(e.id)>=0;}).reduce(function(a,e){return a+(+e.amount||0);},0));}
+  return +(t&&t.spent)||0;
+}
+function _gtSnap(){return {title:v('gt-title'),who:v('gt-who'),status:v('gt-status'),from:v('gt-from'),to:v('gt-to'),budget:v('gt-budget'),spent:v('gt-spent'),note:v('gt-note')};}
+function _gtSumHtml(){
+  var l=(DB.expenses||[]).filter(function(e){return _gtExp.indexOf(e.id)>=0;}),tot=money(l.reduce(function(a,e){return a+(+e.amount||0);},0));
+  return l.length?('🔗 '+l.length+' مصروف مربوط — الإجمالي <b>'+fmt(tot)+' ج</b>'):'مفيش مصروفات مربوطة لسه';
+}
+function _gtMode(on){_gtLink=!!on;var a=document.getElementById('gt-manual'),b=document.getElementById('gt-linked');if(a)a.style.display=on?'none':'block';if(b)b.style.display=on?'block':'none';}
+function openGoalTaskForm(tid,fromDraft){
+  var g=_glFind(_glCur);if(!g)return;_glTaskEdit=tid||null;
+  var x=tid?(g.tasks||[]).find(function(t){return t.id===tid;}):null;
+  var d=(fromDraft&&_gtDraft)?_gtDraft:null;
+  if(!d){_gtLink=x?!!x.link:false;_gtExp=x?(x.exp_ids||[]).slice():[];_gtDraft=null;}
+  function val(k,dv){return d?d[k]:(x?(x[k]==null?dv:x[k]):dv);}
+  document.getElementById('modal-title').textContent=x?'✏️ تعديل مهمة':'📋 مهمة جديدة';
+  document.getElementById('modal-body').innerHTML=
+    '<div class="field"><label>📋 المهمة *</label><input id="gt-title" type="text" value="'+esc(val('title',''))+'" placeholder="مثال: تجهيز المكان / شراء المعدات"></div>'+
+    '<div class="field"><label>👤 المسؤول</label><input id="gt-who" type="text" value="'+esc(val('who',''))+'"></div>'+
+    '<div class="field"><label>الحالة</label><select id="gt-status">'+Object.keys(_GL_ST).map(function(k){return '<option value="'+k+'"'+((val('status','todo')||'todo')===k?' selected':'')+'>'+_GL_ST[k][0]+'</option>';}).join('')+'</select></div>'+
+    dateField('gt-from','📅 تبدأ',d?d.from:(x?x.from:today()))+dateField('gt-to','📅 آخر موعد',d?d.to:(x?x.to:null))+
+    '<div class="field"><label>💰 ميزانية المهمة</label><input id="gt-budget" type="number" step="any" value="'+(val('budget','')||'')+'"></div>'+
+    '<div class="field"><label>💸 اللي اتصرف فعلًا</label>'+
+      '<div style="display:flex;gap:8px;margin-bottom:8px"><label style="flex:1;display:flex;gap:6px;align-items:center;background:#f8fafc;border-radius:9px;padding:8px;font-size:12.5px"><input type="radio" name="gt-mode" '+(!_gtLink?'checked':'')+' onchange="_gtMode(false)"> ✍️ رقم بإيدي</label><label style="flex:1;display:flex;gap:6px;align-items:center;background:#f8fafc;border-radius:9px;padding:8px;font-size:12.5px"><input type="radio" name="gt-mode" '+(_gtLink?'checked':'')+' onchange="_gtMode(true)"> 🔗 مربوط بمصروفات</label></div>'+
+      '<div id="gt-manual" style="display:'+(_gtLink?'none':'block')+'"><input id="gt-spent" type="number" step="any" value="'+(val('spent','')||'')+'"></div>'+
+      '<div id="gt-linked" style="display:'+(_gtLink?'block':'none')+'"><div id="gt-link-sum" style="background:#f5f3ff;border-radius:9px;padding:9px;font-size:12.5px;margin-bottom:8px">'+_gtSumHtml()+'</div><button type="button" class="btn btn-outline btn-full" onclick="openGoalExpPicker()">🔗 اختيار المصروفات</button></div></div>'+
+    '<div class="field"><label>📝 ملاحظات / نتيجة المهمة</label><textarea id="gt-note" rows="3">'+esc(val('note',''))+'</textarea></div>'+
+    '<div class="modal-actions"><button class="btn btn-outline" onclick="_glRender()">إلغاء</button>'+(x?'<button class="btn btn-outline" style="color:#dc2626;border-color:#fca5a5" onclick="deleteGoalTask(\''+x.id+'\')">🗑️</button>':'')+'<button class="btn btn-primary" onclick="__runOnce(this,saveGoalTask)">💾 حفظ</button></div>';
+}
+var _gtPickQ='';
+function openGoalExpPicker(){
+  _gtDraft=_gtSnap();_gtPickQ='';
+  document.getElementById('modal-title').textContent='🔗 اختيار المصروفات';
+  document.getElementById('modal-body').innerHTML=
+    '<input type="search" placeholder="🔍 ابحث بالبيان أو المبلغ أو النوع..." oninput="_gtPickQ=this.value;_gtPickList()" style="width:100%;padding:9px 12px;border:2px solid #e2e8f0;border-radius:10px;font-family:inherit;font-size:13px;margin-bottom:8px;box-sizing:border-box">'+
+    '<div id="gt-pick-sum" style="background:#f5f3ff;border-radius:9px;padding:8px 10px;font-size:12.5px;margin-bottom:8px"></div><div id="gt-pick-list" style="max-height:52vh;overflow:auto"></div>'+
+    '<div class="modal-actions" style="margin-top:8px"><button class="btn btn-primary btn-full" onclick="openGoalTaskForm(_glTaskEdit,true)">✅ تم</button></div>';
+  _gtPickList();
+}
+function _gtTog(id,on){var k=_gtExp.indexOf(id);if(on&&k<0)_gtExp.push(id);if(!on&&k>=0)_gtExp.splice(k,1);var el=document.getElementById('gt-pick-sum');if(el)el.innerHTML=_gtSumHtml();}
+function _gtPickList(){
+  var el=document.getElementById('gt-pick-list');if(!el)return;
+  var used={};_glGoals().forEach(function(g){(g.tasks||[]).forEach(function(t){if(t.link&&t.id!==_glTaskEdit)(t.exp_ids||[]).forEach(function(i){used[i]=t.title||'مهمة تانية';});});});
+  var q=normalizeAr(_gtPickQ||'');
+  var list=(DB.expenses||[]).filter(function(e){return !q||normalizeAr([e.label,e.note,e.type,e.amount].join(' ')).indexOf(q)>=0;}).sort(function(a,b){return (b.date||'').localeCompare(a.date||'');}).slice(0,150);
+  document.getElementById('gt-pick-sum').innerHTML=_gtSumHtml();
+  el.innerHTML=list.length?list.map(function(e){
+    var u=used[e.id];
+    return '<label style="display:flex;gap:10px;align-items:flex-start;background:'+(u?'#f1f5f9':'#fff')+';border-radius:10px;padding:9px 10px;margin-bottom:6px;box-shadow:0 1px 4px rgba(0,0,0,.06);'+(u?'opacity:.6':'cursor:pointer')+'"><input type="checkbox" '+(_gtExp.indexOf(e.id)>=0?'checked ':'')+(u?'disabled ':'')+'onchange="_gtTog(\''+e.id+'\',this.checked)" style="margin-top:3px">'+
+      '<div style="flex:1;min-width:0"><div style="display:flex;justify-content:space-between;gap:8px;font-weight:800;font-size:13px"><span>'+esc(e.label||e.note||e.type||'مصروف')+'</span><span style="color:#dc2626;white-space:nowrap">'+fmt(+e.amount||0)+' ج</span></div><div style="font-size:11px;color:#64748b">'+esc(e.type||'')+' • '+esc(fmtDate(e.date))+(u?' • <b>مربوط بـ: '+esc(u)+'</b>':'')+'</div></div></label>';
+  }).join(''):'<div class="empty">مفيش مصروفات مطابقة</div>';
+}
+function saveGoalTask(){
+  var g=_glFind(_glCur);if(!g)return;
+  var title=v('gt-title').trim();if(!title)return showToast('⚠️ اكتب اسم المهمة','#dc2626');
+  var from=v('gt-from'),to=v('gt-to');if(from&&to&&to<from)return showToast('⚠️ آخر موعد قبل البداية','#dc2626');
+  var st=v('gt-status')||'todo',old=_glTaskEdit?(g.tasks||[]).find(function(t){return t.id===_glTaskEdit;}):null;
+  var rec={title:title,who:v('gt-who').trim(),status:st,from:from,to:to,budget:+v('gt-budget')||0,spent:+v('gt-spent')||0,link:!!_gtLink,exp_ids:_gtLink?_gtExp.slice():[],note:v('gt-note').trim(),doneDate:st==='done'?((old&&old.doneDate)||today()):''};
+  var tasks=(g.tasks||[]).slice();
+  if(old)tasks=tasks.map(function(t){return t.id===old.id?Object.assign({},t,rec):t;});else tasks.push(Object.assign({id:genId()},rec));
+  _gtDraft=null;_glSave(g.id,{tasks:tasks});showToast('✅ اتحفظت المهمة','#16a34a');_glRender();
+}
+function deleteGoalTask(tid){confirmAction('تمسح المهمة دي؟',function(){var g=_glFind(_glCur);if(!g)return;_glSave(g.id,{tasks:(g.tasks||[]).filter(function(t){return t.id!==tid;})});_glRender();});}
+function openGoalResultForm(rid){
+  var g=_glFind(_glCur);if(!g)return;_glResEdit=rid||null;
+  var r=rid?(g.results||[]).find(function(x){return x.id===rid;}):null;
+  document.getElementById('modal-title').textContent=r?'✏️ تعديل نتيجة':'🏁 نتيجة جديدة';
+  document.getElementById('modal-body').innerHTML=
+    '<div class="field"><label>🏁 النتيجة *</label><input id="gr-title" type="text" value="'+esc(r?r.title:'')+'" placeholder="مثال: عدد العملاء الجدد / إيراد الشهر"></div>'+
+    '<div style="display:flex;gap:8px"><div class="field" style="flex:1"><label>🎯 المستهدف</label><input id="gr-target" type="number" step="any" value="'+(r&&r.target?r.target:'')+'"></div><div class="field" style="flex:1"><label>✅ المتحقق</label><input id="gr-actual" type="number" step="any" value="'+(r&&r.actual?r.actual:'')+'"></div></div>'+
+    '<div class="field"><label>الوحدة</label><input id="gr-unit" type="text" value="'+esc(r?r.unit||'':'')+'" placeholder="عميل / جنيه / ورقة"></div>'+
+    '<div class="modal-actions"><button class="btn btn-outline" onclick="_glRender()">إلغاء</button>'+(r?'<button class="btn btn-outline" style="color:#dc2626;border-color:#fca5a5" onclick="deleteGoalResult(\''+r.id+'\')">🗑️</button>':'')+'<button class="btn btn-primary" onclick="__runOnce(this,saveGoalResult)">💾 حفظ</button></div>';
+}
+function saveGoalResult(){
+  var g=_glFind(_glCur);if(!g)return;var title=v('gr-title').trim();if(!title)return showToast('⚠️ اكتب اسم النتيجة','#dc2626');
+  var rec={title:title,target:+v('gr-target')||0,actual:+v('gr-actual')||0,unit:v('gr-unit').trim()},rs=(g.results||[]).slice();
+  if(_glResEdit)rs=rs.map(function(x){return x.id===_glResEdit?Object.assign({},x,rec):x;});else rs.push(Object.assign({id:genId()},rec));
+  _glSave(g.id,{results:rs});showToast('✅ اتحفظت النتيجة','#16a34a');_glRender();
+}
+function deleteGoalResult(rid){confirmAction('تمسح النتيجة دي؟',function(){var g=_glFind(_glCur);if(!g)return;_glSave(g.id,{results:(g.results||[]).filter(function(x){return x.id!==rid;})});_glRender();});}
 function __glStartupNudge(){ // تذكير: أهداف موعدها خلال ٧ أيام أو عدّى وماتحققتش (للمالك)
   setTimeout(function(){try{
     if(!window.__isOwner)return;
@@ -23016,7 +23233,7 @@ window.addEventListener('DOMContentLoaded',function(){
   window.addEventListener('beforeunload',function(){try{persist();}catch(e){}});
   // تحميل البيانات والانطلاق
   loadDB().then(function(){
-    __migrateLegacyIds();__repairSalaryLinks();__wrStartupNudge();__glStartupNudge();ensureMonthlyInventorySnapshot();autoRolloverStale();autoMoveToStock();
+    __migrateLegacyIds();__repairSalaryLinks();__repairLandedCost();__wrStartupNudge();__glStartupNudge();ensureMonthlyInventorySnapshot();autoRolloverStale();autoMoveToStock();
     // v97: دلوقتي بيتأكد إن البيانات المحلية اتحملت وترحيل الـIDs خلص الأول،
     // وبعد كده بس بنتصل بالسيرفر ونسحب وندمج — عشان نمنع تضارب/تكرار السجلات
     if(typeof window.__runSessionCheckAfterLoad === 'function') window.__runSessionCheckAfterLoad();
@@ -23254,7 +23471,7 @@ function _renderClientsHeader(el){
     '<div style="display:flex;gap:6px">'+
     '<button class="btn-add" style="background:#15803d" onclick="openAddClientModal()">+ عميل</button>'+
     '<button class="btn-add" style="background:#ea580c" onclick="openMergeClientsModal()">🔀 دمج</button>'+
-    '<button class="btn-add" style="background:#2563eb" onclick="importBaseClients()">📥 استيراد</button>'+
+    (CLIENTS_BASE_DATA.customers.length?'<button class="btn-add" style="background:#2563eb" onclick="importBaseClients()">📥 استيراد</button>':'')+
     '</div></div>'+
     '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">'+
     '<span style="font-size:11px;font-weight:800;color:#64748b">حالة العميل</span>'+
@@ -24737,7 +24954,7 @@ function openBulkOfferFor(ids,label){
 }
 function openBulkOffer(){
   _bulkPreset=null;_bulkModel='';_bulkQ='';_bulkSel={};_bulkIdx=0;
-  if(!_bulkMsg)_bulkMsg='أهلًا {الاسم} 👋\nعندنا عرض خاص لأصحاب مكنة {الموديل}:\n\n(اكتب العرض هنا)\n\nمركز صيانة كامل أبو حودة';
+  if(!_bulkMsg)_bulkMsg='أهلًا {الاسم} 👋\nعندنا عرض خاص لأصحاب مكنة {الموديل}:\n\n(اكتب العرض هنا)\n\n'+APP_CONFIG.business;
   document.getElementById('modal-title').textContent='📣 عرض لعملاء نوع مكنة';
   document.getElementById('modal-body').innerHTML='<div id="bk-body"></div>'+
     '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
@@ -26173,7 +26390,7 @@ function switchMovTab(tab,el){
 // بتتلف هنا مرة واحدة: لو اتنفّذت من ضغطة مستخدم حقيقية ولسه شغالة (أو خلصت من أقل من ٠٫٦ ثانية)
 // بنفس الأرقام (id) → الضغطة التانية بتتتجاهل. أي دالة جديدة بتنشئ سجل: ضيف اسمها في __ONCE_GUARDED.
 // الاستدعاء من الكود (مش ضغطة) مش بيتأثر. اختلاف الـid (فاتورتين مختلفتين) مش بيتمنع.
-var __ONCE_GUARDED=["saveGoal", "saveWorkRule", "confirmWorkRule", "__giveEmpCashAdvance", "__settleEmpCashBalance", "__undoLastCashAdvance", "_applyLinkRepair", "_duaSave", "_invBatchDel", "_invBatchSave", "_invCreateGoodsAcc", "_invMoneySave", "_invPaySave", "_invSave", "_mfUnify", "_movTodoAdd", "_wsSaveSettings", "addExpenseTemplate", "delPurchaseExec", "addMovAdvancePayment", "approveStocktake", "confirmAutoBalanceDiff", "confirmCloseMovement", "confirmContinueMovement", "confirmExtractParts", "confirmMarkLeave", "confirmMyAttendance", "confirmPayAdvance", "confirmPayDailyWage", "confirmPayFixedExp", "confirmPaySalary", "confirmSchedDone", "convertOpeningInventoryToPurchase", "delScrapMachine", "deleteAllArchivedDebts", "deleteKnowledge", "deleteVisitLog", "duplicateTask", "endVisit", "execMergeProducts", "finishExtractForSale", "importBaseClients", "markSaleItemDamaged", "mergeModelFamily", "openDeleteSaleModal", "payDebt", "payGroupDebts", "quickLogExpense", "removeMovAdvancePayment", "saveAddCapital", "saveAsset", "saveBalanceSnapshot", "saveBatchExpenses", "saveBundleDraft", "saveCapital", "saveConsignmentOutSale", "saveDebt", "saveEditCapital", "saveEditDebt", "saveEditExpense", "saveEditFixedExp", "saveEditReceivable", "saveEmpIncrement", "saveEmployee", "saveExpense", "saveFixedExp", "saveGiveConsignment", "saveIncrement", "saveInventorySnapshot", "saveInvestorWithdraw", "saveKnowledge", "saveLog", "saveMachine", "saveMovement", "saveNewClient", "saveNewInvestor", "saveProduct", "saveProfitCycle", "savePurchase", "saveReceivable", "saveReceiveConsignment", "saveReturnConsignment", "saveSale", "saveScrapMachine", "saveSupplier", "saveTask", "setExtraIncome", "startStocktake", "startVisit", "syncSalesWithDebts", "withdrawPartForMovement", "withdrawPickedParts"];
+var __ONCE_GUARDED=["saveGoalTask", "saveGoalResult", "saveGoal", "saveWorkRule", "confirmWorkRule", "__giveEmpCashAdvance", "__settleEmpCashBalance", "__undoLastCashAdvance", "_applyLinkRepair", "_duaSave", "_invBatchDel", "_invBatchSave", "_invCreateGoodsAcc", "_invMoneySave", "_invPaySave", "_invSave", "_mfUnify", "_movTodoAdd", "_wsSaveSettings", "addExpenseTemplate", "delPurchaseExec", "addMovAdvancePayment", "approveStocktake", "confirmAutoBalanceDiff", "confirmCloseMovement", "confirmContinueMovement", "confirmExtractParts", "confirmMarkLeave", "confirmMyAttendance", "confirmPayAdvance", "confirmPayDailyWage", "confirmPayFixedExp", "confirmPaySalary", "confirmSchedDone", "convertOpeningInventoryToPurchase", "delScrapMachine", "deleteAllArchivedDebts", "deleteKnowledge", "deleteVisitLog", "duplicateTask", "endVisit", "execMergeProducts", "finishExtractForSale", "importBaseClients", "markSaleItemDamaged", "mergeModelFamily", "openDeleteSaleModal", "payDebt", "payGroupDebts", "quickLogExpense", "removeMovAdvancePayment", "saveAddCapital", "saveAsset", "saveBalanceSnapshot", "saveBatchExpenses", "saveBundleDraft", "saveCapital", "saveConsignmentOutSale", "saveDebt", "saveEditCapital", "saveEditDebt", "saveEditExpense", "saveEditFixedExp", "saveEditReceivable", "saveEmpIncrement", "saveEmployee", "saveExpense", "saveFixedExp", "saveGiveConsignment", "saveIncrement", "saveInventorySnapshot", "saveInvestorWithdraw", "saveKnowledge", "saveLog", "saveMachine", "saveMovement", "saveNewClient", "saveNewInvestor", "saveProduct", "saveProfitCycle", "savePurchase", "saveReceivable", "saveReceiveConsignment", "saveReturnConsignment", "saveSale", "saveScrapMachine", "saveSupplier", "saveTask", "setExtraIncome", "startStocktake", "startVisit", "syncSalesWithDebts", "withdrawPartForMovement", "withdrawPickedParts"];
 (function(){
   var busy={};
   function wrap(name){
@@ -26207,7 +26424,7 @@ var __ONCE_GUARDED=["saveGoal", "saveWorkRule", "confirmWorkRule", "__giveEmpCas
 // ده كافي لقابلية التثبيت على أندرويد/iOS/كمبيوتر (Chrome, Edge) — مفيش حاجة تانية مطلوبة.
 (function(){
   try{
-    var manifestContent = `{"name": "ابو حوده الحلو الجميل", "short_name": "ابو حوده", "description": "تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات", "start_url": "./", "display": "standalone", "orientation": "portrait-primary", "background_color": "#0f172a", "theme_color": "#0f172a", "dir": "rtl", "lang": "ar", "icons": [{"src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==", "sizes": "512x512", "type": "image/svg+xml", "purpose": "any"}, {"src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==", "sizes": "512x512", "type": "image/svg+xml", "purpose": "maskable"}]}`;
+    var manifestContent = `{"name": ${JSON.stringify(APP_CONFIG.name)}, "short_name": ${JSON.stringify(APP_CONFIG.short)}, "description": ${JSON.stringify(APP_CONFIG.desc)}, "start_url": "./", "display": "standalone", "orientation": "portrait-primary", "background_color": "${APP_CONFIG.theme}", "theme_color": "${APP_CONFIG.theme}", "dir": "rtl", "lang": "ar", "icons": [{"src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==", "sizes": "512x512", "type": "image/svg+xml", "purpose": "any"}, {"src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==", "sizes": "512x512", "type": "image/svg+xml", "purpose": "maskable"}]}`;
     var blob = new Blob([manifestContent], {type: 'application/manifest+json'});
     var manifestURL = URL.createObjectURL(blob);
     var link = document.createElement('link');
