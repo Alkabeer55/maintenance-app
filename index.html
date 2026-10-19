@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v287</title>
+<title>ابو حوده الحلو الجميل v290</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="1448-05-05 — v287";
+<script>/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="1448-05-05 — v290";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -67,8 +67,22 @@
         ممنوع qty*price أو paid>=total مباشرة. أي تعديل في طريقة الحساب يتعمل في الدالة نفسها فيتغيّر كل مكان.
     14) ⚠️ v268 — أي دالة جديدة بتنشئ سجل أو بتحرّك فلوس/مخزون لازم تتضاف في __ONCE_GUARDED (آخر بلوك السكريبت الرئيسي)،
         ده بيحميها من الضغط المتكرر حتى لو الزرار نسي __runOnce. (__runOnce فاضل مطلوب على الزرار — الاتنين مع بعض).
+    15) ⚠️ v288 — ترحيل المعرّفات: أي ترحيل لمعرّف قديم لازم يكون ثابت (__detId من القديم) مش عشوائي (genId)، وأي مصفوفة بتتزامن
+        كمستند (سكراب/موظفين/أهداف...) دمجها بالاتحاد بالمعرّف → ترحيل عشوائي = نسختين من نفس السجل. وبعد أي دمج مع السيرفر نادي __fixTwins().
+    16) ⚠️ v290 — "الأحدث": أي ترتيب بالأحدث لازم يكسر التعادل في التاريخ بترتيب الإضافة (المنتجات/الموردين بتتضاف في آخر المصفوفة → index أعلى = أحدث).
+    17) ⚠️ v289 — أي عملية تلقائية (ترحيل/إعادة إضافة/إصلاح) لازم تحترم اللي المستخدم مسحه بإيده (علامة تجاهل) وإلا هتفضل ترجّعه كل مرة التطبيق يفتح.
+    18) ⚠️ v290 — الاختبار: قبل التسليم شغّل tests/kbscan.js (بيكتب بالكيبورد في كل خانة بحث ويتأكد إن الفوكس ما بيتفقدش) ولا تسلّم لو فيه ❌.
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v290: [📦 المخزون: مسلسل + افتراضيات | 🕐 الأحدث فوق | ⬇️ تصغير الفاتورة]
+     1) كل منتج في المخزون عليه رقم مسلسل (١، ٢، ٣...) بترتيب العرض الحالي.
+     2) زرار ⚙️ "افتراضيات المنتج الجديد": الفئة، النوع، الشركة، نوع التقنية، الحد الأدنى، نسبة ربح البيع (بتحسب سعر البيع تلقائي من سعر الشراء)، زيادة الجملة — بتتعبّى لوحدها عند إضافة منتج.
+     3) "الأحدث" في المخزون (إضافة/تعديل) والموردين: المنتج الجديد كان بينزل تحت لو نفس التاريخ — دلوقتي فوق.
+     4) زرار ⬇️ في هيدر الفاتورة/العطل/المشترى: يصغّرها لزرار عايم "كمّل ▲" وتتصفح براحتك وترجع لنفس النقطة (بيانات الفورم بتفضل زي ما هي). لو قفلت التطبيق المسودة بتضيع.
+v289: [📆 أعطال المرتبة بترجع بعد المسح من يوم معين]
+     السبب: "المسح من يوم" كان بيشيل اليوم بس من القايمة المرحّلة، والترحيل التلقائي (autoRolloverStale) بيشتغل كل ما التطبيق يفتح فيضيف اليوم تاني لأن العطل لسه جديد/جاري. دلوقتي المسح بيسجّل علامة "تجاهل" لليوم ده ومابيترجّعش، وتتشال العلامة لو انت أضفت اليوم بإيدك.
+v288: [🧹 تكرار مكن الاسكراب والموظفين بعد ترحيل المعرّفات]
+     السبب: ترحيل المعرّف القديم (mc_...) لمعرّف جديد كان عشوائي على كل جهاز، والدمج مع السيرفر اتحاد بالمعرّف → نسختين لنفس المكنة (وكان ممكن يحصل نفس الشيء للموظفين من v279). الحل: معرّف جديد ثابت محسوب من القديم (كل الأجهزة تطلع بنفس الرقم)، ودمج تلقائي لأي توأم معرّفه قديم، وسؤال قبل دمج التوائم المتطابقة تمامًا (نفس الاسم والتاريخ والسعر).
 v287: [💡 تنبيه الخبرة في فورم التحرك + مصروف المهمة (ربط أو رقم يدوي)]
      1) وإنت بتكتب نوع العطل أو الجهاز أو وصف العطل في فورم التحرك بيظهر كارت "💡 فيه N خبرة ممكن تفيدك" تحت الوصف (لحد ٤)، والضغط على أي خبرة يفتح الحل.
      2) المصروف في مهام الأهداف بقى اختياري: "✍️ رقم بإيدي" أو "🔗 مربوط بمصروفات" (بتختار من مصروفاتك المسجّلة، ومصروف ماينفعش يتربط بمهمتين).
@@ -3481,6 +3495,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
         var accRes = await sb.from('business_state').select('data, updated_at').eq('id','accounts').maybeSingle();
         if(!accRes.error && accRes.data && accRes.data.data){
           DB.accounts = __mergeAccounts(DB.accounts, accRes.data.data);
+          __fixTwins();
           // ⚠️ v264 — رصيد المحتجز (المالك + كل مستثمر) بيتعاد حسابه من الدورات فورًا بعد السحب من السيرفر؛ __mergeAccounts بيدي الرصيد الجاهز من السيرفر (ممكن يكون أقدم) والدورات هي مصدر الحقيقة.
           try{ if(typeof recalcRetainedEarnings==='function') recalcRetainedEarnings(); }catch(_eRe){ console.warn('recalcRetainedEarnings after sync:',_eRe); }
         }
@@ -3503,6 +3518,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
         var scrapRes = await sb.from('business_state').select('data, updated_at').eq('id','scrap_machines').maybeSingle();
         if(!scrapRes.error && scrapRes.data && scrapRes.data.data){
           DB.scrap_machines = __mergeServerRows(DB.scrap_machines||[], scrapRes.data.data, 'scrap_machines');
+          __fixTwins();
         }
       }catch(eSc){
         console.warn('فشل سحب السكراب من السيرفر:', eSc);
@@ -4495,7 +4511,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
 
 <div id="modal-overlay" onclick="if(event.target===this)closeModal()">
   <div id="modal-box">
-    <div class="modal-header"><div id="modal-title" class="modal-title"></div><button class="modal-close" onclick="closeModal()">✕</button></div>
+    <div class="modal-header"><div id="modal-title" class="modal-title"></div><button class="modal-close" id="modal-min" onclick="minimizeModal()" title="تصغير" style="display:none;margin-inline-end:6px">⬇️</button><button class="modal-close" onclick="closeModal()">✕</button></div>
     <div id="modal-body"></div>
   </div>
 </div>
@@ -4563,7 +4579,7 @@ var APP_TITLE=APP_CONFIG.name;
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=287;
+var APP_VERSION=290;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -5507,6 +5523,58 @@ function addArchive(k,val){
 // على نفس الـ id القديم (زي روابط الأعطال بمنتج، أو المصاريف بمهمة...) عشان
 // الروابط متتقطعش. بعد كده السجل بيبقى صالح للمزامنة مع السيرفر.
 // (Bug ثابت اتصلح في v92 — الدالة دي بتتأكد إنه ميرجعش تاني حتى لو فيه بيانات قديمة)
+// ===== v288 — منع/إصلاح التكرار بعد ترحيل المعرّفات القديمة (مكن الاسكراب والموظفين) =====
+// السبب: ترحيل معرّف قديم (mc_...) لمعرّف جديد كان عشوائي على كل جهاز، والدمج مع السيرفر اتحاد بالمعرّف → نسختين لنفس المكنة/الموظف.
+// الحل: (١) المعرّف الجديد بقى ثابت (محسوب من القديم) فكل الأجهزة تطلع بنفس الرقم، (٢) دمج تلقائي لأي توأم معرّفه قديم، (٣) سؤال قبل دمج التوائم المتطابقة.
+var __UUID_RE=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+function __hash128(str){var h1=1779033703,h2=3144134277,h3=1013904242,h4=2773480762;for(var i=0,k;i<str.length;i++){k=str.charCodeAt(i);h1=h2^Math.imul(h1^k,597399067);h2=h3^Math.imul(h2^k,2869860233);h3=h4^Math.imul(h3^k,951274213);h4=h1^Math.imul(h4^k,2716044179);}h1=Math.imul(h3^(h1>>>18),597399067);h2=Math.imul(h4^(h2>>>22),2869860233);h3=Math.imul(h1^(h3>>>17),951274213);h4=Math.imul(h2^(h4>>>19),2716044179);return [(h1^h2^h3^h4)>>>0,(h2^h1)>>>0,(h3^h1)>>>0,(h4^h1)>>>0];}
+function __detId(old){var h=__hash128('mc-legacy|'+old).map(function(x){return ('00000000'+x.toString(16)).slice(-8);}).join('');return h.slice(0,8)+'-'+h.slice(8,12)+'-4'+h.slice(13,16)+'-8'+h.slice(17,20)+'-'+h.slice(20,32);}
+function __twinScrapFp(m){return normalizeAr(m.name||'')+'|'+normalizeAr(m.model||'')+'|'+(m.buy_date||'')+'|'+(+m.buy_price||0)+'|'+normalizeAr(m.note||'');}
+function __twinEmpFp(e){return normalizeAr(e.name||'')+'|'+(+e.salary||0)+'|'+(e.hire_date||'')+'|'+(e.role||'');}
+function __twinRemap(map){ // بدّل كل إشارة للمعرّف المحذوف بالمعرّف اللي فضل
+  Object.keys(DB).forEach(function(t){if(!Array.isArray(DB[t]))return;DB[t].forEach(function(r){if(!r||typeof r!=='object')return;Object.keys(r).forEach(function(k){var v=r[k];if(typeof v==='string'&&map.hasOwnProperty(v))r[k]=map[v];});});});
+  (function walk(o,d){if(!o||typeof o!=='object'||d>6)return;Object.keys(o).forEach(function(k){var v=o[k];if(typeof v==='string'){if(map.hasOwnProperty(v))o[k]=map[v];}else walk(v,d+1);});})(DB.accounts,0);
+}
+function __twinGroups(){ // {kind:'scrap'|'emp', list:[members], hasLegacy}
+  var out=[],sets=[['scrap',DB.scrap_machines||[],__twinScrapFp],['emp',(DB.accounts&&DB.accounts.employees)||[],__twinEmpFp]];
+  sets.forEach(function(S){var g={};S[1].forEach(function(r){var k=S[2](r);if(!k||k.replace(/[|0]/g,'')==='')return;(g[k]=g[k]||[]).push(r);});
+    Object.keys(g).forEach(function(k){if(g[k].length>1)out.push({kind:S[0],list:g[k],hasLegacy:g[k].some(function(r){return !__UUID_RE.test(String(r.id));})});});});
+  return out;
+}
+function __twinMerge(groups){ // بيحتفظ بالأقوى (أكتر قطع مستخرجة / مربوط بحساب) ويشيل الباقي
+  var map={},n=0;
+  groups.forEach(function(G){
+    var score=function(r){return G.kind==='scrap'?((r.parts_extracted||[]).length*10+(r.status==='depleted'?1:0)):((r.linked_profile_id?10:0)+(r.active===false?0:1));};
+    var uu=G.list.filter(function(r){return __UUID_RE.test(String(r.id));}),pool=uu.length?uu:G.list;
+    var keep=pool.slice().sort(function(a,b){return score(b)-score(a);})[0];
+    G.list.forEach(function(r){
+      if(r===keep)return;
+      if(G.kind==='scrap'){if((r.parts_extracted||[]).length>(keep.parts_extracted||[]).length)keep.parts_extracted=r.parts_extracted;if(r.status==='depleted')keep.status='depleted';}
+      else{if(!keep.linked_profile_id&&r.linked_profile_id)keep.linked_profile_id=r.linked_profile_id;}
+      map[r.id]=keep.id;n++;
+    });
+  });
+  if(!n)return 0;
+  var drop=function(arr){return arr.filter(function(r){return !map.hasOwnProperty(r.id);});};
+  DB.scrap_machines=drop(DB.scrap_machines||[]);
+  if(DB.accounts&&DB.accounts.employees)DB.accounts.employees=drop(DB.accounts.employees);
+  __twinRemap(map);persist();return n;
+}
+var __twinAsked=false,__twinTimer=null;
+function __fixTwins(){ // بعد أي سحب من السيرفر: توائم المعرّف القديم بتتدمج لوحدها (متأكدين إنها تكرار)، والباقي بنسأل عنه مرة في الجلسة
+  clearTimeout(__twinTimer);
+  __twinTimer=setTimeout(function(){try{
+    var gs=__twinGroups();if(!gs.length)return;
+    var certain=gs.filter(function(g){return g.hasLegacy;});
+    if(certain.length){var n=__twinMerge(certain);if(n)showToast('🧹 اتدمج '+n+' سجل مكرر (مكن اسكراب/موظفين) بعد ترحيل المعرّفات','#2563eb');}
+    var left=__twinGroups();
+    if(left.length&&window.__isOwner&&!__twinAsked){
+      __twinAsked=true;
+      var ns=left.filter(function(g){return g.kind==='scrap';}).reduce(function(a,g){return a+g.list.length-1;},0),ne=left.filter(function(g){return g.kind==='emp';}).reduce(function(a,g){return a+g.list.length-1;},0);
+      confirmAction('🧹 لقيت سجلات متطابقة تمامًا: '+(ns?ns+' ماكينة اسكراب ':'')+(ne?(ns?'و':'')+ne+' موظف ':'')+'مكررين (نفس الاسم والتاريخ والسعر). أدمجهم؟ (بيتحفظ الأكتر بيانات)',function(){var n2=__twinMerge(__twinGroups());showToast('✅ اتدمج '+n2+' سجل مكرر','#16a34a');try{renderScrap();}catch(e){}});
+    }
+  }catch(e){console.warn('فشل فحص التوائم',e);}},1500);
+}
 function __migrateLegacyIds(){
   try{
     var uuidRe = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -5514,7 +5582,7 @@ function __migrateLegacyIds(){
     Object.keys(__SYNCED_TABLES).forEach(function(tbl){
       (DB[tbl]||[]).forEach(function(rec){
         if(rec && rec.id && !uuidRe.test(String(rec.id))){
-          var newId = genId();
+          var newId = __detId(String(rec.id));
           idMap[String(rec.id)] = newId;
           rec.id = newId;
         }
@@ -5522,11 +5590,11 @@ function __migrateLegacyIds(){
     });
     // v260 — مكن الاسكراب (DB.scrap_machines) ليها معرفات قديمة برضه، فنرحّلها عشان scrap_source/scrap_machine_id في المنتجات تتحدّث معاها
     (DB.scrap_machines||[]).forEach(function(rec){
-      if(rec && rec.id && !uuidRe.test(String(rec.id))){var nid=genId();idMap[String(rec.id)]=nid;rec.id=nid;}
+      if(rec && rec.id && !uuidRe.test(String(rec.id))){var nid=__detId(String(rec.id));idMap[String(rec.id)]=nid;rec.id=nid;}
     });
     // v279 — الموظفين (DB.accounts.employees) معرّفاتهم القديمة mc_... مكانتش بتترحّل، فمصروفات الرواتب كانت بتتفصل عن الموظف وقت الرفع للسيرفر
     ((DB.accounts&&DB.accounts.employees)||[]).forEach(function(rec){
-      if(rec && rec.id && !uuidRe.test(String(rec.id))){var nid2=genId();idMap[String(rec.id)]=nid2;rec.id=nid2;}
+      if(rec && rec.id && !uuidRe.test(String(rec.id))){var nid2=__detId(String(rec.id));idMap[String(rec.id)]=nid2;rec.id=nid2;}
     });
     var fixedCount = Object.keys(idMap).length;
     if(fixedCount===0) return;
@@ -7450,9 +7518,10 @@ function renderInventory(){
     return matchQ&&matchT&&matchCo&&matchTech&&matchConsign&&matchC&&matchS;
   });
 
+  var _ixp=new Map();list.forEach(function(x,i){_ixp.set(x,i);}); // v290 — المنتج الجديد بيتضاف في آخر المصفوفة: لو نفس التاريخ، الأحدث (الأعلى ترتيبًا) يطلع فوق
   if(_invSort==='qty') list.sort(function(a,b){return b.qty-a.qty;});
-  else if(_invSort==='created') list.sort(function(a,b){return (b.created_at||'')>(a.created_at||'')?1:(b.created_at||'')<(a.created_at||'')?-1:0;});
-  else if(_invSort==='updated') list.sort(function(a,b){return (b.updated_at||b.created_at||'')>(a.updated_at||a.created_at||'')?1:(b.updated_at||b.created_at||'')<(a.updated_at||a.created_at||'')?-1:0;});
+  else if(_invSort==='created') list.sort(function(a,b){var ka=a.created_at||'',kb=b.created_at||'';return ka!==kb?(kb>ka?1:-1):(_ixp.get(b)-_ixp.get(a));});
+  else if(_invSort==='updated') list.sort(function(a,b){var ka=a.updated_at||a.created_at||'',kb=b.updated_at||b.created_at||'';return ka!==kb?(kb>ka?1:-1):(_ixp.get(b)-_ixp.get(a));});
   // ⚠️ v197 — إصلاح ترتيب "أ-ي": كان بيقارن الاسم الخام (localeCompare) واللي بيدي نتيجة
   // غير ثابتة عبر أجهزة/متصفحات مختلفة (مش كل الأجهزة بتدعم ترتيب اللغة العربية بنفس
   // الشكل)، وكمان مكنش بيجمع أشكال الهمزة المختلفة (أ/إ/آ/ا) والتاء المربوطة/الهاء مع
@@ -7555,6 +7624,7 @@ function renderInventory(){
     '<div style="display:flex;gap:6px;margin-bottom:8px">'+
     (!_multiSelect&&__hasPerm('products','can_insert')?'<button onclick="openReceiveConsignmentModal()" style="flex:1;background:#fce7f3;border:none;border-radius:9px;padding:7px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;color:#be185d">📥 استلام أمانة من مورد</button>':'')+
     (!_multiSelect&&__hasPerm('products','can_insert')?'<button onclick="openGiveConsignmentModal()" style="flex:1;background:#e0f2fe;border:none;border-radius:9px;padding:7px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;color:#0369a1">📤 تسليم أمانة لطرف</button>':'')+
+    (!_multiSelect&&__hasPerm('products','can_update')?'<button onclick="openInvDefaults()" style="flex:1;background:#ecfdf5;border:none;border-radius:9px;padding:7px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;color:#047857">⚙️ افتراضيات المنتج الجديد</button>':'')+
     '</div>';
 
   if(!list.length){el.innerHTML=stats+catBar+filterHtml+_sortBar(_invSort,'setInvSort',['alpha','qty','created','updated'])+msToolbar+actionsBar+'<div class="empty">لا توجد منتجات</div>';if(_multiSelect)updateMsToolbar();return;}
@@ -7563,7 +7633,7 @@ function renderInventory(){
   DB.sales.forEach(function(s){(s.items||[]).forEach(function(i){salesCount[i.name]=(salesCount[i.name]||0)+i.qty;});});
   _invLastList=list; // نحفظ القائمة المعروضة حالياً عشان زر "طباعة الكل المعروض"
 
-  el.innerHTML=stats+catBar+filterHtml+_sortBar(_invSort,'setInvSort',['alpha','qty','created','updated'])+msToolbar+actionsBar+list.map(function(p){
+  el.innerHTML=stats+catBar+filterHtml+_sortBar(_invSort,'setInvSort',['alpha','qty','created','updated'])+msToolbar+actionsBar+list.map(function(p,_pi){
     var isLow=p.qty<=(p.min_qty||0)&&p.qty>0;
     var isOut=p.qty===0;
     var sold=salesCount[p.name]||0;
@@ -7574,7 +7644,7 @@ function renderInventory(){
       '<div style="display:flex;justify-content:space-between;align-items:flex-start">'+
       '<div style="flex:1">'+
       '<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;flex-wrap:wrap">'+
-      '<div class="item-name">'+esc(p.name)+'</div>'+
+      '<span style="background:#0f172a;color:#fff;border-radius:7px;padding:1px 7px;font-size:11px;font-weight:900;min-width:22px;text-align:center">'+(_pi+1)+'</span>'+'<div class="item-name">'+esc(p.name)+'</div>'+
       (isMachine?'<span style="background:#ede9fe;color:#7c3aed;border-radius:6px;padding:2px 7px;font-size:10px;font-weight:700">🖨️ ماكينة</span>':'')+
       (p.unit?'<span style="background:'+typeColor+';color:'+typeTextColor+';border-radius:6px;padding:2px 7px;font-size:10px;font-weight:700">'+esc(p.unit)+'</span>':'')+
       (p.scrap_price?'<span style="background:#fef9c3;color:#ca8a04;border-radius:6px;padding:2px 7px;font-size:10px;font-weight:700">اسكراب: '+p.scrap_price+' ج</span>':'')+
@@ -14450,6 +14520,7 @@ async function toggleWaitingStatus(id){
   showToast(toWait?'⏳ اتحط منتظر':'↩️ اترجع من الانتظار','#f59e0b');
 }
 
+function __undismissDay(id,d){var a=(DB.scheduled_carried||{})[id];if(!a)return;var k=a.indexOf('!'+d);if(k>=0)a.splice(k,1);}
 async function autoRolloverStale(){
   var smap=DB.scheduled_map||{};
   var carried=DB.scheduled_carried||{};
@@ -14468,7 +14539,7 @@ async function autoRolloverStale(){
     while(true){
       cur=new Date(cur.getTime()+86400000);
       var dStr=cur.toISOString().split('T')[0];
-      if(carried[id].indexOf(dStr)===-1){carried[id].push(dStr);changed=true;}
+      if(carried[id].indexOf(dStr)===-1&&carried[id].indexOf('!'+dStr)===-1){carried[id].push(dStr);changed=true;} // v289 — '!تاريخ' = يوم اتمسح بإيدك، ماينفعش يترجّع تلقائيًا
       if(dStr>=todayStr)break;
     }
   });
@@ -14602,7 +14673,7 @@ async function quickAddToScheduled(id){
   if(originalDay===_schedWorkDate)return showToast('موجود بالفعل في مرتبة '+fmtDate(_schedWorkDate),'#64748b');
   if(!DB.scheduled_carried[id])DB.scheduled_carried[id]=[];
   if(DB.scheduled_carried[id].indexOf(_schedWorkDate)===-1){
-    DB.scheduled_carried[id].push(_schedWorkDate);
+    DB.scheduled_carried[id].push(_schedWorkDate);__undismissDay(id,_schedWorkDate);
     await persist();
     showToast('✅ اتضاف كمتابعة لمرتبة '+fmtDate(_schedWorkDate)+' (وفضل في يومه الأصلي كمان)','#16a34a');
   }else{
@@ -14629,7 +14700,7 @@ async function addSelectedToScheduled(){
       // من غير ما نغيّر يومه الأصلي، عشان يفضل ظاهر في اليومين مع بعض ومايتمسحش من مكانه القديم
       if(!DB.scheduled_carried[id])DB.scheduled_carried[id]=[];
       if(DB.scheduled_carried[id].indexOf(_schedWorkDate)===-1){
-        DB.scheduled_carried[id].push(_schedWorkDate);
+        DB.scheduled_carried[id].push(_schedWorkDate);__undismissDay(id,_schedWorkDate);
         addedCarried++;
       }
     }
@@ -14743,7 +14814,7 @@ async function confirmCarryOver(id){
   if(!DB.scheduled_carried)DB.scheduled_carried={};
   if(!DB.scheduled_carried[id])DB.scheduled_carried[id]=[];
   if(DB.scheduled_carried[id].indexOf(dateVal)===-1){
-    DB.scheduled_carried[id].push(dateVal);
+    DB.scheduled_carried[id].push(dateVal);__undismissDay(id,dateVal);
   }
   // لو العطل مش أصلاً في scheduled_list (مثلاً اتفتح من مكان تاني)، ضيفه
   if(!DB.scheduled_list)DB.scheduled_list=[];
@@ -14763,6 +14834,7 @@ async function confirmCarryOver(id){
 async function removeCarriedDay(id,dateVal){
   if(!DB.scheduled_carried||!DB.scheduled_carried[id])return;
   DB.scheduled_carried[id]=DB.scheduled_carried[id].filter(function(d){return d!==dateVal;});
+  if(DB.scheduled_carried[id].indexOf('!'+dateVal)===-1)DB.scheduled_carried[id].push('!'+dateVal); // v289 — علامة تجاهل
   await persist();
   renderScheduledList();
 }
@@ -23233,7 +23305,7 @@ window.addEventListener('DOMContentLoaded',function(){
   window.addEventListener('beforeunload',function(){try{persist();}catch(e){}});
   // تحميل البيانات والانطلاق
   loadDB().then(function(){
-    __migrateLegacyIds();__repairSalaryLinks();__repairLandedCost();__wrStartupNudge();__glStartupNudge();ensureMonthlyInventorySnapshot();autoRolloverStale();autoMoveToStock();
+    __migrateLegacyIds();__fixTwins();__repairSalaryLinks();__repairLandedCost();__wrStartupNudge();__glStartupNudge();ensureMonthlyInventorySnapshot();autoRolloverStale();autoMoveToStock();
     // v97: دلوقتي بيتأكد إن البيانات المحلية اتحملت وترحيل الـIDs خلص الأول،
     // وبعد كده بس بنتصل بالسيرفر ونسحب وندمج — عشان نمنع تضارب/تكرار السجلات
     if(typeof window.__runSessionCheckAfterLoad === 'function') window.__runSessionCheckAfterLoad();
@@ -24016,7 +24088,7 @@ function _renderSuppliersList(){
   }
   if(_suppliersSort==='alpha')list.sort(function(a,b){return(a.name||'').localeCompare(b.name||'','ar');});
   else if(_suppliersSort==='debt')list.sort(function(a,b){return _supplierStats(b).debtBalance-_supplierStats(a).debtBalance;});
-  else list.sort(function(a,b){return(b.date||'')>(a.date||'')?1:-1;});
+  else{var _ixs=new Map();list.forEach(function(x,i){_ixs.set(x,i);});list.sort(function(a,b){var ka=a.date||'',kb=b.date||'';return ka!==kb?(kb>ka?1:-1):(_ixs.get(b)-_ixs.get(a));});} // v290 — الأحدث فوق حتى لو نفس اليوم
   listEl.innerHTML=list.length?list.map(function(s){return _supplierCard(s);}).join(''):'<div class="empty">لا توجد نتائج</div>';
 }
 
@@ -26390,6 +26462,85 @@ function switchMovTab(tab,el){
 // بتتلف هنا مرة واحدة: لو اتنفّذت من ضغطة مستخدم حقيقية ولسه شغالة (أو خلصت من أقل من ٠٫٦ ثانية)
 // بنفس الأرقام (id) → الضغطة التانية بتتتجاهل. أي دالة جديدة بتنشئ سجل: ضيف اسمها في __ONCE_GUARDED.
 // الاستدعاء من الكود (مش ضغطة) مش بيتأثر. اختلاف الـid (فاتورتين مختلفتين) مش بيتمنع.
+// ===== v290 — افتراضيات المنتج الجديد + تصغير الفاتورة/العطل/المشترى =====
+function openInvDefaults(){
+  var d=DB.settings.invDefaults||{};
+  var allTypes=[].concat(DB.settings.partTypes||[],DB.settings.machineTypes||[]).filter(function(x,i,a){return a.indexOf(x)===i;});
+  function sel(id,opts,cur,emp){return '<select id="'+id+'" style="width:100%;padding:9px 12px;border:2px solid #e2e8f0;border-radius:9px;font-size:13px;font-family:inherit;background:#fff"><option value="">'+emp+'</option>'+opts.map(function(o){return '<option value="'+esc(o)+'"'+(cur===o?' selected':'')+'>'+esc(o)+'</option>';}).join('')+'</select>';}
+  document.getElementById('modal-title').textContent='⚙️ افتراضيات المنتج الجديد';
+  document.getElementById('modal-body').innerHTML=
+    '<div style="font-size:12px;color:#64748b;background:#f8fafc;border-radius:9px;padding:8px 10px;margin-bottom:10px">الحاجات اللي تحددها هنا بتتعبّى لوحدها لما تضيف منتج جديد، وتقدر تغيّرها وقتها.</div>'+
+    '<div class="field"><label>الفئة</label><select id="idf-cat" style="width:100%;padding:9px 12px;border:2px solid #e2e8f0;border-radius:9px;font-size:13px;font-family:inherit;background:#fff"><option value="parts"'+(d.category!=='machine'?' selected':'')+'>🔩 قطع غيار</option><option value="machine"'+(d.category==='machine'?' selected':'')+'>🖨️ ماكينة</option></select></div>'+
+    '<div class="field"><label>النوع / الحالة</label>'+sel('idf-unit',allTypes,d.unit||'','— الأول في القايمة —')+'</div>'+
+    '<div class="field"><label>الشركة</label>'+sel('idf-company',DB.settings.companies||[],d.company||'','غير محدد')+'</div>'+
+    '<div class="field"><label>نوع التقنية</label>'+sel('idf-tech',DB.settings.techTypes||[],d.tech_type||'','غير محدد')+'</div>'+
+    '<div class="field"><label>الحد الأدنى للتنبيه</label><input id="idf-min" type="number" step="any" value="'+(d.min_qty||'')+'" style="direction:ltr;text-align:center"></div>'+
+    '<div class="field"><label>نسبة ربح البيع % فوق سعر الشراء (بيتحسب سعر البيع تلقائي وانت بتكتب الشراء)</label><input id="idf-pct" type="number" step="any" value="'+(d.sell_pct||'')+'" placeholder="مثال: 25" style="direction:ltr;text-align:center"></div>'+
+    '<div class="field"><label>زيادة الجملة الافتراضية (نسبة أو مبلغ)</label><input id="idf-ws" type="text" value="'+esc(d.ws_markup||'')+'" placeholder="15% أو 20" style="direction:ltr;text-align:center"></div>'+
+    '<div class="modal-actions"><button class="btn btn-outline" onclick="closeModal()">إلغاء</button><button class="btn btn-outline" style="color:#dc2626;border-color:#fca5a5" onclick="clearInvDefaults()">مسح</button><button class="btn btn-primary" onclick="saveInvDefaults()">💾 حفظ</button></div>';
+  openModal();
+}
+function saveInvDefaults(){
+  DB.settings.invDefaults={category:v('idf-cat')||'parts',unit:v('idf-unit'),company:v('idf-company'),tech_type:v('idf-tech'),min_qty:+v('idf-min')||0,sell_pct:+v('idf-pct')||0,ws_markup:v('idf-ws').trim()};
+  persist();closeModal();showToast('✅ اتحفظت الافتراضيات','#16a34a');
+}
+function clearInvDefaults(){delete DB.settings.invDefaults;persist();closeModal();showToast('اتمسحت الافتراضيات','#64748b');}
+function _prodApplyDefaultsUI(id){
+  var d=DB.settings.invDefaults;if(id||!d)return;
+  try{
+    if(d.category==='machine'&&document.getElementById('pcat-machine'))selectProdCat('machine');
+    if(d.unit&&document.getElementById('ptype-'+d.unit.replace(/ /g,'-')))selectProdType(d.unit);
+    var c=document.getElementById('prod-company');if(c&&d.company)c.value=d.company;
+    var t=document.getElementById('prod-tech-type');if(t&&d.tech_type)t.value=d.tech_type;
+    var mq=document.getElementById('prod-minqty');if(mq&&d.min_qty)mq.value=d.min_qty;
+    var ws=document.getElementById('prod-ws-markup');if(ws&&d.ws_markup)ws.value=d.ws_markup;
+    var buy=document.getElementById('prod-buy'),sell=document.getElementById('prod-sell');
+    if(+d.sell_pct>0&&buy&&sell){
+      buy.addEventListener('input',function(){if(sell.dataset.manual==='1')return;var b=+buy.value||0;sell.value=b?(Math.round(b*(1+d.sell_pct/100)*100)/100):'';});
+      sell.addEventListener('input',function(){sell.dataset.manual='1';});
+    }
+  }catch(e){console.warn('فشل تطبيق افتراضيات المنتج',e);}
+}
+var _opm_orig=openProductModal;
+openProductModal=function(id){_opm_orig(id);setTimeout(function(){_prodApplyDefaultsUI(id);},30);};
+
+// --- تصغير الفاتورة/العطل/المشترى: تسيبها مفتوحة، تشوف أي حاجة، وترجع تكمل من نفس النقطة ---
+var _minModal=null;
+function _minKind(){var t=(document.getElementById('modal-title')||{}).textContent||'';if(/فاتورة|بيع/.test(t))return 'sale';if(/عطل|تحرك/.test(t))return 'mov';if(/مشتر/.test(t))return 'purch';return '';}
+function _minBtnUpdate(){var b=document.getElementById('modal-min');if(b)b.style.display=_minKind()?'':'none';}
+var _openModal_orig=openModal;
+openModal=function(){_openModal_orig();_minBtnUpdate();};
+var _MIN_LABEL={sale:'🧾 فاتورة مفتوحة',mov:'🔧 عطل مفتوح',purch:'🛒 مشترى مفتوح'};
+function minimizeModal(){
+  var kind=_minKind();if(!kind)return;
+  if(_minModal)return showToast('فيه '+_MIN_LABEL[_minModal.kind].slice(2)+' متصغّرة بالفعل — كمّلها أو امسحها الأول','#dc2626');
+  var body=document.getElementById('modal-body'),frag=document.createDocumentFragment();
+  while(body.firstChild)frag.appendChild(body.firstChild);
+  _minModal={kind:kind,frag:frag,title:document.getElementById('modal-title').textContent,saleFromMov:(typeof _saleFromMovementId!=='undefined'?_saleFromMovementId:null)};
+  document.getElementById('modal-overlay').classList.remove('open'); // من غير closeModal عشان مانصفّرش الحالة
+  _minChip();
+}
+function restoreMinimized(){
+  if(!_minModal)return;
+  var m=_minModal;_minModal=null;
+  document.getElementById('modal-title').textContent=m.title;
+  var body=document.getElementById('modal-body');body.innerHTML='';body.appendChild(m.frag);
+  try{if(typeof _saleFromMovementId!=='undefined')_saleFromMovementId=m.saleFromMov;}catch(e){}
+  _minChip();openModal();
+}
+function discardMinimized(){confirmAction('تمسح '+(_minModal?_MIN_LABEL[_minModal.kind].slice(2):'المسودة')+' المتصغّرة؟ اللي كتبته هيضيع.',function(){_minModal=null;_minChip();});}
+function _minChip(){
+  var c=document.getElementById('min-chip');
+  if(!_minModal){if(c)c.remove();return;}
+  if(!c){c=document.createElement('div');c.id='min-chip';c.style.cssText='position:fixed;left:10px;bottom:76px;z-index:9998;background:#0f172a;color:#fff;border-radius:22px;box-shadow:0 4px 16px rgba(0,0,0,.35);display:flex;align-items:center;gap:4px;padding:4px 6px 4px 12px;font-family:inherit';document.body.appendChild(c);}
+  c.innerHTML='<span onclick="restoreMinimized()" style="font-weight:800;font-size:13px;cursor:pointer;padding:6px 6px">'+_MIN_LABEL[_minModal.kind]+' — كمّل ▲</span><button onclick="discardMinimized()" style="border:none;background:#334155;color:#fff;border-radius:50%;width:26px;height:26px;cursor:pointer">✕</button>';
+}
+// لو فيه مسودة متصغّرة من نفس النوع، فتح واحدة جديدة بيرجّعك للمسودة بدل ما يمسحها
+[['openSaleModal','sale'],['openMovementModal','mov'],['openPurchaseModal','purch']].forEach(function(x){
+  var orig=window[x[0]];if(typeof orig!=='function')return;
+  window[x[0]]=function(){if(_minModal&&_minModal.kind===x[1]){showToast('فيه '+_MIN_LABEL[x[1]].slice(2)+' متصغّرة — كمّل عليها أو امسحها الأول','#b45309');restoreMinimized();return;}return orig.apply(this,arguments);};
+});
+
 var __ONCE_GUARDED=["saveGoalTask", "saveGoalResult", "saveGoal", "saveWorkRule", "confirmWorkRule", "__giveEmpCashAdvance", "__settleEmpCashBalance", "__undoLastCashAdvance", "_applyLinkRepair", "_duaSave", "_invBatchDel", "_invBatchSave", "_invCreateGoodsAcc", "_invMoneySave", "_invPaySave", "_invSave", "_mfUnify", "_movTodoAdd", "_wsSaveSettings", "addExpenseTemplate", "delPurchaseExec", "addMovAdvancePayment", "approveStocktake", "confirmAutoBalanceDiff", "confirmCloseMovement", "confirmContinueMovement", "confirmExtractParts", "confirmMarkLeave", "confirmMyAttendance", "confirmPayAdvance", "confirmPayDailyWage", "confirmPayFixedExp", "confirmPaySalary", "confirmSchedDone", "convertOpeningInventoryToPurchase", "delScrapMachine", "deleteAllArchivedDebts", "deleteKnowledge", "deleteVisitLog", "duplicateTask", "endVisit", "execMergeProducts", "finishExtractForSale", "importBaseClients", "markSaleItemDamaged", "mergeModelFamily", "openDeleteSaleModal", "payDebt", "payGroupDebts", "quickLogExpense", "removeMovAdvancePayment", "saveAddCapital", "saveAsset", "saveBalanceSnapshot", "saveBatchExpenses", "saveBundleDraft", "saveCapital", "saveConsignmentOutSale", "saveDebt", "saveEditCapital", "saveEditDebt", "saveEditExpense", "saveEditFixedExp", "saveEditReceivable", "saveEmpIncrement", "saveEmployee", "saveExpense", "saveFixedExp", "saveGiveConsignment", "saveIncrement", "saveInventorySnapshot", "saveInvestorWithdraw", "saveKnowledge", "saveLog", "saveMachine", "saveMovement", "saveNewClient", "saveNewInvestor", "saveProduct", "saveProfitCycle", "savePurchase", "saveReceivable", "saveReceiveConsignment", "saveReturnConsignment", "saveSale", "saveScrapMachine", "saveSupplier", "saveTask", "setExtraIncome", "startStocktake", "startVisit", "syncSalesWithDebts", "withdrawPartForMovement", "withdrawPickedParts"];
 (function(){
   var busy={};
