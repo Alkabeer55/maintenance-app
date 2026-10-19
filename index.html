@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v290</title>
+<title>ابو حوده الحلو الجميل v291</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="1448-05-05 — v290";
+<script>/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="1448-05-05 — v291";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -69,11 +69,18 @@
         ده بيحميها من الضغط المتكرر حتى لو الزرار نسي __runOnce. (__runOnce فاضل مطلوب على الزرار — الاتنين مع بعض).
     15) ⚠️ v288 — ترحيل المعرّفات: أي ترحيل لمعرّف قديم لازم يكون ثابت (__detId من القديم) مش عشوائي (genId)، وأي مصفوفة بتتزامن
         كمستند (سكراب/موظفين/أهداف...) دمجها بالاتحاد بالمعرّف → ترحيل عشوائي = نسختين من نفس السجل. وبعد أي دمج مع السيرفر نادي __fixTwins().
-    16) ⚠️ v290 — "الأحدث": أي ترتيب بالأحدث لازم يكسر التعادل في التاريخ بترتيب الإضافة (المنتجات/الموردين بتتضاف في آخر المصفوفة → index أعلى = أحدث).
+    16) ⚠️ v291 — العملاء استثناء: بيتضافوا بـ unshift (index أقل = أحدث) فالمرجع كود C-NNNN. ⚠️ v290 — "الأحدث": أي ترتيب بالأحدث لازم يكسر التعادل في التاريخ بترتيب الإضافة (المنتجات/الموردين بتتضاف في آخر المصفوفة → index أعلى = أحدث).
     17) ⚠️ v289 — أي عملية تلقائية (ترحيل/إعادة إضافة/إصلاح) لازم تحترم اللي المستخدم مسحه بإيده (علامة تجاهل) وإلا هتفضل ترجّعه كل مرة التطبيق يفتح.
     18) ⚠️ v290 — الاختبار: قبل التسليم شغّل tests/kbscan.js (بيكتب بالكيبورد في كل خانة بحث ويتأكد إن الفوكس ما بيتفقدش) ولا تسلّم لو فيه ❌.
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v291: [📒 دفتر العملاء: تنظيف الشاشة + إصلاح "undefined" + الأحدث افتراضي + فلتر الشركات]
+     1) زرار الترتيب "الأكثر مكن" كان بيظهر "undefined" (الاسم ناقص في _sortBar) — اتصلح، و_sortBar بقى بيعرض مفتاح الترتيب نفسه لو اسمه ناقص (مستحيل يظهر undefined تاني في أي شاشة).
+     2) الترتيب الافتراضي بقى "🕐 الأحدث" (آخر عميل اتضاف فوق) بدل "أ-ي". المرجع = رقم كود العميل C-NNNN (بيزيد مع كل إضافة) ثم created_at، وبعدين ترتيب المصفوفة (العملاء بيتضافوا بـ unshift → index أقل = أحدث، عكس المنتجات).
+     3) شاشة الدفتر: اتشال العنوان المكرر (موجود في الهيدر)، الأزرار بقت صف واحد صغير، وكروت الحالة بقت شريط رفيع واحد (الكل/نشط/متوقف/محتمل/نهائي/🏢 شركات) بدل كروت طويلة.
+     4) فلتر جديد "🏢 شركات": يعرض الشركات (اللي ليها فروع) بس.
+     5) عنوان الهيدر ما بيتكسرش على سطرين (white-space:nowrap + ellipsis).
+     6) كارت الشركة بقى بيكتب اسم الشركة ("🏢 شركة الصافي — 3 فروع")، والفرع اللي اسمه أصلًا بيبدأ بـ"فرع" ما بيتكررش معاه بادج "فرع"، وكارت الفرع بيكتب "🏢 شركة X".
 v290: [📦 المخزون: مسلسل + افتراضيات | 🕐 الأحدث فوق | ⬇️ تصغير الفاتورة]
      1) كل منتج في المخزون عليه رقم مسلسل (١، ٢، ٣...) بترتيب العرض الحالي.
      2) زرار ⚙️ "افتراضيات المنتج الجديد": الفئة، النوع، الشركة، نوع التقنية، الحد الأدنى، نسبة ربح البيع (بتحسب سعر البيع تلقائي من سعر الشراء)، زيادة الجملة — بتتعبّى لوحدها عند إضافة منتج.
@@ -1675,7 +1682,7 @@ input[type=number]{direction:ltr;text-align:center}
 #header{background:#0f172a;color:#fff;padding:12px 16px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.2)}
 #header.hidden{display:none}
 #back-btn{background:rgba(255,255,255,.12);border:none;color:#fff;border-radius:10px;padding:6px 12px;cursor:pointer;font-size:18px;font-family:inherit}
-#header-title{font-weight:900;font-size:16px;flex:1}
+#header-title{font-weight:900;font-size:16px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} /* ⚠️ v291 — العنوان ما يتكسرش على سطرين */
 #content{flex:1;overflow-y:auto;overflow-x:hidden;padding:14px 12px 88px;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain}
 #nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#fff;border-top:1px solid #e2e8f0;display:flex;z-index:200;box-shadow:0 -4px 24px rgba(0,0,0,.08)}
 .nav-btn{flex:1;padding:10px 2px 8px;border:none;background:transparent;cursor:pointer;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:2px}
@@ -4579,7 +4586,7 @@ var APP_TITLE=APP_CONFIG.name;
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=290;
+var APP_VERSION=291;
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -9067,11 +9074,11 @@ var _salesPage=0, SALES_PER_PAGE=30;
 var _salesSort='newest';
 
 function _sortBar(currentSort,setter,opts){
-  var labels={newest:'🕐 الأحدث',created:'📅 الإضافة',updated:'✏️ آخر تعديل',alpha:'أ-ي',amount:'💰 الأعلى',qty:'📦 الكمية'};
+  var labels={machines:'🖨️ الأكثر مكن',newest:'🕐 الأحدث',created:'📅 الإضافة',updated:'✏️ آخر تعديل',alpha:'أ-ي',amount:'💰 الأعلى',qty:'📦 الكمية'};
   return '<div style="display:flex;gap:5px;margin-bottom:10px;overflow-x:auto;padding-bottom:3px">'+
     opts.map(function(s){
       var active=currentSort===s;
-      return '<button onclick="'+setter+'(\''+s+'\')" style="flex-shrink:0;padding:6px 12px;border:2px solid '+(active?'#2563eb':'#e2e8f0')+';border-radius:9px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;background:'+(active?'#dbeafe':'#fff')+';color:'+(active?'#1e40af':'#64748b')+'">'+labels[s]+'</button>';
+      return '<button onclick="'+setter+'(\''+s+'\')" style="flex-shrink:0;padding:6px 12px;border:2px solid '+(active?'#2563eb':'#e2e8f0')+';border-radius:9px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;background:'+(active?'#dbeafe':'#fff')+';color:'+(active?'#1e40af':'#64748b')+'">'+(labels[s]||s)+'</button>'; /* ⚠️ v291 — مستحيل يظهر undefined */
     }).join('')+'</div>';
 }
 
@@ -23464,7 +23471,7 @@ function _clientHasNoActivity(clientName){
   return !hasSale;
 }
 
-var _clientsSearch='',_clientsSort='alpha',_clientsFilter='all',_clientsMachineFilter='all';
+var _clientsSearch='',_clientsSort='newest',_clientsFilter='all',_clientsMachineFilter='all';
 // v275 — قايمة العملاء الأنظم: عرض مضغوط (سطر لكل عميل، دوس يفتح الكارت الكامل) + عدّاد وإجمالي + فلاتر إضافية قابلة للطي
 var _clientsCompact=LS.get('mc8_clients_compact',true)!==false,_clientsExpanded={},_clientsMoreOpen=false;
 function _toggleClientRow(id){_clientsExpanded[id]=!_clientsExpanded[id];_renderClientsList(document.getElementById('clients-body'));}
@@ -23482,13 +23489,15 @@ function _clientRow(c){
   return '<div style="margin-bottom:6px">'+
     '<div onclick="_toggleClientRow('+jsStr(c.id)+')" style="background:#fff;border-radius:11px;padding:9px 11px;box-shadow:0 1px 6px rgba(0,0,0,.05);border-right:4px solid '+(stale?'#dc2626':cSt.color)+';display:flex;align-items:center;gap:8px;cursor:pointer;opacity:'+(c.status==='inactive'?'.6':'1')+'">'+
       '<span style="font-size:15px;flex-shrink:0">'+cSt.icon+'</span>'+
-      '<div style="flex:1;min-width:0"><div style="font-weight:800;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(c.name)+(c.priceType==='wholesale'?' <span style="font-size:9px;background:#ede9fe;color:#5b21b6;border-radius:5px;padding:1px 5px">جملة</span>':'')+(c.parent_id?' <span style="font-size:9px;background:#fef3c7;color:#92400e;border-radius:5px;padding:1px 5px">فرع</span>':'')+'</div>'+
+      '<div style="flex:1;min-width:0"><div style="font-weight:800;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(c.name)+(c.priceType==='wholesale'?' <span style="font-size:9px;background:#ede9fe;color:#5b21b6;border-radius:5px;padding:1px 5px">جملة</span>':'')+(c.parent_id&&!/^\s*فرع(\s|$)/.test(c.name||'')?' <span style="font-size:9px;background:#fef3c7;color:#92400e;border-radius:5px;padding:1px 5px">فرع</span>':'')+(!c.parent_id&&_clientBranches(c).length?' <span style="font-size:9px;background:#e0e7ff;color:#3730a3;border-radius:5px;padding:1px 5px">المقر</span>':'')+'</div>'+
       '<div style="font-size:10.5px;color:'+(stale?'#dc2626':'#94a3b8')+'">🖨️ '+ms+' • '+(last?'🔧 منذ '+days+' يوم':'🔧 مفيش صيانة')+(stale?' • ⏰':'')+'</div></div>'+
       phone+'<span style="color:#94a3b8;font-size:12px;flex-shrink:0">'+(open?'▴':'▾')+'</span></div>'+
     (open?'<div style="margin-top:6px">'+_clientCard(c)+'</div>':'')+'</div>';
 }
 
 function setClientsSort(s){_clientsSort=s;renderClients();}
+// ⚠️ v291 — "الأحدث" للعملاء = آخر عميل اتضاف. العملاء بيتضافوا بـ unshift فالـ index الأقل = الأحدث، والمرجع الأساسي كود C-NNNN (بيزيد مع كل إضافة).
+function _clientAddedNum(c){var m=((c&&c.code)||'').match(/^C-(\d+)$/);return m?+m[1]:0;}
 
 // ===== RENDER - مع إصلاح مشكلة لوحة المفاتيح =====
 // البحث يحدث بدون re-render كامل
@@ -23535,31 +23544,30 @@ function _renderClientsHeader(el){
 
   // تحديث الهيدر فقط
   var sortBar=document.getElementById('clients-sort-bar');
-  if(sortBar)sortBar.innerHTML=_sortBar(_clientsSort,'setClientsSort',['alpha','machines','newest']);
+  if(sortBar)sortBar.innerHTML=_sortBar(_clientsSort,'setClientsSort',['newest','alpha','machines']);
 
+  // ⚠️ v291 — شاشة نظيفة: من غير عنوان مكرر، أزرار في صف واحد، وشريط حالة رفيع واحد (كان 4 كروت طويلة + سطر "الكل")
+  var _parIds={};allC.forEach(function(c){if(c.parent_id)_parIds[c.parent_id]=1;});
+  var companiesCount=allC.filter(function(c){return !c.parent_id&&_parIds[c.id];}).length;
+  function _chip(k,icon,count,label,col,bg){
+    var a=_clientsFilter===k;
+    return '<div class="clients-status-btn" data-filter="'+k+'" onclick="_clientsFilter=\''+k+'\';renderClients()" style="flex:1 1 0;min-width:0;background:'+(a?col:bg)+';border-radius:10px;padding:5px 2px;text-align:center;cursor:pointer;border:2px solid '+(a?col:'transparent')+'">'+
+      '<div style="font-size:14px;font-weight:900;line-height:1.15;color:'+(a?'#fff':col)+'">'+icon+' '+count+'</div>'+
+      '<div style="font-size:9px;font-weight:700;line-height:1.15;color:'+(a?'rgba(255,255,255,.9)':col)+'">'+label+'</div></div>';
+  }
+  var _bs='flex:1;color:#fff;border:none;border-radius:10px;padding:8px 4px;font-family:inherit;font-size:12px;font-weight:800;cursor:pointer';
   header.innerHTML=
-    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">'+
-    '<div class="screen-title" style="margin:0">📒 دفتر العملاء</div>'+
-    '<div style="display:flex;gap:6px">'+
-    '<button class="btn-add" style="background:#15803d" onclick="openAddClientModal()">+ عميل</button>'+
-    '<button class="btn-add" style="background:#ea580c" onclick="openMergeClientsModal()">🔀 دمج</button>'+
-    (CLIENTS_BASE_DATA.customers.length?'<button class="btn-add" style="background:#2563eb" onclick="importBaseClients()">📥 استيراد</button>':'')+
-    '</div></div>'+
-    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">'+
-    '<span style="font-size:11px;font-weight:800;color:#64748b">حالة العميل</span>'+
-    '<span onclick="_clientsFilter=\'all\';renderClients()" style="font-size:11px;font-weight:700;color:'+(_clientsFilter==='all'?'#0f172a':'#94a3b8')+';cursor:pointer">الكل ('+allC.length+')</span>'+
+    '<div style="display:flex;gap:6px;margin-bottom:8px">'+
+    '<button style="'+_bs+';background:#15803d" onclick="openAddClientModal()">+ عميل</button>'+
+    '<button style="'+_bs+';background:#ea580c" onclick="openMergeClientsModal()">🔀 دمج</button>'+
+    (CLIENTS_BASE_DATA.customers.length?'<button style="'+_bs+';background:#2563eb" onclick="importBaseClients()">📥 استيراد</button>':'')+
     '</div>'+
-    '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:8px" id="clients-status-filters">'+
-    Object.keys(CLIENT_STATUSES).map(function(k){
-      var st=CLIENT_STATUSES[k],a=_clientsFilter===k;
-      return '<div class="clients-status-btn" data-filter="'+k+'" onclick="_clientsFilter=\''+k+'\';renderClients()" '+
-        'style="background:'+(a?st.color:st.bg)+';border-radius:11px;padding:8px 4px;text-align:center;cursor:pointer;border:2px solid '+(a?st.color:'transparent')+'">'+
-        '<div style="font-size:12px">'+st.icon+'</div>'+
-        '<div style="font-size:15px;font-weight:900;color:'+(a?'#fff':st.color)+'">'+counts[k]+'</div>'+
-        '<div style="font-size:9px;font-weight:700;color:'+(a?'rgba(255,255,255,.8)':st.color)+'">'+st.label+'</div></div>';
-    }).join('')+
+    '<div style="display:flex;gap:4px;margin-bottom:8px" id="clients-status-filters">'+
+    _chip('all','👥',allC.length,'الكل','#334155','#e2e8f0')+
+    Object.keys(CLIENT_STATUSES).map(function(k){var st=CLIENT_STATUSES[k];return _chip(k,st.icon,counts[k],st.label,st.color,st.bg);}).join('')+
+    _chip('companies','🏢',companiesCount,'شركات','#4338ca','#e0e7ff')+
     '</div>'+
-    '<div onclick="_clientsMoreOpen=!_clientsMoreOpen;renderClients()" style="display:flex;justify-content:space-between;align-items:center;background:#f1f5f9;border-radius:10px;padding:8px 11px;margin-bottom:8px;cursor:pointer;font-size:11.5px;font-weight:800;color:#475569"><span>🖨️ المكن ('+totalM+') • ⏰ '+staleCount+' غير مستخدم • 🆕 '+noActivityCount+' بدون نشاط</span><span>فلاتر إضافية '+((_clientsMoreOpen||_clientsMachineFilter!=='all'||_clientsFilter==='stale'||_clientsFilter==='no_activity')?'▴':'▾')+'</span></div>'+
+    '<div onclick="_clientsMoreOpen=!_clientsMoreOpen;renderClients()" style="display:flex;justify-content:space-between;align-items:center;background:#f1f5f9;border-radius:10px;padding:6px 10px;margin-bottom:6px;cursor:pointer;font-size:11px;font-weight:800;color:#475569"><span>🖨️ '+totalM+' مكنة • ⏰ '+staleCount+' خاملة • 🆕 '+noActivityCount+' بدون نشاط</span><span>فلاتر '+((_clientsMoreOpen||_clientsMachineFilter!=='all'||_clientsFilter==='stale'||_clientsFilter==='no_activity')?'▴':'▾')+'</span></div>'+
     ((_clientsMoreOpen||_clientsMachineFilter!=='all'||_clientsFilter==='stale'||_clientsFilter==='no_activity')?(
     '<div style="display:flex;justify-content:space-between;align-items:center;margin:2px 0 6px">'+
     '<span style="font-size:11px;font-weight:800;color:#64748b">🖨️ إحصائيات المكن ('+totalM+')</span>'+
@@ -23587,6 +23595,7 @@ function _renderClientsList(el){
   var list=[].concat(allC);
   if(_clientsFilter==='stale')list=list.filter(function(c){return _clientIsStale(c.name);});
   else if(_clientsFilter==='no_activity')list=list.filter(function(c){return _clientHasNoActivity(c.name);});
+  else if(_clientsFilter==='companies'){var _cpi={};allC.forEach(function(x){if(x.parent_id)_cpi[x.parent_id]=1;});list=list.filter(function(c){return _cpi[c.id]||(c.parent_id&&_cpi[c.parent_id]);});}
   else if(_clientsFilter!=='all')list=list.filter(function(c){return(c.status||'active')===_clientsFilter;});
   if(_clientsMachineFilter!=='all')list=list.filter(function(c){return(c.machines||[]).some(function(m){return(m.status||'active')===_clientsMachineFilter;});});
   if(_clientsSearch){
@@ -23599,7 +23608,8 @@ function _renderClientsList(el){
   }
   if(_clientsSort==='alpha')list.sort(function(a,b){return(a.name||'').localeCompare(b.name||'','ar');});
   else if(_clientsSort==='machines')list.sort(function(a,b){return(b.machines||[]).length-(a.machines||[]).length;});
-  else list.sort(function(a,b){return (b.date||b.created_at||'')>(a.date||a.created_at||'')?1:(b.date||b.created_at||'')<(a.date||a.created_at||'')?-1:0;});
+  else{var _ixc=new Map();allC.forEach(function(x,i){_ixc.set(x,i);});
+    list.sort(function(a,b){var d=_clientAddedNum(b)-_clientAddedNum(a);if(d)return d;var ka=a.created_at||'',kb=b.created_at||'';if(ka!==kb)return kb>ka?1:-1;return (_ixc.get(a)||0)-(_ixc.get(b)||0);});}
 
   // ⚠️ v253 — الشركة كمجموعة: كارت الشركة وتحته فروعها (كل فرع عميل بماكنه)
   var inList={};list.forEach(function(c){inList[c.id]=1;});
@@ -23612,7 +23622,7 @@ function _renderClientsList(el){
     if(!kids.length&&!_clientBranches(root).length){html.push(_clientsCompact?_clientRow(root):_clientCard(root));return;}
     var allKids=_clientBranches(root),mach=(root.machines||[]).length+allKids.reduce(function(t,k){return t+(k.machines||[]).length;},0);
     html.push('<div style="background:#eef2ff;border-radius:16px;padding:8px;margin-bottom:12px;border:1.5px solid #c7d2fe">'+
-      '<div style="display:flex;justify-content:space-between;align-items:center;gap:6px;padding:4px 6px 8px"><div style="font-size:12px;font-weight:900;color:#3730a3">🏢 شركة — '+allKids.length+' فروع • '+mach+' مكنة</div>'+
+      '<div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px;padding:4px 6px 8px"><div style="flex:1 1 100%;font-size:13px;font-weight:900;color:#3730a3">🏢 شركة '+esc(root.name)+' — '+allKids.length+' فروع • '+mach+' مكنة</div>'+
       '<div style="display:flex;gap:5px"><button onclick="openCompanyReport('+jsStr(root.id)+')" style="background:#4338ca;color:#fff;border:none;border-radius:8px;padding:5px 10px;font-family:inherit;font-size:11px;font-weight:800;cursor:pointer">📊 تقرير الشركة</button>'+
       '<button onclick="openAddClientModal('+jsStr(root.id)+')" style="background:#fff;color:#4338ca;border:1.5px solid #c7d2fe;border-radius:8px;padding:5px 10px;font-family:inherit;font-size:11px;font-weight:800;cursor:pointer">🏢+ فرع</button></div></div>'+
       (_clientsCompact?_clientRow(root):_clientCard(root))+
@@ -23645,7 +23655,7 @@ function _clientCard(c){
     '<span style="font-weight:900;font-size:15px;cursor:pointer" onclick="openLedger(decodeURIComponent(\''+encodeURIComponent(c.name)+'\'))">'+esc(c.name)+'</span>'+
     (c.code?'<span style="background:#eef2ff;color:#4338ca;border-radius:6px;padding:2px 7px;font-size:10px;font-weight:800">🆔 '+esc(c.code)+'</span>':'')+
     (_clientIsInvestor(c)?'<span style="background:#d1fae5;color:#047857;border-radius:6px;padding:2px 8px;font-size:10px;font-weight:800">🤝 مستثمر</span>':'')+
-    (c.parent_id?'<span style="background:#fef3c7;color:#92400e;border-radius:6px;padding:2px 8px;font-size:10px;font-weight:800">🏢 فرع: '+esc(((DB.clients||[]).find(function(x){return x.id===c.parent_id;})||{}).name||'')+'</span>':'')+
+    (c.parent_id?'<span style="background:#fef3c7;color:#92400e;border-radius:6px;padding:2px 8px;font-size:10px;font-weight:800">🏢 شركة '+esc(((DB.clients||[]).find(function(x){return x.id===c.parent_id;})||{}).name||'')+'</span>':'')+
     (_clientBranches(c).length?'<span style="background:#e0e7ff;color:#3730a3;border-radius:6px;padding:2px 8px;font-size:10px;font-weight:800">🏢 '+_clientBranches(c).length+' فروع</span>':'')+
     '<span style="background:'+cSt.bg+';color:'+cSt.color+';border-radius:6px;padding:2px 8px;font-size:10px;font-weight:700">'+cSt.icon+' '+cSt.label+'</span>'+
     (c.priceType==='wholesale'?'<span style="background:#ede9fe;color:#5b21b6;border-radius:6px;padding:2px 8px;font-size:10px;font-weight:800">💼 جملة</span>':'')+
@@ -24405,7 +24415,7 @@ function openAddClientModal(parentId){
 }
 async function saveNewClient(){
   var name=v('ncl-name');if(!name)return showToast('⚠️ الاسم مطلوب','#dc2626');
-  DB.clients.unshift({id:genId(),code:genClientCode(),name:name,phone:v('ncl-phone'),address:v('ncl-address'),notes:v('ncl-notes'),status:'active',priceType:v('ncl-price-type-val')||'retail',parent_id:v('ncl-parent')||null,machines:[]});
+  DB.clients.unshift({id:genId(),code:genClientCode(),name:name,created_at:new Date().toISOString(),phone:v('ncl-phone'),address:v('ncl-address'),notes:v('ncl-notes'),status:'active',priceType:v('ncl-price-type-val')||'retail',parent_id:v('ncl-parent')||null,machines:[]});
   addArchive('customers',name);await persist();closeModal();renderClients();showToast('✅ تم إضافة العميل','#16a34a');
 }
 
