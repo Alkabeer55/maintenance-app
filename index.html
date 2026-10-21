@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v294</title>
+<title>ابو حوده الحلو الجميل v297</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="1448-05-09 — v294";
+<script>/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="1448-05-10 — v297";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -73,8 +73,37 @@
     17) ⚠️ v289 — أي عملية تلقائية (ترحيل/إعادة إضافة/إصلاح) لازم تحترم اللي المستخدم مسحه بإيده (علامة تجاهل) وإلا هتفضل ترجّعه كل مرة التطبيق يفتح.
     18) ⚠️ v290 — الاختبار: قبل التسليم شغّل tests/kbscan.js (بيكتب بالكيبورد في كل خانة بحث ويتأكد إن الفوكس ما بيتفقدش) ولا تسلّم لو فيه ❌.
     19) ⚠️ v292 — الفواتير/التحركات بتترابط بالعميل عن طريق الاسم: أي تغيير اسم لازم ينقل المراجع (saveEditClient بيعمل كده)، واسم الفرع لازم يكون فريد. نسخة العميل (بدون ربح) ما تعرضش ربح/تكلفة أبدًا حتى في الطباعة والواتساب. قسم الجملة للمالك فقط.
+    20) ⚠️ v295 — ممنوع تعريف نفس الدالة (function name) مرتين في السكريبت: التعريف الأخير بيلغي الأول بصمت (v177 اتكسر كده — خصم الغياب). قبل التسليم دوّر على أسماء دوال مكررة.
+    21) ⚠️ v295 — أي دالة بتعدّل الذاكرة المحلية (DB.x=...) قبل ما تنادي dbUpsert/dbUpdate/dbDelete لازم تتضاف في __PERM_MAP (آخر السكريبت الرئيسي) بالجدول والصلاحية المطلوبة، عشان الرفض يحصل قبل أي تعديل محلي مش بعده.
+    22) ⚠️ v296 — ملف الإخراج اسمه دايمًا index.html (مش اسم فيه رقم النسخة): sw.js بيخزّن ويفتح './index.html' بالاسم ده، وأي اسم تاني بيكسر الأوفلاين. رقم النسخة بيتكتب جوه الملف بس (APP_VERSION/BUILD_STAMP/title). ملف sw.js بيتسلّم جنبه لو اتغيّر.
+    23) ⚠️ v296 — أي طلب شبكة لـSupabase لازم يعدّي من __fetchWithTimeout (متظبّط على createClient). ممنوع await على شبكة من غير مهلة — النت الضعيف بيعلّق الطلب للأبد ويقفل الواجهة. أي fetch مباشر جديد (خارج sb) لازم AbortController + مهلة.
+    24) ⚠️ v297 — تكلفة منتج الماكينة (category=machine) في المخزن لازم تفضل = _scrapRemainingCost دايمًا؛ أي دالة بتغيّر قطع الماكينة أو سعرها لازم تنادي _scrapSyncMachineProd(id) بعد التعديل (وإلا قيمة المخزون تتعدّ مرتين).
+    25) ⚠️ v297 — تعديل/حذف قطعة اسكراب لازم يعدّل منتجها في المخزن في نفس العملية (saveScrapPartDetail/delScrapPart)، وممنوع حذف ماكينة فيها قطع مستخرجة (بتتعلّم "مستنفدة") عشان سجل الاستخراج والمبيعات ما يتفصلوش عن بعض.
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v297: [🔩 فحص كامل للاسكراب — المخزن مش بيتلخبط تاني]
+     1) 🐛 زيادة قيمة المخزون (عدّ مزدوج): بعد استخراج قطع كان منتج الماكينة في المخزن بيفضل بسعرها الكامل والقطع المستخرجة بتتحسب بتكلفتها كمان (ماكينة بـ١٠٠٠ + قطعتين = ٢٠٠٠ في قيمة المخزون). دلوقتي تكلفة منتج الماكينة في المخزن = "الباقي من ثمن الماكينة" دايمًا (بيتظبط بعد الاستخراج/التعديل/الحذف)، فالإجمالي بيفضل ١٠٠٠.
+     2) 🐛 تعديل قطعة مستخرجة (الكمية/الشراء/البيع) كان بيتغيّر في سجل الماكينة بس والمخزن زي ما هو. دلوقتي المخزن بيتحدّث معاه (الكمية بفرق التعديل، سعر الشراء متوسط مرجّح، سعر البيع لو القطعة تخص الماكينة دي بس) ومينفعش تنزّل الكمية عن اللي اتباع/اتسحب. وكمان الكمية صفر كانت بتتحول لـ١ بصمت — اتشالت.
+     3) 🐛 حذف قطعة من سجل الاستخراج كان بيرجّع تكلفتها لثمن الماكينة والقطعة لسه في المخزن بتكلفتها (عدّ مزدوج تاني + قطعة من غير سجل). دلوقتي التكلفة بتفضل مع القطعة (detached_cost).
+     4) 🐛 حذف ماكينة فيها قطع مستخرجة كان بيمسح سجل قطعها كله وهي لسه في المخزن/اتباعت (= "قطع اتباعت ومش مسجلة إنها اتستخرجت"). دلوقتي الحذف ممنوع لو فيها قطع (استخدم "مستنفدة") عشان السجل يفضل محفوظ.
+     5) 🐛 ماكينة قديمة منتجها في المخزن مش مربوط (من غير scrap_machine_id): تعديلها ما كانش بيوصل للمخزن و"مستنفدة" كانت بتسيب كميتها ١ بقيمتها. دلوقتي الربط بيتعمل تلقائيًا (بالاسم لو متفرّد) ويتصلّح.
+     6) 🐛 استخراج نفس القطعة مرتين من نفس الماكينة كان بيعمل منتجين بنفس الاسم — دلوقتي بيدمجهم في منتج واحد.
+     7) 🔄 دمج الأجهزة: سجل القطع جوه الماكينة كان بيتدمج "آخر كتابة تكسب" على مستوى الماكينة كلها، فجهاز قديم كان ممكن يمسح قطع اتسجلت من جهاز تاني (= قطع في المخزن من غير سجل). دلوقتي بيتدمج بالاتحاد على مستوى القطعة مع علامات حذف (deleted_part_ids) عشان اللي اتحذف ما يرجعش.
+     9) 🛡️ _netProfitThisMonth: جمع الإيراد/المصروفات/التسويات بقى بيحوّل لرقم (+x||0) — مصروف بقيمة نصية كان بيدمج نصوص ويطلّع ربح الشهر بالسالب بآلاف.
+     8) 🔍 فحص وإصلاح الاسكراب (شريط أعلى شاشة الاسكراب): بيطلّع (أ) قطع مكتوبة في الماكينة ومش موجودة في المخزن ولا اتباعت، (ب) قطع في المخزن من اسكراب ومش مسجلة، (ج) قطع ماكينة اتحذفت، (د) ماكينات تكلفتها في المخزن مش مظبوطة — وزرار إصلاح تلقائي. كمان علامة "⚠️ مش موجودة في المخزن" على القطعة نفسها.
+v296: [📴 إصلاحات الأوفلاين: النت الضعيف + الخطوط + تحديث sw.js]
+     1) 🐛 النت الضعيف (الموبايل فاكر نفسه متصل بس الطلبات معلّقة): حفظ الفاتورة كان بيستنى السيرفر للأبد — المودال يفضل مفتوح، المخزون ما بيتخصمش، والطابور فاضي (والفاتورة في الذاكرة بس). السبب: مفيش أي مهلة زمنية على طلبات Supabase. دلوقتي كل الطلبات ليها مهلة مركزية (١٠ ثواني للكتابة + ٠٫١ث لكل كيلوبايت عشان الرفع الكبير على نت بطيء ما يتقطعش)، ولو فشلت بتتحفظ محليًا وتدخل طابور المزامنة. مفيش تغيير في أي منطق حفظ.
+     2) ⚡ قاطع دايرة: بعد أول مهلة فاشلة، أي حفظ جديد خلال ٢٠ ثانية بيتأجل للطابور فورًا (بدل ما كل حفظ يستنى المهلة كلها). أول طلب ناجح بيقفله. القراءات ما بتتأثرش.
+     3) 🔐 فحص الجلسة قبل الحفظ (__ensureFreshSession) كان ممكن يعلّق كمان — بقى له مهلة ٣ ثواني (٦ للتجديد) ولو انتهت بيكمّل الحفظ عادي.
+     4) 🔄 مؤشر الطابور كان بيقول "٢٠ بانتظار المزامنة" بعد مصروف واحد (لأن كتل الإعدادات والحسابات بتتعدّ كل واحدة لوحدها). بقى بيعدّ السجلات الحقيقية بس ويوضّح إن فيه إعدادات.
+     5) 📄 sw.js v4 (ملف منفصل لازم يترفع جنب index.html): كاش الخطوط (Cairo) — كانت بتختفي أوفلاين والعرض بيتغير؛ تحديث مكتبة Supabase في الكاش حتى لو فشلت أول مرة؛ وفحص sw.js في كل فتحة (updateViaCache:none + reg.update()) عشان التحديث يوصل بسرعة؛ revalidation بدل تحميل ٢٫٢ ميجا في كل فتحة؛ نسخة واحدة من index.html في الكاش بدل اتنين.
+     6) 🟢 شريط الحالة العلوي كان ثابت "✅ متصل بالسيرفر" حتى لو النت قاطع. بقى بيتحول لـ"📴 أوفلاين — محفوظ على جهازك" أو "⚠️ النت ضعيف" (برتقالي) ويرجع أخضر لما النت يرجع.
+     7) 📌 اسم ملف التطبيق بقى ثابت دايمًا index.html (لأن sw.js بيدوّر عليه بالاسم ده بالظبط — أي اسم تاني كان بيكسر الأوفلاين).
+v295: [🛡️ إصلاح انحدار خصم الغياب + 🔐 منع التعديل المحلي بدون صلاحية]
+     1) 🐛 انحدار (رجوع إصلاح v177): دالة _countAbsenceDaysThisMonth كانت متعرّفة مرتين في الملف، والتعريف التاني (القديم) كان بيلغي الأول — فخصم الغياب من المرتب كان بيتحسب بالشهر الميلادي وبيتجاهل \"الإجازة المعتمدة\" (الموظف كان بيتخصم عليه يوم إجازته). اتشال التعريف القديم، والعدّ بقى بتكرار نصي للتواريخ (مش Date/UTC) فمفيش يوم بيتكرر أو بيتنط وقت تغيير التوقيت الصيفي.
+     2) 🔐 ثغرة صلاحيات: حوالي ٤٠ دالة (حذف فاتورة، حذف/تعديل دين، مصروف، تحركات، مهام فرعية، أمانة، جرد، اسكراب...) كانت بتعدّل الذاكرة المحلية وبترجّع المخزون الأول وبعدين طبقة dbUpdate/dbDelete ترفض بسبب الصلاحية — النتيجة: فاتورة بتتمسح محليًا والمخزون يزيد وهي لسه على السيرفر (تلخبط مخزون بين الأجهزة). دلوقتي فيه حارس موحّد (__PERM_GUARDED) بيفحص الصلاحية قبل ما الدالة تبدأ أصلًا ويرفض بنفس رسالة \"مفيش صلاحية\". المالك مش متأثر.
+     3) 🏷️ عنوان الصفحة (<title>) كان رقم النسخة فيه ثابت ومتنسي (v294 فضل ظاهر) — بقى بياخد الرقم من APP_VERSION تلقائيًا.
+     4) 🧪 تغطية: الإصلاحين متجرّبين بمتصفح فعلي (موظف من غير صلاحية حذف: الفاتورة والمخزون ما اتغيروش) + ٢٨٦ زرار اتضغطوا على ١٩ شاشة ببيانات تجريبية من غير أي خطأ JS.
 v294: [🖥️ نسخة الكمبيوتر الاحترافية — نفس الملف ونفس البيانات]
      1) على الشاشة العريضة (٩٠٠px+): قائمة جانبية بكل الأقسام (من نفس مصدر "المزيد" بدون تكرار)، شريط علوي، محتوى واسع، كروت القوائم في أعمدة، والنوافذ بتفتح في نص الشاشة.
      2) اختصارات: Ctrl+K بحث شامل · Esc يقفل النافذة · Alt+1..4 تنقل · Alt+N فاتورة · Alt+M تحرك · Alt+T مهمة · Alt+E مصروف.
@@ -3219,8 +3248,56 @@ input:checked+.slider:before{transform:translateX(-20px)}
   // ⚠️ v264 — لو سكريبت Supabase من الـ CDN ماحمّلش (فتح التطبيق من غير نت وكاش المتصفح فاضي)، السطر ده كان بيرمي خطأ ويوقف باقي البلوك:
   // كل المتغيرات اللي بعده (__PROTECTED_NONEMPTY_FIELDS, __LWW_KEYS...) وفحص الجلسة/الدخول الأوفلاين ماكانوش بيشتغلوا، وبوابة الدخول تفضل مقفولة حتى لو عندك بيانات محلية.
   // دلوقتي sb بيفضل undefined (وكل فحوصات typeof sb==='undefined' الموجودة بتشتغل زي ما هي) والباقي بيكمّل عادي.
+  // ⚠️ v296 — [🐛 النت الضعيف] لما الموبايل يبقى فاكر نفسه متصل بس الطلبات معلّقة (شبكة ضعيفة جدًا)، طلبات Supabase
+  // كانت بتستنى للأبد: الحفظ يعلّق، المودال يفضل مفتوح، والفاتورة تفضل في الذاكرة من غير ما تدخل طابور المزامنة.
+  // الحل مركزي: كل طلب من مكتبة Supabase بيعدّي من هنا بمهلة. لو انتهت المهلة بيترمي نفس خطأ الشبكة المعتاد
+  // ("Failed to fetch") فباقي الكود (طابور المزامنة، رسائل الأوفلاين) بيتصرف زي ما هو متعوّد من غير أي تعديل.
+  //  - الكتابة: ١٠ث + ٠٫١ث لكل KB من الجسم (عشان رفع كتلة كبيرة على نت بطيء ما يتقطعش). القراءة: +٨ث.
+  //  - قاطع دايرة: بعد مهلة فاشلة، الكتابات الجديدة خلال ٢٠ث بتتأجل للطابور فورًا بدل ما كل واحدة تستنى المهلة. أول نجاح بيقفله.
+  var __NET_STATE = {badUntil:0};
+  var __TIMED_OUT = {timedOut:true};
+  function __raceTimeout(p, ms){
+    return new Promise(function(resolve, reject){
+      var done=false, tm=setTimeout(function(){ if(!done){ done=true; resolve(__TIMED_OUT); } }, ms);
+      Promise.resolve(p).then(function(v){ if(!done){ done=true; clearTimeout(tm); resolve(v); } },
+                              function(e){ if(!done){ done=true; clearTimeout(tm); reject(e); } });
+    });
+  }
+  function __fetchWithTimeout(input, init){
+    init = init || {};
+    var method = String(init.method || (input && input.method) || 'GET').toUpperCase();
+    var bodyKB = (typeof init.body === 'string') ? Math.round(init.body.length/1024) : 0;
+    var base = window.__NET_TIMEOUT_BASE_MS || 10000;
+    var ms = base + bodyKB*100 + (method==='GET' ? 8000 : 0);
+    if(method!=='GET' && Date.now() < __NET_STATE.badUntil){
+      return Promise.reject(new TypeError('Failed to fetch (الشبكة ضعيفة — الحفظ اتأجّل للمزامنة)'));
+    }
+    var ctl = (typeof AbortController!=='undefined') ? new AbortController() : null;
+    if(ctl && init.signal){
+      if(init.signal.aborted) ctl.abort();
+      else init.signal.addEventListener('abort', function(){ ctl.abort(); });
+    }
+    var timedOut = false;
+    var timer = setTimeout(function(){
+      timedOut = true;
+      __NET_STATE.badUntil = Date.now() + (window.__NET_BREAKER_MS || 20000);
+      try{ if(typeof __setNetBadge==='function') __setNetBadge('weak'); }catch(_e1){}
+      if(ctl) ctl.abort();
+    }, ms);
+    var opts = Object.assign({}, init);
+    if(ctl) opts.signal = ctl.signal;
+    return fetch(input, opts).then(function(r){
+      clearTimeout(timer); __NET_STATE.badUntil = 0;
+      try{ if(typeof __setNetBadge==='function' && navigator.onLine!==false) __setNetBadge('ok'); }catch(_e2){}
+      return r;
+    }, function(e){
+      clearTimeout(timer);
+      if(timedOut) throw new TypeError('Failed to fetch (انتهت المهلة — النت ضعيف)');
+      throw e;
+    });
+  }
   var sb;
-  try{ sb = window.supabase.createClient(SB_URL, SB_ANON_KEY); }
+  try{ sb = window.supabase.createClient(SB_URL, SB_ANON_KEY, {global:{fetch:__fetchWithTimeout}}); }
   catch(_eSb){ sb = undefined; console.warn('Supabase SDK مش محمّل — وضع أوفلاين محلي:', _eSb); }
   window.__currentProfile = null; // هيتحط فيه: {full_name, role_id, branch_id, id}
 
@@ -3475,6 +3552,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
       var localRow = byId[r[keyField]];
       if(pendingOp==='upsert' && localRow){ return; }
       var merged = Object.assign({}, localRow||{}, r);
+      if(tableName==='scrap_machines' && localRow){ __mergeScrapParts(localRow, r, merged); } // ⚠️ v297 — اتحاد القطع بدل آخر كتابة تكسب
       protectedFields.forEach(function(f){
         if(localRow && localRow[f] && !r[f]) merged[f]=localRow[f];
       });
@@ -4651,7 +4729,9 @@ var APP_TITLE=APP_CONFIG.name;
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=294;
+var APP_VERSION=297;
+// ⚠️ v295 — عنوان الصفحة كان رقم نسخته ثابت ومتنسي (فضل v294 مع إن النسخة اتغيّرت). دلوقتي بياخد الرقم من APP_VERSION دايمًا.
+try{document.title=document.title.replace(/v\d+\s*$/,'v'+APP_VERSION);}catch(_eT){}
 
 // ===== DB — localStorage فقط (offline) =====
 var DB_KEY = 'mc10_data';
@@ -5207,8 +5287,11 @@ function __dequeueSync(table, id){
 }
 function __renderQueueBadge(){
   var el = document.getElementById('__sync-queue-badge');
-  var n = __syncQueue.length;
-  if(!n){ if(el) el.style.display='none'; return; }
+  // ⚠️ v296 — كتل الإعدادات/الحسابات/الأرشيف بتتحط في الطابور كل واحدة لوحدها (فمصروف واحد كان يظهر "٢٠ بانتظار"). بنعدّ السجلات الحقيقية بس.
+  var __BLK_TABLES={'__bizblob__':1,'__accounts__':1,'__clients__':1,'__scrap__':1,'__settings__':1,'__archive__':1,'__mov_counter__':1};
+  var n = __syncQueue.filter(function(q){return !__BLK_TABLES[q.table];}).length;
+  var __hasBlocks = __syncQueue.length > n;
+  if(!__syncQueue.length){ if(el) el.style.display='none'; return; }
   if(!el){
     el = document.createElement('div');
     el.id='__sync-queue-badge';
@@ -5217,7 +5300,7 @@ function __renderQueueBadge(){
     document.body.appendChild(el);
   }
   el.style.display='block';
-  el.textContent = '🔄 '+n+' بانتظار المزامنة — دوس للتفاصيل';
+  el.textContent = n ? ('🔄 '+n+' سجل'+(__hasBlocks?' + الإعدادات':'')+' بانتظار المزامنة — دوس للتفاصيل') : '🔄 الإعدادات والبيانات بانتظار المزامنة — دوس للتفاصيل';
 }
 var __draining = false;
 // v169 — [🐛 إصلاح فوري لباج خطير حصل في v168] النسخة اللي فاتت كانت بتنادي
@@ -5241,12 +5324,15 @@ async function __ensureFreshSession(force){
     // لسه مقبول هناك. بنعمل التأكد الحقيقي ده مرة كل دقيقة بس (مش مع كل نداء) عشان
     // منزودش عدد الطلبات، إلا لو "force" اتبعتت صراحة.
     if(!force && (Date.now()-__lastVerifiedSessionAt) < 60000) return true;
-    var u = await sb.auth.getUser();
+    if(Date.now() < __NET_STATE.badUntil) return true; // القاطع مفتوح (نت ضعيف) → من غير انتظار، الحفظ هيتأجّل للطابور فورًا
+    var u = await __raceTimeout(sb.auth.getUser(), 3000); // ⚠️ v296 — مهلة: النت الضعيف كان بيعلّق الحفظ هنا
+    if(u===__TIMED_OUT) return true; // مش قادرين نتأكد دلوقتي → نكمّل والحفظ نفسه هيتأجّل للطابور لو فشل
     if(u && u.data && u.data.user){ __lastVerifiedSessionAt = Date.now(); return true; }
     // التوكن اتقبلش من السيرفر رغم وجود جلسة محلية — نجرب تجديد صريح مرة واحدة
     // (هنا التجديد اليدوي مبرر لأننا أكدنا فعليًا إن التوكن الحالي معطوب، على عكس
     // مخاوف v169 من التجديد اليدوي وقت ما تكون الجلسة أصلاً سليمة).
-    var r = await sb.auth.refreshSession();
+    var r = await __raceTimeout(sb.auth.refreshSession(), 6000);
+    if(r===__TIMED_OUT) return true;
     var okAfterRefresh = !!(r && r.data && r.data.session);
     if(okAfterRefresh) __lastVerifiedSessionAt = Date.now();
     return okAfterRefresh;
@@ -5384,6 +5470,23 @@ if(typeof window!=='undefined'){
   }, 240000);
 }
 if(__syncQueue.length){ setTimeout(__renderQueueBadge, 300); }
+
+// ⚠️ v296 — شريط الحالة العلوي (#sync-badge) كان نص أخضر ثابت "متصل بالسيرفر" حتى لو النت قاطع (مفيش أي مستمع لحدث offline).
+// دلوقتي بيتبع حالة الشبكة الفعلية: ok (أخضر) · offline (برتقالي) · weak (برتقالي — مهلة طلب فشلت من __fetchWithTimeout).
+var __netBadgeState = 'ok';
+function __setNetBadge(state){
+  if(state===__netBadgeState) return;
+  __netBadgeState = state;
+  var el = document.getElementById('sync-badge'); if(!el) return;
+  if(state==='offline'){ el.textContent='📴 أوفلاين — محفوظ على جهازك'; el.style.background='#d97706'; }
+  else if(state==='weak'){ el.textContent='⚠️ النت ضعيف — الحفظ هيتزامن بعدين'; el.style.background='#d97706'; }
+  else { el.textContent='✅ متصل بالسيرفر'; el.style.background='#16a34a'; }
+}
+if(typeof window!=='undefined'){
+  window.addEventListener('offline', function(){ __setNetBadge('offline'); });
+  window.addEventListener('online', function(){ __setNetBadge('ok'); });
+  if(typeof navigator!=='undefined' && navigator.onLine===false){ __setNetBadge('offline'); }
+}
 
 // ===== Stubs بسيطة — كل عملية بتعمل persist تلقائي =====
 // جداول مسموح مزامنتها فعليًا مع السيرفر (بيتزاد فيها جدول جديد كل ما نوصل قسم جديد)
@@ -10791,6 +10894,8 @@ async function finishExtractForSale(){
     return Object.assign({},m,{parts_extracted:newParts});
   });
   await persist();
+  for(var _mid in byMachine){await _scrapSyncMachineProd(_mid);} // ⚠️ v297 — نفس إصلاح العدّ المزدوج
+  await persist();
 
   // رجّع للفاتورة وأضف كل البنود — بسعر شراء حقيقي (مش صفر) عشان يتحسب صح في الأرباح
   document.getElementById('modal-title').textContent=window._saleModalTitleBackup||'فاتورة بيع جديدة';
@@ -13667,10 +13772,10 @@ function _netProfitThisMonth(){
   var ps=DB.sales.filter(function(s){return isInCurrentHijriMonth(s.date);});
   var pe=DB.expenses.filter(function(e){return isInCurrentHijriMonth(e.date);});
   var pAdj=(DB.accounts.inventory_adjustments||[]).filter(function(a){return isInCurrentHijriMonth(a.date);});
-  var rev=ps.reduce(function(s,x){return s+x.total;},0);
+  var rev=ps.reduce(function(s,x){return s+(+x.total||0);},0); // ⚠️ v297 — حماية: قيمة نصية كانت بتتحول لدمج نصوص وتفجّر الرقم
   var cos=salesCost(ps);
-  var exp=pe.reduce(function(s,x){return s+x.amount;},0);
-  var adj=pAdj.reduce(function(s,x){return s+x.amount;},0);
+  var exp=pe.reduce(function(s,x){return s+(+x.amount||0);},0);
+  var adj=pAdj.reduce(function(s,x){return s+(+x.amount||0);},0);
   return rev-cos-exp+adj;
 }
 
@@ -22817,7 +22922,192 @@ function _scrapRemainingCost(machineId){
   var m=(DB.scrap_machines||[]).find(function(x){return x.id===machineId;});
   if(!m)return 0;
   var recovered=(m.parts_extracted||[]).reduce(function(s,p){return s+(p.qty*(p.buy_price||0));},0);
-  return Math.max(0,(m.buy_price||0)-recovered);
+  // ⚠️ v297 — detached_cost: تكلفة قطع اتحذفت من السجل بس لسه موجودة/اتباعت، فتكلفتها فضلت معاها مش راجعة للماكينة
+  return Math.max(0,(m.buy_price||0)-recovered-(m.detached_cost||0));
+}
+
+// ⚠️ v297 — [🐛 عدّ مزدوج لتكلفة الماكينة + تعديل الاسكراب مش بيوصل للمخزن] — دوال مشتركة (دستور #24)
+function _scrapIsUuid(s){return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(String(s||''));}
+
+// منتج الماكينة في المخزن. القديم (من غير scrap_machine_id) بيتلاقى بالاسم لو متفرّد (ماكينة واحدة ومنتج واحد بنفس الاسم)
+function _scrapMachineProd(m){
+  if(!m)return null;
+  var prods=DB.products||[];
+  var p=prods.find(function(x){return x.category==='machine'&&x.scrap_machine_id===m.id;});
+  if(p)return p;
+  var nm=normalizeAr(m.name);
+  var sameMachines=(DB.scrap_machines||[]).filter(function(x){return normalizeAr(x.name)===nm;});
+  var cands=prods.filter(function(x){return x.category==='machine'&&!x.scrap_machine_id&&normalizeAr(x.name)===nm;});
+  return (sameMachines.length===1&&cands.length===1)?cands[0]:null;
+}
+
+// بيخلّي تكلفة منتج الماكينة في المخزن = الباقي من ثمنها (والباقي اتنقل لقطعها) + بيربط المنتج القديم
+async function _scrapSyncMachineProd(machineId){
+  var m=(DB.scrap_machines||[]).find(function(x){return x.id===machineId;});if(!m)return;
+  var mp=_scrapMachineProd(m);if(!mp)return;
+  var rem=money(_scrapRemainingCost(machineId));
+  var upd={};
+  if(Math.abs((+mp.buy_price||0)-rem)>0.009)upd.buy_price=rem;
+  if(mp.scrap_machine_id!==m.id&&_scrapIsUuid(m.id))upd.scrap_machine_id=m.id;
+  if(!Object.keys(upd).length)return;
+  DB.products=patchRow(DB.products,mp.id,upd);
+  try{await dbUpdate('products',mp.id,upd);}catch(e){}
+}
+
+// علامة على القطعة: مكتوبة في الماكينة ومش موجودة في المخزن ولا اتباعت
+function _scrapPartMissingBadge(m,p,soldInfo){
+  var prod=p.productId?(DB.products||[]).find(function(x){return x.id===p.productId;}):null;
+  if(!prod&&!p.productId)prod=(DB.products||[]).find(function(x){return (x.scrap_source===m.id||x.scrap_machine_id===m.id)&&normalizeAr(x.name)===normalizeAr(p.name);});
+  if(prod||(soldInfo&&soldInfo.soldQty>0))return '';
+  return '<span style="background:#fee2e2;color:#dc2626;border-radius:5px;padding:1px 6px;font-size:10px;font-weight:700;margin-right:4px">⚠️ مش موجودة في المخزن</span>';
+}
+
+// دمج سجل القطع بين الأجهزة بالاتحاد على مستوى القطعة (بدل آخر كتابة تكسب على الماكينة كلها) + علامات الحذف
+function __mergeScrapParts(localRow,serverRow,merged){
+  var tomb={};
+  (localRow.deleted_part_ids||[]).concat(serverRow.deleted_part_ids||[]).forEach(function(i){tomb[i]=1;});
+  var out=[],seen={};
+  (serverRow.parts_extracted||[]).forEach(function(p){
+    if(!p)return; if(p.id&&tomb[p.id])return;
+    out.push(p); if(p.id)seen[p.id]=1;
+  });
+  (localRow.parts_extracted||[]).forEach(function(p){
+    if(!p)return;
+    if(p.id){ if(tomb[p.id]||seen[p.id])return; }
+    else if(out.some(function(q){return q.name===p.name&&q.qty===p.qty&&q.productId===p.productId;}))return;
+    out.push(p);
+  });
+  merged.parts_extracted=out;
+  var tk=Object.keys(tomb); if(tk.length)merged.deleted_part_ids=tk;
+  return merged;
+}
+
+// ===== فحص سلامة الاسكراب =====
+function _scrapAuditCompute(){
+  var res={phantom:[],unrecorded:[],lostMachine:[],costMismatch:[],total:0};
+  var machines=DB.scrap_machines||[],prods=DB.products||[],sales=DB.sales||[];
+  var mById={};machines.forEach(function(m){mById[m.id]=m;});
+  var soldByProd={};
+  sales.forEach(function(s){(s.items||[]).forEach(function(it){if(it.productId)soldByProd[it.productId]=(soldByProd[it.productId]||0)+(+it.qty||0);});});
+  var recorded={};
+  machines.forEach(function(m){
+    (m.parts_extracted||[]).forEach(function(p){
+      var prod=p.productId?prods.find(function(x){return x.id===p.productId;}):null;
+      if(p.productId)recorded[p.productId]=true;
+      if(!prod&&!p.productId){
+        prod=prods.find(function(x){return (x.scrap_source===m.id||x.scrap_machine_id===m.id)&&normalizeAr(x.name)===normalizeAr(p.name);});
+        if(prod)recorded[prod.id]=true;
+      }
+      if(!prod){
+        var sold=p.productId?(soldByProd[p.productId]||0):_scrapPartSaleInfo(m.id,p.name,null).soldQty;
+        if(!sold)res.phantom.push({machineId:m.id,machine:m.name,name:p.name,qty:p.qty,ref:p});
+      }
+    });
+  });
+  prods.forEach(function(p){
+    if(p.category==='machine'||!p.scrap_source||recorded[p.id])return;
+    var m=mById[p.scrap_source];
+    var it={productId:p.id,name:p.name,qty:+p.qty||0,sold:soldByProd[p.id]||0,machineId:p.scrap_source,machine:m?m.name:null,buy:+p.buy_price||0,sell:+p.sell_price||0,date:p.date||''};
+    if(it.qty+it.sold<=0)return;
+    (m?res.unrecorded:res.lostMachine).push(it);
+  });
+  machines.forEach(function(m){
+    var mp=_scrapMachineProd(m);if(!mp)return;
+    var rem=money(_scrapRemainingCost(m.id));
+    var noLink=mp.scrap_machine_id!==m.id;
+    var wrongValue=(+mp.qty||0)>0&&Math.abs((+mp.buy_price||0)-rem)>0.009;
+    if(wrongValue||(noLink&&(+mp.qty||0)>0)||(m.status==='depleted'&&(+mp.qty||0)>0))
+      res.costMismatch.push({machineId:m.id,machine:m.name,current:+mp.buy_price||0,should:rem,qty:+mp.qty||0,noLink:noLink,depleted:m.status==='depleted'});
+  });
+  res.total=res.phantom.length+res.unrecorded.length+res.lostMachine.length+res.costMismatch.length;
+  return res;
+}
+
+function _scrapAuditBanner(){
+  var a=_scrapAuditCompute();
+  return '<div onclick="openScrapAudit()" style="background:'+(a.total?'#fff7ed':'#f0fdf4')+';border:1.5px solid '+(a.total?'#fb923c':'#bbf7d0')+';border-radius:12px;padding:9px 12px;margin-bottom:10px;cursor:pointer;display:flex;justify-content:space-between;align-items:center">'+
+    '<span style="font-size:12px;font-weight:800;color:'+(a.total?'#c2410c':'#15803d')+'">'+(a.total?('⚠️ فحص الاسكراب: '+a.total+' مشكلة محتاجة مراجعة'):'✅ فحص سلامة الاسكراب — مفيش مشاكل')+'</span>'+
+    '<span style="font-size:11px;color:#64748b">دوس للتفاصيل ←</span></div>';
+}
+
+function openScrapAudit(){
+  var a=_scrapAuditCompute();
+  function block(title,color,arr,fmtFn){
+    if(!arr.length)return '';
+    return '<div style="background:#f8fafc;border-radius:10px;padding:9px 11px;margin-bottom:9px;border-right:4px solid '+color+'">'+
+      '<div style="font-size:12px;font-weight:800;color:'+color+';margin-bottom:5px">'+title+' ('+arr.length+')</div>'+
+      arr.slice(0,8).map(function(x){return '<div style="font-size:12px;color:#334155;padding:2px 0">• '+fmtFn(x)+'</div>';}).join('')+
+      (arr.length>8?'<div style="font-size:11px;color:#94a3b8">…و '+(arr.length-8)+' كمان</div>':'')+'</div>';
+  }
+  var body=a.total?
+    block('قطع مكتوبة في الماكينة ومش موجودة في المخزن (ولا اتباعت)','#dc2626',a.phantom,function(x){return esc(x.name)+' × '+x.qty+' — من '+esc(x.machine);})+
+    block('قطع في المخزن من اسكراب ومش مسجلة في الماكينة','#ea580c',a.unrecorded,function(x){return esc(x.name)+' × '+(x.qty+x.sold)+(x.sold?' (اتباع '+x.sold+')':'')+' — '+esc(x.machine||'');})+
+    block('قطع ماكينة اتحذفت (هنعمل لها سجل "ماكينة محذوفة")','#7c3aed',a.lostMachine,function(x){return esc(x.name)+' × '+(x.qty+x.sold);})+
+    block('تكلفة الماكينة في المخزن مش مظبوطة','#0369a1',a.costMismatch,function(x){return esc(x.machine)+': '+(x.depleted?'مستنفدة لكن كميتها '+x.qty+' في المخزن':fmt(x.current)+' ج ← المفروض '+fmt(x.should)+' ج')+(x.noLink?' (مش مربوطة)':'');})
+    :'<div class="empty" style="padding:18px 0">✅ مفيش أي مشكلة في الاسكراب</div>';
+  document.getElementById('modal-title').textContent='🔍 فحص سلامة الاسكراب';
+  document.getElementById('modal-body').innerHTML=body+
+    '<div class="modal-actions">'+(a.total?'<button class="btn btn-green btn-full" onclick="__runOnce(this,scrapAuditFix)">🛠️ إصلاح تلقائي</button>':'')+
+    '<button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+  openModal();
+}
+
+async function scrapAuditFix(){
+  var a=_scrapAuditCompute();
+  if(!a.total){closeModal();return showToast('✅ مفيش مشاكل','#16a34a');}
+  var fixed={phantom:0,unrecorded:0,lost:0,cost:0},prodUpd=[];
+  // (أ) سجلات قطع مش موجودة في المخزن ولا اتباعت → تتشال (تكلفتها بترجع للماكينة)
+  a.phantom.forEach(function(ph){
+    DB.scrap_machines=DB.scrap_machines.map(function(m){
+      if(m.id!==ph.machineId)return m;
+      var parts=(m.parts_extracted||[]).filter(function(p){return p!==ph.ref;});
+      fixed.phantom+=(m.parts_extracted||[]).length-parts.length;
+      var o={parts_extracted:parts};
+      if(ph.ref&&ph.ref.id)o.deleted_part_ids=(m.deleted_part_ids||[]).concat([ph.ref.id]);
+      return Object.assign({},m,o);
+    });
+  });
+  // (ب) قطع في المخزن من ماكينة موجودة ومش مسجلة → نسجّلها (والتكلفة اللي فضلت معاها "detached" بترجع تتحسب في السجل)
+  a.unrecorded.forEach(function(u){
+    DB.scrap_machines=DB.scrap_machines.map(function(m){
+      if(m.id!==u.machineId)return m;
+      var q=roundQty(u.qty+u.sold);
+      var np={id:genId(),name:u.name,qty:q,added_date:u.date||today(),buy_price:u.buy,sell_price:u.sell,productId:u.productId,restored:true};
+      fixed.unrecorded++;
+      return Object.assign({},m,{parts_extracted:(m.parts_extracted||[]).concat([np]),detached_cost:Math.max(0,money((m.detached_cost||0)-q*u.buy))});
+    });
+  });
+  // (ج) قطع ماكينة اتحذفت → ماكينة "محذوفة (مستعادة)" مستنفدة وتكلفتها صفر
+  var lost={};a.lostMachine.forEach(function(u){(lost[u.machineId]=lost[u.machineId]||[]).push(u);});
+  Object.keys(lost).forEach(function(src){
+    var id=_scrapIsUuid(src)?src:genId();
+    var list=lost[src];
+    var dates=list.map(function(u){return u.date;}).filter(Boolean).sort();
+    DB.scrap_machines.unshift({id:id,name:'ماكينة محذوفة (استُعيدت تلقائيًا)',model:'',buy_price:0,buy_date:dates[0]||today(),
+      note:'اتعملت تلقائيًا عشان قطعها المستخرجة تفضل مسجلة بعد حذف الماكينة الأصلية',status:'depleted',restored:true,
+      parts_extracted:list.map(function(u){return {id:genId(),name:u.name,qty:roundQty(u.qty+u.sold),added_date:u.date||today(),buy_price:u.buy,sell_price:u.sell,productId:u.productId,restored:true};})});
+    fixed.lost+=list.length;
+    if(id!==src)list.forEach(function(u){DB.products=patchRow(DB.products,u.productId,{scrap_source:id});prodUpd.push([u.productId,{scrap_source:id}]);});
+  });
+  await persist();
+  for(var i=0;i<prodUpd.length;i++){try{await dbUpdate('products',prodUpd[i][0],prodUpd[i][1]);}catch(e){}}
+  // (د) تكلفة/ربط/كمية منتج كل ماكينة
+  var machines=(DB.scrap_machines||[]).slice();
+  for(var j=0;j<machines.length;j++){
+    var m=machines[j],mp=_scrapMachineProd(m);if(!mp)continue;
+    var before=(+mp.buy_price||0)+'|'+(mp.scrap_machine_id||'')+'|'+(+mp.qty||0);
+    if(m.status==='depleted'&&(+mp.qty||0)>0){
+      DB.products=patchRow(DB.products,mp.id,{qty:0});
+      try{await dbUpdate('products',mp.id,{qty:0});}catch(e){}
+    }
+    await _scrapSyncMachineProd(m.id);
+    var mp2=(DB.products||[]).find(function(x){return x.id===mp.id;})||mp;
+    if(before!==((+mp2.buy_price||0)+'|'+(mp2.scrap_machine_id||'')+'|'+(+mp2.qty||0)))fixed.cost++;
+  }
+  await persist();
+  closeModal();renderScrap();
+  if(typeof renderInventory==='function')renderInventory();
+  showToast('✅ اتصلّح: '+fixed.cost+' ماكينة تكلفة، '+fixed.unrecorded+' قطعة اتسجلت، '+fixed.lost+' قطعة ماكينة محذوفة، '+fixed.phantom+' سجل وهمي اتشال','#16a34a');
 }
 
 navLabels['scrap']='تفكيك الماكينات';
@@ -22845,7 +23135,7 @@ function renderScrap(){
     '<div style="font-size:18px;font-weight:900;color:#15803d">'+totalParts+'</div></div>'+
     '</div>'+
 
-    '<button class="btn btn-red btn-full" onclick="openAddScrapMachineModal()" style="margin-bottom:10px">+ إضافة ماكينة اسكراب جديدة</button>'+
+    '<button class="btn btn-red btn-full" onclick="openAddScrapMachineModal()" style="margin-bottom:10px">+ إضافة ماكينة اسكراب جديدة</button>'+_scrapAuditBanner()+
     (depleted.length?'<div onclick="_scrapFilter=(_scrapFilter===\'depleted\'?\'all\':\'depleted\');renderScrap()" style="background:'+(_scrapFilter==='depleted'?'#475569':'#f1f5f9')+';color:'+(_scrapFilter==='depleted'?'#fff':'#475569')+';border-radius:10px;padding:8px 12px;margin-bottom:12px;text-align:center;font-size:12px;font-weight:800;cursor:pointer">🗂️ المستنفدة ('+depleted.length+') — '+(_scrapFilter==='depleted'?'اضغط للرجوع للكل':'اضغط للعرض بس')+'</div>':'<div style="margin-bottom:4px"></div>')+
 
     // الماكينات النشطة
@@ -22875,7 +23165,7 @@ function scrapMachineCard(m, collapsed){
     parts.map(function(p,pi){
       var soldInfo=_scrapPartSaleInfo(m.id,p.name,p.productId);
       return '<div onclick="openScrapPartDetail(\''+m.id+'\','+pi+')" style="display:flex;justify-content:space-between;align-items:center;padding:7px 8px;border-bottom:1px solid #e2e8f0;font-size:12px;cursor:pointer;border-radius:7px" onmouseover="this.style.background=\'#fff\'" onmouseout="this.style.background=\'transparent\'">'+
-        '<div><b>'+esc(p.name)+'</b><span style="color:#94a3b8;font-size:11px;margin-right:6px">× '+p.qty+'</span>'+
+        '<div><b>'+esc(p.name)+'</b><span style="color:#94a3b8;font-size:11px;margin-right:6px">× '+p.qty+'</span>'+_scrapPartMissingBadge(m,p,soldInfo)+
         (soldInfo.soldQty>0?'<span style="background:#dcfce7;color:#15803d;border-radius:5px;padding:1px 6px;font-size:10px;font-weight:700;margin-right:4px">✅ اتباع '+soldInfo.soldQty+'</span>':'<span style="background:#fef9c3;color:#ca8a04;border-radius:5px;padding:1px 6px;font-size:10px;font-weight:700;margin-right:4px">في المخزن</span>')+
         '</div>'+
         '<div style="display:flex;align-items:center;gap:6px">'+
@@ -22976,30 +23266,59 @@ function openScrapPartDetail(machineId,partIdx){
 }
 
 async function delScrapPart(machineId,partIdx){
-  DB.scrap_machines=(DB.scrap_machines||[]).map(function(m){
-    if(m.id!==machineId)return m;
-    var parts=(m.parts_extracted||[]).filter(function(p,i){return i!==partIdx;});
-    return Object.assign({},m,{parts_extracted:parts});
+  var m=(DB.scrap_machines||[]).find(function(x){return x.id===machineId;});if(!m)return;
+  var part=(m.parts_extracted||[])[partIdx];if(!part)return;
+  // ⚠️ v297 — لو القطعة لسه في المخزن (أو اتباعت) تكلفتها بتفضل معاها (detached_cost) ومتروحش لثمن الماكينة — وإلا عدّ مزدوج
+  var prod=part.productId?(DB.products||[]).find(function(x){return x.id===part.productId;}):null;
+  var sold=_scrapPartSaleInfo(machineId,part.name,part.productId).soldQty;
+  var detach=(prod||sold>0)?(+part.qty||0)*(+part.buy_price||0):0;
+  DB.scrap_machines=(DB.scrap_machines||[]).map(function(mm){
+    if(mm.id!==machineId)return mm;
+    var parts=(mm.parts_extracted||[]).filter(function(p,i){return i!==partIdx;});
+    var o={parts_extracted:parts,detached_cost:money((mm.detached_cost||0)+detach)};
+    if(part.id)o.deleted_part_ids=(mm.deleted_part_ids||[]).concat([part.id]);
+    return Object.assign({},mm,o);
   });
+  await _scrapSyncMachineProd(machineId);
   await persist();
   closeModal();renderScrap();
-  showToast('✅ اتحذفت من سجل الاستخراج','#16a34a');
+  showToast(prod?'✅ اتحذفت من سجل الاستخراج (القطعة لسه في المخزن)':'✅ اتحذفت من سجل الاستخراج','#16a34a');
 }
 
 async function saveScrapPartDetail(machineId,partIdx){
-  var newQty=+v('sp-qty')||1;
-  var newBuy=+v('sp-buy')||0;
-  var newSell=+v('sp-sell')||0;
-  DB.scrap_machines=(DB.scrap_machines||[]).map(function(m){
-    if(m.id!==machineId)return m;
-    var parts=(m.parts_extracted||[]).map(function(p,i){
+  var newQty=+v('sp-qty'),newBuy=+v('sp-buy')||0,newSell=+v('sp-sell')||0;
+  // ⚠️ v297 — الكمية صفر كانت بتتحول لـ١ بصمت. دلوقتي لازم أكبر من صفر (للإزالة استخدم الحذف)
+  if(!(newQty>0))return showToast('⚠️ الكمية لازم تكون أكبر من صفر — لو عايز تشيل القطعة استخدم زر الحذف','#dc2626');
+  newQty=roundQty(newQty);
+  var m=(DB.scrap_machines||[]).find(function(x){return x.id===machineId;});if(!m)return;
+  var part=(m.parts_extracted||[])[partIdx];if(!part)return;
+  var oldQty=+part.qty||0,oldBuy=+part.buy_price||0;
+  var prod=part.productId?(DB.products||[]).find(function(x){return x.id===part.productId;}):null;
+  var upd=null;
+  if(prod){
+    // ⚠️ v297 — تعديل القطعة كان بيتغيّر في سجل الماكينة بس والمخزن زي ما هو. دلوقتي المخزن بيتحدّث في نفس العملية
+    var pQty=+prod.qty||0,pBuy=+prod.buy_price||0;
+    var nQty=roundQty(pQty+(newQty-oldQty));
+    if(nQty<0)return showToast('⚠️ مينفعش تقل الكمية عن '+roundQty(oldQty-pQty)+' — الباقي في المخزن '+pQty+' بس والباقي اتباع/اتسحب','#dc2626');
+    var val=pQty*pBuy-oldQty*oldBuy+newQty*newBuy;
+    upd={qty:nQty,buy_price:nQty>0?money(Math.max(0,val)/nQty):newBuy};
+    if(prod.scrap_source===machineId){upd.sell_price=newSell;upd.scrap_price=newSell;} // لو القطعة مدموجة في منتج عادي ما نغيّرش سعر بيعه
+    DB.products=patchRow(DB.products,prod.id,upd);
+  }
+  DB.scrap_machines=(DB.scrap_machines||[]).map(function(mm){
+    if(mm.id!==machineId)return mm;
+    var parts=(mm.parts_extracted||[]).map(function(p,i){
       return i===partIdx?Object.assign({},p,{qty:newQty,buy_price:newBuy,sell_price:newSell}):p;
     });
-    return Object.assign({},m,{parts_extracted:parts});
+    return Object.assign({},mm,{parts_extracted:parts});
   });
   await persist();
+  if(upd){try{await dbUpdate('products',prod.id,upd);}catch(e){}}
+  await _scrapSyncMachineProd(machineId);
+  await persist();
   closeModal();renderScrap();
-  showToast('✅ تم حفظ التعديل','#16a34a');
+  if(typeof renderInventory==='function')renderInventory();
+  showToast(prod?'✅ تم حفظ التعديل (والمخزن اتحدّث)':'⚠️ اتعدّل السجل بس — القطعة مش موجودة في المخزن','#16a34a');
 }
 
 // إضافة ماكينة اسكراب جديدة
@@ -23201,6 +23520,8 @@ async function confirmExtractParts(machineId){
   for(var i=0;i<_scrapExtractItems.length;i++){
     var item=_scrapExtractItems[i];
     var itemBuy=item.buy_price||0;
+    // ⚠️ v297 — نفس القطعة من نفس الماكينة (حتى لو اتكتبت جديدة تاني) تتدمج في منتج واحد بدل منتجين بنفس الاسم
+    if(!item.isExisting){var _dupP=DB.products.find(function(p){return p.category!=='machine'&&p.scrap_source===machineId&&normalizeAr(p.name)===normalizeAr(item.name);});if(_dupP){item.isExisting=true;item.productId=_dupP.id;}}
     if(item.isExisting&&item.productId){
       // زيادة الكمية في المنتج الموجود + حساب متوسط مرجّح لسعر الشراء بدمج الكمية القديمة والجديدة
       DB.products=DB.products.map(function(p){
@@ -23249,6 +23570,8 @@ async function confirmExtractParts(machineId){
       await dbUpsert('products',it2._syncNewProd);
     }
   }
+  await _scrapSyncMachineProd(machineId); // ⚠️ v297 — تكلفة الماكينة في المخزن بتقل بقد اللي اتنقل للقطع (عدّ مزدوج)
+  await persist();
   closeModal();renderScrap();renderInventory();
   var totalQty=_scrapExtractItems.reduce(function(s,i){return s+i.qty;},0);
   showToast('✅ تم إضافة '+totalQty+' قطعة للمخزون','#16a34a');
@@ -23256,13 +23579,16 @@ async function confirmExtractParts(machineId){
 }
 
 async function markScrapDepleted(id){
+  var m0=(DB.scrap_machines||[]).find(function(x){return x.id===id;});
   DB.scrap_machines=DB.scrap_machines.map(function(m){
     return m.id===id?Object.assign({},m,{status:'depleted'}):m;
   });
   // تحديث المخزون
-  var touchedIds=(DB.products||[]).filter(function(p){return p.scrap_machine_id===id;}).map(function(p){return p.id;}); // ⚠️ v209
+  // ⚠️ v297 — الماكينة القديمة (منتجها من غير scrap_machine_id) كانت بتفضل بكميتها ١ وقيمتها في المخزن بعد "مستنفدة"
+  var _mp=_scrapMachineProd(m0);
+  var touchedIds=(DB.products||[]).filter(function(p){return p.scrap_machine_id===id||(_mp&&p.id===_mp.id);}).map(function(p){return p.id;}); // ⚠️ v209
   DB.products=DB.products.map(function(p){
-    return p.scrap_machine_id===id?Object.assign({},p,{unit:'اسكراب',qty:0}):p;
+    return touchedIds.indexOf(p.id)!==-1?Object.assign({},p,{unit:'اسكراب',qty:0}):p;
   });
   await persist();
   for(var i=0;i<touchedIds.length;i++)await dbUpdate('products',touchedIds[i],{unit:'اسكراب',qty:0}); // ⚠️ v209
@@ -23286,20 +23612,28 @@ function openEditScrapModal(id){
 
 async function saveEditScrapMachine(id){
   var name=v('escm-name');if(!name)return showToast('⚠️ الاسم مطلوب','#dc2626');
+  var price=+v('escm-price')||0;
+  // ⚠️ v297 — بنجيب منتج المخزن قبل تغيير الاسم (الماكينة القديمة من غير ربط بتتلاقى بالاسم القديم)
+  var _mp=_scrapMachineProd((DB.scrap_machines||[]).find(function(x){return x.id===id;}));
   DB.scrap_machines=DB.scrap_machines.map(function(m){
-    return m.id===id?Object.assign({},m,{name:name,model:v('escm-model'),buy_price:+v('escm-price')||0,note:v('escm-note')}):m;
+    return m.id===id?Object.assign({},m,{name:name,model:v('escm-model'),buy_price:price,note:v('escm-note')}):m;
   });
-  // v278 — منتج الماكينة في المخزون كان بيفضل بالاسم/السعر القديم بعد التعديل
-  var _mp=(DB.products||[]).find(function(p){return p.scrap_machine_id===id&&p.category==='machine';});
-  if(_mp){var _pu={name:name,buy_price:+v('escm-price')||0,scrap_price:+v('escm-price')||0};DB.products=patchRow(DB.products,_mp.id,_pu);try{await dbUpdate('products',_mp.id,_pu);}catch(e){}}
+  // v278 — منتج الماكينة في المخزن كان بيفضل بالاسم/السعر القديم بعد التعديل
+  // ⚠️ v297 — سعر المخزن = "الباقي من ثمن الماكينة" (مش السعر الكامل) وإلا القطع المستخرجة بتتعدّ مرتين
+  if(_mp){var _pu={name:name,scrap_price:price};DB.products=patchRow(DB.products,_mp.id,_pu);try{await dbUpdate('products',_mp.id,_pu);}catch(e){}}
+  await _scrapSyncMachineProd(id);
   await persist();closeModal();renderScrap();
+  if(typeof renderInventory==='function')renderInventory();
   showToast('✅ تم التعديل','#16a34a');
 }
 
 async function delScrapMachine(id){
+  var m0=(DB.scrap_machines||[]).find(function(x){return x.id===id;});if(!m0)return;
+  // ⚠️ v297 — حذف ماكينة فيها قطع مستخرجة كان بيمسح سجل قطعها كله والقطع لسه في المخزن/اتباعت (= "قطع من غير سجل استخراج")
+  if((m0.parts_extracted||[]).length)return showToast('⚠️ الماكينة دي فيها قطع مستخرجة — سجّلها "مستنفدة" بدل الحذف عشان سجل القطع والمبيعات يفضل محفوظ (أو احذف القطع من سجلها الأول)','#dc2626');
+  var _mp=_scrapMachineProd(m0);
   DB.scrap_machines=(DB.scrap_machines||[]).filter(function(m){return m.id!==id;});
   // v278 — حذف الماكينة كان بيسيب منتجها في المخزون يتيم (كمية ١ وسعر الشراء داخل في تقييم المخزون)
-  var _mp=(DB.products||[]).find(function(p){return p.scrap_machine_id===id&&p.category==='machine';});
   if(_mp){DB.products=DB.products.filter(function(p){return p.id!==_mp.id;});try{await dbDelete('products',_mp.id,_mp);}catch(e){}}
   await persist();renderScrap();
   showToast('🗑️ تم الحذف','#64748b');
@@ -26422,11 +26756,13 @@ function _countAbsenceDaysThisMonth(profileId){
   (DB.accounts.attendance||[]).forEach(function(a){if(a.profile_id===profileId)present[a.date]=true;});
   var onLeave={};
   (DB.accounts.employee_leaves||[]).forEach(function(l){if(l.profile_id===profileId)onLeave[l.date]=true;});
-  var count=0,d=new Date(from),end=new Date(t);
-  while(d<=end){
-    var ds=d.toISOString().split('T')[0];
-    if(!present[ds]&&!onLeave[ds])count++;
-    d.setDate(d.getDate()+1);
+  // ⚠️ v295 — تكرار نصي للتواريخ (YYYY-MM-DD) بدل Date+toISOString: new Date(from) بيتفسّر UTC وsetDate بيتحسب محلي،
+  // فوقت تغيير التوقيت الصيفي (مصر) كان يوم بيتكرر/بيتنط ويطلع عدّ الغياب غلط بيوم.
+  var count=0,cur=from;
+  while(cur<=t){
+    if(!present[cur]&&!onLeave[cur])count++;
+    var _p=cur.split('-'),_nx=new Date(Date.UTC(+_p[0],+_p[1]-1,+_p[2]+1));
+    cur=_nx.getUTCFullYear()+'-'+String(_nx.getUTCMonth()+1).padStart(2,'0')+'-'+String(_nx.getUTCDate()).padStart(2,'0');
   }
   return count;
 }
@@ -26568,22 +26904,7 @@ async function confirmMarkLeave(empId){
   showToast('✅ اتسجلت إجازة '+esc(fmtDate(dateVal)),'#16a34a');
 }
 
-function _countAbsenceDaysThisMonth(profileId){
-  if(!profileId||!DB.settings||DB.settings.attendanceDeductionEnabled===false)return 0;
-  var t=today();
-  var monthStart=t.slice(0,7)+'-01';
-  var trackStart=DB.settings.attendanceTrackingStartDate||t;
-  var from=monthStart>trackStart?monthStart:trackStart;
-  var present={};
-  (DB.accounts.attendance||[]).forEach(function(a){if(a.profile_id===profileId)present[a.date]=true;});
-  var count=0,d=new Date(from),end=new Date(t);
-  while(d<=end){
-    var ds=d.toISOString().split('T')[0];
-    if(!present[ds])count++;
-    d.setDate(d.getDate()+1);
-  }
-  return count;
-}
+// ⚠️ v295 — تم حذف تعريف مكرر قديم لـ _countAbsenceDaysThisMonth كان بيلغي نسخة v177 (هجري + إجازات معتمدة). التعريف الوحيد فوق.
 
 // v136 — دالة كارت تأكيد الحضور لوحدها (بترجع HTML بس، من غير ما تلمس الـDOM)
 // عشان نقدر نستخدمها في الرئيسية (أول حاجة) وفي شاشة "حسابي" (لو حد فتحها لسه)
@@ -26941,6 +27262,57 @@ var __ONCE_GUARDED=["saveNewCompany", "saveGoalTask", "saveGoalResult", "saveGoa
   }
   __ONCE_GUARDED.forEach(wrap);
 })();
+
+// ⚠️ v295 — حارس الصلاحيات الموحّد. الدوال دي بتعدّل الذاكرة المحلية (وأحيانًا المخزون) قبل ما dbUpdate/dbDelete ترفض
+// بسبب الصلاحية، فكان الموظف من غير صلاحية بيشوف الحذف "ينجح" محليًا والمخزون يتلخبط. هنا الفحص بيحصل قبل أي تعديل.
+// 'ins' = إضافة أو تعديل (زي dbUpsert بالظبط) · 'upd' = تعديل · 'del' = حذف. المالك بيعدّي دايمًا (__hasPerm).
+// قاعدة: أي دالة جديدة بتعدّل DB.x محليًا قبل db*() لازم تتضاف هنا (الدستور #21).
+var __PERM_MAP={
+  openDeleteSaleModal:[['sales','del']], deleteSaleOnly:[['sales','del']], deleteSaleAndDebt:[['sales','del'],['debts','del']],
+  deleteArchivedDebtGroup:[['debts','del']], deleteAllArchivedDebts:[['debts','del']],
+  saveDebt:[['debts','ins']], saveEditDebt:[['debts','upd']],
+  addSubtask:[['tasks','upd']], toggleSubtask:[['tasks','upd']], editSubtask:[['tasks','upd']], delSubtask:[['tasks','upd']],
+  execClearExpenses:[['expenses','del']], saveEditExpense:[['expenses','upd']],
+  confirmPayDailyWage:[['expenses','ins']], confirmPayAdvance:[['expenses','ins']],
+  toggleStockStatus:[['movements','upd']], toggleWaitingStatus:[['movements','upd']], removeFromScheduled:[['movements','upd']],
+  addMovAdvancePayment:[['movements','upd']], removeMovAdvancePayment:[['movements','upd']],
+  confirmContinueMovement:[['movements','upd']], confirmCancelMovement:[['movements','upd']],
+  confirmCloseMovement:[['movements','upd']], confirmSchedDone:[['movements','upd']],
+  saveReceiveConsignment:[['products','ins']], saveGiveConsignment:[['products','upd']],
+  saveReturnConsignment:[['products','upd'],['products','del']], saveConsignmentOutSale:[['products','upd'],['debts','ins']],
+  convertOpeningInventoryToPurchase:[['purchases','ins']],
+  saveEditInvType:[['products','upd']], saveScrapMachine:[['products','ins']], saveEditScrapMachine:[['products','upd']],
+  confirmExtractParts:[['products','upd']], finishExtractForSale:[['products','upd']], markScrapDepleted:[['products','upd']],
+  delScrapMachine:[['products','del']], approveStocktake:[['products','upd'],['expenses','ins']],
+  saveScrapPartDetail:[['products','upd']], scrapAuditFix:[['products','upd']]
+};
+(function(){
+  var ACT={ins:['can_insert','can_update'],upd:['can_update'],del:['can_delete']};
+  var AR={ins:'إضافة',upd:'تعديل',del:'حذف'};
+  function allowed(table,act){
+    if(act==='ins')return __hasPerm(table,'can_insert')||__hasPerm(table,'can_update'); // نفس منطق dbUpsert
+    return __hasPerm(table,ACT[act][0]);
+  }
+  function wrap(name){
+    var orig=window[name];
+    if(typeof orig!=='function'||orig.__permGuarded)return;
+    var req=__PERM_MAP[name];
+    var w=function(){
+      for(var i=0;i<req.length;i++){
+        if(!allowed(req[i][0],req[i][1])){
+          var tn=(typeof __ACTIVITY_TABLE_NAMES!=='undefined'&&__ACTIVITY_TABLE_NAMES[req[i][0]])||req[i][0];
+          showToast('🚫 مفيش صلاحية '+AR[req[i][1]]+' في '+tn+'. كلم المالك.','#dc2626');
+          return;
+        }
+      }
+      return orig.apply(this,arguments);
+    };
+    w.__permGuarded=true;w.__orig=orig;
+    for(var k in orig){try{w[k]=orig[k];}catch(e){}}
+    window[name]=w;
+  }
+  Object.keys(__PERM_MAP).forEach(wrap);
+})();
 </script>
 
 <script>
@@ -27034,7 +27406,11 @@ try{
 // لازم ملف sw.js يكون مرفوع في نفس مجلد index.html على GitHub (نفس المستوى بالظبط).
 if('serviceWorker' in navigator){
   window.addEventListener('load', function(){
-    navigator.serviceWorker.register('./sw.js').catch(function(e){
+    // ⚠️ v296 — updateViaCache:'none' + reg.update(): ملف sw.js الجديد كان بيستنى المتصفح يفحصه لوحده (ممكن ياخد وقت أو كاش GitHub Pages
+    // ١٠ دقايق يعطّله). دلوقتي كل فتحة للتطبيق بتفحص sw.js فورًا (طلب صغير ~٥KB) فأي تحديث للكاش/الخطوط بيوصل بسرعة.
+    navigator.serviceWorker.register('./sw.js', {updateViaCache:'none'}).then(function(reg){
+      try{ reg.update(); }catch(_eU){}
+    }).catch(function(e){
       console.warn('تسجيل Service Worker فشل (التطبيق هيشتغل عادي أونلاين، بس الأوفلاين الكامل مش هيتوفر):', e);
     });
   });
