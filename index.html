@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v300</title>
+<title>ابو حوده الحلو الجميل v301</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="1448-05-12 — v300";
+<script>/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="1448-05-13 — v301";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -84,8 +84,15 @@
     28) ⚠️ v299 — ممنوع تقفل نافذة فيها بيانات مكتوبة بالضغط برّه أو الرجوع أو Esc من غير تأكيد: استخدم __askCloseModal()/__overlayTap(). أي نافذة جديدة فيها حقول بتتحمي تلقائيًا.
     29) ⚠️ v299 — أي حدث مالي بيتحفظ في بلوك الحسابات (accounts) مش بيعدّي على dbUpsert لازم يتسجّل في سجل النشاط بنفسه (__logActivity).
     30) ⚠️ v300 — أي حساب عمولة لازم يسجّل الفواتير/الأعطال اللي اتحسبت في employee.commission_done (بالـid مش بالتاريخ) — التاريخ لوحده بيحسب يوم الاعتماد مرتين.
+    31) ⚠️ v301 — ممنوع أي كود يعدّل القوايم المشتركة (scheduled_list/map/carried) تلقائيًا بناءً على نسخة محلية من التحركات: النسخة المحلية ممكن تبقى ناقصة (رؤية محدودة / تحميل فاشل). أي تنضيف لازم يبقى للمالك + بعد التأكد من اكتمال التحميل + بحد أقصى للقص. وأي قايمة LWW مشتركة لازم يكون ليها نسخ احتياطية محلية قبل ما تتغيّر.
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v301: [🚨 اختفاء أعطال المرتبة فجأة — إصلاح جذري + نسخ احتياطية + استرجاع]
+     1) 🐛 السبب (ثغرة من v254): بعد كل سحب من السيرفر كان التطبيق بيمسح من المرتبة أي عطل مش موجود في النسخة المحلية من الأعطال (__pruneScheduled)، وبعدين المرتبة (بعد التقصير) بتترفع للسيرفر "آخر تعديل يكسب". فأي جهاز نسخته من الأعطال ناقصة (موظف برؤية محدودة، أو تحميل فشل/اتأخر على نت ضعيف، أو جهاز لسه بيحمّل) كان بيقصّ المرتبة المشتركة ويرفعها، فتختفي من كل الأجهزة. اتثبتت بتجربة: جهاز فيه ٢ من ٦ أعطال سحب القايمة الكاملة، فقصّها لـ٢ ورفعها للسيرفر.
+     2) 🔒 التنضيف بقى آمن: بيشتغل بس على جهاز المالك، وبعد التأكد من السيرفر إن عدد الأعطال المحلية = عدد الأعطال في السيرفر، وبيرفض قص جماعي (أكتر من ٣ وأكتر من ٣٠٪ من القايمة). أي موظف مبقاش يقدر يقص القايمة المشتركة.
+     3) 💾 نسخ احتياطية تلقائية للمرتبة: التطبيق بيحفظ على الجهاز آخر ١٥ حالة للمرتبة (قبل أي تعديل وقبل ما السيرفر يستبدلها) — تتحفظ في localStorage.
+     4) 🛟 زرار "استرجاع المرتبة" أعلى شاشة المرتبة (للمالك): (أ) استرجاع من نسخة سابقة (اتحاد مع الحالي، مفيش حاجة بتتمسح) (ب) إضافة أعطال مفتوحة مش في المرتبة (اللي ليها يوم محدد متعلّمة تلقائي) (ج) استرجاع من ملف نسخة احتياطية (mc-backup-*.json). ولو المرتبة فاضية بيظهر تنبيه واضح.
+     5) 📌 إضافة عطل للمرتبة بالأزرار السريعة بقى بيكتب "يوم الجدولة" على العطل نفسه (مزامَن مع السيرفر)، فيه مصدر تاني للاسترجاع غير القايمة.
 v300: [💰 قواعد النسبة للموظف: عملاء معينين / صيانات / اللي بيدخله]
      1) 🎯 قواعد نسبة لكل موظف (في تاب "المالي" بتاع الموظف): (أ) نسبة من عملاء/شركات معينين (أي حد سجّل الفاتورة، وفروع الشركة داخلة)، (ب) نسبة من الصيانات اللي خلّصها (خدمات الصيانة فقط — نفس ربط تقرير الموظفين: نفس العميل في يوم إقفال العطل أو اليوم اللي بعده)، (ج) نسبة من اللي بيدخله هو (حسب مين سجّل الفاتورة). لكل قاعدة نسبة وأساس الحساب: صافي الربح أو الإيراد.
      2) 🧮 كل فاتورة بتتحسب لمرة واحدة بس: الأولوية لعملاء معينين ثم الصيانات ثم اللي بيدخله بنفسه، والخصم بيتخصم مرة واحدة. فيه معاينة بالتفصيل (كل فاتورة وقيمة عمولتها) قبل الاعتماد، والاعتماد بيضيف لرصيد العمولة المعتمدة (زي النظام القديم) ويتسجّل في سجل النشاط وسجل العمولات.
@@ -3814,15 +3821,31 @@ input:checked+.slider:before{transform:translateX(-20px)}
   function __bizBlank(k){ return (k==='scheduled_list'||k==='investors'||k==='inv_batches'||k==='knowledge'||k==='work_rules'||k==='rules_acks'||k==='goals') ? [] : {}; }
   function __bizTs(){ return LS.get('mc8_biz_ts',{}) || {}; }
   function __bizSig(){ return LS.get('mc8_biz_sig',{}) || {}; }
+  // ⚠️ v301 — نسخ احتياطية محلية للمرتبة (آخر ١٥ حالة) — بتتحفظ قبل أي تعديل وقبل ما السيرفر يستبدل القايمة
+  function __schedHist(){return LS.get('mc8_sched_hist',[])||[];}
+  function __schedSnap(reason,state){
+    try{
+      var st=state||{list:DB.scheduled_list||[],map:DB.scheduled_map||{},carried:DB.scheduled_carried||{}};
+      if(!st.list||!st.list.length)return;
+      var h=__schedHist(),sig=JSON.stringify([st.list,st.map,st.carried]);
+      if(h.length){var l=h[h.length-1];if(JSON.stringify([l.list,l.map,l.carried])===sig)return;}
+      h.push({ts:new Date().toISOString(),reason:reason||'',list:st.list,map:st.map||{},carried:st.carried||{}});
+      LS.set('mc8_sched_hist',h.slice(-15));
+    }catch(e){}
+  }
   function __bizTouch(){
-    var ts=__bizTs(), sig=__bizSig(), changed=false;
+    var ts=__bizTs(), sig=__bizSig(), changed=false, schedChanged=false, oldSig=Object.assign({},sig);
     __LWW_KEYS.forEach(function(k){
       var cur=JSON.stringify(DB[k]||__bizBlank(k));
       if(sig[k]!==cur){
-        if(sig[k]!==undefined) ts[k]=new Date().toISOString(); // أول تشغيل: بنسجّل التوقيع بس
+        if(sig[k]!==undefined){ ts[k]=new Date().toISOString(); if(k.indexOf('scheduled_')===0)schedChanged=true; } // أول تشغيل: بنسجّل التوقيع بس
         sig[k]=cur; changed=true;
       }
     });
+    if(schedChanged){
+      var _pj=function(s,d){try{return s!==undefined?JSON.parse(s):d;}catch(e){return d;}};
+      __schedSnap('قبل آخر تعديل',{list:_pj(oldSig.scheduled_list,[]),map:_pj(oldSig.scheduled_map,{}),carried:_pj(oldSig.scheduled_carried,{})});
+    }
     if(changed){ LS.set('mc8_biz_ts',ts); LS.set('mc8_biz_sig',sig); }
   }
   function __mergeIdList(localArr, serverArr){ // لقوائم تانية غير المرتبة
@@ -3836,13 +3859,24 @@ input:checked+.slider:before{transform:translateX(-20px)}
     return Object.assign({}, localObj||{}, serverObj||{});
   }
   // يشيل من المرتبة أي id لتحرك مش موجود
-  function __pruneScheduled(){
-    var ids={}; (DB.movements||[]).forEach(function(m){ ids[m.id]=1; });
-    if((DB.movements||[]).length===0) return; // مفيش تحركات متحمّلة لسه — ما نمسحش حاجة
-    DB.scheduled_list=(DB.scheduled_list||[]).filter(function(id){ return ids[id]; });
-    ['scheduled_map','scheduled_carried'].forEach(function(k){
-      var o=DB[k]||{}; Object.keys(o).forEach(function(id){ if(!ids[id]) delete o[id]; });
-    });
+  // يشيل من المرتبة أي id لتحرك محذوف — ⚠️ v301: كان بيقص القايمة المشتركة حسب نسخة محلية ممكن تبقى ناقصة ثم يرفعها (أعطال المرتبة بتختفي من كل الأجهزة).
+  // دلوقتي: للمالك بس + بعد التأكد من السيرفر إن التحميل كامل + حد أقصى للقص + نسخة احتياطية قبله.
+  async function __pruneScheduled(){
+    try{
+      if(!window.__isOwner)return;
+      var movs=DB.movements||[];if(!movs.length)return;
+      var c=await sb.from('movements').select('id',{count:'exact',head:true});
+      if(c.error||typeof c.count!=='number'||c.count>movs.length)return;
+      var ids={};movs.forEach(function(m){ids[m.id]=1;});
+      var list=DB.scheduled_list||[];
+      var keep=list.filter(function(id){return ids[id];});
+      var dead=list.length-keep.length;
+      if(!dead)return;
+      if(dead>3&&dead>list.length*0.3)return;
+      __schedSnap('قبل تنضيف الأعطال المحذوفة');
+      DB.scheduled_list=keep;
+      ['scheduled_map','scheduled_carried'].forEach(function(k){var o=DB[k]||{};Object.keys(o).forEach(function(id){if(!ids[id])delete o[id];});});
+    }catch(e){}
   }
 
   async function __pullAllFromServer(){
@@ -4108,6 +4142,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
     }
   }
   async function __pullBizBlobsFromServer(){
+    __schedSnap('قبل سحب السيرفر'); // ⚠️ v301 — نسخة احتياطية قبل ما السيرفر يستبدل المرتبة
     for(var i=0;i<__BIZ_BLOBS.length;i++){
       var b = __BIZ_BLOBS[i];
       try{
@@ -4990,7 +5025,7 @@ var APP_TITLE=APP_CONFIG.name;
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=300;
+var APP_VERSION=301;
 // ⚠️ v295 — عنوان الصفحة كان رقم نسخته ثابت ومتنسي (فضل v294 مع إن النسخة اتغيّرت). دلوقتي بياخد الرقم من APP_VERSION دايمًا.
 try{document.title=document.title.replace(/v\d+\s*$/,'v'+APP_VERSION);}catch(_eT){}
 
@@ -14914,7 +14949,7 @@ function renderScheduledList(){
     cardsHtml=list.map(function(m,i){return movCardSched(m,i,[i,list.length],true);}).join('');
   }
 
-  el.innerHTML=dayBar+filterBar+groupBtn+printDayBtn+cardsHtml;
+  el.innerHTML=_schedRestoreBar()+dayBar+filterBar+groupBtn+printDayBtn+cardsHtml;
   if(_schedGroupMode!=='byEng')_wireSchedDrag(el);
   _wireMvSwipeAndTap(el);
 }
@@ -15185,6 +15220,7 @@ async function quickAddToScheduled(id){
   if(!alreadyInList){
     DB.scheduled_list=(DB.scheduled_list||[]).concat([id]);
     DB.scheduled_map[id]=_schedWorkDate;
+    __schedStampDay(id,_schedWorkDate); // ⚠️ v301 — يوم الجدولة على العطل نفسه (مصدر استرجاع تاني)
     await persist();
     showToast('✅ اتضاف لمرتبة '+fmtDate(_schedWorkDate),'#16a34a');
     return;
@@ -15212,6 +15248,7 @@ async function addSelectedToScheduled(){
       // أول مرة يتضاف — يوم عادي، مفيش داعي لأي متابعة
       DB.scheduled_list=(DB.scheduled_list||[]).concat([id]);
       DB.scheduled_map[id]=_schedWorkDate;
+      __schedStampDay(id,_schedWorkDate); // ⚠️ v301
       addedNew++;
     }else{
       var originalDay=DB.scheduled_map[id];
@@ -15263,6 +15300,110 @@ function renderPartsNeeded(){
       (m.device?'<div style="font-size:10px;color:#94a3b8;margin-top:2px">'+esc(m.device)+'</div>':'')+
       '</div>';
   }).join('')+'</div>';
+}
+
+
+// ===== ⚠️ v301 — استرجاع المرتبة =====
+function __schedStampDay(id,day){
+  try{
+    var m=(DB.movements||[]).find(function(x){return x.id===id;});
+    if(!m||m.sched_day===day)return;
+    DB.movements=patchRow(DB.movements,id,{sched_day:day});
+    if(__hasPerm('movements','can_update'))dbUpdate('movements',id,{sched_day:day});
+  }catch(e){}
+}
+function _schedOpenNotListed(){
+  var inList={};(DB.scheduled_list||[]).forEach(function(id){inList[id]=1;});
+  return (DB.movements||[]).filter(function(m){return !inList[m.id]&&m.status!=='منتهي'&&m.status!=='ملغي';});
+}
+function _schedRestoreBar(){
+  if(!window.__isOwner)return '';
+  var emptyList=!(DB.scheduled_list||[]).length;
+  var h=__schedHist().length,open=_schedOpenNotListed();
+  var withDay=open.filter(function(m){return m.sched_day;}).length;
+  var warn=emptyList&&(h||open.length);
+  return '<div onclick="openSchedRestore()" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;padding:8px 11px;border-radius:10px;cursor:pointer;background:'+(warn?'#fff7ed':'#f8fafc')+';border:1.5px solid '+(warn?'#fb923c':'#e2e8f0')+'">'+
+    '<span style="font-size:12px;font-weight:800;color:'+(warn?'#c2410c':'#475569')+'">🛟 '+(warn?'المرتبة فاضية — دوس لاسترجاعها':'استرجاع المرتبة')+(withDay?' • '+withDay+' عطل ليهم يوم محدد مش ظاهرين':'')+'</span>'+
+    '<span style="font-size:11px;color:#94a3b8">'+(h?h+' نسخة محفوظة':'')+'</span></div>';
+}
+function openSchedRestore(){
+  if(!window.__isOwner)return showToast('🚫 الاسترجاع للمالك بس','#dc2626');
+  var hist=__schedHist().slice().reverse();
+  var exists={};(DB.movements||[]).forEach(function(m){exists[m.id]=1;});
+  var cur={};(DB.scheduled_list||[]).forEach(function(id){cur[id]=1;});
+  var h='<div style="font-size:12px;color:#64748b;margin-bottom:8px;line-height:1.7">الاسترجاع بيدمج مع الحالي — مفيش حاجة بتتمسح.</div>';
+  h+='<div style="font-weight:800;font-size:13px;margin:6px 0">💾 نسخ محفوظة على الجهاز ده</div>';
+  if(!hist.length)h+='<div style="font-size:12px;color:#94a3b8;padding:6px 0">مفيش نسخ محفوظة لسه (بتتحفظ تلقائيًا من دلوقتي).</div>';
+  hist.forEach(function(s,ri){
+    var idx=__schedHist().length-1-ri;
+    var n=(s.list||[]).length,ok=(s.list||[]).filter(function(id){return exists[id];}).length,missing=(s.list||[]).filter(function(id){return !cur[id]&&exists[id];}).length;
+    var d=new Date(s.ts);
+    h+='<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;background:#f8fafc;border-radius:10px;padding:8px 10px;margin-bottom:6px"><div style="min-width:0"><div style="font-size:12.5px;font-weight:700">'+esc(fmtDate(s.ts.split('T')[0]))+' — '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')+'</div><div style="font-size:11px;color:#64748b">'+ok+' عطل موجود من '+n+' ('+esc(s.reason||'')+')'+(missing?' — <b style="color:#c2410c">'+missing+' مش في المرتبة دلوقتي</b>':'')+'</div></div>'+
+      '<button class="btn btn-sm" style="background:#7c3aed;color:#fff;flex-shrink:0" onclick="restoreSchedSnapshot('+idx+')">استرجاع</button></div>';
+  });
+  var open=_schedOpenNotListed().sort(function(a,b){return (b.sched_day?1:0)-(a.sched_day?1:0)||String(b.date||'').localeCompare(String(a.date||''));});
+  h+='<div style="font-weight:800;font-size:13px;margin:14px 0 6px">🔧 أعطال مفتوحة مش في المرتبة ('+open.length+')</div>';
+  if(!open.length)h+='<div style="font-size:12px;color:#94a3b8;padding:6px 0">كل الأعطال المفتوحة موجودة في المرتبة.</div>';
+  else{
+    h+='<div style="max-height:230px;overflow:auto;border:1.5px solid #e2e8f0;border-radius:10px;padding:4px">'+open.slice(0,80).map(function(m){
+      return '<label style="display:flex;gap:8px;align-items:center;padding:6px;border-bottom:1px solid #f1f5f9;font-size:12.5px"><input type="checkbox" class="sr-ck" value="'+esc(m.id)+'"'+(m.sched_day?' checked':'')+'><span style="flex:1;min-width:0"><b>'+esc(m.customer||'—')+'</b> <span style="color:#94a3b8">'+esc(m.device||m.fault_type||'')+'</span></span><span style="font-size:10.5px;color:'+(m.sched_day?'#7c3aed':'#94a3b8')+'">'+(m.sched_day?'📌 '+esc(fmtDate(m.sched_day)):esc(m.status||''))+'</span></label>';
+    }).join('')+'</div>'+
+    '<div style="display:flex;gap:6px;align-items:center;margin:8px 0"><label style="font-size:11.5px;color:#64748b;white-space:nowrap">اليوم (لو العطل ملوش يوم)</label><input id="sr-day" type="date" value="'+esc(_schedWorkDate||today())+'" style="flex:1;padding:6px;border:1.5px solid #e2e8f0;border-radius:8px;font-family:inherit"></div>'+
+    '<button class="btn btn-full" style="background:#0d9488;color:#fff" onclick="restoreSchedPick()">➕ أضف المحدد للمرتبة</button>';
+  }
+  h+='<div style="font-weight:800;font-size:13px;margin:14px 0 6px">📁 من ملف نسخة احتياطية</div>'+
+    '<input type="file" accept=".json,application/json" onchange="restoreSchedFromFile(this)" style="width:100%;font-size:12px">'+
+    '<div style="font-size:11px;color:#94a3b8;margin-top:4px">ملف mc-backup-….json اللي بيتحمّل من الإعدادات — بياخد منه المرتبة بس.</div>';
+  document.getElementById('modal-title').textContent='🛟 استرجاع المرتبة';
+  document.getElementById('modal-body').innerHTML=h+'<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+  openModal();
+}
+// اتحاد (مش استبدال): اللي في النسخة + الحالي، واليوم بتاع الحالي يكسب
+async function __schedMergeIn(list,map,carried,reason){
+  __schedSnap('قبل '+reason);
+  var seen={},out=[];
+  (list||[]).concat(DB.scheduled_list||[]).forEach(function(id){if(!seen[id]){seen[id]=1;out.push(id);}});
+  var added=out.length-(DB.scheduled_list||[]).length;
+  DB.scheduled_list=out;
+  DB.scheduled_map=Object.assign({},map||{},DB.scheduled_map||{});
+  DB.scheduled_carried=Object.assign({},carried||{},DB.scheduled_carried||{});
+  await persist();
+  return added;
+}
+async function restoreSchedSnapshot(idx){
+  var s=__schedHist()[idx];if(!s)return;
+  var added=await __schedMergeIn(s.list,s.map,s.carried,'استرجاع نسخة');
+  closeModal();renderScheduledList();
+  showToast('✅ اتسترجع '+added+' عطل للمرتبة','#16a34a');
+}
+async function restoreSchedPick(){
+  var ids=[];document.querySelectorAll('.sr-ck:checked').forEach(function(c){ids.push(c.value);});
+  if(!ids.length)return showToast('⚠️ اختار عطل واحد على الأقل','#ca8a04');
+  var day=(document.getElementById('sr-day')||{}).value||_schedWorkDate||today();
+  var map={};
+  ids.forEach(function(id){var m=(DB.movements||[]).find(function(x){return x.id===id;});map[id]=(m&&m.sched_day)||day;});
+  var added=await __schedMergeIn(ids,map,{},'إضافة أعطال مفتوحة');
+  ids.forEach(function(id){__schedStampDay(id,map[id]);});
+  closeModal();renderScheduledList();
+  showToast('✅ اتضاف '+added+' عطل للمرتبة','#16a34a');
+}
+function restoreSchedFromFile(input){
+  var f=input.files&&input.files[0];if(!f)return;
+  var r=new FileReader();
+  r.onload=function(){
+    try{
+      var d=JSON.parse(r.result);
+      var sl=Array.isArray(d.scheduled_list)?d.scheduled_list:[];
+      if(!sl.length)return showToast('⚠️ الملف مفيهوش مرتبة','#ca8a04');
+      var exists={};(DB.movements||[]).forEach(function(m){exists[m.id]=1;});
+      var ok=sl.filter(function(id){return exists[id];});
+      confirmAction('الملف فيه '+sl.length+' عطل في المرتبة، منهم '+ok.length+' لسه موجودين عندك. تضيفهم للمرتبة؟',async function(){
+        var added=await __schedMergeIn(ok,d.scheduled_map||{},d.scheduled_carried||{},'استرجاع من ملف');
+        closeModal();renderScheduledList();showToast('✅ اتسترجع '+added+' عطل من الملف','#16a34a');
+      });
+    }catch(e){showToast('❌ الملف مش صالح','#dc2626');}
+  };
+  r.readAsText(f);
 }
 
 // أرشفة اليوميات التي مر عليها أكتر من يومين
