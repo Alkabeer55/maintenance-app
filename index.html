@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v301</title>
+<title>ابو حوده الحلو الجميل v302</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="1448-05-13 — v301";
+<script>/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="1448-05-14 — v302";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -85,8 +85,15 @@
     29) ⚠️ v299 — أي حدث مالي بيتحفظ في بلوك الحسابات (accounts) مش بيعدّي على dbUpsert لازم يتسجّل في سجل النشاط بنفسه (__logActivity).
     30) ⚠️ v300 — أي حساب عمولة لازم يسجّل الفواتير/الأعطال اللي اتحسبت في employee.commission_done (بالـid مش بالتاريخ) — التاريخ لوحده بيحسب يوم الاعتماد مرتين.
     31) ⚠️ v301 — ممنوع أي كود يعدّل القوايم المشتركة (scheduled_list/map/carried) تلقائيًا بناءً على نسخة محلية من التحركات: النسخة المحلية ممكن تبقى ناقصة (رؤية محدودة / تحميل فاشل). أي تنضيف لازم يبقى للمالك + بعد التأكد من اكتمال التحميل + بحد أقصى للقص. وأي قايمة LWW مشتركة لازم يكون ليها نسخ احتياطية محلية قبل ما تتغيّر.
+    32) ⚠️ v302 — الاستخراج من الاسكراب (من شاشة الاسكراب أو من الفاتورة) لازم يعدّي من نفس الشاشة (renderExtractBody) ونفس دالة الحفظ (_extractCommit) — ممنوع نسختين من المنطق.
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v302: [🔩 اسكراب: شاشة استخراج واحدة + تقرير الماكينة + إعادة فتح + شراء الاسكراب + فاتورة منظمة]
+     1) 🔩 شاشة الاستخراج بقت واحدة: الاستخراج من الفاتورة والاستخراج من الاسكراب بيفتحوا نفس الشاشة (بحث في المخزون + قطعة جديدة بحقول واضحة + قايمة القطع + توزيع تكلفة الماكينة + المكسب المتوقع). الاختلاف الوحيد: الزرار الأخير (للمخزون / للفاتورة)، والفاتورة بتطلب سعر البيع. وكمان القطعة اللي اسمها موجود في المخزون بتتدمج فيه بدل ما تعمل منتج مكرر (في الحالتين).
+     2) ♻️ بعد ما ثمن الماكينة يخلص: تقدر تكمّل استخراج قطع (تكلفتها ٠ = مكسب صافي) وبعدين تسجّلها مستنفدة.
+     3) 📊 "ملخص الماكينة" لكل ماكينة (نشطة أو مستنفدة): ثمن الشراء، إيراد اللي اتباع منها، الباقي في المخزن بسعر البيع، والنتيجة، وجدول بكل قطعة (استُخرج/اتباع/بكام).
+     4) 🔄 زرار "إعادة فتح" للماكينة المستنفدة عشان تستخرج منها تاني: بيرجّعها نشطة، ولو كانت اتسجلت خسارة من باقي ثمنها بتفضل الخسارة زي ما هي (مبتتعدش تاني).
+     5) ⚠️ سجل تكلفة المباع: القطع المستخرجة من الاسكراب بتكلفة ٠ مبقتش بتظهر كـ"من غير تكلفة" (ده مقصود).
 v301: [🚨 اختفاء أعطال المرتبة فجأة — إصلاح جذري + نسخ احتياطية + استرجاع]
      1) 🐛 السبب (ثغرة من v254): بعد كل سحب من السيرفر كان التطبيق بيمسح من المرتبة أي عطل مش موجود في النسخة المحلية من الأعطال (__pruneScheduled)، وبعدين المرتبة (بعد التقصير) بتترفع للسيرفر "آخر تعديل يكسب". فأي جهاز نسخته من الأعطال ناقصة (موظف برؤية محدودة، أو تحميل فشل/اتأخر على نت ضعيف، أو جهاز لسه بيحمّل) كان بيقصّ المرتبة المشتركة ويرفعها، فتختفي من كل الأجهزة. اتثبتت بتجربة: جهاز فيه ٢ من ٦ أعطال سحب القايمة الكاملة، فقصّها لـ٢ ورفعها للسيرفر.
      2) 🔒 التنضيف بقى آمن: بيشتغل بس على جهاز المالك، وبعد التأكد من السيرفر إن عدد الأعطال المحلية = عدد الأعطال في السيرفر، وبيرفض قص جماعي (أكتر من ٣ وأكتر من ٣٠٪ من القايمة). أي موظف مبقاش يقدر يقص القايمة المشتركة.
@@ -5025,7 +5032,7 @@ var APP_TITLE=APP_CONFIG.name;
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=301;
+var APP_VERSION=302;
 // ⚠️ v295 — عنوان الصفحة كان رقم نسخته ثابت ومتنسي (فضل v294 مع إن النسخة اتغيّرت). دلوقتي بياخد الرقم من APP_VERSION دايمًا.
 try{document.title=document.title.replace(/v\d+\s*$/,'v'+APP_VERSION);}catch(_eT){}
 
@@ -11120,32 +11127,29 @@ var _exsaleMachineId=null;
 
 function openExtractFromScrapForSale(){
   var machines=(DB.scrap_machines||[]).filter(function(m){return m.status!=='depleted';});
-  if(!machines.length)return showToast('⚠️ لا توجد ماكينات اسكراب نشطة — أضف من شاشة تفكيك الاسكراب','#dc2626');
-  // نخزن الفاتورة الحالية مؤقتاً (أول مرة بس، عشان الرجوع بعد كذا قطعة ميمسحش النسخة الأصلية)
+  if(!machines.length)return showToast('⚠️ لا توجد ماكينات اسكراب نشطة — أضف من شاشة تفكيك الاسكراب (أو أعد فتح ماكينة مستنفدة)','#dc2626');
+  // نخزن الفاتورة الحالية مؤقتاً (أول مرة بس، عشان الرجوع ميمسحش النسخة الأصلية)
   if(!window._saleModalBackup){
     window._saleModalBackup=document.getElementById('modal-body').innerHTML;
     window._saleModalTitleBackup=document.getElementById('modal-title').textContent;
-    // ⚠️ إصلاح v108 — النسخة الاحتياطية من الـ HTML بتاعة الفورم مابتحفظش القيم اللي
-    // المستخدم كاتبها بإيده (زي اسم العميل) لأنها بتاخد شكل الفورم الأصلي مش القيم الحية.
-    // فبنحفظ القيم الفعلية دلوقتي كمان عشان نرجّعها صح بعد الرجوع من شاشة الاسكراب.
+    // ⚠️ إصلاح v108 — نحفظ القيم الحية (زي اسم العميل) عشان نرجّعها صح بعد الرجوع
     window._saleFieldsBackup=_saveSaleFields();
   }
+  _extractMode='sale';_scrapExtractItems=[];
   document.getElementById('modal-title').textContent='🔩 اختار ماكينة الاسكراب';
   document.getElementById('modal-body').innerHTML=
     '<div style="font-size:12px;color:#64748b;margin-bottom:10px">اختار الماكينة اللي عايز تستخرج منها القطعة:</div>'+
-    (_exsaleItems.length?'<div style="background:#fdf2f8;border-radius:9px;padding:8px 11px;margin-bottom:10px;font-size:12px;color:#86198f;font-weight:700">📦 '+_exsaleItems.length+' قطعة جاهزة للإضافة للفاتورة لحد دلوقتي</div>':'')+
     machines.map(function(m){
       var partsCount=(m.parts_extracted||[]).reduce(function(s,p){return s+p.qty;},0);
+      var rem=_scrapRemainingCost(m.id);
       return '<div onclick="selectScrapMachineForSale(\''+m.id+'\')" style="display:flex;align-items:center;gap:10px;padding:11px;background:#f8fafc;border-radius:11px;margin-bottom:8px;cursor:pointer;border:1.5px solid #e2e8f0">'+
         '<span style="font-size:24px">🔩</span>'+
         '<div style="flex:1"><div style="font-weight:800;font-size:14px">'+esc(m.name)+'</div>'+
-        '<div style="font-size:11px;color:#64748b">'+(m.model?esc(m.model)+' — ':'')+partsCount+' قطعة مُستخرجة سابقاً</div></div>'+
+        '<div style="font-size:11px;color:#64748b">'+(m.model?esc(m.model)+' — ':'')+partsCount+' قطعة مُستخرجة — '+(rem>0?'متبقي من ثمنها '+fmt(rem):'ثمنها اتسترد (تكلفة ٠)')+'</div></div>'+
         '<span style="background:#fee2e2;color:#dc2626;border-radius:7px;padding:4px 10px;font-size:11px;font-weight:700">اختار</span>'+
         '</div>';
     }).join('')+
-    '<div class="modal-actions">'+
-    (_exsaleItems.length?'<button class="btn btn-green btn-full" onclick="__runOnce(this,finishExtractForSale)">✅ إنهاء وإضافة '+_exsaleItems.length+' قطعة للفاتورة</button>':'')+
-    '<button class="btn btn-outline btn-full" onclick="cancelExtractForSale()">رجوع للفاتورة</button></div>';
+    '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="cancelExtractForSale()">رجوع للفاتورة</button></div>';
 }
 
 function cancelExtractForSale(){
@@ -11153,7 +11157,7 @@ function cancelExtractForSale(){
   document.getElementById('modal-body').innerHTML=window._saleModalBackup||'';
   var fieldsBak=window._saleFieldsBackup;
   window._saleModalBackup=null;window._saleModalTitleBackup=null;window._saleFieldsBackup=null;
-  _exsaleItems=[];
+  _exsaleItems=[];_scrapExtractItems=[];_extractMode='scrap';
   // إعادة ربط حقل العميل بعد استرجاع المحتوى
   var custInp=document.getElementById('sale-customer');
   if(custInp)custInp.addEventListener('input',onCustomerInput);
@@ -11163,97 +11167,23 @@ function cancelExtractForSale(){
 
 function selectScrapMachineForSale(machineId){
   var m=(DB.scrap_machines||[]).find(function(x){return x.id===machineId;});if(!m)return;
-  _exsaleMachineId=machineId;
-  // المتبقي بيراعي القطع اللي لسه في السلة (_exsaleItems) وماتسجلتش في الماكينة لحد دلوقتي
-  var pendingCost=_exsaleItems.filter(function(it){return it.machineId===machineId;}).reduce(function(s,it){return s+it.qty*(it.buy_price||0);},0);
-  var remaining=Math.max(0,_scrapRemainingCost(machineId)-pendingCost);
-  document.getElementById('modal-title').textContent='🔩 استخراج من — '+esc(m.name);
-  document.getElementById('modal-body').innerHTML=
-    (remaining>0?
-      '<div style="background:#fff7ed;border-radius:10px;padding:10px 12px;margin-bottom:12px;font-size:12px;color:#ea580c">'+
-      '💰 متبقي من سعر الماكينة: <b>'+fmt(remaining)+'</b> — معدّل سعر الشراء معبّى تلقائياً، عدّله لو عايز</div>'
-    :
-      '<div style="background:#dcfce7;border-radius:10px;padding:10px 12px;margin-bottom:12px;font-size:12px;color:#15803d">'+
-      '✅ تم استرداد سعر الماكينة بالكامل — تكلفة القطعة 0 ج (مكسب صافي)</div>')+
-    fld('exsale-name','اسم القطعة','text','','مثال: رولر، فيوزر...',true)+
-    fld('exsale-qty','الكمية','number','1','',true)+
-    fld('exsale-buy','سعر الشراء (تكلفة القطعة) ج','number',remaining>0?remaining:0,'',false)+
-    fld('exsale-price','سعر البيع للوحدة (ج)','number','','',true)+
-    '<div class="modal-actions">'+
-    '<button class="btn btn-red btn-full" onclick="addExtractItemForSale()">+ إضافة القطعة دي وأكمل قطعة تانية</button>'+
-    '<button class="btn btn-outline btn-full" onclick="openExtractFromScrapForSale()">رجوع لاختيار الماكينة</button></div>';
+  _exsaleMachineId=machineId;_extractMode='sale';_scrapExtractItems=[];
+  document.getElementById('modal-title').textContent='🔩 استخراج من — '+m.name;
+  document.getElementById('modal-body').innerHTML='';
+  renderExtractBody(m);
 }
 
 // إضافة القطعة الحالية لسلة القطع المؤقتة، وفتح نفس المودال تاني لإضافة قطعة تانية
-function addExtractItemForSale(){
-  var name=v('exsale-name').trim();
-  var qty=+v('exsale-qty')||1;
-  var price=+v('exsale-price');
-  var buyPrice=+v('exsale-buy')||0;
-  if(!name)return showToast('⚠️ اكتب اسم القطعة','#dc2626');
-  if(!price||price<=0)return showToast('⚠️ اكتب سعر البيع','#dc2626');
-  _exsaleItems.push({machineId:_exsaleMachineId,name:name,qty:qty,buy_price:buyPrice,sell_price:price});
-  showToast('✅ اتضافت — كمل قطعة تانية أو اضغط إنهاء','#16a34a');
-  openExtractFromScrapForSale();
-}
+
 
 // إنهاء الاستخراج: تسجيل كل القطع المؤقتة في المخزون + في سجل الماكينة + في بنود الفاتورة دفعة واحدة
 async function finishExtractForSale(){
-  if(!_exsaleItems.length)return;
-  var byMachine={};
-  _exsaleItems.forEach(function(it){
-    if(!byMachine[it.machineId])byMachine[it.machineId]=[];
-    byMachine[it.machineId].push(it);
-  });
-
-  _exsaleItems.forEach(function(item){
-    // أضف أو زوّد الكمية في المخزون — متوسط مرجّح لسعر الشراء لو القطعة موجودة بالفعل
-    var existing=DB.products.find(function(p){return p.category!=='machine'&&normalizeAr(p.name)===normalizeAr(item.name);});
-    var productId;
-    if(existing){
-      var newQty=roundQty(existing.qty+item.qty);
-      var avgBuy=newQty>0?money((existing.qty*(existing.buy_price||0)+item.qty*item.buy_price)/newQty):0;
-      DB.products=patchRow(DB.products,existing.id,{qty:newQty,buy_price:avgBuy});
-      productId=existing.id;
-      item._syncExisting=true; // ⚠️ v209
-    }else{
-      productId=genId();
-      // القطعة المستخرجة من اسكراب تتصنف "اسكراب" مش "استعمال داخلي" — عشان تنعكس صح في هامش الربح وتقارير المخزون
-      var newProdObj={id:productId,name:item.name,category:'parts',unit:'اسكراب',qty:item.qty,min_qty:0,buy_price:item.buy_price,scrap_price:item.sell_price,sell_price:item.sell_price,scrap_source:item.machineId};
-      DB.products.push(newProdObj);
-      item._syncNewProd=newProdObj; // ⚠️ v209
-      addArchive('products',item.name);
-    }
-    item.productId=productId;
-  });
-  // ⚠️ v209 — باج جذري: القطع المستخرجة كانت بتتحدّث في DB.products محليًا بس (من غير
-  // dbUpdate/dbUpsert)، يعني الكمية/السعر الجديد كان يفضل على الجهاز بتاعك بس ويتمسح
-  // بصمت أول ما السيرفر يترجع يتزامن (نفس باج saveProduct بالظبط).
-  for(var i=0;i<_exsaleItems.length;i++){
-    var it=_exsaleItems[i];
-    if(it._syncExisting){
-      var p=DB.products.find(function(x){return x.id===it.productId;});
-      if(p)await dbUpdate('products',it.productId,{qty:p.qty,buy_price:p.buy_price});
-    }else if(it._syncNewProd){
-      await dbUpsert('products',it._syncNewProd);
-    }
-  }
-
-  // سجل الاستخراج في كل ماكينة اتاخد منها قطع
-  DB.scrap_machines=(DB.scrap_machines||[]).map(function(m){
-    if(!byMachine[m.id])return m;
-    var newParts=(m.parts_extracted||[]).concat(
-      // ⚠️ v243 — productId بقى بيتسجل هنا صراحة (كان متاح في it.productId وما كانش بيتخزن)،
-      // عشان تتبع حالة البيع يبقى دقيق بربط مباشر، مش مطابقة بالاسم بس اللي بتتكسر لو
-      // القطعة اتسمّت تاني بعدين — وده السبب الأرجح لظهور قطع متباعة وكأنها لسه بالمخزن
-      byMachine[m.id].map(function(it){return {id:genId(),name:it.name,qty:it.qty,added_date:today(),buy_price:it.buy_price||0,sell_price:it.sell_price||0,productId:it.productId};})
-    );
-    return Object.assign({},m,{parts_extracted:newParts});
-  });
-  await persist();
-  for(var _mid in byMachine){await _scrapSyncMachineProd(_mid);} // ⚠️ v297 — نفس إصلاح العدّ المزدوج
-  await persist();
-
+  if(!_scrapExtractItems.length)return showToast('⚠️ أضف قطعة واحدة على الأقل','#dc2626');
+  if(_scrapExtractItems.some(function(i){return !(+i.sell_price>0);}))return showToast('⚠️ اكتب سعر البيع لكل قطعة (هيتحط في الفاتورة)','#dc2626');
+  var machineId=_exsaleMachineId||((_curExtractMachine()||{}).id);
+  if(!machineId)return;
+  await _extractCommit(machineId);
+  var items=_scrapExtractItems.slice();
   // رجّع للفاتورة وأضف كل البنود — بسعر شراء حقيقي (مش صفر) عشان يتحسب صح في الأرباح
   document.getElementById('modal-title').textContent=window._saleModalTitleBackup||'فاتورة بيع جديدة';
   document.getElementById('modal-body').innerHTML=window._saleModalBackup||'';
@@ -11261,13 +11191,11 @@ async function finishExtractForSale(){
   window._saleModalBackup=null;window._saleModalTitleBackup=null;window._saleFieldsBackup=null;
   var custInp=document.getElementById('sale-customer');
   if(custInp)custInp.addEventListener('input',onCustomerInput);
-
-  _exsaleItems.forEach(function(item){
-    _saleItems.push({productId:item.productId,name:item.name,qty:item.qty,price:item.sell_price,buyPrice:item.buy_price,fromScrap:true,scrapMachineId:item.machineId});
+  items.forEach(function(item){
+    _saleItems.push({productId:item.productId,name:item.name,qty:item.qty,price:item.sell_price,buyPrice:item.buy_price,fromScrap:true,scrapMachineId:machineId});
   });
-  var count=_exsaleItems.length;
-  _exsaleItems=[];
-  // ⚠️ v108 — بنستخدم القيم المحفوظة قبل فتح شاشة الاسكراب (مش قراءة من الفورم اللي لسه اترجع)
+  var count=items.length;
+  _exsaleItems=[];_scrapExtractItems=[];_extractMode='scrap';
   var vals=fieldsBak||_saveSaleFields();
   var s=_saleId?DB.sales.find(function(x){return x.id===_saleId;}):null;
   renderSaleBody(s);_restoreSaleFields(vals);
@@ -15303,6 +15231,63 @@ function renderPartsNeeded(){
 }
 
 
+
+// ===== ⚠️ v302 — ملخص الماكينة + إعادة الفتح =====
+// ملحوظة: لو نفس المنتج اتدمج من أكتر من ماكينة (بالاسم)، المبيع بيتوزّع على القطعة بحد أقصى كميتها المستخرجة من الماكينة دي (تقريب).
+function _scrapMachineStats(m){
+  var price=+m.buy_price||0,rev=0,soldQty=0,extractedQty=0,stockQty=0,stockSell=0,stockCost=0;
+  var rows=(m.parts_extracted||[]).map(function(p){
+    var prod=p.productId?DB.products.find(function(x){return x.id===p.productId;}):null;
+    var qtyOut=0,revenue=0;
+    (DB.sales||[]).forEach(function(s){(s.items||[]).forEach(function(it){
+      var match=prod?(it.productId===prod.id):(it.fromScrap&&normalizeAr(it.name)===normalizeAr(p.name));
+      if(match){qtyOut+=(+it.qty||0);revenue+=(+it.qty||0)*(+it.price||0);}
+    });});
+    var ext=+p.qty||0;
+    if(qtyOut>ext){revenue=ext>0?revenue*ext/qtyOut:0;qtyOut=ext;}
+    var inStock=prod?Math.min(+prod.qty||0,Math.max(0,ext-qtyOut)):0;
+    var sellP=prod?(+prod.sell_price||+p.sell_price||0):(+p.sell_price||0);
+    extractedQty+=ext;soldQty+=qtyOut;rev+=revenue;stockQty+=inStock;stockSell+=inStock*sellP;stockCost+=inStock*(prod?(+prod.buy_price||0):0);
+    return {name:p.name,extracted:ext,sold:qtyOut,revenue:money(revenue),inStock:inStock,cost:+p.buy_price||0,sell:sellP};
+  });
+  return {price:price,rev:money(rev),soldQty:soldQty,extractedQty:extractedQty,stockQty:stockQty,stockSell:money(stockSell),stockCost:money(stockCost),rows:rows,actual:money(rev-price),expected:money(rev+stockSell-price)};
+}
+function openScrapMachineReport(id){
+  var m=(DB.scrap_machines||[]).find(function(x){return x.id===id;});if(!m)return;
+  var s=_scrapMachineStats(m);
+  var card=function(l,v,c,bg){return '<div style="background:'+bg+';border-radius:10px;padding:8px 6px;text-align:center"><div style="font-size:9.5px;color:'+c+';font-weight:700">'+l+'</div><div style="font-size:13px;font-weight:900;color:'+c+'">'+v+'</div></div>';};
+  var h='<div style="font-size:11.5px;color:#64748b;margin-bottom:8px">'+(m.status==='depleted'?'🗂️ مستنفدة':'🔧 نشطة')+' — اشتريت '+esc(fmtDate(m.buy_date))+'</div>'+
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px">'+
+      card('ثمن الشراء',fmt(s.price),'#7c3aed','#ede9fe')+card('إيراد اللي اتباع',fmt(s.rev),'#1e40af','#dbeafe')+
+      card('باقي في المخزن (بسعر البيع)',fmt(s.stockSell),'#ca8a04','#fef9c3')+
+      card('النتيجة لحد دلوقتي',fmt(s.actual),s.actual>=0?'#15803d':'#dc2626',s.actual>=0?'#dcfce7':'#fee2e2')+'</div>'+
+    '<div style="background:#f0fdf4;border-radius:10px;padding:8px 11px;margin-bottom:10px;font-size:12px;color:#15803d">لو اتباع الباقي بالسعر المسجّل: النتيجة النهائية المتوقعة <b>'+fmt(s.expected)+'</b></div>'+
+    '<div style="font-weight:800;font-size:13px;margin-bottom:6px">القطع اللي طلعت ('+s.extractedQty+')</div>';
+  if(!s.rows.length)h+='<div style="font-size:12px;color:#94a3b8">لم يتم استخراج قطع</div>';
+  s.rows.forEach(function(r){
+    h+='<div style="padding:7px 0;border-bottom:1px solid #f1f5f9"><div style="display:flex;justify-content:space-between;gap:8px"><b style="font-size:13px">'+esc(r.name)+'</b><b style="font-size:13px;color:#1e40af">'+fmt(r.revenue)+'</b></div>'+
+      '<div style="font-size:11px;color:#64748b">طلع '+r.extracted+' — اتباع '+r.sold+' — في المخزن '+r.inStock+' — تكلفة '+fmt(r.cost)+' — بيع '+fmt(r.sell)+'</div></div>';
+  });
+  document.getElementById('modal-title').textContent='📊 ملخص — '+m.name;
+  document.getElementById('modal-body').innerHTML=h+'<div class="modal-actions">'+(m.status==='depleted'?'<button class="btn btn-green btn-full" onclick="__runOnce(this,function(){return reopenScrapMachine(\''+m.id+'\');})">🔄 إعادة فتح للاستخراج</button>':'')+'<button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+  openModal();
+}
+async function reopenScrapMachine(id){
+  var m0=(DB.scrap_machines||[]).find(function(x){return x.id===id;});
+  if(!m0||m0.status!=='depleted')return;
+  // لو اتسجلت خسارة من الباقي من ثمنها وقت "مستنفدة"، بتفضل زي ما هي ومبتتعدش تاني
+  var det=money((+m0.detached_cost||0)+(+m0.writeoff_amount||0));
+  DB.scrap_machines=DB.scrap_machines.map(function(m){return m.id===id?Object.assign({},m,{status:'active',detached_cost:det}):m;});
+  var mp=_scrapMachineProd(m0);
+  if(mp){DB.products=patchRow(DB.products,mp.id,{qty:1});}
+  await persist();
+  if(mp){try{await dbUpdate('products',mp.id,{qty:1});}catch(e){}}
+  await _scrapSyncMachineProd(id);
+  await persist();
+  closeModal();renderScrap();
+  showToast('🔄 اتفتحت الماكينة — تقدر تستخرج منها تاني','#16a34a');
+}
+
 // ===== ⚠️ v301 — استرجاع المرتبة =====
 function __schedStampDay(id,day){
   try{
@@ -18000,12 +17985,12 @@ function openCogsLedger(view){
   ps.forEach(function(s){
     var lines=(s.items||[]).map(function(i){
       var q=+i.qty||0,u=+(i.buyPrice||i.buy_price||0);
-      if(q>0&&!u)noCost++;
+      if(q>0&&!u&&!i.fromScrap)noCost++;
       return {name:i.name||'—',qty:q,unit:u,total:money(q*u),price:+i.price||0,scrap:!!i.fromScrap};
     });
     var c=saleCost(s);totCost+=c;totRev+=(+s.total||0);
     rows.push({s:s,lines:lines,cost:c});
-    lines.forEach(function(l){var o=byItem[l.name]||(byItem[l.name]={name:l.name,qty:0,cost:0,rev:0});o.qty+=l.qty;o.cost+=l.total;o.rev+=l.qty*l.price;});
+    lines.forEach(function(l){var o=byItem[l.name]||(byItem[l.name]={name:l.name,qty:0,cost:0,rev:0});o.qty+=l.qty;o.cost+=l.total;o.rev+=l.qty*l.price;if(l.scrap)o.scrap=true;});
   });
   totCost=money(totCost);
   var card=function(lbl,val,col,bg){return '<div style="background:'+bg+';border-radius:10px;padding:8px 6px;text-align:center"><div style="font-size:9.5px;color:'+col+';font-weight:700">'+lbl+'</div><div style="font-size:13px;font-weight:900;color:'+col+'">'+val+'</div></div>';};
@@ -18021,7 +18006,7 @@ function openCogsLedger(view){
     body+=items.map(function(o){
       var avg=o.qty>0?money(o.cost/o.qty):0;
       return '<div style="padding:8px 0;border-bottom:1px solid #f1f5f9"><div style="display:flex;justify-content:space-between;gap:8px"><b style="font-size:13px">'+esc(o.name)+'</b><b style="font-size:13px;color:#7c3aed">'+fmt(money(o.cost))+'</b></div>'+
-        '<div style="font-size:11px;color:#64748b">الكمية '+fmtQty(o.qty)+' × متوسط تكلفة '+fmt(avg)+' — إيراد '+fmt(money(o.rev))+' — هامش '+fmt(money(o.rev-o.cost))+(o.cost===0?' <span style="color:#dc2626;font-weight:700">⚠️ من غير تكلفة</span>':'')+'</div></div>';
+        '<div style="font-size:11px;color:#64748b">الكمية '+fmtQty(o.qty)+' × متوسط تكلفة '+fmt(avg)+' — إيراد '+fmt(money(o.rev))+' — هامش '+fmt(money(o.rev-o.cost))+(o.cost===0&&!o.scrap?' <span style="color:#dc2626;font-weight:700">⚠️ من غير تكلفة</span>':'')+'</div></div>';
     }).join('');
   } else {
     body+=rows.slice(0,120).map(function(x){
@@ -18029,7 +18014,7 @@ function openCogsLedger(view){
       return '<div style="padding:9px 0;border-bottom:1px solid #e2e8f0"><div onclick="openSaleModal('+jsStr(s.id)+')" style="display:flex;justify-content:space-between;align-items:center;gap:8px;cursor:pointer">'+
         '<div style="min-width:0"><b style="font-size:13px">🧾 '+esc(s.customer||'—')+'</b><div style="font-size:10.5px;color:#94a3b8">'+esc(fmtDate(s.date))+' — إجمالي الفاتورة '+fmt(s.total)+'</div></div>'+
         '<b style="font-size:13px;color:#7c3aed;flex-shrink:0">'+fmt(x.cost)+'</b></div>'+
-        (x.lines.length?x.lines.map(function(l){return '<div style="display:flex;justify-content:space-between;gap:8px;font-size:11.5px;color:#475569;padding:2px 0 0 0;margin-right:10px"><span>• '+esc(l.name)+(l.scrap?' ♻️':'')+' — '+fmtQty(l.qty)+' × '+fmt(l.unit)+(l.qty>0&&!l.unit?' <span style="color:#dc2626;font-weight:700">⚠️ من غير تكلفة</span>':'')+'</span><span>'+fmt(l.total)+'</span></div>';}).join(''):'<div style="font-size:11px;color:#94a3b8;margin-right:10px">خدمات/زيارة بدون بنود بضاعة</div>')+
+        (x.lines.length?x.lines.map(function(l){return '<div style="display:flex;justify-content:space-between;gap:8px;font-size:11.5px;color:#475569;padding:2px 0 0 0;margin-right:10px"><span>• '+esc(l.name)+(l.scrap?' ♻️':'')+' — '+fmtQty(l.qty)+' × '+fmt(l.unit)+(l.qty>0&&!l.unit&&!l.scrap?' <span style="color:#dc2626;font-weight:700">⚠️ من غير تكلفة</span>':'')+'</span><span>'+fmt(l.total)+'</span></div>';}).join(''):'<div style="font-size:11px;color:#94a3b8;margin-right:10px">خدمات/زيارة بدون بنود بضاعة</div>')+
         '</div>';
     }).join('')+(rows.length>120?'<div style="text-align:center;font-size:11px;color:#94a3b8;padding:8px">…و '+(rows.length-120)+' فاتورة كمان (ضيّق الفترة لتشوفها)</div>':'');
   }
@@ -23773,6 +23758,8 @@ function scrapMachineCard(m, collapsed){
     '<div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap">'+
     (!isDepleted?'<button class="btn btn-sm btn-full" style="background:#fee2e2;color:#dc2626;border:none;border-radius:9px" onclick="openExtractPartsModal(\''+m.id+'\')">🔩 استخراج قطع</button>':'')+
     (!isDepleted?'<button class="btn btn-sm" style="background:#fef9c3;color:#ca8a04;border:none;border-radius:9px;padding:8px 12px" onclick="markScrapDepleted(\''+m.id+'\')">✅ مستنفدة</button>':'')+
+    '<button class="btn btn-sm" style="background:#ede9fe;color:#6d28d9;border:none;border-radius:9px;padding:8px 12px" onclick="openScrapMachineReport(\''+m.id+'\')">📊 ملخص</button>'+
+    (isDepleted?'<button class="btn btn-sm" style="background:#dcfce7;color:#15803d;border:none;border-radius:9px;padding:8px 12px" onclick="__runOnce(this,function(){return reopenScrapMachine(\''+m.id+'\');})">🔄 إعادة فتح</button>':'')+
     '<button class="btn btn-sm" style="background:#dbeafe;color:#1e40af;border:none;border-radius:9px;padding:8px 12px" onclick="openEditScrapModal(\''+m.id+'\')">✏️</button>'+
     '<button class="btn btn-sm" style="background:#fee2e2;color:#dc2626;border:none;border-radius:9px;padding:8px 12px" onclick="confirmAction(\'هتحذف الماكينة دي؟\',function(){delScrapMachine(\''+m.id+'\')})">🗑️</button>'+
     '</div></div>';
@@ -23930,73 +23917,71 @@ async function saveScrapMachine(){
 
 // استخراج قطع من الماكينة
 var _scrapExtractItems=[];
+var _extractMode='scrap'; // ⚠️ v302 — 'scrap' (من شاشة الاسكراب) | 'sale' (من الفاتورة) — نفس الشاشة بزرار نهائي مختلف
 
 function openExtractPartsModal(machineId){
   var m=(DB.scrap_machines||[]).find(function(x){return x.id===machineId;});
   if(!m)return;
-  _scrapExtractItems=[];
-  document.getElementById('modal-title').textContent='🔩 استخراج قطع — '+esc(m.name);
+  _scrapExtractItems=[];_extractMode='scrap';
+  document.getElementById('modal-title').textContent='🔩 استخراج قطع — '+m.name;
+  document.getElementById('modal-body').innerHTML='';
   renderExtractBody(m);
   openModal();
 }
 
 function renderExtractBody(m){
-  // بنفصل الـ modal لقسمين: الثابت (يُرسم مرة واحدة) + القائمة (تتحدث)
-  var modalBody = document.getElementById('modal-body');
-  
-  // لو الـ modal مش فيه scrap-extract-mid — ارسم كل حاجة (أول مرة)
+  // ⚠️ v302 — شاشة واحدة للاستخراج من الاسكراب ومن الفاتورة (قبل كده كانوا شاشتين مختلفتين)
+  var sale=(_extractMode==='sale');
+  var modalBody=document.getElementById('modal-body');
   if(!document.getElementById('scrap-extract-mid')){
     modalBody.innerHTML=
       '<input type="hidden" id="scrap-extract-mid" value="'+m.id+'">'+
-      '<div style="background:#fee2e2;border-radius:10px;padding:10px 12px;margin-bottom:12px">'+
+      '<div style="background:#fee2e2;border-radius:10px;padding:10px 12px;margin-bottom:10px">'+
       '<div style="font-weight:800;color:#dc2626">'+esc(m.name)+'</div>'+
-      '<div style="font-size:11px;color:#64748b">كل قطعة هتتضاف للمخزون تلقائياً</div></div>'+
-      '<div class="field"><label>🔍 ابحث عن قطعة موجودة في المخزون</label>'+
+      '<div style="font-size:11px;color:#64748b">'+(sale?'القطع هتتضاف للمخزون وللفاتورة دي':'كل قطعة هتتضاف للمخزون تلقائياً')+'</div></div>'+
+      '<div id="extract-cost-note"></div>'+
+      '<div class="field"><label>🔍 قطعة موجودة في المخزون</label>'+
       '<input id="extract-search" type="text" placeholder="اسم القطعة..." oninput="filterExtractProds()" autocomplete="off" '+
       'style="width:100%;padding:10px 13px;border:2px solid #3b82f6;border-radius:11px;font-size:14px;font-family:inherit;direction:rtl;background:#f8fafc;outline:none;margin-bottom:6px">'+
       '<div id="extract-prod-results" style="display:none" class="prod-search-results"></div></div>'+
       '<div style="background:#fff7ed;border-radius:10px;padding:10px 12px;margin-bottom:10px;border:1.5px solid #fed7aa">'+
-      '<div style="font-size:11px;font-weight:700;color:#ea580c;margin-bottom:7px">أو أضف قطعة جديدة مش في المخزون</div>'+
-      '<div style="display:flex;gap:5px">'+
-      '<input id="extract-new-name" type="text" placeholder="اسم القطعة..." style="flex:2;padding:8px 10px;border:2px solid #e2e8f0;border-radius:8px;font-size:13px;font-family:inherit;background:#fff;outline:none;direction:rtl">'+
-      '<input id="extract-new-qty" type="number" step="any" value="1" placeholder="كمية" style="width:60px;padding:8px 6px;border:2px solid #e2e8f0;border-radius:8px;font-size:13px;font-family:inherit;text-align:center">'+
-      '<input id="extract-new-price" type="number" step="any" value="0" placeholder="سعر ج" style="width:70px;padding:8px 6px;border:2px solid #e2e8f0;border-radius:8px;font-size:13px;font-family:inherit;text-align:center">'+
-      '</div>'+
-      '<button onclick="addExtractNewItem()" style="width:100%;margin-top:7px;padding:8px;background:#ea580c;color:#fff;border:none;border-radius:8px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer">+ إضافة للقائمة</button>'+
+      '<div style="font-size:12px;font-weight:800;color:#ea580c;margin-bottom:8px">➕ أو أضف قطعة جديدة مش في المخزون</div>'+
+      '<div class="field" style="margin-bottom:8px"><label>اسم القطعة *</label><input id="extract-new-name" type="text" placeholder="مثال: رولر، فيوزر..." autocomplete="off"></div>'+
+      '<div style="display:flex;gap:8px"><div class="field" style="flex:1;margin-bottom:8px"><label>الكمية</label><input id="extract-new-qty" type="number" step="any" value="1"></div>'+
+      '<div class="field" style="flex:1;margin-bottom:8px"><label>سعر البيع للوحدة (ج)'+(sale?' *':'')+'</label><input id="extract-new-price" type="number" step="any" placeholder="مثال: 150"></div></div>'+
+      '<button onclick="addExtractNewItem()" style="width:100%;padding:10px;background:#ea580c;color:#fff;border:none;border-radius:9px;font-family:inherit;font-size:13px;font-weight:800;cursor:pointer">+ إضافة للقائمة</button>'+
       '</div>'+
       '<div id="extract-items-list"></div>'+
       '<div id="extract-confirm-btn"></div>';
   }
+  // ملحوظة التكلفة (ثابتة فوق)
+  var rem0=_scrapRemainingCost(m.id);
+  var noteEl=document.getElementById('extract-cost-note');
+  if(noteEl)noteEl.innerHTML=rem0>=1
+    ?'<div style="background:#fff7ed;border-radius:10px;padding:8px 12px;margin-bottom:10px;font-size:12px;color:#ea580c">💰 متبقي من سعر الماكينة: <b>'+fmt(rem0)+'</b> — بيتوزّع على القطع تلقائياً وتقدر تعدّله</div>'
+    :'<div style="background:#dcfce7;border-radius:10px;padding:8px 12px;margin-bottom:10px;font-size:12px;color:#15803d">✅ سعر الماكينة اتسترد بالكامل — أي قطعة جديدة تكلفتها ٠ (مكسب صافي) وتقدر تكمّل استخراج</div>';
 
-  // تحديث قائمة القطع فقط (بدون مسح حقول الإدخال)
-  var listEl = document.getElementById('extract-items-list');
-  var confirmEl = document.getElementById('extract-confirm-btn');
-  if(!listEl) return;
-
+  var listEl=document.getElementById('extract-items-list');
+  var confirmEl=document.getElementById('extract-confirm-btn');
+  if(!listEl)return;
+  var backBtn=sale?'<button class="btn btn-outline btn-full" onclick="openExtractFromScrapForSale()">رجوع لاختيار الماكينة</button>':'<button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button>';
   if(!_scrapExtractItems.length){
     listEl.innerHTML='';
-    confirmEl.innerHTML='<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
+    confirmEl.innerHTML='<div class="modal-actions">'+backBtn+'</div>';
     return;
   }
-
   var totalQty=_scrapExtractItems.reduce(function(s,i){return s+i.qty;},0);
-  var mid=document.getElementById('scrap-extract-mid');
-  var machineId=mid?mid.value:'';
-
-  // توزيع المتبقي من سعر الماكينة على القطع التي لم يُحدَّد لها سعر شراء يدوياً بعد (معدّل متوقع تلقائي)
+  var machineId=m.id;
+  // توزيع المتبقي من سعر الماكينة على القطع اللي لسه ما اتحددش لها سعر شراء يدويًا
   var remaining=_scrapRemainingCost(machineId);
-  var autoCount=_scrapExtractItems.filter(function(i){return !i._manualBuy;}).length;
   var autoQty=_scrapExtractItems.filter(function(i){return !i._manualBuy;}).reduce(function(s,i){return s+i.qty;},0);
-  var avgRate=autoQty?Math.round(remaining/autoQty):0;
+  var remEff=remaining>=1?remaining:0; // أقل من جنيه = فروق تقريب مش تكلفة حقيقية
+  var avgRate=autoQty?money(remEff/autoQty):0; // ⚠️ v302 — كان Math.round فبيسيب جنيه متبقي (١٠٠٠÷٣ ← ٣٣٣×٣)
   _scrapExtractItems.forEach(function(it){if(!it._manualBuy)it.buy_price=avgRate;});
-
   var totalCostAuto=money(_scrapExtractItems.reduce(function(s,i){return s+i.qty*(i.buy_price||0);},0));
   var totalSellAuto=money(_scrapExtractItems.reduce(function(s,i){return s+i.qty*(i.sell_price||0);},0));
-
   listEl.innerHTML='<div style="background:#f8fafc;border-radius:10px;padding:9px 11px;margin-bottom:10px">'+
     '<div style="font-size:11px;font-weight:700;color:#64748b;margin-bottom:6px">✅ القطع المراد إضافتها ('+_scrapExtractItems.length+'):</div>'+
-    (remaining>0?'<div style="font-size:11px;color:#ea580c;margin-bottom:8px">💰 متبقي من سعر الماكينة: <b>'+fmt(remaining)+'</b> — بيتوزّع تلقائياً، تقدر تعدّله</div>'
-      :'<div style="font-size:11px;color:#15803d;margin-bottom:8px">✅ تم استرداد سعر الماكينة بالكامل — أي قطعة جديدة تكلفتها 0 ج (مكسب صافي)</div>')+
     _scrapExtractItems.map(function(it,i){
       return '<div style="display:flex;align-items:center;gap:5px;margin-bottom:6px;background:#fff;border-radius:8px;padding:6px 8px;border:1px solid #e2e8f0;flex-wrap:wrap">'+
         '<span style="flex:1;min-width:70px;font-size:13px;font-weight:700">'+esc(it.name)+'</span>'+
@@ -24007,20 +23992,22 @@ function renderExtractBody(m){
         '<input type="number" step="any" id="ex-buy-'+i+'" value="'+(it.buy_price||0)+'" placeholder="شراء" title="سعر الشراء (تكلفة القطعة)" '+
         'style="width:62px;padding:3px 5px;border:2px solid #fed7aa;border-radius:6px;font-size:11px;font-family:inherit;text-align:center" '+
         'oninput="_scrapExtractItems['+i+'].buy_price=+this.value;_scrapExtractItems['+i+']._manualBuy=true" onchange="renderExtractBody(_curExtractMachine())">'+
-        '<input type="number" step="any" id="ex-price-'+i+'" value="'+it.sell_price+'" placeholder="بيع" title="سعر البيع" '+
+        '<input type="number" step="any" id="ex-price-'+i+'" value="'+(it.sell_price||0)+'" placeholder="بيع" title="سعر البيع" '+
         'style="width:62px;padding:3px 5px;border:2px solid #e2e8f0;border-radius:6px;font-size:11px;font-family:inherit;text-align:center" '+
         'oninput="_scrapExtractItems['+i+'].sell_price=+this.value">'+
         '</div>'+
         '<button onclick="removeExtractItem('+i+')" style="background:#fee2e2;border:none;border-radius:5px;padding:3px 8px;cursor:pointer;font-size:12px;color:#dc2626;flex-shrink:0">✕</button>'+
         '</div>';
     }).join('')+
+    '<div style="font-size:10.5px;color:#94a3b8;margin:2px 0 4px">الخانة الأولى سعر الشراء (تكلفة) والتانية سعر البيع</div>'+
     '<div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:#15803d;margin-top:6px;padding-top:6px;border-top:1px solid #e2e8f0">'+
     '<span>مكسب متوقع من الدفعة دي</span><span>'+fmt(totalSellAuto-totalCostAuto)+'</span></div>'+
     '</div>';
-
   confirmEl.innerHTML='<div class="modal-actions">'+
-    '<button class="btn btn-green btn-full" onclick="__runOnce(this,function(){return confirmExtractParts(\''+machineId+'\');})">✅ إضافة '+totalQty+' قطعة للمخزون</button>'+
-    '<button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
+    (sale
+      ?'<button class="btn btn-green btn-full" onclick="__runOnce(this,finishExtractForSale)">✅ إضافة '+totalQty+' قطعة للفاتورة</button>'
+      :'<button class="btn btn-green btn-full" onclick="__runOnce(this,function(){return confirmExtractParts(\''+machineId+'\');})">✅ إضافة '+totalQty+' قطعة للمخزون</button>')+
+    backBtn+'</div>';
 }
 
 function _curExtractMachine(){
@@ -24066,10 +24053,13 @@ function addExtractNewItem(){
   if(!name)return showToast('⚠️ اكتب اسم القطعة','#dc2626');
   var qty=+v('extract-new-qty')||1;
   var price=+v('extract-new-price')||0;
+  if(_extractMode==='sale'&&!(price>0))return showToast('⚠️ اكتب سعر البيع (هيتحط في الفاتورة)','#dc2626');
   _scrapExtractItems.push({name:name,qty:qty,sell_price:price,isNew:true});
-  var mid=document.getElementById('scrap-extract-mid').value;
-  var m=(DB.scrap_machines||[]).find(function(x){return x.id===mid;});
+  var nEl=document.getElementById('extract-new-name'),qEl=document.getElementById('extract-new-qty'),pEl=document.getElementById('extract-new-price');
+  if(nEl)nEl.value='';if(qEl)qEl.value='1';if(pEl)pEl.value='';
+  var m=_curExtractMachine();
   if(m)renderExtractBody(m);
+  if(nEl)nEl.focus();
 }
 
 function chgExtractQty(idx,delta){
@@ -24079,17 +24069,20 @@ function chgExtractQty(idx,delta){
   if(m)renderExtractBody(m);
 }
 
-async function confirmExtractParts(machineId){
-  if(!_scrapExtractItems.length)return showToast('⚠️ أضف قطعة واحدة على الأقل','#dc2626');
+// ⚠️ v302 — نواة واحدة لحفظ الاستخراج (بتخدم شاشة الاسكراب وشاشة الفاتورة): المخزون + سجل الماكينة + تزامن السيرفر + تكلفة الماكينة
+async function _extractCommit(machineId){
   var todayStr=today();
-
   for(var i=0;i<_scrapExtractItems.length;i++){
     var item=_scrapExtractItems[i];
     var itemBuy=item.buy_price||0;
-    // ⚠️ v297 — نفس القطعة من نفس الماكينة (حتى لو اتكتبت جديدة تاني) تتدمج في منتج واحد بدل منتجين بنفس الاسم
-    if(!item.isExisting){var _dupP=DB.products.find(function(p){return p.category!=='machine'&&p.scrap_source===machineId&&normalizeAr(p.name)===normalizeAr(item.name);});if(_dupP){item.isExisting=true;item.productId=_dupP.id;}}
+    // نفس القطعة (بالاسم) تتدمج في منتج واحد بدل منتجين بنفس الاسم: الأول من نفس الماكينة، وبعدين أي منتج بنفس الاسم في المخزن
+    if(!item.isExisting){
+      var _nm=normalizeAr(item.name);
+      var _dupP=DB.products.find(function(p){return p.category!=='machine'&&p.scrap_source===machineId&&normalizeAr(p.name)===_nm;})
+             ||DB.products.find(function(p){return p.category!=='machine'&&normalizeAr(p.name)===_nm;});
+      if(_dupP){item.isExisting=true;item.productId=_dupP.id;}
+    }
     if(item.isExisting&&item.productId){
-      // زيادة الكمية في المنتج الموجود + حساب متوسط مرجّح لسعر الشراء بدمج الكمية القديمة والجديدة
       DB.products=DB.products.map(function(p){
         if(p.id!==item.productId)return p;
         var oldQty=p.qty,oldBuy=p.buy_price||0;
@@ -24097,36 +24090,20 @@ async function confirmExtractParts(machineId){
         var avgBuy=newQty>0?money((oldQty*oldBuy+item.qty*itemBuy)/newQty):0;
         return Object.assign({},p,{qty:newQty,buy_price:avgBuy});
       });
-      item._syncExisting=true; // ⚠️ v209
+      item._syncExisting=true;
     } else {
-      // إنشاء منتج جديد في المخزون — يتصنّف "اسكراب" عشان ينعكس صح في هامش الربح وتقارير المخزون
-      var newProd={
-        id:genId(),name:item.name,category:'parts',
-        unit:'اسكراب',qty:item.qty,min_qty:0,
-        buy_price:itemBuy,sell_price:item.sell_price||0,scrap_price:item.sell_price||0,
-        scrap_source:machineId
-      };
+      var newProd={id:genId(),name:item.name,category:'parts',unit:'اسكراب',qty:item.qty,min_qty:0,buy_price:itemBuy,sell_price:item.sell_price||0,scrap_price:item.sell_price||0,scrap_source:machineId};
       DB.products.push(newProd);
-      item.productId=newProd.id;item._syncNewProd=newProd; // ⚠️ v209
+      item.productId=newProd.id;item._syncNewProd=newProd;
       addArchive('products',item.name);
     }
   }
-
-  // تسجيل القطع في الماكينة
   DB.scrap_machines=DB.scrap_machines.map(function(m){
     if(m.id!==machineId)return m;
-    var newParts=(m.parts_extracted||[]).concat(
-      _scrapExtractItems.map(function(it){
-        return {id:genId(),name:it.name,qty:it.qty,added_date:todayStr,buy_price:it.buy_price||0,sell_price:it.sell_price||0,productId:it.productId}; // ⚠️ v243
-      })
-    );
+    var newParts=(m.parts_extracted||[]).concat(_scrapExtractItems.map(function(it){return {id:genId(),name:it.name,qty:it.qty,added_date:todayStr,buy_price:it.buy_price||0,sell_price:it.sell_price||0,productId:it.productId};}));
     return Object.assign({},m,{parts_extracted:newParts});
   });
-
   await persist();
-  // ⚠️ v209 — نفس باج finishExtractForSale/saveProduct بالظبط: تحديث المخزون هنا كان
-  // محلي بس من غير dbUpdate/dbUpsert (products جدول متزامن صف بصف، persist() المركزي
-  // مابيغطيهوش).
   for(var j=0;j<_scrapExtractItems.length;j++){
     var it2=_scrapExtractItems[j];
     if(it2._syncExisting){
@@ -24136,10 +24113,14 @@ async function confirmExtractParts(machineId){
       await dbUpsert('products',it2._syncNewProd);
     }
   }
-  await _scrapSyncMachineProd(machineId); // ⚠️ v297 — تكلفة الماكينة في المخزن بتقل بقد اللي اتنقل للقطع (عدّ مزدوج)
+  await _scrapSyncMachineProd(machineId);
   await persist();
-  closeModal();renderScrap();renderInventory();
+}
+async function confirmExtractParts(machineId){
+  if(!_scrapExtractItems.length)return showToast('⚠️ أضف قطعة واحدة على الأقل','#dc2626');
   var totalQty=_scrapExtractItems.reduce(function(s,i){return s+i.qty;},0);
+  await _extractCommit(machineId);
+  closeModal();renderScrap();renderInventory();
   showToast('✅ تم إضافة '+totalQty+' قطعة للمخزون','#16a34a');
   _scrapExtractItems=[];
 }
@@ -27887,7 +27868,7 @@ var __PERM_MAP={
   saveEditInvType:[['products','upd']], saveScrapMachine:[['products','ins']], saveEditScrapMachine:[['products','upd']],
   confirmExtractParts:[['products','upd']], finishExtractForSale:[['products','upd']], markScrapDepleted:[['products','upd']],
   delScrapMachine:[['products','del']], approveStocktake:[['products','upd'],['expenses','ins']],
-  saveScrapPartDetail:[['products','upd']], scrapAuditFix:[['products','upd']]
+  saveScrapPartDetail:[['products','upd']], scrapAuditFix:[['products','upd']], reopenScrapMachine:[['products','upd']]
 };
 (function(){
   var ACT={ins:['can_insert','can_update'],upd:['can_update'],del:['can_delete']};
