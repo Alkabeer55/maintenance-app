@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v310</title>
+<title>ابو حوده الحلو الجميل v314</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -92,6 +92,24 @@
     36) ⚠️ v306 — المستثمرين: أي عملية مستثمر (إيداع/سحب/رد رأس مال/دفعة/دورة توزيع/مستثمر) لازم تعدّي بالترتيب: _invGuard(تاريخ العملية) ← _invBackup(سبب) ← التعديل ← _invAudit(...) ← persist. ممنوع تعديل نسبة أو تكلفة دفعة اتباع منها (النسبة بتتغيّر بـ pct_hist بتاريخ سريان عن طريق _invPctAt، والتكلفة بدفعة جديدة). ممنوع حذف دفعة عليها مبيعات أو مستثمر عليه حركات (أرشفة بدل الحذف). إقفال الشهر لازم يثبّت لقطة (_invTakeSnapshot) وأي دالة مستثمرين جديدة لازم تتضاف في __ONCE_GUARDED.
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v314: [🔎 توسيع أداة مطابقة المركز المالي (قراءة فقط) — مفيش أي تغيير في أي معادلة أو رصيد]
+     ✚ مطابقة فواتير الشراء (إجمالي/مدفوع/ديون مرتبطة/متبقي/عدّ مزدوج/جزء غير مغطّى)، وديون موردين متعرّف عليها بالنص بس، وديون عملاء يتيمة (فاتورتها اتحذفت)، ومطابقة المستثمرين (شراكة + بضاعة: مساهمات/أرباح مستحقة/محتجز مسجّل مقابل المتوقع)، وتاريخ أول دخول لكل صنف، ومعاينة حسابية لأثر التصحيحات المقترحة على الفرق.
+v313: [🔎 أداة مطابقة المركز المالي (قراءة فقط) — مفيش أي تغيير في أي معادلة أو رصيد أو بيانات]
+     ✚ زرار جديد في الإعدادات: "🔎 مطابقة المركز المالي". بيفكّك فرق الميزانية لبنود معروفة السبب (طريقة حساب / بيانات وتصنيف / تسويات يدوية) ويعرض الباقي غير المفسَّر زي ما هو من غير ما يسجّله في أي حساب. وبينزّل تقرير JSON كامل للمراجعة. مفيش حفظ ولا مزامنة ولا تسوية.
+v312: [🔒 حراس الإقفال المتفق عليها — بدون تغيير أي حساب أو رقم]
+     1) 🔒 إقفال الشهر: لو لقطة المركز المالي أو لقطة المستثمرين فشلت، الشهر مبيتقفلش (كان بيتقفل مع تنبيه بس).
+     2) 🔒 saveProfitCycle: دورة أرباح جديدة بتاريخ داخل شهر مقفول بقت ممنوعة (الفحص كان في وضع التعديل بس).
+     3) 🔒 approveStocktake: تسوية الجرد ممنوعة لو الشهر الحالي مقفول (بتسجّل مصروف عجز وتعدّل الكميات بتاريخ النهارده).
+     4) 🔒 حذف فاتورة من غير دين مرتبط: فحص الإقفال اتضاف (كان في مساري الحذف مع الدين بس).
+     5) 🛡️ confirmMarkLeave (تسجيل إجازة): حارس صلاحيات "الحسابات".
+     ⚠️ تصحيح لتقرير v310: دوال المستثمرين/الدورات/رأس المال كان عليها حارس "للمالك فقط" أصلًا من v306 (_invGuard) — اللي ضفته في v310 حارس صلاحيات إضافي (دفاعي) مش سدّ ثغرة. وحذف مستثمر عليه حركات كان ممنوع من v306.
+v311: [🛟 سلامة بدء التشغيل وحماية البيانات — فوق v310 بدون تغيير أي منطق محاسبي]
+     1) 🐛 خطأ في v310 (اتصلح): الدمج الثلاثي للحسابات/العملاء لما مفيش نقطة أساس كان بيعتبر نسخة السيرفر هي الأساس، فأي سجل جديد على السيرفر الجهاز ماشافوش كان بيتفسّر "حذف منك" ويتمسح من السيرفر. دلوقتي من غير أساس بنعمل اتحاد بس (مفيش حذف بيتنشر).
+     2) 🛑 فشل تحميل الملف المحلي (JSON تالف): قبل كده كان بيظهر تنبيه بس، وأي حفظ بعدها بيكتب قاعدة فاضية فوق الملف ويرفعها للسيرفر. دلوقتي الحفظ والرفع والطابور متوقفين فعليًا (__dbLoadFailed) لحد ما سحب كامل ناجح من السيرفر يسترجع البيانات ويفك الإيقاف تلقائيًا.
+     3) ⏳ الطابور مبيرفعش قبل أول سحب من السيرفر (كان بيشتغل بعد ٣ ثواني من الفتح، ولو الجهاز بدأ أوفلاين مكانش في سحب أولي أصلًا).
+     4) 🧾 سجل النشاط: JSON صالح دايمًا (كان .slice(0,2000) بيقطعه فيبقى مش قابل للقراءة والاسترجاع بيفشل بصمت). التفاصيل الكبيرة جدًا بتتعلّم _truncated والاسترجاع بيرفضها بدل ما يسترجع بيانات ناقصة.
+     5) 🗑️ مسح قسم كامل / مسح كل البيانات: نسخة أمان كاملة قبل المسح (محليًا أو ملف)؛ لو فشلت المسح بيتلغي. كان مستحيل استرجاع قسم اتمسح.
+     6) 👣 الزيارات (startVisit/endVisit/deleteVisitLog): حراس صلاحيات (كانت بتعدّل محليًا قبل ما الرفع يترفض).
 v310: [🧩 إغلاق نواقص الصلاحيات + استكمال المزامنة + مفتاح الذكاء الاصطناعي + تحسينات تصدير/طباعة — فوق v309 بدون تغيير أي منطق محاسبي]
      1) 👑 المالك: بيتحقق منه دوريًا (الدور + تفعيل الحساب). دوره اتغيّر → سحب المالكية فورًا وإعادة فتح؛ حسابه اتوقف → خروج. أوفلاين التطبيق مش هيعرف (حد معروف): بعد مدة الثقة (٧٢ ساعة) من آخر تحقق ناجح بتتمنع الإجراءات الإدارية الخطرة لحد التحقق أونلاين.
      2) 🛡️ دوال تلقائية/داخلية كانت بتعدّل محليًا لأي موظف (autoMoveToStock / autoRolloverStale / archiveOldDailyLists / saveBalanceSnapshot / saveInventorySnapshot): حراس صامتة. ودوال واجهة ناقصة (saveRemindPhone / _mfJoin / سحب ترتيب الجدول / استرجاع الجدول) اتضافت للخريطة.
@@ -2429,6 +2447,28 @@ input:checked+.slider:before{transform:translateX(-20px)}
   };
   var __ACTIVITY_ACTION_NAMES = {insert:'➕ إضافة', update:'✏️ تعديل', delete:'🗑️ حذف', login:'🔓 دخول', logout:'🔒 خروج'};
   var __ACTIVITY_LOG_TABLE_MISSING = false; // لو الجدول لسه مش متعمول على Supabase، منوقفش نحاول تاني كل شوية
+  // ⚠️ v311 — JSON صالح دايمًا: لو التفاصيل كبيرة (>٢٠٠٠٠ حرف) بنحوّل الحقول المركّبة لأعداد ونعلّم السجل _truncated (والاسترجاع بيرفضه بدل ما يسترجع بيانات ناقصة).
+  function __activityDetailsJson(d){
+    if(!d) return null;
+    var s; try{ s=JSON.stringify(d); }catch(e){ return JSON.stringify({_error:'unserializable',_truncated:true}); }
+    if(s.length<=20000) return s;
+    var slim=function(r){
+      if(!r||typeof r!=='object') return r;
+      var o={_truncated:true};
+      Object.keys(r).forEach(function(k){
+        var v=r[k];
+        if(v===null||typeof v!=='object') o[k]=(typeof v==='string'&&v.length>300)?v.slice(0,300):v;
+        else o[k+'_count']=Array.isArray(v)?v.length:Object.keys(v).length;
+      });
+      return o;
+    };
+    var out={};
+    Object.keys(d).forEach(function(k){ var v=d[k]; out[k]=(v&&typeof v==='object'&&!Array.isArray(v))?slim(v):(Array.isArray(v)?{_count:v.length,_truncated:true}:v); });
+    out._truncated=true; out._bytes=s.length;
+    var t=JSON.stringify(out);
+    if(t.length>20000) t=JSON.stringify({event:d.event||null,_truncated:true,_bytes:s.length});
+    return t;
+  }
   async function __logActivity(action, tableName, recordId, details){
     try{
       if(__ACTIVITY_LOG_TABLE_MISSING) return;
@@ -2440,9 +2480,10 @@ input:checked+.slider:before{transform:translateX(-20px)}
         action: action,
         table_name: tableName,
         record_id: recordId!==undefined && recordId!==null ? String(recordId) : null,
-        details: details ? JSON.stringify(details).slice(0,2000) : null
+        details: __activityDetailsJson(details) // ⚠️ v311 — كان .slice(0,2000) بيقطع الـJSON فيبقى غير صالح (الاسترجاع بيفشل بصمت، وممكن الإدخال نفسه يترفض)
       };
       var res = await sb.from('activity_log').insert(row);
+      if(res && res.error && !/relation .* does not exist|not find the table/i.test(res.error.message||'')){ window.__lastActivityLogErr = res.error.message; console.warn('activity log insert error:', res.error.message); }
       if(res && res.error && /relation .* does not exist|not find the table/i.test(res.error.message||'')){
         __ACTIVITY_LOG_TABLE_MISSING = true; // هيبان تحذير للمالك من شاشة السجل نفسها بدل ما يتكرر في الكونسول
       }
@@ -3543,6 +3584,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
     if(!entry)return;
     confirmAction('هيترجع السجل ده زي ما كان بالظبط ("'+(__ACTIVITY_TABLE_NAMES[entry.table]||entry.table)+'"). تكمل؟',async function(){
       try{
+        if(!entry.row||entry.row._truncated){ showToast('⚠️ السجل ده اتحفظ في السجل بشكل مختصر (كبير جدًا) — مينفعش يتسترجع تلقائيًا. ارجع للنسخة الاحتياطية.','#dc2626'); return; } // ⚠️ v311
         var row=Object.assign({},entry.row);
         if(!DB[entry.table])DB[entry.table]=[];
         // ⚠️ v310 — (١) صلاحية الإضافة  (٢) منع التكرار لو السجل موجود/اترجع قبل كده  (٣) النجاح مبيتعلنش إلا بعد ما الرفع ينجح؛ لو فشل بيتحط في الطابور
@@ -4257,6 +4299,7 @@ async function __tombApplyOnPull(){
 }
 async function __pullAllFromServer(){
     if(!window.__currentProfile) return;
+    window.__pullStartedAt = Date.now(); var __blobPullFailed=false; // ⚠️ v311
     setSyncStatus('⏳ جاري تحميل آخر تحديث من السيرفر...','#64748b');
     // v141 — كانت كل نتيجة سحب بتتفحص بس لو فيها خطأ وتتجاهل من غير أي تنبيه (فشل صامت
     // تمامًا) — لو RLS في Supabase أو أي مشكلة صلاحيات منعت جدول معيّن (زي "المخزون")
@@ -4310,7 +4353,7 @@ async function __pullAllFromServer(){
           // ⚠️ v264 — رصيد المحتجز (المالك + كل مستثمر) بيتعاد حسابه من الدورات فورًا بعد السحب من السيرفر؛ __mergeAccounts بيدي الرصيد الجاهز من السيرفر (ممكن يكون أقدم) والدورات هي مصدر الحقيقة.
           try{ if(typeof recalcRetainedEarnings==='function') recalcRetainedEarnings(); }catch(_eRe){ console.warn('recalcRetainedEarnings after sync:',_eRe); }
         }
-      }catch(eAcc){
+      }catch(eAcc){ __blobPullFailed=true;
         console.warn('فشل سحب الحسابات من السيرفر:', eAcc);
         __reportError('فشل تحميل الحسابات', (eAcc&&eAcc.message)?eAcc.message:String(eAcc));
       }
@@ -4323,6 +4366,7 @@ async function __pullAllFromServer(){
           __blobSetBase('clients', clientsRes.data.data); __blobSetVer('clients', clientsRes.data.updated_at||''); // ⚠️ v310
         }
       }catch(eCl){
+        __blobPullFailed=true;
         console.warn('فشل سحب دفتر العملاء من السيرفر:', eCl);
         __reportError('فشل تحميل دفتر العملاء', (eCl&&eCl.message)?eCl.message:String(eCl));
       }
@@ -4333,6 +4377,7 @@ async function __pullAllFromServer(){
           __fixTwins();
         }
       }catch(eSc){
+        __blobPullFailed=true;
         console.warn('فشل سحب السكراب من السيرفر:', eSc);
         __reportError('فشل تحميل السكراب', (eSc&&eSc.message)?eSc.message:String(eSc));
       }
@@ -4342,6 +4387,11 @@ async function __pullAllFromServer(){
 
       if(window.__isOwner) await __loadStorageUsage();
 
+      window.__initialPullDone = true; // ⚠️ v311 — الطابور مبيشتغلش قبل ما السحب الأولي يخلص
+      if(window.__dbLoadFailed && !failedTables.length && !__blobPullFailed){
+        window.__dbLoadFailed = false; // ⚠️ v311 — اتسحب كل شيء من السيرفر بنجاح: بيانات الجهاز اتسترجعت، الحفظ رجع شغال
+        try{ showToast('✅ بيانات الجهاز اتسترجعت من السيرفر — الحفظ رجع شغال','#16a34a'); }catch(_e){}
+      }
       await persist();
       if(typeof renderScreen === 'function' && typeof currentScreen !== 'undefined') renderScreen(currentScreen);
       if(failedTables.length){
@@ -4353,6 +4403,7 @@ async function __pullAllFromServer(){
       }
     }catch(e){
       console.warn('فشل سحب البيانات من السيرفر:', e);
+      window.__initialPullDone = true; // السحب اتحاول (فشل): مبنعلّقش الطابور للأبد
       setSyncStatus('⚠️ فشل تحميل التحديثات من السيرفر','#dc2626');
     }
   }
@@ -4803,6 +4854,7 @@ var __BLOB3={
   clients:{ get:function(){return DB.clients||[];}, set:function(v){DB.clients=v;}, merge:function(b,l,s,rep){ return __m3Arr(b,l,s,rep,'clients'); }, post:function(){} }
 };
 function __holdBlobConflicts(id,rep){
+  var __total=rep.length; if(rep.length>50) rep=rep.slice(0,50); // ⚠️ v311 — سقف لتفادي إغراق القايمة
   rep.forEach(function(c){
     var rec={kind:'blob_conflict',table:id,id:String(c.label)+'/'+String(c.id),op:'upsert',uid:(window.__currentProfile&&window.__currentProfile.id)||null,ts:Date.now(),
              reason:(c.kind==='both_changed'?'نفس السجل اتعدّل منك ومن جهاز تاني — نسختك اتحفظت':c.kind==='server_deleted_local_edited'?'السجل اتحذف على السيرفر من جهاز تاني وإنت عدّلته — نسختك اتحفظت':c.kind==='local_deleted_server_edited'?'إنت حذفته بس جهاز تاني عدّله — اتحفظت نسخة السيرفر':'قيمة اتغيّرت منك ومن جهاز تاني — قيمتك اتحفظت')+' ('+c.label+')',
@@ -4810,10 +4862,11 @@ function __holdBlobConflicts(id,rep){
     try{ rec.row=rec.row===undefined?null:JSON.parse(JSON.stringify(rec.row)); rec.server=rec.server===undefined?null:JSON.parse(JSON.stringify(rec.server)); }catch(e){}
     __heldOps.push(rec);
   });
-  if(rep.length){ __saveHeld(); try{ showToast('⚠️ اتعمل دمج مع تعديلات جهاز تاني ('+rep.length+' تعارض) — راجعهم من شريط الحالة','#d97706'); }catch(e){} }
+  if(rep.length){ __saveHeld(); try{ showToast('⚠️ اتعمل دمج مع تعديلات جهاز تاني ('+__total+' تعارض'+(__total>rep.length?'، اتعرض أول '+rep.length:'')+') — راجعهم من شريط الحالة','#d97706'); }catch(e){} }
 }
 // بترجّع true لو الرفع نجح، false لو استنفدنا المحاولات، وبترمي خطأ لو في مشكلة اتصال/صلاحيات (الاستدعاء بيحطها في الطابور)
 async function __pushBlobSafe(id){
+  if(window.__dbLoadFailed) throw new Error('الرفع متوقف: بيانات الجهاز المحلية تالفة (لازم تتسترجع من السيرفر الأول)'); // ⚠️ v311
   var cfg=__BLOB3[id]; var uid=window.__currentProfile.id;
   for(var attempt=0;attempt<4;attempt++){
     var sr=await sb.from('business_state').select('data, updated_at').eq('id',id).maybeSingle();
@@ -4829,8 +4882,10 @@ async function __pushBlobSafe(id){
     var srvData=sr.data.data, srvTs=sr.data.updated_at;
     if(__blobVer(id)!==srvTs){                       // حد تاني كتب من آخر مرة اتزامنا
       var base=__blobGet(id);
-      if(base===null||base===undefined){             // مفيش نقطة أساس (أول مرة بعد التحديث): مفيش دمج آمن ممكن → بنعتمد نسخة السيرفر كأساس ونكمّل بدمج ثلاثي منها (المحلي بيفضل زي ما هو)
-        base=srvData;
+      if(base===null||base===undefined){
+        // ⚠️ v311 — إصلاح خطأ في v310: لما مفيش نقطة أساس كنا بنعتبر نسخة السيرفر هي الأساس، فأي سجل جديد على السيرفر (الجهاز مشافوش) كان بيتفسّر "إنت حذفته" ويتمسح من السيرفر!
+        // دلوقتي من غير أساس بنعمل اتحاد بس (مفيش حذف بيتنشر)، والمحلي بيكسب في السجلات المختلفة مع تسجيلها كتعارض.
+        base=Array.isArray(srvData)?[]:{};
       }
       var rep=[];
       var merged=cfg.merge(base,local,srvData,rep);
@@ -5621,9 +5676,9 @@ var APP_TITLE=APP_CONFIG.name;
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=310;
+var APP_VERSION=314;
 // ⚠️ v303 — BUILD_STAMP كان مش متعرّف خالص (شاشة الإعدادات كانت بتعرض "?") — اتعرّف دلوقتي وبيتزود مع كل تحديث
-var BUILD_STAMP='v310 — 2026-11-03';
+var BUILD_STAMP='v314 — 2026-11-04';
 // ⚠️ v295 — عنوان الصفحة كان رقم نسخته ثابت ومتنسي (فضل v294 مع إن النسخة اتغيّرت). دلوقتي بياخد الرقم من APP_VERSION دايمًا.
 try{document.title=document.title.replace(/v\d+\s*$/,'v'+APP_VERSION);}catch(_eT){}
 
@@ -5669,6 +5724,9 @@ function loadDB(){
         console.error('loadDB: بيانات تالفة، اتحفظت نسخة احتياطية.', parseErr);
         setSyncStatus('⚠️ بيانات تالفة — راجع الدعم الفني','#dc2626');
         showToast('⚠️ البيانات المحفوظة تالفة! اتاخدت نسخة احتياطية طارئة، متعملش أي حفظ لحد ما تراجع الموضوع','#dc2626');
+        // ⚠️ v311 — التنبيه لوحده مكانش بيمنع حاجة: أي persist() بعد كده كان بيكتب قاعدة فاضية فوق الملف المحلي ويرفعها للسيرفر.
+        // دلوقتي الحفظ والرفع متوقفين فعليًا لحد ما البيانات تتسترجع من السيرفر (سحب كامل ناجح بيفك الإيقاف تلقائيًا).
+        window.__dbLoadFailed = true;
         return Promise.resolve();
       }
       DB.products   = data.products   || [];
@@ -5816,6 +5874,7 @@ function __aiKeyMigrate(){
   return true;
 }
 function persist(){
+  if(window.__dbLoadFailed){ try{ setSyncStatus('⛔ بيانات الجهاز تالفة — الحفظ متوقف لحد استرجاعها من السيرفر','#dc2626'); }catch(_e){} return Promise.resolve(); } // ⚠️ v311
   try{ if(__aiKeyMigrate()){ try{ if(typeof __scheduleSettingsPush==='function') __scheduleSettingsPush(); }catch(_e){} } }catch(_ek){}
   try{
     var data = {
@@ -6316,6 +6375,7 @@ async function __ensureFreshSession(force){
 // ⚠️ v262 — القفل كان بيفضل مقفول للأبد لو حصل أي خطأ غير متوقع في الحلقة (مفيش try/finally)، فكل محاولة بعد كده (حتى الضغط على الإشعار) بترجع فورًا. دلوقتي: try/finally + فك قفل تلقائي لو عدّى أكتر من 60 ثانية.
 var __drainStartedAt = 0;
 async function __drainSyncQueue(manual){
+  if(window.__dbLoadFailed) return; // ⚠️ v311
   if(__draining){
     if(manual && Date.now()-__drainStartedAt>60000){ __draining=false; }
     else return;
@@ -6326,6 +6386,16 @@ async function __drainSyncQueue(manual){
   // ⚠️ v309 — قبل أي رفع: السيرفر لازم يأكد الحساب والصلاحيات (الشغل الأوفلاين مبيتبعتش إلا بعد التحقق)
   var __vOk = await __verifyBeforeSync();
   if(!__vOk){ if(manual) showToast('⚠️ مقدرتش أتحقق من حسابك وصلاحياتك دلوقتي — المزامنة مؤجلة والعمليات محفوظة','#ea580c'); try{__refreshStatusBadge();}catch(_e){} return; }
+  // ⚠️ v311 — الطابور مبيرفعش حاجة قبل أول سحب من السيرفر (كان ممكن يشتغل بعد ٣ ثواني من فتح التطبيق قبل ما السحب يخلص أو يبدأ لو الجهاز كان أوفلاين)
+  if(!window.__initialPullDone){
+    if(Date.now()-(window.__pullStartedAt||0)<60000 && (window.__pullStartedAt||0)>0){ return; } // سحب شغال دلوقتي: نستنى
+    if(!window.__initialPullRunning){
+      window.__initialPullRunning = true;
+      try{ await __pullAllFromServer(); }catch(_ep){}
+      finally{ window.__initialPullRunning=false; window.__initialPullDone=true; }
+    }
+    if(window.__dbLoadFailed) return;
+  }
   var sessionOk = await __ensureFreshSession();
   if(!sessionOk){
     // v172 — [🐛 إصلاح: كان بيعمل تسجيل خروج/دخول تلقائي متكرر كل شوية] "مفيش جلسة"
@@ -6666,6 +6736,7 @@ async function dbDelete(table, id, oldRow){
 }
 
 async function __pushRowToServer(table, row){
+  if(window.__dbLoadFailed) return false; // ⚠️ v311
   if(!__SYNCED_TABLES[table] || typeof sb === 'undefined' || !window.__currentProfile) return;
   // ⚠️ v223 — [🐛 سبب جديد لـ"جلسة الدخول تالفة"] لو الموظف سايب التطبيق مفتوح فترة
   // من غير استخدام (شاشة ظاهرة طول الوقت، يعني visibilitychange مايحصلش خالص لأن
@@ -10316,6 +10387,7 @@ function confirmApproveStocktake(id){
 // الخطوة الوحيدة اللي بتعدّل المخزون الفعلي — ماحدش غيرها بيلمس qty
 async function approveStocktake(id){
   var st=(DB.stocktakes||[]).find(function(x){return x.id===id});if(!st)return;
+  if(_blockIfClosedMonth(today()))return; // ⚠️ v312 — التسوية بتسجّل مصروف عجز وتعدّل الكميات بتاريخ النهارده: ممنوعة لو الشهر مقفول
 
   var totalShortageValue=0,totalSurplusValue=0;
   var shortageDetails=[],surplusDetails=[];
@@ -12270,6 +12342,7 @@ function openDeleteSaleModal(saleId){
   var linkedDebt=DB.debts.find(function(d){return d.source_sale_id===saleId;});
 
   if(!linkedDebt){
+    if(_blockIfClosedMonth(s.date))return; // ⚠️ v312 — كان الحارس موجود في مسارات الحذف مع الدين بس، ومسار الحذف العادي بدون حارس
     // مفيش دين مرتبط — حذف عادي مع استرجاع المخزون
     confirmAction('هتحذف الفاتورة دي؟',async function(){
       await _restoreStockFromSale(s);
@@ -20166,9 +20239,12 @@ async function closeCurrentHijriMonth(){
   if((DB.accounts.closed_months||[]).some(function(c){return c.hKey===key;}))return showToast('⚠️ الشهر ده مقفول بالفعل','#ca8a04');
   var r=hijriMonthRange(h.year,h.month);
   // نثبّت لقطة نهاية الشهر (حتى النهارده) عشان تبقى رصيد إقفال موثّق قبل المنع
-  var snap=await saveBalanceSnapshot(today(),'إقفال '+HIJRI_MONTH_NAMES[h.month-1]+' '+h.year+' هـ');
+  var snap=null;
+  try{ snap=await saveBalanceSnapshot(today(),'إقفال '+HIJRI_MONTH_NAMES[h.month-1]+' '+h.year+' هـ'); }
+  catch(eSn){ console.warn('balance snapshot',eSn); return showToast('❌ مقدرتش أثبّت لقطة المركز المالي — الإقفال اتلغى (الشهر لسه مفتوح)','#dc2626'); } // ⚠️ v312
+  if(!snap) return showToast('❌ لقطة المركز المالي ما اتثبّتتش — الإقفال اتلغى (الشهر لسه مفتوح)','#dc2626');
   // ⚠️ v306 — لقطة ثابتة لأرباح دفعات المستثمرين ومستحقاتهم لحظة الإقفال (محفوظة في سجل المراجعة)
-  var _isn=null;try{_isn=_invTakeSnapshot(key,'عند الإقفال');}catch(eIs){console.warn('inv snapshot',eIs);showToast('⚠️ الشهر اتقفل بس لقطة المستثمرين ما اتثبّتتش — ثبّتها من 🛡️ سلامة المستثمرين','#ca8a04');}
+  var _isn=null;try{_isn=_invTakeSnapshot(key,'عند الإقفال');}catch(eIs){console.warn('inv snapshot',eIs);return showToast('❌ لقطة المستثمرين فشلت — الإقفال اتلغى (الشهر لسه مفتوح). جرّب تاني أو راجع 🛡️ سلامة المستثمرين','#dc2626');} // ⚠️ v312 — كان بيقفل الشهر برضه مع تنبيه بس
   DB.accounts.closed_months.push({hKey:key,hLabel:HIJRI_MONTH_NAMES[h.month-1]+' '+h.year+' هـ',
     closedAt:new Date().toISOString(),closedBy:(window.__currentProfile&&window.__currentProfile.name)||'',asOf:today(),snapshotId:snap.id,inv_snap_id:_isn?_isn.id:null});
   await persist();
@@ -22172,6 +22248,8 @@ function renderSettings(){
     '<button class="settings-btn" onclick="exportCSV()">📊 تصدير المبيعات للإكسيل (CSV — الفواتير فقط)</button>'+
     '<div style="font-size:11px;color:#94a3b8;margin:8px 0 6px">تصدير أقسام تانية (بيانات خام من غير أي حساب):</div>'+
     ['purchases','debts','expenses','products','movements','part_withdrawals','tasks'].map(function(k){return '<button class="settings-btn" onclick="exportSectionCSV(\''+k+'\')">📄 '+__CSV_SECTIONS[k]+'</button>';}).join('')+
+    '<div style="font-size:11px;color:#94a3b8;margin:12px 0 6px">تشخيص المركز المالي (قراءة فقط — مفيش أي تعديل ولا تسوية):</div>'+
+    '<button class="settings-btn" style="background:#ecfdf5;color:#047857" onclick="__auditBalanceSheetRender()">🔎 مطابقة المركز المالي</button>'+
     '</div>'+
     (window.__isOwner?(
       '<div class="card">'+
@@ -22257,6 +22335,8 @@ function confirmClearSection(table,label){
   });
 }
 async function clearDataSection(table,label){
+  // ⚠️ v311 — مسح قسم كامل مكانش ينفع يتسترجع (السجل بيسجّل العدد بس). دلوقتي نسخة أمان كاملة قبل المسح؛ لو مقدرناش ناخدها المسح بيتلغي. الاسترجاع: استيراد النسخة من الإعدادات.
+  var __wb=__makeSafetyBackup('wipe'); if(!__wb.ok){ showToast('❌ مقدرتش آخد نسخة أمان قبل المسح فالمسح اتلغى (ماتغيّرش حاجة)','#dc2626'); return; }
   var ids=(DB[table]||[]).map(function(r){return r.id;});
   DB[table]=[];
   await persist();
@@ -23708,10 +23788,10 @@ function __validateBackup(data){
   return {ok:errors.length===0,errors:errors,warnings:warnings,present:present,counts:counts};
 }
 // نسخة أمان من البيانات الحالية قبل الاستبدال: محليًا (آخر نسختين)، ولو الذاكرة مش كفاية بتتنزّل كملف. لو الاتنين فشلوا → الاستيراد بيتلغي.
-function __makePreImportBackup(){
+function __makeSafetyBackup(tag){
   var json;
-  try{ json=JSON.stringify(Object.assign({},DB,{__preImportAt:new Date().toISOString(),__meta:{app_version:APP_VERSION,kind:'pre-import-safety'}})); }catch(e){ return {ok:false}; }
-  var prefix='mc8_pre_import_backup_';
+  try{ json=JSON.stringify(Object.assign({},DB,{__preImportAt:new Date().toISOString(),__meta:{app_version:APP_VERSION,kind:'safety-'+tag}})); }catch(e){ return {ok:false}; }
+  var prefix='mc8_pre_'+tag+'_backup_';
   try{
     Object.keys(localStorage).filter(function(k){return k.indexOf(prefix)===0;}).sort().slice(0,-1).forEach(function(k){localStorage.removeItem(k);}); // نسيب آخر نسخة بس قبل ما نكتب الجديدة
   }catch(e){}
@@ -23719,10 +23799,12 @@ function __makePreImportBackup(){
   try{ localStorage.setItem(key,json); return {ok:true,where:'local',key:key}; }catch(e1){}
   try{
     var blob=new Blob([json],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');
-    a.href=url;a.download='mc-PRE-IMPORT-safety-'+today()+'-'+Date.now()+'.json';a.click();setTimeout(function(){URL.revokeObjectURL(url);},4000);
+    a.href=url;a.download='mc-PRE-'+tag.toUpperCase()+'-safety-'+today()+'-'+Date.now()+'.json';a.click();setTimeout(function(){URL.revokeObjectURL(url);},4000);
     return {ok:true,where:'file'};
   }catch(e2){ return {ok:false}; }
 }
+// ⚠️ v311 — اسم قديم محفوظ للتوافق (الاستيراد)
+function __makePreImportBackup(){ return __makeSafetyBackup('import'); }
 function importBackup(input){
   var file=input.files&&input.files[0];if(!file)return;
   var r=new FileReader();
@@ -23778,6 +23860,200 @@ function __csvCell(c){
   return '"'+t.replace(/"/g,'""')+'"';
 }
 // ⚠️ v310 — تصدير أي قسم كبيانات خام (CSV): الأعمدة = كل الحقول الموجودة فعلًا في السجلات (الأرقام زي ما هي، والحقول المركّبة كنص JSON). مفيش حساب ولا تحويل. محمي من Formula Injection.
+// ============================================================================
+// ⚠️ v313 — مطابقة المركز المالي (قراءة فقط). مفيش أي تعديل على البيانات ولا حفظ ولا مزامنة ولا تسوية.
+// بتقرا DB الحالي، وبتفكّك "فرق الميزانية" لبنود معروفة السبب (كل بند بقيمته ومعادلته)، وبتعرض الباقي "غير مُفسَّر" كما هو
+// (مش بيتحط في النقدية ولا الأرباح المحتجزة ولا بيتسوّى).
+// إشارة القيمة: موجب = بند بيزوّد الأصول عن (الالتزامات + حقوق الملكية)، سالب = العكس.   فرق الميزانية = الأصول − (الالتزامات + حقوق الملكية)
+// ============================================================================
+function __auditBalanceSheet(){
+  var B=_computeBalanceSheet(null), acc=DB.accounts||{}, R=function(n){return Math.round((+n||0)*100)/100;};
+  var debts=DB.debts||[], sales=DB.sales||[], purchases=DB.purchases||[], products=DB.products||[];
+  var items=[]; // مساهمات الفرق
+  function add(code,group,title,value,formula,rows){ items.push({code:code,group:group,title:title,value:R(value),formula:formula,rows:(rows||[]).slice(0,40),count:(rows||[]).length}); }
+  var isPurch=function(d){ return !!d.source_purchase_id || String(d.details||d.desc||'').indexOf('مشترى — ')===0; };
+  var isConsDebt=function(d){ return d.source==='consignment' || !!d.consignment_product_id; };
+  var linkedDebtsOfPurchase=function(pid){ return debts.filter(function(d){return d.type==='supplier'&&d.source_purchase_id===pid;}); };
+  var linkedDebtsOfSale=function(sid){ return debts.filter(function(d){return d.type==='customer'&&d.source_sale_id===sid;}); };
+  var remD=function(d){ return Math.max(0,(d.total||0)-(d.paid||0)); };
+
+  // ---- (طريقة الحساب) ----
+  // م٠: سداد دين مورد مرتبط بمشترى بيتحسب مرتين (purchase.paid بيتحدّث عند السداد + purchLinkedSuppPaidCash)
+  var dbl=[],dblSum=0;
+  purchases.forEach(function(pu){
+    var ld=linkedDebtsOfPurchase(pu.id); if(!ld.length) return;
+    var grand=(pu.total||0)+(pu.extra_cost||0), sumDebtTotal=ld.reduce(function(s,d){return s+(d.total||0);},0), sumPay=ld.reduce(function(s,d){return s+(d.payments||[]).reduce(function(ss,p){return ss+(p.amount||0);},0);},0);
+    var trueInitial=grand-sumDebtTotal;              // المدفوع وقت الشراء
+    var extraCounted=(pu.paid||0)-trueInitial;       // لو purchase.paid اتحدّث بالسداد فده بيساوي المدفوع من الدين
+    if(extraCounted>0.005 && sumPay>0.005){ var d=Math.min(extraCounted,sumPay); dbl.push({purchase:pu.id,supplier:pu.supplier||'',date:pu.date||'',paid_in_purchase:R(pu.paid||0),initial_paid:R(trueInitial),payments_on_debt:R(sumPay),counted_twice:R(d)}); dblSum+=d; }
+  });
+  add('M1','method','سداد ديون موردين مرتبطة بمشتريات بيتخصم من النقدية مرتين',-dblSum,'purchase.paid (بيتحدّث عند السداد) + دفعات الدين (purchLinkedSuppPaidCash) — الاتنين بيتجمعوا في totalInventoryCashOut',dbl);
+  // م١: بضاعة أمانة داخلة بتتحسب مخزون مملوك (بدون أي التزام وقت الاستلام)
+  var consIn=products.filter(function(p){return p.consignment==='in';}).map(function(p){return {id:p.id,name:p.name,party:p.consignment_party||'',qty:p.qty,cost:p.buy_price,value:R((+p.qty||0)*(p.buy_price||0))};});
+  add('M2','method','بضاعة أمانة داخلة لسه ما اتباعتش بتتحسب مخزون مملوك',consIn.reduce(function(s,x){return s+x.value;},0),'invValue بيجمع qty×buy_price لكل المنتجات حتى consignment="in" (مش ملك المحل)',consIn);
+  // م٣: التزامات الشهر المعلّقة (راتب/مصروف ثابت لسه ما اتدفعش) بتتسجّل التزام من غير مصروف
+  var pend=(typeof _pendingFixedCommitments==='function'?_pendingFixedCommitments():[]);
+  add('M3','method','التزامات معلّقة هذا الشهر (رواتب/مصروفات ثابتة) مسجّلة التزام بدون مصروف مقابل',-pend.reduce(function(s,p){return s+p.amount;},0),'pendingTotal داخل totalLiabilities، بينما المصروف مبيتسجّلش في الأرباح لحد ما يتدفع (وبتظهر في الحالي بس مش التاريخي)',pend.map(function(p){return {name:p.name,amount:p.amount};}));
+  // م٤: خسارة متراكمة مخفية
+  var totalDist=((acc.profit_cycles||[]).reduce(function(s,c){return s+(c.distributions||[]).reduce(function(ss,d){return ss+(d.amount||0);},0)+(c.owner_share||0);},0));
+  var hist=sales.reduce(function(s,x){return s+x.total;},0)-salesCost(sales)-(DB.expenses||[]).reduce(function(s,x){return s+x.amount;},0);
+  var x=hist-totalDist;
+  add('M4','method','خسارة متراكمة بتظهر صفر (Math.max(0,…)) فحقوق الملكية مبالغ فيها',-Math.max(0,-x),'undistributedProfit = max(0, الربح التاريخي − الموزّع)',[{profit_all_time:R(hist),distributed:R(totalDist),net:R(x)}]);
+  // م٥: تكاليف إضافية على المشتريات (شحن…) مدفوعة/مستحقة لكن مش في المخزون ولا في المصروفات
+  var ex=purchases.filter(function(p){return (p.extra_cost||0)>0;}).map(function(p){return {purchase:p.id,supplier:p.supplier||'',date:p.date||'',extra_cost:R(p.extra_cost)};});
+  add('M5','method','تكاليف إضافية على المشتريات (شحن/مصاريف) لا تدخل المخزون ولا المصروفات',-ex.reduce(function(s,p){return s+p.extra_cost;},0),'المخزون بيقيّم بـ buy_price (من غير landed) والتكلفة extra_cost بتتدفع/بتتسجّل دين ومفيش مصروف',ex);
+  // م٦: رصيد افتتاحي نقدي بدون مقابل في حقوق الملكية
+  add('M6','method','رصيد افتتاحي نقدي داخل النقدية وغير داخل حقوق الملكية',acc.opening_balance||0,'openingBalance في cashRaw فقط (مش في totalEquity) — بيتغطى فقط لو اتعملت تسوية equity_adjustments',[]);
+
+  // ---- (بيانات / تصنيف) ----
+  var custAll=debts.filter(function(d){return d.type==='customer'&&!d.source_sale_id;});
+  var custMan=custAll.filter(function(d){return !isConsDebt(d);}), custCons=custAll.filter(isConsDebt);
+  var rowsD=function(a){return a.map(function(d){return {id:d.id,name:d.name,desc:d.desc||d.details||'',date:d.date||'',total:R(d.total),paid:R(d.paid||0),remaining:R(remD(d))};});};
+  add('D1','data','ديون عملاء يدوية (بدون فاتورة بيع) — أصل بدون إيراد/مقابل',custMan.reduce(function(s,d){return s+(d.total||0);},0),'custDebt بيجمع كل ديون العملاء، والدين اليدوي مالوش إيراد (حركة نقدية الدفع بتتحسب custCollected فمحايدة)',rowsD(custMan));
+  add('D2','data','ديون عملاء ناتجة عن أمانة خارجة (بدون فاتورة بيع) — أصل بسعر البيع بدون إيراد',custCons.reduce(function(s,d){return s+(d.total||0);},0),'saveConsignmentOutSale بتعمل دين فقط؛ وتكلفة الصنف اللي خرج بتظهر في D9 كنقص مخزون غير موثّق (سالب)',rowsD(custCons));
+  var suppAll=debts.filter(function(d){return d.type==='supplier'&&!isPurch(d);});
+  var suppCons=suppAll.filter(isConsDebt), suppMan=suppAll.filter(function(d){return !isConsDebt(d);});
+  add('D3','data','ديون موردين يدوية (بدون مشترى) — التزام بدون أصل/مصروف',-suppMan.reduce(function(s,d){return s+(d.total||0);},0),'suppDebt بيجمع كل ديون الموردين، والدين اليدوي مالوش مخزون ولا مصروف يقابله',rowsD(suppMan));
+  add('D4','data','ديون موردين ناتجة عن بيع بضاعة أمانة (بدون فاتورة شراء) — معلومة فقط',0,'متوازنة (التكلفة اتسجّلت في الأرباح عند البيع والالتزام قابله)؛ الخلل الفعلي في بضاعة الأمانة غير المباعة وهو م٢',rowsD(suppCons));
+  var rec=(acc.receivables||[]).filter(function(r){return r.status==='pending';});
+  add('D5','data','مستحقات معلّقة — أصل من طرف واحد (بدون إيراد ولا مقابل في حقوق الملكية)',rec.reduce(function(s,r){return s+(r.amount||0);},0),'rec داخل totalCurrent بدون أي قيد مقابل',rec.map(function(r){return {id:r.id,name:r.name,amount:R(r.amount),due:r.due_date||''};}));
+  // فواتير: متبقي بدون دين / فرق بين الفاتورة والدين
+  var sg=[],sgSum=0;
+  sales.forEach(function(s){ var unpaid=(s.total||0)-(s.paid||0); var ld=linkedDebtsOfSale(s.id); var remL=ld.reduce(function(a,d){return a+remD(d);},0); var gap=unpaid-remL; if(Math.abs(gap)>0.5){ sg.push({sale:s.id,date:s.date||'',customer:s.customer||'',total:R(s.total),paid:R(s.paid||0),unpaid:R(unpaid),linked_debt_remaining:R(remL),gap:R(gap)}); sgSum+=gap; } });
+  add('D6','data','فواتير فيها متبقي غير مطابق لرصيد الدين المرتبط (أو بدون دين أصلًا)',-sgSum,'الإيراد دخل بالكامل (sale.total) لكن الأصل (دين العميل) ناقص/زايد عن (total − paid)',sg);
+  // مشتريات: عناصر مش داخلة المخزون
+  var nos=[],nosSum=0;
+  purchases.forEach(function(pu){ (pu.items||[]).forEach(function(it){ if(!it.productId||it.productId==='__new__'){ var v=(it.qty||0)*(it.price||0); nosSum+=v; nos.push({purchase:pu.id,date:pu.date||'',name:it.name||'',qty:it.qty,price:it.price,value:R(v)}); } }); });
+  add('D7','data','بنود شراء مش مربوطة بصنف في المخزون (فلوس خرجت بدون أصل ولا مصروف)',-nosSum,'items.productId فاضي أو __new__ بدون addToStock',nos);
+  // بنود بيع من غير سعر تكلفة
+  var nc=[],ncSum=0;
+  sales.forEach(function(s){ (s.items||[]).forEach(function(it){ var c=it.buyPrice||it.buy_price||0; if(!(c>0)&&(it.qty||0)>0){ var pr=products.find(function(p){return p.id===it.productId;}); var est=pr?(it.qty||0)*(pr.buy_price||0):0; if(est>0){ ncSum+=est; nc.push({sale:s.id,date:s.date||'',item:it.name||(pr&&pr.name)||'',qty:it.qty,estimated_cost:R(est)}); } } }); });
+  add('D8','data','بنود بيع بدون تكلفة مسجّلة (التكلفة خرجت من المخزون ومدخلتش الأرباح) — تقدير',-ncSum,'saleCost بيجمع items.buyPrice وده صفر؛ المخزون اتخصم فعليًا بالكمية (تقدير بتكلفة الصنف الحالية)',nc);
+
+  // ---- مطابقة فواتير الشراء: المدفوع والمتبقي والديون المرتبطة ----
+  var ptab=[],d11=0;
+  purchases.forEach(function(pu){
+    var ld=linkedDebtsOfPurchase(pu.id), grand=(pu.total||0)+(pu.extra_cost||0);
+    var remL=ld.reduce(function(s,d){return s+remD(d);},0), payL=ld.reduce(function(s,d){return s+(d.payments||[]).reduce(function(ss,p){return ss+(p.amount||0);},0);},0), debtTotal=ld.reduce(function(s,d){return s+(d.total||0);},0);
+    var trueInitial=grand-debtTotal, dblp=0;
+    if(ld.length){ var extraCounted=(pu.paid||0)-trueInitial; if(extraCounted>0.005&&payL>0.005) dblp=Math.min(extraCounted,payL); }
+    var gap=grand-(pu.paid||0)-payL-remL+dblp;   // المتبقي من المشترى اللي مش مغطّى بدين ولا بدفع (لو مش صفر = عدم اتساق)
+    d11+=gap;
+    var firstTs=''; 
+    ptab.push({purchase:pu.id,date:pu.date||'',supplier:pu.supplier||'',grand_total:R(grand),extra_cost:R(pu.extra_cost||0),paid_field:R(pu.paid||0),linked_debts:ld.length,linked_debt_total:R(debtTotal),linked_payments:R(payL),linked_remaining:R(remL),counted_cash_out:R((pu.paid||0)+payL),true_cash_out:R(grand-remL),double_counted:R(dblp),uncovered_gap:R(gap)});
+  });
+  var d11rows=ptab.filter(function(r){return Math.abs(r.uncovered_gap)>0.5;});
+  add('D11','data','فواتير شراء فيها جزء غير مدفوع وغير مغطّى بدين (أو العكس) — عدم اتساق بين المشترى والدين',d11,'grand − paid − دفعات الدين − متبقي الدين (+ العدّ المزدوج م١). لو مش صفر: المخزون دخل ومفيش دفع أو التزام مقابل',d11rows);
+  var orphanTxt=debts.filter(function(d){return d.type==='supplier'&&!d.source_purchase_id&&String(d.details||d.desc||'').indexOf('مشترى — ')===0;});
+  add('D12','data','ديون موردين متعرّف عليها كمشتريات بالنص فقط (من غير source_purchase_id) — مش مربوطة بفاتورة',-orphanTxt.reduce(function(s,d){return s+(d.total||0);},0),'الكود بيعاملها مشتريات (نقدية/التزام) لكن مش بيربطها بفاتورة محددة؛ بتتعادل مع D11 للمشترى المقابل لو موجود',rowsD(orphanTxt));
+  var saleIds={}; sales.forEach(function(s){saleIds[s.id]=1;});
+  var orphSale=debts.filter(function(d){return d.type==='customer'&&d.source_sale_id&&!saleIds[d.source_sale_id];});
+  add('D13','data','ديون عملاء مربوطة بفاتورة بيع اتحذفت (دين يتيم)',orphSale.reduce(function(s,d){return s+remD(d);},0),'الأصل (المتبقي) موجود لكن الفاتورة/الإيراد اتحذفوا',rowsD(orphSale));
+  // ---- مطابقة المخزون صنف بصنف (تقدير) ----
+  var pq={},sq={},wq={},kq={};
+  purchases.forEach(function(pu){(pu.items||[]).forEach(function(it){ if(it.productId&&it.productId!=='__new__') pq[it.productId]=(pq[it.productId]||0)+(it.qty||0); });});
+  sales.forEach(function(s){(s.items||[]).forEach(function(it){ var id=it.productId||it.product_id; if(id) sq[id]=(sq[id]||0)+(it.qty||0); });});
+  (DB.part_withdrawals||[]).forEach(function(w){ var id=w.product_id||w.productId; if(id) wq[id]=(wq[id]||0)+(w.qty||0); });
+  (DB.stocktakes||[]).forEach(function(st){ if(!(st.status==='approved'||st.approved_at||st.status==='closed')) return; (st.items||[]).forEach(function(it){ if(it.confirmed===false) return; var id=it.productId; if(id&&it.counted_qty!=null&&it.system_qty!=null) kq[id]=(kq[id]||0)+(it.counted_qty-it.system_qty); }); });
+  var firstPurch={};
+  purchases.forEach(function(pu){(pu.items||[]).forEach(function(it){ if(it.productId&&it.productId!=='__new__'){ var d=pu.date||''; if(d&&(!firstPurch[it.productId]||d<firstPurch[it.productId])) firstPurch[it.productId]=d; } });});
+  var inv=[],invSum=0;
+  products.forEach(function(p){
+    if(p.consignment==='in') return; // بند م٢
+    var documented=(pq[p.id]||0)-(sq[p.id]||0)-(wq[p.id]||0)+(kq[p.id]||0);
+    var resid=(+p.qty||0)-documented;
+    if(Math.abs(resid)>0.0005){ var v=resid*(p.buy_price||0); invSum+=v; inv.push({id:p.id,name:p.name,source:p.source||'',created:p.created_at||'',first_purchase_date:firstPurch[p.id]||'',qty_now:p.qty,purchased:pq[p.id]||0,sold:sq[p.id]||0,withdrawn:wq[p.id]||0,stocktake_adj:kq[p.id]||0,undocumented_qty:R(resid),cost:p.buy_price||0,undocumented_value:R(v)}); }
+  });
+  inv.sort(function(a,b){return Math.abs(b.undocumented_value)-Math.abs(a.undocumented_value);});
+  var openDecl=acc.opening_inventory_value||0;
+  add('D9','data','مخزون غير موثّق بفواتير/جرد (تقدير) — دخل بدون مشترى مسجّل',invSum,'(الكمية الحالية) − (مشتريات − مبيعات − سحب قطع ± جرد معتمد) × سعر الشراء. بيشمل أي مصدر ما بيتتبعوش الكود (رصيد افتتاحي، خردة، مرتجع، تعديل يدوي)',inv);
+  add('D10','data','"مخزون يدوي" معلن في الإعدادات (بيتخصم من النقدية عشان يقابل D9)',-openDecl,'openingInventoryValue بيتخصم من cashRaw',[]);
+  // ---- تسويات يدوية ----
+  var eqAdj=(acc.equity_adjustments||[]);
+  add('A1','manual','تسويات حقوق ملكية (بما فيها تسوية فرق الميزانية التلقائية)',-(B.equityAdj||0),'equityAdj داخل totalEquity — لو فيه تسويات سابقة بتخفي جزء من الفرق',eqAdj.map(function(a){return {date:a.date||'',amount:R(a.amount),note:a.note||a.reason||a.label||''};}));
+  add('A2','manual','أرباح محتجزة يدوية للمالك (ownerRetained)',-(B.ownerRetained||0),'acc.retained_earnings.owner داخل حقوق الملكية بدون أصل مقابل',[]);
+
+
+  // ---- مطابقة المستثمرين ----
+  var invAudit={partnership:[],batch:[],totals:{}};
+  var re=acc.retained_earnings||{owner:0,investors:{}}, cycles=acc.profit_cycles||[];
+  var pTot={contrib:0,capret:0,profwd:0,accrued:0,storedRetained:0,expectedRetained:0};
+  (acc.investors||[]).forEach(function(iv){
+    var contrib=(iv.capital_contributions||[]).reduce(function(s,c){return s+(c.amount||0);},0);
+    var capret=(iv.withdrawals||[]).filter(function(w){return w.type==='capital_return';}).reduce(function(s,w){return s+(w.amount||0);},0);
+    var profwd=(iv.withdrawals||[]).filter(function(w){return w.type!=='capital_return';}).reduce(function(s,w){return s+(w.amount||0);},0);
+    var accrued=cycles.reduce(function(s,c){return s+(c.distributions||[]).filter(function(d){return d.investor_id===iv.id;}).reduce(function(ss,d){return ss+(d.amount||0);},0);},0);
+    var stored=(re.investors||{})[iv.id]||0, expected=accrued-profwd;
+    invAudit.partnership.push({id:iv.id,name:iv.name||'',contributions:R(contrib),capital_returned:R(capret),profit_withdrawn:R(profwd),profit_accrued_in_cycles:R(accrued),retained_stored:R(stored),retained_expected:R(expected),retained_difference:R(stored-expected),capital_remaining:R(contrib-capret),owed_to_investor:R(contrib-capret+stored)});
+    pTot.contrib+=contrib;pTot.capret+=capret;pTot.profwd+=profwd;pTot.accrued+=accrued;pTot.storedRetained+=stored;pTot.expectedRetained+=expected;
+  });
+  try{ _invList().forEach(function(iv){ var T=_invStats(iv,null).T; invAudit.batch.push({id:iv.id,name:iv.name||'',deposited:R(T.dep),profit_share:R(T.share),profit_withdrawn:R(T.pw),capital_returned:R(T.cr),capital_remaining:R(T.capRem),profit_remaining:R(T.profRem),owed:R(T.owed),capital_in_goods:R(T.remCost),cash_unspent:R(T.capCash)}); }); }catch(eIn){ invAudit.batch_error=String(eIn&&eIn.message||eIn); }
+  invAudit.totals={partnership_capital_in_balance_sheet:R(pTot.contrib-pTot.capret),partnership_retained_stored:R(pTot.storedRetained),partnership_retained_expected:R(pTot.expectedRetained),partnership_retained_difference:R(pTot.storedRetained-pTot.expectedRetained),
+    batch_due_in_balance_sheet:R(B.batchInvDue),batch_capital_in_equity:R(B.invCapital-(pTot.contrib-pTot.capret))};
+  var allInvIds={}; (acc.investors||[]).forEach(function(iv){allInvIds[iv.id]=1;}); Object.keys(re.investors||{}).forEach(function(k){allInvIds[k]=1;});
+  var a3rows=[],a3=0;
+  Object.keys(allInvIds).forEach(function(id){
+    var iv=(acc.investors||[]).find(function(x){return x.id===id;})||{name:'(مستثمر محذوف)'};
+    var accrued=cycles.reduce(function(s,c){return s+(c.distributions||[]).filter(function(d){return d.investor_id===id;}).reduce(function(ss,d){return ss+(d.amount||0);},0);},0);
+    var profwd=(iv.withdrawals||[]).filter(function(w){return w.type!=='capital_return';}).reduce(function(s,w){return s+(w.amount||0);},0);
+    var stored=(re.investors||{})[id]||0, diffI=stored-(accrued-profwd);
+    if(Math.abs(diffI)>0.005){ a3+=diffI; a3rows.push({id:id,name:iv.name||'',retained_stored:R(stored),accrued_in_cycles:R(accrued),profit_withdrawn:R(profwd),expected:R(accrued-profwd),difference:R(diffI)}); }
+  });
+  add('A3','manual','أرباح مستثمري الشراكة المحتجزة: المسجّل ≠ (الموزّع في الدورات − المسحوب) — الفرق التزام بدون أصل/توزيع مقابل',-a3,'المتوافق متعادل مع التوزيعات (مش بند)، والفرق بس هو اللي بيكسر التوازن',a3rows);
+  var sum=0; items.forEach(function(i){sum+=i.value;});
+  var diff=R(B.diff), unexplained=R(diff-sum);
+
+  var byCode={}; items.forEach(function(i){byCode[i.code]=i.value;});
+  var preview=[
+    {fix:'تصحيح العدّ المزدوج لسداد ديون الموردين (م١)',diff_after:R(diff-(byCode.M1||0))},
+    {fix:'م١ + استبعاد الأمانة الداخلة من المخزون (م٢)',diff_after:R(diff-(byCode.M1||0)-(byCode.M2||0))},
+    {fix:'م١ + م٢ + إظهار الخسارة المتراكمة (م٤)',diff_after:R(diff-(byCode.M1||0)-(byCode.M2||0)-(byCode.M4||0))}
+  ];
+  var groups={method:0,data:0,manual:0}; items.forEach(function(i){groups[i.group]+=i.value;});
+  return {generated_at:new Date().toISOString(),app_version:APP_VERSION,read_only:true,
+    statement:{cash:R(B.cash),inventory:R(B.inventory),customer_receivables:R(B.custDebt),receivables_screen:R(B.rec),fixed_assets:R(B.fixedAssets),total_assets:R(B.totalAssets),
+      supplier_debts:R(B.suppDebt),pending_commitments:R(B.pendingTotal),batch_investor_due:R(B.batchInvDue),investor_retained_liability:R(B.invRetained),total_liabilities:R(B.totalLiabilities),
+      owner_capital:R(B.ownerCapital),investor_capital:R(B.invCapital),retained_earnings:R(B.retainedEarnings),owner_retained:R(B.ownerRetained),equity_adjustments:R(B.equityAdj),total_equity:R(B.totalEquity),
+      total_liab_equity:R(B.totalLiabEquity),difference:diff},
+    purchases_reconciliation:ptab,investors:invAudit,contributions:items,groups:{method:R(groups.method),data:R(groups.data),manual:R(groups.manual)},explained:R(sum),unexplained:unexplained,preview_after_proposed_fixes:preview,
+    cash_components:{collected_on_sales:R(B.totalCollected),capital_in:R(B.capitalIn),manual_customer_collections:R(B.custCollected),opening_balance:R(B.openingBalance),
+      inventory_cash_out:R(B.totalInventoryCashOut),purchases_paid_field:R(B.purchasesCashPaid),linked_supplier_payments:R(B.purchLinkedSuppPaidCash),opening_inventory_declared:R(B.openingInventoryValue),manual_supplier_payments:R(B.suppManualPaidOut),
+      expenses_cash:R(B.totalPaidOutCash),fixed_assets_deducted_in_full:R(B.fixedAssets),owner_draws:R(B.ownerDrawsOut),investor_withdrawals:R(B.invWithdrawsOut)},
+    notes:['الفرق = الأصول − (الالتزامات + حقوق الملكية). موجب: أصول أكتر من المصادر. سالب: التزامات/حقوق أكتر من الأصول.','البند "غير مُفسَّر" هو الباقي بعد البنود المعروفة، ومتحطش في أي حساب.','بنود D9 (مخزون غير موثّق) وD8 تقديرية وبتعتمد على اكتمال الفواتير.','معاينة التصحيحات (preview_after_proposed_fixes) حساب حسابي من نفس البنود، ومفيش أي معادلة اتغيّرت.']};
+}
+function __auditBalanceSheetRender(){
+  if(!window.__isOwner && !__hasPerm('accounting','can_select')){ __permDeny('accounting','ins'); return; }
+  var A=__auditBalanceSheet(), f=function(n){return (typeof fmt==='function'?fmt(n):String(n));}, e=esc;
+  var grp={method:'🔧 طريقة الحساب (تصميم الكود)',data:'🗂️ بيانات/تصنيف (إدخال يدوي أو دوال بتسجّل من طرف واحد)',manual:'✍️ تسويات يدوية موجودة'};
+  var col=function(v){return v>0?'#b45309':(v<0?'#1d4ed8':'#64748b');};
+  var html='<div style="font-size:12px;line-height:1.8">'+
+    '<div style="background:#ecfdf5;border-radius:10px;padding:8px 10px;margin-bottom:8px">🔒 <b>قراءة فقط</b> — مفيش أي بيانات اتغيّرت ولا تسوية اتعملت.</div>'+
+    '<div style="background:#f8fafc;border-radius:10px;padding:8px 10px;margin-bottom:8px"><b>الميزانية الحالية:</b><br>الأصول '+f(A.statement.total_assets)+' | الالتزامات '+f(A.statement.total_liabilities)+' | حقوق الملكية '+f(A.statement.total_equity)+'<br><b style="color:'+(Math.abs(A.statement.difference)>0.5?'#dc2626':'#16a34a')+'">الفرق = '+f(A.statement.difference)+'</b> ('+(A.statement.difference>0?'الأصول أكبر':A.statement.difference<0?'الالتزامات+الملكية أكبر':'متوازنة')+')</div>';
+  ['method','data','manual'].forEach(function(g){
+    var its=A.contributions.filter(function(i){return i.group===g&&(Math.abs(i.value)>0.004||i.count);});
+    html+='<div style="font-weight:800;margin:10px 0 4px">'+grp[g]+' — الإجمالي <span style="color:'+col(A.groups[g])+'">'+f(A.groups[g])+'</span></div>';
+    if(!its.length) html+='<div style="color:#64748b">لا يوجد</div>';
+    its.forEach(function(i){
+      html+='<div style="border:1px solid #e2e8f0;border-radius:9px;padding:7px 9px;margin-bottom:5px"><b>'+e(i.code)+'</b> — '+e(i.title)+': <b style="color:'+col(i.value)+'">'+f(i.value)+'</b>'+(i.count?' <span style="color:#64748b">('+i.count+' سجل)</span>':'')+
+        '<div style="color:#64748b;font-size:11px">'+e(i.formula)+'</div></div>';
+    });
+  });
+  html+='<div style="font-weight:800;margin:10px 0 4px">🔮 معاينة (حساب فقط — مفيش تنفيذ):</div>'+A.preview_after_proposed_fixes.map(function(p){return '<div style="font-size:11px;color:#475569">• '+e(p.fix)+' ← الفرق يبقى <b>'+f(p.diff_after)+'</b></div>';}).join('')+
+    '<div style="font-weight:800;margin:10px 0 4px">👥 المستثمرون (شراكة): الفرق بين المحتجز المسجّل والمتوقع = <span style="color:'+(Math.abs(A.investors.totals.partnership_retained_difference)>0.5?'#dc2626':'#16a34a')+'">'+f(A.investors.totals.partnership_retained_difference)+'</span></div>'+
+    '<div style="background:'+(Math.abs(A.unexplained)>0.5?'#fef2f2':'#ecfdf5')+';border-radius:10px;padding:8px 10px;margin-top:10px"><b>مجموع البنود المعروفة: '+f(A.explained)+'</b><br><b>الباقي غير المُفسَّر: '+f(A.unexplained)+'</b> (مش متسجّل في أي حساب — محتاج مراجعة يدوية)</div>'+
+    '<div class="modal-actions" style="margin-top:10px"><button class="btn btn-green btn-full" onclick="__auditBalanceSheetExport()">⬇️ نزّل التقرير الكامل (JSON) وابعته لي</button><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div></div>';
+  document.getElementById('modal-title').textContent='🔎 مطابقة المركز المالي (قراءة فقط)';
+  document.getElementById('modal-body').innerHTML=html;
+  openModal();
+}
+function __auditBalanceSheetExport(){
+  if(!window.__isOwner && !__hasPerm('accounting','can_select')){ __permDeny('accounting','ins'); return; }
+  var A=__auditBalanceSheet();
+  var blob=new Blob([JSON.stringify(A,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+  a.href=url;a.download='balance-audit-'+today()+'.json';a.click();setTimeout(function(){URL.revokeObjectURL(url);},4000);
+  showToast('✅ اتنزّل تقرير المطابقة (قراءة فقط)','#16a34a');
+}
+
 var __CSV_SECTIONS={sales:'المبيعات',purchases:'المشتريات',debts:'الديون',expenses:'المصروفات',products:'المخزون',movements:'الأعطال والتحركات',part_withdrawals:'سحب القطع',tasks:'المهام'};
 function exportSectionCSV(kind){
   if(!__CSV_SECTIONS[kind]) return;
@@ -23812,6 +24088,7 @@ function exportCSV(){
 }
 
 async function clearAllData(){
+  var __wb=__makeSafetyBackup('wipe'); if(!__wb.ok){ showToast('❌ مقدرتش آخد نسخة أمان قبل المسح فالمسح اتلغى (ماتغيّرش حاجة)','#dc2626'); return; } // ⚠️ v311
   DB.products=[];DB.sales=[];DB.purchases=[];DB.expenses=[];
   DB.debts=[];DB.tasks=[];DB.movements=[];
   DB.archive={customers:[],suppliers:[],products:[],expDescs:[],serials:[],models:[]};
@@ -23827,7 +24104,7 @@ async function clearAllData(){
   DB.daily_archive=[];
   DB.stocktakes=[];
   await persist();renderHome();navigate('home');
-  showToast('🗑️ تم مسح كل البيانات','#64748b');
+  showToast('🗑️ تم مسح كل البيانات — نسخة الأمان '+(__wb.where==='local'?'محفوظة في الجهاز (استرجعها بالاستيراد)':'اتنزّلت كملف'),'#64748b');
 }
 
 
@@ -28520,6 +28797,7 @@ async function saveProfitCycle(skipOverlap){
   // ⚠️ v262 — تاريخ التوزيع + فحص الفترة + منع تكرار نفس الفترة من غير تأكيد
   var distDate=v('pc-date')||today();
   if(distDate>today())return showToast('⚠️ تاريخ التوزيع في المستقبل','#dc2626');
+  if(_invGuard(distDate))return; // ⚠️ v312 — منع إنشاء دورة بتاريخ داخل شهر مقفول (كان الفحص في وضع التعديل بس)
   var pr=_pcRangeNow();
   if(pr.from&&pr.to&&pr.from>pr.to)return showToast('⚠️ بداية الفترة بعد نهايتها','#dc2626');
   if(skipOverlap!==true){
@@ -29388,6 +29666,8 @@ var __PERM_MAP_V310={
   saveRemindPhone:[['clients_ledger','upd']], _mfJoin:[['clients_ledger','upd']], _applySchedDragOrder:[['movements','upd']],
   restoreSchedFromFile:[['movements','upd']], restoreSchedPick:[['movements','upd']], restoreSchedSnapshot:[['movements','upd']],
   // ⚠️ v310 — المستثمرين ودورات الأرباح وراس المال: كانت من غير أي حارس جوه الدالة (الواجهة بس) — دلوقتي بتتفحص بصلاحيات "الحسابات"
+  confirmMarkLeave:[['accounting','ins']], // ⚠️ v312 — كانت بتكتب في الحسابات من غير حارس
+  startVisit:[['movements','upd']], endVisit:[['movements','upd']], deleteVisitLog:[['movements','upd']], // ⚠️ v311 — كانت بتعدّل محليًا قبل ما dbUpdate يرفض
   saveNewInvestor:[['accounting','ins']], saveEditInvestor:[['accounting','upd']], delInvestor:[['accounting','del']], saveInvestorWithdraw:[['accounting','ins']],
   saveAddCapital:[['accounting','ins']], saveProfitCycle:[['accounting','ins']], deleteProfitCycle:[['accounting','del']],
   _invBatchSave:[['accounting','ins']], _invBatchClose:[['accounting','upd']], _invBatchDel:[['accounting','del']]
@@ -29449,7 +29729,7 @@ var __OWNER_ONLY_FUNCS=['_invRestoreBackup','__approveJoin','__resetRoleToDefaul
   // ⚠️ v310 — حراس صامتة للدوال التلقائية/الداخلية: كانت بتعدّل الذاكرة المحلية لأي موظف (حتى من غير صلاحية) وبعدين dbUpdate يرفض الرفع فيحصل اختلاف بين الجهاز والسيرفر.
   // دلوقتي بتتجاهل التنفيذ بهدوء (من غير رسالة) لو المستخدم مالوش الصلاحية.
   var SILENT={autoMoveToStock:[['movements','upd']],autoRolloverStale:[['movements','upd']],archiveOldDailyLists:[['movements','upd']],
-              saveBalanceSnapshot:[['accounting','ins']],saveInventorySnapshot:[['accounting','ins']]};
+              saveBalanceSnapshot:[['accounting','ins']],saveInventorySnapshot:[['accounting','ins']],_visitEndSilently:[['movements','upd']]};
   function silentAllowed(t,a){
     if(a==='ins') return __hasPerm(t,'can_insert')||__hasPerm(t,'can_update');
     if(a==='upd') return __hasPerm(t,'can_update');
