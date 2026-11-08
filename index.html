@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v316</title>
+<title>ابو حوده الحلو الجميل v319</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="v316 — ٢٦ جمادى الأولى ١٤٤٨ هـ";
+<script>/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="v319 — ٢٧ جمادى الأولى ١٤٤٨ هـ";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -92,6 +92,9 @@
     36) ⚠️ v306 — المستثمرين: أي عملية مستثمر (إيداع/سحب/رد رأس مال/دفعة/دورة توزيع/مستثمر) لازم تعدّي بالترتيب: _invGuard(تاريخ العملية) ← _invBackup(سبب) ← التعديل ← _invAudit(...) ← persist. ممنوع تعديل نسبة أو تكلفة دفعة اتباع منها (النسبة بتتغيّر بـ pct_hist بتاريخ سريان عن طريق _invPctAt، والتكلفة بدفعة جديدة). ممنوع حذف دفعة عليها مبيعات أو مستثمر عليه حركات (أرشفة بدل الحذف). إقفال الشهر لازم يثبّت لقطة (_invTakeSnapshot) وأي دالة مستثمرين جديدة لازم تتضاف في __ONCE_GUARDED.
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v319: [🛠️ إصلاح جذري في تعديل المشترى بعد سداد جزئي لدين المورد: كان بيصغّر إجمالي الدين (دين 60 اتسدد 20 يبقى 40 والمتبقي 20 بدل 40) ويرجّع العدّ المزدوج في النقدية — دلوقتي الدين = المتبقي + اللي اتسدد، والمشتريات القديمة (قبل v250) محمية • اختبار شامل للعمليات المالية الحقيقية (شراء/تعديل/سداد/بيع/تحصيل/حذف)]
+v318: [🏦 الميزانية: الشحن جوه قيمة المخزون (landed_cost) — مخزون البضاعة بالتكلفة شاملة الشحن • الالتزامات المعلّقة (إيجار/مرتبات ثابتة) خرجت من الخصوم وبتظهر كملاحظة «التزامات قادمة» • تحديث أداة المطابقة (م٣/م٥) — الشاشات التانية للمخزن ورأس المال ما اتغيّرتش]
+v317: [🧮 إصلاح العدّ المزدوج لسداد ديون الموردين المرتبطة بمشتريات (النقدية كانت بتخصم الدفعة مرتين) — المعادلة في _computeBalanceSheet • 📊 إحصائيات ماكينات الاسكراب (عدد المبيعات/الثمن/الإيراد/استرداد الثمن/الربح بعده) • 🤝 كشف المستثمر: «الأرباح + رأس المال المتاح» + زرار تسجيل رأس المال المودع + تسمية أزرار الإضافة]
 v316: [📜 المستثمرين: عقد مستثمر بضاعة (نسبة بالكسور ربع/ثلث/نص + تاريخ العقد + رأس المال المتفق + شرح محاسبي) • 🧾 كشف المستثمر الملخّص (تكلفة المبيعات / رأس المال المتبقي والمتاح / الأرباح / تكلفة المبيعات+نصيبه) وجدول كشف مضغوط • 🤝 الفاتورة: الصنف المربوط بدفعة مستثمر يتحسب عليه افتراضيًا + سؤال لو عندك بضاعة خاصة من نفس الصنف + تنبيه وتقسيم السطر لو الكمية زادت عن المتاح + ⚙️ إعداد (تلقائي/اسألني/يدوي) • إصلاح BUILD_STAMP القديم (v302) وتاريخه بالهجري — مفيش أي تغيير في معادلات الربح أو المخزون أو الميزانية]
 v315: [🔎 أداة مطابقة المركز المالي (قراءة فقط) — مُعايَرة على بيانات حقيقية: مطابقة الأصناف بالاسم، لقطة افتتاحية، ماكينات خردة، وعدّ مزدوج شامل للمشتريات — مفيش أي تغيير في أي معادلة أو رصيد]
      ✚ مطابقة فواتير الشراء (إجمالي/مدفوع/ديون مرتبطة/متبقي/عدّ مزدوج/جزء غير مغطّى)، وديون موردين متعرّف عليها بالنص بس، وديون عملاء يتيمة (فاتورتها اتحذفت)، ومطابقة المستثمرين (شراكة + بضاعة: مساهمات/أرباح مستحقة/محتجز مسجّل مقابل المتوقع)، وتاريخ أول دخول لكل صنف، ومعاينة حسابية لأثر التصحيحات المقترحة على الفرق.
@@ -5677,9 +5680,9 @@ var APP_TITLE=APP_CONFIG.name;
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=316;
+var APP_VERSION=319;
 // ⚠️ v303 — BUILD_STAMP كان مش متعرّف خالص (شاشة الإعدادات كانت بتعرض "?") — اتعرّف دلوقتي وبيتزود مع كل تحديث
-var BUILD_STAMP='v316 — ٢٦ جمادى الأولى ١٤٤٨ هـ';
+var BUILD_STAMP='v319 — ٢٧ جمادى الأولى ١٤٤٨ هـ';
 // ⚠️ v295 — عنوان الصفحة كان رقم نسخته ثابت ومتنسي (فضل v294 مع إن النسخة اتغيّرت). دلوقتي بياخد الرقم من APP_VERSION دايمًا.
 try{document.title=document.title.replace(/v\d+\s*$/,'v'+APP_VERSION);}catch(_eT){}
 
@@ -7384,6 +7387,9 @@ function saleItemsSubtotal(items){return money((items||[]).reduce(function(t,i){
 function purchItemsSubtotal(items){return money((items||[]).reduce(function(t,i){return t+(+i.qty||0)*(+i.price||0);},0));}
 function saleCost(sale){return money(((sale&&sale.items)||[]).reduce(function(t,i){return t+(+i.qty||0)*(i.buyPrice||i.buy_price||0);},0));}
 function invValue(products){return money((products||[]).reduce(function(t,p){return t+(+p.qty||0)*(p.buy_price||0);},0));}
+// ⚠️ v318 — قيمة المخزون بالتكلفة بعد الشحن (landed_cost) — بتُستخدم في الميزانية بس. الشحن تكلفة مخزون بيتوزع على الأصناف ويتخصم مع البيع (نفس buyPrice سطر الفاتورة)،
+// فلازم يبقى جوه قيمة المخزون الباقي وإلا الميزانية بتنقص بقيمته. باقي الشاشات (مخزن/رأس المال) فضلت بسعر الشراء زي ما هي.
+function invValueLanded(products){return money((products||[]).reduce(function(t,p){return t+(+p.qty||0)*((p.landed_cost||p.buy_price)||0);},0));}
 function isPaidUp(paid,total){return (+paid||0)>=money(total)-0.005;}
 // ⚠️ v299 — كشف تكرار الفاتورة (بصمة: عميل + مبلغ + مدفوع + أصناف) خلال ٣ دقايق
 function _saleDupSig(customer,total,paid,items){
@@ -12975,7 +12981,13 @@ async function savePurchase(){
       await dbUpdate('purchases',_purchId,{supplier_id:supObj.id});
     }
     if(linkedDebt){
-      var newTotal=Math.max(newDebtAmount,linkedDebt.paid||0);
+      // ⚠️ v319 — إصلاح جذري: purchase.paid (من v250) بيشمل دفعات الدين، فحقل «المدفوع» في شاشة التعديل بيظهر بالإجمالي. القديم كان بيحسب الدين = الإجمالي − المدفوع
+      // (المتبقي بس) فبيصغّر إجمالي الدين بقيمة اللي اتسدد (مثال: دين 60 اتسدد منه 20 → بعد أي تعديل بقى 40 والمتبقي 20 بدل 40) ويرجّع العدّ المزدوج في النقدية.
+      // الصح: إجمالي الدين = المتبقي + اللي اتسدد. لو المشترى قديم (قبل v250) وpaid مش شاملة الدفعات بنسيب الحساب القديم.
+      var _lp=linkedDebt.paid||0;
+      var _impliedInit=Math.round((oldGrandTotal-(linkedDebt.total||0))*100)/100;
+      var _paidIncludesPay=_lp>0.005&&Math.abs((oldPaidAtPurchase-_impliedInit)-_lp)<0.01;
+      var newTotal=_paidIncludesPay?Math.round((newDebtAmount+_lp)*100)/100:Math.max(newDebtAmount,_lp);
       var updDebt=Object.assign({},linkedDebt,{name:supplier,supplier_id:supObj?supObj.id:linkedDebt.supplier_id,source_purchase_id:_purchId,total:newTotal,date:v('purch-date'),details:'مشترى — '+v('purch-date'),desc:'مشترى — '+v('purch-date')});
       DB.debts=replaceRow(DB.debts,linkedDebt.id,updDebt);
       await dbUpdate('debts',linkedDebt.id,updDebt);
@@ -16150,13 +16162,13 @@ function renderPartsNeeded(){
 // ===== ⚠️ v302 — ملخص الماكينة + إعادة الفتح =====
 // ملحوظة: لو نفس المنتج اتدمج من أكتر من ماكينة (بالاسم)، المبيع بيتوزّع على القطعة بحد أقصى كميتها المستخرجة من الماكينة دي (تقريب).
 function _scrapMachineStats(m){
-  var price=+m.buy_price||0,rev=0,soldQty=0,extractedQty=0,stockQty=0,stockSell=0,stockCost=0;
+  var price=+m.buy_price||0,rev=0,soldQty=0,extractedQty=0,stockQty=0,stockSell=0,stockCost=0,allSales={};
   var rows=(m.parts_extracted||[]).map(function(p){
     var prod=p.productId?DB.products.find(function(x){return x.id===p.productId;}):null;
     var qtyOut=0,revenue=0;
     (DB.sales||[]).forEach(function(s){(s.items||[]).forEach(function(it){
       var match=prod?(it.productId===prod.id):(it.fromScrap&&normalizeAr(it.name)===normalizeAr(p.name));
-      if(match){qtyOut+=(+it.qty||0);revenue+=(+it.qty||0)*(+it.price||0);}
+      if(match){qtyOut+=(+it.qty||0);revenue+=(+it.qty||0)*(+it.price||0);allSales[s.id]=1;}
     });});
     var ext=+p.qty||0;
     if(qtyOut>ext){revenue=ext>0?revenue*ext/qtyOut:0;qtyOut=ext;}
@@ -16165,7 +16177,32 @@ function _scrapMachineStats(m){
     extractedQty+=ext;soldQty+=qtyOut;rev+=revenue;stockQty+=inStock;stockSell+=inStock*sellP;stockCost+=inStock*(prod?(+prod.buy_price||0):0);
     return {name:p.name,extracted:ext,sold:qtyOut,revenue:money(revenue),inStock:inStock,cost:+p.buy_price||0,sell:sellP};
   });
-  return {price:price,rev:money(rev),soldQty:soldQty,extractedQty:extractedQty,stockQty:stockQty,stockSell:money(stockSell),stockCost:money(stockCost),rows:rows,actual:money(rev-price),expected:money(rev+stockSell-price)};
+  return {price:price,rev:money(rev),soldQty:soldQty,extractedQty:extractedQty,stockQty:stockQty,stockSell:money(stockSell),stockCost:money(stockCost),rows:rows,actual:money(rev-price),expected:money(rev+stockSell-price),salesCount:Object.keys(allSales).length,recoveredPct:price>0?Math.min(100,Math.round(rev/price*100)):0,toRecover:money(Math.max(0,price-rev)),profitAfter:money(Math.max(0,rev-price)),isRecovered:price>0&&rev>=price};
+}
+// ⚠️ v317 — 📊 إحصائيات كل ماكينات الاسكراب: عدد المبيعات، ثمن الشراء (التكلفة)، الإيراد، استرداد الثمن، والربح بعد استرداده. نفس حسابات _scrapMachineStats (من غير تغيير في أي رصيد).
+var _scrapStatsF='all';
+function openScrapStatsAll(){_scrapStatsF='all';document.getElementById('modal-title').textContent='📊 إحصائيات ماكينات الاسكراب';document.getElementById('modal-body').innerHTML='<div id="ss-top"></div><div id="ss-list"></div><div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';openModal();_scrapStatsRender();}
+function _scrapStatsSet(f){_scrapStatsF=f;_scrapStatsRender();}
+function _scrapStatsRender(){
+  var top=document.getElementById('ss-top'),list=document.getElementById('ss-list');if(!top||!list)return;
+  var all=(DB.scrap_machines||[]).map(function(m){return {m:m,s:_scrapMachineStats(m)};});
+  var f=_scrapStatsF;
+  var rows=all.filter(function(r){return f==='all'||(f==='rec'&&r.s.isRecovered)||(f==='not'&&!r.s.isRecovered)||(f==='active'&&r.m.status!=='depleted')||(f==='dep'&&r.m.status==='depleted');});
+  var T=rows.reduce(function(a,r){a.price+=r.s.price;a.rev+=r.s.rev;a.n+=r.s.salesCount;a.q+=r.s.soldQty;a.after+=r.s.profitAfter;return a;},{price:0,rev:0,n:0,q:0,after:0});
+  var seg=function(k,l,n){var a=f===k;return '<button type="button" onclick="_scrapStatsSet(\''+k+'\')" style="flex:1;padding:6px 3px;border:none;border-radius:8px;font-family:inherit;font-size:11px;font-weight:800;cursor:pointer;background:'+(a?'#0f172a':'#f1f5f9')+';color:'+(a?'#fff':'#64748b')+'">'+l+' ('+n+')</button>';};
+  var cnt=function(fn){return all.filter(fn).length;};
+  var card=function(l,v_,c,bg){return '<div style="background:'+bg+';border-radius:10px;padding:6px 3px;text-align:center"><div style="font-size:9.5px;font-weight:800;color:'+c+'">'+l+'</div><div style="font-size:12.5px;font-weight:900;color:'+c+'">'+v_+'</div></div>';};
+  var net=T.rev-T.price;
+  top.innerHTML='<div style="display:flex;gap:4px;margin-bottom:8px">'+seg('all','الكل',all.length)+seg('rec','اتسدد ثمنها',cnt(function(r){return r.s.isRecovered;}))+seg('not','لسه',cnt(function(r){return !r.s.isRecovered;}))+seg('active','نشطة',cnt(function(r){return r.m.status!=='depleted';}))+seg('dep','مستنفدة',cnt(function(r){return r.m.status==='depleted';}))+'</div>'+
+    '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:8px">'+card('ثمن الشراء (التكلفة)',fmt(T.price),'#7c3aed','#ede9fe')+card('إيراد المبيعات',fmt(T.rev),'#1e40af','#dbeafe')+card('الصافي لحد دلوقتي',fmt(net),net>=0?'#15803d':'#dc2626',net>=0?'#dcfce7':'#fee2e2')+card('عدد المبيعات',T.n,'#0e7490','#cffafe')+card('قطع اتباعت',fmtQty(T.q),'#c2410c','#ffedd5')+card('ربح بعد استرداد الثمن',fmt(T.after),'#15803d','#dcfce7')+'</div>';
+  list.innerHTML=rows.length?rows.sort(function(a,b){return b.s.rev-a.s.rev;}).map(function(r){
+    var m=r.m,s=r.s;
+    return '<div onclick="openScrapMachineReport('+jsStr(m.id)+')" style="cursor:pointer;background:#fff;border:1.5px solid #e2e8f0;border-right:4px solid '+(s.isRecovered?'#16a34a':'#ea580c')+';border-radius:12px;padding:9px 11px;margin-bottom:7px">'+
+      '<div style="display:flex;justify-content:space-between;align-items:center;gap:6px"><b style="font-size:13px">🔩 '+esc(m.name)+(m.model?' — '+esc(m.model):'')+'</b><span style="font-size:10.5px;color:'+(m.status==='depleted'?'#64748b':'#86198f')+';font-weight:800">'+(m.status==='depleted'?'🗂️ مستنفدة':'🔧 نشطة')+'</span></div>'+
+      '<div style="display:flex;gap:10px;flex-wrap:wrap;font-size:11.5px;color:#475569;margin-top:4px"><span>ثمنها <b>'+fmt(s.price)+'</b></span><span>مبيعات <b>'+s.salesCount+'</b> ('+fmtQty(s.soldQty)+' قطعة)</span><span>إيراد <b style="color:#1e40af">'+fmt(s.rev)+'</b></span></div>'+
+      '<div style="background:#f1f5f9;border-radius:6px;height:6px;margin:6px 0 3px;overflow:hidden"><div style="background:'+(s.isRecovered?'#16a34a':'#ea580c')+';height:6px;width:'+s.recoveredPct+'%"></div></div>'+
+      '<div style="font-size:11px;font-weight:800;color:'+(s.isRecovered?'#15803d':'#9a3412')+'">'+(s.isRecovered?'✅ اتسدد ثمنها — الربح بعده '+fmt(s.profitAfter):'⏳ لسه ناقص '+fmt(s.toRecover)+' ('+s.recoveredPct+'%)')+'</div></div>';
+  }).join(''):'<div class="empty">مفيش ماكينات بالفلتر ده</div>';
 }
 function openScrapMachineReport(id){
   var m=(DB.scrap_machines||[]).find(function(x){return x.id===id;});if(!m)return;
@@ -16176,7 +16213,9 @@ function openScrapMachineReport(id){
       card('ثمن الشراء',fmt(s.price),'#7c3aed','#ede9fe')+card('إيراد اللي اتباع',fmt(s.rev),'#1e40af','#dbeafe')+
       card('باقي في المخزن (بسعر البيع)',fmt(s.stockSell),'#ca8a04','#fef9c3')+
       card('النتيجة لحد دلوقتي',fmt(s.actual),s.actual>=0?'#15803d':'#dc2626',s.actual>=0?'#dcfce7':'#fee2e2')+'</div>'+
-    '<div style="background:#f0fdf4;border-radius:10px;padding:8px 11px;margin-bottom:10px;font-size:12px;color:#15803d">لو اتباع الباقي بالسعر المسجّل: النتيجة النهائية المتوقعة <b>'+fmt(s.expected)+'</b></div>'+
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px">'+card('عدد المبيعات (فواتير)',s.salesCount,'#0e7490','#cffafe')+card('قطع اتباعت',s.soldQty+' من '+s.extractedQty,'#c2410c','#ffedd5')+'</div>'+
+      '<div style="background:'+(s.isRecovered?'#dcfce7':'#fff7ed')+';border-radius:10px;padding:8px 11px;margin-bottom:8px;font-size:12px;color:'+(s.isRecovered?'#15803d':'#9a3412')+'"><div style="display:flex;justify-content:space-between;font-weight:800"><span>'+(s.isRecovered?'✅ اتسدد ثمنها':'⏳ استرداد الثمن')+'</span><span>'+s.recoveredPct+'%</span></div><div style="background:#fff;border-radius:6px;height:7px;margin:6px 0;overflow:hidden"><div style="background:'+(s.isRecovered?'#16a34a':'#ea580c')+';height:7px;width:'+s.recoveredPct+'%"></div></div>'+(s.isRecovered?'الربح بعد استرداد الثمن: <b>'+fmt(s.profitAfter)+'</b>':'لسه ناقص <b>'+fmt(s.toRecover)+'</b> لاسترداد الثمن')+'</div>'+
+      '<div style="background:#f0fdf4;border-radius:10px;padding:8px 11px;margin-bottom:10px;font-size:12px;color:#15803d">لو اتباع الباقي بالسعر المسجّل: النتيجة النهائية المتوقعة <b>'+fmt(s.expected)+'</b></div>'+
     '<div style="font-weight:800;font-size:13px;margin-bottom:6px">القطع اللي طلعت ('+s.extractedQty+')</div>';
   if(!s.rows.length)h+='<div style="font-size:12px;color:#94a3b8">لم يتم استخراج قطع</div>';
   s.rows.forEach(function(r){
@@ -17525,7 +17564,7 @@ function _invPrint(){
   var N=function(x){return fmt(Math.round(x*100)/100);};
   var body='<div style="margin-bottom:8px;color:#64748b">تاريخ الكشف: '+esc(fmtDate(today()))+' — '+_gregTxt(today())+'</div>'+
     '<table style="width:100%;border-collapse:collapse;margin-bottom:10px"><tbody>'+
-    [['💰 رأس المال المودع',T.dep],['↩️ رأس مال مردود',T.cr],['💰 رأس المال المتبقي',T.capRem],['📈 إجمالي ربحه ('+fmtQty(inv.pct||0)+'% — بحسب كل دفعة)',T.share],['💸 أرباح مسحوبة',T.pw],['🧮 أرباح متبقية',T.profRem],['📦 رأس المال المتبقي (في بضاعة لسه)',T.remCost],['💵 رأس المال المتاح (سايل)',T.capCash],['🛒 إجمالي المبيعات',T.revenue],['📉 تكلفة المبيعات',T.capSold],['📈 ربح المبيعات',T.profit],['🧾 تكلفة المبيعات + نصيبه من الربح',T.capSold+T.share]].map(function(r){return '<tr><td style="'+td+';text-align:right">'+r[0]+'</td><td style="'+td+'"><b>'+N(r[1])+'</b></td></tr>';}).join('')+
+    [['💰 رأس المال المودع',T.dep],['↩️ رأس مال مردود',T.cr],['💰 رأس المال المتبقي',T.capRem],['📈 إجمالي ربحه ('+fmtQty(inv.pct||0)+'% — بحسب كل دفعة)',T.share],['💸 أرباح مسحوبة',T.pw],['🧮 أرباح متبقية',T.profRem],['📦 رأس المال المتبقي (في بضاعة لسه)',T.remCost],['💵 رأس المال المتاح (سايل)',T.capCash],['🛒 إجمالي المبيعات',T.revenue],['📉 تكلفة المبيعات',T.capSold],['📈 ربح المبيعات',T.profit],['🧾 تكلفة المبيعات + نصيبه من الربح',T.capSold+T.share],['💰 الأرباح المتبقية + رأس المال المتاح',T.profRem+T.capCash]].map(function(r){return '<tr><td style="'+td+';text-align:right">'+r[0]+'</td><td style="'+td+'"><b>'+N(r[1])+'</b></td></tr>';}).join('')+
     '<tr style="background:#d1fae5"><td style="'+td+';text-align:right"><b>⚖️ إجمالي المستحق له (رأس مال + أرباح)</b></td><td style="'+td+'"><b>'+N(T.owed)+' ج</b></td></tr></tbody></table>'+
     (S.bs.length?'<h3 style="margin:14px 0 6px">📦 الدفعات</h3><table style="width:100%;border-collapse:collapse"><thead><tr><th style="'+th+'">الدفعة</th><th style="'+th+'">رأس مال الدفعة</th><th style="'+th+'">اتباع</th><th style="'+th+'">ربح الدفعة</th><th style="'+th+'">نسبته</th><th style="'+th+'">نصيبه</th><th style="'+th+'">نصيب المشروع</th></tr></thead><tbody>'+
       S.bs.map(function(x){return '<tr><td style="'+td+';text-align:right">'+esc(x.b.title||'دفعة')+'<br><span style="font-size:10px;color:#64748b">'+esc(fmtDate(x.b.date))+' — '+_gregTxt(x.b.date)+'</span></td><td style="'+td+'">'+N(x.st.deployed)+'</td><td style="'+td+'">'+fmtQty(x.st.soldQty)+'/'+fmtQty(x.st.totQty)+'</td><td style="'+td+'">'+N(x.st.profit)+'</td><td style="'+td+'">'+fmtQty(x.b.pct)+'%</td><td style="'+td+'"><b>'+N(x.st.share)+'</b></td><td style="'+td+'">'+N(x.st.owner)+'</td></tr>';}).join('')+'</tbody></table>':'')+
@@ -17537,7 +17576,7 @@ function _invPrint(){
 function _invShare(){
   var inv=_invById(_invId);if(!inv)return;
   var S=_invStats(inv),T=S.T,N=function(x){return fmt(Math.round(x*100)/100);};
-  var txt='🤝 كشف حساب — '+inv.name+'\n📅 '+fmtDate(today())+' ('+_gregTxt(today())+')\n\n💰 رأس المال المودع: '+N(T.dep)+'\n↩️ مردود: '+N(T.cr)+'\n💰 رأس المال المتبقي: '+N(T.capRem)+'\n\n📈 إجمالي ربحك: '+N(T.share)+'\n💸 أرباح مسحوبة: '+N(T.pw)+'\n🧮 أرباح متبقية: '+N(T.profRem)+'\n\n📦 رأس المال المتبقي (في بضاعة): '+N(T.remCost)+'\n💵 رأس المال المتاح: '+N(T.capCash)+'\n\n🛒 المبيعات: '+N(T.revenue)+'\n📉 تكلفة المبيعات: '+N(T.capSold)+'\n📈 ربح المبيعات: '+N(T.profit)+'\n🧾 تكلفة المبيعات + نصيبك: '+N(T.capSold+T.share)+'\n\n⚖️ المستحق لك (رأس مال + أرباح): '+N(T.owed)+' ج\n';
+  var txt='🤝 كشف حساب — '+inv.name+'\n📅 '+fmtDate(today())+' ('+_gregTxt(today())+')\n\n💰 رأس المال المودع: '+N(T.dep)+'\n↩️ مردود: '+N(T.cr)+'\n💰 رأس المال المتبقي: '+N(T.capRem)+'\n\n📈 إجمالي ربحك: '+N(T.share)+'\n💸 أرباح مسحوبة: '+N(T.pw)+'\n🧮 أرباح متبقية: '+N(T.profRem)+'\n\n📦 رأس المال المتبقي (في بضاعة): '+N(T.remCost)+'\n💵 رأس المال المتاح: '+N(T.capCash)+'\n\n🛒 المبيعات: '+N(T.revenue)+'\n📉 تكلفة المبيعات: '+N(T.capSold)+'\n📈 ربح المبيعات: '+N(T.profit)+'\n🧾 تكلفة المبيعات + نصيبك: '+N(T.capSold+T.share)+'\n💰 الأرباح المتبقية + رأس المال المتاح: '+N(T.profRem+T.capCash)+'\n\n⚖️ المستحق لك (رأس مال + أرباح): '+N(T.owed)+' ج\n';
   if(S.bs.length){txt+='\n📦 الدفعات:\n';S.bs.forEach(function(x){txt+='• '+(x.b.title||'دفعة')+' — اتباع '+fmtQty(x.st.soldQty)+'/'+fmtQty(x.st.totQty)+' — نصيبك '+N(x.st.share)+'\n';});}
   var ph=_bulkPhone(inv.phone);
   if(navigator.share){navigator.share({text:txt}).catch(function(){});}
@@ -17655,6 +17694,8 @@ function _invStatementHtml(inv,S){
     head('الأرباح')+
     row('💸 أرباح مسحوبة',T.pw,'#ea580c')+
     row('🧮 أرباح متبقية',T.profRem,'#6d28d9')+
+    row('💰 الأرباح المتبقية + رأس المال المتاح',T.profRem+T.capCash,'#047857','اللي متاح له دلوقتي (أرباح + رأس مال سايل)',true,'#ecfdf5')+
+    (T.capCash<-0.001?'<div style="padding:7px 9px"><button type="button" class="btn btn-sm btn-full" style="background:#dbeafe;color:#1d4ed8;border:none" onclick="_invMoney(\'deposit\')">➕ سجّل رأس المال المودع (الناقص '+N(-T.capCash)+')</button></div>':'')+
     '</div>';
 }
 function _invLedgerTable(E,T){
@@ -17676,7 +17717,7 @@ function _renderInv(){
     '<div style="display:flex;justify-content:space-between;align-items:center;gap:6px;background:#d1fae5;border-radius:10px;padding:6px 10px;margin-bottom:5px"><span style="font-size:11px;font-weight:800;color:#047857">⚖️ المستحق له (رأس مال + أرباح)</span><b style="font-size:16px;color:#047857">'+fmt(Math.round(T.owed*100)/100)+'</b></div>'+
     '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:5px">'+card('ledger','💰 رأس ماله (مودع−مردود)',T.capRem,'#1d4ed8','#dbeafe')+card('sales','📈 إجمالي ربحه',T.share,'#7c3aed','#ede9fe')+card('ledger','💸 أرباح مسحوبة',T.pw,'#ea580c','#ffedd5')+card('ledger','↩️ رأس مال مردود',T.cr,'#0e7490','#cffafe')+card('ledger','🧮 أرباح متبقية',T.profRem,'#6d28d9','#f5f3ff')+card('batches','📦 رأس مال في بضاعة',T.remCost,'#c2410c','#fff7ed')+'</div>'+
     '<div style="display:flex;gap:5px;margin-bottom:6px">'+[['batches','📦 الدفعات'],['sales','🧾 المبيعات'],['ledger','📒 الكشف']].map(function(tb){var a=_invView===tb[0];return '<button type="button" onclick="_invSetView(\''+tb[0]+'\')" style="flex:1;padding:6px;border-radius:10px;border:2px solid '+(a?'#047857':'#e2e8f0')+';background:'+(a?'#d1fae5':'#fff')+';color:#047857;font-family:inherit;font-size:12px;font-weight:800;cursor:pointer">'+tb[1]+'</button>';}).join('')+'</div>'+
-    (T.capCash<-0.001&&_invView!=='ledger'?'<div style="background:#fffbeb;border:1px solid #fde68a;border-radius:9px;padding:6px 9px;font-size:10.5px;color:#92400e;margin-bottom:6px">ℹ️ بضاعة بتكلفة '+fmt(Math.round(T.remCost))+' عندك أكتر من رأس المال المتبقي له بـ'+fmt(Math.round(-T.capCash))+' (الفرق ممول من عندك). لو ده غلط راجع الإيداعات أو رد رأس المال.</div>':'');
+    (T.capCash<-0.001&&_invView!=='ledger'?'<div style="background:#fffbeb;border:1px solid #fde68a;border-radius:9px;padding:6px 9px;font-size:10.5px;color:#92400e;margin-bottom:6px">ℹ️ بضاعة بتكلفة '+fmt(Math.round(T.remCost))+' عندك أكتر من رأس المال المتبقي له بـ'+fmt(Math.round(-T.capCash))+' (الفرق ممول من عندك). لو ده غلط راجع الإيداعات أو رد رأس المال.<br><button type="button" onclick="_invMoney(\'deposit\')" style="margin-top:5px;background:#dbeafe;color:#1d4ed8;border:none;border-radius:8px;padding:5px 10px;font-family:inherit;font-weight:800;font-size:11px;cursor:pointer">➕ سجّل رأس المال المودع</button></div>':'');
   if(_invView==='sales'){list.innerHTML=_invSalesView(inv,S);return;}
   if(_invView==='ledger'){
     list.innerHTML=_invStatementHtml(inv,S)+_invLedgerTable(_invLedger(inv,S),T);
@@ -20118,10 +20159,10 @@ function _computeBalanceSheet(asOfDate){
     if(snaps.length){
       inventory=invValue(snaps[0].products);
     }else{
-      inventory=invValue(DB.products);
+      inventory=invValueLanded(DB.products);
     }
   }else{
-    inventory=invValue(DB.products);
+    inventory=invValueLanded(DB.products);
   }
   // ⚠️ إصلاح جذري v104 — أخطر عيب في صميم معادلة النقدية من الأساس (السبب الحقيقي لمشكلة
   // "قطعة غيار تكلفتها 200 وبتتباع بـ400 والنقدية بتبقى 600 بدل 200 الصح"):
@@ -20187,7 +20228,20 @@ function _computeBalanceSheet(asOfDate){
   // دلوقتي بدل "قيمة المخزون الحالي" (الشرح الكامل فوق مع purchasesCashPaid).
   var purchLinkedSuppPaidCash=debts.filter(function(d){return d.type==='supplier'&&_isPurchaseLinkedSupplierDebt(d);})
     .reduce(function(s,d){return s+(d.payments||[]).filter(function(p){return!asOfDate||(p.date||'')<=asOfDate;}).reduce(function(ss,p){return ss+(p.amount||0);},0);},0);
-  var totalInventoryCashOut=purchasesCashPaid+purchLinkedSuppPaidCash;
+  // ⚠️ v317 — إصلاح جذري للعدّ المزدوج (م١): payDebt بيزوّد purchase.paid لما تسدد دين مورد مرتبط بالمشترى، ودفعات الدين نفسها كانت بتتجمع هنا تاني
+  // (purchLinkedSuppPaidCash) → نفس الفلوس بتخصم مرتين من النقدية. مثال: مشترى 100 مدفوع 40 + دين 60 اتسدد = المفروض خروج 100، كان بيتحسب 160.
+  // الحل: نخصم من الإجمالي الجزء المتحسوب مرتين لكل مشترى = min(الزيادة في purchase.paid عن (الإجمالي − الدين), دفعات الدين). مشتريات بدون دين مرتبط ما بتتأثرش.
+  var _ldByPurch={};
+  debts.forEach(function(d){if(d.type==='supplier'&&d.source_purchase_id)(_ldByPurch[d.source_purchase_id]=_ldByPurch[d.source_purchase_id]||[]).push(d);});
+  var purchDoubleCounted=0;
+  purchases.forEach(function(pu){
+    var ld=_ldByPurch[pu.id];if(!ld)return;
+    var grand=(pu.total||0)+(pu.extra_cost||0),debtTotal=0,payAll=0;
+    ld.forEach(function(d){debtTotal+=(d.total||0);payAll+=(d.payments||[]).reduce(function(ss,p){return ss+(p.amount||0);},0);});
+    var extra=(pu.paid||0)-(grand-debtTotal);
+    if(extra>0.005&&payAll>0.005)purchDoubleCounted+=Math.min(extra,payAll);
+  });
+  var totalInventoryCashOut=purchasesCashPaid+purchLinkedSuppPaidCash-purchDoubleCounted;
   // دين مورد "يدوي" مفيهوش بضاعة داخل المخزون تقابله — فمالوش تأثير على الكاش وقت الإنشاء
   // (زي دين العميل بالظبط)، لكن أي سداد فعلي منه هو خروج كاش حقيقي من الخزنة فبيتخصم مباشرة هنا.
   var suppManualPaidOut=debts.filter(function(d){return d.type==='supplier'&&!_isPurchaseLinkedSupplierDebt(d);})
@@ -20268,7 +20322,9 @@ function _computeBalanceSheet(asOfDate){
   var pendingCommitments=(!asOfDate&&typeof _pendingFixedCommitments==='function')?_pendingFixedCommitments():[];
   var pendingTotal=pendingCommitments.reduce(function(s,p){return s+p.amount;},0);
   var batchInvDue=_ba.share-_ba.pw; // v258 — أرباح مستحقة لمستثمري البضاعة (التزام)
-  var totalLiabilities=suppDebt+pendingTotal+batchInvDue;
+  // ⚠️ v318 — الالتزامات الشهرية المعلّقة (إيجار/مرتبات ثابتة) مش خصوم: وقتها لسه ما جاش ومفيش مصروف مقابلها لحد ما تتدفع. بتتعرض كملاحظة «التزامات قادمة»
+  // وبتتحسب مصروف لما تتدفع. (pendingTotal لسه راجع في الناتج للعرض بس.)
+  var totalLiabilities=suppDebt+batchInvDue;
 
   var ownerCapital=(acc.capital||[]).filter(function(c){return!asOfDate||(c.date||'')<=asOfDate;}).reduce(function(s,c){return s+c.amount;},0);
   var totalSales=sales.reduce(function(s,x){return s+x.total;},0);
@@ -20320,7 +20376,7 @@ function _computeBalanceSheet(asOfDate){
     totalCollected:totalCollected,capitalIn:capitalIn,
     custCollected:custCollected,custDebtTotalEver:custDebtTotalEver,suppPaidCash:suppPaidCash,
     suppManualPaidOut:suppManualPaidOut,purchasesCashPaid:purchasesCashPaid,
-    purchLinkedSuppPaidCash:purchLinkedSuppPaidCash,totalInventoryCashOut:totalInventoryCashOut,
+    purchLinkedSuppPaidCash:purchLinkedSuppPaidCash,purchDoubleCounted:purchDoubleCounted,totalInventoryCashOut:totalInventoryCashOut,
     openingInventoryValue:openingInventoryValue,
     totalPaidOut:totalPaidOut,totalPaidOutCash:totalPaidOutCash,ownerDrawsOut:ownerDrawsOut,invWithdrawsOut:invWithdrawsOut
   };
@@ -20462,7 +20518,7 @@ var CASH_FORMULA_ITEMS=[
   {key:'capitalIn',label:'رأس المال',sign:'+',desc:'كل بنود رأس المال + مساهمات المستثمرين'},
   {key:'custCollected',label:'تحصيل ديون العملاء اليدوية',sign:'+',desc:'دفعات ديون عملاء يدوية بس (مش مرتبطة بفاتورة) — تحصيل ديون الفواتير بيتغطى تلقائيًا عن طريق sale.paid'},
   {key:'openingBalance',label:'الرصيد الافتتاحي',sign:'+',desc:'القيمة المُدخلة يدوياً في رأس المال'},
-  {key:'totalInventoryCashOut',label:'إجمالي الفلوس المدفوعة فعليًا على المخزون (من مشتريات مسجّلة)',sign:'−',desc:'كل مشترى (المدفوع فوري) + كل سداد لدين مورد مرتبط بمشترى — رقم تراكمي ثابت ماينزلش لما تبيع البضاعة'},
+  {key:'totalInventoryCashOut',label:'إجمالي الفلوس المدفوعة فعليًا على المخزون (من مشتريات مسجّلة)',sign:'−',desc:'كل مشترى (المدفوع فوري) + كل سداد لدين مورد مرتبط بمشترى (بعد استبعاد المحسوب مرتين — v317) — رقم تراكمي ثابت ماينزلش لما تبيع البضاعة'},
   {key:'openingInventoryValue',label:'مخزون مُدخل يدويًا (بدون مشتريات)',sign:'−',desc:'قيمة أي بضاعة دخلت المخزون من غير عملية "مشترى" مسجّلة — يتحدد يدويًا من شاشة المحاسبة (رأس المال)'},
   {key:'custDebtTotalEver',label:'إجمالي ديون العملاء (بسعر البيع) — معطّل افتراضيًا',sign:'−',desc:'⚠️ لو فعّلته هيخصم هامش الربح غير المحصَّل كمان (تكلفة البضاعة خُصمت خلاص ضمن إجمالي المدفوع على المخزون)، فالنقدية هتبان أقل من الحقيقي'},
   {key:'suppManualPaidOut',label:'سداد ديون موردين يدوية (مش من مشترى)',sign:'−',desc:'دين مورد اتضاف يدوياً من شاشة الديون (مفيهوش بضاعة في المخزون) — سداده خروج كاش حقيقي يُخصم مباشرة'},
@@ -20671,7 +20727,7 @@ function _renderBalanceSheetHTML(d,acc){
     '</div>'+
     accSection('أصول متداولة','#0d9488')+
     _bsRow('نقدية وما يعادلها',d.cash)+
-    _bsRow('مخزون البضاعة',d.inventory)+
+    _bsRow('مخزون البضاعة (بالتكلفة شاملة الشحن)',d.inventory)+
     _bsRow('ذمم مدينة (عملاء)',d.custDebt)+
     _bsRow('مستحقات أخرى',d.rec)+
     _bsTotal('إجمالي المتداولة',d.totalCurrent,'#0d9488')+
@@ -20685,10 +20741,11 @@ function _renderBalanceSheetHTML(d,acc){
     '<div style="font-weight:900;font-size:13px;color:#dc2626;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid #dc2626">📤 الخصوم والملكية</div>'+
     accSection('خصوم متداولة','#dc2626')+
     _bsRow('ذمم دائنة (موردين)',d.suppDebt)+
-    (d.pendingTotal?_bsRow('التزامات شهرية معلّقة',d.pendingTotal):'')+
+    
     (d.invRetained?_bsRow('أرباح مستحقة للمستثمرين (شراكة)',d.invRetained):'')+
   (d.batchInvDue?_bsRow('أرباح مستحقة لمستثمري البضاعة',d.batchInvDue):'')+
     _bsTotal('إجمالي الخصوم',d.totalLiabilities,'#dc2626')+
+    (d.pendingTotal?'<div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:9px;padding:6px 9px;margin:4px 0 6px;font-size:11px;color:#9a3412;line-height:1.7">ℹ️ <b>التزامات قادمة (مش محسوبة في الخصوم):</b> '+fmt(d.pendingTotal)+' — إيجار ومرتبات ثابتة لسه وقتها ما جاش، وبتتحسب مصروف لما تتدفع.</div>':'')+
     accSection('حقوق الملكية','#15803d')+
     _bsRow('رأس مال صاحب المشروع',d.ownerCapital)+
     _bsRow('أرباح محتجزة (صاحب)',d.ownerRetained)+
@@ -24052,13 +24109,13 @@ function __auditBalanceSheet(){
   dbl.sort(function(x,y){return Math.abs(y.over_count)-Math.abs(x.over_count);});
   var txtDebts=debts.filter(function(d){return d.type==='supplier'&&!d.source_purchase_id&&String(d.details||d.desc||'').indexOf('مشترى — ')===0;});
   if(txtDebts.length) dbl.push({note:'ديون موردين متعرّف عليها بالنص بس (مش مربوطة بفاتورة)',count:txtDebts.length,total:R(txtDebts.reduce(function(s,d){return s+(d.total||0);},0)),remaining:R(txtDebts.reduce(function(s,d){return s+remD(d);},0))});
-  add('M1','method','النقدية الخارجة للمشتريات بتتحسب أكتر من الحقيقي (عدّ مزدوج لسداد الديون المرتبطة بمشتريات)',-over,'إجمالي ما بيتخصم من النقدية للمشتريات = Σ purchase.paid + Σ دفعات ديونها. الحقيقي = Σ (إجمالي المشترى − المتبقي من ديونه). الفرق موجب = اتحسب مرتين',dbl);
+  add('M1','method','فرق متبقّي في النقدية الخارجة للمشتريات بعد إصلاح العدّ المزدوج (v317): أجزاء مشتريات مش مدفوعة ومش مغطّاة بدين، أو ديون متعرّف عليها بالنص بس',-over,'إجمالي ما بيتخصم من النقدية للمشتريات = Σ purchase.paid + Σ دفعات ديونها. الحقيقي = Σ (إجمالي المشترى − المتبقي من ديونه). الفرق موجب = اتحسب مرتين',dbl);
   // م١: بضاعة أمانة داخلة بتتحسب مخزون مملوك (بدون أي التزام وقت الاستلام)
   var consIn=products.filter(function(p){return p.consignment==='in';}).map(function(p){return {id:p.id,name:p.name,party:p.consignment_party||'',qty:p.qty,cost:p.buy_price,value:R((+p.qty||0)*(p.buy_price||0))};});
   add('M2','method','بضاعة أمانة داخلة لسه ما اتباعتش بتتحسب مخزون مملوك',consIn.reduce(function(s,x){return s+x.value;},0),'invValue بيجمع qty×buy_price لكل المنتجات حتى consignment="in" (مش ملك المحل)',consIn);
   // م٣: التزامات الشهر المعلّقة (راتب/مصروف ثابت لسه ما اتدفعش) بتتسجّل التزام من غير مصروف
   var pend=(typeof _pendingFixedCommitments==='function'?_pendingFixedCommitments():[]);
-  add('M3','method','التزامات معلّقة هذا الشهر (رواتب/مصروفات ثابتة) مسجّلة التزام بدون مصروف مقابل',-pend.reduce(function(s,p){return s+p.amount;},0),'pendingTotal داخل totalLiabilities، بينما المصروف مبيتسجّلش في الأرباح لحد ما يتدفع (وبتظهر في الحالي بس مش التاريخي)',pend.map(function(p){return {name:p.name,amount:p.amount};}));
+  add('M3','method','التزامات معلّقة هذا الشهر (رواتب/مصروفات ثابتة) — اتصلّح v318: اتشالت من الخصوم وبتتعرض كملاحظة',0,'pendingTotal داخل totalLiabilities، بينما المصروف مبيتسجّلش في الأرباح لحد ما يتدفع (وبتظهر في الحالي بس مش التاريخي)',pend.map(function(p){return {name:p.name,amount:p.amount};}));
   // م٤: خسارة متراكمة مخفية
   var totalDist=((acc.profit_cycles||[]).reduce(function(s,c){return s+(c.distributions||[]).reduce(function(ss,d){return ss+(d.amount||0);},0)+(c.owner_share||0);},0));
   var hist=sales.reduce(function(s,x){return s+x.total;},0)-salesCost(sales)-(DB.expenses||[]).reduce(function(s,x){return s+x.amount;},0);
@@ -24066,7 +24123,7 @@ function __auditBalanceSheet(){
   add('M4','method','خسارة متراكمة بتظهر صفر (Math.max(0,…)) فحقوق الملكية مبالغ فيها',-Math.max(0,-x),'undistributedProfit = max(0, الربح التاريخي − الموزّع)',[{profit_all_time:R(hist),distributed:R(totalDist),net:R(x)}]);
   // م٥: تكاليف إضافية على المشتريات (شحن…) مدفوعة/مستحقة لكن مش في المخزون ولا في المصروفات
   var ex=purchases.filter(function(p){return (p.extra_cost||0)>0;}).map(function(p){return {purchase:p.id,supplier:p.supplier||'',date:p.date||'',extra_cost:R(p.extra_cost)};});
-  add('M5','method','تكاليف إضافية على المشتريات (شحن/مصاريف) لا تدخل المخزون ولا المصروفات',-ex.reduce(function(s,p){return s+p.extra_cost;},0),'المخزون بيقيّم بـ buy_price (من غير landed) والتكلفة extra_cost بتتدفع/بتتسجّل دين ومفيش مصروف',ex);
+  add('M5','method','تكاليف إضافية على المشتريات (شحن/مصاريف) لسه ما اتوزعتش على تكلفة الأصناف (v318: الموزّع منها جوه قيمة المخزون)',-(ex.reduce(function(s,p){return s+p.extra_cost;},0)-R(invValueLanded(products)-invValue(products))),'المخزون بيقيّم بـ buy_price (من غير landed) والتكلفة extra_cost بتتدفع/بتتسجّل دين ومفيش مصروف',ex);
   // م٦: رصيد افتتاحي نقدي بدون مقابل في حقوق الملكية
   add('M6','method','رصيد افتتاحي نقدي داخل النقدية وغير داخل حقوق الملكية',acc.opening_balance||0,'openingBalance في cashRaw فقط (مش في totalEquity) — بيتغطى فقط لو اتعملت تسوية equity_adjustments',[]);
 
@@ -24205,7 +24262,7 @@ function __auditBalanceSheet(){
 
   var byCode={}; items.forEach(function(i){byCode[i.code]=i.value;});
   var preview=[
-    {fix:'تصحيح العدّ المزدوج لسداد ديون الموردين (م١)',diff_after:R(diff-(byCode.M1||0))},
+    {fix:'تصحيح باقي فرق المشتريات غير المغطّى (م١ بعد إصلاح العدّ المزدوج v317)',diff_after:R(diff-(byCode.M1||0))},
     {fix:'م١ + استبعاد الأمانة الداخلة من المخزون (م٢)',diff_after:R(diff-(byCode.M1||0)-(byCode.M2||0))},
     {fix:'م١ + م٢ + إظهار الخسارة المتراكمة (م٤)',diff_after:R(diff-(byCode.M1||0)-(byCode.M2||0)-(byCode.M4||0))}
   ];
@@ -24217,7 +24274,7 @@ function __auditBalanceSheet(){
       total_liab_equity:R(B.totalLiabEquity),difference:diff},
     purchases_reconciliation:ptab,investors:invAudit,contributions:items,groups:{method:R(groups.method),data:R(groups.data),manual:R(groups.manual)},explained:R(sum),unexplained:unexplained,preview_after_proposed_fixes:preview,
     cash_components:{collected_on_sales:R(B.totalCollected),capital_in:R(B.capitalIn),manual_customer_collections:R(B.custCollected),opening_balance:R(B.openingBalance),
-      inventory_cash_out:R(B.totalInventoryCashOut),purchases_paid_field:R(B.purchasesCashPaid),linked_supplier_payments:R(B.purchLinkedSuppPaidCash),opening_inventory_declared:R(B.openingInventoryValue),manual_supplier_payments:R(B.suppManualPaidOut),
+      inventory_cash_out:R(B.totalInventoryCashOut),purchases_paid_field:R(B.purchasesCashPaid),linked_supplier_payments:R(B.purchLinkedSuppPaidCash),double_count_removed:R(B.purchDoubleCounted),opening_inventory_declared:R(B.openingInventoryValue),manual_supplier_payments:R(B.suppManualPaidOut),
       expenses_cash:R(B.totalPaidOutCash),fixed_assets_deducted_in_full:R(B.fixedAssets),owner_draws:R(B.ownerDrawsOut),investor_withdrawals:R(B.invWithdrawsOut)},
     notes:['الفرق = الأصول − (الالتزامات + حقوق الملكية). موجب: أصول أكتر من المصادر. سالب: التزامات/حقوق أكتر من الأصول.','البند "غير مُفسَّر" هو الباقي بعد البنود المعروفة، ومتحطش في أي حساب.','بنود D9 (مخزون غير موثّق) وD8 تقديرية وبتعتمد على اكتمال الفواتير.','معاينة التصحيحات (preview_after_proposed_fixes) حساب حسابي من نفس البنود، ومفيش أي معادلة اتغيّرت.']};
 }
@@ -25405,7 +25462,7 @@ function renderScrap(){
     '<div style="font-size:18px;font-weight:900;color:#15803d">'+totalParts+'</div></div>'+
     '</div>'+
 
-    '<button class="btn btn-red btn-full" onclick="openAddScrapMachineModal()" style="margin-bottom:10px">+ إضافة ماكينة اسكراب جديدة</button>'+_scrapPurchaseBanner()+_scrapAuditBanner()+
+    '<button class="btn btn-red btn-full" onclick="openAddScrapMachineModal()" style="margin-bottom:10px">+ إضافة ماكينة اسكراب جديدة</button>'+'<button class="btn btn-full" onclick="openScrapStatsAll()" style="margin-bottom:10px;background:#ede9fe;color:#5b21b6;border:none">📊 إحصائيات الماكينات (مبيعات • استرداد الثمن • ربح)</button>'+_scrapPurchaseBanner()+_scrapAuditBanner()+
     (depleted.length?'<div onclick="_scrapFilter=(_scrapFilter===\'depleted\'?\'all\':\'depleted\');renderScrap()" style="background:'+(_scrapFilter==='depleted'?'#475569':'#f1f5f9')+';color:'+(_scrapFilter==='depleted'?'#fff':'#475569')+';border-radius:10px;padding:8px 12px;margin-bottom:12px;text-align:center;font-size:12px;font-weight:800;cursor:pointer">🗂️ المستنفدة ('+depleted.length+') — '+(_scrapFilter==='depleted'?'اضغط للرجوع للكل':'اضغط للعرض بس')+'</div>':'<div style="margin-bottom:4px"></div>')+
 
     // الماكينات النشطة
@@ -27975,7 +28032,7 @@ function renderInvestors(){
     _pcFixBanner()+
     _invHubSummary()+
     '<div style="display:flex;gap:8px;margin-bottom:14px">'+
-    '<button class="btn btn-primary btn-full" onclick="openAddInvestorModal()">+ إضافة مستثمر</button>'+
+    '<button class="btn btn-primary btn-full" onclick="openAddInvestorModal()">+ شريك (نسبة من الصافي)</button>'+
     '<button class="btn btn-green btn-full" onclick="openProfitCycleModal()">📊 توزيع أرباح</button>'+
     '<button class="btn btn-full" style="background:#ecfdf5;color:#047857;border:none" onclick="_invForm(null)">📜 مستثمر بضاعة (عقد)</button>'+
     '</div>'+
