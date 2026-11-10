@@ -1,4 +1,4 @@
-// Service Worker لتطبيق ابو حوده — v17 (منطق v4 كما هو؛ اتغيّر رقم الكاش بس مع إصدار التطبيق v320)
+// Service Worker لتطبيق ابو حوده — v19 (منطق v4 كما هو؛ اتغيّر رقم الكاش بس مع إصدار التطبيق v322)
 // الهدف: تخزين صفحة التطبيق (index.html) ومكتبة Supabase والخطوط عشان التطبيق يفتح أوفلاين وبنفس الشكل.
 // البيانات نفسها في localStorage جوه التطبيق، مش هنا.
 // ⚠️ لازم اسم ملف التطبيق يكون index.html بالظبط (الملف ده بيخزّنه ويفتحه بالاسم ده) ويتحط sw.js جنبه في نفس المجلد.
@@ -19,7 +19,7 @@
 //     الصوت/Range/Supabase API/أي موقع تاني من غير تدخّل، النت الأول بمهلة ٤ ثواني ثم الكاش.
 
 var SHELL_PREFIX = 'maintenance-app-shell-';
-var CACHE_NAME = SHELL_PREFIX + 'v17'; // ⚠️ v315 (كان v11 في v314) — رفع رقم الكاش مع كل إصدار كبير عشان activate يمسح كاش الشل القديم (النسخة v307 وما قبلها). باقي المنطق بدون أي تغيير.
+var CACHE_NAME = SHELL_PREFIX + 'v19'; // ⚠️ v315 (كان v11 في v314) — رفع رقم الكاش مع كل إصدار كبير عشان activate يمسح كاش الشل القديم (النسخة v307 وما قبلها). باقي المنطق بدون أي تغيير.
 var FONT_CACHE = 'mc8-fonts-v1';   // اسمه مش بيبدأ بـ SHELL_PREFIX → activate مابيمسحوش
 var SDK_URL = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
 var FONT_HOSTS = ['fonts.googleapis.com', 'fonts.gstatic.com'];
