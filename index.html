@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v322</title>
+<title>ابو حوده الحلو الجميل v323</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="v322 — ٢٩ جمادى الأولى ١٤٤٨ هـ";
+<script>/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="v323 — ٣٠ جمادى الأولى ١٤٤٨ هـ";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -92,6 +92,7 @@
     36) ⚠️ v306 — المستثمرين: أي عملية مستثمر (إيداع/سحب/رد رأس مال/دفعة/دورة توزيع/مستثمر) لازم تعدّي بالترتيب: _invGuard(تاريخ العملية) ← _invBackup(سبب) ← التعديل ← _invAudit(...) ← persist. ممنوع تعديل نسبة أو تكلفة دفعة اتباع منها (النسبة بتتغيّر بـ pct_hist بتاريخ سريان عن طريق _invPctAt، والتكلفة بدفعة جديدة). ممنوع حذف دفعة عليها مبيعات أو مستثمر عليه حركات (أرشفة بدل الحذف). إقفال الشهر لازم يثبّت لقطة (_invTakeSnapshot) وأي دالة مستثمرين جديدة لازم تتضاف في __ONCE_GUARDED.
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v323: [🐞 إصلاح «فحص كميات المخزون»: المشتريات اللي اتعمل بيها الصنف جديد (productId=__new__) ما كانتش بتتحسب فكان بيطلّع أصناف سليمة غلط (كلبسات بيضاء، شداد تغذية، مجموعة الدرام...) • 📦 فلتر «دخل بدون شراء / ناقص بدون بيع» بقى بالكمية مش بالقيمة (فرق الأسعار كان بيطلّع أصناف سليمة)، بيجمّع الأصناف المتكررة بالاسم، بيحسب تفكيك الاسكراب، وكل كارت بيعرض الحساب (افتتاحي + مشترى − مباع = المسجّل والفعلي)]
 v322: [📦 فلتر المخزن «🕳️ دخل بدون شراء» و«👻 ناقص بدون بيع» (كارت المنتج بيوضح الكمية والقيمة التقديرية) • 🧾 شاشة «فحص النقدية» (قراءة فقط) في الإعدادات: فواتير/مصاريف/مشتريات/اسكراب مكررة محتملة + مدفوع زيادة + مشتريات بدون دين + تواريخ غريبة، وكل كرت بيفتح السجل للمراجعة • ⚠️ حماية من تسجيل نفس السلفة/الراتب/المصروف مرتين في ٣ دقايق • ⚠️ حماية مشترى الاسكراب المكرر (بيعرض الربط بدل الخصم التاني) + تنبيه في إحصائيات الاسكراب — مفيش أي تغيير في أي معادلة أو رصيد]
 v321: [🏦 الخسارة التراكمية بتظهر بالسالب في حقوق الملكية (كانت بتظهر صفر والميزانية مش بتتوازن) • 💵 إيداع قبل الشراء: لو المتاح للشراء مش كفاية بيعرض تسجيل إيداع بالناقص بتاريخ الدفعة قبل الحفظ (أو تكمّل من غير إيداع صراحةً)]
 v320: [📜 نظام عقد المستثمر الكامل: أنواع عقد (مضاربة/مشاركة/اتفاق خاص) + بنود تتنفّذ محاسبيًا (قاعدة الخسارة: على المستثمر/بالنسبة/على المشروع) + رد رأس المال والتسوية والمدة وبنود عامة + موافقة الطرفين بالتاريخ والطريقة + ملاحق التعديل + نموذج عقد كامل للطباعة والواتساب • 🎨 إعادة تصميم شاشة المستثمر: مؤشرات واضحة (المتاح للشراء / في بضاعة / أرباح / إجمالي) وتابات (دفعات/مبيعات/كشف/عقد) • 💵 المتاح للشراء في الشاشة والقايمة ونموذج الدفعة + تنبيهات قبل الحفظ • 🗑️ حذف/تعديل قيود دفتر المستثمر • ⚠️ تحذير تعديل دين مرتبط بمشترى/فاتورة • 🐞 إصلاح: زرار «مستثمر بضاعة (عقد)» من شاشة المستثمرين ما كانش بيفتح النموذج لو مفيش نافذة مفتوحة]
@@ -5683,9 +5684,9 @@ var APP_TITLE=APP_CONFIG.name;
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=322;
+var APP_VERSION=323;
 // ⚠️ v303 — BUILD_STAMP كان مش متعرّف خالص (شاشة الإعدادات كانت بتعرض "?") — اتعرّف دلوقتي وبيتزود مع كل تحديث
-var BUILD_STAMP='v322 — ٢٩ جمادى الأولى ١٤٤٨ هـ';
+var BUILD_STAMP='v323 — ٣٠ جمادى الأولى ١٤٤٨ هـ';
 // ⚠️ v295 — عنوان الصفحة كان رقم نسخته ثابت ومتنسي (فضل v294 مع إن النسخة اتغيّرت). دلوقتي بياخد الرقم من APP_VERSION دايمًا.
 try{document.title=document.title.replace(/v\d+\s*$/,'v'+APP_VERSION);}catch(_eT){}
 
@@ -8781,28 +8782,27 @@ var _invStatsIncludeConsignment=false; // ⚠️ v201 — تبديل عرض قي
 // موجب = دخل بدون مشترى/افتتاحي/جرد • سالب = ناقص بدون بيع أو جرد (استهلاك/تلف/فرق تكلفة). قراءة فقط.
 var _invSrcFilter='all'; // all | noPurchase | missing
 function _stockSourceMap(){
+  // ⚠️ v323 — بالكمية مش بالقيمة (فرق الأسعار كان بيطلّع أصناف سليمة كأنها غلط). بنجمّع الأصناف المتكررة بنفس الاسم:
+  // المسجّل = افتتاحي + مشتريات (حتى المشتريات اللي اتعمل بيها الصنف جديد) + تفكيك اسكراب − مبيعات − سحب قطع ± جرد معتمد. الفرق عن الكمية الفعلية هو اللي بيتعرض.
   var NM=function(s){return String(s==null?'':s).split(/\s+/).join(' ').trim();};
-  var products=DB.products||[],purchases=DB.purchases||[],sales=DB.sales||[];
-  var byName={};products.forEach(function(p){var k=NM(p.name);(byName[k]=byName[k]||[]).push(p);});
-  var kq={};
-  (DB.stocktakes||[]).forEach(function(st){if(!(st.status==='approved'||st.approved_at||st.status==='closed'))return;(st.items||[]).forEach(function(it){if(it.confirmed===false)return;var id=it.productId;if(id&&it.counted_qty!=null&&it.system_qty!=null)kq[id]=(kq[id]||0)+(it.counted_qty-it.system_qty);});});
+  var products=DB.products||[],byId={},byName={},firstOf={};
+  products.forEach(function(p){byId[p.id]=p;var k=NM(p.name);(byName[k]=byName[k]||[]).push(p);if(!firstOf[k])firstOf[k]=p;});
+  var keyOf=function(id,name){return byId[id]?NM(byId[id].name):NM(name);};
+  var cur={},op={},pq={},xq={},sq={},wq={},kq={};
+  var add=function(o,k,v_){o[k]=(o[k]||0)+(+v_||0);};
+  products.forEach(function(p){if(p.consignment==='in'||p.scrap_machine_id)return;add(cur,NM(p.name),p.qty);});
   var snaps=(DB.inventory_snapshots||[]).filter(function(s){return Array.isArray(s.products)&&s.products.length;}).slice().sort(function(x,y){return ((x.asOf||'')+(x.createdAt||'')>(y.asOf||'')+(y.createdAt||''))?1:-1;});
-  var op=snaps[0]||null,openVal={};
-  if(op)op.products.forEach(function(p){var k=NM(p.name);openVal[k]=(openVal[k]||0)+(+p.qty||0)*(+p.buy_price||0);});
-  var purchVal={},soldCost={};
-  purchases.forEach(function(pu){(pu.items||[]).forEach(function(it){
-    if(it.scrapMachineId)return;
-    var id=(it.productId&&it.productId!=='__new__')?it.productId:null;
-    if(!id){var m=byName[NM(it.name)];if(m&&m.length&&it.addToStock===true)id=m[0].id;}
-    if(id)purchVal[id]=(purchVal[id]||0)+(it.qty||0)*(it.price||0);
-  });});
-  sales.forEach(function(s){(s.items||[]).forEach(function(it){if(it.fromScrap)return;var id=it.productId||it.product_id;if(id)soldCost[id]=(soldCost[id]||0)+(it.qty||0)*(it.buyPrice||it.buy_price||0);});});
+  if(snaps[0])snaps[0].products.forEach(function(p){add(op,NM(p.name),p.qty);});
+  (DB.purchases||[]).forEach(function(pu){(pu.items||[]).forEach(function(it){if(it.scrapMachineId)return;if(it.addToStock===false&&!byId[it.productId])return;add(pq,keyOf(it.productId,it.name),it.qty);});});
+  (DB.scrap_machines||[]).forEach(function(m){(m.parts_extracted||[]).forEach(function(x){add(xq,keyOf(x.productId,x.name),x.qty);});});
+  (DB.sales||[]).forEach(function(s){(s.items||[]).forEach(function(it){add(sq,keyOf(it.productId||it.product_id,it.name),it.qty);});});
+  (DB.part_withdrawals||[]).forEach(function(w){add(wq,keyOf(w.product_id,w.name),w.qty);});
+  (DB.stocktakes||[]).forEach(function(st){if(!(st.status==='approved'||st.status==='closed'||st.approved_at))return;(st.items||[]).forEach(function(it){if(it.confirmed===false)return;if(it.counted_qty!=null&&it.system_qty!=null)add(kq,keyOf(it.productId,it.name),it.counted_qty-it.system_qty);});});
   var out={};
-  products.forEach(function(p){
-    if(p.consignment==='in'||p.scrap_machine_id)return;
-    var nowV=(+p.qty||0)*(p.buy_price||0),key=NM(p.name),first=byName[key]&&byName[key][0]&&byName[key][0].id===p.id;
-    var resid=Math.round((nowV-((first?(openVal[key]||0):0)+(purchVal[p.id]||0)-(soldCost[p.id]||0)+(kq[p.id]||0)*(p.buy_price||0)))*100)/100;
-    if(Math.abs(resid)>0.5)out[p.id]={resid:resid,cost:+p.buy_price||0,qty:(+p.buy_price>0)?resid/(+p.buy_price):null};
+  Object.keys(cur).forEach(function(k){
+    var p=firstOf[k];if(!p)return;
+    var exp=(op[k]||0)+(pq[k]||0)+(xq[k]||0)-(sq[k]||0)-(wq[k]||0)+(kq[k]||0),diff=Math.round((cur[k]-exp)*1000)/1000;
+    if(Math.abs(diff)>0.001){var c=+p.landed_cost||+p.buy_price||0;out[p.id]={resid:Math.round(diff*(c>0?c:1)*100)/100,cost:c,qty:diff,d:{o:op[k]||0,p:pq[k]||0,x:xq[k]||0,s:sq[k]||0,w:wq[k]||0,k:kq[k]||0,cur:cur[k],exp:exp}};}
   });
   return out;
 }
@@ -9040,7 +9040,7 @@ function renderInventory(){
       (p.scrap_price?'<span style="background:#fef9c3;color:#ca8a04;border-radius:6px;padding:1px 7px;font-size:10px;font-weight:700">اسكراب: '+p.scrap_price+' ج</span>':'')+
       (p.consignment==='in'?'<span style="background:#fce7f3;color:#be185d;border-radius:6px;padding:1px 7px;font-size:10px;font-weight:700">📥 أمانة من '+esc(p.consignment_party||'')+'</span>':'')+
       (p.consignment==='out'?'<span style="background:#e0f2fe;color:#0369a1;border-radius:6px;padding:1px 7px;font-size:10px;font-weight:700">📤 أمانة عند '+esc(p.consignment_party||'')+'</span>':'')+
-      '</div>'+(_srcMap&&_srcMap[p.id]?'<div style="font-size:11px;font-weight:700;color:'+(_srcMap[p.id].resid>0?'#b45309':'#dc2626')+';margin-top:3px">'+(_srcMap[p.id].resid>0?'🕳️ دخل بدون شراء':'👻 ناقص بدون بيع')+' ≈ '+(_srcMap[p.id].qty!=null?fmtQty(Math.round(Math.abs(_srcMap[p.id].qty)*100)/100)+' وحدة (':'(')+fmt(Math.abs(_srcMap[p.id].resid))+')</div>':'')+'</div>'+
+      '</div>'+(_srcMap&&_srcMap[p.id]?'<div style="font-size:11px;font-weight:700;color:'+(_srcMap[p.id].resid>0?'#b45309':'#dc2626')+';margin-top:3px">'+(_srcMap[p.id].resid>0?'🕳️ دخل بدون شراء':'👻 ناقص بدون بيع')+' '+fmtQty(Math.round(Math.abs(_srcMap[p.id].qty)*100)/100)+' وحدة'+'<div style="font-weight:500;color:#64748b;font-size:10.5px;line-height:1.6">المسجّل: افتتاحي '+fmtQty(_srcMap[p.id].d.o)+' + مشترى '+fmtQty(_srcMap[p.id].d.p)+(_srcMap[p.id].d.x?' + تفكيك اسكراب '+fmtQty(_srcMap[p.id].d.x):'')+' − مباع '+fmtQty(_srcMap[p.id].d.s)+(_srcMap[p.id].d.w?' − مسحوب '+fmtQty(_srcMap[p.id].d.w):'')+(_srcMap[p.id].d.k?' ± جرد '+fmtQty(_srcMap[p.id].d.k):'')+' = '+fmtQty(_srcMap[p.id].d.exp)+' • الفعلي '+fmtQty(_srcMap[p.id].d.cur)+'</div></div>':'')+'</div>'+
       '<div class="inv-q" style="background:'+qBg+';color:'+qFg+'"><div style="font-size:18px;line-height:1.1">'+fmtQty(p.qty)+'</div><div style="font-size:9px;font-weight:700">'+(isOut?'نفذ 🚫':isLow?'منخفض ⚠️':'متاح')+'</div></div></div>'+
       '<div style="font-size:12px;color:#64748b;margin-top:6px">'+(_invShowCost?'شراء <b>'+p.buy_price+'</b>'+
       (p.landed_cost&&Math.round(p.landed_cost)!==Math.round(p.buy_price)?' <span style="color:#ea580c">(بعد التكاليف: <b>'+Math.round(p.landed_cost)+'</b>)</span>':'')+' · ':'')+
@@ -23013,7 +23013,9 @@ function auditProductQuantities(){
     if(p.category==='machine')return;
     checked++;
     var purchasedQty=0;
-    (DB.purchases||[]).forEach(function(pu){(pu.items||[]).forEach(function(it){if(it.productId===p.id)purchasedQty+=(it.qty||0);});});
+    // ⚠️ v323 — المشتريات اللي اتعمل بيها الصنف جديد كان productId فيها '__new__' فما كانتش بتتحسب (كلبسات بيضاء: مشترى 5 بس الأداة شايفة 2). دلوقتي بنطابقها بالاسم لأول صنف بنفس الاسم.
+    var _nmq=function(s){return String(s==null?'':s).split(/\s+/).join(' ').trim();},_firstSame=DB.products.find(function(x){return _nmq(x.name)===_nmq(p.name);});
+    (DB.purchases||[]).forEach(function(pu){(pu.items||[]).forEach(function(it){if(it.productId===p.id||((!it.productId||it.productId==='__new__')&&it.addToStock!==false&&_firstSame&&_firstSame.id===p.id&&_nmq(it.name)===_nmq(p.name)))purchasedQty+=(it.qty||0);});});
     var soldQty=0;
     (DB.sales||[]).forEach(function(s){(s.items||[]).forEach(function(it){if(it.productId===p.id)soldQty+=(it.qty||0);});});
     var withdrawnQty=0;
