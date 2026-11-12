@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v323</title>
+<title>ابو حوده الحلو الجميل v327</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,47 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSI5MCIgZmlsbD0iIzBmMTcyYSIvPgo8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyMzAiIHI9IjE1MCIgZmlsbD0iIzg2MTk4ZiIvPgo8dGV4dCB4PSIyNTYiIHk9IjI3MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE1MCIgZm9udC13ZWlnaHQ9IjkwMCIgZmlsbD0iI2ZmZmZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+2K08L3RleHQ+CjxyZWN0IHg9IjEwNiIgeT0iNDAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjYwIiByeD0iMTQiIGZpbGw9IiM4NjE5OGYiLz4KPC9zdmc+Cg==">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <!-- Built: 2026-08-12T00:00:00.000Z | Modules: 23 -->
-<script>/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="v323 — ٣٠ جمادى الأولى ١٤٤٨ هـ";
+<script>
+// ==================== ⚠️ v326 — فحص اتصال حقيقي + سجل تشخيص ====================
+// navigator.onLine بيكدّب: ممكن يقول false والسيرفر واصل (VPN/DNS خاص/بعض متصفحات الموبايل)، وممكن يقول true وهو واي فاي من غير إنترنت.
+// الحل: نسأل السيرفر فعليًا (طلب خفيف بمهلة ٣٫٥ث) ونصدّق النتيجة دي.
+var __REACH={ok:null,at:0,okAt:0,fails:0,busy:false};
+var __netLog=[];
+function __netLogPush(e){ try{ e.t=Date.now(); __netLog.unshift(e); if(__netLog.length>30) __netLog.length=30; }catch(x){} }
+function __navOffline(){
+  if(typeof navigator==='undefined'||navigator.onLine!==false) return false;
+  // المتصفح بيقول أوفلاين — بس لو الفحص الفعلي نجح خلال آخر ٤٥ث، نعتبره متصل
+  return !(__REACH.ok===true && Date.now()-__REACH.at<45000);
+}
+function __netProbeDown(){ return __REACH.ok===false && Date.now()-__REACH.at<20000; }
+async function __netProbe(force){
+  if(__REACH.busy) return __REACH.ok;
+  if(!force && __REACH.ok!==null && Date.now()-__REACH.at<6000) return __REACH.ok;
+  if(typeof SB_URL==='undefined') return null;
+  __REACH.busy=true;
+  var ctl=(typeof AbortController!=='undefined')?new AbortController():null,tm=null,t0=Date.now(),ok=false,why='';
+  try{
+    tm=setTimeout(function(){ try{ctl&&ctl.abort();}catch(e){} },3500);
+    await fetch(SB_URL+'/auth/v1/health',{method:'GET',headers:{apikey:SB_ANON_KEY},cache:'no-store',signal:ctl?ctl.signal:undefined});
+    ok=true; // أي رد HTTP (حتى 401) = السيرفر واصل
+  }catch(e){ why=String((e&&e.name==='AbortError')?'مهلة ٣٫٥ث':((e&&e.message)||e)).slice(0,70); }
+  clearTimeout(tm);
+  var prev=__REACH.ok;
+  __REACH.ok=ok; __REACH.at=Date.now(); __REACH.busy=false;
+  if(ok){ __REACH.okAt=Date.now(); __REACH.fails=0; } else { __REACH.fails++; }
+  __netLogPush({k:'probe',ok:ok,ms:Date.now()-t0,why:why,onLine:(typeof navigator!=='undefined'?navigator.onLine:null)});
+  try{
+    if(ok){
+      if(typeof __netBadgeState!=='undefined' && __netBadgeState!=='ok'){ __setNetBadge('ok'); }
+      if(prev!==true && typeof __drainSyncQueue==='function'){ setTimeout(function(){ try{__drainSyncQueue();}catch(e2){} },300); }
+    }else if(__REACH.fails>=2 && typeof __netBadgeState!=='undefined' && __netBadgeState==='ok' && navigator.onLine!==false){
+      __setNetBadge('weak');
+    }
+    if(typeof __refreshStatusBadge==='function') __refreshStatusBadge();
+  }catch(e3){}
+  return ok;
+}
+/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="v327 — ٣٠ جمادى الأولى ١٤٤٨ هـ";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -92,6 +132,10 @@
     36) ⚠️ v306 — المستثمرين: أي عملية مستثمر (إيداع/سحب/رد رأس مال/دفعة/دورة توزيع/مستثمر) لازم تعدّي بالترتيب: _invGuard(تاريخ العملية) ← _invBackup(سبب) ← التعديل ← _invAudit(...) ← persist. ممنوع تعديل نسبة أو تكلفة دفعة اتباع منها (النسبة بتتغيّر بـ pct_hist بتاريخ سريان عن طريق _invPctAt، والتكلفة بدفعة جديدة). ممنوع حذف دفعة عليها مبيعات أو مستثمر عليه حركات (أرشفة بدل الحذف). إقفال الشهر لازم يثبّت لقطة (_invTakeSnapshot) وأي دالة مستثمرين جديدة لازم تتضاف في __ONCE_GUARDED.
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v327: [💼 تعديل/حذف مساهمة رأس المال (كانت مفيش طريقة للتراجع عن مساهمة اتسجّلت غلط) — من «📜 السجل الكامل» للمستثمر، للمالك بس، ومحمي: مينفعش يخلّي رأس المال المردود أكبر من المساهمات • ⛔ تعديل دورة توزيع بعد سحب: بيتمنع لو هيخلّي مستثمر سحبه أكبر من أرباحه (كان بيسكت ويصفّر المحتجز) • 🧮 حاسبة نسبة الأرباح: (١) مستثمر جديد بطريقتين (قيمة المركز الدفترية / رأس المال فقط) مع أثره على القدامى والمالك (٢) توزيع النسب حسب رأس المال × المدة (متوسط مرجّح بالأيام) من الأرقام المسجّلة — اقتراح للقراءة بس، مابتغيّرش نسب • مفيش تغيير في معادلات الخزنة أو الميزانية]
+v326: [📶 النت: (١) فحص اتصال حقيقي بالسيرفر (__netProbe) بدل الاعتماد على navigator.onLine اللي بيكدّب في الاتجاهين — لو المتصفح قال «أوفلاين» والسيرفر واصل، التطبيق بيشتغل أونلاين ويرفع الطابور؛ ولو قال «متصل» والسيرفر مش واصل، الحفظ بيتأجّل للطابور فورًا من غير ما يستنى المهلة • (٢) فحص التعارض (v310) قبل كل حفظ كان بيستنى قراءة من السيرفر لحد ~18ث لما النت وهمي ومتغطّيش بالقاطع — بقى بيتخطى لو النت ضعيف ومحدود بـ٢٫٥ث • (٣) سجل تشخيص النت: آخر ٣٠ حدث (مهلات/فشل/بطء/فحص) بيظهر لما تدوس على شريط الحالة العلوي + زر «فحص الاتصال الآن» • مفيش تغيير في بيانات أو حسابات]
+v325: [🧭 شاشة المستثمرين اتقسمت 4 تبويبات (نظرة عامة / المستثمرون بكروت مضغوطة بتتفتح بضغطة / التوزيعات بملخص كل المستثمرين / السحوبات) بدل الشاشة الطويلة • 👤 تقرير صاحب المشروع (إجمالي المسحوب + رأس المال الحالي) • 🔗 ربط مستثمر (شراكة/بضاعة) بموظف + «📊 تقرير شامل» لأي موظف (راتبه + سلفه + إجازاته + كمستثمر) من شاشة الموظفين • 🔀 دمج موظف مكرر بأسماء مختلفة (بيحوّل كل مصروفاته ورواتبه وإجازاته وروابطه للأساسي + سجل تراجع + شاهد حذف) • 🗑️ إصلاح: حذف موظف/دمجه ما بيرجعش من جهاز تاني (شواهد الحذف شملت الموظفين) • ✅ التقرير الشامل ما بيعرضش فواتير/مصروفات غيره لو مش مربوط بحساب دخول • مفيش تغيير في معادلات الأرباح أو الخزنة أو المخزون]
+v324: [💸 المستثمرين (شراكة): «استلام الأرباح» — كل دورة توزيع بقت بتوضح لكل مستثمر (مستلم / متبقي) + زر «💸 استلم» (بيفتح نافذة السحب بالمبلغ المتبقي) + زر «تسليم كل المتبقي» لكل الدورة • 📋 قائمة «كل السحوبات» (شراكة + بضاعة) بفلتر الفترة + النوع + المستثمر وإجماليات • 🗑️ حذف سحب شراكة غلط (كان مفيش طريقة للتراجع) • 🗑️ المستثمر اللي عليه حركات: بدل الرفض بيعرض «تعطيله» بضغطة • ⚠️ حذف دورة توزيع بيحذّر لو مستثمر سحب منها • مفيش أي تغيير في معادلات الأرباح أو المخزون أو الميزانية]
 v323: [🐞 إصلاح «فحص كميات المخزون»: المشتريات اللي اتعمل بيها الصنف جديد (productId=__new__) ما كانتش بتتحسب فكان بيطلّع أصناف سليمة غلط (كلبسات بيضاء، شداد تغذية، مجموعة الدرام...) • 📦 فلتر «دخل بدون شراء / ناقص بدون بيع» بقى بالكمية مش بالقيمة (فرق الأسعار كان بيطلّع أصناف سليمة)، بيجمّع الأصناف المتكررة بالاسم، بيحسب تفكيك الاسكراب، وكل كارت بيعرض الحساب (افتتاحي + مشترى − مباع = المسجّل والفعلي)]
 v322: [📦 فلتر المخزن «🕳️ دخل بدون شراء» و«👻 ناقص بدون بيع» (كارت المنتج بيوضح الكمية والقيمة التقديرية) • 🧾 شاشة «فحص النقدية» (قراءة فقط) في الإعدادات: فواتير/مصاريف/مشتريات/اسكراب مكررة محتملة + مدفوع زيادة + مشتريات بدون دين + تواريخ غريبة، وكل كرت بيفتح السجل للمراجعة • ⚠️ حماية من تسجيل نفس السلفة/الراتب/المصروف مرتين في ٣ دقايق • ⚠️ حماية مشترى الاسكراب المكرر (بيعرض الربط بدل الخصم التاني) + تنبيه في إحصائيات الاسكراب — مفيش أي تغيير في أي معادلة أو رصيد]
 v321: [🏦 الخسارة التراكمية بتظهر بالسالب في حقوق الملكية (كانت بتظهر صفر والميزانية مش بتتوازن) • 💵 إيداع قبل الشراء: لو المتاح للشراء مش كفاية بيعرض تسجيل إيداع بالناقص بتاريخ الدفعة قبل الحفظ (أو تكمّل من غير إيداع صراحةً)]
@@ -2252,14 +2296,14 @@ input:checked+.slider:before{transform:translateX(-20px)}
   function __permErr(prefix,res){
     var m=(res&&res.error&&res.error.message)||(res?'':'مفيش رد');
     var er=new Error(prefix+': '+m), st=res&&res.status, code=res&&res.error&&res.error.code;
-    er.net = (typeof navigator!=='undefined'&&navigator.onLine===false) || !res || /failed to fetch|networkerror|network request failed|network|load failed|timed out|timeout|aborted|offline/i.test(m) || st===0 || st===408 || st===502 || st===503 || st===504 || st===522 || st===524;
+    er.net = (__navOffline()) || !res || /failed to fetch|networkerror|network request failed|network|load failed|timed out|timeout|aborted|offline/i.test(m) || st===0 || st===408 || st===502 || st===503 || st===504 || st===522 || st===524;
     er.auth = st===401 || st===403 || code==='42501' || code==='PGRST301' || /jwt|permission denied/i.test(m);
     return er;
   }
   function __permNetErr(e){
     if(e && e.net!==undefined) return !!e.net;
     var m=(e&&e.message)||String(e||'');
-    return (typeof navigator!=='undefined'&&navigator.onLine===false) || e instanceof TypeError || /failed to fetch|networkerror|network request failed|network|load failed|timed out|timeout|aborted|offline|مفيش اتصال/i.test(m);
+    return (__navOffline()) || e instanceof TypeError || /failed to fetch|networkerror|network request failed|network|load failed|timed out|timeout|aborted|offline|مفيش اتصال/i.test(m);
   }
   // قفل فوري: بيمسح أي صلاحيات من الذاكرة ويحط الحالة failed
   function __permLock(reason, silent){
@@ -3828,9 +3872,10 @@ input:checked+.slider:before{transform:translateX(-20px)}
     var bodyKB = (typeof init.body === 'string') ? Math.round(init.body.length/1024) : 0;
     var base = window.__NET_TIMEOUT_BASE_MS || 10000;
     var ms = base + bodyKB*100 + (method==='GET' ? 8000 : 0);
-    if(method!=='GET' && Date.now() < __NET_STATE.badUntil){
+    if(method!=='GET' && (Date.now() < __NET_STATE.badUntil || __netProbeDown())){ // ⚠️ v326 — كمان لو فحص الاتصال الفعلي فشل
       return Promise.reject(new TypeError('Failed to fetch (الشبكة ضعيفة — الحفظ اتأجّل للمزامنة)'));
     }
+    var __t0=Date.now(), __uPath=String(typeof input==='string'?input:((input&&input.url)||'')).replace(/^https?:\/\/[^\/]+/,'').replace(/[?].*$/,'').slice(0,60);
     var ctl = (typeof AbortController!=='undefined') ? new AbortController() : null;
     if(ctl && init.signal){
       if(init.signal.aborted) ctl.abort();
@@ -3839,6 +3884,8 @@ input:checked+.slider:before{transform:translateX(-20px)}
     var timedOut = false;
     var timer = setTimeout(function(){
       timedOut = true;
+      __netLogPush({k:'timeout',m:method,u:__uPath,ms:ms,onLine:navigator.onLine});
+      try{ __netProbe(true); }catch(_ep){} // ⚠️ v326 — نتأكد فعليًا: النت وقع ولا الطلب ده بس تقيل؟
       __NET_STATE.badUntil = Date.now() + (window.__NET_BREAKER_MS || 20000);
       try{ if(typeof __setNetBadge==='function') __setNetBadge('weak'); }catch(_e1){}
       if(ctl) ctl.abort();
@@ -3847,11 +3894,13 @@ input:checked+.slider:before{transform:translateX(-20px)}
     if(ctl) opts.signal = ctl.signal;
     return fetch(input, opts).then(function(r){
       clearTimeout(timer); __NET_STATE.badUntil = 0;
+      try{ var __d=Date.now()-__t0; if(__d>6000||r.status>=500) __netLogPush({k:r.status>=500?'http'+r.status:'slow',m:method,u:__uPath,ms:__d}); __REACH.ok=true;__REACH.at=Date.now();__REACH.okAt=Date.now();__REACH.fails=0; }catch(_el){}
       try{ if(typeof __setNetBadge==='function' && navigator.onLine!==false) __setNetBadge('ok'); }catch(_e2){}
       return r;
     }, function(e){
       clearTimeout(timer);
       if(timedOut) throw new TypeError('Failed to fetch (انتهت المهلة — النت ضعيف)');
+      try{ __netLogPush({k:'fail',m:method,u:__uPath,ms:Date.now()-__t0,why:String((e&&e.message)||e).slice(0,60),onLine:navigator.onLine}); }catch(_el2){}
       throw e;
     });
   }
@@ -4255,7 +4304,7 @@ function __tombAdd(table,id){
 async function __tombFlush(){
   if(__tombBusy) return;
   var pend=__tombPending();
-  if(!pend.length||typeof sb==='undefined'||!window.__currentProfile||(typeof navigator!=='undefined'&&navigator.onLine===false)) return;
+  if(!pend.length||typeof sb==='undefined'||!window.__currentProfile||(__navOffline())) return;
   __tombBusy=true;
   try{
     for(var attempt=0;attempt<4;attempt++){
@@ -4424,7 +4473,7 @@ async function __pullAllFromServer(){
     // ===== v193 — إصلاح: الزرار ده معناه معدوم من غير نت (مفيش حاجة يقارنها)، وكان
     // قبل كده بيحاول ينادي كل جدول لوحده فيفشل كل نداء بسبب فقدان النت، فيطلع سطر أحمر
     // منفصل لكل جدول (~15 سطر) بدل تنبيه هادي واحد زي باقي أخطاء النت في التطبيق. =====
-    if(typeof navigator!=='undefined' && navigator.onLine===false){
+    if(__navOffline()){
       showToast('🚫 لازم تكون متصل بالنت عشان تقارن البيانات مع السيرفر','#dc2626');
       return;
     }
@@ -4534,7 +4583,7 @@ async function __pullAllFromServer(){
   }
   async function __pushBizBlobsToServer(){
     if(!window.__currentProfile || typeof sb === 'undefined') return;
-    if(typeof navigator!=='undefined' && navigator.onLine===false){
+    if(__navOffline()){
       __BIZ_BLOBS.forEach(function(b){ __queueForSync('__bizblob__', b.id, b.id); });
       return;
     }
@@ -4660,7 +4709,7 @@ async function __pullAllFromServer(){
   }
   async function __pushSettingsToServer(){
     if(!window.__currentProfile || typeof sb === 'undefined') return;
-    if(typeof navigator!=='undefined' && navigator.onLine===false){ __queueForSync('__settings__','settings','settings'); return; }
+    if(__navOffline()){ __queueForSync('__settings__','settings','settings'); return; }
     try{
       var res = await sb.from('business_state').upsert({id:'settings', data:DB.settings||{}, updated_by:window.__currentProfile.id, updated_at:new Date().toISOString()});
       if(res.error){ __reportError('فشل مزامنة الإعدادات', res.error.message); __queueForSync('__settings__','settings','settings'); }
@@ -4675,7 +4724,7 @@ async function __pullAllFromServer(){
   }
   async function __pushArchiveToServer(){
     if(!window.__currentProfile || typeof sb === 'undefined') return;
-    if(typeof navigator!=='undefined' && navigator.onLine===false){ __queueForSync('__archive__','archive','archive'); return; }
+    if(__navOffline()){ __queueForSync('__archive__','archive','archive'); return; }
     try{
       var res = await sb.from('business_state').upsert({id:'archive', data:DB.archive||{}, updated_by:window.__currentProfile.id, updated_at:new Date().toISOString()});
       if(res.error){ __reportError('فشل مزامنة الأرشيف', res.error.message); __queueForSync('__archive__','archive','archive'); }
@@ -4690,7 +4739,7 @@ async function __pullAllFromServer(){
   }
   async function __pushMovCounterToServer(){
     if(!window.__currentProfile || typeof sb === 'undefined') return;
-    if(typeof navigator!=='undefined' && navigator.onLine===false){ __queueForSync('__mov_counter__','mov_counter','mov_counter'); return; }
+    if(__navOffline()){ __queueForSync('__mov_counter__','mov_counter','mov_counter'); return; }
     try{
       var res = await sb.from('business_state').upsert({id:'mov_counter', data:{value:DB.movCounter||0}, updated_by:window.__currentProfile.id, updated_at:new Date().toISOString()});
       if(res.error){ __reportError('فشل مزامنة عداد التحركات', res.error.message); __queueForSync('__mov_counter__','mov_counter','mov_counter'); }
@@ -4772,7 +4821,7 @@ async function __pullAllFromServer(){
       var __tl=Object.keys(__tm).map(function(k){return __tm[k];});
       if(__tl.length){
         result.deleted_rows=__tl;
-        ['profit_cycles','investors'].forEach(function(k){
+        ['profit_cycles','investors','employees'].forEach(function(k){ // ⚠️ v325 — الموظفين كمان
           if(result[k])result[k]=result[k].filter(function(r){return !(r&&__tm[r.id]&&__tm[r.id].kind===k);});
         });
       }
@@ -4913,7 +4962,7 @@ async function __pushBlobSafe(id){
     // v157 — لو الجهاز أوفلاين أصلاً، منحاولش نبعت للسيرفر خالص (كان بيظهر خطأ
     // "Failed to fetch" مخيف وهو أوفلاين عمدًا). بس نضيفها لطابور المزامنة بهدوء
     // وهتترفع تلقائي لما النت يرجع (نفس آلية طابور الأوفلاين).
-    if(typeof navigator!=='undefined' && navigator.onLine===false){
+    if(__navOffline()){
       __queueForSync('__accounts__', 'accounts', 'accounts');
       return;
     }
@@ -4946,7 +4995,7 @@ async function __pushBlobSafe(id){
   }
   async function __pushClientsToServer(){
     if(!window.__currentProfile || typeof sb === 'undefined') return;
-    if(typeof navigator!=='undefined' && navigator.onLine===false){
+    if(__navOffline()){
       __queueForSync('__clients__', 'clients', 'clients');
       return;
     }
@@ -4974,7 +5023,7 @@ async function __pushBlobSafe(id){
   }
   async function __pushScrapToServer(){
     if(!window.__currentProfile || typeof sb === 'undefined') return;
-    if(typeof navigator!=='undefined' && navigator.onLine===false){
+    if(__navOffline()){
       __queueForSync('__scrap__', 'scrap_machines', 'scrap_machines');
       return;
     }
@@ -5059,7 +5108,7 @@ async function __pushBlobSafe(id){
   function __requestLogout(){
     var uid=window.__currentProfile&&window.__currentProfile.id;
     var mine=__syncQueue.filter(function(q){return !q.uid||q.uid===uid;}).length, held=__heldOps.filter(function(h){return !h.uid||h.uid===uid;}).length;
-    var off=(typeof navigator!=='undefined'&&navigator.onLine===false);
+    var off=(__navOffline());
     if(!mine&&!held&&!off){ __doLogout(); return; }
     var msg='';
     if(mine||held) msg+='عندك '+(mine+held)+' عملية لسه ما اتزامنتش مع السيرفر. لو خرجت هتفضل محفوظة على الجهاز (مش هتتمسح) وهتتزامن لما تدخل بنفس حسابك وفي نت. ';
@@ -5126,7 +5175,7 @@ async function __pushBlobSafe(id){
   }
   async function __checkExistingSession(){
     var userId = null;
-    var __offlineFast = (typeof navigator!=='undefined' && navigator.onLine===false);
+    var __offlineFast = (__navOffline());
     try{
       // v154 — getSession() نفسها أحيانًا بتحاول تجدد التوكن بطلب شبكة، ولو النت مقطوع
       // بترفض/تفشل قبل ما توصل لمنطق "استخدم آخر بيانات محفوظة" تحت خالص. بنحطها في
@@ -5684,7 +5733,7 @@ var APP_TITLE=APP_CONFIG.name;
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=323;
+var APP_VERSION=327;
 // ⚠️ v303 — BUILD_STAMP كان مش متعرّف خالص (شاشة الإعدادات كانت بتعرض "?") — اتعرّف دلوقتي وبيتزود مع كل تحديث
 var BUILD_STAMP='v323 — ٣٠ جمادى الأولى ١٤٤٨ هـ';
 // ⚠️ v295 — عنوان الصفحة كان رقم نسخته ثابت ومتنسي (فضل v294 مع إن النسخة اتغيّرت). دلوقتي بياخد الرقم من APP_VERSION دايمًا.
@@ -6088,7 +6137,7 @@ function __saveErrLog(){ try{ localStorage.setItem('mc8_error_log', JSON.stringi
 // ⚠️ v260 — تنبيه "مفيش نت" بيفضل في سجل الأخطاء حتى بعد ما النت يرجع وكل التغييرات تتزامن: بنمسحه لما الطابور يفضى والنت شغال.
 function __clearOfflineNotice(){
   try{
-    if(typeof navigator!=='undefined'&&navigator.onLine===false)return;
+    if(__navOffline())return;
     var i=__errLog.findIndex(function(e){return e&&e.context==='__offline_pending__';});
     if(i>-1){__errLog.splice(i,1);__saveErrLog();try{__renderErrorBanner();}catch(e2){}}
   }catch(e){}
@@ -6265,7 +6314,7 @@ function __queueForSync(table, id, op){
   op = op || 'upsert';
   var key = __queueKey(table,id);
   var uid = (window.__currentProfile && window.__currentProfile.id) || null;
-  var offlineNow = (typeof navigator!=='undefined' && navigator.onLine===false) || window.__permState==='offline';
+  var offlineNow = (__navOffline()) || window.__permState==='offline';
   var existing = __syncQueue.find(function(q){ return __queueKey(q.table,q.id)===key; });
   if(existing){
     existing.op = op; existing.ts = Date.now();
@@ -6390,7 +6439,7 @@ async function __drainSyncQueue(manual){
   }
   if(!__syncQueue.length){ __clearOfflineNotice(); return; } // v260
   if(typeof sb === 'undefined' || !window.__currentProfile) return;
-  if(typeof navigator!=='undefined' && navigator.onLine===false && !manual) return;
+  if(__navOffline() && !manual) return;
   // ⚠️ v309 — قبل أي رفع: السيرفر لازم يأكد الحساب والصلاحيات (الشغل الأوفلاين مبيتبعتش إلا بعد التحقق)
   var __vOk = await __verifyBeforeSync();
   if(!__vOk){ if(manual) showToast('⚠️ مقدرتش أتحقق من حسابك وصلاحياتك دلوقتي — المزامنة مؤجلة والعمليات محفوظة','#ea580c'); try{__refreshStatusBadge();}catch(_e){} return; }
@@ -6489,12 +6538,29 @@ async function __drainSyncQueue(manual){
 
 // ⚠️ v262 — تفاصيل الطابور: إيه اللي عالق ولية (قبل كده كان رقم "1" بس من غير أي تفسير)
 var __SQ_LABELS={'__accounts__':'الحسابات (بما فيها توزيع الأرباح)','__clients__':'دفتر العملاء','__scrap__':'سكراب الماكينات','__settings__':'الإعدادات','__archive__':'الأرشيف','__mov_counter__':'عداد التحركات','__bizblob__':'بيانات التشغيل','sales':'فاتورة','products':'منتج','movements':'تحرّك/عطل','expenses':'مصروف','debts':'دين','purchases':'مشتريات','tasks':'مهمة','part_withdrawals':'سحب قطع'};
+function __netDiagHtml(){
+  var fmtT=function(t){return new Date(t).toLocaleTimeString('ar-EG');};
+  var ico={probe:'🔎',timeout:'⏱️',fail:'❌',slow:'🐢',http500:'🛑',http502:'🛑',http503:'🛑'};
+  var rows=__netLog.slice(0,14).map(function(e){
+    var d=(e.k==='probe')?(e.ok?'السيرفر واصل':'السيرفر مش واصل'+(e.why?' — '+esc(e.why):''))+' ('+e.ms+'ms)':((e.m||'')+' '+esc(e.u||'')+' — '+(e.ms||0)+'ms'+(e.why?' — '+esc(e.why):''));
+    return '<div style="display:flex;gap:6px;font-size:11px;padding:3px 0;border-bottom:1px solid #f1f5f9"><span style="color:#94a3b8;white-space:nowrap">'+fmtT(e.t)+'</span><span>'+(ico[e.k]||'•')+' '+d+(e.onLine===false?' <span style="color:#b45309">(المتصفح قال أوفلاين)</span>':'')+'</span></div>';
+  }).join('')||'<div style="font-size:11px;color:#94a3b8">لسه مفيش أحداث متسجّلة (ده معناه إن مفيش مهلات ولا فشل)</div>';
+  var st=__navOffline()?'📴 أوفلاين':(__REACH.ok===false?'⚠️ المتصفح متصل لكن السيرفر مش واصل':(__netBadgeState==='weak'?'⚠️ النت ضعيف':'🌐 متصل'));
+  return '<div style="font-size:12px;line-height:1.9;margin-bottom:8px"><b>'+st+'</b><br>المتصفح بيقول: '+(navigator.onLine?'متصل':'أوفلاين')+' • آخر فحص فعلي: '+(__REACH.at?fmtT(__REACH.at)+' ('+(__REACH.ok?'نجح':'فشل')+')':'لسه')+(__REACH.okAt?' • آخر نجاح: '+fmtT(__REACH.okAt):'')+(window.__lastSyncOkAt?'<br>آخر مزامنة ناجحة: '+fmtT(window.__lastSyncOkAt):'')+'</div>'+
+    '<div style="font-weight:800;font-size:12px;margin:6px 0 4px">📋 آخر الأحداث (للتشخيص)</div>'+rows;
+}
+function __showNetDiag(hasQueue){
+  document.getElementById('modal-title').textContent='📶 حالة الاتصال';
+  document.getElementById('modal-body').innerHTML=(hasQueue?'':'<div style="background:#f0fdf4;border-radius:10px;padding:8px 11px;margin-bottom:10px;font-size:12px;color:#166534">✅ مفيش حاجة بانتظار المزامنة</div>')+__netDiagHtml()+
+    '<div class="modal-actions"><button class="btn btn-green btn-full" onclick="__netProbe(true).then(function(){__showNetDiag('+(hasQueue?'true':'')+');})">🔎 فحص الاتصال الآن</button><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+  openModal();
+}
 function __showSyncQueueDetails(){
   var list=__syncQueue.slice(), held=__heldOps.slice();
   var my=window.__currentProfile&&window.__currentProfile.id;
-  if(!list.length&&!held.length){ closeModal(); showToast('✅ مفيش حاجة بانتظار المزامنة'+(window.__lastSyncOkAt?' • آخر مزامنة '+new Date(window.__lastSyncOkAt).toLocaleTimeString('ar-EG'):''),'#16a34a'); return; }
+  if(!list.length&&!held.length){ __showNetDiag(); return; } // ⚠️ v326 — بدل التوست: لوحة حالة الاتصال
   var errs=(window.__lastSyncErrs||[]).slice(0,3);
-  var netTxt=(typeof navigator!=='undefined'&&navigator.onLine===false)?'📴 أوفلاين':'🌐 متصل';
+  var netTxt=(__navOffline())?'📴 أوفلاين':'🌐 متصل';
   var permTxt=window.__isOwner?'👑 مالك':(window.__permState==='ready'?'✅ صلاحياتك متحقق منها دلوقتي':(window.__permState==='offline'?'📴 شغال بآخر صلاحيات متحقق منها (لحد '+new Date(window.__permOfflineUntil).toLocaleString('ar-EG')+'). لو اتسحبت منك صلاحية وانت أوفلاين، التطبيق مش هيعرف لحظيًا — هتتطبّق أول ما النت يرجع ويتحقق.':'⛔ الصلاحيات مقفولة لحد التحقق من السيرفر'));
   var kindTxt={perm:'🚫 اتمنعت (صلاحية)',conflict:'⚠️ تعارض',blob_conflict:'⚠️ تعارض بعد دمج'};
   document.getElementById('modal-title').textContent='🔄 بانتظار المزامنة ('+(list.length+held.length)+')';
@@ -6524,6 +6590,7 @@ function __showSyncQueueDetails(){
     }).join('')+
     (errs.length?'<div style="background:#fef2f2;border-radius:10px;padding:9px 11px;margin:8px 0;font-size:11px;color:#991b1b;line-height:1.7"><b>آخر أخطاء:</b><br>'+errs.map(function(e){return esc(e);}).join('<br>')+'</div>':'')+
     '<div class="modal-actions"><button class="btn btn-green btn-full" onclick="__retrySyncNow(this)">🔄 حاول تاني دلوقتي</button>'+
+    '<button class="btn btn-outline btn-full" onclick="__showNetDiag(true)">📶 تشخيص الاتصال</button>'+
     '<button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
   openModal();
 }
@@ -6614,7 +6681,7 @@ function __pendingCounts(){
 function __refreshStatusBadge(){
   var el=document.getElementById('sync-badge'); if(!el) return;
   var c=__pendingCounts();
-  var offline=(__netBadgeState==='offline')||(typeof navigator!=='undefined'&&navigator.onLine===false);
+  var offline=(__netBadgeState==='offline')||(__navOffline());
   var txt,bg;
   if(window.__currentProfile && !window.__isOwner && window.__permState==='failed'){ txt='⛔ الصلاحيات مقفولة — محتاج نت للتحقق'; bg='#dc2626'; }
   else if(offline){ txt='📴 أوفلاين — شغال محليًا'; bg='#d97706'; }
@@ -6631,9 +6698,11 @@ function __setNetBadge(state){
   __refreshStatusBadge();
 }
 if(typeof window!=='undefined'){
-  window.addEventListener('offline', function(){ __setNetBadge('offline'); });
-  window.addEventListener('online', function(){ __setNetBadge('ok'); });
-  if(typeof navigator!=='undefined' && navigator.onLine===false){ __setNetBadge('offline'); }
+  window.addEventListener('offline', function(){ __setNetBadge('offline'); setTimeout(function(){ __netProbe(true); },1200); }); // ⚠️ v326 — الحدث ممكن يكون كدب
+  window.addEventListener('online', function(){ __setNetBadge('ok'); __netProbe(true); });
+  setInterval(function(){ try{ if(!document.hidden && (navigator.onLine===false || __netBadgeState!=='ok')) __netProbe(); }catch(e){} },10000);
+  setTimeout(function(){ try{ if(navigator.onLine===false) __netProbe(true); }catch(e){} },2500);
+  if(__navOffline()){ __setNetBadge('offline'); }
 }
 
 // ===== Stubs بسيطة — كل عملية بتعمل persist تلقائي =====
@@ -6646,12 +6715,13 @@ var __conflictToastAt=0;
 async function __directConflictNote(table,id,changed){
   try{
     if(!__SYNCED_TABLES[table]||typeof sb==='undefined'||!window.__currentProfile) return;
-    if(typeof navigator!=='undefined'&&navigator.onLine===false) return;
+    if(__navOffline()) return;
+    if(Date.now()<__NET_STATE.badUntil||__netProbeDown()||(typeof __netBadgeState!=='undefined'&&__netBadgeState!=='ok')) return; // ⚠️ v326 — فحص تعارض اختياري: مايعطّلش الحفظ لما النت ضعيف
     if(table==='products'&&changed&&Object.prototype.hasOwnProperty.call(changed,'qty')) return;
     var row=(DB[table]||[]).find(function(r){return r&&r.id===id;});
     var base=row&&row.updated_at; if(!base) return;
-    var r=await sb.from(table).select('*').eq('id',id).maybeSingle();
-    if(!r||r.error||!r.data) return;
+    var r=await __raceTimeout(sb.from(table).select('*').eq('id',id).maybeSingle(),2500); // ⚠️ v326 — حد أقصى ٢٫٥ث (كان ممكن يستنى ~١٨ث قبل كل حفظ)
+    if(r===__TIMED_OUT||!r||r.error||!r.data) return;
     var tS=Date.parse(r.data.updated_at||''), tB=Date.parse(base);
     if(!(r.data.updated_by&&r.data.updated_by!==window.__currentProfile.id&&!isNaN(tS)&&!isNaN(tB)&&tS>tB)) return;
     var cols={};
@@ -6894,7 +6964,7 @@ function __twinGroups(){ // {kind:'scrap'|'emp', list:[members], hasLegacy}
   return out;
 }
 function __twinMerge(groups){ // بيحتفظ بالأقوى (أكتر قطع مستخرجة / مربوط بحساب) ويشيل الباقي
-  var map={},n=0;
+  var map={},n=0,__twinTombs=[];
   groups.forEach(function(G){
     var score=function(r){return G.kind==='scrap'?((r.parts_extracted||[]).length*10+(r.status==='depleted'?1:0)):((r.linked_profile_id?10:0)+(r.active===false?0:1));};
     var uu=G.list.filter(function(r){return __UUID_RE.test(String(r.id));}),pool=uu.length?uu:G.list;
@@ -6903,14 +6973,14 @@ function __twinMerge(groups){ // بيحتفظ بالأقوى (أكتر قطع م
       if(r===keep)return;
       if(G.kind==='scrap'){if((r.parts_extracted||[]).length>(keep.parts_extracted||[]).length)keep.parts_extracted=r.parts_extracted;if(r.status==='depleted')keep.status='depleted';}
       else{if(!keep.linked_profile_id&&r.linked_profile_id)keep.linked_profile_id=r.linked_profile_id;}
-      map[r.id]=keep.id;n++;
+      map[r.id]=keep.id;n++;if(G.kind==='emp')__twinTombs.push(r.id);
     });
   });
   if(!n)return 0;
   var drop=function(arr){return arr.filter(function(r){return !map.hasOwnProperty(r.id);});};
   DB.scrap_machines=drop(DB.scrap_machines||[]);
   if(DB.accounts&&DB.accounts.employees)DB.accounts.employees=drop(DB.accounts.employees);
-  __twinRemap(map);persist();return n;
+  __twinRemap(map);__twinTombs.forEach(function(x){try{_invTomb('employees',x);}catch(eT){}});persist();return n; // ⚠️ v325 — الشواهد بعد الاستبدال (وإلا المعرّف الباقي هو اللي كان هيتعلّم محذوف)
 }
 var __twinAsked=false,__twinTimer=null;
 function __fixTwins(){ // بعد أي سحب من السيرفر: توائم المعرّف القديم بتتدمج لوحدها (متأكدين إنها تكرار)، والباقي بنسأل عنه مرة في الجلسة
@@ -17118,7 +17188,7 @@ function _invExportBackup(){
     showToast('✅ تم التصدير — شوف Downloads','#16a34a');
   }catch(e){showToast('❌ فشل التصدير','#dc2626');}
 }
-var _INV_ACT={deposit:['💰 إيداع رأس مال','money'],payout:['💸 دفع للمستثمر','money'],pay:['💸 دفع (أرباح/رأس مال)','money'],old_withdraw:['💸 سحب شراكة','money'],old_capital_add:['💼 مساهمة رأس مال (شراكة)','money'],profit_cycle_create:['📊 توزيع أرباح','money'],profit_cycle_delete:['🗑️ حذف دورة توزيع','money'],profit_cycle_edit_rollback:['↺ استرجاع دورة للتعديل (قديم)','money'],profit_cycle_edit:['✏️ تعديل دورة توزيع','money'],investor_create:['👤 مستثمر جديد','batch'],investor_edit:['✏️ تعديل مستثمر','batch'],investor_archive:['📦 أرشفة مستثمر','batch'],investor_unarchive:['📦 إلغاء أرشفة','batch'],old_investor_create:['👤 مستثمر شراكة جديد','batch'],old_investor_edit:['✏️ تعديل مستثمر شراكة','batch'],old_investor_delete:['🗑️ حذف مستثمر شراكة','batch'],batch_create:['📦 دفعة جديدة','batch'],batch_edit:['✏️ تعديل دفعة','batch'],batch_delete:['🗑️ حذف دفعة','batch'],batch_close:['🔒 قفل دفعة','batch'],batch_reopen:['🔓 فتح دفعة','batch'],month_snapshot:['📸 لقطة إقفال','close'],baseline_snapshots:['📸 تثبيت لقطات قديمة','close'],reopen_month:['🔓 فتح شهر مقفول','close'],sync_conflict:['⚠️ تعارض مزامنة','sync'],restore_backup:['↩️ استرجاع نسخة','sync']};
+var _INV_ACT={deposit:['💰 إيداع رأس مال','money'],payout:['💸 دفع للمستثمر','money'],pay:['💸 دفع (أرباح/رأس مال)','money'],old_withdraw:['💸 سحب شراكة','money'],investor_emp_link:['🔗 ربط مستثمر بموظف','batch'],investor_emp_unlink:['⛓️‍💥 فك ربط مستثمر بموظف','batch'],old_capital_edit:['✏️ تعديل مساهمة رأس مال','money'],old_capital_delete:['🗑️ حذف مساهمة رأس مال','money'],old_withdraw_delete:['🗑️ حذف سحب شراكة','money'],old_investor_deactivate:['⏸️ تعطيل مستثمر شراكة','batch'],old_capital_add:['💼 مساهمة رأس مال (شراكة)','money'],profit_cycle_create:['📊 توزيع أرباح','money'],profit_cycle_delete:['🗑️ حذف دورة توزيع','money'],profit_cycle_edit_rollback:['↺ استرجاع دورة للتعديل (قديم)','money'],profit_cycle_edit:['✏️ تعديل دورة توزيع','money'],investor_create:['👤 مستثمر جديد','batch'],investor_edit:['✏️ تعديل مستثمر','batch'],investor_archive:['📦 أرشفة مستثمر','batch'],investor_unarchive:['📦 إلغاء أرشفة','batch'],old_investor_create:['👤 مستثمر شراكة جديد','batch'],old_investor_edit:['✏️ تعديل مستثمر شراكة','batch'],old_investor_delete:['🗑️ حذف مستثمر شراكة','batch'],batch_create:['📦 دفعة جديدة','batch'],batch_edit:['✏️ تعديل دفعة','batch'],batch_delete:['🗑️ حذف دفعة','batch'],batch_close:['🔒 قفل دفعة','batch'],batch_reopen:['🔓 فتح دفعة','batch'],month_snapshot:['📸 لقطة إقفال','close'],baseline_snapshots:['📸 تثبيت لقطات قديمة','close'],reopen_month:['🔓 فتح شهر مقفول','close'],sync_conflict:['⚠️ تعارض مزامنة','sync'],restore_backup:['↩️ استرجاع نسخة','sync']};
 function _invAuditSum(a){
   var d=a.details||{},p=[];
   if(d.investor)p.push(d.investor);if(d.name)p.push(d.name);if(d.title)p.push(d.title);
@@ -17356,7 +17426,7 @@ function _invUnifiedBlock(inv){
   }else{
     h+='<button class="btn btn-sm btn-full" style="background:#fffbeb;color:#92400e;border:1.5px dashed #fde68a;border-radius:9px;margin-bottom:8px" onclick="_invLinkClientPick(\'old\','+jsStr(inv.id)+')">🔗 ربطه بعميل (لو هو عميل عندك كمان)</button>';
   }
-  return h;
+  return h+_invEmpChip('old',inv); // ⚠️ v325 — ربط بموظف
 }
 function _invUnlinkedBlock(){
   var rows=_invList().filter(function(n){return !n.archived&&!_invLinkedOld(n);}),N=function(x){return fmt(Math.round(x*100)/100);};
@@ -17367,6 +17437,7 @@ function _invUnlinkedBlock(){
       '<div style="display:flex;justify-content:space-between;align-items:center;gap:6px"><div><b style="font-size:15px">'+esc(n.name)+'</b>'+(n.phone?'<div style="font-size:12px;color:#64748b">📱 '+esc(n.phone)+'</div>':'')+'</div><span style="background:#d1fae5;color:#047857;border-radius:7px;padding:2px 9px;font-size:12px;font-weight:700">'+fmtQty(n.pct||0)+'% من ربح الدفعات</span></div>'+
       '<div style="margin-top:5px">'+_invStatusBadge(n,false)+'</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin:8px 0">'+_invMini('💵 متاح للشراء',T.capCash,T.capCash<-0.001?'#dc2626':'#047857',T.capCash<-0.001?'#fee2e2':'#d1fae5')+_invMini('📦 في بضاعة',T.remCost,'#c2410c','#ffedd5')+_invMini('🧮 أرباح متبقية',T.profRem,'#6d28d9','#ede9fe')+_invMini('⚖️ له',T.owed,'#0f172a','#e2e8f0')+'</div>'+
       (cli?'<div style="font-size:12px;margin-bottom:6px">👤 عميل كمان: <b>'+esc(cli.name)+'</b> <a href="#" onclick="openTwoWayStatement('+jsStr(cli.name)+');return false" style="color:#92400e;font-weight:800">⚖️ كشفه</a></div>':'')+
+      _invEmpChip('new',n)+
       '<div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn btn-sm" style="flex:1;background:#d1fae5;color:#047857;border:none;border-radius:9px" onclick="openInvestor('+jsStr(n.id)+')">📂 فتح الحساب</button>'+
       '<button class="btn btn-sm" style="flex:1;background:#eef2ff;color:#4338ca;border:none;border-radius:9px" onclick="_invLinkOldPick('+jsStr(n.id)+')">🔗 ربط بمستثمر شراكة</button>'+
       (cli?'':'<button class="btn btn-sm" style="flex:1;background:#fffbeb;color:#92400e;border:none;border-radius:9px" onclick="_invLinkClientPick(\'new\','+jsStr(n.id)+')">🔗 ربط بعميل</button>')+'</div></div>';
@@ -21836,7 +21907,8 @@ function renderEmployees(){
     '<div style="background:#dcfce7;border-radius:12px;padding:12px;text-align:center">'+
     '<div style="font-size:10px;color:#15803d;font-weight:700">إجمالي الرواتب / شهر</div>'+
     '<div style="font-size:18px;font-weight:900;color:#15803d">'+fmt(totalSalaries)+'</div></div></div>'+
-    '<button class="btn btn-primary btn-full btn-sm" onclick="openAddEmployeeModal()" style="margin-bottom:12px">+ إضافة موظف</button>'+
+    '<div style="display:flex;gap:6px;margin-bottom:12px"><button class="btn btn-primary btn-sm" style="flex:2" onclick="openAddEmployeeModal()">+ إضافة موظف</button>'+
+    (window.__isOwner&&items.length>1?'<button class="btn btn-sm" style="flex:1;background:#fef3c7;color:#92400e;border:none" onclick="openMergeEmployees()">🔀 دمج مكرر</button>':'')+'</div>'+_empDupBanner()+ // ⚠️ v325
     (items.length?items.map(function(e){
       var isActive=e.active!==false;
       var isDaily=e.wage_type==='daily';
@@ -21855,6 +21927,7 @@ function renderEmployees(){
         '<span style="font-size:12px;color:#64748b">'+esc(e.role||'—')+'</span>'+
         (e.hire_date?'<span style="font-size:11px;color:#94a3b8">— عُيّن '+esc(fmtDate(e.hire_date))+'</span>':'')+
         (!isActive?'<span style="background:#f1f5f9;color:#94a3b8;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:700">متوقف</span>':'')+
+        (_empInvCount(e)?'<span style="background:#e0e7ff;color:#4338ca;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:700">💼 مستثمر</span>':'')+
         (e.increment?'<span style="background:#ede9fe;color:#7c3aed;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:700">📈 '+e.increment.value+(e.increment.type==='pct'?'%':' ج')+' كل '+e.increment.every+' '+(e.increment.period==='year'?'سنة':'صرف')+'</span>':'')+
         '</div>'+
         // ⚠️ v177 — شريط استحقاق/مدفوع/رصيد للراتب اليومي
@@ -21869,6 +21942,7 @@ function renderEmployees(){
           (isDaily?'<button class="btn-ic" style="background:#f5f3ff" onclick="openPayDailyWageModal(\''+e.id+'\')">💰 دفعة</button>':_paySalBtn(e.id))+
           (!isDaily?'<button class="btn-ic" style="background:#fff7ed" onclick="openPayAdvanceModal(\''+e.id+'\')">💵 سلفة</button>':'')+
           (e.linked_profile_id?'<button class="btn-ic" style="background:#eff6ff" onclick="openMarkLeaveModal(\''+e.id+'\')">📅 إجازة</button>':'')+
+        '<button class="btn-ic" style="background:#e0e7ff" onclick="openEmployeeDetailReport(\''+e.id+'\')">📊 تقرير</button>'+
         '<button class="btn-ic" style="background:#fffbeb" onclick="openEmployeeStatement(\''+e.id+'\')">📒 كشف</button>'+
         '<button class="btn-ic" style="background:#ede9fe" onclick="openSalaryIncrementModal(\''+e.id+'\')" title="زيادة دورية">📈 زيادة</button>'+
         '<button class="btn-ic" style="background:'+(isActive?'#fef9c3':'#dcfce7')+'" onclick="toggleEmployee(\''+e.id+'\')">'+(isActive?'⏸️ إيقاف':'▶️ تفعيل')+'</button>'+
@@ -21956,6 +22030,7 @@ async function toggleEmployee(id){
 }
 
 async function delEmployee(id){
+  try{_invTomb('employees',id);}catch(eT){} // ⚠️ v325 — شاهد حذف: الموظف المحذوف ما يرجعش من جهاز تاني
   DB.accounts.employees=removeRow(DB.accounts.employees,id);
   await persist();renderAccounting();showToast('🗑️ تم الحذف','#64748b');
 }
@@ -28372,71 +28447,456 @@ if(!DB.accounts.profit_cycles) DB.accounts.profit_cycles=[];
 if(!DB.accounts.retained_earnings) DB.accounts.retained_earnings={owner:0,investors:{}};
 
 // ===== RENDER =====
+// ==================== ⚠️ v325 — ربط المستثمر بالموظف + التقرير الشامل + دمج الموظف المكرر ====================
+// الربط متخزّن في employee_id على المستثمر (شراكة: DB.accounts.investors / بضاعة: DB.investors). مستثمر البضاعة المربوط بحساب شراكة بيرث ربطه منه.
+function _invEmpOf(inv,kind){
+  if(!inv)return null;
+  var id=inv.employee_id;
+  if(!id&&kind==='new'){var o=_invLinkedOld(inv);id=o&&o.employee_id;}
+  return id?((DB.accounts.employees||[]).find(function(e){return e.id===id;})||null):null;
+}
+function _invEmpChip(kind,inv){
+  var e=_invEmpOf(inv,kind),st='background:#eef2ff;border:1.5px solid #c7d2fe;border-radius:11px;padding:8px 11px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;gap:6px;font-size:12px';
+  if(e)return '<div style="'+st+'"><span>👤 موظف عندك: <b>'+esc(e.name)+'</b></span><span style="display:flex;gap:5px">'+
+    '<button class="btn btn-sm" style="background:#e0e7ff;color:#4338ca;border:none;border-radius:8px" onclick="openEmployeeDetailReport('+jsStr(e.id)+')">📊 تقريره</button>'+
+    '<button class="btn btn-sm" style="background:#f1f5f9;color:#475569;border:none;border-radius:8px" onclick="confirmAction(\'هتفك ربط المستثمر بالموظف؟\',function(){_invEmpApply(\''+kind+'\','+jsStr(inv.id)+',\'\')})">فك</button></span></div>';
+  return '<button class="btn btn-sm btn-full" style="background:#eef2ff;color:#4338ca;border:1.5px dashed #a5b4fc;border-radius:9px;margin-bottom:8px" onclick="_invEmpPick(\''+kind+'\','+jsStr(inv.id)+')">👤 ربطه بموظف (لو هو موظف عندك كمان)</button>';
+}
+function _invEmpPick(kind,id){
+  var inv=kind==='old'?(DB.accounts.investors||[]).find(function(x){return x.id===id;}):_invById(id);if(!inv)return;
+  var E=(DB.accounts.employees||[]),nm=normalizeAr(inv.name||''),pre='';
+  E.forEach(function(e){var n2=normalizeAr(e.name||'');if(!pre&&n2&&(n2===nm||nm.indexOf(n2)>=0||n2.indexOf(nm)>=0))pre=e.id;});
+  document.getElementById('modal-title').textContent='👤 ربط بموظف — '+inv.name;
+  document.getElementById('modal-body').innerHTML=E.length?
+    '<div style="font-size:12px;color:#64748b;margin-bottom:8px">اختار الموظف اللي هو نفس الشخص. بعد الربط هتلاقي تقرير شامل ليه (راتب + استثمار) من شاشة الموظفين.</div>'+
+    '<select id="iel-emp" style="width:100%;padding:10px;border:1.5px solid #e2e8f0;border-radius:9px;font-family:inherit;margin-bottom:10px">'+E.map(function(e){return '<option value="'+esc(e.id)+'"'+(e.id===pre?' selected':'')+'>'+esc(e.name)+(e.role?' — '+esc(e.role):'')+'</option>';}).join('')+'</select>'+
+    '<div class="modal-actions"><button class="btn btn-green btn-full" onclick="__runOnce(this,function(){return _invEmpApply(\''+kind+'\','+jsStr(id)+',v(\'iel-emp\'));})">🔗 ربط</button><button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>'
+    :'<div class="empty">مفيش موظفين مسجّلين لسه</div><div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+  openModal();
+}
+async function _invEmpApply(kind,id,empId,reopenEmp){
+  if(_invGuard(null))return; // مالك بس
+  var tk=kind,tid=id;
+  if(kind==='new'){var n0=_invById(id),o0=n0&&_invLinkedOld(n0);if(o0){tk='old';tid=o0.id;}}
+  if(empId&&!(DB.accounts.employees||[]).some(function(e){return e.id===empId;}))return showToast('⚠️ الموظف مش موجود','#dc2626');
+  var name='';
+  if(tk==='old'){
+    var r=(DB.accounts.investors||[]).find(function(x){return x.id===tid;});if(!r)return;name=r.name;
+    _invBackup(empId?'قبل ربط مستثمر بموظف':'قبل فك ربط مستثمر بموظف');
+    DB.accounts.investors=patchRow(DB.accounts.investors,tid,{employee_id:empId||null});
+  }else{
+    var r2=_invById(tid);if(!r2)return;name=r2.name;
+    _invBackup(empId?'قبل ربط مستثمر بموظف':'قبل فك ربط مستثمر بموظف');
+    r2.employee_id=empId||null;
+  }
+  _invAudit(empId?'investor_emp_link':'investor_emp_unlink',tk,tid,{investor:name,employee:empId||null});
+  await persist();closeModal();
+  if(reopenEmp)openEmployeeDetailReport(reopenEmp);else{renderAccounting();}
+  showToast(empId?'✅ اتربط المستثمر بالموظف':'✅ اتفك الربط','#16a34a');
+}
+function _empInvData(emp){
+  var olds=(DB.accounts.investors||[]).filter(function(o){return o.employee_id===emp.id;});
+  var news=_invList().filter(function(n){return n.employee_id===emp.id;});
+  olds.forEach(function(o){var n=_invLinkedNew(o);if(n&&news.indexOf(n)<0)news.push(n);});
+  var cycles=DB.accounts.profit_cycles||[],pm=_pcPaidMap(),re=(DB.accounts.retained_earnings||{}).investors||{};
+  var sum=function(a,f){return (a||[]).reduce(function(s,x){return s+(+f(x)||0);},0);};
+  var P=olds.map(function(o){
+    var cap=sum(o.capital_contributions,function(x){return x.amount;});
+    var capRet=sum((o.withdrawals||[]).filter(function(w){return w.type==='capital_return';}),function(w){return w.amount;});
+    var profWd=sum((o.withdrawals||[]).filter(function(w){return w.type==='profit';}),function(w){return w.amount;});
+    var rows=[],dist=0;
+    cycles.forEach(function(c){(c.distributions||[]).forEach(function(d){if(d.investor_id===o.id){dist+=+d.amount||0;rows.push({from:c.date_from,to:c.date_to,amount:+d.amount||0,paid:(pm[c.id]||{})[o.id]||0,date:c.date_created||''});}});});
+    rows.sort(function(a,b){return a.date<b.date?1:a.date>b.date?-1:0;});
+    return {o:o,cap:cap,capRet:capRet,capRem:cap-capRet,dist:dist,profWd:profWd,retained:re[o.id]||0,rows:rows};
+  });
+  var G=news.map(function(n){return {n:n,T:_invStats(n).T};});
+  var due=0;P.forEach(function(x){due+=x.capRem+x.retained;});G.forEach(function(g){due+=g.T.owed;});
+  return {P:P,G:G,due:due};
+}
+function _empInvCount(emp){
+  if(!emp)return 0;
+  var olds=(DB.accounts.investors||[]).filter(function(o){return o.employee_id===emp.id;});
+  var news=_invList().filter(function(n){return n.employee_id===emp.id&&!olds.some(function(o){return n.acc_id===o.id;});});
+  return olds.length+news.length;
+}
+function _empInvSec(emp){
+  if(_empDetSec!=='all'&&_empDetSec!=='inv')return '';
+  var D=_empInvData(emp),N=function(x){return fmt(Math.round(x*100)/100);},full=_empDetSec==='inv';
+  var title='<div style="font-weight:800;font-size:13px;margin:12px 0 6px">📈 كمستثمر</div>';
+  var linkBtn='<button class="btn btn-sm btn-full" style="background:#eef2ff;color:#4338ca;border:1.5px dashed #a5b4fc;border-radius:9px;margin:4px 0 8px" onclick="_empInvLinkPick('+jsStr(emp.id)+')">🔗 ربطه بمستثمر</button>';
+  if(!D.P.length&&!D.G.length)return title+'<div class="empty">مش مربوط بأي مستثمر</div>'+(window.__isOwner?linkBtn:'');
+  var h=title+'<div style="background:#ede9fe;border-radius:11px;padding:9px 12px;margin-bottom:8px;font-size:13px;font-weight:900;color:#5b21b6">⚖️ إجمالي المستحق له كمستثمر: '+N(D.due)+' ج'+(full?'':' <a href="#" onclick="_empDetSet(\'inv\');return false" style="font-size:11px;color:#4338ca;font-weight:800">تفاصيل ›</a>')+'</div>';
+  if(!full)return h;
+  D.P.forEach(function(x){
+    h+='<div style="background:#f5f3ff;border-radius:11px;padding:10px 12px;margin-bottom:8px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><b style="font-size:13px">💼 شريك — '+esc(x.o.name)+' ('+_pctTxt(x.o.profit_share_pct)+')'+(x.o.status==='inactive'?' <span style="font-size:10px;color:#94a3b8">غير نشط</span>':'')+'</b>'+
+      (window.__isOwner?'<button class="btn btn-sm" style="background:#f1f5f9;color:#475569;border:none;border-radius:8px" onclick="confirmAction(\'هتفك الربط؟\',function(){_invEmpApply(\'old\','+jsStr(x.o.id)+',\'\','+jsStr(emp.id)+')})">فك</button>':'')+'</div>'+
+      '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px">'+_invMini('رأس مال مودع',x.cap,'#5b21b6','#ede9fe')+_invMini('مردود',x.capRet,'#0e7490','#cffafe')+_invMini('متبقي',x.capRem,'#1e40af','#dbeafe')+
+      _invMini('أرباح موزعة',x.dist,'#15803d','#dcfce7')+_invMini('مسحوب',x.profWd,'#c2410c','#ffedd5')+_invMini('محتجز',x.retained,'#854d0e','#fef9c3')+'</div>'+
+      (x.rows.length?'<div style="margin-top:7px;font-size:11px;color:#475569">'+x.rows.slice(0,6).map(function(r){return '<div style="display:flex;justify-content:space-between;padding:2px 0"><span>'+esc(fmtDate(r.from))+' ← '+esc(fmtDate(r.to))+'</span><span><b>'+N(r.amount)+'</b> '+(r.paid>=r.amount-0.5?'✅':'<span style="color:#b45309">استلم '+N(r.paid)+'</span>')+'</span></div>';}).join('')+'</div>':'')+
+      '<div style="border-top:1px dashed #c4b5fd;margin-top:6px;padding-top:5px;font-size:12px;font-weight:800;color:#5b21b6">له: '+N(x.capRem+x.retained)+' ج</div></div>';
+  });
+  D.G.forEach(function(g){
+    h+='<div style="background:#ecfdf5;border-radius:11px;padding:10px 12px;margin-bottom:8px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><b style="font-size:13px">📦 بضاعة — '+esc(g.n.name)+' ('+fmtQty(g.n.pct||0)+'% من ربح الدفعات)</b>'+
+      '<button class="btn btn-sm" style="background:#d1fae5;color:#047857;border:none;border-radius:8px" onclick="closeModal();openInvestor('+jsStr(g.n.id)+')">📂 فتح</button></div>'+
+      '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px">'+_invMini('مودع',g.T.dep,'#047857','#d1fae5')+_invMini('متاح للشراء',g.T.capCash,g.T.capCash<-0.001?'#dc2626':'#047857','#d1fae5')+_invMini('في بضاعة',g.T.remCost,'#c2410c','#ffedd5')+
+      _invMini('أرباح',g.T.share,'#6d28d9','#ede9fe')+_invMini('مدفوع له',g.T.pay,'#c2410c','#ffedd5')+_invMini('له',g.T.owed,'#0f172a','#e2e8f0')+'</div></div>';
+  });
+  return h+'<div style="font-size:10.5px;color:#94a3b8;margin-bottom:6px">ℹ️ المستحق ده غير مُقاص مع عهدة الخزنة أو السلف — كل رقم بيظهر لوحده.</div>'+(window.__isOwner?linkBtn:'');
+}
+function _empSalData(emp){
+  var ents=(DB.expenses||[]).filter(function(ex){return ex.source==='salary'&&ex.employee_id===emp.id;}).map(function(ex){
+    var kind=ex.is_advance===true?'advance':(ex.official_pay===true||ex.wage_type==='daily')?'salary':'bonus';
+    return {id:ex.id,date:ex.date||'',kind:kind,amount:+ex.amount||0,note:ex.note||''};
+  }).sort(function(a,b){return a.date<b.date?1:a.date>b.date?-1:0;});
+  var sums={salary:0,advance:0,bonus:0};ents.forEach(function(e){sums[e.kind]+=e.amount;});
+  var leaves=(DB.accounts.employee_leaves||[]).filter(function(l){return l.employee_id===emp.id;}).length;
+  return {ents:ents,sums:sums,leaves:leaves,total:sums.salary+sums.advance+sums.bonus};
+}
+function _empSalSec(emp){
+  if(_empDetSec!=='all'&&_empDetSec!=='sal')return '';
+  var S=_empSalData(emp),full=_empDetSec==='sal',N=function(x){return fmt(Math.round(x*100)/100);};
+  var lab={salary:'💰 راتب/أجر',advance:'💵 سلفة',bonus:'🎁 مكافأة'};
+  var h='<div style="font-weight:800;font-size:13px;margin:12px 0 6px">💼 الراتب والأجر</div>'+
+    '<div style="background:#f0fdf4;border-radius:11px;padding:10px 12px;margin-bottom:8px;font-size:12px">'+
+    '<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px"><span>'+esc(emp.role||'—')+(emp.hire_date?' • عُيّن '+esc(fmtDate(emp.hire_date)):'')+(emp.active===false?' • <b style="color:#94a3b8">متوقف</b>':'')+'</span><b style="color:#15803d">'+(emp.wage_type==='daily'?N(emp.daily_rate||0)+'/يوم':N(emp.salary||0)+'/شهر')+'</b></div>'+
+    '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:7px">'+_invMini('رواتب',S.sums.salary,'#15803d','#dcfce7')+_invMini('سلف',S.sums.advance,'#c2410c','#ffedd5')+_invMini('مكافآت',S.sums.bonus,'#6d28d9','#ede9fe')+_invMini('الإجمالي',S.total,'#0f172a','#e2e8f0')+'</div>'+
+    '<div style="margin-top:6px;color:#475569">📅 أيام إجازة معتمدة: <b>'+S.leaves+'</b></div></div>';
+  var cap=full?40:5;
+  h+=S.ents.slice(0,cap).map(function(e){return '<div style="display:flex;justify-content:space-between;gap:8px;background:#f8fafc;border-radius:8px;padding:7px 10px;margin-bottom:5px;font-size:12px"><span>'+lab[e.kind]+' — '+esc(fmtDate(e.date))+'</span><b style="color:#dc2626">'+N(e.amount)+'</b></div>';}).join('');
+  return h+'<button class="btn btn-sm btn-full" style="background:#fffbeb;color:#92400e;border:none;margin-bottom:6px" onclick="closeModal();openEmployeeStatement('+jsStr(emp.id)+')">📒 كشف حساب الراتب الكامل'+(S.ents.length>cap?' ('+S.ents.length+' حركة)':'')+'</button>';
+}
+function _empInvLinkPick(empId){
+  var emp=(DB.accounts.employees||[]).find(function(e){return e.id===empId;});if(!emp)return;
+  var nm=normalizeAr(emp.name||''),opts=[],pre='';
+  (DB.accounts.investors||[]).forEach(function(o){if(!o.employee_id){var k='old:'+o.id;opts.push([k,'💼 شريك — '+o.name]);if(!pre&&normalizeAr(o.name||'')&&(normalizeAr(o.name)===nm||nm.indexOf(normalizeAr(o.name))>=0||normalizeAr(o.name).indexOf(nm)>=0))pre=k;}});
+  _invList().forEach(function(n){if(!n.employee_id&&!_invLinkedOld(n)){var k='new:'+n.id;opts.push([k,'📦 بضاعة — '+n.name]);if(!pre&&normalizeAr(n.name||'')&&(normalizeAr(n.name)===nm||nm.indexOf(normalizeAr(n.name))>=0||normalizeAr(n.name).indexOf(nm)>=0))pre=k;}});
+  document.getElementById('modal-title').textContent='🔗 ربط '+emp.name+' بمستثمر';
+  document.getElementById('modal-body').innerHTML=opts.length?
+    '<select id="eil-inv" style="width:100%;padding:10px;border:1.5px solid #e2e8f0;border-radius:9px;font-family:inherit;margin-bottom:10px">'+opts.map(function(o){return '<option value="'+esc(o[0])+'"'+(o[0]===pre?' selected':'')+'>'+esc(o[1])+'</option>';}).join('')+'</select>'+
+    '<div class="modal-actions"><button class="btn btn-green btn-full" onclick="__runOnce(this,function(){var x=v(\'eil-inv\').split(\':\');return _invEmpApply(x[0],x.slice(1).join(\':\'),'+jsStr(empId)+','+jsStr(empId)+');})">🔗 ربط</button><button class="btn btn-outline btn-full" onclick="closeModal();openEmployeeDetailReport('+jsStr(empId)+')">إلغاء</button></div>'
+    :'<div class="empty">كل المستثمرين مربوطين أو مفيش مستثمرين</div><div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal();openEmployeeDetailReport('+jsStr(empId)+')">رجوع</button></div>';
+  openModal();
+}
+// ---------- دمج موظف مكرر ----------
+function _empDupPairs(){
+  var E=DB.accounts.employees||[],out=[];
+  var tok=function(n){return normalizeAr(n||'').split(/\s+/).filter(function(x){return x.length>1;});};
+  for(var i=0;i<E.length;i++)for(var j=i+1;j<E.length;j++){
+    var a=E[i],b=E[j],ta=tok(a.name),tb=tok(b.name),score=0,why='';
+    if(ta.length&&tb.length){
+      if(ta.join(' ')===tb.join(' ')){score=1;why='نفس الاسم';}
+      else{
+        var common=ta.filter(function(x){return tb.some(function(y){return x===y||(x.length>=3&&y.length>=3&&(x.indexOf(y)===0||y.indexOf(x)===0));});}).length;
+        var mn=Math.min(ta.length,tb.length);
+        if(common>=2||(common>=1&&mn===1)){score=0.7;why='أسماء متشابهة';}
+      }
+    }
+    if(!score&&a.hire_date&&a.hire_date===b.hire_date&&(+a.salary||0)>0&&(+a.salary)===(+b.salary)){score=0.6;why='نفس الراتب وتاريخ التعيين';}
+    if(score)out.push({a:a,b:b,score:score,why:why});
+  }
+  return out.sort(function(x,y){return y.score-x.score;});
+}
+function _empDupBanner(){
+  if(!window.__isOwner)return '';
+  var ps=_empDupPairs().slice(0,2);if(!ps.length)return '';
+  return '<div style="background:#fffbeb;border:1.5px solid #fde68a;border-radius:11px;padding:9px 11px;margin-bottom:12px;font-size:12px">'+
+    '<div style="font-weight:800;color:#92400e;margin-bottom:5px">🔀 شكّيت في موظفين مكررين</div>'+
+    ps.map(function(p){return '<div style="display:flex;justify-content:space-between;align-items:center;gap:6px;margin-bottom:3px"><span>'+esc(p.a.name)+' ≈ '+esc(p.b.name)+' <span style="color:#94a3b8">('+p.why+')</span></span><button class="btn btn-sm" style="background:#fef3c7;color:#92400e;border:none;border-radius:8px" onclick="openMergeEmployees('+jsStr(p.a.id)+','+jsStr(p.b.id)+')">دمج</button></div>';}).join('')+'</div>';
+}
+function openMergeEmployees(aId,bId){
+  if(!window.__isOwner)return showToast('🚫 دمج الموظفين للمالك بس','#dc2626');
+  var E=DB.accounts.employees||[];if(E.length<2)return showToast('⚠️ محتاج موظفين اتنين على الأقل','#dc2626');
+  var pairs=_empDupPairs().slice(0,4);
+  if(!aId||!bId){aId=pairs.length?pairs[0].a.id:E[0].id;bId=pairs.length?pairs[0].b.id:E[1].id;}
+  var opt=function(sel){return E.map(function(e){return '<option value="'+esc(e.id)+'"'+(e.id===sel?' selected':'')+'>'+esc(e.name)+(e.role?' — '+esc(e.role):'')+(e.active===false?' (متوقف)':'')+'</option>';}).join('');};
+  var sty='width:100%;padding:10px;border:1.5px solid #e2e8f0;border-radius:9px;font-family:inherit;margin-bottom:10px';
+  document.getElementById('modal-title').textContent='🔀 دمج موظف مكرر';
+  document.getElementById('modal-body').innerHTML=
+    '<div style="font-size:12px;color:#64748b;margin-bottom:8px;line-height:1.7">بينقل كل مصروفات ورواتب وسلف وإجازات وروابط المكرر للموظف الأساسي، وبيشيل المكرر. بيتسجّل في سجل عشان تقدر ترجع تراجع.</div>'+
+    (pairs.length?'<div style="margin-bottom:8px">'+pairs.map(function(p){return '<button type="button" class="btn btn-sm" style="background:#fef3c7;color:#92400e;border:none;border-radius:8px;margin:0 0 4px 4px" onclick="openMergeEmployees('+jsStr(p.a.id)+','+jsStr(p.b.id)+')">'+esc(p.a.name)+' ≈ '+esc(p.b.name)+'</button>';}).join('')+'</div>':'')+
+    '<label style="font-size:12px;font-weight:800">✅ الأساسي (اللي هيفضل)</label><select id="mg-keep" onchange="_empMergePreview(true)" style="'+sty+'">'+opt(aId)+'</select>'+
+    '<label style="font-size:12px;font-weight:800">🗑️ المكرر (هيتشال وتتنقل سجلاته)</label><select id="mg-dup" onchange="_empMergePreview(true)" style="'+sty+'">'+opt(bId)+'</select>'+
+    fld('mg-name','الاسم النهائي','text','')+
+    '<div style="display:flex;gap:6px;margin:-4px 0 10px"><button type="button" class="btn btn-sm" style="flex:1;background:#f1f5f9;color:#475569;border:none" onclick="_mgFillName(\'keep\')">اسم الأساسي</button><button type="button" class="btn btn-sm" style="flex:1;background:#f1f5f9;color:#475569;border:none" onclick="_mgFillName(\'dup\')">اسم المكرر</button></div>'+
+    '<div id="mg-prev"></div>'+
+    '<div class="modal-actions"><button class="btn btn-green btn-full" onclick="_empMergeConfirm()">🔀 دمج</button><button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
+  openModal();_empMergePreview(true);
+}
+function _mgEmp(id){return (DB.accounts.employees||[]).find(function(e){return e.id===id;});}
+function _mgFillName(w){var e=_mgEmp(v(w==='keep'?'mg-keep':'mg-dup'));if(e)document.getElementById('mg-name').value=e.name||'';}
+function _empMergeCounts(dupId){
+  return {exp:(DB.expenses||[]).filter(function(e){return e.employee_id===dupId;}).length,
+    pay:((DB.accounts.salary_payments||[]).filter(function(p){return p.emp_id===dupId;})).length,
+    leaves:((DB.accounts.employee_leaves||[]).filter(function(l){return l.employee_id===dupId;})).length,
+    inv:((DB.accounts.investors||[]).filter(function(o){return o.employee_id===dupId;})).length+(_invList().filter(function(n){return n.employee_id===dupId;})).length};
+}
+function _empMergeProblem(K,D){
+  if(!K||!D)return 'اختار موظفين';
+  if(K.id===D.id)return 'اختار موظفين مختلفين';
+  if(K.linked_profile_id&&D.linked_profile_id&&K.linked_profile_id!==D.linked_profile_id)return 'الاتنين مربوطين بحسابين دخول مختلفين — فك ربط واحد منهم الأول من ⚙️ إدارة الموظفين';
+  return '';
+}
+function _empMergePreview(resetName){
+  var K=_mgEmp(v('mg-keep')),D=_mgEmp(v('mg-dup')),box=document.getElementById('mg-prev');if(!box)return;
+  if(resetName&&K)document.getElementById('mg-name').value=K.name||'';
+  var pr=_empMergeProblem(K,D);
+  if(pr){box.innerHTML='<div style="background:#fee2e2;color:#b91c1c;border-radius:10px;padding:9px 12px;font-size:12px;margin-bottom:10px">⚠️ '+pr+'</div>';return;}
+  var c=_empMergeCounts(D.id),sal=function(e){return e.wage_type==='daily'?fmt(e.daily_rate||0)+'/يوم':fmt(e.salary||0)+'/شهر';};
+  box.innerHTML='<div style="background:#f0f9ff;border-radius:10px;padding:9px 12px;font-size:12px;margin-bottom:10px;line-height:1.9">'+
+    '<b>هيتنقل من «'+esc(D.name)+'» لـ «'+esc(K.name)+'»:</b><br>💸 مصروفات/رواتب: <b>'+c.exp+'</b> • 💰 دفعات راتب: <b>'+c.pay+'</b> • 📅 إجازات: <b>'+c.leaves+'</b> • 💼 مستثمرين مربوطين: <b>'+c.inv+'</b><br>'+
+    '<span style="color:#64748b">بيانات الأساسي بتفضل (الراتب '+sal(K)+'، الوظيفة '+esc(K.role||'—')+') والفاضي بيتكمّل من المكرر (الراتب عند المكرر '+sal(D)+').</span></div>';
+}
+function _empMergeConfirm(){
+  var K=_mgEmp(v('mg-keep')),D=_mgEmp(v('mg-dup')),pr=_empMergeProblem(K,D);
+  if(pr)return showToast('⚠️ '+pr,'#dc2626');
+  var nm=(v('mg-name')||'').trim()||K.name,kid=K.id,did=D.id;
+  confirmAction('هتدمج «'+D.name+'» جوه «'+K.name+'» بالاسم «'+nm+'»؟ المكرر هيتشال وسجلاته كلها هتنتقل.',function(){_empMergeExec(kid,did,nm);});
+}
+async function _empMergeExec(keepId,dupId,finalName){
+  if(!window.__isOwner)return showToast('🚫 دمج الموظفين للمالك بس','#dc2626');
+  var K=_mgEmp(keepId),D=_mgEmp(dupId),pr=_empMergeProblem(K,D);
+  if(pr)return showToast('⚠️ '+pr,'#dc2626');
+  var name=(finalName||'').trim()||K.name;
+  var expIds=(DB.expenses||[]).filter(function(e){return e.employee_id===dupId;}).map(function(e){return e.id;});
+  var payIds=(DB.accounts.salary_payments||[]).filter(function(p){return p.emp_id===dupId;}).map(function(p){return p.id;});
+  var leaveIds=(DB.accounts.employee_leaves||[]).filter(function(l){return l.employee_id===dupId;}).map(function(l){return l.id;});
+  var invOld=(DB.accounts.investors||[]).filter(function(o){return o.employee_id===dupId;}).map(function(o){return o.id;});
+  var invNew=_invList().filter(function(n){return n.employee_id===dupId;}).map(function(n){return n.id;});
+  var dupCopy=JSON.parse(JSON.stringify(D)),keepBefore=JSON.parse(JSON.stringify(K));
+  var merged=Object.assign({},K,{name:name});
+  ['role','hire_date','note','linked_profile_id','cash_balance_since'].forEach(function(f){if(!merged[f]&&D[f])merged[f]=D[f];});
+  if(D.hire_date&&K.hire_date&&D.hire_date<K.hire_date)merged.hire_date=D.hire_date;
+  if(!(+merged.salary>0)&&merged.wage_type!=='daily'&&(+D.salary>0))merged.salary=D.salary;
+  if(!merged.increment&&D.increment)merged.increment=D.increment;
+  merged.active=(K.active!==false)||(D.active!==false);
+  if(Array.isArray(D.commission_done)&&D.commission_done.length){
+    var seen={};merged.commission_done=(Array.isArray(K.commission_done)?K.commission_done:[]).concat(D.commission_done).filter(function(x){var k=JSON.stringify(x);if(seen[k])return false;seen[k]=1;return true;});
+  }
+  DB.accounts.employees=DB.accounts.employees.filter(function(e){return e.id!==dupId;}).map(function(e){return e.id===keepId?merged:e;});
+  var map={};map[dupId]=keepId;
+  __twinRemap(map); // يبدّل المعرّف في كل الجداول وجوه DB.accounts (مصروفات، دفعات راتب، إجازات، مستثمرين...)
+  try{
+    var ts=(DB.settings&&DB.settings.expenseTemplates)||[],tch=false;
+    ts.forEach(function(t){if(t&&t.employee_id===dupId){t.employee_id=keepId;tch=true;}});
+    if(tch&&typeof __scheduleSettingsPush==='function')__scheduleSettingsPush();
+  }catch(eT){}
+  try{_invTomb('employees',dupId);}catch(eTomb){} // بعد الاستبدال (وإلا الشاهد نفسه كان هيتبدّل)
+  (DB.accounts.emp_merge_log=DB.accounts.emp_merge_log||[]).push({id:genId(),at:new Date().toISOString(),by:(window.__currentProfile&&window.__currentProfile.id)||'',keep:keepId,dup:dupId,keepBefore:keepBefore,dupRecord:dupCopy,expIds:expIds,payIds:payIds,leaveIds:leaveIds,invOld:invOld,invNew:invNew});
+  expIds.forEach(function(id){try{dbUpdate('expenses',id,{employee_id:keepId});}catch(eU){}});
+  try{__logActivity('update','employees',keepId,{event:'دمج موظف مكرر',label:dupCopy.name+' ← '+name,count:expIds.length});}catch(eL){}
+  await persist();closeModal();renderAccounting();
+  showToast('✅ اتدمج «'+dupCopy.name+'» في «'+name+'» ('+expIds.length+' مصروف اتنقل)','#16a34a');
+}
+// ==================== ⚠️ v325 — شاشة المستثمرين بتبويبات ====================
+var _invsTab='ov',_invsOpenId='';
+function _invsSetTab(t){
+  _invsTab=t;_invsOpenId='';
+  if(t==='wd'){_wlPeriod=_makePeriodState();_wlType='all';_wlInv='all';}
+  renderInvestors();
+}
+function _invsToggleCard(id){_invsOpenId=(_invsOpenId===id?'':id);renderInvestors();}
+function _invOwnerReport(){
+  var cap=DB.accounts.capital||[],cycles=DB.accounts.profit_cycles||[],re=DB.accounts.retained_earnings||{owner:0};
+  var sum=function(a,f){return a.reduce(function(s,x){return s+(+f(x)||0);},0);};
+  var capNow=sum(cap,function(c){return c.amount;}),capOut=sum(cap.filter(function(c){return c.amount<0;}),function(c){return -c.amount;});
+  var draws=sum(cycles,function(c){return c.owner_draw;}),share=sum(cycles,function(c){return c.owner_share;});
+  return '<div style="background:#faf5ff;border:1.5px solid #e9d5ff;border-radius:12px;padding:11px 12px;margin-bottom:12px">'+
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><b style="font-size:13px;color:#6b21a8">👤 تقرير صاحب المشروع</b><button class="btn btn-sm" style="background:#f3e8ff;color:#7e22ce;border:none;border-radius:8px" onclick="openOwnerTimeline()">📜 السجل الكامل</button></div>'+
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">'+
+    _invKpi('💰 إجمالي المسحوب',fmt(draws+capOut),'#c2410c','#ffedd5')+_invKpi('💼 رأس المال الحالي',fmt(capNow),'#5b21b6','#ede9fe')+'</div>'+
+    '<div style="font-size:11px;color:#6b7280;margin-top:7px;line-height:1.8">سحب أرباح: <b>'+fmt(draws)+'</b> • سحب رأس مال: <b>'+fmt(capOut)+'</b><br>حصتك من الأرباح: <b>'+fmt(share)+'</b> • محتجز لك: <b>'+fmt(re.owner||0)+'</b></div></div>';
+}
+function _invRow(i){
+  var open=_invsOpenId===i.id,re=(DB.accounts.retained_earnings.investors||{})[i.id]||0,isAct=i.status!=='inactive';
+  var wd=(i.withdrawals||[]).filter(function(w){return w.type!=='capital_return';}).reduce(function(s,w){return s+(+w.amount||0);},0);
+  if(open)return '<button type="button" class="btn btn-sm btn-full" style="background:#e0e7ff;color:#3730a3;border:none;margin-bottom:6px" onclick="_invsToggleCard('+jsStr(i.id)+')">▴ إخفاء التفاصيل — '+esc(i.name)+'</button>'+_investorCard(i);
+  return '<div style="background:#fff;border-radius:14px;padding:10px 12px;box-shadow:0 2px 10px rgba(0,0,0,.06);margin-bottom:8px;border-right:4px solid '+(isAct?'#2563eb':'#94a3b8')+';opacity:'+(isAct?1:.7)+'">'+
+    '<div onclick="_invsToggleCard('+jsStr(i.id)+')" style="cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:6px"><div><b style="font-size:14px">'+esc(i.name)+'</b>'+
+    (_invEmpOf(i,'old')?' <span style="font-size:10px;background:#e0e7ff;color:#4338ca;border-radius:6px;padding:1px 6px;font-weight:800">👤 موظف</span>':'')+(isAct?'':' <span style="font-size:10px;color:#94a3b8">غير نشط</span>')+
+    '<div style="font-size:11px;color:#64748b">'+_pctTxt(i.profit_share_pct)+' من الأرباح</div></div><span style="font-size:18px;color:#94a3b8">▾</span></div>'+
+    '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:8px">'+_invMini('رأس مال متبقي',_oiCapRem(i),'#1e40af','#dbeafe')+_invMini('أرباح متبقية',re,'#854d0e','#fef9c3')+_invMini('مسحوب',wd,'#c2410c','#ffedd5')+'</div></div>';
+}
+function _distSummaryHtml(){
+  var inv=DB.accounts.investors||[],cycles=DB.accounts.profit_cycles||[],re=DB.accounts.retained_earnings||{owner:0,investors:{}};
+  if(!cycles.length)return '';
+  var T={dist:0,wd:0,ret:0},N=function(x){return fmt(Math.round(x*100)/100);};
+  var rows=inv.map(function(i){
+    var dist=0;cycles.forEach(function(c){(c.distributions||[]).forEach(function(d){if(d.investor_id===i.id)dist+=+d.amount||0;});});
+    var wd=(i.withdrawals||[]).filter(function(w){return w.type==='profit';}).reduce(function(s,w){return s+(+w.amount||0);},0),ret=(re.investors||{})[i.id]||0;
+    T.dist+=dist;T.wd+=wd;T.ret+=ret;
+    return '<div style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:4px;font-size:11.5px;padding:5px 0;border-bottom:1px solid #f1f5f9"><span style="font-weight:700">'+esc(i.name)+'</span><span>'+N(dist)+'</span><span style="color:#c2410c">'+N(wd)+'</span><span style="color:#854d0e">'+N(ret)+'</span></div>';
+  }).join('');
+  var oS=cycles.reduce(function(s,c){return s+(+c.owner_share||0);},0),oD=cycles.reduce(function(s,c){return s+(+c.owner_draw||0);},0);
+  return '<div style="background:#fff;border-radius:12px;padding:10px 12px;margin-bottom:12px;box-shadow:0 2px 10px rgba(0,0,0,.05)"><div style="font-weight:900;font-size:13px;margin-bottom:6px">📊 ملخص أرباح كل المستثمرين</div>'+
+    '<div style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:4px;font-size:10.5px;color:#94a3b8;font-weight:800;padding-bottom:4px;border-bottom:2px solid #e2e8f0"><span>المستثمر</span><span>موزع</span><span>مسحوب</span><span>متبقي</span></div>'+rows+
+    '<div style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:4px;font-size:12px;font-weight:900;padding:6px 0 2px"><span>إجمالي المستثمرين</span><span>'+N(T.dist)+'</span><span style="color:#c2410c">'+N(T.wd)+'</span><span style="color:#854d0e">'+N(T.ret)+'</span></div>'+
+    '<div style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:4px;font-size:11.5px;color:#6b21a8;padding-top:4px;border-top:1px dashed #e9d5ff"><span style="font-weight:700">👤 صاحب المشروع</span><span>'+N(oS)+'</span><span>'+N(oD)+'</span><span>'+N(re.owner||0)+'</span></div></div>';
+}
 function renderInvestors(){
   var el=document.getElementById('accounting-body');if(!el)return;
   _invAutoLink(); // v260 — ربط تلقائي بالاسم
-  var inv=DB.accounts.investors||[];
-  var cycles=DB.accounts.profit_cycles||[];
-  var re=DB.accounts.retained_earnings||{owner:0,investors:{}};
-
-  // إجمالي رأس مال المستثمرين
-  var totalInvCap=inv.reduce(function(s,i){
-    return s+(i.capital_contributions||[]).reduce(function(ss,c){return ss+c.amount;},0);
-  },0);
-
-  // إجمالي الأرباح الموزعة
-  var totalDistributed=cycles.reduce(function(s,c){
-    return s+(c.distributions||[]).reduce(function(ss,d){return ss+d.amount;},0);
-  },0);
-
-  // أرباح محتجزة للمستثمرين
+  var inv=DB.accounts.investors||[],cycles=DB.accounts.profit_cycles||[],re=DB.accounts.retained_earnings||{owner:0,investors:{}};
+  var totalInvCap=inv.reduce(function(s,i){return s+(i.capital_contributions||[]).reduce(function(ss,c){return ss+c.amount;},0);},0);
+  var totalDistributed=cycles.reduce(function(s,c){return s+(c.distributions||[]).reduce(function(ss,d){return ss+d.amount;},0);},0);
   var totalInvRetained=Object.values(re.investors||{}).reduce(function(s,v){return s+v;},0);
-
-  el.innerHTML=
-    // KPIs
-    '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px">'+
-    _invKpi('👥 مستثمرين',inv.filter(function(i){return i.status!=='inactive';}).length+' نشط','#1e40af','#dbeafe')+
-    _invKpi('💰 رأس مالهم',fmt(totalInvCap),'#7c3aed','#ede9fe')+
-    _invKpi('📤 موزع عليهم',fmt(totalDistributed),'#15803d','#dcfce7')+
-    '</div>'+
-
-    // أرباح محتجزة
-    (totalInvRetained>0||re.owner>0?
-      '<div style="background:#fef9c3;border-radius:12px;padding:12px;margin-bottom:12px;border:1.5px solid #fde047">'+
-      '<div style="font-weight:800;font-size:13px;color:#854d0e;margin-bottom:8px">💼 الأرباح المحتجزة</div>'+
-      '<div onclick="openOwnerTimeline()" style="cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:13px;margin-bottom:4px;background:#fffbeb;border-radius:8px;padding:6px 8px">'+
-      '<span style="color:#64748b">👤 حصتك أنت (صاحب المشروع) <span style="color:#ca8a04">📜</span></span><b style="color:#854d0e">'+fmt(re.owner||0)+'</b></div>'+
-      inv.map(function(i){
-        var retained=re.investors[i.id]||0;
-        if(!retained)return'';
-        return '<div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px">'+
-          '<span style="color:#64748b">'+esc(i.name)+'</span><b style="color:#854d0e">'+fmt(retained)+'</b></div>';
-      }).join('')+
-      '</div>':'')+ 
-
-    // أزرار
-    _pcFixBanner()+
-    _invHubSummary()+
-    '<div style="display:flex;gap:8px;margin-bottom:14px">'+
-    '<button class="btn btn-primary btn-full" onclick="openAddInvestorModal()">+ شريك (نسبة من الصافي)</button>'+
-    '<button class="btn btn-green btn-full" onclick="openProfitCycleModal()">📊 توزيع أرباح</button>'+
-    '<button class="btn btn-full" style="background:#ecfdf5;color:#047857;border:none" onclick="_invForm(null)">📜 مستثمر بضاعة (عقد)</button>'+
-    '</div>'+
-    (window.__isOwner?'<button class="btn btn-full" style="background:#eef2ff;color:#4338ca;border:none;margin-bottom:14px" onclick="openInvIntegrity()">🛡️ سلامة المستثمرين: لقطات الإقفال • فحص • نسخ • سجل مراجعة</button>':'')+
-
-    // قائمة المستثمرين
-    (inv.length?inv.map(function(i){return _investorCard(i);}).join('')
-      :'<div class="empty">لا يوجد مستثمرون — أضف أول مستثمر</div>')+
-    _invUnlinkedBlock()+
-
-    // سجل دورات الأرباح
-    (cycles.length?
-      '<div style="margin-top:16px">'+
-      '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:10px">📋 سجل توزيعات الأرباح ('+cycles.length+')</div>'+
-      cycles.slice().sort(function(a,b){var x=(a.date_created||'')+'|'+(a.date_to||''),y=(b.date_created||'')+'|'+(b.date_to||'');return x<y?1:x>y?-1:0;}).map(function(c){return _cycleCard(c);}).join('')+
-      '</div>':'');
+  var tabs=[['ov','📊 عامة'],['list','👥 المستثمرون'],['dist','📜 التوزيعات'],['wd','💸 السحوبات']];
+  var tabsHtml='<div style="display:flex;gap:6px;margin-bottom:12px">'+tabs.map(function(t){var a=_invsTab===t[0];return '<button type="button" onclick="_invsSetTab(\''+t[0]+'\')" style="flex:1;white-space:nowrap;padding:9px 4px;border:none;border-radius:10px;font-family:inherit;font-size:12px;font-weight:800;cursor:pointer;background:'+(a?'#0f172a':'#f1f5f9')+';color:'+(a?'#fff':'#64748b')+'">'+t[1]+'</button>';}).join('')+'</div>';
+  var body='';
+  if(_invsTab==='ov'){
+    body=
+      '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px">'+
+      _invKpi('👥 مستثمرين',inv.filter(function(i){return i.status!=='inactive';}).length+' نشط','#1e40af','#dbeafe')+
+      _invKpi('💰 رأس مالهم',fmt(totalInvCap),'#7c3aed','#ede9fe')+
+      _invKpi('📤 موزع عليهم',fmt(totalDistributed),'#15803d','#dcfce7')+'</div>'+
+      _invOwnerReport()+
+      (totalInvRetained>0?'<div style="background:#fef9c3;border-radius:12px;padding:12px;margin-bottom:12px;border:1.5px solid #fde047"><div style="font-weight:800;font-size:13px;color:#854d0e;margin-bottom:8px">💼 الأرباح المحتجزة للمستثمرين</div>'+
+        inv.map(function(i){var r=(re.investors||{})[i.id]||0;if(!r)return '';return '<div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px"><span style="color:#64748b">'+esc(i.name)+'</span><b style="color:#854d0e">'+fmt(r)+'</b></div>';}).join('')+'</div>':'')+
+      _pcFixBanner()+_invHubSummary()+
+      '<div style="display:flex;gap:8px;margin-bottom:14px"><button class="btn btn-primary btn-full" onclick="openAddInvestorModal()">+ شريك (نسبة من الصافي)</button>'+
+      '<button class="btn btn-green btn-full" onclick="openProfitCycleModal()">📊 توزيع أرباح</button>'+
+      '<button class="btn btn-full" style="background:#ecfdf5;color:#047857;border:none" onclick="_invForm(null)">📜 مستثمر بضاعة (عقد)</button></div>'+
+      '<button class="btn btn-full" style="background:#fef3c7;color:#92400e;border:none;margin-bottom:10px" onclick="openProfitCalc()">🧮 حاسبة نسبة الأرباح (مستثمر جديد / رأس مال × مدة)</button>'+ // ⚠️ v327
+      (window.__isOwner?'<button class="btn btn-full" style="background:#eef2ff;color:#4338ca;border:none;margin-bottom:14px" onclick="openInvIntegrity()">🛡️ سلامة المستثمرين: لقطات الإقفال • فحص • نسخ • سجل مراجعة</button>':'');
+  }else if(_invsTab==='list'){
+    body=(inv.length?inv.map(function(i){return _invRow(i);}).join(''):'<div class="empty">لا يوجد مستثمرون — أضف أول مستثمر</div>')+_invUnlinkedBlock();
+  }else if(_invsTab==='dist'){
+    body='<button class="btn btn-green btn-full" style="margin-bottom:12px" onclick="openProfitCycleModal()">📊 توزيع أرباح جديد</button>'+_distSummaryHtml()+
+      (cycles.length?'<div style="font-weight:900;font-size:14px;color:#0f172a;margin:6px 0 10px">📋 سجل التوزيعات ('+cycles.length+')</div>'+
+        cycles.slice().sort(function(a,b){var x=(a.date_created||'')+'|'+(a.date_to||''),y=(b.date_created||'')+'|'+(b.date_to||'');return x<y?1:x>y?-1:0;}).map(function(c){return _cycleCard(c);}).join(''):'<div class="empty">مفيش توزيعات لسه</div>');
+  }else{
+    body='<div id="wl-filter"></div><div id="wl-list"></div>';
+  }
+  el.innerHTML=tabsHtml+body;
+  if(_invsTab==='wd')_wlRender();
 }
-
+// ==================== ⚠️ v327 — تعديل/حذف مساهمة + حاسبة النسبة ====================
+function _oiContribCheck(inv,cid,newAmount){ // true لو رأس المال بعد التعديل/الحذف لسه >= رأس المال المردود
+  var cap=0,ret=0;
+  (inv.capital_contributions||[]).forEach(function(c){cap+=(c.id===cid?(+newAmount||0):(+c.amount||0));});
+  (inv.withdrawals||[]).forEach(function(w){if(w.type==='capital_return')ret+=+w.amount||0;});
+  return cap>=ret-0.5;
+}
+function openEditContribution(invId,cid){
+  var inv=(DB.accounts.investors||[]).find(function(i){return i.id===invId;});if(!inv)return;
+  var c=(inv.capital_contributions||[]).find(function(x){return x.id===cid;});if(!c)return;
+  document.getElementById('modal-title').textContent='✏️ تعديل مساهمة — '+inv.name;
+  document.getElementById('modal-body').innerHTML=
+    fld('ecap-amount','المبلغ (ج)','number',c.amount,'',true)+dateField('ecap-date','📅 التاريخ',c.date)+fld('ecap-note','ملاحظة','text',c.note||'')+
+    '<div class="modal-actions"><button class="btn btn-primary btn-full" onclick="__runOnce(this,function(){return _oiSaveContribution('+jsStr(invId)+','+jsStr(cid)+');})">حفظ</button><button class="btn btn-outline btn-full" onclick="closeModal();openInvestorTimeline('+jsStr(invId)+')">إلغاء</button></div>';
+  openModal();
+}
+async function _oiSaveContribution(invId,cid){
+  var inv=(DB.accounts.investors||[]).find(function(i){return i.id===invId;});if(!inv)return;
+  var c=(inv.capital_contributions||[]).find(function(x){return x.id===cid;});if(!c)return;
+  var amount=+v('ecap-amount'),date=v('ecap-date')||c.date,note=v('ecap-note');
+  if(!amount||amount<=0)return showToast('⚠️ المبلغ مطلوب','#dc2626');
+  if(_invGuard(c.date)||_invGuard(date))return; // مالك بس + شهر مقفول (القديم والجديد)
+  if(!_oiContribCheck(inv,cid,amount))return showToast('⛔ رأس المال المردود أكبر من المساهمات بعد التعديل — عدّل/احذف رد رأس المال الأول','#dc2626');
+  _invBackup('قبل تعديل مساهمة رأس مال (شراكة)');
+  _invAudit('old_capital_edit','old',invId,{investor:inv.name,from:c.amount,to:amount,date_from:c.date,date_to:date,note:note});
+  DB.accounts.investors=DB.accounts.investors.map(function(i){
+    if(i.id!==invId)return i;
+    return Object.assign({},i,{capital_contributions:(i.capital_contributions||[]).map(function(x){return x.id===cid?Object.assign({},x,{amount:amount,date:date,note:note}):x;})});
+  });
+  try{__logActivity('update','accounting',cid,{event:'تعديل مساهمة مستثمر',label:inv.name,amount:amount});}catch(e){}
+  await persist();closeModal();renderAccounting();openInvestorTimeline(invId);
+  showToast('✅ اتعدّلت المساهمة','#16a34a');
+}
+async function _oiDelContribution(invId,cid){
+  var inv=(DB.accounts.investors||[]).find(function(i){return i.id===invId;});if(!inv)return;
+  var c=(inv.capital_contributions||[]).find(function(x){return x.id===cid;});if(!c)return;
+  if(_invGuard(c.date))return;
+  if(!_oiContribCheck(inv,cid,0))return showToast('⛔ مينفعش: رأس المال المردود أكبر من المساهمات اللي هتفضل — عدّل/احذف رد رأس المال الأول','#dc2626');
+  _invBackup('قبل حذف مساهمة رأس مال (شراكة)');
+  _invAudit('old_capital_delete','old',invId,{investor:inv.name,amount:c.amount,date:c.date,note:c.note||''});
+  DB.accounts.investors=DB.accounts.investors.map(function(i){
+    if(i.id!==invId)return i;
+    return Object.assign({},i,{capital_contributions:(i.capital_contributions||[]).filter(function(x){return x.id!==cid;})});
+  });
+  try{__logActivity('delete','accounting',cid,{event:'حذف مساهمة مستثمر',label:inv.name,amount:c.amount});}catch(e){}
+  await persist();closeModal();renderAccounting();openInvestorTimeline(invId);
+  showToast('🗑️ اتحذفت المساهمة','#64748b');
+}
+// ---------- حاسبة نسبة الأرباح ----------
+var _pcalcPeriod=_makePeriodState();
+function _pcalcAvgCap(ev,from,to){ // متوسط رأس المال المرجّح بالأيام على [from,to] — ev = [{d:'YYYY-MM-DD',a:±amount}]
+  var f=Date.parse(from),t=Date.parse(to);if(!(t>=f))return 0;
+  var days=Math.round((t-f)/864e5)+1,bal=0;
+  ev.forEach(function(e){if((e.d||'0000')<=from)bal+=e.a;});
+  var pts=ev.filter(function(e){return e.d>from&&e.d<=to;}).sort(function(a,b){return a.d<b.d?-1:a.d>b.d?1:0;});
+  var area=0,cur=f;
+  pts.forEach(function(e){var dt=Date.parse(e.d);area+=bal*((dt-cur)/864e5);bal+=e.a;cur=dt;});
+  area+=bal*(((t-cur)/864e5)+1);
+  return area/days;
+}
+function openProfitCalc(){
+  _pcalcPeriod=_makePeriodState();
+  var bs=null;try{bs=_computeBalanceSheet();}catch(e){}
+  var val=bs&&bs.totalEquity>0?Math.round(bs.totalEquity):'';
+  var sty='width:100%;padding:10px;border:1.5px solid #e2e8f0;border-radius:9px;font-family:inherit;margin-bottom:8px;box-sizing:border-box';
+  document.getElementById('modal-title').textContent='🧮 حاسبة نسبة الأرباح';
+  document.getElementById('modal-body').innerHTML=
+    '<div style="background:#eff6ff;border-radius:10px;padding:9px 12px;margin-bottom:10px;font-size:11.5px;color:#1e40af;line-height:1.7">اقتراحات محسوبة من الأرقام المسجّلة — للقراءة بس، مابتغيّرش أي نسبة. أي تعديل في النسب لازم يكون باتفاق مكتوب مع المستثمر.</div>'+
+    '<div style="font-weight:900;font-size:13px;margin:4px 0 6px">١) مستثمر جديد داخل</div>'+
+    '<label style="font-size:12px;font-weight:700">مبلغ المستثمر الجديد (ج)</label><input id="pcalc-amt" type="number" inputmode="decimal" oninput="_pcalcRender()" style="'+sty+'">'+
+    '<label style="font-size:12px;font-weight:700">قيمة المركز الحالية (ج) — الافتراضي حقوق الملكية الدفترية</label><input id="pcalc-val" type="number" inputmode="decimal" value="'+val+'" oninput="_pcalcRender()" style="'+sty+'">'+
+    '<div id="pcalc-new"></div>'+
+    '<div style="font-weight:900;font-size:13px;margin:14px 0 6px;border-top:1px dashed #cbd5e1;padding-top:10px">٢) النسب حسب رأس المال × المدة</div>'+
+    '<div id="pcalc-pf"></div><div id="pcalc-time"></div>'+
+    '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+  openModal();_pcalcRender();
+}
+function _pcalcParties(){
+  var inv=(DB.accounts.investors||[]),act=inv.filter(function(i){return i.status!=='inactive';});
+  var ownerPct=100-act.reduce(function(s,i){return s+(+i.profit_share_pct||0);},0);
+  var ownerCap=(DB.accounts.capital||[]).reduce(function(s,c){return s+(+c.amount||0);},0);
+  var P=[{name:'أنت (صاحب المشروع)',pct:ownerPct,cap:ownerCap,owner:true}];
+  act.forEach(function(i){P.push({name:i.name,pct:+i.profit_share_pct||0,cap:_oiCapRem(i),id:i.id});});
+  return P;
+}
+function _pcalcRender(){
+  var nEl=document.getElementById('pcalc-new'),tEl=document.getElementById('pcalc-time'),fEl=document.getElementById('pcalc-pf');if(!nEl||!tEl||!fEl)return;
+  var N1=function(x){return (Math.round(x*10)/10);},amt=+v('pcalc-amt')||0,val=+v('pcalc-val')||0,P=_pcalcParties();
+  // ----- ١) مستثمر جديد -----
+  var totalCap=P.reduce(function(s,x){return s+Math.max(0,x.cap);},0),h='';
+  if(amt>0){
+    var pA=val>0?amt/(val+amt)*100:null,pB=totalCap>0?amt/(totalCap+amt)*100:null,use=pA!==null?pA:pB;
+    h+='<div style="background:#f0fdf4;border-radius:10px;padding:10px 12px;margin-bottom:8px;font-size:12.5px;line-height:1.9">'+
+      (pA!==null?'• <b>بقيمة المركز</b> ('+fmt(val)+'): نسبته <b style="color:#15803d">'+_pctTxt(N1(pA))+'</b><br>':'')+
+      (pB!==null?'• <b>برأس المال فقط</b> ('+fmt(totalCap)+'): نسبته <b style="color:#0e7490">'+_pctTxt(N1(pB))+'</b><br>':'')+
+      '<span style="color:#64748b;font-size:11px">الأولى بتحسب الأرباح المتراكمة والأصول (الأعدل لو المركز اشتغل فترة). التانية بتتجاهلهم.</span></div>';
+    if(use!==null){
+      var f=(100-use)/100;
+      h+='<div style="font-size:12px;font-weight:800;margin-bottom:4px">أثر الدخول على النسب'+(pA!==null?' (بطريقة قيمة المركز)':'')+'</div>'+
+        '<div style="display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:4px;font-size:10.5px;color:#94a3b8;font-weight:800;padding-bottom:3px;border-bottom:2px solid #e2e8f0"><span>الطرف</span><span>الحالية</span><span>بعد الدخول</span></div>'+
+        P.map(function(x){return '<div style="display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:4px;font-size:12px;padding:4px 0;border-bottom:1px solid #f1f5f9"><span style="font-weight:700">'+esc(x.name)+'</span><span>'+_pctTxt(N1(x.pct))+'</span><span style="color:#c2410c">'+_pctTxt(N1(x.pct*f))+'</span></div>';}).join('')+
+        '<div style="display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:4px;font-size:12px;padding:4px 0;font-weight:900;color:#15803d"><span>🆕 المستثمر الجديد</span><span>—</span><span>'+_pctTxt(N1(use))+'</span></div>'+
+        '<div style="font-size:10.5px;color:#94a3b8;margin-top:4px">التخفيف نسبي (بيحافظ على علاقة القدامى ببعض). النسب دي للأرباح من تاريخ دخوله بس.</div>';
+    }
+  }else{h='<div class="empty" style="font-size:12px">اكتب مبلغ المستثمر الجديد عشان تظهر النسبة</div>';}
+  nEl.innerHTML=h;
+  // ----- ٢) رأس المال × المدة -----
+  fEl.innerHTML=renderPeriodFilterHTML('_pcalcPeriod','_pcalcRender');
+  var rg=_periodToRange(_pcalcPeriod),inv=(DB.accounts.investors||[]),evOwner=[],evInv={},all=[];
+  (DB.accounts.capital||[]).forEach(function(c){var e={d:c.date||'0000-00-00',a:+c.amount||0};evOwner.push(e);all.push(e.d);});
+  inv.forEach(function(i){
+    var ev=[];
+    (i.capital_contributions||[]).forEach(function(c){ev.push({d:c.date||'0000-00-00',a:+c.amount||0});all.push(c.date||'');});
+    (i.withdrawals||[]).forEach(function(w){if(w.type==='capital_return'){ev.push({d:w.date||'0000-00-00',a:-(+w.amount||0)});all.push(w.date||'');}});
+    evInv[i.id]=ev;
+  });
+  var real=all.filter(function(d){return d&&d>'0000-00-00';}).sort();
+  var from=rg.from||real[0]||today(),to=rg.to||today();
+  if(from>to){tEl.innerHTML='<div class="empty" style="font-size:12px">بداية الفترة بعد نهايتها</div>';return;}
+  var rows=[{name:'أنت (صاحب المشروع)',avg:_pcalcAvgCap(evOwner,from,to),cur:P[0].pct,act:true}];
+  inv.forEach(function(i){var a=_pcalcAvgCap(evInv[i.id],from,to);if(a>0.5||i.status!=='inactive')rows.push({name:i.name,avg:a,cur:+i.profit_share_pct||0,act:i.status!=='inactive'});});
+  var tot=rows.reduce(function(s,r){return s+Math.max(0,r.avg);},0);
+  if(tot<=0){tEl.innerHTML='<div class="empty" style="font-size:12px">مفيش رأس مال مسجّل في الفترة دي</div>';return;}
+  tEl.innerHTML='<div style="font-size:11px;color:#64748b;margin-bottom:5px">متوسط رأس المال بالأيام من '+esc(fmtDate(from))+' إلى '+esc(fmtDate(to))+'</div>'+
+    '<div style="display:grid;grid-template-columns:1.5fr 1.1fr 1fr 1fr;gap:4px;font-size:10.5px;color:#94a3b8;font-weight:800;padding-bottom:3px;border-bottom:2px solid #e2e8f0"><span>الطرف</span><span>متوسط رأس المال</span><span>المقترحة</span><span>الحالية</span></div>'+
+    rows.map(function(r){var sug=Math.max(0,r.avg)/tot*100,diff=sug-r.cur;return '<div style="display:grid;grid-template-columns:1.5fr 1.1fr 1fr 1fr;gap:4px;font-size:12px;padding:4px 0;border-bottom:1px solid #f1f5f9;opacity:'+(r.act?1:.6)+'"><span style="font-weight:700">'+esc(r.name)+(r.act?'':' <span style="font-size:9px">(غير نشط)</span>')+'</span><span>'+fmt(Math.round(r.avg))+'</span><span style="color:#15803d;font-weight:800">'+_pctTxt(N1(sug))+'</span><span>'+_pctTxt(N1(r.cur))+(Math.abs(diff)>=1?' <span style="font-size:10px;color:'+(diff>0?'#15803d':'#dc2626')+'">'+(diff>0?'▲':'▼')+N1(Math.abs(diff))+'</span>':'')+'</span></div>';}).join('')+
+    '<div style="font-size:10.5px;color:#94a3b8;margin-top:5px;line-height:1.7">المنهج: نسبة كل طرف = متوسط رأس ماله المرجّح بالمدة ÷ مجموع المتوسطات. ما بيحسبش مجهود المالك أو الخبرة — دي اتفاق منفصل.</div>';
+}
 function _invKpi(label,val,color,bg){
   return '<div style="background:'+bg+';border-radius:12px;padding:11px 8px;text-align:center">'+
     '<div style="font-size:10px;font-weight:700;color:'+color+';margin-bottom:3px">'+label+'</div>'+
@@ -28449,7 +28909,7 @@ function _oiCapRem(inv){
   var r=(inv.withdrawals||[]).filter(function(w){return w.type==='capital_return';}).reduce(function(s,w){return s+(+w.amount||0);},0);
   return c-r;
 }
-function openInvestorWithdrawModal(invId){
+function openInvestorWithdrawModal(invId,prefill){ // ⚠️ v324 — prefill = المبلغ المتبقي من دورة توزيع (زر «استلم»)
   var inv=(DB.accounts.investors||[]).find(function(i){return i.id===invId;});if(!inv)return;
   window.__oiId=invId;
   var retained=(DB.accounts.retained_earnings.investors||{})[invId]||0,capRem=_oiCapRem(inv);
@@ -28457,7 +28917,7 @@ function openInvestorWithdrawModal(invId){
   document.getElementById('modal-body').innerHTML=
     '<div style="display:flex;gap:6px;margin-bottom:10px"><div style="flex:1;background:#f0fdf4;border-radius:10px;padding:8px;text-align:center"><div style="font-size:10px;color:#15803d;font-weight:800">أرباح متاحة للسحب</div><b style="color:#15803d;font-size:15px">'+fmt(retained)+'</b></div>'+
     '<div style="flex:1;background:#dbeafe;border-radius:10px;padding:8px;text-align:center"><div style="font-size:10px;color:#1d4ed8;font-weight:800">رأس مال متبقي</div><b style="color:#1d4ed8;font-size:15px">'+fmt(capRem)+'</b></div></div>'+
-    fld('wdraw-amount','المبلغ','number',retained>0?retained:'')+
+    fld('wdraw-amount','المبلغ','number',(+prefill>0)?prefill:(retained>0?retained:''))+
     '<div class="field"><label>نوع العملية</label><select id="wdraw-type" onchange="_oiPayPreview()" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit">'+
     '<option value="profit">سحب أرباح</option><option value="auto">تلقائي (أرباح الأول ثم رد رأس مال)</option><option value="capital">رد رأس مال</option></select></div>'+
     '<div id="wdraw-prev" style="font-size:12px;border-radius:10px;padding:8px 11px;margin-bottom:10px;background:#f8fafc;color:#475569;line-height:1.8"></div>'+
@@ -28555,7 +29015,8 @@ function _investorCard(inv){
       withdrawals.slice().reverse().map(function(w){
         return '<div style="display:flex;justify-content:space-between;font-size:12px;padding:3px 0;border-bottom:1px solid #fed7aa">'+
           '<span style="color:#9a3412">'+esc(fmtDate(w.date))+(w.type==='capital_return'?'↩️ رد رأس مال ':'💸 أرباح ')+(w.note?' — '+esc(w.note):'')+'</span>'+
-          '<b style="color:#ea580c">'+fmt(w.amount)+'</b></div>';
+          '<span style="display:flex;align-items:center;gap:8px"><b style="color:#ea580c">'+fmt(w.amount)+'</b>'+
+          '<span onclick="confirmAction(\'هتحذف السحب ده؟ المبلغ هيرجع للمستثمر والنقدية هتتغيّر\',function(){_oiDelWithdrawal(\''+inv.id+'\',\''+w.id+'\')})" style="cursor:pointer;font-size:13px">🗑️</span></span></div>';
       }).join('')+'</div>':'')+
 
     _invUnifiedBlock(inv)+
@@ -28870,6 +29331,7 @@ function openEmployeesReport(){
 var _empDetId='',_empDetSec='all',_empDetAct=null;
 function _empDetData(emp){
   var pid=emp.linked_profile_id,t=function(a,b){return a<b?1:a>b?-1:0;};
+  if(!pid)return {sales:[],moves:[],exps:[],wds:[],purs:[],colls:[]}; // ⚠️ v325 — من غير حساب دخول: ممنوع نفلتر على created_by الفاضي (كان هيجيب سجلات غيره)
   var colls=[];
   (DB.debts||[]).forEach(function(d){(d.payments||[]).forEach(function(p){if(p.collected_by===pid)colls.push({debt:d,date:p.date||'',amount:p.amount||0});});});
   return {
@@ -28884,10 +29346,10 @@ function _empDetData(emp){
 function openEmployeeDetailReport(empId){
   var emp=(DB.accounts.employees||[]).find(function(e){return e.id===empId;});if(!emp)return;
   _empDetId=empId;_empDetSec='all';_empDetAct=null;
-  document.getElementById('modal-title').textContent='👤 صفحة المهندس — '+(emp.name||'');
+  document.getElementById('modal-title').textContent='👤 تقرير شامل — '+(emp.name||'');
   document.getElementById('modal-body').innerHTML='<div id="ed-body"></div>'+
     '<div class="modal-actions"><button class="btn btn-sm" style="background:#fffbeb;color:#92400e;border:none;flex:1" onclick="openEmployeeStatement('+jsStr(emp.id)+')">📒 كشف حساب الراتب</button>'+
-    '<button class="btn btn-outline btn-full" style="flex:1" onclick="closeModal();openEmployeesReport()">‹ رجوع</button></div>';
+    '<button class="btn btn-outline btn-full" style="flex:1" onclick="closeModal();'+(emp.linked_profile_id?'openEmployeesReport()':'')+'">‹ رجوع</button></div>';
   openModal();_renderEmpDet();
 }
 function _empDetSet(sec){_empDetSec=sec;_renderEmpDet();if(sec==='act'&&_empDetAct===null)_empDetLoadAct();}
@@ -28925,12 +29387,16 @@ function _renderEmpDet(){
     '<div>رواتب اتصرفتله: <b style="color:#dc2626">-'+fmt(bal.salarySum)+'</b></div>'+
     '<div style="font-weight:900;color:'+(bal.balance>=0?'#1e40af':'#dc2626')+'">الصافي معاه دلوقتي: '+fmt(bal.balance)+'</div></div></div>'+
     '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:6px">'+
-    card('all','🗂️','الكل','')+card('sales','🧾','فواتير',D.sales.length)+card('moves','🔧','تحركات',D.moves.length)+card('exps','💸','مصروفات',D.exps.length)+
+    card('all','🗂️','الكل','')+card('inv','📈','مستثمر',_empInvCount(emp))+card('sal','💼','راتبه','')+card('sales','🧾','فواتير',D.sales.length)+card('moves','🔧','تحركات',D.moves.length)+card('exps','💸','مصروفات',D.exps.length)+
     card('wds','📦','سحب مخزن',D.wds.length)+card('purs','🛒','مشتريات',D.purs.length)+card('colls','💳','تحصيل',D.colls.length)+card('act','📜','السجل','')+'</div>'+
     (_empDetSec==='act'||_empDetSec==='all'?'':'')+
-    sec('sales','🧾 فواتيره',salesH,D.sales.length)+sec('moves','🔧 تحركاته',movesH,D.moves.length)+sec('exps','💸 مصروفاته',expsH,D.exps.length)+
+    _empInvSec(emp)+_empSalSec(emp)+sec('sales','🧾 فواتيره',salesH,D.sales.length)+sec('moves','🔧 تحركاته',movesH,D.moves.length)+sec('exps','💸 مصروفاته',expsH,D.exps.length)+
     sec('wds','📦 سحبه من المخزن',wdsH,D.wds.length)+sec('purs','🛒 مشترياته',pursH,D.purs.length)+sec('colls','💳 تحصيله من الديون',collsH,D.colls.length)+
     ((_empDetSec==='all'||_empDetSec==='act')?'<div style="font-weight:800;font-size:13px;margin:12px 0 6px">📜 سجل نشاطه الكامل (كل تعديل/حذف/إضافة)</div><div id="ed-act">'+actH+'</div>':'');
+  if(!emp.linked_profile_id){ // ⚠️ v325 — مش مربوط بحساب: صندوق الأمانة والفواتير ملهاش معنى
+    var f0=el.firstElementChild;
+    if(f0)f0.outerHTML='<div style="background:#f1f5f9;border-radius:10px;padding:9px 12px;margin-bottom:10px;font-size:11.5px;color:#475569">ℹ️ الموظف ده مش مربوط بحساب دخول، فالفواتير والتحركات وعهدة الخزنة مش هتظهر. اربطه من ⚙️ الإعدادات ← إدارة الموظفين. الراتب والاستثمار بيظهروا عادي.</div>';
+  }
 }
 async function _empDetLoadAct(){
   var emp=(DB.accounts.employees||[]).find(function(e){return e.id===_empDetId;});if(!emp||!emp.linked_profile_id)return;
@@ -28985,7 +29451,7 @@ function openInvestorTimeline(invId){
   var inv=(DB.accounts.investors||[]).find(function(i){return i.id===invId;});if(!inv)return;
   var events=[];
   (inv.capital_contributions||[]).forEach(function(c){
-    events.push({date:c.date,type:'مساهمة رأس مال',amount:c.amount,color:'#7c3aed',icon:'💼',note:c.note});
+    events.push({date:c.date,type:'مساهمة رأس مال',amount:c.amount,color:'#7c3aed',icon:'💼',note:c.note,cid:c.id}); // ⚠️ v327
   });
   (DB.accounts.profit_cycles||[]).forEach(function(cy){
     var d=(cy.distributions||[]).find(function(x){return x.investor_id===invId;});
@@ -29006,7 +29472,8 @@ function openInvestorTimeline(invId){
       return '<div style="display:flex;justify-content:space-between;align-items:center;background:#f8fafc;border-radius:9px;padding:9px 12px;margin-bottom:6px">'+
         '<div><div style="font-size:12px;font-weight:700;color:#374151">'+e.icon+' '+esc(e.type)+'</div>'+
         '<div style="font-size:11px;color:#94a3b8">'+esc(fmtDate(e.date))+(e.note?' — '+esc(e.note):'')+'</div></div>'+
-        '<b style="font-size:14px;color:'+(e.amount<0?'#dc2626':e.color)+'">'+(e.amount<0?'-':'+')+fmt(Math.abs(e.amount))+'</b></div>';
+        '<div style="display:flex;align-items:center;gap:8px"><b style="font-size:14px;color:'+(e.amount<0?'#dc2626':e.color)+'">'+(e.amount<0?'-':'+')+fmt(Math.abs(e.amount))+'</b>'+
+        (e.cid&&window.__isOwner?'<span onclick="openEditContribution('+jsStr(inv.id)+','+jsStr(e.cid)+')" style="cursor:pointer">✏️</span><span onclick="confirmAction(\'هتحذف المساهمة دي؟ رأس المال والخزنة هيتغيّروا\',function(){_oiDelContribution('+jsStr(inv.id)+','+jsStr(e.cid)+')})" style="cursor:pointer">🗑️</span>':'')+'</div></div>';
     }).join(''):'<div class="empty">مفيش حركات لسه</div>')+
     '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal();renderInvestors()">إغلاق</button></div>';
   openModal();
@@ -29037,8 +29504,135 @@ function printProfitCycle(id){
     (c.note?'<div style="margin-top:6px;color:#64748b">📝 '+esc(c.note)+'</div>':'');
   printSection('📊 كشف توزيع أرباح',body);
 }
+// ⚠️ v324 — حالة استلام المستثمر لكل دورة. مفيش حقل «مستلم» متخزّن (withdrawn كان دايمًا 0): بنوزّع سحوبات الأرباح (type=profit)
+// على دورات المستثمر من الأقدم للأحدث (FIFO) فالأرقام بتتسق مع المحتجز وسجل السحب من غير ما نغيّر شكل البيانات.
+function _pcPaidMap(){
+  var cycles=(DB.accounts.profit_cycles||[]).slice().sort(function(a,b){var x=(a.date_created||'')+'|'+(a.date_to||''),y=(b.date_created||'')+'|'+(b.date_to||'');return x<y?-1:x>y?1:0;});
+  var left={},map={};
+  (DB.accounts.investors||[]).forEach(function(i){
+    left[i.id]=(i.withdrawals||[]).filter(function(w){return w.type==='profit';}).reduce(function(s,w){return s+(+w.amount||0);},0);
+  });
+  cycles.forEach(function(c){
+    map[c.id]={};
+    (c.distributions||[]).forEach(function(d){
+      var l=left[d.investor_id]||0,pd=Math.min(l,+d.amount||0);
+      left[d.investor_id]=l-pd;map[c.id][d.investor_id]=pd;
+    });
+  });
+  return map;
+}
+// ⚠️ v324 — تسليم كل المتبقي لمستثمري دورة واحدة (سحب أرباح بتاريخ النهارده لكل مستثمر)
+async function _pcPayInv(cycleId){
+  var cy=(DB.accounts.profit_cycles||[]).find(function(c){return c.id===cycleId;});if(!cy)return;
+  var date=today();
+  if(_invGuard(date))return; // مالك بس + شهر مقفول
+  var pm=_pcPaidMap()[cycleId]||{},jobs=[];
+  (cy.distributions||[]).forEach(function(d){
+    var inv=(DB.accounts.investors||[]).find(function(i){return i.id===d.investor_id;});
+    var rem=Math.round(((+d.amount||0)-(pm[d.investor_id]||0))*100)/100;
+    if(inv&&rem>0.004)jobs.push({id:inv.id,name:inv.name,rem:rem});
+  });
+  if(!jobs.length)return showToast('✅ كل المستثمرين استلموا','#16a34a');
+  _invBackup('قبل تسليم أرباح دورة');
+  var total=0;
+  jobs.forEach(function(j){
+    total+=j.rem;
+    DB.accounts.investors=DB.accounts.investors.map(function(i){
+      if(i.id!==j.id)return i;
+      return Object.assign({},i,{withdrawals:(i.withdrawals||[]).map(function(w){return Object.assign({},w);}).concat([{id:genId(),amount:j.rem,date:date,note:'تسليم أرباح دورة حتى '+fmtDate(cy.date_to||''),type:'profit',cycle_id:cy.id}])});
+    });
+    _invAudit('old_withdraw','old',j.id,{investor:j.name,profit:j.rem,capital:0,date:date,note:'تسليم أرباح دورة',cycle:cy.id});
+  });
+  recalcRetainedEarnings();
+  __logActivity('insert','accounting',cy.id,{event:'تسليم أرباح مستثمرين',label:'دورة حتى '+(cy.date_to||''),amount:total});
+  await persist();renderAccounting();
+  showToast('✅ اتسجّل تسليم '+fmt(total)+' لـ '+jobs.length+' مستثمر','#16a34a');
+}
+// ⚠️ v324 — حذف سحب شراكة غلط (كان مفيش أي طريقة للتراجع عن سحب اتسجّل بالغلط)
+async function _oiDelWithdrawal(invId,wid){
+  var inv=(DB.accounts.investors||[]).find(function(i){return i.id===invId;});if(!inv)return;
+  var w=(inv.withdrawals||[]).find(function(x){return x.id===wid;});if(!w)return;
+  if(_invGuard(w.date))return; // مالك بس + شهر مقفول
+  _invBackup('قبل حذف سحب مستثمر (شراكة)');
+  DB.accounts.investors=DB.accounts.investors.map(function(i){
+    if(i.id!==invId)return i;
+    return Object.assign({},i,{withdrawals:(i.withdrawals||[]).filter(function(x){return x.id!==wid;})});
+  });
+  recalcRetainedEarnings();
+  _invAudit('old_withdraw_delete','old',invId,{investor:inv.name,amount:w.amount,type:w.type,date:w.date,note:w.note||'',cycle:w.cycle_id||null});
+  __logActivity('delete','accounting',wid,{event:'حذف سحب مستثمر',label:inv.name,amount:w.amount});
+  await persist();renderAccounting();
+  if(document.getElementById('wl-list'))_wlRender();
+  showToast('🗑️ اتحذف السحب ورجع المبلغ للمستثمر','#64748b');
+}
+// ⚠️ v324 — تعطيل مستثمر (بديل الحذف لو عليه حركات)
+async function _oiDeactivate(id){
+  var inv=(DB.accounts.investors||[]).find(function(i){return i.id===id;});if(!inv)return;
+  if(_invGuard(null))return;
+  _invBackup('قبل تعطيل مستثمر (شراكة)');
+  DB.accounts.investors=DB.accounts.investors.map(function(i){return i.id===id?Object.assign({},i,{status:'inactive'}):i;});
+  _invAudit('old_investor_deactivate','old',id,{name:inv.name});
+  await persist();closeModal();renderAccounting();
+  showToast('⏸️ المستثمر بقى غير نشط (التاريخ محفوظ)','#64748b');
+}
+// ⚠️ v324 — قائمة «كل السحوبات» (شراكة + بضاعة) — فلتر الفترة نفس نمط باقي الشاشات + segmented للنوع + اختيار مستثمر
+var _wlPeriod=_makePeriodState(),_wlType='all',_wlInv='all';
+function openAllWithdrawals(){
+  _wlPeriod=_makePeriodState();_wlType='all';_wlInv='all';
+  document.getElementById('modal-title').textContent='📋 كل السحوبات';
+  document.getElementById('modal-body').innerHTML='<div id="wl-filter"></div><div id="wl-list"></div>'+
+    '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+  openModal();_wlRender();
+}
+function _wlRows(){
+  var R=[],seq=0;
+  (DB.accounts.investors||[]).forEach(function(i){
+    (i.withdrawals||[]).forEach(function(w){
+      R.push({seq:seq++,key:'o:'+i.id,name:i.name,src:'شراكة',date:w.date||'',amount:+w.amount||0,cap:w.type==='capital_return',note:w.note||'',del:'_oiDelWithdrawal(\''+i.id+'\',\''+w.id+'\')'});
+    });
+  });
+  (DB.investors||[]).forEach(function(i){
+    (i.ledger||[]).forEach(function(e){
+      if(e.type!=='profit'&&e.type!=='capital_return'&&e.type!=='payout')return;
+      R.push({seq:seq++,key:'g:'+i.id,name:i.name||i.title||'مستثمر',src:'بضاعة',date:e.date||'',amount:+e.amount||0,cap:e.type==='capital_return',note:e.note||'',del:''});
+    });
+  });
+  return R;
+}
+function _wlRender(){
+  var fEl=document.getElementById('wl-filter'),lEl=document.getElementById('wl-list');if(!fEl||!lEl)return;
+  var all=_wlRows(),rg=_periodToRange(_wlPeriod),names={};
+  all.forEach(function(r){names[r.key]=r.name+' ('+r.src+')';});
+  var seg=function(k,l){var a=_wlType===k;return '<button type="button" onclick="_wlType=\''+k+'\';_wlRender()" style="flex:1;padding:8px 4px;border:none;border-radius:9px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer;background:'+(a?'#0f172a':'#f1f5f9')+';color:'+(a?'#fff':'#64748b')+'">'+l+'</button>';};
+  fEl.innerHTML=renderPeriodFilterHTML('_wlPeriod','_wlRender')+
+    '<div style="display:flex;gap:6px;margin-bottom:8px">'+seg('all','الكل')+seg('profit','💸 أرباح')+seg('cap','↩️ رأس مال')+'</div>'+
+    '<select onchange="_wlInv=this.value;_wlRender()" style="width:100%;padding:9px;border:2px solid #e2e8f0;border-radius:10px;font-family:inherit;font-size:13px;margin-bottom:10px"><option value="all">كل المستثمرين</option>'+
+    Object.keys(names).map(function(k){return '<option value="'+esc(k)+'"'+(_wlInv===k?' selected':'')+'>'+esc(names[k])+'</option>';}).join('')+'</select>';
+  var rows=all.filter(function(r){
+    if(rg.from&&r.date<rg.from)return false;
+    if(rg.to&&r.date>rg.to)return false;
+    if(_wlType==='profit'&&r.cap)return false;
+    if(_wlType==='cap'&&!r.cap)return false;
+    if(_wlInv!=='all'&&r.key!==_wlInv)return false;
+    return true;
+  }).sort(function(a,b){return a.date<b.date?1:a.date>b.date?-1:b.seq-a.seq;});
+  var tp=rows.filter(function(r){return !r.cap;}).reduce(function(s,r){return s+r.amount;},0);
+  var tc=rows.filter(function(r){return r.cap;}).reduce(function(s,r){return s+r.amount;},0);
+  lEl.innerHTML='<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px">'+
+    _invKpi('🧾 عدد السحوبات',rows.length,'#1e40af','#dbeafe')+_invKpi('💸 أرباح',fmt(tp),'#c2410c','#ffedd5')+_invKpi('↩️ رأس مال',fmt(tc),'#0e7490','#cffafe')+'</div>'+
+    (rows.length?rows.map(function(r){
+      return '<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;background:#f8fafc;border-radius:10px;padding:9px 12px;margin-bottom:6px">'+
+        '<div style="min-width:0"><div style="font-size:13px;font-weight:800">'+esc(r.name)+' <span style="font-size:10px;color:#64748b;font-weight:700">'+r.src+'</span></div>'+
+        '<div style="font-size:11px;color:#94a3b8">'+esc(fmtDate(r.date))+' • '+(r.cap?'↩️ رد رأس مال':'💸 أرباح')+(r.note?' — '+esc(r.note):'')+'</div></div>'+
+        '<div style="display:flex;align-items:center;gap:8px"><b style="color:'+(r.cap?'#0e7490':'#ea580c')+'">'+fmt(r.amount)+'</b>'+
+        (r.del?'<span onclick="confirmAction(\'هتحذف السحب ده؟ النقدية ورصيد المستثمر هيتغيّروا\',function(){'+r.del+'})" style="cursor:pointer">🗑️</span>':'')+'</div></div>';
+    }).join(''):'<div class="empty">مفيش سحوبات بالفلتر ده</div>')+
+    (rows.some(function(r){return r.src==='بضاعة';})?'<div style="font-size:11px;color:#94a3b8;margin-top:6px">ℹ️ سحوبات مستثمري البضاعة بتتحذف من شاشة المستثمر نفسه (دفتره).</div>':'');
+}
+
 function _cycleCard(c){
   var ownerShare=c.owner_share||0;
+  var _pm=_pcPaidMap()[c.id]||{},_remTot=0; // ⚠️ v324
   return '<div style="background:#fff;border-radius:12px;padding:12px 14px;box-shadow:0 1px 6px rgba(0,0,0,.06);margin-bottom:8px;border-right:4px solid #15803d">'+
     '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">'+
     '<div>'+
@@ -29056,10 +29650,16 @@ function _cycleCard(c){
     '<div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="color:#64748b">حصتك أنت</span><b style="color:#2563eb">'+fmt(ownerShare)+'</b></div>'+
     (c.distributions||[]).map(function(d){
       var inv=(DB.accounts.investors||[]).find(function(i){return i.id===d.investor_id;});
-      return '<div style="display:flex;justify-content:space-between;margin-bottom:4px">'+
+      // ⚠️ v324 — حالة الاستلام + زر «استلم»
+      var _paid=_pm[d.investor_id]||0,_rem=Math.max(0,Math.round(((+d.amount||0)-_paid)*100)/100);_remTot+=_rem;
+      var _st=_rem<=0.5?'<span style="color:#15803d;font-size:11px;font-weight:700">✅ مستلم بالكامل</span>'
+        :'<span style="color:#b45309;font-size:11px;font-weight:700">'+(_paid>0?'مستلم '+fmt(_paid)+' • ':'')+'متبقي '+fmt(_rem)+'</span> <button type="button" onclick="openInvestorWithdrawModal(\''+d.investor_id+'\','+_rem+')" style="background:#ffedd5;color:#c2410c;border:none;border-radius:7px;padding:3px 9px;font-family:inherit;font-size:11px;font-weight:800;cursor:pointer">💸 استلم</button>';
+      return '<div style="margin-bottom:6px"><div style="display:flex;justify-content:space-between;margin-bottom:2px">'+
         '<span style="color:#64748b">'+(inv?esc(inv.name):'مستثمر')+' ('+_pctTxt(d.share_pct)+')</span>'+
-        '<b style="color:#7c3aed">'+fmt(d.amount)+'</b></div>';
+        '<b style="color:#7c3aed">'+fmt(d.amount)+'</b></div>'+
+        '<div style="display:flex;justify-content:flex-end;align-items:center;gap:6px">'+_st+'</div></div>';
     }).join('')+
+    (_remTot>0.5?'<button type="button" class="btn btn-sm btn-full" style="background:#ffedd5;color:#c2410c;border:none;border-radius:9px;margin:2px 0 6px" onclick="confirmAction(\'هتسجّل تسليم كل المتبقي ('+fmt(_remTot)+') لمستثمري الدورة دي بتاريخ النهارده؟\',function(){_pcPayInv(\''+c.id+'\')})">💸 تسليم كل المتبقي ('+fmt(_remTot)+')</button>':'')+
     '<div style="display:flex;justify-content:space-between;margin-top:5px;padding-top:5px;border-top:1px solid #e2e8f0">'+
     '<span style="color:#64748b">سحبك الفعلي</span><b style="color:#ea580c">'+fmt(c.owner_draw)+'</b></div>'+
     (c.retained>0?'<div style="display:flex;justify-content:space-between"><span style="color:#64748b">محتجز</span><b style="color:#854d0e">'+fmt(c.retained)+'</b></div>':'')+
@@ -29181,7 +29781,9 @@ async function delInvestor(id){
     var _ct=_di.capital_contributions||[],_wd=_di.withdrawals||[];
     var _inCl=_ct.some(function(c){return !!getClosedMonthFor(c.date);})||_wd.some(function(w){return !!getClosedMonthFor(w.date);});
     if(_hasCyc||_wd.length||_ct.length>1||_inCl){
-      return showToast('⚠️ المستثمر ده عليه حركات/توزيعات — غيّر حالته لـ "غير نشط" بدل الحذف (الحذف بيضيّع تاريخ رأس المال والتوزيعات)','#dc2626');
+      // ⚠️ v324 — بدل الرفض الصامت: عرض «تعطيل» بضغطة (setTimeout عشان confirmAction جوه callback بيتقفل بعده مباشرة)
+      setTimeout(function(){confirmAction('المستثمر ده عليه حركات/توزيعات فمينفعش يتحذف (الحذف بيضيّع تاريخ رأس المال والتوزيعات). تخليه "غير نشط" بدل الحذف؟',function(){_oiDeactivate(id);});},120);
+      return;
     }
     _invBackup('قبل حذف مستثمر (شراكة)');
     _invAudit('old_investor_delete','old',id,{name:_di.name,contributions:_ct});_invTomb('investors',id);
@@ -29451,6 +30053,17 @@ async function saveProfitCycle(skipOverlap){
     }
   }
   // ⚠️ v306 — وضع التعديل: بعد كل الفحوصات (مفيش return بعد كده) نشيل الدورة القديمة في الذاكرة ونعيد المحتجز، والحفظ النهائي في persist واحد
+  // ⚠️ v327 — حماية التعديل: ممنوع نخلّي مستثمر سحبه أكبر من أرباحه المسجّلة (المحتجز كان بيتصفّر بصمت)
+  if(_pcEditId){
+    var _inc0=document.getElementById('pc-include-investors')?document.getElementById('pc-include-investors').checked:true,_bad0=[];
+    (DB.accounts.investors||[]).forEach(function(iv){
+      var newS=(_inc0&&iv.status!=='inactive')?Math.round(profit*(+iv.profit_share_pct||0)/100):0,other=0;
+      (DB.accounts.profit_cycles||[]).forEach(function(c){if(c.id===_pcEditId)return;(c.distributions||[]).forEach(function(d){if(d.investor_id===iv.id)other+=+d.amount||0;});});
+      var wd=(iv.withdrawals||[]).filter(function(w){return w.type==='profit';}).reduce(function(s,w){return s+(+w.amount||0);},0);
+      if(wd>other+newS+0.5)_bad0.push(iv.name+' (سحب '+fmt(wd)+' والمتاح بعد التعديل '+fmt(other+newS)+')');
+    });
+    if(_bad0.length)return showToast('⛔ التعديل هيخلّي سحب مستثمر أكبر من أرباحه: '+_bad0.join('، ')+' — عدّل/احذف السحب الأول (🗑️ في كارت المستثمر)','#dc2626');
+  }
   var _editOld=null;
   if(_pcEditId){
     _editOld=(DB.accounts.profit_cycles||[]).find(function(c){return c.id===_pcEditId;})||null;
@@ -29589,7 +30202,18 @@ async function applyRetainedFix(){
 async function deleteProfitCycle(id){
   var _cy=(DB.accounts.profit_cycles||[]).find(function(c){return c.id===id;});
   if(_invGuard(_cy?(_cy.date_created||_cy.date_to):null))return; // ⚠️ v306 — دورة في شهر مقفول لازم يتفتح الأول
-  confirmAction('هتحذف دورة التوزيع دي؟ الأرباح المحتجزة هتترجع',async function(){
+  // ⚠️ v324 — تحذير لو مستثمر سحب أرباح أكتر من اللي هيفضل ليه بعد حذف الدورة (المحتجز بيتصفّر بصمت في recalcRetainedEarnings)
+  var _orph=[];
+  if(_cy){
+    var _oth=(DB.accounts.profit_cycles||[]).filter(function(c){return c.id!==id;});
+    (_cy.distributions||[]).forEach(function(d){
+      var iv=(DB.accounts.investors||[]).find(function(i){return i.id===d.investor_id;});if(!iv)return;
+      var dist=0;_oth.forEach(function(c){(c.distributions||[]).forEach(function(x){if(x.investor_id===iv.id)dist+=+x.amount||0;});});
+      var wd=(iv.withdrawals||[]).filter(function(w){return w.type==='profit';}).reduce(function(s,w){return s+(+w.amount||0);},0);
+      if(wd>dist+0.5)_orph.push(iv.name+' ('+fmt(wd-dist)+')');
+    });
+  }
+  confirmAction('هتحذف دورة التوزيع دي؟ الأرباح المحتجزة هتترجع'+(_orph.length?'\n⚠️ تنبيه: سحوبات مستثمرين هتبقى أكبر من أرباحهم المسجّلة: '+_orph.join('، ')+' — احذف سحبهم الأول لو غلط.':''),async function(){
     _invBackup('قبل حذف دورة توزيع');
     _invAudit('profit_cycle_delete','old',id,{gross:_cy?_cy.gross_profit:0,date:_cy?(_cy.date_created||_cy.date_to||''):'',investors:_cy?(_cy.distributions||[]).length:0,old:_cy||null});_invTomb('profit_cycles',id);
     DB.accounts.profit_cycles=(DB.accounts.profit_cycles||[]).filter(function(c){return c.id!==id;});
@@ -30229,7 +30853,7 @@ function _minChip(){
   window[x[0]]=function(){if(_minModal&&_minModal.kind===x[1]){showToast('فيه '+_MIN_LABEL[x[1]].slice(2)+' متصغّرة — كمّل عليها أو امسحها الأول','#b45309');restoreMinimized();return;}return orig.apply(this,arguments);};
 });
 
-var __ONCE_GUARDED=["saveNewCompany", "saveGoalTask", "saveGoalResult", "saveGoal", "saveWorkRule", "confirmWorkRule", "__giveEmpCashAdvance", "__settleEmpCashBalance", "__undoLastCashAdvance", "_applyLinkRepair", "_duaSave", "_invBatchDel", "_invBatchSave", "_invCreateGoodsAcc", "_invMoneySave", "_invPaySave", "_invSave", "_invBaselineSnapshots", "_invRestoreBackup", "_invBatchClose", "_invArchive", "saveEditInvestor", "_mfUnify", "_movTodoAdd", "_wsSaveSettings", "addExpenseTemplate", "delPurchaseExec", "addMovAdvancePayment", "approveStocktake", "confirmAutoBalanceDiff", "confirmCloseMovement", "confirmContinueMovement", "confirmExtractParts", "confirmMarkLeave", "confirmMyAttendance", "confirmPayAdvance", "confirmPayDailyWage", "confirmPayFixedExp", "confirmPaySalary", "confirmSchedDone", "convertOpeningInventoryToPurchase", "delScrapMachine", "deleteAllArchivedDebts", "deleteKnowledge", "deleteVisitLog", "duplicateTask", "endVisit", "execMergeProducts", "finishExtractForSale", "importBaseClients", "markSaleItemDamaged", "mergeModelFamily", "openDeleteSaleModal", "payDebt", "payGroupDebts", "quickLogExpense", "removeMovAdvancePayment", "saveAddCapital", "saveAsset", "saveBalanceSnapshot", "saveBatchExpenses", "saveBundleDraft", "saveCapital", "saveConsignmentOutSale", "saveDebt", "saveEditCapital", "saveEditDebt", "saveEditExpense", "saveEditFixedExp", "saveEditReceivable", "saveEmpIncrement", "saveEmployee", "saveExpense", "saveFixedExp", "saveGiveConsignment", "saveIncrement", "saveInventorySnapshot", "saveInvestorWithdraw", "saveKnowledge", "saveLog", "saveMachine", "saveMovement", "saveNewClient", "saveNewInvestor", "saveProduct", "saveProfitCycle", "savePurchase", "saveReceivable", "saveReceiveConsignment", "saveReturnConsignment", "saveSale", "saveScrapMachine", "confirmScrapPurchaseMigration", "markScrapNoPurchase", "saveSupplier", "saveTask", "setExtraIncome", "startStocktake", "startVisit", "syncSalesWithDebts", "withdrawPartForMovement", "withdrawPickedParts"];
+var __ONCE_GUARDED=["_oiSaveContribution", "_oiDelContribution", "_invEmpApply", "_empMergeExec", "_pcPayInv", "_oiDelWithdrawal", "_oiDeactivate", "saveNewCompany", "saveGoalTask", "saveGoalResult", "saveGoal", "saveWorkRule", "confirmWorkRule", "__giveEmpCashAdvance", "__settleEmpCashBalance", "__undoLastCashAdvance", "_applyLinkRepair", "_duaSave", "_invBatchDel", "_invBatchSave", "_invCreateGoodsAcc", "_invMoneySave", "_invPaySave", "_invSave", "_invBaselineSnapshots", "_invRestoreBackup", "_invBatchClose", "_invArchive", "saveEditInvestor", "_mfUnify", "_movTodoAdd", "_wsSaveSettings", "addExpenseTemplate", "delPurchaseExec", "addMovAdvancePayment", "approveStocktake", "confirmAutoBalanceDiff", "confirmCloseMovement", "confirmContinueMovement", "confirmExtractParts", "confirmMarkLeave", "confirmMyAttendance", "confirmPayAdvance", "confirmPayDailyWage", "confirmPayFixedExp", "confirmPaySalary", "confirmSchedDone", "convertOpeningInventoryToPurchase", "delScrapMachine", "deleteAllArchivedDebts", "deleteKnowledge", "deleteVisitLog", "duplicateTask", "endVisit", "execMergeProducts", "finishExtractForSale", "importBaseClients", "markSaleItemDamaged", "mergeModelFamily", "openDeleteSaleModal", "payDebt", "payGroupDebts", "quickLogExpense", "removeMovAdvancePayment", "saveAddCapital", "saveAsset", "saveBalanceSnapshot", "saveBatchExpenses", "saveBundleDraft", "saveCapital", "saveConsignmentOutSale", "saveDebt", "saveEditCapital", "saveEditDebt", "saveEditExpense", "saveEditFixedExp", "saveEditReceivable", "saveEmpIncrement", "saveEmployee", "saveExpense", "saveFixedExp", "saveGiveConsignment", "saveIncrement", "saveInventorySnapshot", "saveInvestorWithdraw", "saveKnowledge", "saveLog", "saveMachine", "saveMovement", "saveNewClient", "saveNewInvestor", "saveProduct", "saveProfitCycle", "savePurchase", "saveReceivable", "saveReceiveConsignment", "saveReturnConsignment", "saveSale", "saveScrapMachine", "confirmScrapPurchaseMigration", "markScrapNoPurchase", "saveSupplier", "saveTask", "setExtraIncome", "startStocktake", "startVisit", "syncSalesWithDebts", "withdrawPartForMovement", "withdrawPickedParts"];
 (function(){
   var busy={};
   function wrap(name){
@@ -30317,6 +30941,7 @@ var __PERM_MAP_V310={
   startVisit:[['movements','upd']], endVisit:[['movements','upd']], deleteVisitLog:[['movements','upd']], // ⚠️ v311 — كانت بتعدّل محليًا قبل ما dbUpdate يرفض
   saveNewInvestor:[['accounting','ins']], saveEditInvestor:[['accounting','upd']], delInvestor:[['accounting','del']], saveInvestorWithdraw:[['accounting','ins']],
   saveAddCapital:[['accounting','ins']], saveProfitCycle:[['accounting','ins']], deleteProfitCycle:[['accounting','del']],
+  _pcPayInv:[['accounting','ins']], _oiSaveContribution:[['accounting','upd']], _oiDelContribution:[['accounting','del']], _invEmpApply:[['accounting','upd']], _empMergeExec:[['accounting','upd']], _oiDelWithdrawal:[['accounting','del']], _oiDeactivate:[['accounting','upd']], // ⚠️ v324
   _invBatchSave:[['accounting','ins']], _invBatchClose:[['accounting','upd']], _invBatchDel:[['accounting','del']]
 };
 var __OWNER_ONLY_FUNCS=['_invRestoreBackup','__approveJoin','__resetRoleToDefault','__changeEmpRole','__toggleEmpBlock','__resetEmpCustomPerms','__toggleEmpPerm','__togglePerm',
