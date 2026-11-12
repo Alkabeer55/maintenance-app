@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v327</title>
+<title>ابو حوده الحلو الجميل v329</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -53,7 +53,7 @@ async function __netProbe(force){
   }catch(e3){}
   return ok;
 }
-/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="v327 — ٣٠ جمادى الأولى ١٤٤٨ هـ";
+/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="v329 — ٣٠ جمادى الأولى ١٤٤٨ هـ";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -132,6 +132,8 @@ async function __netProbe(force){
     36) ⚠️ v306 — المستثمرين: أي عملية مستثمر (إيداع/سحب/رد رأس مال/دفعة/دورة توزيع/مستثمر) لازم تعدّي بالترتيب: _invGuard(تاريخ العملية) ← _invBackup(سبب) ← التعديل ← _invAudit(...) ← persist. ممنوع تعديل نسبة أو تكلفة دفعة اتباع منها (النسبة بتتغيّر بـ pct_hist بتاريخ سريان عن طريق _invPctAt، والتكلفة بدفعة جديدة). ممنوع حذف دفعة عليها مبيعات أو مستثمر عليه حركات (أرشفة بدل الحذف). إقفال الشهر لازم يثبّت لقطة (_invTakeSnapshot) وأي دالة مستثمرين جديدة لازم تتضاف في __ONCE_GUARDED.
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v329: [📜 عقود المستثمرين: عقد استثمار لمستثمر الشراكة بنوعين — «مستثمر شريك» (نسبة ملكية + أرباح وخسائر + تخارج بالقيمة الدفترية) و«مستثمر برأس مال» (نسبة أرباح من غير ملكية + تنظيم استرداد رأس المال) مع موافقة الطرفين وطباعة وواتساب • عقود البضاعة اتسمّت بوضوح «مستثمر بضاعة — مضاربة/مشاركة» (مبقاش شكلهم زي بعض) • 🧮 حاسبة النسبة بقت بتفرّق بين «شريك» (قيمة عادلة Post-money + رأس المال×المدة) و«مستثمر بضاعة» (عائد على رأس المال = هامش الربح × دوران المخزون من مبيعاتك الفعلية) وبتشرح الأساس المحاسبي قدام كل رقم • 🧭 المستثمرين: (١) إلغاء/حذف مستثمر بضاعة اتفتح بالغلط (بيتمسح لو مفيش عليه دفعات أو حركات، وغير كده بيتأرشف) • (٢) قائمة «⚙️ خيارات» موحدة لكل مستثمر (ربط عميل/موظف، حساب بضاعة، تعطيل، حذف...) بدل الأزرار الكبيرة اللي واخدة الشاشة • (٣) كروت «عامة» بقت بتودّيك لبياناتها + تبويب جديد «📦 بضاعة» • (٤) تقرير المالك: إجمالي رأس المال شامل المحتجز • (٥) شاشة توزيع الأرباح بتعرض مستثمري البضاعة ونصيب كل واحد قبل توزيع الشركة، وبيتسجّل في الدورة • (٦) شرح مبسّط لـ«الحماية والنسخ الاحتياطي» جوه الشاشة • 🐛 «التعديل بيرجع زي ما كان»: سحب الحسابات من السيرفر كان بيدّي نسخة السيرفر الأولوية على أي تعديل/حذف محلي لسه ما اترفعش (مستثمر، سحب، مساهمة، موظف، دورة توزيع...) فبيرجّع القديم — اتصلح بدمج ثلاثي (الأساس/المحلي/السيرفر) في السحب زي الرفع بالظبط • تعديل دورة التوزيع بقى بيسجّل شاهد حذف للدورة القديمة (كانت ممكن ترجع بعد المزامنة)]
+v328: [🔀 دمج الموظفين: الراتبين بقوا بيتجمّعوا مع بعض (راتب الأساسي + راتب المكرر) بدل ما راتب المكرر يتشال — خيار «جمّع الراتبين» شغّال تلقائي ومعاينة الدمج بتعرض الناتج (مثال: ٥٠٠٠ + ٢٠٠٠ = ٧٠٠٠) • لو نوع الأجر مختلف (شهري/يومي) مينفعش يتجمعوا فبيفضل راتب الأساسي وراتب المكرر بيتسجّل في الملاحظة (مفيش حاجة بتضيع) • الزيادة الدورية بالمبلغ بتتجمّع لو نفس المدة، وغير كده بتتسجّل في الملاحظة • كل دمج بيسجّل تفاصيل الجمع في ملاحظة الموظف]
 v327: [💼 تعديل/حذف مساهمة رأس المال (كانت مفيش طريقة للتراجع عن مساهمة اتسجّلت غلط) — من «📜 السجل الكامل» للمستثمر، للمالك بس، ومحمي: مينفعش يخلّي رأس المال المردود أكبر من المساهمات • ⛔ تعديل دورة توزيع بعد سحب: بيتمنع لو هيخلّي مستثمر سحبه أكبر من أرباحه (كان بيسكت ويصفّر المحتجز) • 🧮 حاسبة نسبة الأرباح: (١) مستثمر جديد بطريقتين (قيمة المركز الدفترية / رأس المال فقط) مع أثره على القدامى والمالك (٢) توزيع النسب حسب رأس المال × المدة (متوسط مرجّح بالأيام) من الأرقام المسجّلة — اقتراح للقراءة بس، مابتغيّرش نسب • مفيش تغيير في معادلات الخزنة أو الميزانية]
 v326: [📶 النت: (١) فحص اتصال حقيقي بالسيرفر (__netProbe) بدل الاعتماد على navigator.onLine اللي بيكدّب في الاتجاهين — لو المتصفح قال «أوفلاين» والسيرفر واصل، التطبيق بيشتغل أونلاين ويرفع الطابور؛ ولو قال «متصل» والسيرفر مش واصل، الحفظ بيتأجّل للطابور فورًا من غير ما يستنى المهلة • (٢) فحص التعارض (v310) قبل كل حفظ كان بيستنى قراءة من السيرفر لحد ~18ث لما النت وهمي ومتغطّيش بالقاطع — بقى بيتخطى لو النت ضعيف ومحدود بـ٢٫٥ث • (٣) سجل تشخيص النت: آخر ٣٠ حدث (مهلات/فشل/بطء/فحص) بيظهر لما تدوس على شريط الحالة العلوي + زر «فحص الاتصال الآن» • مفيش تغيير في بيانات أو حسابات]
 v325: [🧭 شاشة المستثمرين اتقسمت 4 تبويبات (نظرة عامة / المستثمرون بكروت مضغوطة بتتفتح بضغطة / التوزيعات بملخص كل المستثمرين / السحوبات) بدل الشاشة الطويلة • 👤 تقرير صاحب المشروع (إجمالي المسحوب + رأس المال الحالي) • 🔗 ربط مستثمر (شراكة/بضاعة) بموظف + «📊 تقرير شامل» لأي موظف (راتبه + سلفه + إجازاته + كمستثمر) من شاشة الموظفين • 🔀 دمج موظف مكرر بأسماء مختلفة (بيحوّل كل مصروفاته ورواتبه وإجازاته وروابطه للأساسي + سجل تراجع + شاهد حذف) • 🗑️ إصلاح: حذف موظف/دمجه ما بيرجعش من جهاز تاني (شواهد الحذف شملت الموظفين) • ✅ التقرير الشامل ما بيعرضش فواتير/مصروفات غيره لو مش مربوط بحساب دخول • مفيش تغيير في معادلات الأرباح أو الخزنة أو المخزون]
@@ -4404,7 +4406,7 @@ async function __pullAllFromServer(){
       try{
         var accRes = await sb.from('business_state').select('data, updated_at').eq('id','accounts').maybeSingle();
         if(!accRes.error && accRes.data && accRes.data.data){
-          DB.accounts = __mergeAccounts(DB.accounts, accRes.data.data);
+          DB.accounts = __mergeAccounts(DB.accounts, accRes.data.data, __blobGet('accounts')); try{ if(window.__lastMergeRep&&window.__lastMergeRep.length) __holdBlobConflicts('accounts', window.__lastMergeRep); }catch(_eh){} // ⚠️ v329
           __blobSetBase('accounts', accRes.data.data); __blobSetVer('accounts', accRes.data.updated_at||''); // ⚠️ v310 — نقطة الأساس للدمج الثلاثي
           __fixTwins();
           // ⚠️ v264 — رصيد المحتجز (المالك + كل مستثمر) بيتعاد حسابه من الدورات فورًا بعد السحب من السيرفر؛ __mergeAccounts بيدي الرصيد الجاهز من السيرفر (ممكن يكون أقدم) والدورات هي مصدر الحقيقة.
@@ -4779,14 +4781,15 @@ async function __pullAllFromServer(){
   // كل مصفوفة فرعية (موظفين، مستثمرين...) بتتدمج عنصر بعنصر حسب id (بالظبط زي باقي
   // الجداول)، والحقول المفردة (الأرباح المحتجزة، رصيد افتتاحي...) بتاخد نسخة السيرفر
   // لو موجودة، عشان آخر نسخة اتحفظت (من أي جهاز) هي اللي تفوز =====
-  function __mergeAccounts(local, server){
+  function __mergeAccounts(local, server, base){ // ⚠️ v329 — base = آخر نسخة اتفقنا عليها مع السيرفر: لو موجودة بنعمل دمج ثلاثي بدل «السيرفر يكسب دايمًا»
     local = local || {};
     server = server || {};
+    var __rep = []; window.__lastMergeRep = __rep;
     var result = Object.assign({}, local);
     var arrayKeys = ['capital','fixed_assets','fixed_expenses','receivables','employees',
       'investors','profit_cycles','balance_snapshots','inventory_adjustments','equity_adjustments'];
     arrayKeys.forEach(function(k){
-      result[k] = __mergeServerRows(local[k]||[], server[k]||[]);
+      result[k] = base ? __m3Arr(base[k]||[], local[k]||[], server[k]||[], __rep, k) : __mergeServerRows(local[k]||[], server[k]||[]); // ⚠️ v329
     });
     // ⚠️ v306 — المستثمرين القدام: السحوبات والمساهمات جوه صف المستثمر نفسه، و__mergeServerRows بيخلّي صف السيرفر يكسب كله،
     // فسحب اتسجّل على جهاز تاني كان بيضيع. دلوقتي بيتدمجوا بالـid (إضافة فقط، مفيش حذف لسحوبات في التطبيق).
@@ -4794,7 +4797,9 @@ async function __pullAllFromServer(){
       (result.investors||[]).forEach(function(r){
         var l=(local.investors||[]).find(function(x){return x.id===r.id;}),s=(server.investors||[]).find(function(x){return x.id===r.id;});
         if(!l||!s)return;
+        var bI=base?(base.investors||[]).find(function(x){return x.id===r.id;}):null; // ⚠️ v329
         ['withdrawals','capital_contributions'].forEach(function(f){
+          if(bI){ r[f]=__m3Arr(bI[f]||[], l[f]||[], s[f]||[], __rep, 'inv_'+f); return; } // دمج ثلاثي للحركات: تعديل/حذف محلي ما يرجعش
           var a=(s[f]||[]).slice(),seen={};
           a.forEach(function(e){if(e&&e.id)seen[e.id]=1;});
           (l[f]||[]).forEach(function(e){if(e&&e.id&&!seen[e.id]){a.push(e);seen[e.id]=1;}});
@@ -5733,7 +5738,7 @@ var APP_TITLE=APP_CONFIG.name;
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=327;
+var APP_VERSION=329;
 // ⚠️ v303 — BUILD_STAMP كان مش متعرّف خالص (شاشة الإعدادات كانت بتعرض "?") — اتعرّف دلوقتي وبيتزود مع كل تحديث
 var BUILD_STAMP='v323 — ٣٠ جمادى الأولى ١٤٤٨ هـ';
 // ⚠️ v295 — عنوان الصفحة كان رقم نسخته ثابت ومتنسي (فضل v294 مع إن النسخة اتغيّرت). دلوقتي بياخد الرقم من APP_VERSION دايمًا.
@@ -17188,7 +17193,7 @@ function _invExportBackup(){
     showToast('✅ تم التصدير — شوف Downloads','#16a34a');
   }catch(e){showToast('❌ فشل التصدير','#dc2626');}
 }
-var _INV_ACT={deposit:['💰 إيداع رأس مال','money'],payout:['💸 دفع للمستثمر','money'],pay:['💸 دفع (أرباح/رأس مال)','money'],old_withdraw:['💸 سحب شراكة','money'],investor_emp_link:['🔗 ربط مستثمر بموظف','batch'],investor_emp_unlink:['⛓️‍💥 فك ربط مستثمر بموظف','batch'],old_capital_edit:['✏️ تعديل مساهمة رأس مال','money'],old_capital_delete:['🗑️ حذف مساهمة رأس مال','money'],old_withdraw_delete:['🗑️ حذف سحب شراكة','money'],old_investor_deactivate:['⏸️ تعطيل مستثمر شراكة','batch'],old_capital_add:['💼 مساهمة رأس مال (شراكة)','money'],profit_cycle_create:['📊 توزيع أرباح','money'],profit_cycle_delete:['🗑️ حذف دورة توزيع','money'],profit_cycle_edit_rollback:['↺ استرجاع دورة للتعديل (قديم)','money'],profit_cycle_edit:['✏️ تعديل دورة توزيع','money'],investor_create:['👤 مستثمر جديد','batch'],investor_edit:['✏️ تعديل مستثمر','batch'],investor_archive:['📦 أرشفة مستثمر','batch'],investor_unarchive:['📦 إلغاء أرشفة','batch'],old_investor_create:['👤 مستثمر شراكة جديد','batch'],old_investor_edit:['✏️ تعديل مستثمر شراكة','batch'],old_investor_delete:['🗑️ حذف مستثمر شراكة','batch'],batch_create:['📦 دفعة جديدة','batch'],batch_edit:['✏️ تعديل دفعة','batch'],batch_delete:['🗑️ حذف دفعة','batch'],batch_close:['🔒 قفل دفعة','batch'],batch_reopen:['🔓 فتح دفعة','batch'],month_snapshot:['📸 لقطة إقفال','close'],baseline_snapshots:['📸 تثبيت لقطات قديمة','close'],reopen_month:['🔓 فتح شهر مقفول','close'],sync_conflict:['⚠️ تعارض مزامنة','sync'],restore_backup:['↩️ استرجاع نسخة','sync']};
+var _INV_ACT={deposit:['💰 إيداع رأس مال','money'],payout:['💸 دفع للمستثمر','money'],pay:['💸 دفع (أرباح/رأس مال)','money'],old_withdraw:['💸 سحب شراكة','money'],investor_emp_link:['🔗 ربط مستثمر بموظف','batch'],investor_emp_unlink:['⛓️‍💥 فك ربط مستثمر بموظف','batch'],old_capital_edit:['✏️ تعديل مساهمة رأس مال','money'],old_capital_delete:['🗑️ حذف مساهمة رأس مال','money'],investor_goods_delete:['🗑️ إلغاء مستثمر بضاعة','batch'],old_investor_activate:['▶️ تفعيل مستثمر شراكة','batch'],oc_contract_save:['📜 حفظ عقد استثمار (شراكة)','batch'],oc_contract_approve:['✅ موافقة على عقد استثمار (شراكة)','batch'],old_withdraw_delete:['🗑️ حذف سحب شراكة','money'],old_investor_deactivate:['⏸️ تعطيل مستثمر شراكة','batch'],old_capital_add:['💼 مساهمة رأس مال (شراكة)','money'],profit_cycle_create:['📊 توزيع أرباح','money'],profit_cycle_delete:['🗑️ حذف دورة توزيع','money'],profit_cycle_edit_rollback:['↺ استرجاع دورة للتعديل (قديم)','money'],profit_cycle_edit:['✏️ تعديل دورة توزيع','money'],investor_create:['👤 مستثمر جديد','batch'],investor_edit:['✏️ تعديل مستثمر','batch'],investor_archive:['📦 أرشفة مستثمر','batch'],investor_unarchive:['📦 إلغاء أرشفة','batch'],old_investor_create:['👤 مستثمر شراكة جديد','batch'],old_investor_edit:['✏️ تعديل مستثمر شراكة','batch'],old_investor_delete:['🗑️ حذف مستثمر شراكة','batch'],batch_create:['📦 دفعة جديدة','batch'],batch_edit:['✏️ تعديل دفعة','batch'],batch_delete:['🗑️ حذف دفعة','batch'],batch_close:['🔒 قفل دفعة','batch'],batch_reopen:['🔓 فتح دفعة','batch'],month_snapshot:['📸 لقطة إقفال','close'],baseline_snapshots:['📸 تثبيت لقطات قديمة','close'],reopen_month:['🔓 فتح شهر مقفول','close'],sync_conflict:['⚠️ تعارض مزامنة','sync'],restore_backup:['↩️ استرجاع نسخة','sync']};
 function _invAuditSum(a){
   var d=a.details||{},p=[];
   if(d.investor)p.push(d.investor);if(d.name)p.push(d.name);if(d.title)p.push(d.title);
@@ -17214,6 +17219,12 @@ function _invIntRender(){
     return '<div onclick="_invIntSet(\''+k+'\')" style="flex:1;cursor:pointer;border-radius:11px;padding:8px 2px;text-align:center;background:'+(on?'#0f172a':'#f1f5f9')+';color:'+(on?'#fff':(warn?'#dc2626':'#334155'))+'"><div style="font-size:17px;font-weight:900">'+val+'</div><div style="font-size:10px;font-weight:700">'+icon+' '+label+'</div></div>';
   };
   var h='<div style="display:flex;gap:6px;margin-bottom:10px">'+card('snaps','📸','لقطات',ver.length,drift>0)+card('issues','🔎','فحص',iss.length,errs>0)+card('backups','🗂️','نسخ',hist.length,false)+card('audit','🧾','سجل',aud.length,false)+'</div>';
+  h='<details style="background:#eff6ff;border-radius:10px;padding:8px 11px;margin-bottom:10px;font-size:11.5px;color:#1e40af;line-height:1.9"><summary style="cursor:pointer;font-weight:800">❓ الصفحة دي بتعمل إيه؟</summary>'+
+    'حماية لحسابات المستثمرين من الغلط أو التلاعب — مش لازم تفتحها في الشغل اليومي:<br>'+
+    '📸 <b>لقطات:</b> لما بتقفل شهر، التطبيق بيصوّر أرقام المستثمرين وقتها. بعد كده لو حد غيّر حاجة في الشهر ده بيظهر لك «فيه فرق».<br>'+
+    '🔎 <b>فحص:</b> بيراجع الأرقام لوحده (مثلاً رأس مال مردود أكبر من المودع) ويقولك لو في مشكلة — قراءة بس ومابيعدّلش حاجة.<br>'+
+    '🗂️ <b>نسخ:</b> نسخة احتياطية بتتاخد تلقائي قبل أي تعديل، تقدر ترجع لها أو تنزلها كملف.<br>'+
+    '🧾 <b>سجل:</b> مين عمل إيه وإمتى (إضافة / تعديل / حذف).</details>'+h;
   if(_invIntTab==='snaps'){
     h+='<div style="font-size:11px;color:#64748b;line-height:1.8;margin-bottom:8px">كل إقفال بيثبّت لقطة بأرباح الدفعات ومستحقات المستثمرين. الفحص بيقارنها بالحساب الحالي — أي فرق معناه إن حاجة اتغيّرت بعد الإقفال.</div>';
     if(!ver.length)h+='<div class="empty">مفيش شهور مقفولة</div>';
@@ -17447,7 +17458,7 @@ function _invHubSummary(){
   var news=_invList().filter(function(n){return !n.archived;}),ex=_invExclOn();
   var tot=news.reduce(function(t,n){var T=_invStats(n).T;t.owed+=T.owed;t.rem+=T.remCost;t.avail+=T.capCash;return t;},{owed:0,rem:0,avail:0});
   if(!news.length&&!_invList().length)return '';
-  return '<div style="display:flex;gap:8px;margin-bottom:10px"><div style="flex:1;background:#d1fae5;border-radius:11px;padding:8px;text-align:center"><div style="font-size:10px;color:#047857;font-weight:800">🤝 مستثمرو بضاعة ('+news.length+')</div><b style="color:#047857;font-size:15px">'+fmt(Math.round(tot.owed))+'</b><div style="font-size:9.5px;color:#059669">مستحق لهم</div></div>'+
+  return '<div onclick="_invsSetTab(\'goods\')" style="display:flex;gap:8px;margin-bottom:10px;cursor:pointer"><div style="flex:1;background:#d1fae5;border-radius:11px;padding:8px;text-align:center"><div style="font-size:10px;color:#047857;font-weight:800">🤝 مستثمرو بضاعة ('+news.length+')</div><b style="color:#047857;font-size:15px">'+fmt(Math.round(tot.owed))+'</b><div style="font-size:9.5px;color:#059669">مستحق لهم</div></div>'+
     '<div style="flex:1;background:#ffedd5;border-radius:11px;padding:8px;text-align:center"><div style="font-size:10px;color:#c2410c;font-weight:800">📦 رأس مال في بضاعة</div><b style="color:#c2410c;font-size:15px">'+fmt(Math.round(tot.rem))+'</b></div>'+
     '<div style="flex:1;background:'+(tot.avail<-0.001?'#fee2e2':'#d1fae5')+';border-radius:11px;padding:8px;text-align:center"><div style="font-size:10px;color:'+(tot.avail<-0.001?'#dc2626':'#047857')+';font-weight:800">💵 المتاح للشراء</div><b style="color:'+(tot.avail<-0.001?'#dc2626':'#047857')+';font-size:15px">'+fmt(Math.round(tot.avail))+'</b></div></div>'+
     '<div onclick="_invSetExcl('+(ex?'false':'true')+')" style="cursor:pointer;background:'+(ex?'#ecfdf5':'#fef2f2')+';border:1.5px solid '+(ex?'#6ee7b7':'#fca5a5')+';border-radius:10px;padding:8px 11px;font-size:11.5px;font-weight:700;color:'+(ex?'#047857':'#b91c1c')+';margin-bottom:10px;line-height:1.7">'+(ex?'✅ توزيع أرباح الشراكة: بعد خصم نصيب مستثمري البضاعة':'⛔ توزيع أرباح الشراكة: على صافي الربح كامل')+' <span style="font-weight:500;opacity:.8">(اضغط للتغيير)</span></div>'+
@@ -17785,9 +17796,9 @@ function _invToggleArch(){_invListArch=!_invListArch;_renderInvList();}
 // أنواع العقد + بنود قابلة للاختيار (محاسبيًا): النسبة، قاعدة الخسارة (بتتنفّذ فعلًا في الحسابات)، رد رأس المال والتسوية والمدة والبنود العامة (بنود تعاقدية مكتوبة)،
 // وموافقة الطرفين (بالتاريخ والطريقة) + ملاحق التعديل + نموذج عقد كامل للطباعة والواتساب.
 var _INV_CTYPES={
-  mudaraba:{ico:'🤲',name:'مضاربة بضاعة',loss:'investor',desc:'المستثمر بيدفع رأس المال وانت اللي بتشتري وتبيع وتشتغل. الربح بالنسبة المتفق عليها، والخسارة (لو حصلت) على رأس مال المستثمر إلا لو في تقصير منك.'},
-  musharaka:{ico:'🤝',name:'مشاركة بضاعة',loss:'ratio',desc:'مشاركة في ربح بضاعة بتتشتري بفلوس المستثمر. الربح والخسارة بنفس النسبة المتفق عليها.'},
-  custom:{ico:'⚙️',name:'اتفاق خاص',loss:'ratio',desc:'انت اللي بتختار كل بند بنفسك.'}
+  mudaraba:{ico:'🤲',name:'مستثمر بضاعة — مضاربة',loss:'investor',desc:'المستثمر بيدفع رأس المال وانت اللي بتشتري وتبيع وتشتغل. الربح بالنسبة المتفق عليها، والخسارة (لو حصلت) على رأس مال المستثمر إلا لو في تقصير منك.'},
+  musharaka:{ico:'🤝',name:'مستثمر بضاعة — مشاركة',loss:'ratio',desc:'مشاركة في ربح بضاعة بتتشتري بفلوس المستثمر. الربح والخسارة بنفس النسبة المتفق عليها.'},
+  custom:{ico:'⚙️',name:'مستثمر بضاعة — اتفاق خاص',loss:'ratio',desc:'انت اللي بتختار كل بند بنفسك.'}
 };
 var _INV_LOSS={investor:'بتتحمّلها رأس مال المستثمر (بتتخصم من مستحقه)',ratio:'بنفس نسبة الربح (المستثمر والمشروع)',owner:'يتحملها صاحب المشروع بالكامل (المستثمر ما يخسرش)'};
 var _INV_LOSS_F={investor:'يتحمّلها رأس مال الطرف الثاني (وتُخصم من مستحقاته) ما لم يكن هناك تقصير من الطرف الأول',ratio:'تُقسَّم بين الطرفين بنفس نسبة الربح',owner:'يتحمّلها الطرف الأول بالكامل ولا يخسر الطرف الثاني من رأس ماله'};
@@ -17931,7 +17942,7 @@ function _invForm(id){
       fld('iv-owner','الطرف الأول — صاحب المشروع (اسم يظهر في العقد)','text',c.ownerName||'','مثال: اسمك أو اسم المركز')+
       fld('iv-name','الطرف الثاني — المستثمر','text',i?i.name:'','',true)+
       fld('iv-phone','التليفون (واتساب)','tel',i?i.phone:''))+
-    sec('📑 ٢) نوع العقد','<input type="hidden" id="iv-ctype" value="'+ctype+'"><div id="iv-ctypes">'+_invCtypePills(ctype)+'</div>')+
+    sec('📑 ٢) نوع تمويل البضاعة (مستثمر بضاعة — مش شريك ولا برأس مال)','<input type="hidden" id="iv-ctype" value="'+ctype+'"><div id="iv-ctypes">'+_invCtypePills(ctype)+'</div>')+
     sec('💰 ٣) رأس المال والمدة',
       fld('iv-cap','رأس المال المتفق عليه (اختياري)','number',c.capital||'','المبلغ المتفق عليه في العقد')+
       (i?'':'<div class="field"><label>تسجيل الإيداع</label><select id="iv-capnow" style="'+sel+'"><option value="0">لا — هسجّل الإيداع بنفسي بعدين</option><option value="1">أيوه — سجّله إيداع بتاريخ العقد</option></select></div>')+
@@ -28618,6 +28629,7 @@ function openMergeEmployees(aId,bId){
     '<label style="font-size:12px;font-weight:800">🗑️ المكرر (هيتشال وتتنقل سجلاته)</label><select id="mg-dup" onchange="_empMergePreview(true)" style="'+sty+'">'+opt(bId)+'</select>'+
     fld('mg-name','الاسم النهائي','text','')+
     '<div style="display:flex;gap:6px;margin:-4px 0 10px"><button type="button" class="btn btn-sm" style="flex:1;background:#f1f5f9;color:#475569;border:none" onclick="_mgFillName(\'keep\')">اسم الأساسي</button><button type="button" class="btn btn-sm" style="flex:1;background:#f1f5f9;color:#475569;border:none" onclick="_mgFillName(\'dup\')">اسم المكرر</button></div>'+
+    '<label style="display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;margin-bottom:10px"><input type="checkbox" id="mg-sum" checked onchange="_empMergePreview()" style="width:18px;height:18px"> جمّع الراتبين (راتب الأساسي + راتب المكرر)</label>'+
     '<div id="mg-prev"></div>'+
     '<div class="modal-actions"><button class="btn btn-green btn-full" onclick="_empMergeConfirm()">🔀 دمج</button><button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
   openModal();_empMergePreview(true);
@@ -28636,6 +28648,19 @@ function _empMergeProblem(K,D){
   if(K.linked_profile_id&&D.linked_profile_id&&K.linked_profile_id!==D.linked_profile_id)return 'الاتنين مربوطين بحسابين دخول مختلفين — فك ربط واحد منهم الأول من ⚙️ إدارة الموظفين';
   return '';
 }
+function _empMergeSalary(K,D,doSum){
+  var kw=K.wage_type==='daily'?'daily':'monthly',dw=D.wage_type==='daily'?'daily':'monthly';
+  var kv=kw==='daily'?(+K.daily_rate||0):(+K.salary||0),dv=dw==='daily'?(+D.daily_rate||0):(+D.salary||0);
+  var unit=function(w){return w==='daily'?'/يوم':'/شهر';};
+  var r={wage_type:K.wage_type||'monthly',salary:+K.salary||0,daily_rate:+K.daily_rate||0,summed:false,warn:'',noteAdd:'',result:kv,unit:unit(kw)};
+  if(!(dv>0))return r;                                    // المكرر من غير راتب — مفيش حاجة تتجمّع
+  if(!(kv>0)){r.wage_type=D.wage_type||'monthly';r.salary=+D.salary||0;r.daily_rate=+D.daily_rate||0;r.result=dv;r.unit=unit(dw);return r;} // الأساسي من غير راتب → ياخد راتب المكرر
+  if(!doSum){r.noteAdd='راتب «'+D.name+'» قبل الدمج: '+dv+unit(dw);return r;}
+  if(kw!==dw){r.warn='نوع الأجر مختلف (شهري/يومي) — مينفعش يتجمعوا في خانة واحدة. هيفضل راتب الأساسي وراتب المكرر ('+dv+unit(dw)+') هيتسجّل في الملاحظة.';r.noteAdd='راتب «'+D.name+'» قبل الدمج: '+dv+unit(dw);return r;}
+  if(kw==='daily')r.daily_rate=kv+dv;else r.salary=kv+dv;
+  r.summed=true;r.result=kv+dv;r.noteAdd='رواتب مجمّعة عند الدمج: «'+K.name+'» '+kv+' + «'+D.name+'» '+dv+' = '+(kv+dv)+unit(kw);
+  return r;
+}
 function _empMergePreview(resetName){
   var K=_mgEmp(v('mg-keep')),D=_mgEmp(v('mg-dup')),box=document.getElementById('mg-prev');if(!box)return;
   if(resetName&&K)document.getElementById('mg-name').value=K.name||'';
@@ -28644,15 +28669,21 @@ function _empMergePreview(resetName){
   var c=_empMergeCounts(D.id),sal=function(e){return e.wage_type==='daily'?fmt(e.daily_rate||0)+'/يوم':fmt(e.salary||0)+'/شهر';};
   box.innerHTML='<div style="background:#f0f9ff;border-radius:10px;padding:9px 12px;font-size:12px;margin-bottom:10px;line-height:1.9">'+
     '<b>هيتنقل من «'+esc(D.name)+'» لـ «'+esc(K.name)+'»:</b><br>💸 مصروفات/رواتب: <b>'+c.exp+'</b> • 💰 دفعات راتب: <b>'+c.pay+'</b> • 📅 إجازات: <b>'+c.leaves+'</b> • 💼 مستثمرين مربوطين: <b>'+c.inv+'</b><br>'+
-    '<span style="color:#64748b">بيانات الأساسي بتفضل (الراتب '+sal(K)+'، الوظيفة '+esc(K.role||'—')+') والفاضي بيتكمّل من المكرر (الراتب عند المكرر '+sal(D)+').</span></div>';
+    (function(){
+      var sr=_empMergeSalary(K,D,document.getElementById('mg-sum')?document.getElementById('mg-sum').checked:true);
+      return '💰 <b>الراتب بعد الدمج: '+fmt(sr.result)+sr.unit+'</b>'+(sr.summed?' <span style="color:#15803d">(= '+sal(K)+' + '+sal(D)+')</span>':' <span style="color:#64748b">(الأساسي '+sal(K)+' • المكرر '+sal(D)+')</span>')+
+        (sr.warn?'<div style="color:#b45309;font-size:11px;margin-top:3px">⚠️ '+esc(sr.warn)+'</div>':'')+
+        '<div style="color:#64748b;font-size:11px;margin-top:3px">الوظيفة: '+esc(K.role||D.role||'—')+' • والفاضي في بيانات الأساسي بيتكمّل من المكرر.</div></div>';
+    })();
 }
 function _empMergeConfirm(){
   var K=_mgEmp(v('mg-keep')),D=_mgEmp(v('mg-dup')),pr=_empMergeProblem(K,D);
   if(pr)return showToast('⚠️ '+pr,'#dc2626');
-  var nm=(v('mg-name')||'').trim()||K.name,kid=K.id,did=D.id;
-  confirmAction('هتدمج «'+D.name+'» جوه «'+K.name+'» بالاسم «'+nm+'»؟ المكرر هيتشال وسجلاته كلها هتنتقل.',function(){_empMergeExec(kid,did,nm);});
+  var nm=(v('mg-name')||'').trim()||K.name,kid=K.id,did=D.id,sumS=document.getElementById('mg-sum')?document.getElementById('mg-sum').checked:true;
+  var sr=_empMergeSalary(K,D,sumS);
+  confirmAction('هتدمج «'+D.name+'» جوه «'+K.name+'» بالاسم «'+nm+'»؟ الراتب بعد الدمج '+fmt(sr.result)+sr.unit+'، وسجلات المكرر كلها هتنتقل.',function(){_empMergeExec(kid,did,nm,sumS);});
 }
-async function _empMergeExec(keepId,dupId,finalName){
+async function _empMergeExec(keepId,dupId,finalName,sumSalary){
   if(!window.__isOwner)return showToast('🚫 دمج الموظفين للمالك بس','#dc2626');
   var K=_mgEmp(keepId),D=_mgEmp(dupId),pr=_empMergeProblem(K,D);
   if(pr)return showToast('⚠️ '+pr,'#dc2626');
@@ -28666,8 +28697,17 @@ async function _empMergeExec(keepId,dupId,finalName){
   var merged=Object.assign({},K,{name:name});
   ['role','hire_date','note','linked_profile_id','cash_balance_since'].forEach(function(f){if(!merged[f]&&D[f])merged[f]=D[f];});
   if(D.hire_date&&K.hire_date&&D.hire_date<K.hire_date)merged.hire_date=D.hire_date;
-  if(!(+merged.salary>0)&&merged.wage_type!=='daily'&&(+D.salary>0))merged.salary=D.salary;
-  if(!merged.increment&&D.increment)merged.increment=D.increment;
+  // ⚠️ v328 — الراتبين بيتجمّعوا (كان بيفضل راتب الأساسي وراتب المكرر بيضيع)
+  var _sr=_empMergeSalary(K,D,sumSalary!==false);
+  merged.wage_type=_sr.wage_type;merged.salary=_sr.salary;merged.daily_rate=_sr.daily_rate;
+  var _noteAdd=_sr.noteAdd?[_sr.noteAdd]:[];
+  var _ki=K.increment,_di=D.increment;
+  if(!_ki&&_di)merged.increment=_di;
+  else if(_ki&&_di){
+    if(_sr.summed&&_ki.type==='amount'&&_di.type==='amount'&&_ki.every==_di.every&&_ki.period===_di.period)merged.increment=Object.assign({},_ki,{value:(+_ki.value||0)+(+_di.value||0)});
+    else _noteAdd.push('زيادة «'+D.name+'» قبل الدمج: '+_di.value+(_di.type==='pct'?'%':' ج')+' كل '+_di.every+' '+(_di.period==='year'?'سنة':'شهر'));
+  }
+  if(_noteAdd.length)merged.note=((merged.note||'')+(merged.note?' | ':'')+_noteAdd.join(' | '));
   merged.active=(K.active!==false)||(D.active!==false);
   if(Array.isArray(D.commission_done)&&D.commission_done.length){
     var seen={};merged.commission_done=(Array.isArray(K.commission_done)?K.commission_done:[]).concat(D.commission_done).filter(function(x){var k=JSON.stringify(x);if(seen[k])return false;seen[k]=1;return true;});
@@ -28703,7 +28743,8 @@ function _invOwnerReport(){
   return '<div style="background:#faf5ff;border:1.5px solid #e9d5ff;border-radius:12px;padding:11px 12px;margin-bottom:12px">'+
     '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><b style="font-size:13px;color:#6b21a8">👤 تقرير صاحب المشروع</b><button class="btn btn-sm" style="background:#f3e8ff;color:#7e22ce;border:none;border-radius:8px" onclick="openOwnerTimeline()">📜 السجل الكامل</button></div>'+
     '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">'+
-    _invKpi('💰 إجمالي المسحوب',fmt(draws+capOut),'#c2410c','#ffedd5')+_invKpi('💼 رأس المال الحالي',fmt(capNow),'#5b21b6','#ede9fe')+'</div>'+
+    _invKpi('💰 إجمالي المسحوب',fmt(draws+capOut),'#c2410c','#ffedd5','openOwnerTimeline()')+_invKpi('💼 رأس المال الحالي',fmt(capNow),'#5b21b6','#ede9fe','openOwnerTimeline()')+
+    _invKpi('🏦 المحتجز لك',fmt(re.owner||0),'#854d0e','#fef9c3','openOwnerTimeline()')+_invKpi('📊 إجمالي رأس المال + المحتجز',fmt(capNow+(re.owner||0)),'#0f766e','#ccfbf1','openOwnerTimeline()')+'</div>'+
     '<div style="font-size:11px;color:#6b7280;margin-top:7px;line-height:1.8">سحب أرباح: <b>'+fmt(draws)+'</b> • سحب رأس مال: <b>'+fmt(capOut)+'</b><br>حصتك من الأرباح: <b>'+fmt(share)+'</b> • محتجز لك: <b>'+fmt(re.owner||0)+'</b></div></div>';
 }
 function _invRow(i){
@@ -28713,7 +28754,7 @@ function _invRow(i){
   return '<div style="background:#fff;border-radius:14px;padding:10px 12px;box-shadow:0 2px 10px rgba(0,0,0,.06);margin-bottom:8px;border-right:4px solid '+(isAct?'#2563eb':'#94a3b8')+';opacity:'+(isAct?1:.7)+'">'+
     '<div onclick="_invsToggleCard('+jsStr(i.id)+')" style="cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:6px"><div><b style="font-size:14px">'+esc(i.name)+'</b>'+
     (_invEmpOf(i,'old')?' <span style="font-size:10px;background:#e0e7ff;color:#4338ca;border-radius:6px;padding:1px 6px;font-weight:800">👤 موظف</span>':'')+(isAct?'':' <span style="font-size:10px;color:#94a3b8">غير نشط</span>')+
-    '<div style="font-size:11px;color:#64748b">'+_pctTxt(i.profit_share_pct)+' من الأرباح</div></div><span style="font-size:18px;color:#94a3b8">▾</span></div>'+
+    '<div style="font-size:11px;color:#64748b">'+_pctTxt(i.profit_share_pct)+' من الأرباح</div></div><span style="display:flex;align-items:center;gap:10px"><span onclick="event.stopPropagation();_invOpts(\'old\','+jsStr(i.id)+')" style="font-size:17px">⚙️</span><span style="font-size:18px;color:#94a3b8">▾</span></span></div>'+
     '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:8px">'+_invMini('رأس مال متبقي',_oiCapRem(i),'#1e40af','#dbeafe')+_invMini('أرباح متبقية',re,'#854d0e','#fef9c3')+_invMini('مسحوب',wd,'#c2410c','#ffedd5')+'</div></div>';
 }
 function _distSummaryHtml(){
@@ -28739,26 +28780,28 @@ function renderInvestors(){
   var totalInvCap=inv.reduce(function(s,i){return s+(i.capital_contributions||[]).reduce(function(ss,c){return ss+c.amount;},0);},0);
   var totalDistributed=cycles.reduce(function(s,c){return s+(c.distributions||[]).reduce(function(ss,d){return ss+d.amount;},0);},0);
   var totalInvRetained=Object.values(re.investors||{}).reduce(function(s,v){return s+v;},0);
-  var tabs=[['ov','📊 عامة'],['list','👥 المستثمرون'],['dist','📜 التوزيعات'],['wd','💸 السحوبات']];
+  var tabs=[['ov','📊 عامة'],['list','👥 شركاء'],['goods','📦 بضاعة'],['dist','📜 توزيعات'],['wd','💸 سحوبات']];
   var tabsHtml='<div style="display:flex;gap:6px;margin-bottom:12px">'+tabs.map(function(t){var a=_invsTab===t[0];return '<button type="button" onclick="_invsSetTab(\''+t[0]+'\')" style="flex:1;white-space:nowrap;padding:9px 4px;border:none;border-radius:10px;font-family:inherit;font-size:12px;font-weight:800;cursor:pointer;background:'+(a?'#0f172a':'#f1f5f9')+';color:'+(a?'#fff':'#64748b')+'">'+t[1]+'</button>';}).join('')+'</div>';
   var body='';
   if(_invsTab==='ov'){
     body=
       '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px">'+
-      _invKpi('👥 مستثمرين',inv.filter(function(i){return i.status!=='inactive';}).length+' نشط','#1e40af','#dbeafe')+
-      _invKpi('💰 رأس مالهم',fmt(totalInvCap),'#7c3aed','#ede9fe')+
-      _invKpi('📤 موزع عليهم',fmt(totalDistributed),'#15803d','#dcfce7')+'</div>'+
+      _invKpi('👥 مستثمرين',inv.filter(function(i){return i.status!=='inactive';}).length+' نشط','#1e40af','#dbeafe',"_invsSetTab('list')")+
+      _invKpi('💰 رأس مالهم',fmt(totalInvCap),'#7c3aed','#ede9fe',"_invsSetTab('list')")+
+      _invKpi('📤 موزع عليهم',fmt(totalDistributed),'#15803d','#dcfce7',"_invsSetTab('dist')")+'</div>'+
       _invOwnerReport()+
-      (totalInvRetained>0?'<div style="background:#fef9c3;border-radius:12px;padding:12px;margin-bottom:12px;border:1.5px solid #fde047"><div style="font-weight:800;font-size:13px;color:#854d0e;margin-bottom:8px">💼 الأرباح المحتجزة للمستثمرين</div>'+
+      (totalInvRetained>0?'<div onclick="_invsSetTab(\'list\')" style="cursor:pointer;background:#fef9c3;border-radius:12px;padding:12px;margin-bottom:12px;border:1.5px solid #fde047"><div style="font-weight:800;font-size:13px;color:#854d0e;margin-bottom:8px">💼 الأرباح المحتجزة للمستثمرين</div>'+
         inv.map(function(i){var r=(re.investors||{})[i.id]||0;if(!r)return '';return '<div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px"><span style="color:#64748b">'+esc(i.name)+'</span><b style="color:#854d0e">'+fmt(r)+'</b></div>';}).join('')+'</div>':'')+
       _pcFixBanner()+_invHubSummary()+
       '<div style="display:flex;gap:8px;margin-bottom:14px"><button class="btn btn-primary btn-full" onclick="openAddInvestorModal()">+ شريك (نسبة من الصافي)</button>'+
       '<button class="btn btn-green btn-full" onclick="openProfitCycleModal()">📊 توزيع أرباح</button>'+
       '<button class="btn btn-full" style="background:#ecfdf5;color:#047857;border:none" onclick="_invForm(null)">📜 مستثمر بضاعة (عقد)</button></div>'+
       '<button class="btn btn-full" style="background:#fef3c7;color:#92400e;border:none;margin-bottom:10px" onclick="openProfitCalc()">🧮 حاسبة نسبة الأرباح (مستثمر جديد / رأس مال × مدة)</button>'+ // ⚠️ v327
-      (window.__isOwner?'<button class="btn btn-full" style="background:#eef2ff;color:#4338ca;border:none;margin-bottom:14px" onclick="openInvIntegrity()">🛡️ سلامة المستثمرين: لقطات الإقفال • فحص • نسخ • سجل مراجعة</button>':'');
+      (window.__isOwner?'<button class="btn btn-full" style="background:#eef2ff;color:#4338ca;border:none;margin-bottom:14px" onclick="openInvIntegrity()">🛡️ الحماية والنسخ الاحتياطي (للمالك)</button>':'');
   }else if(_invsTab==='list'){
-    body=(inv.length?inv.map(function(i){return _invRow(i);}).join(''):'<div class="empty">لا يوجد مستثمرون — أضف أول مستثمر</div>')+_invUnlinkedBlock();
+    body='<button class="btn btn-primary btn-full" style="margin-bottom:10px" onclick="openAddInvestorModal()">+ شريك (نسبة من الصافي)</button>'+(inv.length?inv.map(function(i){return _invRow(i);}).join(''):'<div class="empty">لا يوجد مستثمرون — أضف أول مستثمر</div>');
+  }else if(_invsTab==='goods'){
+    body=_invGoodsTabHtml();
   }else if(_invsTab==='dist'){
     body='<button class="btn btn-green btn-full" style="margin-bottom:12px" onclick="openProfitCycleModal()">📊 توزيع أرباح جديد</button>'+_distSummaryHtml()+
       (cycles.length?'<div style="font-weight:900;font-size:14px;color:#0f172a;margin:6px 0 10px">📋 سجل التوزيعات ('+cycles.length+')</div>'+
@@ -28829,22 +28872,79 @@ function _pcalcAvgCap(ev,from,to){ // متوسط رأس المال المرجّ�
   area+=bal*(((t-cur)/864e5)+1);
   return area/days;
 }
+var _pcalcType='partner';
 function openProfitCalc(){
-  _pcalcPeriod=_makePeriodState();
-  var bs=null;try{bs=_computeBalanceSheet();}catch(e){}
-  var val=bs&&bs.totalEquity>0?Math.round(bs.totalEquity):'';
-  var sty='width:100%;padding:10px;border:1.5px solid #e2e8f0;border-radius:9px;font-family:inherit;margin-bottom:8px;box-sizing:border-box';
+  _pcalcPeriod=_makePeriodState();_pcalcType='partner';
   document.getElementById('modal-title').textContent='🧮 حاسبة نسبة الأرباح';
-  document.getElementById('modal-body').innerHTML=
-    '<div style="background:#eff6ff;border-radius:10px;padding:9px 12px;margin-bottom:10px;font-size:11.5px;color:#1e40af;line-height:1.7">اقتراحات محسوبة من الأرقام المسجّلة — للقراءة بس، مابتغيّرش أي نسبة. أي تعديل في النسب لازم يكون باتفاق مكتوب مع المستثمر.</div>'+
-    '<div style="font-weight:900;font-size:13px;margin:4px 0 6px">١) مستثمر جديد داخل</div>'+
-    '<label style="font-size:12px;font-weight:700">مبلغ المستثمر الجديد (ج)</label><input id="pcalc-amt" type="number" inputmode="decimal" oninput="_pcalcRender()" style="'+sty+'">'+
-    '<label style="font-size:12px;font-weight:700">قيمة المركز الحالية (ج) — الافتراضي حقوق الملكية الدفترية</label><input id="pcalc-val" type="number" inputmode="decimal" value="'+val+'" oninput="_pcalcRender()" style="'+sty+'">'+
-    '<div id="pcalc-new"></div>'+
-    '<div style="font-weight:900;font-size:13px;margin:14px 0 6px;border-top:1px dashed #cbd5e1;padding-top:10px">٢) النسب حسب رأس المال × المدة</div>'+
-    '<div id="pcalc-pf"></div><div id="pcalc-time"></div>'+
-    '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
-  openModal();_pcalcRender();
+  document.getElementById('modal-body').innerHTML='<div id="pcalc-seg"></div><div id="pcalc-body"></div><div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+  openModal();_pcalcBuild();
+}
+function _pcalcSetType(t){_pcalcType=t;_pcalcBuild();}
+function _pcalcGoodsDefaults(){
+  var t=today(),d0=new Date(t+'T00:00:00');d0.setDate(d0.getDate()-365);var from=localISO_(d0);
+  var ps=(DB.sales||[]).filter(function(x){return x.date>=from&&x.date<=t;});
+  if(!ps.length)return null;
+  var first=ps.reduce(function(m,x){return x.date<m?x.date:m;},t),days=Math.max(30,Math.round((Date.parse(t)-Date.parse(first))/864e5)+1);
+  var rev=ps.reduce(function(sm,x){return sm+(+x.total||0);},0),cos=salesCost(ps),bs=null;
+  try{bs=_computeBalanceSheet();}catch(e){}
+  var inv=bs?(+bs.inventory||0):0;
+  return {markup:cos>0?Math.round((rev-cos)/cos*1000)/10:0,turns:(inv>0&&cos>0)?Math.round(cos*(365/days)/inv*10)/10:0,days:days,rev:rev,cos:cos,inv:inv};
+}
+function _pcalcBuild(){
+  var seg=function(k,l){var a=_pcalcType===k;return '<button type="button" onclick="_pcalcSetType(\''+k+'\')" style="flex:1;padding:9px 4px;border:none;border-radius:10px;font-family:inherit;font-size:12.5px;font-weight:800;cursor:pointer;background:'+(a?'#0f172a':'#f1f5f9')+';color:'+(a?'#fff':'#64748b')+'">'+l+'</button>';};
+  document.getElementById('pcalc-seg').innerHTML='<div style="display:flex;gap:6px;margin-bottom:10px">'+seg('partner','💼 شريك (نسبة ملكية)')+seg('goods','📦 مستثمر بضاعة')+'</div>';
+  var sty='width:100%;padding:10px;border:1.5px solid #e2e8f0;border-radius:9px;font-family:inherit;margin-bottom:8px;box-sizing:border-box';
+  var lab=function(t){return '<label style="font-size:12px;font-weight:700">'+t+'</label>';};
+  var body=document.getElementById('pcalc-body');
+  var warn='<div style="background:#fff7ed;border-radius:10px;padding:8px 11px;margin-bottom:10px;font-size:11px;color:#9a3412;line-height:1.7">اقتراحات محسوبة من أرقامك المسجّلة — للقراءة بس، مابتغيّرش أي نسبة. أي تعديل لازم يتكتب باتفاق مع المستثمر.</div>';
+  if(_pcalcType==='partner'){
+    var bs=null;try{bs=_computeBalanceSheet();}catch(e){}
+    var val=bs&&bs.totalEquity>0?Math.round(bs.totalEquity):'';
+    body.innerHTML=warn+
+      '<div style="background:#eff6ff;border-radius:10px;padding:9px 12px;margin-bottom:10px;font-size:11.5px;color:#1e40af;line-height:1.85"><b>📘 الأساس المحاسبي (شريك):</b> الشريك بيشتري حصة في <b>ملكية</b> المركز. نسبته = مبلغه ÷ (قيمة المركز قبل دخوله + مبلغه) — أسلوب القيمة العادلة (Post-money). بعد دخوله كل الملّاك القدام بيتخففوا بنفس النسبة فعلاقتهم ببعض بتفضل زي ما هي.'+
+      (bs?'<br>قيمة المركز الافتراضية = <b>حقوق الملكية الدفترية</b> من ميزانيتك: الأصول '+fmt(Math.round(bs.totalAssets))+' − الالتزامات '+fmt(Math.round(bs.totalLiabilities))+' = <b>'+fmt(Math.round(bs.totalEquity))+'</b> (مستثمر البضاعة التزام مش حقوق ملكية). لو أصولك فعلياً بتساوي أكتر بسعر السوق عدّل القيمة.':'')+'</div>'+
+      '<div style="font-weight:900;font-size:13px;margin:4px 0 6px">١) شريك جديد داخل</div>'+
+      lab('مبلغ الشريك الجديد (ج)')+'<input id="pcalc-amt" type="number" inputmode="decimal" oninput="_pcalcRender()" style="'+sty+'">'+
+      lab('قيمة المركز قبل دخوله (ج)')+'<input id="pcalc-val" type="number" inputmode="decimal" value="'+val+'" oninput="_pcalcRender()" style="'+sty+'">'+
+      '<div id="pcalc-new"></div>'+
+      '<div style="font-weight:900;font-size:13px;margin:14px 0 4px;border-top:1px dashed #cbd5e1;padding-top:10px">٢) النسب حسب رأس المال × المدة</div>'+
+      '<div style="font-size:11px;color:#64748b;margin-bottom:6px;line-height:1.7">لو عايز تراجع النسب الحالية: كل طرف بياخد حسب <b>متوسط رأس ماله المرجّح بعدد الأيام</b> اللي كان شغّال فيها في الفترة (مين دخل بدري وبمبلغ أكبر = نسبة أكبر).</div>'+
+      '<div id="pcalc-pf"></div><div id="pcalc-time"></div>';
+  }else{
+    var d=_pcalcGoodsDefaults();
+    body.innerHTML=warn+
+      '<div style="background:#ecfdf5;border-radius:10px;padding:9px 12px;margin-bottom:10px;font-size:11.5px;color:#065f46;line-height:1.85"><b>📘 الأساس المحاسبي (مستثمر بضاعة):</b> مستثمر البضاعة <b>مش شريك في الملكية</b> — بيمّول مخزون وياخد نسبة من (سعر البيع − التكلفة) لبضاعته بس، ورأس ماله دين مستحق له. فنسبته العادلة مش «حصة ملكية»، هي <b>العائد على رأس ماله</b>:<br>العائد السنوي = <b>نسبته × هامش الربح على التكلفة × عدد مرات دوران المخزون في السنة</b>.<br>'+
+      (d?'الهامش والدوران اتحسبوا تلقائي من مبيعاتك آخر '+d.days+' يوم (مبيعات '+fmt(Math.round(d.rev))+' − تكلفة '+fmt(Math.round(d.cos))+'، والمخزون الحالي '+fmt(Math.round(d.inv))+') وتقدر تعدّلهم.':'مفيش مبيعات كفاية في آخر سنة — اكتب الهامش والدوران بإيدك.')+'</div>'+
+      lab('رأس مال المستثمر (ج)')+'<input id="pcalc-gcap" type="number" inputmode="decimal" oninput="_pcalcRender()" style="'+sty+'">'+
+      lab('العائد السنوي المستهدف له (%)')+'<input id="pcalc-gtarget" type="number" inputmode="decimal" value="20" oninput="_pcalcRender()" style="'+sty+'">'+
+      lab('هامش الربح على التكلفة (%)')+'<input id="pcalc-gmk" type="number" inputmode="decimal" value="'+(d&&d.markup>0?d.markup:'')+'" oninput="_pcalcRender()" style="'+sty+'">'+
+      lab('دوران المخزون (مرة في السنة)')+'<input id="pcalc-gturn" type="number" inputmode="decimal" value="'+(d&&d.turns>0?d.turns:'')+'" oninput="_pcalcRender()" style="'+sty+'">'+
+      '<div id="pcalc-g"></div><div id="pcalc-gex"></div>';
+  }
+  _pcalcRender();
+}
+function _pcalcRender(){if(_pcalcType==='goods')_pcalcRenderGoods();else _pcalcRenderPartner();}
+function _pcalcRenderGoods(){
+  var el=document.getElementById('pcalc-g'),ex=document.getElementById('pcalc-gex');if(!el||!ex)return;
+  var cap=+v('pcalc-gcap')||0,tg=+v('pcalc-gtarget')||0,mk=+v('pcalc-gmk')||0,tn=+v('pcalc-gturn')||0,N1=function(x){return Math.round(x*10)/10;};
+  var g=(mk/100)*tn; // ربح البضاعة السنوي على كل جنيه رأس مال (قبل نسبة المستثمر)
+  if(!(g>0)){el.innerHTML='<div class="empty" style="font-size:12px">محتاج هامش الربح ودوران المخزون (بيتحسبوا تلقائي لو عندك مبيعات كفاية)</div>';}
+  else{
+    var fair=tg>0?Math.min(100,tg/g):null;
+    var sc=[20,30,40,50].map(function(pc){return '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;font-size:12px;padding:4px 0;border-bottom:1px solid #f1f5f9"><span style="font-weight:700">'+pc+'%</span><span style="color:#047857;font-weight:800">'+_pctTxt(N1(g*pc))+' سنويًا</span><span>'+(cap>0?fmt(Math.round(cap*g*pc/100)):'—')+'</span></div>';}).join('');
+    el.innerHTML='<div style="background:#f0fdf4;border-radius:10px;padding:10px 12px;margin:6px 0 8px;font-size:12.5px;line-height:1.9">'+
+      '• ربح بضاعته قبل نسبته: <b>'+_pctTxt(N1(g*100))+'</b> من رأس ماله سنويًا ('+_pctTxt(N1(mk))+' هامش × '+N1(tn)+' دوران)<br>'+
+      (fair!==null?'• النسبة اللازمة لعائد <b>'+_pctTxt(N1(tg))+'</b> سنويًا: <b style="color:#15803d;font-size:15px">'+_pctTxt(N1(fair))+'</b> من ربح بضاعته'+(tg/g>100?' <span style="color:#dc2626">(حتى 100% مش كفاية — العائد المستهدف أعلى من اللي بضاعتك بتولّده)</span>':'')+'<br>':'')+
+      (fair!==null&&fair<100?'• ولك أنت <b>'+_pctTxt(N1(100-fair))+'</b> مقابل الشغل والمكان والمخاطرة.':'')+'</div>'+
+      '<div style="font-size:12px;font-weight:800;margin-bottom:4px">لو اتفقتوا على نسبة معيّنة هيطلع له كام:</div>'+
+      '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;font-size:10.5px;color:#94a3b8;font-weight:800;padding-bottom:3px;border-bottom:2px solid #e2e8f0"><span>نسبته</span><span>عائده</span><span>'+(cap>0?'ربحه السنوي':'')+'</span></div>'+sc+
+      '<div style="font-size:10.5px;color:#94a3b8;margin-top:5px;line-height:1.7">تقدير بافتراض إن الهامش والدوران يفضلوا زي ما هم. الخسارة والتسوية بتتحدد في العقد.</div>';
+  }
+  var gs=_invList().filter(function(n){return !n.archived;});
+  ex.innerHTML=gs.length?'<div style="font-weight:900;font-size:12.5px;margin:12px 0 4px;border-top:1px dashed #cbd5e1;padding-top:10px">مستثمرو البضاعة الحاليين — اللي حصل فعلاً</div>'+
+    '<div style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:4px;font-size:10.5px;color:#94a3b8;font-weight:800;padding-bottom:3px;border-bottom:2px solid #e2e8f0"><span>المستثمر</span><span>نسبته</span><span>رأس المال المودع</span><span>أرباحه</span></div>'+
+    gs.map(function(n){var T=_invStats(n).T;return '<div style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:4px;font-size:12px;padding:4px 0;border-bottom:1px solid #f1f5f9"><span style="font-weight:700">'+esc(n.name)+'</span><span>'+_pctTxt(N1(+n.pct||0))+'</span><span>'+fmt(Math.round(T.dep))+'</span><span style="color:#6d28d9">'+fmt(Math.round(T.share))+(T.dep>0?' <span style="font-size:10px;color:#94a3b8">('+_pctTxt(N1(T.share/T.dep*100))+')</span>':'')+'</span></div>';}).join('')+
+    '<div style="font-size:10.5px;color:#94a3b8;margin-top:4px">النسبة بين القوسين = أرباحه ÷ رأس ماله المودع (من غير تحويله لسنوي — للمقارنة بس).</div>':'';
 }
 function _pcalcParties(){
   var inv=(DB.accounts.investors||[]),act=inv.filter(function(i){return i.status!=='inactive';});
@@ -28854,7 +28954,7 @@ function _pcalcParties(){
   act.forEach(function(i){P.push({name:i.name,pct:+i.profit_share_pct||0,cap:_oiCapRem(i),id:i.id});});
   return P;
 }
-function _pcalcRender(){
+function _pcalcRenderPartner(){
   var nEl=document.getElementById('pcalc-new'),tEl=document.getElementById('pcalc-time'),fEl=document.getElementById('pcalc-pf');if(!nEl||!tEl||!fEl)return;
   var N1=function(x){return (Math.round(x*10)/10);},amt=+v('pcalc-amt')||0,val=+v('pcalc-val')||0,P=_pcalcParties();
   // ----- ١) مستثمر جديد -----
@@ -28897,8 +28997,265 @@ function _pcalcRender(){
     rows.map(function(r){var sug=Math.max(0,r.avg)/tot*100,diff=sug-r.cur;return '<div style="display:grid;grid-template-columns:1.5fr 1.1fr 1fr 1fr;gap:4px;font-size:12px;padding:4px 0;border-bottom:1px solid #f1f5f9;opacity:'+(r.act?1:.6)+'"><span style="font-weight:700">'+esc(r.name)+(r.act?'':' <span style="font-size:9px">(غير نشط)</span>')+'</span><span>'+fmt(Math.round(r.avg))+'</span><span style="color:#15803d;font-weight:800">'+_pctTxt(N1(sug))+'</span><span>'+_pctTxt(N1(r.cur))+(Math.abs(diff)>=1?' <span style="font-size:10px;color:'+(diff>0?'#15803d':'#dc2626')+'">'+(diff>0?'▲':'▼')+N1(Math.abs(diff))+'</span>':'')+'</span></div>';}).join('')+
     '<div style="font-size:10.5px;color:#94a3b8;margin-top:5px;line-height:1.7">المنهج: نسبة كل طرف = متوسط رأس ماله المرجّح بالمدة ÷ مجموع المتوسطات. ما بيحسبش مجهود المالك أو الخبرة — دي اتفاق منفصل.</div>';
 }
-function _invKpi(label,val,color,bg){
-  return '<div style="background:'+bg+';border-radius:12px;padding:11px 8px;text-align:center">'+
+// ==================== ⚠️ v329 — عقد الاستثمار لمستثمر الشراكة (شريك / برأس مال) ====================
+// مستثمر البضاعة له عقوده القديمة (_invForm). ده للمستثمر العادي (DB.accounts.investors): العقد متخزّن في o.contract.
+var _OC_TYPES={
+  partner:{ico:'💼',name:'مستثمر شريك',desc:'بيدفع مبلغ مقابل نسبة ملكية في المركز، وبيشارك في الأرباح والخسائر بنسبته.',loss:'ratio'},
+  capital:{ico:'💰',name:'مستثمر برأس مال',desc:'بيدخل بمبلغ وياخد نسبة من الأرباح من غير ملكية، وله حق استرداد رأس ماله حسب الشروط.',loss:'owner'}
+};
+var _OC_LOSS={ratio:'بنفس نسبة الأرباح وبحد أقصى رأس ماله',owner:'يتحملها صاحب المشروع (المستثمر مايخسرش من رأس ماله)',capital:'بتتخصم من رأس مال المستثمر'};
+var _OC_LOSS_F={ratio:'تُقسَّم بين الطرفين بنفس نسبة الأرباح، ولا يتحمّل الطرف الثاني منها أكثر من رأس ماله',owner:'يتحمّلها الطرف الأول بالكامل ولا يخسر الطرف الثاني من رأس ماله',capital:'تُخصم من رأس مال الطرف الثاني'};
+var _OC_CAPRET={on_request:'عند طلب المستثمر',notice:'بعد إخطار مكتوب بمدة محددة',end:'عند انتهاء العقد'};
+var _OC_SETTLE={cycle:'مع كل دورة توزيع أرباح',monthly:'شهريًا',yearly:'سنويًا'};
+var _OC_STD=[
+  ['conf','سرية بيانات الطرفين وعدم إفشائها للغير.'],
+  ['noassign','لا يجوز لأي طرف التنازل عن العقد أو حقوقه للغير بدون موافقة كتابية من الطرف الآخر.'],
+  ['notice','يجوز لأي طرف إنهاء العقد بإخطار كتابي قبلها ثلاثون يومًا، مع تصفية الحسابات وردّ المستحقات.'],
+  ['friendly','يُحَلّ أي خلاف بالتراضي أولًا، ثم بالرجوع لأهل الاختصاص.'],
+  ['audit','للطرف الثاني حق الاطلاع على كشف حسابه والتقارير المالية الدورية للمركز في أي وقت.'],
+  ['records','يلتزم الطرف الأول بتسجيل الإيرادات والمصروفات بدقة في دفاتر التطبيق.']
+];
+function _ocFind(id){return (DB.accounts.investors||[]).find(function(x){return x.id===id;});}
+function _ocTypeName(o){var c=(o&&o.contract)||{};return (_OC_TYPES[c.type]||_OC_TYPES.partner).name;}
+function _ocBadge(o,click){
+  var m={none:['⚪ بدون عقد','#f1f5f9','#64748b'],draft:['🟡 عقد — بانتظار الموافقة','#fef9c3','#a16207'],amended:['🟠 تعديل — بانتظار موافقة الطرفين','#ffedd5','#c2410c'],approved:['🟢 عقد معتمد','#dcfce7','#15803d']}[_invCStatus(o)];
+  return '<span '+(click?'onclick="openPartnerContract('+jsStr(o.id)+')" ':'')+'style="'+(click?'cursor:pointer;':'')+'display:inline-block;background:'+m[1]+';color:'+m[2]+';border-radius:8px;padding:3px 9px;font-size:11px;font-weight:800">📜 '+m[0]+'</span>';
+}
+function openPartnerContract(id){var o=_ocFind(id);if(!o)return;if(_invCStatus(o)==='none')return _ocForm(id);_ocView(id);}
+function _ocPickType(k){
+  var e=document.getElementById('oc-type');if(e)e.value=k;
+  var l=document.getElementById('oc-loss');if(l&&_OC_TYPES[k])l.value=_OC_TYPES[k].loss;
+  var box=document.getElementById('oc-types');if(box)box.innerHTML=_ocTypePills(k);
+}
+function _ocTypePills(sel){
+  return Object.keys(_OC_TYPES).map(function(k){var o=_OC_TYPES[k],a=sel===k;return '<div onclick="_ocPickType(\''+k+'\')" style="cursor:pointer;border:2.5px solid '+(a?'#4338ca':'#e2e8f0')+';background:'+(a?'#eef2ff':'#fff')+';border-radius:12px;padding:8px 10px;margin-bottom:6px"><div style="font-weight:900;font-size:13px;color:#0f172a">'+o.ico+' '+o.name+'</div><div style="font-size:11px;color:#64748b;line-height:1.6;margin-top:2px">'+o.desc+'</div></div>';}).join('');
+}
+function _ocForm(id){
+  var o=_ocFind(id);if(!o)return;
+  var c=o.contract||{},type=c.type||'partner',capNow=(o.capital_contributions||[]).reduce(function(sm,x){return sm+(+x.amount||0);},0);
+  var sel='width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit';
+  var sec=function(ttl,h){return '<div style="border:1.5px solid #e2e8f0;border-radius:12px;padding:10px 12px;margin-bottom:10px"><div style="font-size:12.5px;font-weight:900;color:#0f172a;margin-bottom:8px">'+ttl+'</div>'+h+'</div>';};
+  var opts=function(m,cur){return Object.keys(m).map(function(k){return '<option value="'+k+'"'+(cur===k?' selected':'')+'>'+m[k]+'</option>';}).join('');};
+  var cl=c.clauses||_OC_STD.map(function(x){return x[0];});
+  document.getElementById('modal-title').textContent=(_invCStatus(o)==='none'?'📜 عقد استثمار — ':'✏️ تعديل عقد — ')+o.name;
+  document.getElementById('modal-body').innerHTML=
+    (_invCStatus(o)==='approved'?'<div style="background:#fff7ed;border:1.5px solid #fdba74;border-radius:11px;padding:8px 11px;margin-bottom:10px;font-size:12px;color:#9a3412;line-height:1.8">⚠️ العقد معتمد من الطرفين. أي تعديل هيتسجّل كملحق وهيحتاج موافقة الطرفين من جديد.</div>':'')+
+    sec('👤 ١) الأطراف',fld('oc-owner','الطرف الأول — صاحب المشروع (اسم يظهر في العقد)','text',c.ownerName||'','مثال: اسمك أو اسم المركز')+'<div style="font-size:12px;color:#475569">الطرف الثاني: <b>'+esc(o.name)+'</b> — نسبته الحالية <b>'+_pctTxt(+o.profit_share_pct||0)+'</b> (بتتعدّل من «تعديل البيانات والنسبة»)</div>')+
+    sec('📑 ٢) نوع المستثمر','<input type="hidden" id="oc-type" value="'+type+'"><div id="oc-types">'+_ocTypePills(type)+'</div>')+
+    sec('💰 ٣) رأس المال والمدة',fld('oc-capital','رأس المال المتفق عليه (ج)','number',c.capital||capNow||'')+
+      dateField('oc-date','تاريخ بداية العقد',c.date||null)+
+      '<div class="field"><label>مدة العقد</label><select id="oc-term" style="'+sel+'"><option value="0"'+(!c.termDays?' selected':'')+'>مفتوحة</option><option value="180"'+(c.termDays===180?' selected':'')+'>٦ شهور</option><option value="354"'+(c.termDays===354?' selected':'')+'>سنة هجرية</option><option value="708"'+(c.termDays===708?' selected':'')+'>سنتين هجريتين</option></select></div>')+
+    sec('📈 ٤) الخسارة والتسوية','<div class="field"><label>الخسارة (لو المركز خسر)</label><select id="oc-loss" style="'+sel+'">'+opts(_OC_LOSS,c.lossRule||(_OC_TYPES[type]||{}).loss||'ratio')+'</select></div>'+
+      '<div class="field"><label>توزيع الأرباح</label><select id="oc-settle" style="'+sel+'">'+opts(_OC_SETTLE,c.settle||'cycle')+'</select></div>')+
+    sec('🔁 ٥) استرداد رأس المال','<div class="field"><label>رد رأس المال</label><select id="oc-capret" style="'+sel+'">'+opts(_OC_CAPRET,c.capitalReturn||'on_request')+'</select></div>'+fld('oc-notice','مدة الإخطار (يوم) — لو اخترت «بعد إخطار»','number',c.noticeDays||30)+
+      '<div style="font-size:10.5px;color:#94a3b8;line-height:1.7">دي بنود تعاقدية مكتوبة في العقد. السحب الفعلي بيتسجّل من 💰 في كارت المستثمر.</div>')+
+    sec('📋 ٦) بنود عامة وإضافية',_OC_STD.map(function(x){return '<label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.7;margin-bottom:5px;color:#334155"><input type="checkbox" id="oc-cl-'+x[0]+'"'+(cl.indexOf(x[0])>-1?' checked':'')+' style="margin-top:4px">'+x[1]+'</label>';}).join('')+
+      '<div class="field" style="margin-top:6px"><label>بنود إضافية (اختياري)</label><textarea id="oc-note" rows="3" placeholder="اكتب أي شروط تانية متفق عليها" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:13px;font-family:inherit">'+esc(c.note||'')+'</textarea></div>')+
+    '<div class="modal-actions"><button class="btn btn-primary btn-full" onclick="__runOnce(this,function(){return _ocSave('+jsStr(id)+')})">💾 حفظ العقد</button><button class="btn btn-outline btn-full" onclick="closeModal()">إلغاء</button></div>';
+  openModal();
+}
+async function _ocSave(id){
+  if(_invGuard(null))return; // مالك بس
+  var o=_ocFind(id);if(!o)return;
+  var type=v('oc-type')||'partner',cdate=v('oc-date')||today(),term=+v('oc-term')||0;
+  var clauses=_OC_STD.filter(function(x){var e=document.getElementById('oc-cl-'+x[0]);return e&&e.checked;}).map(function(x){return x[0];});
+  var nc={type:type,date:cdate,termDays:term,end:term>0?_invAddDays(cdate,term):'',capital:+v('oc-capital')||0,lossRule:v('oc-loss')||'ratio',capitalReturn:v('oc-capret')||'on_request',noticeDays:+v('oc-notice')||30,settle:v('oc-settle')||'cycle',clauses:clauses,ownerName:(v('oc-owner')||'').trim(),note:v('oc-note')||''};
+  var was=_invCStatus(o)==='approved';
+  if(was&&!confirm('العقد ده معتمد من الطرفين.\nتعديله هيتسجّل كملحق وهيحتاج موافقة الطرفين من جديد. تكمل؟'))return;
+  _invBackup('قبل حفظ عقد مستثمر شراكة — '+o.name);
+  var oc=o.contract||{},contract=Object.assign({},oc,nc);
+  if(was){contract.approvals={};contract.amendedPending=true;contract.amendments=(oc.amendments||[]).concat([{date:today(),summary:'تعديل بنود العقد'}]);}
+  DB.accounts.investors=patchRow(DB.accounts.investors,id,{contract:contract});
+  _invAudit('oc_contract_save','old',id,{investor:o.name,type:type,amended:was});
+  await persist();closeModal();renderAccounting();_ocView(id);
+  showToast('✅ اتحفظ العقد','#16a34a');
+}
+function _ocClauses(o){
+  var c=o.contract||{},type=c.type==='capital'?'capital':'partner',ty=_OC_TYPES[type],p=Math.round((+o.profit_share_pct||0)*100)/100;
+  var N=function(x){return fmt(Math.round((+x||0)*100)/100);},owner=c.ownerName||'صاحب المشروع',out=[];
+  var capNow=(o.capital_contributions||[]).reduce(function(sm,x){return sm+(+x.amount||0);},0),capital=+c.capital>0?+c.capital:capNow;
+  var start=c.date||today();
+  out.push(['المادة ١ — أطراف العقد','الطرف الأول (صاحب المشروع): '+owner+'.\nالطرف الثاني ('+ty.name+'): '+o.name+(o.phone?' — هاتف: '+o.phone:'')+'.']);
+  out.push(['المادة ٢ — موضوع العقد (نوع العقد: '+ty.name+')',type==='partner'
+    ?'يساهم الطرف الثاني برأس مال في المركز مقابل نسبة ملكية '+p+'% منه، ويشارك الطرف الأول في الأرباح والخسائر بنسبته، ويُقيَّد كل ذلك في دفاتر التطبيق.'
+    :'يقدّم الطرف الثاني مبلغًا للمركز على سبيل الاستثمار دون أن يكتسب حصة في ملكية المركز، مقابل نسبة '+p+'% من صافي أرباحه، مع حقه في استرداد رأس ماله وفق المادة ٦.']);
+  out.push(['المادة ٣ — رأس المال','رأس المال المتفق عليه: '+(capital>0?N(capital):'غير محدد')+'. تُسجَّل كل مساهمة بتاريخها في كشف المستثمر، وأي زيادة لاحقة تكون باتفاق الطرفين.']);
+  out.push(['المادة ٤ — الأرباح','نصيب الطرف الثاني '+p+'% من صافي أرباح المركز (بعد المصروفات وبعد خصم نصيب مستثمري البضاعة إن وُجدوا)، والباقي '+Math.round((100-p)*100)/100+'% للطرف الأول. وتُوزَّع '+(_OC_SETTLE[c.settle]||_OC_SETTLE.cycle)+'.']);
+  out.push(['المادة ٥ — الخسارة','إذا انتهت الفترة بخسارة صافية فإنها '+(_OC_LOSS_F[c.lossRule]||_OC_LOSS_F[ty.loss])+'.']);
+  var cr=c.capitalReturn||'on_request';
+  out.push(['المادة ٦ — السحب واسترداد رأس المال','للطرف الثاني سحب أرباحه الموزَّعة والمحتجزة له متى شاء. أما رأس المال فيُرَدّ '+(_OC_CAPRET[cr]||_OC_CAPRET.on_request)+(cr==='notice'?' بمدة '+(c.noticeDays||30)+' يومًا':'')+'، ويُسجَّل كل سحب بتاريخه في كشف المستثمر.']);
+  var n=7;
+  if(type==='partner')out.push(['المادة ٧ — التخارج وتقييم الحصة','عند خروج الطرف الثاني تُقيَّم حصته بنسبته من حقوق الملكية الدفترية للمركز (الأصول − الالتزامات) وقت الخروج، ما لم يتفق الطرفان كتابةً على قيمة أخرى.']),n=8;
+  out.push(['المادة '+n+' — المدة','يبدأ العقد من '+fmtDate(start)+' ('+_gregTxt(start)+')'+(c.end?' وينتهي في '+fmtDate(c.end)+' ('+_gregTxt(c.end)+')':' ومدته مفتوحة')+'.']);n++;
+  out.push(['المادة '+n+' — الحسابات والإفصاح','يحصل الطرف الثاني متى طلب على كشف حساب مفصّل يبيّن: رأس المال المودع والمردود والمتبقي، والأرباح الموزَّعة والمسحوبة والمحتجزة له، والمستحق له.']);n++;
+  var std=_OC_STD.filter(function(x){return (c.clauses||[]).indexOf(x[0])>-1;});
+  if(std.length){out.push(['المادة '+n+' — بنود عامة',std.map(function(x,i){return (i+1)+'. '+x[1];}).join('\n')]);n++;}
+  if(c.note){out.push(['المادة '+n+' — بنود إضافية',c.note]);}
+  out.push(['الإقرار والموافقة','يُقرّ الطرفان بأنهما اطّلعا على بنود هذا العقد وفهماها ووافقا عليها.']);
+  return out;
+}
+function _ocText(o){
+  var c=o.contract||{},a=c.approvals||{},txt='📜 عقد '+_ocTypeName(o)+'\n'+fmtDate(c.date||today())+' ('+_gregTxt(c.date||today())+')\n\n';
+  _ocClauses(o).forEach(function(x){txt+=x[0]+'\n'+x[1]+'\n\n';});
+  ['owner','investor'].forEach(function(k){var ap=a[k];txt+=(k==='owner'?'موافقة صاحب المشروع: ':'موافقة المستثمر: ')+(ap?('✅ '+ap.name+' — '+fmtDate(ap.date)+' ('+ap.method+')'):'⬜ لم تتم بعد')+'\n';});
+  return txt;
+}
+var _ocId='';
+function _ocView(id){
+  var o=_ocFind(id);if(!o)return;_ocId=id;
+  var c=o.contract||{},a=c.approvals||{};
+  document.getElementById('modal-title').textContent='📜 عقد — '+o.name;
+  var apBox=function(k,lbl){var ap=a[k];return '<div style="flex:1;border:1.5px solid '+(ap?'#86efac':'#e2e8f0')+';background:'+(ap?'#f0fdf4':'#fff')+';border-radius:11px;padding:8px;text-align:center"><div style="font-size:11px;font-weight:800;color:#334155">'+lbl+'</div>'+(ap?'<div style="font-size:12px;color:#15803d;font-weight:800;margin-top:3px">✅ '+esc(ap.name)+'</div><div style="font-size:10px;color:#64748b">'+esc(fmtDate(ap.date))+'</div>':'<button class="btn btn-sm" style="margin-top:5px;background:#eef2ff;color:#4338ca;border:none" onclick="_ocApproveForm(\''+k+'\')">✅ سجّل الموافقة</button>')+'</div>';};
+  document.getElementById('modal-body').innerHTML=
+    '<div style="text-align:center;margin-bottom:8px"><div style="font-size:16px;font-weight:900;color:#0f172a">عقد '+esc(_ocTypeName(o))+'</div><div style="font-size:11px;color:#64748b;margin:2px 0 5px">'+esc(fmtDate(c.date||today()))+' — '+_gregTxt(c.date||today())+'</div>'+_ocBadge(o,false)+'</div>'+
+    _ocClauses(o).map(function(x){return '<div style="border-bottom:1px solid #f1f5f9;padding:6px 2px"><div style="font-size:12px;font-weight:900;color:#4338ca;margin-bottom:2px">'+esc(x[0])+'</div><div style="font-size:12px;color:#334155;line-height:1.9;white-space:pre-line">'+esc(x[1])+'</div></div>';}).join('')+
+    '<div style="margin:10px 0 4px;font-size:12px;font-weight:900;color:#0f172a">✍️ موافقة الطرفين</div><div style="display:flex;gap:7px;margin-bottom:8px">'+apBox('owner','الطرف الأول — '+esc(c.ownerName||'صاحب المشروع'))+apBox('investor','الطرف الثاني — '+esc(o.name))+'</div>'+
+    ((c.amendments||[]).length?'<div style="font-size:11px;color:#9a3412;background:#fff7ed;border-radius:9px;padding:6px 9px;margin-bottom:8px;line-height:1.8">📎 ملاحق التعديل: '+(c.amendments||[]).map(function(m){return esc(fmtDate(m.date))+' — '+esc(m.summary||'تعديل');}).join(' • ')+'</div>':'')+
+    '<div class="modal-actions" style="flex-wrap:wrap"><button class="btn btn-sm" style="background:#f5f3ff;color:#7c3aed;border:none;flex:1" onclick="_ocPrint()">🖨️ طباعة / PDF</button><button class="btn btn-sm" style="background:#dcfce7;color:#15803d;border:none;flex:1" onclick="_ocShare()">📲 واتساب</button><button class="btn btn-sm" style="background:#fff7ed;color:#c2410c;border:none;flex:1" onclick="_ocForm('+jsStr(id)+')">✏️ تعديل</button><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+  openModal();
+}
+function _ocPrint(){
+  var o=_ocFind(_ocId);if(!o)return;
+  var c=o.contract||{},a=c.approvals||{};
+  var body='<div style="text-align:center;margin-bottom:10px;color:#64748b">'+esc(fmtDate(c.date||today()))+' — '+_gregTxt(c.date||today())+'</div>'+
+    _ocClauses(o).map(function(x){return '<div style="margin-bottom:10px"><div style="font-weight:900;margin-bottom:3px">'+esc(x[0])+'</div><div style="line-height:2;white-space:pre-line">'+esc(x[1])+'</div></div>';}).join('')+
+    '<table style="width:100%;border-collapse:collapse;margin-top:18px"><tr>'+['owner','investor'].map(function(k){var ap=a[k];return '<td style="width:50%;border:1px solid #cbd5e1;padding:14px;text-align:center;vertical-align:top"><div style="font-weight:900">'+(k==='owner'?'الطرف الأول — '+esc(c.ownerName||'صاحب المشروع'):'الطرف الثاني — '+esc(o.name))+'</div><div style="margin-top:34px;color:#94a3b8;font-size:12px">'+(ap?'✅ '+esc(ap.name)+' — '+esc(fmtDate(ap.date)):'التوقيع: ................')+'</div></td>';}).join('')+'</tr></table>';
+  printSection('📜 عقد '+esc(_ocTypeName(o))+' — '+esc(o.name),body);
+}
+function _ocShare(){
+  var o=_ocFind(_ocId);if(!o)return;
+  var txt=_ocText(o),ph=_bulkPhone(o.phone);
+  if(navigator.share){navigator.share({text:txt}).catch(function(){});}
+  else window.open('https://wa.me/'+(ph||'')+'?text='+encodeURIComponent(txt),'_blank');
+}
+function _ocApproveForm(party){
+  var o=_ocFind(_ocId);if(!o)return;if(_invGuard(null))return;
+  var c=o.contract||{},nm=party==='investor'?o.name:(c.ownerName||'صاحب المشروع');
+  document.getElementById('modal-title').textContent='✅ موافقة '+(party==='investor'?'المستثمر':'صاحب المشروع');
+  document.getElementById('modal-body').innerHTML=
+    '<div style="background:#ecfdf5;border:1.5px solid #6ee7b7;border-radius:11px;padding:8px 11px;margin-bottom:10px;font-size:12px;color:#065f46;line-height:1.8">الموافقة بتتسجّل في العقد بتاريخها وطريقتها وبتتحفظ في سجل المراجعة. العقد بيبقى «معتمد» لما الطرفين يوافقوا.</div>'+
+    fld('ap-name','اسم الموافق','text',nm,'',true)+
+    '<div class="field"><label>طريقة الموافقة</label><select id="ap-method" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit"><option>توقيع ورقي على نسخة مطبوعة</option><option>رسالة واتساب</option><option>شفهيًا بحضور شاهد</option><option>إلكترونيًا</option></select></div>'+
+    dateField('ap-date','تاريخ الموافقة',null)+
+    '<div class="modal-actions"><button class="btn btn-primary btn-full" onclick="__runOnce(this,function(){return _ocApproveSave(\''+party+'\')})">✅ سجّل الموافقة</button><button class="btn btn-outline btn-full" onclick="_ocView('+jsStr(o.id)+')">رجوع</button></div>';
+  openModal();
+}
+async function _ocApproveSave(party){
+  var o=_ocFind(_ocId);if(!o)return;if(_invGuard(null))return;
+  var nm=(v('ap-name')||'').trim();if(!nm)return showToast('⚠️ اكتب اسم الموافق','#dc2626');
+  _invBackup('قبل تسجيل موافقة عقد — '+o.name);
+  var c=Object.assign({},o.contract||{}),ap=Object.assign({},c.approvals||{});
+  ap[party]={name:nm,method:v('ap-method')||'',date:v('ap-date')||today(),at:new Date().toISOString()};
+  c.approvals=ap;
+  var both=ap.investor&&ap.owner;if(both)delete c.amendedPending;
+  DB.accounts.investors=patchRow(DB.accounts.investors,o.id,{contract:c});
+  _invAudit('oc_contract_approve','old',o.id,{party:party,name:nm,both:!!both});
+  await persist();renderAccounting();showToast(both?'✅ العقد بقى معتمد من الطرفين':'✅ اتسجّلت الموافقة','#16a34a');_ocView(o.id);
+}
+// ==================== ⚠️ v329 — قائمة الخيارات الموحدة + إلغاء مستثمر البضاعة ====================
+function _invLinksLine(inv){
+  var ni=_invLinkedNew(inv),cli=_invClientOf(inv,ni),emp=_invEmpOf(inv,'old'),chips=[];
+  var chip=function(txt,act,bg,col){return '<span onclick="'+act+'" style="cursor:pointer;background:'+bg+';color:'+col+';border-radius:8px;padding:3px 9px;font-size:11px;font-weight:800">'+txt+'</span>';};
+  chips.push(_ocBadge(inv,true));
+  if(ni){var T=_invStats(ni).T;chips.push(chip('📦 بضاعة: له '+fmt(Math.round(T.owed))+' ›','openInvestor('+jsStr(ni.id)+')','#d1fae5','#047857'));}
+  if(cli)chips.push(chip('👤 عميل: '+esc(cli.name)+' ›','openTwoWayStatement('+jsStr(cli.name)+')','#fef3c7','#92400e'));
+  if(emp)chips.push(chip('🧑‍💼 موظف: '+esc(emp.name)+' ›','openEmployeeDetailReport('+jsStr(emp.id)+')','#e0e7ff','#4338ca'));
+  if(!chips.length)return '';
+  return '<div style="margin-bottom:8px"><div style="display:flex;flex-wrap:wrap;gap:5px">'+chips.join('')+'</div>'+
+    (ni?'<div style="font-size:11.5px;font-weight:900;color:#065f46;margin-top:5px">⚖️ إجمالي المستحق له (شراكة + بضاعة): '+fmt(Math.round(_invOldDue(inv)+_invStats(ni).T.owed))+' ج</div>':'')+'</div>';
+}
+function _invOpts(kind,id){
+  var isOld=kind==='old';
+  var inv=isOld?(DB.accounts.investors||[]).find(function(x){return x.id===id;}):_invById(id);if(!inv)return;
+  var ni=isOld?_invLinkedNew(inv):inv,oi=isOld?inv:_invLinkedOld(inv),cli=_invClientOf(oi,ni),emp=_invEmpOf(inv,kind);
+  var J=jsStr(id),row=function(ico,t,d,act,danger){return '<div onclick="_invOptsDo(\''+kind+'\','+J+',\''+act+'\')" style="cursor:pointer;display:flex;align-items:center;gap:10px;background:'+(danger?'#fef2f2':'#f8fafc')+';border-radius:11px;padding:9px 12px;margin-bottom:6px"><span style="font-size:19px">'+ico+'</span><span style="flex:1;min-width:0"><b style="font-size:13px;color:'+(danger?'#b91c1c':'#0f172a')+'">'+t+'</b><span style="display:block;font-size:11px;color:#64748b;line-height:1.5">'+d+'</span></span><span style="color:#94a3b8">›</span></div>';};
+  var sec=function(t){return '<div style="font-size:11px;font-weight:900;color:#64748b;margin:10px 2px 5px">'+t+'</div>';};
+  var h='';
+  if(isOld){
+    h+=sec('الحساب')+row('📜','عقد الاستثمار','شريك / برأس مال — '+(_invCStatus(inv)==='none'?'لسه ماتعملش':'موجود'),'contract')+row('✏️','تعديل البيانات والنسبة','الاسم والتليفون ونسبة الأرباح','edit')+row('💰','سحب','سحب أرباح أو رد رأس مال','wd')+row('➕','مساهمة رأس مال','زوّد رأس ماله','cap')+row('📜','السجل الكامل','كل الحركات — وتعديل/حذف المساهمات','tl');
+    h+=sec('حساب البضاعة')+(ni?row('📂','فتح حساب البضاعة','الدفعات والبيع والكشف','open')+row('🗑️','إلغاء حساب البضاعة','لو اتفتح بالغلط — بيتمسح لو مفيش عليه حركات','goodsDel',true):row('📦','فتح حساب بضاعة','لو هو كمان مستثمر بضاعة','goodsNew'));
+  }else{
+    h+=sec('الحساب')+row('📂','فتح حساب البضاعة','الدفعات والبيع والكشف','open')+row('✏️','تعديل العقد','النسبة والبنود والمدة','edit');
+    h+=sec('ربط بحساب شراكة')+(oi?row('💼','مربوط بشريك: '+esc(oi.name),'ده نفس الشخص في الشراكة','tlOld'):row('🔗','ربط بمستثمر شراكة','لو هو شريك عادي كمان','linkOld'));
+  }
+  h+=sec('الربط')+(cli?row('⚖️','كشف حسابه كعميل: '+esc(cli.name),'','cliOpen')+row('⛓️','فك ربط العميل','','cliUnlink'):row('🔗','ربط بعميل','لو هو عميل عندك كمان','cli'))+
+    (emp?row('🧑‍💼','تقرير الموظف: '+esc(emp.name),'راتب + استثمار + كل حاجة','empOpen')+row('⛓️','فك ربط الموظف','','empUnlink'):row('🧑‍💼','ربط بموظف','لو هو موظف عندك كمان','emp'));
+  h+=sec('الحالة')+(isOld?(inv.status==='inactive'?row('▶️','تفعيل','يرجع يدخل في توزيع الأرباح','act'):row('⏸️','تعطيل','يوقف دخوله في التوزيعات والتاريخ يفضل محفوظ','deact'))+row('🗑️','حذف المستثمر','بيتمنع لو عليه حركات','del',true)
+    :row('📦',inv.archived?'إرجاع من الأرشيف':'أرشفة','يختفي من القوائم والتاريخ محفوظ','arch')+row('🗑️','إلغاء/حذف مستثمر البضاعة','بيتمسح لو مفيش عليه دفعات أو حركات مالية','goodsDelSelf',true));
+  document.getElementById('modal-title').textContent='⚙️ خيارات — '+inv.name;
+  document.getElementById('modal-body').innerHTML=h+'<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+  openModal();
+}
+function _invOptsDo(kind,id,act){
+  closeModal();
+  var isOld=kind==='old',inv=isOld?(DB.accounts.investors||[]).find(function(x){return x.id===id;}):_invById(id);if(!inv)return;
+  var ni=isOld?_invLinkedNew(inv):inv,oi=isOld?inv:_invLinkedOld(inv),emp=_invEmpOf(inv,kind),cli=_invClientOf(oi,ni);
+  setTimeout(function(){
+    switch(act){
+      case 'contract': return openPartnerContract(id);
+      case 'edit': return isOld?openEditInvestorModal(id):_invForm(id);
+      case 'wd': return openInvestorWithdrawModal(id);
+      case 'cap': return openAddCapitalModal(id);
+      case 'tl': return openInvestorTimeline(id);
+      case 'tlOld': return oi&&openInvestorTimeline(oi.id);
+      case 'open': return ni&&openInvestor(ni.id);
+      case 'goodsNew': return _invCreateGoodsAcc(id);
+      case 'goodsDel': return ni&&confirmAction('هتلغي حساب البضاعة لـ «'+ni.name+'»؟ بيتمسح بس لو مفيش عليه دفعات أو حركات مالية.',function(){_invDeleteGoods(ni.id);});
+      case 'goodsDelSelf': return confirmAction('هتلغي مستثمر البضاعة «'+inv.name+'»؟ بيتمسح بس لو مفيش عليه دفعات أو حركات مالية.',function(){_invDeleteGoods(id);});
+      case 'linkOld': return _invLinkOldPick(id);
+      case 'cli': return _invLinkClientPick(kind,id);
+      case 'cliOpen': return cli&&openTwoWayStatement(cli.name);
+      case 'cliUnlink': return _invUnlinkClient(kind,id);
+      case 'emp': return _invEmpPick(kind,id);
+      case 'empOpen': return emp&&openEmployeeDetailReport(emp.id);
+      case 'empUnlink': return confirmAction('هتفك ربط المستثمر بالموظف؟',function(){_invEmpApply(kind,id,'');});
+      case 'deact': return confirmAction('هتعطّل «'+inv.name+'»؟ مش هيدخل في توزيعات جديدة والتاريخ بيفضل محفوظ.',function(){_oiDeactivate(id);});
+      case 'act': return _oiActivate(id);
+      case 'del': return confirmAction('هتحذف المستثمر؟',function(){delInvestor(id);});
+      case 'arch': return _invArchive(id);
+    }
+  },60);
+}
+async function _oiActivate(id){
+  var inv=(DB.accounts.investors||[]).find(function(i){return i.id===id;});if(!inv)return;
+  if(_invGuard(null))return;
+  var others=(DB.accounts.investors||[]).filter(function(i){return i.id!==id&&i.status!=='inactive';}).reduce(function(s,i){return s+(+i.profit_share_pct||0);},0);
+  if(others+(+inv.profit_share_pct||0)>=100)return showToast('⛔ مجموع نسب المستثمرين النشطين هيوصل 100% أو أكتر — عدّل نسبته الأول','#dc2626');
+  _invBackup('قبل تفعيل مستثمر (شراكة)');
+  DB.accounts.investors=DB.accounts.investors.map(function(i){return i.id===id?Object.assign({},i,{status:'active'}):i;});
+  _invAudit('old_investor_activate','old',id,{name:inv.name});
+  await persist();closeModal();renderAccounting();showToast('▶️ المستثمر اتفعّل','#16a34a');
+}
+async function _invDeleteGoods(id){
+  var n=_invById(id);if(!n)return;
+  if(_invGuard(null))return; // مالك بس
+  var batches=_invBatches().filter(function(b){return b.investor_id===id;}).length;
+  var moves=(n.ledger||[]).filter(function(e){return (+e.amount||0)>0;}).length;
+  if(batches||moves)return showToast('⛔ مينفعش يتمسح: عليه '+(batches?batches+' دفعة بضاعة':'')+(batches&&moves?' و':'')+(moves?moves+' حركة مالية':'')+'. صفّي حسابه الأول، أو أرشفه من ⚙️ خيارات عشان يختفي من القوائم.','#dc2626');
+  _invBackup('قبل إلغاء حساب مستثمر بضاعة');
+  var arr=_invList(),ix=arr.indexOf(n),nm=n.name;
+  if(ix>=0)arr.splice(ix,1);
+  _invAudit('investor_goods_delete','investor',id,{name:nm,pct:n.pct});
+  await persist();closeModal();renderAccounting();
+  showToast('🗑️ اتلغى حساب البضاعة ('+nm+') — لسه مستثمر شراكة عادي','#16a34a');
+}
+function _invGoodsTabHtml(){
+  var all=_invList(),news=all.filter(function(n){return !n.archived;}),arch=all.filter(function(n){return n.archived;});
+  var N=function(x){return fmt(Math.round(x));};
+  var card=function(n){
+    var T=_invStats(n).T,o=_invLinkedOld(n),emp=_invEmpOf(n,'new'),cli=_invClientOf(o,n);
+    return '<div style="background:#fff;border-radius:14px;padding:10px 12px;box-shadow:0 2px 10px rgba(0,0,0,.06);margin-bottom:8px;border-right:4px solid '+(n.archived?'#94a3b8':'#059669')+';opacity:'+(n.archived?.7:1)+'">'+
+      '<div style="display:flex;justify-content:space-between;align-items:center;gap:6px"><div onclick="openInvestor('+jsStr(n.id)+')" style="cursor:pointer;min-width:0"><b style="font-size:14px">'+esc(n.name)+'</b> <span style="background:#d1fae5;color:#047857;border-radius:6px;padding:1px 8px;font-size:11px;font-weight:800">'+fmtQty(n.pct||0)+'% من ربح دفعاته</span>'+
+      '<div style="font-size:10.5px;color:#64748b;margin-top:2px">'+(o?'💼 شريك كمان • ':'')+(cli?'👤 عميل • ':'')+(emp?'🧑‍💼 موظف • ':'')+(n.archived?'📦 مؤرشف':'مستثمر بضاعة')+'</div></div>'+
+      '<button class="btn-ic" style="background:#eef2ff" onclick="_invOpts(\'new\','+jsStr(n.id)+')">⚙️</button></div>'+
+      '<div onclick="openInvestor('+jsStr(n.id)+')" style="cursor:pointer;display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:8px">'+_invMini('متاح للشراء',T.capCash,T.capCash<-0.001?'#dc2626':'#047857',T.capCash<-0.001?'#fee2e2':'#d1fae5')+_invMini('في بضاعة',T.remCost,'#c2410c','#ffedd5')+_invMini('له',T.owed,'#0f172a','#e2e8f0')+'</div></div>';
+  };
+  return '<button class="btn btn-full" style="background:#ecfdf5;color:#047857;border:none;margin-bottom:12px" onclick="_invForm(null)">📜 + مستثمر بضاعة (عقد)</button>'+
+    (news.length?news.map(card).join(''):'<div class="empty">مفيش مستثمرين بضاعة</div>')+
+    (arch.length?'<details style="margin-top:6px"><summary style="cursor:pointer;font-size:12px;font-weight:800;color:#64748b">📦 المؤرشفين ('+arch.length+')</summary><div style="margin-top:8px">'+arch.map(card).join('')+'</div></details>':'');
+}
+function _invKpi(label,val,color,bg,act){ // ⚠️ v329 — act = اختياري: الكارت بيفتح بياناته
+  return '<div'+(act?' onclick="'+act+'"':'')+' style="background:'+bg+';border-radius:12px;padding:11px 8px;text-align:center;'+(act?'cursor:pointer;':'')+'">'+
     '<div style="font-size:10px;font-weight:700;color:'+color+';margin-bottom:3px">'+label+'</div>'+
     '<div style="font-size:14px;font-weight:900;color:'+color+'">'+val+'</div></div>';
 }
@@ -28998,35 +29355,28 @@ function _investorCard(inv){
     _invStat('أرباح متبقية',fmt(retained),'#854d0e')+
     '</div>'+
 
-    // سجل المساهمات
+    // ⚠️ v329 — المساهمات والسحوب مطويّة + سطر الروابط المضغوط + 3 أزرار بس (الباقي في ⚙️ خيارات)
     (contributions.length>1?
-      '<div style="background:#f8fafc;border-radius:9px;padding:8px 10px;margin-bottom:8px">'+
-      '<div style="font-size:11px;font-weight:700;color:#64748b;margin-bottom:5px">💼 مساهمات رأس المال</div>'+
+      '<details style="background:#f8fafc;border-radius:9px;padding:7px 10px;margin-bottom:8px"><summary style="cursor:pointer;font-size:11.5px;font-weight:800;color:#64748b">💼 مساهمات رأس المال ('+contributions.length+')</summary>'+
       contributions.map(function(c){
         return '<div style="display:flex;justify-content:space-between;font-size:12px;padding:3px 0;border-bottom:1px solid #e2e8f0">'+
           '<span style="color:#64748b">'+esc(fmtDate(c.date))+(c.note?' — '+esc(c.note):'')+'</span>'+
           '<b style="color:#7c3aed">'+fmt(c.amount)+'</b></div>';
-      }).join('')+'</div>':'')+
-
-    // ⚠️ v111 — سجل السحب مفصّل (كان بيتعرض إجمالي بس)
+      }).join('')+'</details>':'')+
     (withdrawals.length?
-      '<div style="background:#fff7ed;border-radius:9px;padding:8px 10px;margin-bottom:8px">'+
-      '<div style="font-size:11px;font-weight:700;color:#9a3412;margin-bottom:5px">💰 سجل السحب</div>'+
+      '<details style="background:#fff7ed;border-radius:9px;padding:7px 10px;margin-bottom:8px"><summary style="cursor:pointer;font-size:11.5px;font-weight:800;color:#9a3412">💰 سجل السحب ('+withdrawals.length+')</summary>'+
       withdrawals.slice().reverse().map(function(w){
         return '<div style="display:flex;justify-content:space-between;font-size:12px;padding:3px 0;border-bottom:1px solid #fed7aa">'+
           '<span style="color:#9a3412">'+esc(fmtDate(w.date))+(w.type==='capital_return'?'↩️ رد رأس مال ':'💸 أرباح ')+(w.note?' — '+esc(w.note):'')+'</span>'+
           '<span style="display:flex;align-items:center;gap:8px"><b style="color:#ea580c">'+fmt(w.amount)+'</b>'+
           '<span onclick="confirmAction(\'هتحذف السحب ده؟ المبلغ هيرجع للمستثمر والنقدية هتتغيّر\',function(){_oiDelWithdrawal(\''+inv.id+'\',\''+w.id+'\')})" style="cursor:pointer;font-size:13px">🗑️</span></span></div>';
-      }).join('')+'</div>':'')+
+      }).join('')+'</details>':'')+
 
-    _invUnifiedBlock(inv)+
-    '<div style="display:flex;gap:6px;margin-bottom:6px">'+
-    '<button class="btn btn-sm btn-full" style="background:#eef2ff;color:#4338ca;border:none;border-radius:9px" onclick="openInvestorTimeline(\''+inv.id+'\')">📜 السجل الكامل</button>'+
-    '</div>'+
-
+    _invLinksLine(inv)+
     '<div style="display:flex;gap:6px">'+
+    '<button class="btn btn-sm btn-full" style="background:#eef2ff;color:#4338ca;border:none;border-radius:9px" onclick="openInvestorTimeline(\''+inv.id+'\')">📜 السجل</button>'+
     '<button class="btn btn-sm btn-full" style="background:#ede9fe;color:#7c3aed;border:none;border-radius:9px" onclick="openAddCapitalModal(\''+inv.id+'\')">+ مساهمة</button>'+
-    '<button class="btn btn-sm btn-full" style="background:#fee2e2;color:#dc2626;border:none;border-radius:9px" onclick="confirmAction(\'هتحذف المستثمر؟\',function(){delInvestor(\''+inv.id+'\')})">🗑️</button>'+
+    '<button class="btn btn-sm btn-full" style="background:#f1f5f9;color:#0f172a;border:none;border-radius:9px" onclick="_invOpts(\'old\','+jsStr(inv.id)+')">⚙️ خيارات</button>'+
     '</div></div>';
 }
 
@@ -29660,6 +30010,7 @@ function _cycleCard(c){
         '<div style="display:flex;justify-content:flex-end;align-items:center;gap:6px">'+_st+'</div></div>';
     }).join('')+
     (_remTot>0.5?'<button type="button" class="btn btn-sm btn-full" style="background:#ffedd5;color:#c2410c;border:none;border-radius:9px;margin:2px 0 6px" onclick="confirmAction(\'هتسجّل تسليم كل المتبقي ('+fmt(_remTot)+') لمستثمري الدورة دي بتاريخ النهارده؟\',function(){_pcPayInv(\''+c.id+'\')})">💸 تسليم كل المتبقي ('+fmt(_remTot)+')</button>':'')+
+    (c.goods_deduct>0?'<div style="display:flex;justify-content:space-between;margin-top:5px;padding-top:5px;border-top:1px solid #e2e8f0"><span style="color:#047857">🤝 مستثمرو البضاعة (اتخصموا قبل التوزيع)</span><b style="color:#047857">'+fmt(c.goods_deduct)+'</b></div>'+(c.goods_shares||[]).map(function(g){return '<div style="display:flex;justify-content:space-between;font-size:11px;color:#64748b;margin:0 10px 2px 0"><span>'+esc(g.name)+'</span><span>'+fmt(g.amount)+'</span></div>';}).join(''):'')+
     '<div style="display:flex;justify-content:space-between;margin-top:5px;padding-top:5px;border-top:1px solid #e2e8f0">'+
     '<span style="color:#64748b">سحبك الفعلي</span><b style="color:#ea580c">'+fmt(c.owner_draw)+'</b></div>'+
     (c.retained>0?'<div style="display:flex;justify-content:space-between"><span style="color:#64748b">محتجز</span><b style="color:#854d0e">'+fmt(c.retained)+'</b></div>':'')+
@@ -29887,6 +30238,7 @@ function openProfitCycleModal(){
     (lastCycle?'<div style="background:#fef9c3;border-radius:10px;padding:9px 12px;margin-bottom:12px;font-size:11px;color:#854d0e">⚠️ آخر توزيع كان حتى <b>'+esc(fmtDate(lastCycle.date_to))+'</b> — اختر فترة بعدها لتجنّب حساب ربح مكرر</div>':'')+
 
     '<div id="pc-period-filter"></div>'+
+    '<div id="pc-goods-box"></div>'+
     '<div id="pc-profit-box"></div>'+
     '<div id="pc-overlap-box"></div>'+
 
@@ -29959,7 +30311,17 @@ function _updatePcProfitBox(){
   var totalSales=ps.reduce(function(s,x){return s+x.total;},0);
   var totalCos=salesCost(ps);
   var totalExp=pe.reduce(function(s,x){return s+x.amount;},0);
-  var _bShare=_invExclOn()?_invSalesShare(ps).share:0;
+  var _bs=_invSalesShare(ps),_bShare=_invExclOn()?_bs.share:0;
+  // ⚠️ v329 — مستثمرو البضاعة ونصيب كل واحد قبل توزيع الشركة (كانوا بيتخصموا من غير ما يظهروا)
+  var _gb=document.getElementById('pc-goods-box');
+  if(_gb){
+    var _gAll=_invList().filter(function(n){return !n.archived;});
+    if(!_gAll.length)_gb.innerHTML='';
+    else _gb.innerHTML='<div style="background:#ecfdf5;border:1.5px solid #6ee7b7;border-radius:10px;padding:9px 12px;margin-bottom:10px"><div style="font-size:12px;font-weight:900;color:#047857;margin-bottom:5px">🤝 مستثمرو البضاعة — قبل توزيع الشركة</div>'+
+      _gAll.map(function(n){var o=_bs.byInv[n.id];return '<div style="display:flex;justify-content:space-between;font-size:12px;padding:3px 0;border-bottom:1px solid #d1fae5"><span>'+esc(n.name)+' <span style="color:#059669;font-size:10.5px">('+fmtQty(n.pct||0)+'% من ربح دفعاته)</span></span><b>'+fmt(o?o.share:0)+'</b></div>';}).join('')+
+      '<div style="display:flex;justify-content:space-between;font-size:12.5px;font-weight:900;margin-top:5px"><span>إجمالي نصيبهم في الفترة</span><span>'+fmt(_bs.share)+'</span></div>'+
+      (_invExclOn()?'<div style="font-size:10.5px;color:#047857;margin-top:3px">✅ بيتخصم من الربح قبل ما يتوزّع على الشركاء — والمبلغ اللي تحت صافي بعد خصمهم.</div>':'<div style="font-size:10.5px;color:#b91c1c;margin-top:3px">⛔ مش متخصم: الأساس صافي الربح كامل (غيّره من تبويب «عامة» ← الشريط الأخضر/الأحمر).</div>')+'</div>';
+  }
   var rawProfit=Math.max(0,Math.round(totalSales-totalCos-totalExp-_bShare));
   // ⚠️ v299 — الفترة اللي اتوزّع منها قبل كده (حتى لو بالنهارده) كانت بترجّع نفس الربح كأنه ما اتوزّعش. بنخصم اللي اتوزّع في الفترات المتداخلة
   var _distDeduct=_pcOverlapping(r).reduce(function(s,c){return s+(+c.gross_profit||0);},0);
@@ -30071,6 +30433,7 @@ async function saveProfitCycle(skipOverlap){
     if(_invGuard(_editOld.date_created||_editOld.date_to)||_invGuard(distDate))return;
     _invBackup('قبل تعديل دورة توزيع');
     DB.accounts.profit_cycles=(DB.accounts.profit_cycles||[]).filter(function(c){return c.id!==_editOld.id;});
+    try{_invTomb('profit_cycles',_editOld.id);}catch(eTc){} // ⚠️ v329 — الدورة القديمة ما ترجعش بعد المزامنة
     recalcRetainedEarnings();
   }
   var ownerDraw=Math.round(+v('pc-owner-draw')||0);
@@ -30099,6 +30462,9 @@ async function saveProfitCycle(skipOverlap){
     return {investor_id:i.id,share_pct:i.profit_share_pct,amount:share,withdrawn:0,retained:share};
   });
 
+  // ⚠️ v329 — نصيب مستثمري البضاعة اللي اتخصم قبل التوزيع بيتسجّل في الدورة
+  var _gsSales=(DB.sales||[]).filter(function(sx){return(!pr.from||sx.date>=pr.from)&&(!pr.to||sx.date<=pr.to);}),_gs=_invSalesShare(_gsSales);
+  var _gsDeduct=_invExclOn()?_gs.share:0,_gsList=_invExclOn()?Object.keys(_gs.byInv).map(function(k){return {investor_id:k,name:_gs.byInv[k].name,amount:_gs.byInv[k].share};}):[];
   // حفظ الدورة
   // (الفترة اتحسبت فوق في pr)
   var cycle={
@@ -30109,6 +30475,8 @@ async function saveProfitCycle(skipOverlap){
     gross_profit:profit,
     owner_share:ownerShare,
     owner_draw:actualDraw,
+    goods_deduct:_gsDeduct,
+    goods_shares:_gsList,
     retained:ownerRetainedChange,
     distributions:distributions,
     include_investors:includeInvestors,
@@ -30853,7 +31221,7 @@ function _minChip(){
   window[x[0]]=function(){if(_minModal&&_minModal.kind===x[1]){showToast('فيه '+_MIN_LABEL[x[1]].slice(2)+' متصغّرة — كمّل عليها أو امسحها الأول','#b45309');restoreMinimized();return;}return orig.apply(this,arguments);};
 });
 
-var __ONCE_GUARDED=["_oiSaveContribution", "_oiDelContribution", "_invEmpApply", "_empMergeExec", "_pcPayInv", "_oiDelWithdrawal", "_oiDeactivate", "saveNewCompany", "saveGoalTask", "saveGoalResult", "saveGoal", "saveWorkRule", "confirmWorkRule", "__giveEmpCashAdvance", "__settleEmpCashBalance", "__undoLastCashAdvance", "_applyLinkRepair", "_duaSave", "_invBatchDel", "_invBatchSave", "_invCreateGoodsAcc", "_invMoneySave", "_invPaySave", "_invSave", "_invBaselineSnapshots", "_invRestoreBackup", "_invBatchClose", "_invArchive", "saveEditInvestor", "_mfUnify", "_movTodoAdd", "_wsSaveSettings", "addExpenseTemplate", "delPurchaseExec", "addMovAdvancePayment", "approveStocktake", "confirmAutoBalanceDiff", "confirmCloseMovement", "confirmContinueMovement", "confirmExtractParts", "confirmMarkLeave", "confirmMyAttendance", "confirmPayAdvance", "confirmPayDailyWage", "confirmPayFixedExp", "confirmPaySalary", "confirmSchedDone", "convertOpeningInventoryToPurchase", "delScrapMachine", "deleteAllArchivedDebts", "deleteKnowledge", "deleteVisitLog", "duplicateTask", "endVisit", "execMergeProducts", "finishExtractForSale", "importBaseClients", "markSaleItemDamaged", "mergeModelFamily", "openDeleteSaleModal", "payDebt", "payGroupDebts", "quickLogExpense", "removeMovAdvancePayment", "saveAddCapital", "saveAsset", "saveBalanceSnapshot", "saveBatchExpenses", "saveBundleDraft", "saveCapital", "saveConsignmentOutSale", "saveDebt", "saveEditCapital", "saveEditDebt", "saveEditExpense", "saveEditFixedExp", "saveEditReceivable", "saveEmpIncrement", "saveEmployee", "saveExpense", "saveFixedExp", "saveGiveConsignment", "saveIncrement", "saveInventorySnapshot", "saveInvestorWithdraw", "saveKnowledge", "saveLog", "saveMachine", "saveMovement", "saveNewClient", "saveNewInvestor", "saveProduct", "saveProfitCycle", "savePurchase", "saveReceivable", "saveReceiveConsignment", "saveReturnConsignment", "saveSale", "saveScrapMachine", "confirmScrapPurchaseMigration", "markScrapNoPurchase", "saveSupplier", "saveTask", "setExtraIncome", "startStocktake", "startVisit", "syncSalesWithDebts", "withdrawPartForMovement", "withdrawPickedParts"];
+var __ONCE_GUARDED=["_ocSave", "_ocApproveSave", "_invDeleteGoods", "_oiActivate", "_oiSaveContribution", "_oiDelContribution", "_invEmpApply", "_empMergeExec", "_pcPayInv", "_oiDelWithdrawal", "_oiDeactivate", "saveNewCompany", "saveGoalTask", "saveGoalResult", "saveGoal", "saveWorkRule", "confirmWorkRule", "__giveEmpCashAdvance", "__settleEmpCashBalance", "__undoLastCashAdvance", "_applyLinkRepair", "_duaSave", "_invBatchDel", "_invBatchSave", "_invCreateGoodsAcc", "_invMoneySave", "_invPaySave", "_invSave", "_invBaselineSnapshots", "_invRestoreBackup", "_invBatchClose", "_invArchive", "saveEditInvestor", "_mfUnify", "_movTodoAdd", "_wsSaveSettings", "addExpenseTemplate", "delPurchaseExec", "addMovAdvancePayment", "approveStocktake", "confirmAutoBalanceDiff", "confirmCloseMovement", "confirmContinueMovement", "confirmExtractParts", "confirmMarkLeave", "confirmMyAttendance", "confirmPayAdvance", "confirmPayDailyWage", "confirmPayFixedExp", "confirmPaySalary", "confirmSchedDone", "convertOpeningInventoryToPurchase", "delScrapMachine", "deleteAllArchivedDebts", "deleteKnowledge", "deleteVisitLog", "duplicateTask", "endVisit", "execMergeProducts", "finishExtractForSale", "importBaseClients", "markSaleItemDamaged", "mergeModelFamily", "openDeleteSaleModal", "payDebt", "payGroupDebts", "quickLogExpense", "removeMovAdvancePayment", "saveAddCapital", "saveAsset", "saveBalanceSnapshot", "saveBatchExpenses", "saveBundleDraft", "saveCapital", "saveConsignmentOutSale", "saveDebt", "saveEditCapital", "saveEditDebt", "saveEditExpense", "saveEditFixedExp", "saveEditReceivable", "saveEmpIncrement", "saveEmployee", "saveExpense", "saveFixedExp", "saveGiveConsignment", "saveIncrement", "saveInventorySnapshot", "saveInvestorWithdraw", "saveKnowledge", "saveLog", "saveMachine", "saveMovement", "saveNewClient", "saveNewInvestor", "saveProduct", "saveProfitCycle", "savePurchase", "saveReceivable", "saveReceiveConsignment", "saveReturnConsignment", "saveSale", "saveScrapMachine", "confirmScrapPurchaseMigration", "markScrapNoPurchase", "saveSupplier", "saveTask", "setExtraIncome", "startStocktake", "startVisit", "syncSalesWithDebts", "withdrawPartForMovement", "withdrawPickedParts"];
 (function(){
   var busy={};
   function wrap(name){
@@ -30941,7 +31309,7 @@ var __PERM_MAP_V310={
   startVisit:[['movements','upd']], endVisit:[['movements','upd']], deleteVisitLog:[['movements','upd']], // ⚠️ v311 — كانت بتعدّل محليًا قبل ما dbUpdate يرفض
   saveNewInvestor:[['accounting','ins']], saveEditInvestor:[['accounting','upd']], delInvestor:[['accounting','del']], saveInvestorWithdraw:[['accounting','ins']],
   saveAddCapital:[['accounting','ins']], saveProfitCycle:[['accounting','ins']], deleteProfitCycle:[['accounting','del']],
-  _pcPayInv:[['accounting','ins']], _oiSaveContribution:[['accounting','upd']], _oiDelContribution:[['accounting','del']], _invEmpApply:[['accounting','upd']], _empMergeExec:[['accounting','upd']], _oiDelWithdrawal:[['accounting','del']], _oiDeactivate:[['accounting','upd']], // ⚠️ v324
+  _pcPayInv:[['accounting','ins']], _ocSave:[['accounting','upd']], _ocApproveSave:[['accounting','upd']], _invDeleteGoods:[['accounting','del']], _oiActivate:[['accounting','upd']], _oiSaveContribution:[['accounting','upd']], _oiDelContribution:[['accounting','del']], _invEmpApply:[['accounting','upd']], _empMergeExec:[['accounting','upd']], _oiDelWithdrawal:[['accounting','del']], _oiDeactivate:[['accounting','upd']], // ⚠️ v324
   _invBatchSave:[['accounting','ins']], _invBatchClose:[['accounting','upd']], _invBatchDel:[['accounting','del']]
 };
 var __OWNER_ONLY_FUNCS=['_invRestoreBackup','__approveJoin','__resetRoleToDefault','__changeEmpRole','__toggleEmpBlock','__resetEmpCustomPerms','__toggleEmpPerm','__togglePerm',
