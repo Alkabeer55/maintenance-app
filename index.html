@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v329</title>
+<title>ابو حوده الحلو الجميل v330</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -53,7 +53,7 @@ async function __netProbe(force){
   }catch(e3){}
   return ok;
 }
-/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="v329 — ٣٠ جمادى الأولى ١٤٤٨ هـ";
+/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="v330 — ٣٠ جمادى الأولى ١٤٤٨ هـ";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -132,6 +132,7 @@ async function __netProbe(force){
     36) ⚠️ v306 — المستثمرين: أي عملية مستثمر (إيداع/سحب/رد رأس مال/دفعة/دورة توزيع/مستثمر) لازم تعدّي بالترتيب: _invGuard(تاريخ العملية) ← _invBackup(سبب) ← التعديل ← _invAudit(...) ← persist. ممنوع تعديل نسبة أو تكلفة دفعة اتباع منها (النسبة بتتغيّر بـ pct_hist بتاريخ سريان عن طريق _invPctAt، والتكلفة بدفعة جديدة). ممنوع حذف دفعة عليها مبيعات أو مستثمر عليه حركات (أرشفة بدل الحذف). إقفال الشهر لازم يثبّت لقطة (_invTakeSnapshot) وأي دالة مستثمرين جديدة لازم تتضاف في __ONCE_GUARDED.
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v330: [🧾 صفحة الفواتير: (١) رقم فاتورة ثابت (تاريخ-كود قصير من المعرّف) على الكارت والطباعة وبيتبحث بيه — كان «الرقم» اللي بيظهر ترتيب الصف وبيتغيّر مع الفلتر والترتيب • (٢) إصلاح انهيار طباعة فاتورة «خدمة بس» (من غير أصناف) • (٣) الطباعة بقت فيها الخصم وطريقة الدفع والحالة والرقم (كان الإجمالي بيظهر من غير خصم فيحصل لخبطة) وعدّاد الألوان (كان مفتاح غلط) • (٤) إصلاح القائمة الفاضية لو حذفت آخر فاتورة في آخر صفحة • (٥) اسم عميل فيه علامة ' ما بقاش يكسر الضغط عليه • (٦) شريط ملخّص (العدد/الإجمالي/المحصّل/المتبقي) + فلتر حالة (مدفوع/جزئي/آجل/زيارة) • (٧) البحث بقى بيشمل رقم الفاتورة والملاحظة وطريقة الدفع • (٨) إصلاح jsStr على مستوى التطبيق: أي اسم (عميل/مستثمر/موظف...) فيه علامة ' كان بيكسر الضغط عليه]
 v329: [📜 عقود المستثمرين: عقد استثمار لمستثمر الشراكة بنوعين — «مستثمر شريك» (نسبة ملكية + أرباح وخسائر + تخارج بالقيمة الدفترية) و«مستثمر برأس مال» (نسبة أرباح من غير ملكية + تنظيم استرداد رأس المال) مع موافقة الطرفين وطباعة وواتساب • عقود البضاعة اتسمّت بوضوح «مستثمر بضاعة — مضاربة/مشاركة» (مبقاش شكلهم زي بعض) • 🧮 حاسبة النسبة بقت بتفرّق بين «شريك» (قيمة عادلة Post-money + رأس المال×المدة) و«مستثمر بضاعة» (عائد على رأس المال = هامش الربح × دوران المخزون من مبيعاتك الفعلية) وبتشرح الأساس المحاسبي قدام كل رقم • 🧭 المستثمرين: (١) إلغاء/حذف مستثمر بضاعة اتفتح بالغلط (بيتمسح لو مفيش عليه دفعات أو حركات، وغير كده بيتأرشف) • (٢) قائمة «⚙️ خيارات» موحدة لكل مستثمر (ربط عميل/موظف، حساب بضاعة، تعطيل، حذف...) بدل الأزرار الكبيرة اللي واخدة الشاشة • (٣) كروت «عامة» بقت بتودّيك لبياناتها + تبويب جديد «📦 بضاعة» • (٤) تقرير المالك: إجمالي رأس المال شامل المحتجز • (٥) شاشة توزيع الأرباح بتعرض مستثمري البضاعة ونصيب كل واحد قبل توزيع الشركة، وبيتسجّل في الدورة • (٦) شرح مبسّط لـ«الحماية والنسخ الاحتياطي» جوه الشاشة • 🐛 «التعديل بيرجع زي ما كان»: سحب الحسابات من السيرفر كان بيدّي نسخة السيرفر الأولوية على أي تعديل/حذف محلي لسه ما اترفعش (مستثمر، سحب، مساهمة، موظف، دورة توزيع...) فبيرجّع القديم — اتصلح بدمج ثلاثي (الأساس/المحلي/السيرفر) في السحب زي الرفع بالظبط • تعديل دورة التوزيع بقى بيسجّل شاهد حذف للدورة القديمة (كانت ممكن ترجع بعد المزامنة)]
 v328: [🔀 دمج الموظفين: الراتبين بقوا بيتجمّعوا مع بعض (راتب الأساسي + راتب المكرر) بدل ما راتب المكرر يتشال — خيار «جمّع الراتبين» شغّال تلقائي ومعاينة الدمج بتعرض الناتج (مثال: ٥٠٠٠ + ٢٠٠٠ = ٧٠٠٠) • لو نوع الأجر مختلف (شهري/يومي) مينفعش يتجمعوا فبيفضل راتب الأساسي وراتب المكرر بيتسجّل في الملاحظة (مفيش حاجة بتضيع) • الزيادة الدورية بالمبلغ بتتجمّع لو نفس المدة، وغير كده بتتسجّل في الملاحظة • كل دمج بيسجّل تفاصيل الجمع في ملاحظة الموظف]
 v327: [💼 تعديل/حذف مساهمة رأس المال (كانت مفيش طريقة للتراجع عن مساهمة اتسجّلت غلط) — من «📜 السجل الكامل» للمستثمر، للمالك بس، ومحمي: مينفعش يخلّي رأس المال المردود أكبر من المساهمات • ⛔ تعديل دورة توزيع بعد سحب: بيتمنع لو هيخلّي مستثمر سحبه أكبر من أرباحه (كان بيسكت ويصفّر المحتجز) • 🧮 حاسبة نسبة الأرباح: (١) مستثمر جديد بطريقتين (قيمة المركز الدفترية / رأس المال فقط) مع أثره على القدامى والمالك (٢) توزيع النسب حسب رأس المال × المدة (متوسط مرجّح بالأيام) من الأرقام المسجّلة — اقتراح للقراءة بس، مابتغيّرش نسب • مفيش تغيير في معادلات الخزنة أو الميزانية]
@@ -5738,7 +5739,7 @@ var APP_TITLE=APP_CONFIG.name;
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=329;
+var APP_VERSION=330;
 // ⚠️ v303 — BUILD_STAMP كان مش متعرّف خالص (شاشة الإعدادات كانت بتعرض "?") — اتعرّف دلوقتي وبيتزود مع كل تحديث
 var BUILD_STAMP='v323 — ٣٠ جمادى الأولى ١٤٤٨ هـ';
 // ⚠️ v295 — عنوان الصفحة كان رقم نسخته ثابت ومتنسي (فضل v294 مع إن النسخة اتغيّرت). دلوقتي بياخد الرقم من APP_VERSION دايمًا.
@@ -7106,7 +7107,7 @@ function esc(s){
 // بيحوّل أي نص لصيغة مُرمّزة (encodeURIComponent) وبيفكها وقت التنفيذ عبر decodeURIComponent
 // هذا يمنع كسر onclick لو النص فيه فاصلة عليا ' أو أي رمز خاص
 function jsStr(s){
-  return "decodeURIComponent('"+encodeURIComponent(s===null||s===undefined?'':String(s))+"')";
+  return "decodeURIComponent('"+encodeURIComponent(s===null||s===undefined?'':String(s)).replace(/'/g,'%27')+"')"; // ⚠️ v330 — encodeURIComponent مابيشفّرش ' فكان بيكسر الـonclick لأي اسم فيه فاصلة عليا
 }
 
 function normalizeAr(s){
@@ -8473,7 +8474,7 @@ function navigateBack(){
 function renderScreen(s){
   if(s==='home')renderHome();
   else if(s==='inventory')renderInventory();
-  else if(s==='sales'){_salesPage=0;renderSales();}
+  else if(s==='sales'){_salesPage=0;_salesStatus='all';renderSales();}
   else if(s==='purchases')renderPurchases();
   else if(s==='debts')renderDebts();
   else if(s==='tasks')renderTasks();
@@ -10607,7 +10608,12 @@ function printStocktakeReport(id){
     '<p style="margin-top:14px;font-size:13px">إجمالي الفروق: '+diffs.length+' من '+st.items.length+' صنف</p>');
 }
 // ===== SALES =====
-var _salesPage=0, SALES_PER_PAGE=30;
+var _salesPage=0, SALES_PER_PAGE=30, _salesStatus='all';
+function _saleNo(x){var d=String((x&&x.date)||'').replace(/-/g,'').slice(2),id=String((x&&x.id)||'').replace(/[^0-9a-zA-Z]/g,'');return (d||'000000')+'-'+(id.slice(-4).toUpperCase()||'0000');} // ⚠️ v330 — رقم فاتورة ثابت (مش ترتيب الصف)
+function _salesStatusChips(){
+  var o=[['all','الكل'],['مدفوع','✅ مدفوع'],['جزئي','🟡 جزئي'],['غير مدفوع','🔴 آجل'],['زيارة','🚗 زيارة']];
+  return '<div style="display:flex;gap:5px;margin:8px 0;flex-wrap:wrap">'+o.map(function(x){var a=_salesStatus===x[0];return '<button type="button" onclick="_salesStatus=\''+x[0]+'\';_salesPage=0;renderSales()" style="padding:6px 11px;border:none;border-radius:9px;font-family:inherit;font-size:11.5px;font-weight:800;cursor:pointer;background:'+(a?'#0f172a':'#f1f5f9')+';color:'+(a?'#fff':'#64748b')+'">'+x[1]+'</button>';}).join('')+'</div>';
+}
 var _salesSort='newest';
 
 function _sortBar(currentSort,setter,opts){
@@ -10729,7 +10735,7 @@ function selectClientMachine(idx,customerName){
 var _salesPeriod=_makePeriodState();
 function renderSales(){
   var filterEl=document.getElementById('sales-period-filter');
-  if(filterEl)filterEl.innerHTML=renderPeriodFilterHTML('_salesPeriod','renderSales')+_whoSelectHTML('sales',DB.sales,'renderSales'); // ⚠️ v299 — فلتر مين سجّل
+  if(filterEl)filterEl.innerHTML=renderPeriodFilterHTML('_salesPeriod','renderSales')+_whoSelectHTML('sales',DB.sales,'renderSales')+_salesStatusChips(); // ⚠️ v299 — فلتر مين سجّل + ⚠️ v330 فلتر الحالة
   var pr=_periodToRange(_salesPeriod);
   var q=document.getElementById('sales-search')?normalizeAr(document.getElementById('sales-search').value):'';
   // v139 — رجّعنا قائمة المبيعات تظهر لكل الموظفين المصرّح لهم بفتح الشاشة (من غير فلترة
@@ -10740,8 +10746,10 @@ function renderSales(){
   if(q)list=list.filter(function(s){
     return normalizeAr(s.customer).includes(q)||normalizeAr(s.serial||'').includes(q)||
       normalizeAr(s.model||'').includes(q)||normalizeAr(s.counter||'').includes(q)||
+      normalizeAr(_saleNo(s)).includes(q)||normalizeAr(s.note||'').includes(q)||normalizeAr(s.payment_method||'').includes(q)|| // ⚠️ v330
       (s.items||[]).some(function(i){return normalizeAr(i.name).includes(q);});
   });
+  if(_salesStatus!=='all')list=list.filter(function(s){return _saleStatusOf(s)===_salesStatus;}); // ⚠️ v330
   if(_salesSort==='alpha')list.sort(function(a,b){return(a.customer||'').localeCompare(b.customer||'','ar');});
   else if(_salesSort==='amount')list.sort(function(a,b){return b.total-a.total;});
   else list.sort(function(a,b){return (b.date||b.created_at||'')>(a.date||a.created_at||'')?1:(b.date||b.created_at||'')<(a.date||a.created_at||'')?-1:0;});
@@ -10755,16 +10763,21 @@ function renderSales(){
   function statusBg(st){return st==='مدفوع'?'#dcfce7':st==='جزئي'?'#fef9c3':st==='زيارة'?'#f1f5f9':'#fee2e2';}
   function pmIcon(pm){return pm==='فودافون كاش'?'📱':pm==='انستا باي'?'💳':pm==='تحويل'?'🏦':'💵';}
 
+  var totalPages=Math.ceil(list.length/SALES_PER_PAGE);
+  if(_salesPage>=totalPages)_salesPage=Math.max(0,totalPages-1); // ⚠️ v330 — بعد حذف/فلترة: ما نفضلش واقفين على صفحة مش موجودة
   var start=_salesPage*SALES_PER_PAGE;
   var pageItems=list.slice(start,start+SALES_PER_PAGE);
-  var totalPages=Math.ceil(list.length/SALES_PER_PAGE);
+  var _sm={total:0,paid:0,rem:0};
+  list.forEach(function(x){if(x.status==='زيارة')return;var t=+x.total||0,pd=+x.paid||0;_sm.total+=t;_sm.paid+=Math.min(pd,t);_sm.rem+=Math.max(0,t-pd);});
+  var _smHtml='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px">'+
+    _invKpi('🧾 العدد',list.length,'#1e40af','#dbeafe')+_invKpi('💰 الإجمالي',fmt(Math.round(_sm.total)),'#0f172a','#e2e8f0')+_invKpi('✅ المحصّل',fmt(Math.round(_sm.paid)),'#15803d','#dcfce7')+_invKpi('🔴 المتبقي',fmt(Math.round(_sm.rem)),'#b91c1c','#fee2e2')+'</div>';
   var msBtn=document.getElementById('sales-ms-btn');
   if(msBtn)msBtn.style.display=_multiSelect?'none':'';
   var msBar=document.getElementById('ms-toolbar');
   if(msBar&&_multiTable==='sales')updateMsToolbar();
   else if(msBar&&_multiTable!=='sales')msBar.style.display='none';
 
-  el.innerHTML=pageItems.map(function(s,__idx){
+  el.innerHTML=_smHtml+pageItems.map(function(s,__idx){
     var sc=statusColor(_saleStatusOf(s)),sb=statusBg(_saleStatusOf(s));
     var rem=s.total-(s.paid||0);
     var pm=s.payment_method||'كاش';
@@ -10774,10 +10787,10 @@ function renderSales(){
         __hCost=__isFieldHidden('sales','items_cost'), __hNote=__isFieldHidden('sales','note');
     var inner=
       '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">'+
-      '<span style="background:#0f172a;color:#fff;border-radius:3px;padding:0 4px;font-size:10px;font-weight:900;flex-shrink:0;margin-top:2px">'+(start+__idx+1)+'</span>'+
+      '<span title="رقم الفاتورة" style="background:#0f172a;color:#fff;border-radius:4px;padding:1px 5px;font-size:9.5px;font-weight:800;flex-shrink:0;margin-top:2px;direction:ltr">#'+_saleNo(s)+'</span>'+
       '<div style="flex:1;min-width:0">'+
       '<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:3px">'+
-      (__hC?'<span style="font-weight:900;font-size:14px;color:#94a3b8">🔒 عميل</span>':'<span style="font-weight:900;font-size:14px;cursor:pointer;color:#0f172a" onclick="openLedger(\''+esc(s.customer)+'\')">'+clientDisp(s.customer,s.serial)+'</span>')+
+      (__hC?'<span style="font-weight:900;font-size:14px;color:#94a3b8">🔒 عميل</span>':'<span style="font-weight:900;font-size:14px;cursor:pointer;color:#0f172a" onclick="openLedger('+jsStr(s.customer)+')">'+clientDisp(s.customer,s.serial)+'</span>')+
       (__hSt?'':'<span style="font-size:10px;background:'+sb+';color:'+sc+';border-radius:6px;padding:2px 8px;font-weight:700">'+_saleStatusOf(s)+'</span>')+
       (__hPm?'':'<span style="font-size:10px;background:#f1f5f9;color:#374151;border-radius:6px;padding:2px 6px">'+pmIcon(pm)+' '+pm+'</span>')+
       ((s.items||[]).some(function(i){return i.inv_batch;})?'<span style="font-size:10px;background:#d1fae5;color:#047857;border-radius:6px;padding:2px 7px;font-weight:800">🤝 مستثمر</span>':'')+
@@ -24948,7 +24961,7 @@ function printInvoice(id){
   var s=DB.sales.find(function(x){return x.id===id;});if(!s)return;
   var w=window.open('','_blank','width=420,height=650');
   if(!w){showToast('⚠️ المتصفح منع نافذة الطباعة — اسمح بالنوافذ المنبثقة وجرّب تاني','#dc2626');return;} // v271
-  var rows=s.items.map(function(i){
+  var rows=(s.items||[]).map(function(i){ // ⚠️ v330 — فاتورة خدمة بس (من غير items) كانت بتكسر الطباعة
     return '<tr><td style="padding:6px 8px;border-bottom:1px solid #eee">'+esc(i.name)+'</td>'+
       '<td style="padding:6px 8px;border-bottom:1px solid #eee;text-align:center">'+fmtQty(i.qty)+'</td>'+
       '<td style="padding:6px 8px;border-bottom:1px solid #eee;text-align:left">'+i.price+' ج</td>'+
@@ -24968,15 +24981,18 @@ function printInvoice(id){
     '@media print{button{display:none}}</style></head><body>'+
     '<h2>'+esc(shopName)+'</h2>'+
     '<div class="info-row"><span><b>العميل:</b></span><span>'+clientDisp(s.customer,s.serial)+'</span></div>'+
+    '<div class="info-row"><span><b>رقم الفاتورة:</b></span><span dir="ltr">#'+_saleNo(s)+'</span></div>'+
     '<div class="info-row"><span><b>التاريخ:</b></span><span>'+esc(fmtDate(s.date))+'</span></div>'+
     (s.serial?'<div class="info-row"><span><b>السيريال:</b></span><span>'+esc(s.serial)+'</span></div>':'')+
     (s.model?'<div class="info-row"><span><b>الموديل:</b></span><span>'+esc(s.model)+'</span></div>':'')+
-    (s.counter?'<div class="info-row"><span><b>العداد:</b></span><span>'+esc(s.counter)+(s.colorCounter?' | ألوان: '+esc(s.colorCounter):'')+'</span></div>':'')+
+    (s.counter?'<div class="info-row"><span><b>العداد:</b></span><span>'+esc(s.counter)+((s.color_counter||s.colorCounter)?' | ألوان: '+esc(s.color_counter||s.colorCounter):'')+'</span></div>':'')+
     '<br>'+
     (rows||srvRows?
       '<table><thead><tr><th>البند</th><th>الكمية</th><th>السعر</th><th>الإجمالي</th></tr></thead>'+
       '<tbody>'+rows+srvRows+'</tbody></table>':'')+'<hr>'+
+    (s.discount>0?'<div class="info-row"><span>خصم</span><span>- '+s.discount+' ج</span></div>':'')+
     '<div class="info-row" style="font-size:16px;font-weight:900"><span>الإجمالي</span><span>'+s.total+' ج</span></div>'+
+    '<div class="info-row"><span>طريقة الدفع</span><span>'+esc(s.payment_method||'كاش')+'</span></div>'+
     '<div class="info-row"><span>المدفوع</span><span style="color:green">'+( s.paid||0)+' ج</span></div>'+
     ((s.total-(s.paid||0))>0?'<div class="info-row"><span>المتبقي</span><span style="color:red">'+(s.total-(s.paid||0))+' ج</span></div>':'')+
     (s.note?'<div style="margin-top:10px;padding:8px;background:#f8fafc;border-radius:8px;font-size:12px"><b>ملاحظة:</b> '+esc(s.note)+'</div>':'')+
