@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v330</title>
+<title>ابو حوده الحلو الجميل v332</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -53,7 +53,7 @@ async function __netProbe(force){
   }catch(e3){}
   return ok;
 }
-/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="v330 — ٣٠ جمادى الأولى ١٤٤٨ هـ";
+/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="v332 — ٢ جمادى الآخرة ١٤٤٨ هـ";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -132,6 +132,8 @@ async function __netProbe(force){
     36) ⚠️ v306 — المستثمرين: أي عملية مستثمر (إيداع/سحب/رد رأس مال/دفعة/دورة توزيع/مستثمر) لازم تعدّي بالترتيب: _invGuard(تاريخ العملية) ← _invBackup(سبب) ← التعديل ← _invAudit(...) ← persist. ممنوع تعديل نسبة أو تكلفة دفعة اتباع منها (النسبة بتتغيّر بـ pct_hist بتاريخ سريان عن طريق _invPctAt، والتكلفة بدفعة جديدة). ممنوع حذف دفعة عليها مبيعات أو مستثمر عليه حركات (أرشفة بدل الحذف). إقفال الشهر لازم يثبّت لقطة (_invTakeSnapshot) وأي دالة مستثمرين جديدة لازم تتضاف في __ONCE_GUARDED.
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v332: [🧾 المصروفات — «سجل» مضغوط: زر تبديل جديد جنب العروض القديمة (مجمّعة/جدول) وبيفتكر آخر عرض اخترته • كل مصروف سطر واحد (نوع › فرع / ملاحظة + مبلغ أحمر) متقسّم بعناوين أيام • ضغطة على المصروف = قايمة (تفاصيل/تعديل/استنساخ/حفظ كقالب/اختيار/حذف) والأزرار بتتخفي حسب الصلاحية • ضغطة مطوّلة = وضع التحديد، وشريط التحديد بيعرض مجموع المحدد Σ • 🔒 إصلاحات لقيتها: (١) الحذف الفردي للمصروف كان بيتخطى قفل الشهر (الحذف المتعدد كان محمي) — اتقفل • (٢) عرض المصروفات في التقارير كان بيتجاهل الحقول المخفية حسب الصلاحية (نوع/مبلغ/ملاحظة) — اتصلح في كل العروض • ⚠️ لا تحذف _expSortNewest/_expDayList ولا تعدّل في expenses-list القديمة بس]
+v331: [💸 المصروفات: (١) الأحدث بيظهر فوق دايمًا — السبب الجذري إن السيرفر بيرجّع الصفوف بالـid العشوائي فمصاريف نفس اليوم كانت بتتلخبط بعد المزامنة؛ دلوقتي الترتيب (التاريخ ← وقت الإنشاء ← ترتيب الإضافة) والصف الجديد غير المختوم بيتعامل إنه الأحدث • ⚠️ مهم: شاشة المصروفات الفعلية هي تاب «المصروفات» جوه التقارير (renderExpensesReport) — شاشة expenses-list القديمة يتيمة (navigate بيحوّلها) فأي تعديل لازم يتعمل في الاتنين • (٢) القائمة بقت مقسّمة بعناوين أيام مع إجمالي كل يوم • (٢ب) إصلاح فتح مجموعة نوع مصروف فيه علامة ' (كان بيتكسر — اتحوّل لـjsStr) • (٣) إصلاح ترتيب عرض «مجمّعة» (الكومباراتور القديم مكانش بيرجّع 0) • (٤) حماية الجمع من القيم النصية (+e.amount) • (٥) 🐛 إصلاح: رقم النسخة في الإعدادات كان واقف على v323 من v324 (تعريفين لـBUILD_STAMP والتاني بيكسب) — دلوقتي بيتولّد من APP_VERSION تلقائي ومينفعش يتأخر تاني — مفيش أي تغيير في معادلات الربح أو الخزنة]
 v330: [🧾 صفحة الفواتير: (١) رقم فاتورة ثابت (تاريخ-كود قصير من المعرّف) على الكارت والطباعة وبيتبحث بيه — كان «الرقم» اللي بيظهر ترتيب الصف وبيتغيّر مع الفلتر والترتيب • (٢) إصلاح انهيار طباعة فاتورة «خدمة بس» (من غير أصناف) • (٣) الطباعة بقت فيها الخصم وطريقة الدفع والحالة والرقم (كان الإجمالي بيظهر من غير خصم فيحصل لخبطة) وعدّاد الألوان (كان مفتاح غلط) • (٤) إصلاح القائمة الفاضية لو حذفت آخر فاتورة في آخر صفحة • (٥) اسم عميل فيه علامة ' ما بقاش يكسر الضغط عليه • (٦) شريط ملخّص (العدد/الإجمالي/المحصّل/المتبقي) + فلتر حالة (مدفوع/جزئي/آجل/زيارة) • (٧) البحث بقى بيشمل رقم الفاتورة والملاحظة وطريقة الدفع • (٨) إصلاح jsStr على مستوى التطبيق: أي اسم (عميل/مستثمر/موظف...) فيه علامة ' كان بيكسر الضغط عليه]
 v329: [📜 عقود المستثمرين: عقد استثمار لمستثمر الشراكة بنوعين — «مستثمر شريك» (نسبة ملكية + أرباح وخسائر + تخارج بالقيمة الدفترية) و«مستثمر برأس مال» (نسبة أرباح من غير ملكية + تنظيم استرداد رأس المال) مع موافقة الطرفين وطباعة وواتساب • عقود البضاعة اتسمّت بوضوح «مستثمر بضاعة — مضاربة/مشاركة» (مبقاش شكلهم زي بعض) • 🧮 حاسبة النسبة بقت بتفرّق بين «شريك» (قيمة عادلة Post-money + رأس المال×المدة) و«مستثمر بضاعة» (عائد على رأس المال = هامش الربح × دوران المخزون من مبيعاتك الفعلية) وبتشرح الأساس المحاسبي قدام كل رقم • 🧭 المستثمرين: (١) إلغاء/حذف مستثمر بضاعة اتفتح بالغلط (بيتمسح لو مفيش عليه دفعات أو حركات، وغير كده بيتأرشف) • (٢) قائمة «⚙️ خيارات» موحدة لكل مستثمر (ربط عميل/موظف، حساب بضاعة، تعطيل، حذف...) بدل الأزرار الكبيرة اللي واخدة الشاشة • (٣) كروت «عامة» بقت بتودّيك لبياناتها + تبويب جديد «📦 بضاعة» • (٤) تقرير المالك: إجمالي رأس المال شامل المحتجز • (٥) شاشة توزيع الأرباح بتعرض مستثمري البضاعة ونصيب كل واحد قبل توزيع الشركة، وبيتسجّل في الدورة • (٦) شرح مبسّط لـ«الحماية والنسخ الاحتياطي» جوه الشاشة • 🐛 «التعديل بيرجع زي ما كان»: سحب الحسابات من السيرفر كان بيدّي نسخة السيرفر الأولوية على أي تعديل/حذف محلي لسه ما اترفعش (مستثمر، سحب، مساهمة، موظف، دورة توزيع...) فبيرجّع القديم — اتصلح بدمج ثلاثي (الأساس/المحلي/السيرفر) في السحب زي الرفع بالظبط • تعديل دورة التوزيع بقى بيسجّل شاهد حذف للدورة القديمة (كانت ممكن ترجع بعد المزامنة)]
 v328: [🔀 دمج الموظفين: الراتبين بقوا بيتجمّعوا مع بعض (راتب الأساسي + راتب المكرر) بدل ما راتب المكرر يتشال — خيار «جمّع الراتبين» شغّال تلقائي ومعاينة الدمج بتعرض الناتج (مثال: ٥٠٠٠ + ٢٠٠٠ = ٧٠٠٠) • لو نوع الأجر مختلف (شهري/يومي) مينفعش يتجمعوا فبيفضل راتب الأساسي وراتب المكرر بيتسجّل في الملاحظة (مفيش حاجة بتضيع) • الزيادة الدورية بالمبلغ بتتجمّع لو نفس المدة، وغير كده بتتسجّل في الملاحظة • كل دمج بيسجّل تفاصيل الجمع في ملاحظة الموظف]
@@ -5739,9 +5741,9 @@ var APP_TITLE=APP_CONFIG.name;
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=330;
+var APP_VERSION=332;
 // ⚠️ v303 — BUILD_STAMP كان مش متعرّف خالص (شاشة الإعدادات كانت بتعرض "?") — اتعرّف دلوقتي وبيتزود مع كل تحديث
-var BUILD_STAMP='v323 — ٣٠ جمادى الأولى ١٤٤٨ هـ';
+var BUILD_STAMP='v'+APP_VERSION+' — ٢ جمادى الآخرة ١٤٤٨ هـ'; // ⚠️ v331 — رقم النسخة بيتولّد من APP_VERSION (كان واقف على v323 لأن في تعريفين، والتاني بيكسب). ممنوع تكتب رقم نسخة يدوي هنا.
 // ⚠️ v295 — عنوان الصفحة كان رقم نسخته ثابت ومتنسي (فضل v294 مع إن النسخة اتغيّرت). دلوقتي بياخد الرقم من APP_VERSION دايمًا.
 try{document.title=document.title.replace(/v\d+\s*$/,'v'+APP_VERSION);}catch(_eT){}
 
@@ -7120,6 +7122,7 @@ async function delItem(table, id, cb){
     showToast('🚫 مفيش صلاحية حذف في القسم ده. كلم المالك.', '#dc2626');
     return;
   }
+  if(table==='expenses'){var __r332=(DB.expenses||[]).find(function(x){return x&&x.id===id;});if(__r332&&_blockIfClosedMonth(__r332.date))return;} // ⚠️ v332 — الحذف الفردي كان بيتخطى قفل الشهر (الحذف المتعدد كان محمي)
   var __oldRow = (DB[table]||[]).find(function(x){return x&&x.id===id;}); // v129 — نلقط نسخة الصف كاملة قبل ما نشيلها، عشان سجل النشاط يحفظها
   DB[table]=DB[table].filter(function(x){return x.id!==id;});
   await dbDelete(table,id,__oldRow);
@@ -15179,6 +15182,110 @@ function renderProfitSufficiencyCard(){
     '</div>';
 }
 
+// ⚠️ v331 — ترتيب المصروفات: الأحدث فوق دايمًا (التاريخ ← وقت الإنشاء ← ترتيب الإضافة).
+// السبب الجذري: السيرفر بيرجّع الصفوف مرتبة بالـid (UUID عشوائي) فبعد المزامنة المصاريف اللي في نفس اليوم كانت بتتلخبط.
+// الصف اللي مفيهوش ختم وقت (لسه محلي/جديد) بيتعامل إنه الأحدث. ممنوع حذف الدالة دي أو الرجوع للترتيب بالتاريخ بس.
+function _expStamp(e){var t=Date.parse((e&&(e.created_at||e.updated_at))||'');return isNaN(t)?null:t;}
+function _expSortNewest(list){
+  var ix=new Map();(DB.expenses||[]).forEach(function(e,i){ix.set(e,i);});
+  var pos=function(e){return ix.has(e)?ix.get(e):1e9;};
+  return (list||[]).slice().sort(function(a,b){
+    var da=a.date||'',db=b.date||'';
+    if(da!==db)return da>db?-1:1;
+    var ta=_expStamp(a),tb=_expStamp(b);
+    if(ta===null&&tb!==null)return -1;
+    if(ta!==null&&tb===null)return 1;
+    if(ta!==null&&tb!==null&&ta!==tb)return tb-ta;
+    return pos(a)-pos(b);
+  });
+}
+// ⚠️ v331 — قائمة مصروفات مقسّمة بعناوين أيام + إجمالي اليوم (العرض المسطّح في تقرير المصروفات)
+function _expDayList(items,rowFn){
+  var tot={};items.forEach(function(e){var k=e.date||'';tot[k]=(tot[k]||0)+(+e.amount||0);});
+  return items.map(function(e,i){
+    var hdr='';
+    if(i===0||(items[i-1].date||'')!==(e.date||'')){
+      hdr='<div style="display:flex;justify-content:space-between;align-items:center;margin:'+(i?'12px':'2px')+' 2px 6px;font-size:11.5px;font-weight:800;color:#64748b"><span>📅 '+esc(fmtDate(e.date))+'</span><span style="color:#ea580c">'+fmt(tot[e.date||''])+'</span></div>';
+    }
+    return hdr+rowFn(e);
+  }).join('');
+}
+// ⚠️ v332 — سجل المصروفات المضغوط: سطر لكل مصروف (نوع › فرع / ملاحظة) + مبلغ، ضغطة = قايمة خيارات، ضغطة مطوّلة = تحديد
+function _expLogRow(e){
+  var hT=__isFieldHidden('expenses','type'),hA=__isFieldHidden('expenses','amount'),hN=__isFieldHidden('expenses','note');
+  var inMs=!!(_multiSelect&&_multiTable==='expenses'),sel=!!(inMs&&_selected[e.id]);
+  var col=e.source==='salary'?'#15803d':e.source==='fixed_exp'?'#7c3aed':'#ea580c';
+  var path=hT?'🔒 مصروف':esc(e.type||'')+(e.subcategory?' › '+esc(e.subcategory):'');
+  var note=(!hN&&e.note)?esc(e.note):'';
+  var ck=inMs?'<div class="ms-check" style="width:20px;height:20px;border:2px solid '+(sel?'#2563eb':'#cbd5e1')+';border-radius:6px;flex-shrink:0;background:'+(sel?'#2563eb':'#fff')+';display:flex;align-items:center;justify-content:center">'+(sel?'<span style="color:#fff;font-size:11px">✓</span>':'')+'</div>':'';
+  return '<div class="exp-log-row" data-id="'+e.id+'" onclick="_expLogTap(\''+e.id+'\')" style="display:flex;align-items:center;gap:8px;padding:10px 6px;box-shadow:inset 0 -1px 0 #e2e8f0;cursor:pointer;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;'+(sel?'background:#eff6ff;':'')+'">'+
+    ck+
+    '<span style="width:7px;height:7px;border-radius:50%;background:'+col+';flex-shrink:0"></span>'+
+    '<div style="flex:1;min-width:0"><div style="font-size:12.5px;font-weight:700;color:#0f172a;line-height:1.4;word-break:break-word">'+path+'</div>'+
+    (note?'<div style="font-size:11px;color:#64748b;margin-top:1px;line-height:1.4;word-break:break-word">'+note+'</div>':'')+'</div>'+
+    (_isSettled(e)?'':'<span title="معلّق" style="font-size:12px;flex-shrink:0">⏳</span>')+
+    (hA?'':'<b style="color:#dc2626;font-size:13.5px;white-space:nowrap;flex-shrink:0">−'+fmt(+e.amount||0)+'</b>')+
+    '</div>';
+}
+function _expLogHtml(pe){
+  if(!pe.length)return '<div class="empty">لا توجد مصاريف في هذه الفترة</div>';
+  return '<div style="font-size:10.5px;color:#94a3b8;margin:0 2px 6px">اضغط على أي مصروف للخيارات • اضغط مطوّلًا للتحديد</div>'+
+    '<div style="background:#fff;border-radius:12px;padding:10px 10px 6px;box-shadow:0 2px 8px rgba(0,0,0,.05)">'+_expDayList(pe,_expLogRow)+'</div>';
+}
+function _expLogTap(id){
+  if(Date.now()-(window.__expLpAt||0)<900)return; // الضغطة المطوّلة بتطلّع click بعدها — نتجاهله
+  if(_multiSelect&&_multiTable==='expenses'){toggleSelect(id);return;}
+  _expLogMenu(id);
+}
+function _expLogLong(id){
+  window.__expLpAt=Date.now();
+  if(!(_multiSelect&&_multiTable==='expenses'))startMultiSelect('expenses','expr-ms-toolbar');
+  _selected[id]=true;
+  renderExpensesReport();
+}
+function _expLogMenu(id){
+  var e=(DB.expenses||[]).find(function(x){return x.id===id;});if(!e)return;
+  var hT=__isFieldHidden('expenses','type'),hA=__isFieldHidden('expenses','amount'),hN=__isFieldHidden('expenses','note');
+  function line(k,val){return '<div style="display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid #f1f5f9;font-size:12.5px"><span style="color:#64748b;flex-shrink:0">'+k+'</span><b style="text-align:left;word-break:break-word">'+val+'</b></div>';}
+  var src=e.source==='salary'?'راتب':e.source==='fixed_exp'?'دوري':'يدوي';
+  var by=(window.__isOwner&&e.created_by&&window.__currentProfile&&e.created_by!==window.__currentProfile.id)?esc(_employeeNameById(e.created_by)||'موظف'):'';
+  var det=(hA?'':line('المبلغ','<span style="color:#dc2626">'+fmt(+e.amount||0)+'</span>'))+
+    line('التاريخ',esc(fmtDate(e.date)))+
+    line('النوع',hT?'🔒':esc(e.type||''))+
+    (e.subcategory&&!hT?line('الفرع',esc(e.subcategory)):'')+
+    (e.note&&!hN?line('ملاحظة',esc(e.note)):'')+
+    line('المصدر',src)+line('الحالة',_isSettled(e)?'✅ مدفوع':'⏳ معلّق')+
+    (by?line('على حساب','👤 '+by):'');
+  function btn(label,onclick,bg,fg){return '<button onclick="'+onclick+'" style="flex:1 1 45%;padding:11px 6px;border:none;border-radius:10px;background:'+bg+';color:'+fg+';font-family:inherit;font-size:13px;font-weight:800;cursor:pointer">'+label+'</button>';}
+  var q="'"+e.id+"'";
+  var btns='<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px">'+
+    (__hasPerm('expenses','can_update')?btn('✏️ تعديل','closeModal();openEditExpenseModal('+q+')','#dbeafe','#1d4ed8'):'')+
+    (__hasPerm('expenses','can_insert')?btn('📋 استنساخ','closeModal();copyExpense('+q+')','#f1f5f9','#374151'):'')+
+    ((window.__isOwner&&e.source!=='salary')?btn('💾 حفظ كقالب','_expLogSaveTpl('+q+')','#fff7ed','#c2410c'):'')+
+    btn('☑️ اختيار','closeModal();_expLogLong('+q+')','#ede9fe','#6d28d9')+
+    (__hasPerm('expenses','can_delete')?btn('🗑️ حذف','closeModal();confirmAction(\'هتحذف المصروف ده؟\',function(){delItem(\'expenses\','+q+',renderExpensesReport)})','#fee2e2','#dc2626'):'')+
+    '</div>';
+  document.getElementById('modal-title').textContent='💸 تفاصيل المصروف';
+  document.getElementById('modal-body').innerHTML=det+btns;
+  openModal();
+}
+async function _expLogSaveTpl(id){
+  var e=(DB.expenses||[]).find(function(x){return x.id===id;});if(!e||e.source==='salary')return;
+  var list=DB.settings.expenseTemplates||[];
+  if(list.some(function(t){return t.category===e.type&&(t.sub||'')===(e.subcategory||'')&&(+t.amount||0)===(+e.amount||0);}))return showToast('⚠️ القالب ده موجود قبل كده','#d97706');
+  DB.settings.expenseTemplates=list.concat([{name:(e.type||'')+(e.subcategory?' — '+e.subcategory:''),category:e.type,sub:e.subcategory||'',amount:+e.amount||0}]);
+  await persist();closeModal();showToast('✅ اتحفظ كقالب','#16a34a');renderExpensesReport();
+}
+// ضغطة مطوّلة (٥٠٠ms) على الموبايل / كليك يمين على الديسكتوب = تحديد
+(function(){
+  if(window.__expLogGesture)return;window.__expLogGesture=true;
+  var t=null;
+  function rowOf(ev){return ev.target&&ev.target.closest?ev.target.closest('.exp-log-row'):null;}
+  function cancel(){if(t){clearTimeout(t);t=null;}}
+  document.addEventListener('touchstart',function(ev){var r=rowOf(ev);if(!r)return;cancel();var id=r.dataset.id;t=setTimeout(function(){t=null;if(!(_multiSelect&&_multiTable==='expenses'))_expLogLong(id);else{window.__expLpAt=Date.now();toggleSelect(id);}},500);},{passive:true});
+  ['touchmove','touchend','touchcancel'].forEach(function(n){document.addEventListener(n,cancel,{passive:true});});
+  document.addEventListener('contextmenu',function(ev){var r=rowOf(ev);if(!r)return;ev.preventDefault();if(Date.now()-(window.__expLpAt||0)<1500)return;_expLogLong(r.dataset.id);});
+})();
 var _expPeriod=_makePeriodState();
 // تحديث موحّد لعرض المصاريف — المكان الفعلي الوحيد دلوقتي هو تاب "المصروفات" بالتقارير
 function _refreshExpensesView(){
@@ -15204,7 +15311,7 @@ function renderExpensesList(){
     '<button onclick="openExpenseTemplatesSettings()" style="padding:7px 12px;background:#fff;border:1.5px dashed #cbd5e1;border-radius:9px;font-family:inherit;font-size:12px;font-weight:700;color:#64748b;cursor:pointer">⚙️ القوالب</button>'+
     '</div>';
   var r=_periodToRange(_expPeriod);
-  var allList=_whoApply('expenses',_visFilter([].concat(DB.expenses))).filter(function(e){return(!r.from||e.date>=r.from)&&(!r.to||e.date<=r.to);}).sort(function(a,b){return(b.date||'')>(a.date||'')?1:(b.date||'')<(a.date||'')?-1:0;});
+  var allList=_expSortNewest(_whoApply('expenses',_visFilter([].concat(DB.expenses))).filter(function(e){return(!r.from||e.date>=r.from)&&(!r.to||e.date<=r.to);})); // ⚠️ v331
 
   var manual=allList.filter(function(e){return e.source==='manual'||!e.source;});
   var salaries=allList.filter(function(e){return e.source==='salary';});
@@ -15212,10 +15319,10 @@ function renderExpensesList(){
 
   var list=_expFilter==='manual'?manual:_expFilter==='salary'?salaries:_expFilter==='fixed_exp'?fixedPaid:allList;
 
-  var totalAll=allList.reduce(function(s,e){return s+e.amount;},0);
-  var totalManual=manual.reduce(function(s,e){return s+e.amount;},0);
-  var totalSal=salaries.reduce(function(s,e){return s+e.amount;},0);
-  var totalFixed=fixedPaid.reduce(function(s,e){return s+e.amount;},0);
+  var totalAll=allList.reduce(function(s,e){return s+(+e.amount||0);},0);
+  var totalManual=manual.reduce(function(s,e){return s+(+e.amount||0);},0);
+  var totalSal=salaries.reduce(function(s,e){return s+(+e.amount||0);},0);
+  var totalFixed=fixedPaid.reduce(function(s,e){return s+(+e.amount||0);},0);
 
   var groupToggleHtml='<div style="display:flex;gap:5px;margin-bottom:10px">'+
     [['list','📋 مفصّلة'],['grouped','🗂️ مجمّعة'],['table','📊 جدول']].map(function(o){
@@ -15231,7 +15338,7 @@ function renderExpensesList(){
     list.forEach(function(e){
       var key=e.type+'|||'+e.source;
       if(!groupsT[key]){groupsT[key]={type:e.type,source:e.source,items:[],total:0};orderT.push(key);}
-      groupsT[key].items.push(e);groupsT[key].total+=e.amount;
+      groupsT[key].items.push(e);groupsT[key].total+=(+e.amount||0);
     });
     orderT.sort(function(a,b){return groupsT[b].total-groupsT[a].total;});
     listHtml=orderT.length?
@@ -15247,7 +15354,7 @@ function renderExpensesList(){
           '<td style="padding:9px 11px;text-align:left;font-size:13px;font-weight:900;color:'+sc+'">'+fmt(g.total)+'</td>'+
           '</tr>';
       }).join('')+
-      '<tr style="background:#fff7ed;border-top:2px solid #fed7aa"><td style="padding:10px 11px;font-size:12px;font-weight:900;color:#ea580c">الإجمالي الكلي</td><td></td><td style="padding:10px 11px;text-align:left;font-size:14px;font-weight:900;color:#ea580c">'+fmt(list.reduce(function(s,e){return s+e.amount;},0))+'</td></tr>'+
+      '<tr style="background:#fff7ed;border-top:2px solid #fed7aa"><td style="padding:10px 11px;font-size:12px;font-weight:900;color:#ea580c">الإجمالي الكلي</td><td></td><td style="padding:10px 11px;text-align:left;font-size:14px;font-weight:900;color:#ea580c">'+fmt(list.reduce(function(s,e){return s+(+e.amount||0);},0))+'</td></tr>'+
       '</table></div>'
       :'<div class="empty">لا توجد مصاريف</div>';
   }else if(_expGroupMode==='grouped'){
@@ -15256,7 +15363,7 @@ function renderExpensesList(){
     list.forEach(function(e){
       var key=e.type+'|||'+e.source;
       if(!groups[key]){groups[key]={type:e.type,source:e.source,items:[],total:0};order.push(key);}
-      groups[key].items.push(e);groups[key].total+=e.amount;
+      groups[key].items.push(e);groups[key].total+=(+e.amount||0);
     });
     order.sort(function(a,b){return groups[b].total-groups[a].total;});
     listHtml=order.length?order.map(function(key){
@@ -15265,7 +15372,7 @@ function renderExpensesList(){
       var sb=g.source==='salary'?'#dcfce7':g.source==='fixed_exp'?'#ede9fe':'#fff7ed';
       var sl=g.source==='salary'?'راتب':g.source==='fixed_exp'?'دوري':'يدوي';
       var isOpen=_expandedExpGroup===key;
-      var sortedItems=g.items.slice().sort(function(a,b){return(b.date||'')>(a.date||'')?1:-1;});
+      var sortedItems=_expSortNewest(g.items); // ⚠️ v331 — الكومباراتور القديم عمره ما كان بيرجّع 0 (ترتيب غير مستقر)
       return '<div class="card" style="margin-bottom:16px">'+
         '<div onclick="toggleExpGroupDetail('+jsStr(key)+')" style="display:flex;justify-content:space-between;align-items:center;cursor:pointer">'+
         '<div style="flex:1;min-width:0">'+
@@ -15293,13 +15400,16 @@ function renderExpensesList(){
         '</div>';
     }).join(''):'<div class="empty">لا توجد مصاريف</div>';
   }else{
-    listHtml=(list.length?list.map(function(e){
+    var _dayTot={};list.forEach(function(e){_dayTot[e.date||'']=(_dayTot[e.date||'']||0)+(+e.amount||0);}); // ⚠️ v331 — إجمالي كل يوم
+    listHtml=(list.length?list.map(function(e,_i){
+      var _newDay=(_i===0||(list[_i-1].date||'')!==(e.date||''));
+      var _dayHdr=_newDay?('<div style="display:flex;justify-content:space-between;align-items:center;margin:'+(_i?'18px':'4px')+' 2px 8px;font-size:12px;font-weight:800;color:#64748b"><span>📅 '+esc(fmtDate(e.date))+'</span>'+(__isFieldHidden('expenses','amount')?'':'<span style="color:#ea580c">'+fmt(_dayTot[e.date||''])+'</span>')+'</div>'):'';
       var sc=e.source==='salary'?'#15803d':e.source==='fixed_exp'?'#7c3aed':'#ea580c';
       var sb=e.source==='salary'?'#dcfce7':e.source==='fixed_exp'?'#ede9fe':'#fff7ed';
       var sl=e.source==='salary'?'راتب':e.source==='fixed_exp'?'دوري':'يدوي';
       var __hLbl=__isFieldHidden('expenses','label'), __hAmt=__isFieldHidden('expenses','amount'),
           __hType=__isFieldHidden('expenses','type'), __hNote=__isFieldHidden('expenses','note');
-      return '<div class="card" style="margin-bottom:16px">'+
+      return _dayHdr+'<div class="card" style="margin-bottom:10px">'+
         '<div style="display:flex;justify-content:space-between;align-items:center">'+
         '<div style="flex:1;min-width:0">'+
         '<div style="display:flex;align-items:center;gap:6px;margin-bottom:2px">'+
@@ -20163,13 +20273,13 @@ function renderBalanceReport(){
 var _expReportSort='amount';
 var _expReportOpenType='';
 var _expGrouped=true; // true=مجمّع حسب النوع (الافتراضي) | false=قائمة عادية بالتاريخ
-var _expReportViewMode='accordion'; // accordion = الوضع الحالي | table_expand = جدول يفتح صف | table_split = جدول ملخص + تفاصيل تحت
+var _expReportViewMode=(function(){var m=DB.settings&&DB.settings.expReportView;return(['log','accordion','table_expand','table_split'].indexOf(m)!==-1)?m:'accordion';})(); // ⚠️ v332 — بيفتكر آخر عرض اخترته // accordion = الوضع الحالي | table_expand = جدول يفتح صف | table_split = جدول ملخص + تفاصيل تحت
 var _expTableOpenType='';
 var _expSettledFilter='all'; // all | settled | pending — فلتر حالة الدفع
 function setExpReportSort(s){_expReportSort=s;renderExpensesReport();}
 function toggleExpReportType(type){_expReportOpenType=(_expReportOpenType===type)?'':type;renderExpensesReport();}
 function toggleExpGrouped(){_expGrouped=!_expGrouped;renderExpensesReport();}
-function setExpReportViewMode(m){_expReportViewMode=m;renderExpensesReport();}
+function setExpReportViewMode(m){_expReportViewMode=m;try{if(DB.settings){DB.settings.expReportView=m;persist();}}catch(e){}renderExpensesReport();}
 function toggleExpTableType(type){_expTableOpenType=(_expTableOpenType===type)?'':type;renderExpensesReport();}
 function setExpSettledFilter(f){_expSettledFilter=f;renderExpensesReport();}
 // تبديل حالة الدفع لمصروف يدوياً — بيتحكم فيها المستخدم بغض النظر عن مصدر المصروف
@@ -20182,9 +20292,9 @@ async function toggleExpSettled(id){
 function _isSettled(e){return e.settled!==false;} // افتراضياً كل مصروف متسجل يُعتبر مدفوع، إلا لو اتحدد إنه لسه معلّق
 
 function renderExpensesReport(){
-  var peAll=_whoApply('expenses',filterExpByPeriod()).sort(function(a,b){return(b.date||'')>(a.date||'')?1:-1;});
+  var peAll=_expSortNewest(_whoApply('expenses',filterExpByPeriod())); // ⚠️ v331 — الأحدث فوق (الكومباراتور القديم مكانش بيرجّع 0 وبيتجاهل وقت الإنشاء)
   var pe=_expSettledFilter==='all'?peAll:peAll.filter(function(e){return _expSettledFilter==='settled'?_isSettled(e):!_isSettled(e);});
-  var total=pe.reduce(function(s,e){return s+e.amount;},0);
+  var total=pe.reduce(function(s,e){return s+(+e.amount||0);},0);
   var el=document.getElementById('tab-expenses');if(!el)return;
   if(!peAll.length){
     el.innerHTML='<div class="empty">لا توجد مصاريف في هذه الفترة</div>';return;
@@ -20193,8 +20303,8 @@ function renderExpensesReport(){
   // تقسيم حسب المصدر (للـ KPIs فقط)
   var salaries=pe.filter(function(e){return e.source==='salary';});
   var fixedPaid=pe.filter(function(e){return e.source==='fixed_exp';});
-  var totalSal=salaries.reduce(function(s,e){return s+e.amount;},0);
-  var totalFixed=fixedPaid.reduce(function(s,e){return s+e.amount;},0);
+  var totalSal=salaries.reduce(function(s,e){return s+(+e.amount||0);},0);
+  var totalFixed=fixedPaid.reduce(function(s,e){return s+(+e.amount||0);},0);
   var pendingCount=peAll.filter(function(e){return !_isSettled(e);}).length;
 
   // ===== تجميع حسب النوع (مستوى أول) =====
@@ -20202,7 +20312,7 @@ function renderExpensesReport(){
   pe.forEach(function(e){
     if(!byType[e.type])byType[e.type]={items:[],total:0};
     byType[e.type].items.push(e);
-    byType[e.type].total+=e.amount;
+    byType[e.type].total+=(+e.amount||0);
   });
   var typeNames=Object.keys(byType);
   if(_expReportSort==='alpha')typeNames.sort(function(a,b){return a.localeCompare(b,'ar');});
@@ -20223,7 +20333,7 @@ function renderExpensesReport(){
         var key=e.employee_id||e.note||'—';
         var label=e.note?e.note.replace(/^.*—\s*/,''):'—';
         if(!byEmp[key])byEmp[key]={label:label,items:[],total:0,icon:'👤'};
-        byEmp[key].items.push(e);byEmp[key].total+=e.amount;
+        byEmp[key].items.push(e);byEmp[key].total+=(+e.amount||0);
       });
       return byEmp;
     }
@@ -20237,7 +20347,7 @@ function renderExpensesReport(){
       var key=e.fixed_exp_id;
       var label=e.subcategory||e.label||e.type;
       if(!byCommitment[key])byCommitment[key]={label:label,items:[],total:0,icon:'📌'};
-      byCommitment[key].items.push(e);byCommitment[key].total+=e.amount;
+      byCommitment[key].items.push(e);byCommitment[key].total+=(+e.amount||0);
     });
     var restItems=items.filter(function(e){return !(e.source==='fixed_exp'&&e.fixed_exp_id);});
     var bySub={};
@@ -20246,7 +20356,7 @@ function renderExpensesReport(){
       for(var ci=0;ci<sb.length;ci++){h=((h<<5)-h+sb.charCodeAt(ci))|0;}
       var key='__s'+(sb?Math.abs(h):'none');
       if(!bySub[key])bySub[key]={label:sb||'بدون فرع',items:[],total:0,icon:sb?'🏷️':'📄'};
-      bySub[key].items.push(e);bySub[key].total+=e.amount;
+      bySub[key].items.push(e);bySub[key].total+=(+e.amount||0);
     });
     var subKeys=Object.keys(bySub);
     if(!fixedItems.length&&subKeys.length===1&&subKeys[0]==='__snone')return null; // كله من غير فرع → عرض عادي
@@ -20268,22 +20378,22 @@ function renderExpensesReport(){
       '<div style="display:flex;justify-content:space-between;align-items:center;gap:6px">'+
       '<div style="display:flex;align-items:center;gap:5px;min-width:0;overflow:hidden">'+
       '<span style="background:'+sb+';color:'+sc+';border-radius:5px;padding:1px 5px;font-size:9px;font-weight:800;flex-shrink:0">'+sl+'</span>'+
-      '<span style="font-weight:800;font-size:12.5px;color:#0f172a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(e.subcategory||e.type)+'</span>'+
+      '<span style="font-weight:800;font-size:12.5px;color:#0f172a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+(__isFieldHidden('expenses','type')?'🔒 مصروف':esc(e.subcategory||e.type))+'</span>'+
       '<span style="font-size:10px;color:#94a3b8;flex-shrink:0">'+esc(fmtDate(e.date))+'</span>'+
       '</div>'+
       '<div style="display:flex;align-items:center;gap:4px;flex-shrink:0">'+
-      '<b style="color:#ea580c;font-size:13px">'+fmt(e.amount)+'</b>'+
+      (__isFieldHidden('expenses','amount')?'':'<b style="color:#ea580c;font-size:13px">'+fmt(e.amount)+'</b>')+
       '<button onclick="event.stopPropagation();toggleExpSettled(\''+e.id+'\')" title="'+(_isSettled(e)?'مدفوع':'معلّق')+'" style="background:none;border:none;font-size:14px;cursor:pointer;padding:2px">'+(_isSettled(e)?'✅':'⏳')+'</button>'+
       '<button onclick="event.stopPropagation();copyExpense(\''+e.id+'\')" title="نسخ" style="background:none;border:none;font-size:14px;cursor:pointer;padding:2px">📋</button>'+
       '<button onclick="event.stopPropagation();openEditExpenseModal(\''+e.id+'\')" title="تعديل" style="background:none;border:none;font-size:14px;cursor:pointer;padding:2px">✏️</button>'+
       '<button onclick="event.stopPropagation();confirmAction(\'هتحذف؟\',function(){delItem(\'expenses\',\''+e.id+'\',renderExpensesReport)})" title="حذف" style="background:none;border:none;font-size:14px;cursor:pointer;padding:2px">🗑️</button>'+
       '</div></div>'+
-      (e.note?'<div style="font-size:10px;color:#94a3b8;margin-top:2px;padding-right:2px">'+esc(e.note)+'</div>':'');
+      ((e.note&&!__isFieldHidden('expenses','note'))?'<div style="font-size:10px;color:#94a3b8;margin-top:2px;padding-right:2px">'+esc(e.note)+'</div>':'');
     return '<div style="margin-bottom:4px;background:#f8fafc;border-radius:8px;padding:7px 9px">'+msCard(e.id,inner)+'</div>';
   }
 
   var viewSwitchHtml='<div style="display:flex;gap:5px;margin-bottom:10px">'+
-    [['accordion','🗂️ مجمّعة'],['table_expand','📊 جدول (فتح صف)'],['table_split','📑 جدول (ورقتين)']].map(function(o){
+    [['log','🧾 سجل'],['accordion','🗂️ مجمّعة'],['table_expand','📊 جدول (فتح)'],['table_split','📑 جدول (ورقتين)']].map(function(o){
       var active=_expReportViewMode===o[0];
       return '<button onclick="setExpReportViewMode(\''+o[0]+'\')" style="flex:1;padding:8px 3px;border-radius:9px;border:2px solid '+(active?'#ea580c':'#e2e8f0')+';background:'+(active?'#fff7ed':'#fff')+';color:'+(active?'#ea580c':'#64748b')+';font-family:inherit;font-size:10.5px;font-weight:800;cursor:pointer">'+o[1]+'</button>';
     }).join('')+
@@ -20306,7 +20416,9 @@ function renderExpensesReport(){
     '</div>';
 
   var bodyHtml;
-  if(_expReportViewMode==='table_expand'||_expReportViewMode==='table_split'){
+  if(_expReportViewMode==='log'){
+    bodyHtml=_expLogHtml(pe); // ⚠️ v332 — السجل المضغوط
+  }else if(_expReportViewMode==='table_expand'||_expReportViewMode==='table_split'){
     // ===== جدول ملخص: صف واحد لكل نوع (نوع/عدد/إجمالي) =====
     var tableRows=typeNames.map(function(type,i){
       var grp=byType[type];
@@ -20372,7 +20484,7 @@ function renderExpensesReport(){
   }else{
     // ===== الوضع الأصلي: أكورديون مجمّع أو قائمة عادية =====
     bodyHtml=(!_expGrouped?
-      pe.map(itemRow).join('')
+      _expDayList(pe,itemRow)
     :
     _sortBar(_expReportSort,'setExpReportSort',['amount','count','alpha']).replace('💰 الأعلى','💰 الأعلى قيمة').replace('📦 الكمية','🔢 الأكثر تكراراً')+
     typeNames.map(function(type){
@@ -20381,7 +20493,7 @@ function renderExpensesReport(){
       var pct=total>0?Math.round(grp.total/total*100):0;
       var subGroups=subGroupsFor(type,grp.items);
       return '<div class="card" style="margin-bottom:8px;padding:0;overflow:hidden">'+
-        '<div onclick="toggleExpReportType(\''+esc(type).replace(/'/g,"\\'")+'\')" style="padding:13px 14px;cursor:pointer">'+
+        '<div onclick="toggleExpReportType('+jsStr(type)+')" style="padding:13px 14px;cursor:pointer">'+
         '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">'+
         '<div style="display:flex;align-items:center;gap:8px">'+
         '<span style="font-size:12px;color:#94a3b8">'+(isOpen?'▾':'◂')+'</span>'+
@@ -25133,8 +25245,9 @@ function updateMsToolbar(){
   var bar = document.getElementById(_multiToolbarId);
   if(!bar) return;
   var count = Object.keys(_selected).length;
+  var _sumTxt='';if(_multiTable==='expenses'&&count){var _sm=0;Object.keys(_selected).forEach(function(i){var x=(DB.expenses||[]).find(function(r){return r.id===i;});if(x)_sm+=(+x.amount||0);});_sumTxt=' — Σ '+fmt(_sm);} // ⚠️ v332
   bar.innerHTML =
-    '<span style="font-size:13px;font-weight:700">تم تحديد '+count+'</span>'+
+    '<span style="font-size:13px;font-weight:700">تم تحديد '+count+_sumTxt+'</span>'+
     '<div style="display:flex;gap:6px;margin-right:auto;flex-wrap:wrap">'+
     (count>0?'<button class="btn btn-sm" style="background:#ede9fe;color:#7c3aed" onclick="printSelectedGeneric()">🖨️ طباعة ('+count+')</button>':'')+
     (count>=2&&_multiTable==='products'?'<button class="btn btn-sm" style="background:#fef9c3;color:#92400e" onclick="openMergeConfirm(Object.keys(_selected))">🔗 دمج ('+count+')</button>':'')+
