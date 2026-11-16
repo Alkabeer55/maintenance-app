@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v338</title>
+<title>ابو حوده الحلو الجميل v341</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -53,7 +53,7 @@ async function __netProbe(force){
   }catch(e3){}
   return ok;
 }
-/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="v338 — ٥ جمادى الآخرة ١٤٤٨ هـ";
+/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="v341 — ٦ جمادى الآخرة ١٤٤٨ هـ";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -132,6 +132,9 @@ async function __netProbe(force){
     36) ⚠️ v306 — المستثمرين: أي عملية مستثمر (إيداع/سحب/رد رأس مال/دفعة/دورة توزيع/مستثمر) لازم تعدّي بالترتيب: _invGuard(تاريخ العملية) ← _invBackup(سبب) ← التعديل ← _invAudit(...) ← persist. ممنوع تعديل نسبة أو تكلفة دفعة اتباع منها (النسبة بتتغيّر بـ pct_hist بتاريخ سريان عن طريق _invPctAt، والتكلفة بدفعة جديدة). ممنوع حذف دفعة عليها مبيعات أو مستثمر عليه حركات (أرشفة بدل الحذف). إقفال الشهر لازم يثبّت لقطة (_invTakeSnapshot) وأي دالة مستثمرين جديدة لازم تتضاف في __ONCE_GUARDED.
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v341: [🗂️ تنظيم العناوين والفروع (كانت كتير ومتلخبطة): (١) فورم المصروف: العناوين بقت مجمّعة ⭐ المفضلة / 🔥 الأكثر استخدامًا (٥) / 📁 الباقي أبجدي (لو أكتر من ٧)، وشرائح الفروع أول ٨ (المفضلة ثم الأكثر استخدامًا) والباقي «⋯ كمان N»؛ نفس الشيء في المصروف الدوري والدفعة والقوالب • (٢) شاشة الإدارة بقت أكورديون: كل عنوان مطوي بعدد مصروفاته، بحث، ترتيب (الأكثر استخدامًا/أبجدي)، ⭐ مفضلة لعنوان أو فرع، 📥 إخفاء بدل الحذف (مابيمسحش بيانات، وبيرجع من «المخفية»)، تنبيه «أسماء شبه بعض» (كهربا/كهرباء) بزر دمج، و«🧹 إخفاء غير المستخدم» بضغطة • الإعدادات في DB.settings.expCatsMeta (بتتزامن) وبتتنقل مع إعادة التسمية/النقل/الحذف/الدمج • ⚠️ مابتتحذفش حاجة اتستخدمت — بس بتتخفى]
+v340: [🎨 الأيقونات: كل عنصر في شريط التنقل وقائمة «المزيد» بقى له أيقونة لوحده — كان فيه تكرار (📊 لتحليل مكن العملاء ولتقرير التحركات والمهمات وزر التقارير، 📒 للحسابات ودفتر العملاء، 🏭 للإنتاج وأرشيف الموردين، 📖 للقرآن والدليل، 💼 للجملة وقسم العمليات، 🔧 و📋 لتقارير التحركات والمهمات زي شريط التنقل). الجديد: الحسابات 🏦 • تقرير التحركات 🗂️ • تقرير المهمات ✅ • تحليل مكن العملاء 🔬 • الإنتاج اليومي 🏗️ • الجملة 🏷️ • دليل الاستخدام ❓ وأقسام: حسابي 🙋 • التقارير 📈 • الإدارة 🛡️ — وعناوين الشاشات والهيدر اتحدّثت بنفس الأيقونة. + __iconAudit() بتفحص إن مفيش تكرار (لازم يرجّع dups و secDups فاضيين) • 🐛 إصلاح: هيدر شاشة «المزيد» كان بيكتب more بالإنجليزي • كشف حساب المورد 📑 بدل 📋]
+v339: [🗂️ العناوين والفروع في المصروفات: (١) إصلاح: العناوين والفروع الجديدة كانت متخزّنة في localStorage على الجهاز ده بس (يعني اللي تضيفه على موبايل مكانش بيظهر على جهاز تاني)؛ دلوقتي في DB.settings.expCats (بتتزامن)، وأول مرة بيتبني من الافتراضي + المخزّن القديم + اللي مستخدم فعلًا في المصروفات والدورية والقوالب فمفيش حاجة بتختفي • (٢) شاشة «🗂️ إدارة العناوين والفروع» (للمالك، من فورم المصروف أو ⚙️ القوالب): إضافة عنوان/فرع، إعادة تسمية (ولو الاسم موجود بيتدمج)، نقل فرع لعنوان تاني، حذف (بس لو مش مستخدم)؛ إعادة التسمية والنقل بيحدّثوا كل المصروفات القديمة والمصاريف الدورية والقوالب وبيترفعوا للسيرفر عن طريق طابور المزامنة • «رواتب» عنوان نظام ومقفول (مرتبط بمنطق الموظفين والسلف) • ⚠️ لا تحفظ العناوين في localStorage تاني]
 v338: [🧰 دفعة بنود سهلة: (١) 📊 سجل الصنف (زر «السجل» في المخزون): كل بيعة بتظهر معاها تكلفة الوحدة والربح/الخسارة (تقريبية لو الفاتورة قديمة ومفيهاش تكلفة مسجلة)، وسجل الشراء بيوضح سعر شراء الوحدة والإجمالي، ومن غير صلاحية «سعر الشراء» التكلفة والربح بيتخفوا (كانوا بيظهروا غلط) • (٢) 🔒 تكلفة الصنف (سعر الشراء + السعر بعد التكاليف) بقت مقفولة في «تعديل المنتج» لو الصنف ليه فواتير شراء (التكلفة بتيجي من المشتريات) والمالك عنده «🔓 فتح» بتأكيد؛ الأصناف اللي من غير مشتريات وإضافة صنف جديد زي ما هم • (٣) 🛒 إحصائيات المخزون: كارت «أكثر منتجات شراءً» (بالكمية أو بالقيمة) مع عدد مرات الشراء والموردين ومتوسط وآخر سعر • (٤) 🕌 مواعيد الصلاة بقت بتظهر في الرئيسية تلقائي (تقريبي بتوقيت القاهرة) حتى لو ماضبطتش موقعك، من غير صوت ولا إشعارات — لو ضبطت موقعك وفعّلتها بتتحول لمواعيدك الفعلية، ولو ضبطتها وقفلتها بتختفي]
 v337: [🟢 أسعار حيّة في مقارنة بدائل الاستثمار: كل مرة تفتح الشاشة بتجيب سعر الدولار من open.er-api.com وأوقية الدهب العالمية من xaus.com (احتياطي: gold-api.com) وتحسب جرام عيار ٢١ = الأوقية ÷ ٣١٫١٠٣٥ × ٢١/٢٤ × الدولار (تقدير ممكن يفرق ١–٣٪ عن الصاغة ومكتوب كده)، مهلة ٧ ثواني، وبترفض أي رقم خارج المعقول، وبتحفظ آخر سعر (DB.settings.refLive) لو النت قطع، والاستعلام بيضيف _=timestamp عشان الكاش/الـservice worker مايرجّعش سعر قديم • تقدر تعدّل أي رقم يدويًا (التعديل بيفضل لحد ما تقفل الشاشة أو تدوس 🔄 وإعادة فتح الشاشة بتجيب السعر الحالي تاني) • عائد الإيداع في المركزي والجدول التاريخي يدويين/ثابتين (مفيش مصدر مجاني بيسمح للمتصفح) • العائد السنوي بقى على المدة الفعلية • تنبيه لو الجدول التاريخي عدّى ١٣ شهر من آخر نقطة • ⚠️ لو الـsw.js بيعمل كاش للـAPI الخارجي لازم يستثنيه]
 v336: [📊 مقارنة بدائل الاستثمار: شاشة جديدة (⚙️ خيارات مستثمر البضاعة ← «مقارنة بدائل الاستثمار»، أو ⚙️ أدوات وإعدادات) بتقارن نفس المبلغ لو اتحط في بنك / دهب عيار ٢١ / دولار / معاك، على ٣ مدد (سنة / ٣ سنين / ٥ سنين) بأسعار تاريخية حقيقية يوم ١٤ نوفمبر من كل سنة (REF_MARKET: دولار المركزي، دهب الصاغة، عائد الإيداع في المركزي، التضخم السنوي للمدن). بتعرض القيمة النهارده والربح والعائد السنوي والعائد بعد التضخم وتميّز الأعلى 🏆. «معاك» تقدير من هامش ربح مركزك الفعلي شهر بشهر × دوران بضاعته × نسبته من غير إعادة استثمار. الأرقام اتجمعت يدويًا من مصادر منشورة (التطبيق مابيجيبش أسعار من النت)، فيه زر «عدّل أسعار النهارده» وتحذير لو الأسعار قديمة +١٤ يوم. ⚠️ لتحديث REF_MARKET في نسخة جاية: نقطة جديدة كل ١٤ نوفمبر + مصادرها]
@@ -5660,7 +5663,7 @@ async function __pushBlobSafe(id){
     <div id="screen-ledger" class="screen"></div>
 
     <div id="screen-accounting" class="screen">
-      <div style="font-size:19px;font-weight:900;margin-bottom:12px">📒 الحسابات</div>
+      <div style="font-size:19px;font-weight:900;margin-bottom:12px">🏦 الحسابات</div>
       <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:12px">
         <button id="acc-tab-overview" class="acc-tab tab active" onclick="switchAccTab('overview',this)">نظرة عامة</button>
         <button id="acc-tab-capital" class="acc-tab tab" onclick="switchAccTab('capital',this)">💰 رأس المال</button>
@@ -5748,9 +5751,9 @@ var APP_TITLE=APP_CONFIG.name;
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=338;
+var APP_VERSION=341;
 // ⚠️ v303 — BUILD_STAMP كان مش متعرّف خالص (شاشة الإعدادات كانت بتعرض "?") — اتعرّف دلوقتي وبيتزود مع كل تحديث
-var BUILD_STAMP='v'+APP_VERSION+' — ٥ جمادى الآخرة ١٤٤٨ هـ'; // ⚠️ v331 — رقم النسخة بيتولّد من APP_VERSION (كان واقف على v323 لأن في تعريفين، والتاني بيكسب). ممنوع تكتب رقم نسخة يدوي هنا.
+var BUILD_STAMP='v'+APP_VERSION+' — ٦ جمادى الآخرة ١٤٤٨ هـ'; // ⚠️ v331 — رقم النسخة بيتولّد من APP_VERSION (كان واقف على v323 لأن في تعريفين، والتاني بيكسب). ممنوع تكتب رقم نسخة يدوي هنا.
 // ⚠️ v295 — عنوان الصفحة كان رقم نسخته ثابت ومتنسي (فضل v294 مع إن النسخة اتغيّرت). دلوقتي بياخد الرقم من APP_VERSION دايمًا.
 try{document.title=document.title.replace(/v\d+\s*$/,'v'+APP_VERSION);}catch(_eT){}
 
@@ -7642,7 +7645,7 @@ function _dpRender(){
   var engChips='<button type="button" onclick="_dpSetEng(\'all\')" style="'+chip(_dpEng==='all')+'">الكل</button>'+rowsAll.map(function(r){
     return '<button type="button" onclick="_dpSetEng('+jsStr(r.id)+')" style="'+chip(_dpEng===r.id)+'">'+esc(r.name)+' ('+r.movs.length.toLocaleString('ar-EG')+')</button>';
   }).join('');
-  document.getElementById('modal-title').textContent='🏭 الإنتاج اليومي';
+  document.getElementById('modal-title').textContent='🏗️ الإنتاج اليومي';
   document.getElementById('modal-body').innerHTML=
     '<div style="display:flex;justify-content:space-between;align-items:center;gap:6px;margin-bottom:8px">'+
       '<button type="button" onclick="_dpShift(-1)" style="'+chip(false)+'">▶ أمس</button>'+
@@ -8371,7 +8374,7 @@ function _wireReportTabsDrag(bar){
 }
 var _navHistory=['home'];
 var navLabels={home:'الرئيسية',inventory:'مخزون',sales:'مبيعات',purchases:'مشتريات',debts:'الديون',reports:'التقارير',tasks:'المهمات',settings:'إعدادات',movements:'التحركات','movements-report':'تقرير التحركات','tasks-report':'تقرير المهمات',ledger:'سجل العميل',quran:'القرآن الكريم'};
-var navIcons={home:'🏠',inventory:'📦',sales:'🧾',purchases:'🛒',debts:'💳',reports:'📊',tasks:'📋',settings:'⚙️',movements:'🔧','movements-report':'📊','tasks-report':'📊',ledger:'👤',quran:'📖'};
+var navIcons={home:'🏠',inventory:'📦',sales:'🧾',purchases:'🛒',debts:'💳',reports:'📊',tasks:'📋',settings:'⚙️',movements:'🔧','movements-report':'🗂️','tasks-report':'✅',ledger:'👤',quran:'📖'};
 // ⚠️ v243 — شريط التنقل السفلي بقى بيتبني ديناميكيًا من ترتيب مخزّن (DB.settings.navOrder)
 // بدل ما يكون ثابت في الـHTML، عشان يبقى قابل لإعادة الترتيب من الإعدادات. الترتيب
 // الافتراضي الجديد: تقارير قبل مهمات (بطلب العميل).
@@ -14646,28 +14649,42 @@ var DEFAULT_EXP_CATEGORIES={
 };
 var _expFilter='all';
 
-function getExpCategories(){
-  var custom=LS.get('mc8_exp_categories',{});
+// ⚠️ v339 — العناوين والفروع بقت في DB.settings.expCats (بتتزامن بين الأجهزة) بدل localStorage (كانت على الجهاز ده بس — اللي تضيفه على موبايل مكانش بيظهر على التاني).
+// getExpCategories() = شجرة الإعدادات + أي عنوان/فرع مستخدم فعلًا في المصروفات أو الدورية أو القوالب (عشان مفيش حاجة تختفي). الأعلى 'رواتب' عنوان نظام ومقفول.
+var _EXP_SYS_TITLE='رواتب';
+function _expCatsBase(){
   var all={};
   Object.keys(DEFAULT_EXP_CATEGORIES).forEach(function(k){all[k]=DEFAULT_EXP_CATEGORIES[k].slice();});
-  Object.keys(custom).forEach(function(k){
-    if(!all[k])all[k]=[];
-    custom[k].forEach(function(sub){if(all[k].indexOf(sub)===-1)all[k].push(sub);});
-  });
+  var custom=LS.get('mc8_exp_categories',{});
+  Object.keys(custom).forEach(function(k){if(!all[k])all[k]=[];custom[k].forEach(function(sb){if(all[k].indexOf(sb)===-1)all[k].push(sb);});});
   return all;
 }
+function _expCatsUsed(){
+  var u={};
+  var add=function(t,sb){t=String(t==null?'':t).trim();if(!t)return;if(!u[t])u[t]=[];sb=String(sb==null?'':sb).trim();if(sb&&u[t].indexOf(sb)===-1)u[t].push(sb);};
+  (DB.expenses||[]).forEach(function(e){add(e.type,e.subcategory);});
+  ((DB.accounts&&DB.accounts.fixed_expenses)||[]).forEach(function(f){add(f.name,f.category);});
+  ((DB.settings&&DB.settings.expenseTemplates)||[]).forEach(function(t){add(t.category,t.sub);});
+  return u;
+}
+function getExpCategories(){
+  var st=DB.settings||(DB.settings={});
+  var tree=st.expCats?JSON.parse(JSON.stringify(st.expCats)):_expCatsBase();
+  var used=_expCatsUsed();
+  Object.keys(used).forEach(function(t){if(!tree[t])tree[t]=[];used[t].forEach(function(sb){if(tree[t].indexOf(sb)===-1)tree[t].push(sb);});});
+  return tree;
+}
+function _expCatsSave(tree){DB.settings.expCats=tree;try{persist();}catch(e){}}
 function addExpCategory(name){
-  if(!name)return;
-  var custom=LS.get('mc8_exp_categories',{});
-  if(!custom[name])custom[name]=[];
-  LS.set('mc8_exp_categories',custom);
+  name=String(name||'').trim();if(!name)return;
+  var t=getExpCategories();
+  if(!t[name]){t[name]=[];_expCatsSave(t);}
 }
 function addExpSubcategory(cat,sub){
-  if(!cat||!sub)return;
-  var custom=LS.get('mc8_exp_categories',{});
-  if(!custom[cat])custom[cat]=[];
-  if(custom[cat].indexOf(sub)===-1)custom[cat].push(sub);
-  LS.set('mc8_exp_categories',custom);
+  cat=String(cat||'').trim();sub=String(sub||'').trim();if(!cat||!sub)return;
+  var t=getExpCategories();
+  if(!t[cat])t[cat]=[];
+  if(t[cat].indexOf(sub)===-1){t[cat].push(sub);_expCatsSave(t);}
 }
 
 // ===== مصروف سريع (مدفوع فعلاً) =====
@@ -14684,13 +14701,14 @@ function openExpenseModal(prefill){
 
     '<div class="field"><label>العنوان الرئيسي<span class="required">*</span></label>'+
     '<select id="exp-type" onchange="onExpCatChange()" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit">'+
-    catNames.map(function(t){return '<option'+(t===defaultCat?' selected':'')+'>'+t+'</option>';}).join('')+
+    _expTitleOptionsHtml(defaultCat)+ // ⚠️ v341 — مجموعات: مفضلة / الأكثر استخدامًا / الباقي
     '</select></div>'+
 
     '<div style="display:flex;gap:6px;margin-bottom:12px">'+
     '<input id="exp-new-type" type="text" placeholder="عنوان رئيسي جديد..." style="flex:1;padding:9px 12px;border:2px solid #e2e8f0;border-radius:9px;font-size:13px;font-family:inherit;background:#f8fafc;outline:none;direction:rtl">'+
     '<button onclick="addExpType()" style="background:#64748b;color:#fff;border:none;border-radius:9px;padding:9px 13px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer">+ عنوان</button>'+
     '</div>'+
+    (window.__isOwner?'<div style="margin:-6px 0 12px;text-align:left"><a href="#" onclick="closeModal();openExpCatManager();return false" style="font-size:11.5px;color:#1d4ed8;font-weight:800">🗂️ إدارة العناوين والفروع (تعديل / دمج / حذف)</a></div>':'')+
 
     '<div id="exp-employee-wrap" style="display:none;margin-bottom:12px">'+
     '<div class="field" style="margin:0"><label>👤 الموظف</label>'+
@@ -14760,7 +14778,7 @@ function _batchExpRowHtml(i){
   var cats=Object.keys(getExpCategories());
   return '<div id="batch-row-'+i+'" style="background:#f8fafc;border-radius:10px;padding:10px;margin-bottom:8px;display:flex;gap:6px;align-items:flex-start">'+
     '<select id="batch-type-'+i+'" style="flex:1.3;padding:8px;border:2px solid #e2e8f0;border-radius:8px;font-family:inherit;font-size:12px">'+
-    cats.map(function(c){return '<option>'+esc(c)+'</option>';}).join('')+'</select>'+
+    _expTitleOptionsHtml('')+'</select>'+
     '<input id="batch-sub-'+i+'" type="text" placeholder="الفرع (اختياري)" style="flex:1;padding:8px;border:2px solid #e2e8f0;border-radius:8px;font-family:inherit;font-size:12px">'+
     '<input id="batch-amount-'+i+'" type="number" step="any" placeholder="المبلغ" style="width:80px;padding:8px;border:2px solid #e2e8f0;border-radius:8px;font-family:inherit;font-size:12px">'+
     (i>0?'<button onclick="document.getElementById(\'batch-row-'+i+'\').remove()" style="background:none;border:none;color:#dc2626;font-size:15px;cursor:pointer">✕</button>':'')+
@@ -14798,18 +14816,12 @@ async function saveBatchExpenses(){
 // تحديث الفروع المتاحة حسب العنوان الرئيسي المختار + إظهار خانة الموظف لو رواتب
 function onExpCatChange(){
   var cat=v('exp-type');
-  var cats=getExpCategories();
-  var subs=cats[cat]||[];
   var chipsEl=document.getElementById('exp-sub-chips');
   var empWrap=document.getElementById('exp-employee-wrap');
   if(empWrap)empWrap.style.display=(cat==='رواتب')?'block':'none';
   if(!chipsEl)return;
-  if(!subs.length){chipsEl.innerHTML='';return;}
-  chipsEl.innerHTML=subs.map(function(s){
-    return '<button type="button" onclick="document.getElementById(\'exp-sub\').value=\''+s.replace(/'/g,"\\'")+'\'" style="padding:5px 11px;background:#fff7ed;border:1.5px solid #fed7aa;border-radius:8px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;color:#ea580c">'+esc(s)+'</button>';
-  }).join('');
+  chipsEl.innerHTML=_expSubChipsHtml(cat,'exp-sub'); // ⚠️ v341 — الأكتر استخدامًا أول، والباقي «⋯ كمان»
 }
-
 // لما يختار موظف — نقترح راتبه الأساسي في خانة المبلغ لو لسه فاضية
 function onExpEmployeeChange(){
   var empId=v('exp-employee');
@@ -14856,16 +14868,286 @@ async function quickLogExpense(idx){
   showToast('✅ اتسجّل: '+t.name+' — '+fmt(t.amount),'#16a34a');
 }
 
+// ⚠️ v339 — إدارة العناوين والفروع (للمالك): إضافة / إعادة تسمية (ودمج) / نقل فرع / حذف (لو مش مستخدم). إعادة التسمية والنقل بيحدّثوا كل المصروفات القديمة والدورية والقوالب.
+// ⚠️ v341 — تنظيم العناوين والفروع (كانت كتير ومتلخبطة): ترتيب بالأكثر استخدامًا، ⭐ مفضّلة، 📥 إخفاء (من غير حذف البيانات)، بحث، واكتشاف التكرار.
+// الإعدادات في DB.settings.expCatsMeta = {pins:{مفتاح:true},arch:{مفتاح:true},sort:'usage'|'alpha'} — المفتاح = العنوان أو العنوان+\u0001+الفرع. بتتزامن مع الإعدادات.
+var _ECM_SEP='\u0001',_ecmOpen={},_ecmQ='',_ecmShowArch=false;
+function _ecmMeta(){var st=DB.settings||(DB.settings={});if(!st.expCatsMeta)st.expCatsMeta={pins:{},arch:{},sort:'usage'};var m=st.expCatsMeta;if(!m.pins)m.pins={};if(!m.arch)m.arch={};return m;}
+function _expMetaSave(){try{persist();}catch(e){}}
+function _expMetaMove(from,to,merged){
+  var m=_ecmMeta(),p=m.pins,a=m.arch,fp=!!p[from],fa=!!a[from],tp=!!p[to],ta=!!a[to];
+  delete p[from];delete a[from];
+  if(fp||tp)p[to]=true;
+  var na=merged?(fa&&ta):fa; if(na)a[to]=true;else delete a[to];
+}
+function _expMetaMovePrefix(from,to,merged){
+  var m=_ecmMeta(),keys={};Object.keys(m.pins).concat(Object.keys(m.arch)).forEach(function(k){keys[k]=1;});
+  Object.keys(keys).forEach(function(k){
+    if(k===from)_expMetaMove(k,to,merged);
+    else if(k.indexOf(from+_ECM_SEP)===0)_expMetaMove(k,to+_ECM_SEP+k.slice(from.length+1),merged);
+  });
+}
+function _expMetaDrop(key){var m=_ecmMeta();Object.keys(m.pins).concat(Object.keys(m.arch)).forEach(function(k){if(k===key||k.indexOf(key+_ECM_SEP)===0){delete m.pins[k];delete m.arch[k];}});}
+function _expOrdered(includeArch){
+  var tree=getExpCategories(),m=_ecmMeta(),u=_ecmUsage(),pins=m.pins,arch=m.arch,mode=m.sort||'usage';
+  var cmp=function(pa,pb,na,nb,a,b){if(pa!==pb)return pb-pa;if(mode==='alpha')return String(a).localeCompare(String(b),'ar');if(nb!==na)return nb-na;return String(a).localeCompare(String(b),'ar');};
+  var out=Object.keys(tree).filter(function(t){return includeArch||!arch[t]||t===_EXP_SYS_TITLE;}).map(function(t){
+    var subs=tree[t].filter(function(sb){return includeArch||!arch[t+_ECM_SEP+sb];});
+    subs.sort(function(a,b){var ka=t+_ECM_SEP+a,kb=t+_ECM_SEP+b;return cmp(pins[ka]?1:0,pins[kb]?1:0,(u.s[ka]||{n:0}).n,(u.s[kb]||{n:0}).n,a,b);});
+    return {t:t,subs:subs,n:(u.t[t]||{n:0}).n,pin:!!pins[t],arch:!!arch[t]&&t!==_EXP_SYS_TITLE};
+  });
+  out.sort(function(a,b){return cmp(a.pin?1:0,b.pin?1:0,a.n,b.n,a.t,b.t);});
+  return out;
+}
+// قايمة العناوين في الفورم: لو أكتر من ٧ بتتقسم: ⭐ المفضلة / 🔥 الأكثر استخدامًا (٥) / 📁 الباقي أبجدي. المخفي مابيظهرش (إلا لو هو المختار في تعديل مصروف قديم).
+function _expTitleOptionsHtml(selected){
+  var list=_expOrdered(false),has={};list.forEach(function(x){has[x.t]=1;});
+  var opt=function(t){return '<option'+(t===selected?' selected':'')+'>'+esc(t)+'</option>';};
+  var extra=(selected&&!has[selected])?opt(selected):'';
+  if(list.length<=7)return extra+list.map(function(x){return opt(x.t);}).join('');
+  var pins=list.filter(function(x){return x.pin;}),rest=list.filter(function(x){return !x.pin;});
+  var top=rest.filter(function(x){return x.n>0;}).slice(0,5),tset={};top.forEach(function(x){tset[x.t]=1;});
+  var other=rest.filter(function(x){return !tset[x.t];}).sort(function(a,b){return a.t.localeCompare(b.t,'ar');});
+  var g=function(l,arr){return arr.length?'<optgroup label="'+l+'">'+arr.map(function(x){return opt(x.t);}).join('')+'</optgroup>':'';};
+  return extra+g('⭐ المفضلة',pins)+g('🔥 الأكثر استخدامًا',top)+g('📁 باقي العناوين',other);
+}
+// شرائح الفروع: أول ٨ (المفضلة ثم الأكثر استخدامًا) والباقي مطوي تحت «⋯ كمان N»
+function _expSubChipsHtml(cat,inputId){
+  var o=_expOrdered(false).filter(function(x){return x.t===cat;})[0],subs=o?o.subs:(getExpCategories()[cat]||[]);
+  if(!subs.length)return '';
+  var LIM=8;
+  var chip=function(sb,hid){return '<button type="button"'+(hid?' data-more="1"':'')+' onclick="document.getElementById(\''+inputId+'\').value='+jsStr(sb)+'" style="'+(hid?'display:none;':'')+'padding:5px 11px;background:#fff7ed;border:1.5px solid #fed7aa;border-radius:8px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;color:#ea580c">'+esc(sb)+'</button>';};
+  return subs.map(function(sb,i){return chip(sb,i>=LIM);}).join('')+
+    (subs.length>LIM?'<button type="button" onclick="var p=this.parentNode;p.querySelectorAll(\'[data-more]\').forEach(function(x){x.style.display=\'\';});this.remove()" style="padding:5px 11px;background:#f1f5f9;border:1.5px solid #e2e8f0;border-radius:8px;font-family:inherit;font-size:11px;font-weight:800;cursor:pointer;color:#475569">⋯ كمان '+(subs.length-LIM)+'</button>':'');
+}
+function _ecmNorm(x){
+  // الأرقام العربية بتتحوّل لإنجليزي الأول (عشان «فرع ١» و«فرع ٢» مايتحسبوش نفس الاسم)
+  return String(x==null?'':x).toLowerCase().replace(/[\u0660-\u0669]/g,function(d){return String(d.charCodeAt(0)-0x660);}).replace(/[\u064B-\u065F\u0670\u0640]/g,'').replace(/[أإآ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي').replace(/[^\u0621-\u064Aa-z0-9]/g,'').replace(/^ال/,'');
+}
+function _ecmLev(a,b){
+  if(a===b)return 0;var m=a.length,n=b.length;if(Math.abs(m-n)>1)return 2;
+  var prev=[],cur=[],i,j;for(j=0;j<=n;j++)prev[j]=j;
+  for(i=1;i<=m;i++){cur=[i];for(j=1;j<=n;j++)cur[j]=Math.min(prev[j]+1,cur[j-1]+1,prev[j-1]+(a[i-1]===b[j-1]?0:1));prev=cur;}
+  return prev[n];
+}
+function _ecmSimilar(a,b){
+  var x=_ecmNorm(a),y=_ecmNorm(b);if(!x||!y||a===b)return false;
+  if(x.replace(/[^0-9]/g,'')!==y.replace(/[^0-9]/g,''))return false; // لو الأرقام مختلفة (بند1/بند2) مش نفس الاسم
+  if(x===y)return true;
+  return Math.min(x.length,y.length)>=5&&_ecmLev(x,y)<=1;
+}
+function _ecmDupes(){
+  var tree=getExpCategories(),u=_ecmUsage(),out=[];
+  var pick=function(kind,t,a,b,na,nb){var from=(na>nb||(na===nb&&a.length<b.length))?b:a,to=from===a?b:a;out.push({kind:kind,t:t,from:from,to:to});};
+  var titles=Object.keys(tree).filter(function(t){return t!==_EXP_SYS_TITLE;});
+  for(var i=0;i<titles.length;i++)for(var j=i+1;j<titles.length;j++)if(_ecmSimilar(titles[i],titles[j]))pick('t','',titles[i],titles[j],(u.t[titles[i]]||{n:0}).n,(u.t[titles[j]]||{n:0}).n);
+  titles.forEach(function(t){var subs=tree[t];for(var i=0;i<subs.length;i++)for(var j=i+1;j<subs.length;j++)if(_ecmSimilar(subs[i],subs[j]))pick('s',t,subs[i],subs[j],(u.s[t+_ECM_SEP+subs[i]]||{n:0}).n,(u.s[t+_ECM_SEP+subs[j]]||{n:0}).n);});
+  return out;
+}
+function _ecmUnused(){
+  var tree=getExpCategories(),u=_ecmUsage(),m=_ecmMeta(),keys=[];
+  Object.keys(tree).forEach(function(t){
+    if(t===_EXP_SYS_TITLE||m.arch[t])return;
+    if(!_ecmUsed(u.t[t])&&!m.pins[t])keys.push(t);
+    else tree[t].forEach(function(sb){var k=t+_ECM_SEP+sb;if(!m.arch[k]&&!m.pins[k]&&!_ecmUsed(u.s[k]))keys.push(k);});
+  });
+  return keys;
+}
+function _ecmUsage(){
+  var m={t:{},s:{}},k=function(t,sb){return t+'\u0001'+sb;};
+  (DB.expenses||[]).forEach(function(e){
+    var t=String(e.type||'').trim();if(!t)return;var sb=String(e.subcategory||'').trim(),a=+e.amount||0;
+    var x=m.t[t]||(m.t[t]={n:0,total:0,fx:0,tp:0});x.n++;x.total+=a;
+    if(sb){var y=m.s[k(t,sb)]||(m.s[k(t,sb)]={n:0,total:0,fx:0,tp:0});y.n++;y.total+=a;}
+  });
+  ((DB.accounts&&DB.accounts.fixed_expenses)||[]).forEach(function(f){var t=String(f.name||'').trim();if(!t)return;var x=m.t[t]||(m.t[t]={n:0,total:0,fx:0,tp:0});x.fx++;var sb=String(f.category||'').trim();if(sb){var y=m.s[k(t,sb)]||(m.s[k(t,sb)]={n:0,total:0,fx:0,tp:0});y.fx++;}});
+  ((DB.settings&&DB.settings.expenseTemplates)||[]).forEach(function(f){var t=String(f.category||'').trim();if(!t)return;var x=m.t[t]||(m.t[t]={n:0,total:0,fx:0,tp:0});x.tp++;var sb=String(f.sub||'').trim();if(sb){var y=m.s[k(t,sb)]||(m.s[k(t,sb)]={n:0,total:0,fx:0,tp:0});y.tp++;}});
+  return m;
+}
+function _ecmUsed(u){return u&&((u.n||0)+(u.fx||0)+(u.tp||0))>0;}
+function _ecmRows(fn){ // يطبّق التعديل على المصروفات ويرجّع الصفوف اللي اتغيّرت
+  var ch=[];(DB.expenses||[]).forEach(function(e){if(fn(e)){ch.push(e.id);}});return ch;
+}
+function _ecmCommit(label,details,changedIds){
+  changedIds.forEach(function(id){try{__queueForSync('expenses',id,'upsert');}catch(e){}});
+  try{__logActivity('update','expenses','bulk',Object.assign({event:label},details));}catch(e){}
+  var p=null;try{p=persist();}catch(e){}
+  try{if(typeof __drainSyncQueue==='function')__drainSyncQueue(false);}catch(e){}
+  return p;
+}
+function _ecmRenameTitleDo(old,nw){
+  nw=String(nw||'').trim();
+  if(!window.__isOwner)return {err:'المالك بس'};
+  if(!nw)return {err:'اكتب الاسم'};
+  if(old===_EXP_SYS_TITLE)return {err:'العنوان «'+_EXP_SYS_TITLE+'» عنوان نظام ومقفول'};
+  if(nw===_EXP_SYS_TITLE)return {err:'الاسم «'+_EXP_SYS_TITLE+'» محجوز للنظام'};
+  if(nw===old)return {err:'الاسم هو هو'};
+  var tree=getExpCategories(),merged=!!tree[nw],out={},k;
+  Object.keys(tree).forEach(function(t){
+    if(t===old){ if(merged)return; out[nw]=tree[old].slice(); }
+    else if(t===nw){ out[nw]=tree[nw].slice(); tree[old].forEach(function(sb){if(out[nw].indexOf(sb)===-1)out[nw].push(sb);}); }
+    else out[t]=tree[t];
+  });
+  if(merged&&!out[nw])out[nw]=tree[nw];
+  var ch=_ecmRows(function(e){if(String(e.type||'').trim()===old){e.type=nw;return true;}return false;});
+  ((DB.accounts&&DB.accounts.fixed_expenses)||[]).forEach(function(f){if(String(f.name||'').trim()===old)f.name=nw;});
+  ((DB.settings&&DB.settings.expenseTemplates)||[]).forEach(function(t){if(String(t.category||'').trim()===old)t.category=nw;});
+  _expMetaMovePrefix(old,nw,merged); // ⚠️ v341
+  _expCatsSave(out);
+  _ecmCommit('إعادة تسمية عنوان مصروفات',{from:old,to:nw,count:ch.length,merged:merged},ch);
+  return {ok:true,count:ch.length,merged:merged};
+}
+function _ecmRenameSubDo(t,old,nw){
+  nw=String(nw||'').trim();
+  if(!window.__isOwner)return {err:'المالك بس'};
+  if(!nw)return {err:'اكتب الاسم'};
+  if(t===_EXP_SYS_TITLE)return {err:'فروع «'+_EXP_SYS_TITLE+'» مقفولة (مرتبطة بمنطق الرواتب)'};
+  if(nw===old)return {err:'الاسم هو هو'};
+  var tree=getExpCategories();if(!tree[t])return {err:'العنوان مش موجود'};
+  var merged=tree[t].indexOf(nw)!==-1;
+  tree[t]=tree[t].filter(function(x){return x!==old;});
+  if(!merged)tree[t].push(nw);
+  var ch=_ecmRows(function(e){if(String(e.type||'').trim()===t&&String(e.subcategory||'').trim()===old){e.subcategory=nw;return true;}return false;});
+  ((DB.accounts&&DB.accounts.fixed_expenses)||[]).forEach(function(f){if(String(f.name||'').trim()===t&&String(f.category||'').trim()===old)f.category=nw;});
+  ((DB.settings&&DB.settings.expenseTemplates)||[]).forEach(function(x){if(String(x.category||'').trim()===t&&String(x.sub||'').trim()===old)x.sub=nw;});
+  _expMetaMove(t+_ECM_SEP+old,t+_ECM_SEP+nw,merged); // ⚠️ v341
+  _expCatsSave(tree);
+  _ecmCommit('إعادة تسمية فرع مصروفات',{title:t,from:old,to:nw,count:ch.length,merged:merged},ch);
+  return {ok:true,count:ch.length,merged:merged};
+}
+function _ecmMoveSubDo(t,sb,to){
+  if(!window.__isOwner)return {err:'المالك بس'};
+  if(t===_EXP_SYS_TITLE||to===_EXP_SYS_TITLE)return {err:'العنوان «'+_EXP_SYS_TITLE+'» مقفول — مينفعش تنقل منه ولا ليه'};
+  if(!to||to===t)return {err:'اختار عنوان تاني'};
+  var tree=getExpCategories();if(!tree[t]||!tree[to])return {err:'العنوان مش موجود'};
+  tree[t]=tree[t].filter(function(x){return x!==sb;});
+  var _had=tree[to].indexOf(sb)!==-1;if(!_had)tree[to].push(sb);
+  var ch=_ecmRows(function(e){if(String(e.type||'').trim()===t&&String(e.subcategory||'').trim()===sb){e.type=to;return true;}return false;});
+  ((DB.accounts&&DB.accounts.fixed_expenses)||[]).forEach(function(f){if(String(f.name||'').trim()===t&&String(f.category||'').trim()===sb)f.name=to;});
+  ((DB.settings&&DB.settings.expenseTemplates)||[]).forEach(function(x){if(String(x.category||'').trim()===t&&String(x.sub||'').trim()===sb)x.category=to;});
+  _expMetaMove(t+_ECM_SEP+sb,to+_ECM_SEP+sb,_had); // ⚠️ v341
+  _expCatsSave(tree);
+  _ecmCommit('نقل فرع مصروفات لعنوان تاني',{sub:sb,from:t,to:to,count:ch.length},ch);
+  return {ok:true,count:ch.length};
+}
+function _ecmDeleteDo(t,sb){
+  if(!window.__isOwner)return {err:'المالك بس'};
+  if(t===_EXP_SYS_TITLE)return {err:'العنوان «'+_EXP_SYS_TITLE+'» مقفول'};
+  var u=_ecmUsage(),tree=getExpCategories();if(!tree[t])return {err:'مش موجود'};
+  if(sb){
+    var x=u.s[t+'\u0001'+sb];if(_ecmUsed(x))return {err:'الفرع مستخدم ('+((x.n||0)+(x.fx||0)+(x.tp||0))+' عملية) — انقله لعنوان تاني أو غيّر اسمه (الدمج) الأول'};
+    tree[t]=tree[t].filter(function(y){return y!==sb;});
+  }else{
+    var tt=u.t[t];if(_ecmUsed(tt))return {err:'العنوان مستخدم ('+((tt.n||0)+(tt.fx||0)+(tt.tp||0))+' عملية) — ادمجه في عنوان تاني بإعادة تسميته لاسمه'};
+    delete tree[t];
+  }
+  _expMetaDrop(sb?t+_ECM_SEP+sb:t); // ⚠️ v341
+  _expCatsSave(tree);
+  return {ok:true};
+}
+function _ecmFmt(u){if(!u||!u.n)return '';return u.n+' مصروف • '+fmt(Math.round(u.total));}
+function openExpCatManager(){
+  if(!window.__isOwner)return showToast('⚠️ إدارة العناوين للمالك بس','#dc2626');
+  document.getElementById('modal-title').textContent='🗂️ العناوين والفروع';
+  document.getElementById('modal-body').innerHTML=
+    '<div style="display:flex;gap:6px;margin-bottom:8px"><input id="ecm-q" type="search" placeholder="🔍 دوّر على عنوان أو فرع..." value="'+esc(_ecmQ)+'" oninput="_ecmQ=this.value;_ecmRender()" style="flex:1;min-width:0;padding:9px 12px;border:2px solid #e2e8f0;border-radius:10px;font-family:inherit;font-size:13px"><button class="btn btn-orange" style="padding:0 14px;border-radius:10px;font-size:12px" onclick="_ecmAct(this,\'at\')">+ عنوان</button></div>'+
+    '<div id="ecm-sort"></div><div id="ecm-flags"></div><div id="ecm-list"></div>'+
+    '<div class="modal-actions"><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
+  _ecmRender();
+  openModal();
+}
+function _ecmBtn(ico,op,t,sb,bg,fg,ttl,extra){return '<button type="button" title="'+ttl+'" data-t="'+esc(t)+'" data-s="'+esc(sb||'')+'" '+(extra||'')+' onclick="event.stopPropagation();_ecmAct(this,\''+op+'\')" style="border:none;background:'+bg+';color:'+fg+';border-radius:8px;padding:5px 8px;font-size:13px;cursor:pointer;font-family:inherit">'+ico+'</button>';}
+function _ecmRender(){
+  var listEl=document.getElementById('ecm-list');if(!listEl)return;
+  var m=_ecmMeta(),u=_ecmUsage(),q=_ecmNorm(_ecmQ),mode=m.sort||'usage';
+  // شرائح الترتيب
+  var sc=function(k,l){var a=mode===k;return '<button type="button" onclick="_ecmMeta().sort=\''+k+'\';_expMetaSave();_ecmRender()" style="padding:5px 11px;border:none;border-radius:8px;font-family:inherit;font-size:11px;font-weight:800;cursor:pointer;background:'+(a?'#0f172a':'#f1f5f9')+';color:'+(a?'#fff':'#64748b')+'">'+l+'</button>';};
+  document.getElementById('ecm-sort').innerHTML='<div style="display:flex;gap:6px;align-items:center;margin-bottom:8px"><span style="font-size:11px;color:#64748b;font-weight:700">الترتيب:</span>'+sc('usage','🔥 الأكثر استخدامًا')+sc('alpha','🔤 أبجدي')+'<span style="font-size:10px;color:#94a3b8">(⭐ المفضلة دايمًا فوق)</span></div>';
+  // تنبيهات: تكرار + غير مستخدم
+  var dup=_ecmDupes().slice(0,4),unused=_ecmUnused(),fl='';
+  if(dup.length)fl+='<div style="background:#fffbeb;border:1.5px solid #fde68a;border-radius:11px;padding:8px 10px;margin-bottom:8px"><div style="font-size:11.5px;font-weight:900;color:#92400e;margin-bottom:5px">🔎 أسماء شبه بعض (ممكن تتدمج)</div>'+dup.map(function(d){
+    return '<div style="display:flex;justify-content:space-between;align-items:center;gap:6px;font-size:11.5px;padding:3px 0"><span style="min-width:0;word-break:break-word">«'+esc(d.from)+'» ← «'+esc(d.to)+'»'+(d.kind==='s'?' <span style="color:#94a3b8;font-size:10px">('+esc(d.t)+')</span>':'')+'</span><button type="button" data-k="'+d.kind+'" data-t="'+esc(d.t)+'" data-s="'+esc(d.from)+'" data-to="'+esc(d.to)+'" onclick="_ecmAct(this,\'mg\')" style="border:none;background:#fde68a;color:#92400e;border-radius:7px;padding:4px 9px;font-family:inherit;font-size:11px;font-weight:800;cursor:pointer;flex-shrink:0">دمج</button></div>';}).join('')+'</div>';
+  if(unused.length)fl+='<div style="background:#f1f5f9;border-radius:11px;padding:8px 10px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;gap:8px"><span style="font-size:11.5px;color:#475569">🧹 <b>'+unused.length+'</b> عنوان/فرع عمرهم ما اتستخدموا</span><button type="button" onclick="_ecmAct(this,\'cu\')" style="border:none;background:#0f172a;color:#fff;border-radius:8px;padding:6px 11px;font-family:inherit;font-size:11px;font-weight:800;cursor:pointer;flex-shrink:0">📥 إخفاءهم</button></div>';
+  document.getElementById('ecm-flags').innerHTML=q?'':fl;
+  // القايمة
+  var all=_expOrdered(true),act=all.filter(function(o){return !o.arch;}),arc=all.filter(function(o){return o.arch;});
+  var match=function(o){if(!q)return true;if(_ecmNorm(o.t).indexOf(q)!==-1)return true;return o.subs.some(function(sb){return _ecmNorm(sb).indexOf(q)!==-1;});};
+  var row=function(o){
+    var t=o.t,lock=(t===_EXP_SYS_TITLE),ut=u.t[t]||{},open=!!_ecmOpen[t]||!!q;
+    var visSubs=o.subs.filter(function(sb){return !q||_ecmNorm(t).indexOf(q)!==-1||_ecmNorm(sb).indexOf(q)!==-1;});
+    var hdr='<div data-t="'+esc(t)+'" data-s="" onclick="_ecmAct(this,\'tg\')" style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 11px;cursor:pointer"><div style="min-width:0"><div style="font-weight:900;font-size:13.5px;word-break:break-word">'+(lock?'🔒 ':'')+(o.pin?'⭐ ':'')+'📁 '+esc(t)+' <span style="font-size:10px;color:#94a3b8;font-weight:700">'+(open?'▾':'◂')+'</span></div><div style="font-size:10.5px;color:#94a3b8">'+(_ecmFmt(ut)||'غير مستخدم')+((ut.fx||0)?' • '+ut.fx+' دوري':'')+((ut.tp||0)?' • '+ut.tp+' قالب':'')+' • '+o.subs.length+' فرع</div></div>'+
+      '<div style="display:flex;gap:5px;flex-shrink:0">'+_ecmBtn(o.pin?'⭐':'☆','pt',t,'',o.pin?'#fef9c3':'#f1f5f9','#a16207',o.pin?'شيل من المفضلة':'ضيف للمفضلة')+(lock?'':_ecmBtn('✏️','rt',t,'','#dbeafe','#1d4ed8','إعادة تسمية / دمج')+(o.arch?_ecmBtn('↩️','xt',t,'','#dcfce7','#15803d','رجّعه'):_ecmBtn('📥','xt',t,'','#f1f5f9','#475569','إخفاء'))+(_ecmUsed(ut)?'':_ecmBtn('🗑️','dt',t,'','#fee2e2','#dc2626','حذف')))+'</div></div>';
+    var body='';
+    if(open){
+      body='<div style="padding:0 11px 9px"><div style="margin-bottom:6px">'+_ecmBtn('➕ فرع','as',t,'','#dcfce7','#15803d','فرع جديد')+'</div>'+
+        (visSubs.length?'<div style="padding-right:10px;border-right:3px solid #e2e8f0">'+visSubs.map(function(sb){
+          var k=t+_ECM_SEP+sb,x=u.s[k]||{},sp=!!m.pins[k],sa=!!m.arch[k];
+          return '<div style="display:flex;justify-content:space-between;align-items:center;gap:6px;padding:5px 0;border-bottom:1px solid #eef2f7"><div style="min-width:0"><span style="font-size:12.5px;font-weight:700;word-break:break-word">'+(sp?'⭐ ':'')+'› '+esc(sb)+'</span> <span style="font-size:10px;color:#94a3b8">'+(_ecmFmt(x)||'')+(sa?' • مخفي':'')+'</span></div>'+
+            '<div style="display:flex;gap:4px;flex-shrink:0">'+_ecmBtn(sp?'⭐':'☆','ps',t,sb,sp?'#fef9c3':'#f8fafc','#a16207','مفضّل')+(lock?'':_ecmBtn('✏️','rs',t,sb,'#eff6ff','#1d4ed8','إعادة تسمية / دمج')+_ecmBtn('↗️','ms',t,sb,'#f5f3ff','#6d28d9','نقل')+_ecmBtn(sa?'↩️':'📥','xs',t,sb,'#f1f5f9','#475569',sa?'رجّعه':'إخفاء')+(_ecmUsed(x)?'':_ecmBtn('🗑️','ds',t,sb,'#fef2f2','#dc2626','حذف')))+'</div></div>';
+        }).join('')+'</div>':'<div style="font-size:11px;color:#94a3b8">مفيش فروع</div>')+'</div>';
+    }
+    return '<div style="background:#f8fafc;border-radius:12px;margin-bottom:8px;overflow:hidden">'+hdr+body+'</div>';
+  };
+  var shown=act.filter(match);
+  var html=shown.length?shown.map(row).join(''):'<div class="empty">'+(q?'مفيش نتيجة للبحث':'مفيش عناوين')+'</div>';
+  var arcShown=arc.filter(match);
+  if(arc.length){
+    html+='<div style="margin-top:10px"><button type="button" onclick="_ecmShowArch=!_ecmShowArch;_ecmRender()" style="width:100%;padding:9px;border:1.5px dashed #cbd5e1;background:#fff;border-radius:10px;font-family:inherit;font-size:12px;font-weight:800;color:#64748b;cursor:pointer">📥 العناوين المخفية ('+arc.length+') '+(_ecmShowArch?'▾':'◂')+'</button>'+((_ecmShowArch||q)?'<div style="margin-top:8px;opacity:.85">'+(arcShown.length?arcShown.map(row).join(''):'')+'</div>':'')+'</div>';
+  }
+  listEl.innerHTML=html;
+}
+function _ecmAsk(title,label,val,cb){
+  window.__ecmCb=cb;
+  document.getElementById('modal-title').textContent=title;
+  document.getElementById('modal-body').innerHTML='<div class="field"><label>'+label+'</label><input id="ecm-in" type="text" value="'+esc(val||'')+'" autocomplete="off" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit;direction:rtl"></div>'+
+    '<div class="modal-actions"><button class="btn btn-green btn-full" onclick="_ecmAskOk()">💾 حفظ</button><button class="btn btn-outline btn-full" onclick="openExpCatManager()">رجوع</button></div>';
+  openModal();setTimeout(function(){var i=document.getElementById('ecm-in');if(i){i.focus();i.select();}},80);
+}
+function _ecmAskOk(){var i=document.getElementById('ecm-in'),cb=window.__ecmCb;if(cb)cb(((i&&i.value)||'').trim());}
+function _ecmDone(r,okMsg){
+  if(r&&r.err){showToast('⚠️ '+r.err,'#dc2626');return false;}
+  showToast('✅ '+okMsg+(r&&r.count?' — اتحدّث '+r.count+' مصروف':'')+(r&&r.merged?' (اتدمج)':''),'#16a34a');
+  try{renderExpensesReport();}catch(e){}
+  openExpCatManager();return true;
+}
+function _ecmAct(el,op){
+  var t=el.getAttribute('data-t'),sb=el.getAttribute('data-s'),m=_ecmMeta();
+  var rerender=function(){_ecmRender();_expMetaSave();};
+  if(op==='tg'){_ecmOpen[t]=!_ecmOpen[t];return _ecmRender();}
+  if(op==='pt'){if(m.pins[t])delete m.pins[t];else m.pins[t]=true;return rerender();}
+  if(op==='ps'){var k=t+_ECM_SEP+sb;if(m.pins[k])delete m.pins[k];else m.pins[k]=true;return rerender();}
+  if(op==='xt'){if(t===_EXP_SYS_TITLE)return;if(m.arch[t])delete m.arch[t];else m.arch[t]=true;return rerender();}
+  if(op==='xs'){var k2=t+_ECM_SEP+sb;if(m.arch[k2])delete m.arch[k2];else m.arch[k2]=true;return rerender();}
+  if(op==='cu'){var ks=_ecmUnused();ks.forEach(function(k3){m.arch[k3]=true;});showToast('📥 اتخفى '+ks.length+' (تقدر ترجّعهم من «المخفية»)','#475569');return rerender();}
+  if(op==='mg'){var kind=el.getAttribute('data-k'),to=el.getAttribute('data-to');
+    return confirmAction('هتدمج «'+sb+'» في «'+to+'»؟ كل مصروفاته القديمة هتتحدّث.',function(){_ecmDone(kind==='t'?_ecmRenameTitleDo(sb,to):_ecmRenameSubDo(t,sb,to),'اتدمجوا');});}
+  if(op==='at')return _ecmAsk('➕ عنوان جديد','اسم العنوان','',function(nm){if(!nm)return showToast('⚠️ اكتب الاسم','#dc2626');if(getExpCategories()[nm])return showToast('⚠️ العنوان موجود','#dc2626');addExpCategory(nm);_ecmDone({},'اتضاف العنوان');});
+  if(op==='as')return _ecmAsk('➕ فرع جديد تحت «'+t+'»','اسم الفرع','',function(nm){if(!nm)return showToast('⚠️ اكتب الاسم','#dc2626');addExpSubcategory(t,nm);_ecmOpen[t]=true;_ecmDone({},'اتضاف الفرع');});
+  if(op==='rt')return _ecmAsk('✏️ إعادة تسمية العنوان','الاسم الجديد (لو موجود هيتدمج)',t,function(nm){_ecmDone(_ecmRenameTitleDo(t,nm),'اتغيّر اسم العنوان');});
+  if(op==='rs')return _ecmAsk('✏️ إعادة تسمية الفرع','الاسم الجديد (لو موجود هيتدمج)',sb,function(nm){_ecmDone(_ecmRenameSubDo(t,sb,nm),'اتغيّر اسم الفرع');});
+  if(op==='ms'){
+    var others=Object.keys(getExpCategories()).filter(function(x){return x!==t&&x!==_EXP_SYS_TITLE;});
+    if(!others.length)return showToast('⚠️ مفيش عنوان تاني تنقله ليه','#dc2626');
+    window.__ecmCb=function(){var sel=document.getElementById('ecm-to');_ecmDone(_ecmMoveSubDo(t,sb,sel&&sel.value),'اتنقل الفرع');};
+    document.getElementById('modal-title').textContent='↗️ نقل «'+sb+'»';
+    document.getElementById('modal-body').innerHTML='<div class="field"><label>انقله لعنوان</label><select id="ecm-to" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit">'+others.map(function(x){return '<option>'+esc(x)+'</option>';}).join('')+'</select></div><div style="font-size:11px;color:#64748b;margin-bottom:8px">كل مصروفات الفرع ده القديمة هتتنقل معاه.</div><div class="modal-actions"><button class="btn btn-green btn-full" onclick="_ecmAskOk2()">💾 نقل</button><button class="btn btn-outline btn-full" onclick="openExpCatManager()">رجوع</button></div>';
+    return openModal();
+  }
+  if(op==='dt')return confirmAction('هتحذف العنوان «'+t+'» وكل فروعه؟',function(){_ecmDone(_ecmDeleteDo(t,null),'اتحذف العنوان');});
+  if(op==='ds')return confirmAction('هتحذف الفرع «'+sb+'»؟',function(){_ecmDone(_ecmDeleteDo(t,sb),'اتحذف الفرع');});
+}
+function _ecmAskOk2(){var cb=window.__ecmCb;if(cb)cb();}
 function openExpenseTemplatesSettings(){
   var cats=Object.keys(getExpCategories());
   document.getElementById('modal-title').textContent='⚙️ قوالب المصروفات الجاهزة';
   document.getElementById('modal-body').innerHTML=
+    (window.__isOwner?'<button class="btn btn-full" style="background:#eff6ff;color:#1d4ed8;border:none;margin-bottom:10px" onclick="openExpCatManager()">🗂️ إدارة العناوين والفروع</button>':'')+
     '<div id="exp-tmpl-list">'+_renderExpTmplList()+'</div>'+
     '<div style="background:#f8fafc;border-radius:10px;padding:10px;margin-top:10px">'+
     '<div style="font-size:12px;font-weight:800;color:#374151;margin-bottom:6px">+ قالب جديد</div>'+
     fld('et-name','اسم القالب (زي: بنزين العربية)','text','')+
     '<div class="field"><label>العنوان الرئيسي</label><select id="et-cat" onchange="_etCatChange()" style="width:100%;padding:9px;border:2px solid #e2e8f0;border-radius:9px;font-family:inherit">'+
-    cats.map(function(c){return '<option>'+esc(c)+'</option>';}).join('')+'</select></div>'+
+    _expTitleOptionsHtml('')+'</select></div>'+
     '<div id="et-emp-wrap" style="display:none"><div class="field"><label>الموظف</label><select id="et-emp" style="width:100%;padding:9px;border:2px solid #e2e8f0;border-radius:9px;font-family:inherit">'+
     (DB.accounts.employees||[]).filter(function(e){return e.active!==false;}).map(function(e){return '<option value="'+e.id+'">'+esc(e.name)+'</option>';}).join('')+'</select></div>'+
     '<div class="field"><label>نوع الصرف</label><select id="et-kind" style="width:100%;padding:9px;border:2px solid #e2e8f0;border-radius:9px;font-family:inherit"><option value="advance">💵 سلفة — تتخصم من الراتب الأساسي</option><option value="bonus">🎁 مكافأة — فوق الراتب</option></select></div></div>'+
@@ -15599,15 +15881,10 @@ function openEditExpenseModal(id){
 
 function onEditExpCatChange(){
   var cat=v('edit-exp-type');
-  var cats=getExpCategories();
-  var subs=cats[cat]||[];
   var chipsEl=document.getElementById('edit-exp-sub-chips');
   if(!chipsEl)return;
-  chipsEl.innerHTML=subs.map(function(s){
-    return '<button type="button" onclick="document.getElementById(\'edit-exp-sub\').value=\''+s.replace(/'/g,"\\'")+'\'" style="padding:5px 11px;background:#fff7ed;border:1.5px solid #fed7aa;border-radius:8px;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;color:#ea580c">'+esc(s)+'</button>';
-  }).join('');
+  chipsEl.innerHTML=_expSubChipsHtml(cat,'edit-exp-sub');
 }
-
 async function saveEditExpense(id){
   var amount=+v('edit-exp-amount');
   if(!amount||amount<=0)return showToast('⚠️ المبلغ غير صحيح','#dc2626');
@@ -22081,7 +22358,7 @@ function openFixedExpModal(){
   document.getElementById('modal-body').innerHTML=
     '<div class="field"><label>اسم المصروف<span class="required">*</span></label>'+
     '<select id="fexp-name" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit">'+
-    catNames.map(function(t){return '<option>'+esc(t)+'</option>';}).join('')+
+    _expTitleOptionsHtml('')+
     '</select></div>'+
     '<div style="display:flex;gap:6px;margin-bottom:12px">'+
     '<input id="fexp-new-name" type="text" placeholder="اسم جديد مش موجود..." style="flex:1;padding:9px 12px;border:2px solid #e2e8f0;border-radius:9px;font-size:13px;font-family:inherit;background:#f8fafc;outline:none;direction:rtl">'+
@@ -26912,8 +27189,9 @@ async function delScrapMachine(id){
 navLabels['movements-report']='تقرير التحركات';navLabels['tasks-report']='تقرير المهمات';
 navLabels['ledger']='سجل العميل';navLabels['accounting']='الحسابات';
 navLabels['purchases']='المشتريات';navLabels['inventory']='المخزون';navLabels['expenses']='المصاريف';
-navIcons['more']='☰';navIcons['movements']='🔧';navIcons['movements-report']='📊';
-navIcons['tasks-report']='📊';navIcons['ledger']='👤';navIcons['accounting']='📒';
+navIcons['more']='☰';navLabels['more']='المزيد'; // ⚠️ v340 — الهيدر كان بيكتب «more» بالإنجليزي
+navIcons['movements']='🔧';navIcons['movements-report']='🗂️';
+navIcons['tasks-report']='✅';navIcons['ledger']='👤';navIcons['accounting']='🏦';
 navIcons['purchases']='🛒';navIcons['inventory']='📦';navIcons['expenses']='💸';
 var _baseRS=renderScreen;
 renderScreen=function(s){
@@ -27000,7 +27278,7 @@ navIcons['clients'] = '📒';
 navLabels['suppliers'] = 'أرشيف الموردين';
 navIcons['suppliers'] = '🏭';
 navLabels['supplier-ledger'] = 'كشف حساب المورد';
-navIcons['supplier-ledger'] = '📋';
+navIcons['supplier-ledger'] = '📑';
 
 // الداتا الأصلية المستوردة من الملف
 var CLIENTS_BASE_DATA = {"customers": [{"name": "محمد رمضان المحامي", "phone": "01277027206", "address": "مساكن الصينيه", "machines": [{"row": 1, "model": "كونيكا 3350 الالوان", "serial": "4121009313y4A", "counter": "", "color_counter": "", "date": "1/4/1446"}, {"row": 2, "model": "4200 كيوسيرا", "serial": "00.014.012f-3lv2", "counter": "26199", "color_counter": "", "date": "1/4/1446"}]}, {"name": "عمرو مدرسة سمير موسي", "phone": "01272858781", "address": "مجمع مدارس فضه", "machines": [{"row": 3, "model": "301 Mp", "serial": "07951pc914W", "counter": "", "color_counter": "", "date": ""}, {"row": 4, "model": "2022 Mp", "serial": "", "counter": "", "color_counter": "", "date": ""}]}, {"name": "ام جمال قصر القويري", "phone": "01066707814", "address": "شارع قصر القويري هنوفيل", "machines": [{"row": 5, "model": "307 Mpc", "serial": "901502p517C", "counter": "", "color_counter": "", "date": "16/10/1446"}]}, {"name": "محمد مكتبة أية 21", "phone": "01117273115", "address": "عند مدرسة شرين 21", "machines": [{"row": 6, "model": "5890 Ep", "serial": "2041124Xbk", "counter": "", "color_counter": "", "date": "16/10/1446"}, {"row": 7, "model": "5390 Ep", "serial": "021354Xbkf", "counter": "", "color_counter": "", "date": "10/3/1447"}, {"row": 146, "model": "ep C869R", "serial": "X2ss016576", "counter": "126845", "color_counter": "", "date": "24/10/1447"}]}, {"name": "سيد", "phone": "01281759461", "address": "شارع فضه قريب من اسامه فضه", "machines": [{"row": 8, "model": "300 Mpc", "serial": "7214101185S", "counter": "", "color_counter": "", "date": "29/10/1446"}]}, {"name": "اسلام المربع الذهبي", "phone": "01271187338", "address": "الهانوفيل المربع الذهبي", "machines": [{"row": 9, "model": "ci 4052 K كيوسيرا", "serial": "17258y7n2W", "counter": "", "color_counter": "", "date": "6/11/1446"}, {"row": 10, "model": "55250 Hp", "serial": "vm0mmy15Cn", "counter": "582837", "color_counter": "", "date": "17/6/1447"}, {"row": 11, "model": "577 Hp", "serial": "D3q21d", "counter": "411616", "color_counter": "", "date": "17/6/1447"}, {"row": 12, "model": "577 Hp", "serial": "9h0mjy98Cn", "counter": "155733", "color_counter": "", "date": "21/11/1447"}]}, {"name": "خالد بخيت القويري", "phone": "01018869824", "address": "مسجد القويري", "machines": [{"row": 13, "model": "5290 Ep", "serial": "4010302c3X", "counter": "394930", "color_counter": "", "date": "13/4/1447"}, {"row": 14, "model": "5290 Ep", "serial": "4014494c3X", "counter": "", "color_counter": "", "date": "7/11/1446"}, {"row": 15, "model": "5290 Ep", "serial": "4006934c3X", "counter": "", "color_counter": "", "date": "7/11/1446"}]}, {"name": "ابو حماده مدرسة زياد بن حارثة", "phone": "01229952790", "address": "مجمع مدارس فضه", "machines": [{"row": 16, "model": "2022 Mp", "serial": "8353802293J", "counter": "", "color_counter": "", "date": "12/11/1446"}, {"row": 28, "model": "4500 Mpc", "serial": "9084300535L", "counter": "", "color_counter": "", "date": "29/11/1446"}]}, {"name": "سنتر الدراسيه الحاج حلمي", "phone": "01284512904", "address": "اول خيرا", "machines": [{"row": 17, "model": "201 Mp", "serial": "3068700414W", "counter": "", "color_counter": "", "date": ""}]}, {"name": "مكتبة ادهم 21", "phone": "01115860004", "address": "شارع مدرسه شرين ك 21", "machines": [{"row": 18, "model": "451 Hp", "serial": "039jkj56Cn", "counter": "", "color_counter": "", "date": ""}]}, {"name": "اسامه فضه", "phone": "01280205128", "address": "مجمع مدارس فضه قديم", "machines": [{"row": 19, "model": "476 Hp", "serial": "cnjkoxn4Cn", "counter": "", "color_counter": "", "date": ""}, {"row": 29, "model": "477 Hp", "serial": "010sgz73Cn", "counter": "479701", "color_counter": "", "date": "9/4/1447"}, {"row": 30, "model": "4310 Sp", "serial": "1148761862T", "counter": "479701", "color_counter": "", "date": ""}]}, {"name": "محمد تبع محمود علي كرموز", "phone": "01278090417", "address": "اخر مواصله كرموز", "machines": [{"row": 20, "model": "440 Spc", "serial": "100522p688X", "counter": "", "color_counter": "", "date": "20/11/1446"}, {"row": 21, "model": "301 Mp", "serial": "703731p908W", "counter": "", "color_counter": "", "date": "20/11/1446"}]}, {"name": "محمد إسماعيل", "phone": "01067868672", "address": "اخر البطاش شارع فرع فودافون قديم", "machines": [{"row": 22, "model": "4510 Sp", "serial": "601392H596T", "counter": "", "color_counter": "", "date": ""}]}, {"name": "احمد خفاجي", "phone": "01226830646", "address": "اخر شارع خفاجي بعد مسجد ابو عمر", "machines": [{"row": 23, "model": "477 Hp", "serial": "37e1921", "counter": "", "color_counter": "", "date": "27/11/1446"}, {"row": 24, "model": "2050 Mpc", "serial": "9823800326V", "counter": "", "color_counter": "", "date": "27/11/1446"}, {"row": 25, "model": "ci3252", "serial": "8847305s2W", "counter": "455077", "color_counter": "", "date": "23/7/1447"}, {"row": 26, "model": "ci4006", "serial": "68407699Vg", "counter": "128318", "color_counter": "", "date": "12/7/1447"}, {"row": 27, "model": "4210 Sp", "serial": "5289603377S", "counter": "13791", "color_counter": "", "date": "4/11/1447"}]}, {"name": "المحكمة", "phone": "01277150543", "address": "محكمة الدخيلة", "machines": [{"row": 31, "model": "7030 B", "serial": "3399866617", "counter": "", "color_counter": "", "date": "27/11/1446"}, {"row": 32, "model": "Hp laser E72525", "serial": "Cnc1m6907l", "counter": "158949", "color_counter": "", "date": "22/1/1447"}]}, {"name": "علي الجندي الطلخاوي", "phone": "01211480805", "address": "اول شارع الطلخاوي علي اليمين قديم", "machines": [{"row": 33, "model": "585 Hp", "serial": "m05qcy53Cn", "counter": "", "color_counter": "", "date": ""}, {"row": 51, "model": "585 Hp", "serial": "cyogn592Cn", "counter": "", "color_counter": "", "date": "8/1/1447"}, {"row": 52, "model": "585 Hp", "serial": "079vcy58Cn", "counter": "75343", "color_counter": "", "date": "8/2/1447"}, {"row": 53, "model": "585 Hp", "serial": "021y4674Cn", "counter": "75343", "color_counter": "", "date": "8/2/1447"}, {"row": 54, "model": "585 Hp", "serial": "j05y4h46Cn", "counter": "257905", "color_counter": "", "date": "25/8/1447"}, {"row": 55, "model": "476 Hp", "serial": "kr0mkj59Cn", "counter": "91518", "color_counter": "", "date": "15/3/1447"}, {"row": 56, "model": "477 Hp", "serial": "b20q3D", "counter": "267165", "color_counter": "", "date": "10/3/1447"}, {"row": 57, "model": "477 Hp", "serial": "r02Cngqjy", "counter": "277742", "color_counter": "", "date": "8/1/1447"}, {"row": 58, "model": "58650E Hp", "serial": "fv0z7Cnczl", "counter": "34306", "color_counter": "", "date": "24/3/1447"}, {"row": 59, "model": "58650E Hp", "serial": "9b0bk864Cn", "counter": "98664", "color_counter": "", "date": "24/3/1447"}, {"row": 60, "model": "58650E Hp", "serial": "g09bk2c7Cn", "counter": "70992", "color_counter": "", "date": "24/3/1447"}, {"row": 61, "model": "58650E Hp", "serial": "jt0lfk15Cn", "counter": "153142", "color_counter": "", "date": "24/3/1447"}]}, {"name": "مدرسة فرست بلس", "phone": "01113555264", "address": "شارع الصفا عند المسجد الأول", "machines": [{"row": 34, "model": "4310 Sp", "serial": "1149264549T", "counter": "67169", "color_counter": "", "date": "22/12/1446"}, {"row": 35, "model": "301 Mp", "serial": "00182pc903W", "counter": "", "color_counter": "", "date": "22/12/1446"}, {"row": 36, "model": "58650 Hp", "serial": "1bdkom92Cn", "counter": "", "color_counter": "", "date": "22/12/1446"}, {"row": 37, "model": "5290 Ep", "serial": "5004469c3X", "counter": "", "color_counter": "", "date": "22/12/1446"}, {"row": 38, "model": "5290 Ep", "serial": "5003906c3X", "counter": "", "color_counter": "", "date": "23/4/1447"}]}, {"name": "ابو انس سنترال الريان", "phone": "01283389093", "address": "سنترال الريان شارع السلام الهانوفيل", "machines": [{"row": 39, "model": "2026 Hp", "serial": "", "counter": "", "color_counter": "", "date": "22/12/1446"}, {"row": 40, "model": "سامسونج 6260", "serial": "y800016abjeh77Z", "counter": "", "color_counter": "", "date": "22/12/1446"}]}, {"name": "احمد ياسر", "phone": "01288551043", "address": "امام معاهد الجزار البطاش", "machines": [{"row": 41, "model": "ci2500 كيوسيرا", "serial": "", "counter": "", "color_counter": "", "date": "26/12/1447"}]}, {"name": "ايهاب الجمال المحامي", "phone": "01093130253", "address": "شارع الخلفاء الراشدين امام بنك مصر الهانوفيل", "machines": [{"row": 42, "model": "اسكنر 4510 Sp", "serial": "01433hc596T", "counter": "", "color_counter": "", "date": "26/12/1447"}, {"row": 43, "model": "4510 Sp", "serial": "02391ha575T", "counter": "", "color_counter": "", "date": "26/12/1447"}]}, {"name": "طه احمد برج العرب", "phone": "01114766585", "address": "برج العرب", "machines": [{"row": 44, "model": "306 Mpc", "serial": "00765pa446G", "counter": "", "color_counter": "", "date": "3/1/1447"}]}, {"name": "مكتبة عمرو المختار اكتوبر", "phone": "", "address": "شارع 4 علي 25 اكتوبر ك 21", "machines": [{"row": 45, "model": "5390 Ep", "serial": "000762Xbkg", "counter": "", "color_counter": "", "date": "3/1/1447"}, {"row": 46, "model": "5390 Ep", "serial": "005655Xbkg", "counter": "12589", "color_counter": "", "date": "21/7/1447"}]}, {"name": "كابتن احمد الغندور", "phone": "01024690017", "address": "العوايد", "machines": [{"row": 47, "model": "5390 Ep", "serial": "000933Xbkg", "counter": "", "color_counter": "", "date": "4/1/1446"}, {"row": 48, "model": "5290 Ep", "serial": "4015603c3X", "counter": "", "color_counter": "", "date": "4/1/1446"}]}, {"name": "عبد الرحمن سنترال العربي", "phone": "01095239060", "address": "القباري سنترال العربي", "machines": [{"row": 49, "model": "2050 Mpc", "serial": "2204704117V", "counter": "", "color_counter": "", "date": "6/1/1447"}, {"row": 50, "model": "2050 Mpc", "serial": "2204102468V", "counter": "", "color_counter": "", "date": "6/1/1447"}]}, {"name": "محمد سعيد الخلفاء ep", "phone": "01289050156", "address": "الهانوفيل شارع الخلفاء", "machines": [{"row": 62, "model": "5390 Ep", "serial": "017934Xbkf", "counter": "42983", "color_counter": "", "date": "12/1/1447"}, {"row": 63, "model": "i4002", "serial": "07673z7Vnn", "counter": "532545", "color_counter": "", "date": "12/1/1447"}, {"row": 64, "model": "ic 3207", "serial": "9401943Rgs", "counter": "187885", "color_counter": "", "date": "12/1/1447"}, {"row": 156, "model": "477 Hp", "serial": "4409208186V", "counter": "214335", "color_counter": "", "date": ""}]}, {"name": "احمد غنيم ريكو", "phone": "01204479958", "address": "الدخيلة الشارع الي قبل القسم القديم", "machines": [{"row": 65, "model": "2004 Mpc", "serial": "831436r746G", "counter": "4423", "color_counter": "9686", "date": "18/1/1447"}]}, {"name": "مسعد برنتر شوب", "phone": "01070278267", "address": "الدخيلة المكس", "machines": [{"row": 66, "model": "i5555", "serial": "9-2000.007.451n2", "counter": "1472267", "color_counter": "", "date": "20/1/1447"}, {"row": 67, "model": "6501", "serial": "7610900641V", "counter": "781039", "color_counter": "", "date": "20/1/1447"}, {"row": 68, "model": "2550 Mp", "serial": "6403800002M", "counter": "633880", "color_counter": "", "date": "20/1/1447"}, {"row": 69, "model": "3500 Mp", "serial": "2773300849M", "counter": "486128", "color_counter": "", "date": "20/1/1447"}, {"row": 70, "model": "6502 Mpc", "serial": "930039c234E", "counter": "413232", "color_counter": "991685", "date": "15/3/1447"}]}, {"name": "محمود عوض المحامي", "phone": "01282992359", "address": "اخر شارع ورشة البلاط", "machines": [{"row": 71, "model": "402 Mp", "serial": "01419hb176Y", "counter": "132731", "color_counter": "", "date": "22/1/1447"}, {"row": 72, "model": "4310 Sp", "serial": "1129160785T", "counter": "229980", "color_counter": "", "date": "15/3/1447"}]}, {"name": "شريف أكاديمية المجد", "phone": "01030077377", "address": "اخر شارع فضه عند مجمع المدارس", "machines": [{"row": 73, "model": "2500 Mpc", "serial": "3673803947L", "counter": "109305", "color_counter": "37000", "date": "29/1/1447"}]}, {"name": "محمد سعيد جربنا فلاتر", "phone": "01279236203", "address": "نص شارع خيرا قديم", "machines": [{"row": 74, "model": "2022 Mp", "serial": "1074301412M", "counter": "", "color_counter": "", "date": ""}, {"row": 75, "model": "ci3252", "serial": "8441207s2W", "counter": "215163", "color_counter": "117917", "date": "5/8/1447"}]}, {"name": "مينا فست برنت Hp", "phone": "01279787574", "address": "شارع رضوان جنب كافتريا الرضوي", "machines": [{"row": 76, "model": "477 Hp مينا 1", "serial": "", "counter": "", "color_counter": "", "date": "8/2/1447"}, {"row": 77, "model": "477 Hp مينا 2", "serial": "", "counter": "", "color_counter": "", "date": "8/2/1447"}]}, {"name": "سنتر نولدج", "phone": "", "address": "الهانوفيل أمام محمصه هشام", "machines": [{"row": 78, "model": "2352 Mp", "serial": "500645k673w", "counter": "279187", "color_counter": "", "date": "10/2/1447"}]}, {"name": "مسعود تايم كمبيوتر", "phone": "01288111293", "address": "الهانوفيل", "machines": [{"row": 79, "model": "ليزر n436m Hp", "serial": "9bid6Cnvil", "counter": "", "color_counter": "", "date": "10/2/1447"}]}, {"name": "محمود مكاوي القويري", "phone": "01202189057", "address": "شارع مسجد القويري", "machines": [{"row": 81, "model": "5790 Ep", "serial": "9014761b3X", "counter": "403658", "color_counter": "", "date": "10/2/1447"}]}, {"name": "الحاج وحيد البطاش 305", "phone": "01154908064", "address": "الشارع الي أمام برج العائلة", "machines": [{"row": 82, "model": "305 Mpc", "serial": "04138pb794W", "counter": "37436", "color_counter": "27210", "date": "15/2/1447"}]}, {"name": "محمد كرم رشوان المحامي", "phone": "01228058447", "address": "البطاش بعد بنك القاهرة", "machines": [{"row": 83, "model": "3510 Sp", "serial": "301801q312T", "counter": "53957", "color_counter": "", "date": "15/2/1447"}]}, {"name": "ماجد", "phone": "", "address": "العجمي البحرية", "machines": [{"row": 84, "model": "307 Mpc", "serial": "C507p602380", "counter": "32195", "color_counter": "55424", "date": "18/2/1447"}]}, {"name": "حسن مكتبة الامل", "phone": "01228870496", "address": "البيطاش شرق", "machines": [{"row": 85, "model": "477 Hp", "serial": "b20q3D", "counter": "88182", "color_counter": "", "date": "23/2/1447"}, {"row": 86, "model": "57750p Hp", "serial": "1j350ci8Cn", "counter": "103739", "color_counter": "", "date": "23/2/1447"}, {"row": 87, "model": "5390 Ep", "serial": "004612Xbkg", "counter": "4208", "color_counter": "", "date": "3/9/1447"}]}, {"name": "عصام خليفه", "phone": "01554319383", "address": "الشارع الي أمام برج العائلة", "machines": [{"row": 88, "model": "كونيكا 3350 الالوان", "serial": "4021056659y4A", "counter": "119780", "color_counter": "", "date": "23/2/1447"}]}, {"name": "محمود الشاعر", "phone": "01003176764", "address": "شارع النموذجيه جنب المعهد السعودي", "machines": [{"row": 89, "model": "2050 Mpc", "serial": "2294302168V", "counter": "138548", "color_counter": "47307", "date": "23/2/1447"}]}, {"name": "محمد احمد البلشي ريكو 3600", "phone": "01224400158", "address": "البطاش", "machines": [{"row": 90, "model": "4510 Sp", "serial": "00170ha574T", "counter": "82983", "color_counter": "", "date": "25/2/1447"}]}, {"name": "سيف مكتبة", "phone": "01223784239", "address": "جنب بنزينه وليبيا", "machines": [{"row": 91, "model": "5290 Ep", "serial": "4012009c3X", "counter": "606375", "color_counter": "", "date": "25/2/1447"}]}, {"name": "ماهر المعهد السعودي", "phone": "01227658222", "address": "شارع مدرسه النموذجيه", "machines": [{"row": 92, "model": "477 Hp", "serial": "dv352l92Cn", "counter": "621292", "color_counter": "", "date": "10/3/1447"}]}, {"name": "عبد الله من جناكليس Hp", "phone": "01011850521", "address": "جناكليس", "machines": [{"row": 93, "model": "58650 Hp", "serial": "komp6g76Cn", "counter": "405637", "color_counter": "", "date": "15/3/1447"}, {"row": 94, "model": "58650 Hp", "serial": "fkopj231Cn", "counter": "160146", "color_counter": "", "date": "15/3/1447"}, {"row": 95, "model": "58650 Hp", "serial": "s03k7736Cn", "counter": "517", "color_counter": "", "date": "21/12/1447"}, {"row": 96, "model": "556 Hp", "serial": "5j0c9Cnxzl", "counter": "984888", "color_counter": "", "date": "15/3/1447"}]}, {"name": "الشيخ محمود صابر سنتر نور", "phone": "01222936847", "address": "الهانوفيل فوق الصعيدي", "machines": [{"row": 97, "model": "i4056", "serial": "18402977Vq", "counter": "1479609", "color_counter": "", "date": "3/4/1447"}, {"row": 98, "model": "i4002", "serial": "07382y7Vnn", "counter": "917661", "color_counter": "", "date": "10/11/1447"}, {"row": 99, "model": "5290 Ep", "serial": "4013505c3X", "counter": "467607", "color_counter": "", "date": "3/4/1447"}, {"row": 100, "model": "5390 Ep", "serial": "012223XBkf", "counter": "598152", "color_counter": "", "date": "10/11/1447"}]}, {"name": "احمد السعودي برج العرب", "phone": "01024266631", "address": "برج العرب الجديدة", "machines": [{"row": 101, "model": "2051 Mpc", "serial": "V9724600202", "counter": "76088", "color_counter": "40068", "date": "9/4/1447"}, {"row": 102, "model": "2051 Mpc", "serial": "V973402210", "counter": "85594", "color_counter": "75918", "date": "9/4/1447"}]}, {"name": "يحيي مكتبة الفيروز برج العرب", "phone": "01226839881", "address": "برج العرب الجديدة", "machines": [{"row": 103, "model": "58650E Hp", "serial": "jz0z7Cnczl", "counter": "206825", "color_counter": "", "date": "9/4/1447"}, {"row": 104, "model": "ci5551", "serial": "Km08ae45", "counter": "443846", "color_counter": "129607", "date": "9/4/1447"}]}, {"name": "مصطفي مكتبة فري ابويوسف", "phone": "01013501960", "address": "ابو يوسف قبل الملاهي", "machines": [{"row": 106, "model": "2800 Mpc", "serial": "1404604485V", "counter": "784951", "color_counter": "70794", "date": "9/4/1447"}, {"row": 107, "model": "2800 Mpc", "serial": "1494502864V", "counter": "266069", "color_counter": "13519", "date": "9/4/1447"}]}, {"name": "شركة الحرمين", "phone": "01227729421", "address": "اخر شارع عجم استار", "machines": [{"row": 108, "model": "كونيكا 3350 الالوان", "serial": "021003742gn3A", "counter": "", "color_counter": "00239525", "date": "13/4/1447"}]}, {"name": "كريم مكتبة فرست الحضري", "phone": "01272965317", "address": "الحضره جنب مستشفي الجامعي", "machines": [{"row": 109, "model": "5790 Ep", "serial": "8061767b3X", "counter": "104495", "color_counter": "", "date": "30/4/1447"}]}, {"name": "ابو انس صاحب الصعيدي", "phone": "01227633866", "address": "", "machines": [{"row": 110, "model": "4210 Sp كيوسيرا", "serial": "0640431152S", "counter": "331", "color_counter": "", "date": "1/5/1447"}]}, {"name": "سنتر الصادق تبع محمد سعيد", "phone": "01207156826", "address": "شارع الضروري ماما فاتكي", "machines": [{"row": 111, "model": "477 Hp", "serial": "550x3g99Cn", "counter": "341757", "color_counter": "", "date": "8/5/1447"}, {"row": 112, "model": "307 Mpc", "serial": "C507p500319", "counter": "206152", "color_counter": "979", "date": "10/11/1447"}]}, {"name": "احمد مصطفي مدرسة النارمان", "phone": "01555690688", "address": "الشارع الي علي يار عبد المدارس", "machines": [{"row": 113, "model": "307 Mpc", "serial": "C507p500126", "counter": "001112", "color_counter": "27785", "date": "12/4/1447"}]}, {"name": "احمد نور دحروج برج العرب", "phone": "01070989789", "address": "برج العرب", "machines": [{"row": 114, "model": "m5521 كيوسيرا", "serial": "Vdx852025", "counter": "78101", "color_counter": "", "date": "11/4/1447"}]}, {"name": "سيد الداخل تبع الكتكت", "phone": "01227046669", "address": "البطاش الكتكت بجوار مبني كببانك", "machines": [{"row": 115, "model": "305 Mpc", "serial": "7964p401745", "counter": "395305", "color_counter": "", "date": ""}]}, {"name": "مكتبة علاء الدين يونس", "phone": "01273232036", "address": "ابو يوسف مدرسة النارمان رقم 3", "machines": [{"row": 116, "model": "5290 Ep", "serial": "348524X3c4", "counter": "401474", "color_counter": "", "date": "4/6/1447"}, {"row": 117, "model": "5790 Ep", "serial": "10550X3b8", "counter": "057601", "color_counter": "", "date": "4/6/1447"}, {"row": 118, "model": "5210 Ep", "serial": "137181X3Bx", "counter": "069587", "color_counter": "", "date": "4/6/1447"}, {"row": 119, "model": "5210 Ep", "serial": "234751X3bx", "counter": "069772", "color_counter": "", "date": "23/9/1447"}, {"row": 120, "model": "5290 Ep", "serial": "107169X3C4", "counter": "011392", "color_counter": "", "date": "4/6/1447"}, {"row": 121, "model": "3501 Mpc", "serial": "9413800490V", "counter": "504923", "color_counter": "285232", "date": "4/6/1447"}]}, {"name": "هبه مكتبة الحبيب بيبسون القباري", "phone": "01283896136", "address": "شارع قريب من مسجد عثمان", "machines": [{"row": 123, "model": "5290 Ep", "serial": "", "counter": "", "color_counter": "", "date": "17/6/1447"}, {"row": 124, "model": "300 Mpc", "serial": "5723400006823", "counter": "83395", "color_counter": "173105", "date": "23/7/1447"}, {"row": 125, "model": "401 Mpc", "serial": "G094p600189", "counter": "23952", "color_counter": "394866", "date": "23/7/1447"}]}, {"name": "شركة كاملك المهندس كيوسيرا 2640", "phone": "01007473100", "address": "برج العرب", "machines": [{"row": 126, "model": "2640 كيوسيرا", "serial": "Vcn8816031", "counter": "155191", "color_counter": "740", "date": ""}]}, {"name": "الشيخ مصطفي الحاج عادل كيوسيرا", "phone": "01282477043", "address": "مسجد عبد الكبير القباري الشمال", "machines": [{"row": 127, "model": "301 Mp", "serial": "108281W908p5", "counter": "013302", "color_counter": "", "date": "2/7/1447"}]}, {"name": "الحاج عادل الخردواتي القباري", "phone": "01227930355", "address": "القباري الشارع الي قدام مستشفي القباري", "machines": [{"row": 128, "model": "3350 Mp ليزر", "serial": "6203900104M", "counter": "482632", "color_counter": "", "date": "23/7/1447"}, {"row": 129, "model": "ic 3207 ليزر", "serial": "9603983Rgs", "counter": "112754", "color_counter": "", "date": "2/7/1447"}]}, {"name": "الحاج إبراهيم القباري كيوسيرا", "phone": "01227702015", "address": "القباري عند الترسانة البحارية", "machines": [{"row": 130, "model": "ci5053", "serial": "00537z88Rf", "counter": "487361", "color_counter": "", "date": "23/7/1447"}]}, {"name": "ياسر ابو ملك", "phone": "01201900560", "address": "اول شارع ابو يوسف", "machines": [{"row": 132, "model": "3030 Mp", "serial": "8663901455K", "counter": "1292342", "color_counter": "", "date": "7/7/1447"}]}, {"name": "مكتبة كادي", "phone": "01212483259", "address": "أمام مدرسة شباب المستقبل", "machines": [{"row": 133, "model": "ci 3206", "serial": "25768z38Vg", "counter": "218393", "color_counter": "36429", "date": "21/7/1447"}]}, {"name": "محمد منصور المحامي", "phone": "01227063354", "address": "21", "machines": [{"row": 134, "model": "5420 Sp", "serial": "00325ha587T", "counter": "52264", "color_counter": "", "date": "25/7/1447"}]}, {"name": "مصطفى ديشا", "phone": "", "address": "", "machines": [{"row": 135, "model": "477 Hp", "serial": "Cn759gj03s", "counter": "20323", "color_counter": "", "date": "2/8/1447"}]}, {"name": "فتحي سنترال زين الاسناوي ريكو", "phone": "01200033898", "address": "بعد شارع الصينيه من المكس", "machines": [{"row": 136, "model": "201 Mp", "serial": "3058802287W", "counter": "247036", "color_counter": "", "date": "16/8/1447"}]}, {"name": "نور سعد مكتبة نور الدين", "phone": "01278267901", "address": "الهانوفيل جنب مسجد محمد موسي", "machines": [{"row": 137, "model": "577 Hp", "serial": "", "counter": "365445", "color_counter": "", "date": "25/8/1447"}, {"row": 138, "model": "2500 Mpc", "serial": "3673702597L", "counter": "823012", "color_counter": "", "date": "12/11/1446"}, {"row": 139, "model": "2500 Mpc", "serial": "5084300000M", "counter": "157697", "color_counter": "158478", "date": "12/11/1446"}]}, {"name": "خميس مكتبة ورقة وقلم ابو يوسف", "phone": "01221674437", "address": "شارع الارمان شمال", "machines": [{"row": 140, "model": "3002 Mpc", "serial": "02821kc492W", "counter": "633182", "color_counter": "141751", "date": "3/9/1447"}]}, {"name": "فاتن فاروق", "phone": "", "address": "", "machines": [{"row": 141, "model": "515 Hp", "serial": "Cn0ae3s28d", "counter": "11021", "color_counter": "", "date": "3/9/1447"}]}, {"name": "محمد عامر", "phone": "01226604057", "address": "", "machines": [{"row": 142, "model": "201 Mp", "serial": "3069200469W", "counter": "117295", "color_counter": "", "date": "6/10/1447"}]}, {"name": "صبحي قاسم", "phone": "01222739385", "address": "", "machines": [{"row": 143, "model": "477 Hp", "serial": "Cn96rjy0sp", "counter": "1049558", "color_counter": "", "date": "7/12/1447"}]}, {"name": "احمد فتحي", "phone": "01222799983", "address": "", "machines": [{"row": 144, "model": "4510 Sp", "serial": "102128h577T", "counter": "12423", "color_counter": "", "date": "20/10/1447"}, {"row": 145, "model": "2650 كيوسيرا C", "serial": "Vnh6900114", "counter": "33541", "color_counter": "", "date": "20/10/1447"}]}, {"name": "عماد سمير ردبيكس", "phone": "01207984450", "address": "", "machines": [{"row": 147, "model": "407 Mpc", "serial": "200144p497C", "counter": "40935", "color_counter": "35989", "date": "4/11/1447"}]}, {"name": "ياسين تامر برنتر كيوسيرا", "phone": "01211746232", "address": "البطاش عند شارع إبراهيم عثمان", "machines": [{"row": 148, "model": "i4035", "serial": "", "counter": "", "color_counter": "", "date": "10/11/1447"}]}, {"name": "عماد نصر المحامي", "phone": "01282879282", "address": "", "machines": [{"row": 150, "model": "201 Mp", "serial": "0189005017M", "counter": "122374", "color_counter": "", "date": "10/11/1447"}]}, {"name": "محمد مكتبة الرياض البطاش", "phone": "01112279974", "address": "البطاش شارع مكه", "machines": [{"row": 151, "model": "577 Hp", "serial": "033clhy7Cn", "counter": "402549", "color_counter": "", "date": "18/11/1447"}]}, {"name": "ام مصطفى", "phone": "01026565253", "address": "أمام مدرسة شباب المستقبل", "machines": [{"row": 152, "model": "3501 Mpc", "serial": "9363277698V", "counter": "141577", "color_counter": "67771", "date": "21/11/1447"}]}, {"name": "مكتبة الاستاذ هنوفيل", "phone": "01229002561", "address": "الهانوفيل عند شركة الكهرباء", "machines": [{"row": 153, "model": "5290 Ep", "serial": "4010561c3X", "counter": "216343", "color_counter": "", "date": "21/11/1447"}, {"row": 154, "model": "ci 2507", "serial": "9402769Rgt", "counter": "98649", "color_counter": "", "date": "21/11/1447"}]}, {"name": "لؤي الهانوفيل", "phone": "01279107627", "address": "الهانوفيل", "machines": [{"row": 155, "model": "5420 Sp", "serial": "400621h588T", "counter": "240919", "color_counter": "", "date": ""}]}, {"name": "تبع اسلام المربع الذهبي", "phone": "01271187338", "address": "الحديد والصلب", "machines": [{"row": 157, "model": "3352 Mp", "serial": "700061k683W", "counter": "165622", "color_counter": "", "date": "21/12/1447"}]}, {"name": "محمد قبيصي", "phone": "01200798230", "address": "", "machines": [{"row": 158, "model": "300 Mpc", "serial": "7313700286S", "counter": "192422", "color_counter": "162951", "date": "21/12/1447"}]}], "serials_index": {"4121009313Y4A": {"customer": "محمد رمضان المحامي", "model": "كونيكا 3350 الالوان", "phone": "01277027206", "address": "مساكن الصينيه", "counter": ""}, "00.014.012F-3LV2": {"customer": "محمد رمضان المحامي", "model": "4200 كيوسيرا", "phone": "01277027206", "address": "مساكن الصينيه", "counter": "26199"}, "07951PC914W": {"customer": "عمرو مدرسة سمير موسي", "model": "301 Mp", "phone": "01272858781", "address": "مجمع مدارس فضه", "counter": ""}, "901502P517C": {"customer": "ام جمال قصر القويري", "model": "307 Mpc", "phone": "01066707814", "address": "شارع قصر القويري هنوفيل", "counter": ""}, "2041124XBK": {"customer": "محمد مكتبة أية 21", "model": "5890 Ep", "phone": "01117273115", "address": "عند مدرسة شرين 21", "counter": ""}, "021354XBKF": {"customer": "محمد مكتبة أية 21", "model": "5390 Ep", "phone": "01117273115", "address": "عند مدرسة شرين 21", "counter": ""}, "7214101185S": {"customer": "سيد", "model": "300 Mpc", "phone": "01281759461", "address": "شارع فضه قريب من اسامه فضه", "counter": ""}, "17258Y7N2W": {"customer": "اسلام المربع الذهبي", "model": "ci 4052 K كيوسيرا", "phone": "01271187338", "address": "الهانوفيل المربع الذهبي", "counter": ""}, "VM0MMY15CN": {"customer": "اسلام المربع الذهبي", "model": "55250 Hp", "phone": "01271187338", "address": "الهانوفيل المربع الذهبي", "counter": "582837"}, "D3Q21D": {"customer": "اسلام المربع الذهبي", "model": "577 Hp", "phone": "01271187338", "address": "الهانوفيل المربع الذهبي", "counter": "411616"}, "9H0MJY98CN": {"customer": "اسلام المربع الذهبي", "model": "577 Hp", "phone": "01271187338", "address": "الهانوفيل المربع الذهبي", "counter": "155733"}, "4010302C3X": {"customer": "خالد بخيت القويري", "model": "5290 Ep", "phone": "01018869824", "address": "مسجد القويري", "counter": "394930"}, "4014494C3X": {"customer": "خالد بخيت القويري", "model": "5290 Ep", "phone": "01018869824", "address": "مسجد القويري", "counter": ""}, "4006934C3X": {"customer": "خالد بخيت القويري", "model": "5290 Ep", "phone": "01018869824", "address": "مسجد القويري", "counter": ""}, "8353802293J": {"customer": "ابو حماده مدرسة زياد بن حارثة", "model": "2022 Mp", "phone": "01229952790", "address": "مجمع مدارس فضه", "counter": ""}, "3068700414W": {"customer": "سنتر الدراسيه الحاج حلمي", "model": "201 Mp", "phone": "01284512904", "address": "اول خيرا", "counter": ""}, "039JKJ56CN": {"customer": "مكتبة ادهم 21", "model": "451 Hp", "phone": "01115860004", "address": "شارع مدرسه شرين ك 21", "counter": ""}, "CNJKOXN4CN": {"customer": "اسامه فضه", "model": "476 Hp", "phone": "01280205128", "address": "مجمع مدارس فضه قديم", "counter": ""}, "100522P688X": {"customer": "محمد تبع محمود علي كرموز", "model": "440 Spc", "phone": "01278090417", "address": "اخر مواصله كرموز", "counter": ""}, "703731P908W": {"customer": "محمد تبع محمود علي كرموز", "model": "301 Mp", "phone": "01278090417", "address": "اخر مواصله كرموز", "counter": ""}, "601392H596T": {"customer": "محمد إسماعيل", "model": "4510 Sp", "phone": "01067868672", "address": "اخر البطاش شارع فرع فودافون قديم", "counter": ""}, "37E1921": {"customer": "احمد خفاجي", "model": "477 Hp", "phone": "01226830646", "address": "اخر شارع خفاجي بعد مسجد ابو عمر", "counter": ""}, "9823800326V": {"customer": "احمد خفاجي", "model": "2050 Mpc", "phone": "01226830646", "address": "اخر شارع خفاجي بعد مسجد ابو عمر", "counter": ""}, "8847305S2W": {"customer": "احمد خفاجي", "model": "ci3252", "phone": "01226830646", "address": "اخر شارع خفاجي بعد مسجد ابو عمر", "counter": "455077"}, "68407699VG": {"customer": "احمد خفاجي", "model": "ci4006", "phone": "01226830646", "address": "اخر شارع خفاجي بعد مسجد ابو عمر", "counter": "128318"}, "5289603377S": {"customer": "احمد خفاجي", "model": "4210 Sp", "phone": "01226830646", "address": "اخر شارع خفاجي بعد مسجد ابو عمر", "counter": "13791"}, "9084300535L": {"customer": "ابو حماده مدرسة زياد بن حارثة", "model": "4500 Mpc", "phone": "01229952790", "address": "مجمع مدارس فضه", "counter": ""}, "010SGZ73CN": {"customer": "اسامه فضه", "model": "477 Hp", "phone": "01280205128", "address": "مجمع مدارس فضه", "counter": "479701"}, "1148761862T": {"customer": "اسامه فضه", "model": "4310 Sp", "phone": "01280205128", "address": "مجمع مدارس فضه قديم", "counter": "479701"}, "3399866617": {"customer": "المحكمة", "model": "7030 B", "phone": "01277150543", "address": "محكمة الدخيلة", "counter": ""}, "CNC1M6907L": {"customer": "المحكمة", "model": "Hp laser E72525", "phone": "01277150543", "address": "محكمة الدخيلة", "counter": "158949"}, "M05QCY53CN": {"customer": "علي الجندي الطلخاوي", "model": "585 Hp", "phone": "01211480805", "address": "اول شارع الطلخاوي علي اليمين قديم", "counter": ""}, "1149264549T": {"customer": "مدرسة فرست بلس", "model": "4310 Sp", "phone": "01113555264", "address": "شارع الصفا عند المسجد الأول", "counter": "67169"}, "00182PC903W": {"customer": "مدرسة فرست بلس", "model": "301 Mp", "phone": "01113555264", "address": "شارع الصفا عند المسجد الأول", "counter": ""}, "1BDKOM92CN": {"customer": "مدرسة فرست بلس", "model": "58650 Hp", "phone": "01113555264", "address": "شارع الصفا عند المسجد الأول", "counter": ""}, "5004469C3X": {"customer": "مدرسة فرست بلس", "model": "5290 Ep", "phone": "01113555264", "address": "شارع الصفا عند المسجد الأول", "counter": ""}, "5003906C3X": {"customer": "مدرسة فرست بلس", "model": "5290 Ep", "phone": "01113555264", "address": "شارع الصفا عند المسجد الأول", "counter": ""}, "Y800016ABJEH77Z": {"customer": "ابو انس سنترال الريان", "model": "سامسونج 6260", "phone": "01283389093", "address": "سنترال الريان شارع السلام الهانوفيل", "counter": ""}, "01433HC596T": {"customer": "ايهاب الجمال المحامي", "model": "اسكنر 4510 Sp", "phone": "01093130253", "address": "شارع الخلفاء الراشدين امام بنك مصر الهانوفيل", "counter": ""}, "02391HA575T": {"customer": "ايهاب الجمال المحامي", "model": "4510 Sp", "phone": "01093130253", "address": "شارع الخلفاء الراشدين امام بنك مصر الهانوفيل", "counter": ""}, "00765PA446G": {"customer": "طه احمد برج العرب", "model": "306 Mpc", "phone": "01114766585", "address": "برج العرب", "counter": ""}, "000762XBKG": {"customer": "مكتبة عمرو المختار اكتوبر", "model": "5390 Ep", "phone": "", "address": "شارع 4 علي 25 اكتوبر ك 21", "counter": ""}, "005655XBKG": {"customer": "مكتبة عمرو المختار اكتوبر", "model": "5390 Ep", "phone": "", "address": "شارع 4 علي 25 اكتوبر ك 21", "counter": "12589"}, "000933XBKG": {"customer": "كابتن احمد الغندور", "model": "5390 Ep", "phone": "01024690017", "address": "العوايد", "counter": ""}, "4015603C3X": {"customer": "كابتن احمد الغندور", "model": "5290 Ep", "phone": "01024690017", "address": "العوايد", "counter": ""}, "2204704117V": {"customer": "عبد الرحمن سنترال العربي", "model": "2050 Mpc", "phone": "01095239060", "address": "القباري سنترال العربي", "counter": ""}, "2204102468V": {"customer": "عبد الرحمن سنترال العربي", "model": "2050 Mpc", "phone": "01095239060", "address": "القباري سنترال العربي", "counter": ""}, "CYOGN592CN": {"customer": "علي الجندي الطلخاوي", "model": "585 Hp", "phone": "01211480805", "address": "اول شارع الطلخاوي علي اليمين", "counter": ""}, "079VCY58CN": {"customer": "علي الجندي الطلخاوي", "model": "585 Hp", "phone": "01211480805", "address": "اول شارع الطلخاوي علي اليمين", "counter": "75343"}, "021Y4674CN": {"customer": "علي الجندي الطلخاوي", "model": "585 Hp", "phone": "01211480805", "address": "اول شارع الطلخاوي علي اليمين", "counter": "75343"}, "J05Y4H46CN": {"customer": "علي الجندي الطلخاوي", "model": "585 Hp", "phone": "01211480805", "address": "رقم 7 اول شارع الطلخاوي", "counter": "257905"}, "KR0MKJ59CN": {"customer": "علي الجندي الطلخاوي", "model": "476 Hp", "phone": "01211480805", "address": "اول شارع الطلخاوي علي اليمين", "counter": "91518"}, "B20Q3D": {"customer": "حسن مكتبة الامل", "model": "477 Hp", "phone": "01228870496", "address": "البيطاش شرق", "counter": "88182"}, "R02CNGQJY": {"customer": "علي الجندي الطلخاوي", "model": "477 Hp", "phone": "01211480805", "address": "رقم 5 اول شارع الطلخاوي", "counter": "277742"}, "FV0Z7CNCZL": {"customer": "علي الجندي الطلخاوي", "model": "58650E Hp", "phone": "01211480805", "address": "رقم 4 اول شارع الطلخاوي", "counter": "34306"}, "9B0BK864CN": {"customer": "علي الجندي الطلخاوي", "model": "58650E Hp", "phone": "01211480805", "address": "رقم 4 اول شارع الطلخاوي", "counter": "98664"}, "G09BK2C7CN": {"customer": "علي الجندي الطلخاوي", "model": "58650E Hp", "phone": "01211480805", "address": "رقم 2 اول شارع الطلخاوي", "counter": "70992"}, "JT0LFK15CN": {"customer": "علي الجندي الطلخاوي", "model": "58650E Hp", "phone": "01211480805", "address": "رقم 1 اول شارع الطلخاوي", "counter": "153142"}, "017934XBKF": {"customer": "محمد سعيد الخلفاء ep", "model": "5390 Ep", "phone": "01289050156", "address": "الهانوفيل شارع الخلفاء", "counter": "42983"}, "07673Z7VNN": {"customer": "محمد سعيد الخلفاء ep", "model": "i4002", "phone": "01289050156", "address": "الهانوفيل شارع الخلفاء", "counter": "532545"}, "9401943RGS": {"customer": "محمد سعيد الخلفاء ep", "model": "ic 3207", "phone": "01289050156", "address": "الهانوفيل شارع الخلفاء", "counter": "187885"}, "831436R746G": {"customer": "احمد غنيم ريكو", "model": "2004 Mpc", "phone": "01204479958", "address": "الدخيلة الشارع الي قبل القسم القديم", "counter": "4423"}, "9-2000.007.451N2": {"customer": "مسعد برنتر شوب", "model": "i5555", "phone": "01070278267", "address": "الدخيلة المكس", "counter": "1472267"}, "7610900641V": {"customer": "مسعد برنتر شوب", "model": "6501", "phone": "01070278267", "address": "الدخيلة المكس", "counter": "781039"}, "6403800002M": {"customer": "مسعد برنتر شوب", "model": "2550 Mp", "phone": "01070278267", "address": "الدخيلة المكس", "counter": "633880"}, "2773300849M": {"customer": "مسعد برنتر شوب", "model": "3500 Mp", "phone": "01070278267", "address": "الدخيلة المكس", "counter": "486128"}, "930039C234E": {"customer": "مسعد برنتر شوب", "model": "6502 Mpc", "phone": "01070278267", "address": "الدخيلة المكس", "counter": "413232"}, "01419HB176Y": {"customer": "محمود عوض المحامي", "model": "402 Mp", "phone": "01282992359", "address": "اخر شارع ورشة البلاط", "counter": "132731"}, "1129160785T": {"customer": "محمود عوض المحامي", "model": "4310 Sp", "phone": "01282992359", "address": "اخر شارع ورشة البلاط", "counter": "229980"}, "3673803947L": {"customer": "شريف أكاديمية المجد", "model": "2500 Mpc", "phone": "01030077377", "address": "اخر شارع فضه عند مجمع المدارس", "counter": "109305"}, "1074301412M": {"customer": "محمد سعيد جربنا فلاتر", "model": "2022 Mp", "phone": "01279236203", "address": "نص شارع خيرا قديم", "counter": ""}, "8441207S2W": {"customer": "محمد سعيد جربنا فلاتر", "model": "ci3252", "phone": "01279236203", "address": "نص شارع خيرا", "counter": "215163"}, "500645K673W": {"customer": "سنتر نولدج", "model": "2352 Mp", "phone": "", "address": "الهانوفيل أمام محمصه هشام", "counter": "279187"}, "9BID6CNVIL": {"customer": "مسعود تايم كمبيوتر", "model": "ليزر n436m Hp", "phone": "01288111293", "address": "الهانوفيل", "counter": ""}, "9014761B3X": {"customer": "محمود مكاوي القويري", "model": "5790 Ep", "phone": "01202189057", "address": "شارع مسجد القويري", "counter": "403658"}, "04138PB794W": {"customer": "الحاج وحيد البطاش 305", "model": "305 Mpc", "phone": "01154908064", "address": "الشارع الي أمام برج العائلة", "counter": "37436"}, "301801Q312T": {"customer": "محمد كرم رشوان المحامي", "model": "3510 Sp", "phone": "01228058447", "address": "البطاش بعد بنك القاهرة", "counter": "53957"}, "C507P602380": {"customer": "ماجد", "model": "307 Mpc", "phone": "", "address": "العجمي البحرية", "counter": "32195"}, "1J350CI8CN": {"customer": "حسن مكتبة الامل", "model": "57750p Hp", "phone": "01228870496", "address": "البيطاش شرق", "counter": "103739"}, "004612XBKG": {"customer": "حسن مكتبة الامل", "model": "5390 Ep", "phone": "01228870496", "address": "البيطاش شرق", "counter": "4208"}, "4021056659Y4A": {"customer": "عصام خليفه", "model": "كونيكا 3350 الالوان", "phone": "01554319383", "address": "الشارع الي أمام برج العائلة", "counter": "119780"}, "2294302168V": {"customer": "محمود الشاعر", "model": "2050 Mpc", "phone": "01003176764", "address": "شارع النموذجيه جنب المعهد السعودي", "counter": "138548"}, "00170HA574T": {"customer": "محمد احمد البلشي ريكو 3600", "model": "4510 Sp", "phone": "01224400158", "address": "البطاش", "counter": "82983"}, "4012009C3X": {"customer": "سيف مكتبة", "model": "5290 Ep", "phone": "01223784239", "address": "جنب بنزينه وليبيا", "counter": "606375"}, "DV352L92CN": {"customer": "ماهر المعهد السعودي", "model": "477 Hp", "phone": "01227658222", "address": "شارع مدرسه النموذجيه", "counter": "621292"}, "KOMP6G76CN": {"customer": "عبد الله من جناكليس Hp", "model": "58650 Hp", "phone": "01011850521", "address": "جناكليس", "counter": "405637"}, "FKOPJ231CN": {"customer": "عبد الله من جناكليس Hp", "model": "58650 Hp", "phone": "01011850521", "address": "جناكليس", "counter": "160146"}, "S03K7736CN": {"customer": "عبد الله من جناكليس Hp", "model": "58650 Hp", "phone": "01011850521", "address": "جناكليس", "counter": "517"}, "5J0C9CNXZL": {"customer": "عبد الله من جناكليس Hp", "model": "556 Hp", "phone": "01011850521", "address": "جناكليس", "counter": "984888"}, "18402977VQ": {"customer": "الشيخ محمود صابر سنتر نور", "model": "i4056", "phone": "01222936847", "address": "الهانوفيل فوق الصعيدي", "counter": "1479609"}, "07382Y7VNN": {"customer": "الشيخ محمود صابر سنتر نور", "model": "i4002", "phone": "01222936847", "address": "الهانوفيل فوق الصعيدي", "counter": "917661"}, "4013505C3X": {"customer": "الشيخ محمود صابر سنتر نور", "model": "5290 Ep", "phone": "01222936847", "address": "الهانوفيل فوق الصعيدي", "counter": "467607"}, "012223XBKF": {"customer": "الشيخ محمود صابر سنتر نور", "model": "5390 Ep", "phone": "01222936847", "address": "الهانوفيل فوق الصعيدي", "counter": "598152"}, "V9724600202": {"customer": "احمد السعودي برج العرب", "model": "2051 Mpc", "phone": "01024266631", "address": "برج العرب الجديدة", "counter": "76088"}, "V973402210": {"customer": "احمد السعودي برج العرب", "model": "2051 Mpc", "phone": "01024266631", "address": "برج العرب الجديدة", "counter": "85594"}, "JZ0Z7CNCZL": {"customer": "يحيي مكتبة الفيروز برج العرب", "model": "58650E Hp", "phone": "01226839881", "address": "برج العرب الجديدة", "counter": "206825"}, "KM08AE45": {"customer": "يحيي مكتبة الفيروز برج العرب", "model": "ci5551", "phone": "01226839881", "address": "برج العرب الجديدة", "counter": "443846"}, "1404604485V": {"customer": "مصطفي مكتبة فري ابويوسف", "model": "2800 Mpc", "phone": "01013501960", "address": "ابو يوسف قبل الملاهي", "counter": "784951"}, "1494502864V": {"customer": "مصطفي مكتبة فري ابويوسف", "model": "2800 Mpc", "phone": "01013501960", "address": "ابو يوسف قبل الملاهي", "counter": "266069"}, "021003742GN3A": {"customer": "شركة الحرمين", "model": "كونيكا 3350 الالوان", "phone": "01227729421", "address": "اخر شارع عجم استار", "counter": ""}, "8061767B3X": {"customer": "كريم مكتبة فرست الحضري", "model": "5790 Ep", "phone": "01272965317", "address": "الحضره جنب مستشفي الجامعي", "counter": "104495"}, "0640431152S": {"customer": "ابو انس صاحب الصعيدي", "model": "4210 Sp كيوسيرا", "phone": "01227633866", "address": "", "counter": "331"}, "550X3G99CN": {"customer": "سنتر الصادق تبع محمد سعيد", "model": "477 Hp", "phone": "01207156826", "address": "شارع الضروري ماما فاتكي", "counter": "341757"}, "C507P500319": {"customer": "سنتر الصادق تبع محمد سعيد", "model": "307 Mpc", "phone": "01207156826", "address": "شارع الضروري ماما فاتكي", "counter": "206152"}, "C507P500126": {"customer": "احمد مصطفي مدرسة النارمان", "model": "307 Mpc", "phone": "01555690688", "address": "الشارع الي علي يار عبد المدارس", "counter": "001112"}, "VDX852025": {"customer": "احمد نور دحروج برج العرب", "model": "m5521 كيوسيرا", "phone": "01070989789", "address": "برج العرب", "counter": "78101"}, "7964P401745": {"customer": "سيد الداخل تبع الكتكت", "model": "305 Mpc", "phone": "01227046669", "address": "البطاش الكتكت بجوار مبني كببانك", "counter": "395305"}, "348524X3C4": {"customer": "مكتبة علاء الدين يونس", "model": "5290 Ep", "phone": "01273232036", "address": "ابو يوسف مدرسة النارمان رقم 3", "counter": "401474"}, "10550X3B8": {"customer": "مكتبة علاء الدين يونس", "model": "5790 Ep", "phone": "01273232036", "address": "ابو يوسف مدرسة النارمان رقم 4", "counter": "057601"}, "137181X3BX": {"customer": "مكتبة علاء الدين يونس", "model": "5210 Ep", "phone": "01273232036", "address": "ابو يوسف مدرسة النارمان رقم 1", "counter": "069587"}, "234751X3BX": {"customer": "مكتبة علاء الدين يونس", "model": "5210 Ep", "phone": "01273232036", "address": "ابو يوسف مدرسة النارمان رقم 5", "counter": "069772"}, "107169X3C4": {"customer": "مكتبة علاء الدين يونس", "model": "5290 Ep", "phone": "01273232036", "address": "ابو يوسف مدرسة النارمان رقم 2", "counter": "011392"}, "9413800490V": {"customer": "مكتبة علاء الدين يونس", "model": "3501 Mpc", "phone": "01273232036", "address": "ابو يوسف مدرسة النارمان", "counter": "504923"}, "5723400006823": {"customer": "هبه مكتبة الحبيب بيبسون القباري", "model": "300 Mpc", "phone": "01283896136", "address": "شارع قريب من مسجد عثمان", "counter": "83395"}, "G094P600189": {"customer": "هبه مكتبة الحبيب بيبسون القباري", "model": "401 Mpc", "phone": "01283896136", "address": "شارع قريب من مسجد عثمان", "counter": "23952"}, "VCN8816031": {"customer": "شركة كاملك المهندس كيوسيرا 2640", "model": "2640 كيوسيرا", "phone": "01007473100", "address": "برج العرب", "counter": "155191"}, "108281W908P5": {"customer": "الشيخ مصطفي الحاج عادل كيوسيرا", "model": "301 Mp", "phone": "01282477043", "address": "مسجد عبد الكبير القباري الشمال", "counter": "013302"}, "6203900104M": {"customer": "الحاج عادل الخردواتي القباري", "model": "3350 Mp ليزر", "phone": "01227930355", "address": "القباري الشارع الي قدام مستشفي القباري", "counter": "482632"}, "9603983RGS": {"customer": "الحاج عادل الخردواتي القباري", "model": "ic 3207 ليزر", "phone": "01227930355", "address": "القباري الشارع الي قدام مستشفي القباري", "counter": "112754"}, "00537Z88RF": {"customer": "الحاج إبراهيم القباري كيوسيرا", "model": "ci5053", "phone": "01227702015", "address": "القباري عند الترسانة البحارية", "counter": "487361"}, "8663901455K": {"customer": "ياسر ابو ملك", "model": "3030 Mp", "phone": "01201900560", "address": "اول شارع ابو يوسف", "counter": "1292342"}, "25768Z38VG": {"customer": "مكتبة كادي", "model": "ci 3206", "phone": "01212483259", "address": "أمام مدرسة شباب المستقبل", "counter": "218393"}, "00325HA587T": {"customer": "محمد منصور المحامي", "model": "5420 Sp", "phone": "01227063354", "address": "21", "counter": "52264"}, "CN759GJ03S": {"customer": "مصطفى ديشا", "model": "477 Hp", "phone": "", "address": "", "counter": "20323"}, "3058802287W": {"customer": "فتحي سنترال زين الاسناوي ريكو", "model": "201 Mp", "phone": "01200033898", "address": "بعد شارع الصينيه من المكس", "counter": "247036"}, "3673702597L": {"customer": "نور سعد مكتبة نور الدين", "model": "2500 Mpc", "phone": "01278267901", "address": "الهانوفيل جنب مسجد محمد موسي", "counter": "823012"}, "5084300000M": {"customer": "نور سعد مكتبة نور الدين", "model": "2500 Mpc", "phone": "01278267901", "address": "الهانوفيل جنب مسجد محمد موسي", "counter": "157697"}, "02821KC492W": {"customer": "خميس مكتبة ورقة وقلم ابو يوسف", "model": "3002 Mpc", "phone": "01221674437", "address": "شارع الارمان شمال", "counter": "633182"}, "CN0AE3S28D": {"customer": "فاتن فاروق", "model": "515 Hp", "phone": "", "address": "", "counter": "11021"}, "3069200469W": {"customer": "محمد عامر", "model": "201 Mp", "phone": "01226604057", "address": "", "counter": "117295"}, "CN96RJY0SP": {"customer": "صبحي قاسم", "model": "477 Hp", "phone": "01222739385", "address": "", "counter": "1049558"}, "102128H577T": {"customer": "احمد فتحي", "model": "4510 Sp", "phone": "01222799983", "address": "", "counter": "12423"}, "VNH6900114": {"customer": "احمد فتحي", "model": "2650 كيوسيرا C", "phone": "01222799983", "address": "", "counter": "33541"}, "X2SS016576": {"customer": "محمد مكتبة أية 21", "model": "ep C869R", "phone": "01228981583", "address": "", "counter": "126845"}, "200144P497C": {"customer": "عماد سمير ردبيكس", "model": "407 Mpc", "phone": "01207984450", "address": "", "counter": "40935"}, "0189005017M": {"customer": "عماد نصر المحامي", "model": "201 Mp", "phone": "01282879282", "address": "", "counter": "122374"}, "033CLHY7CN": {"customer": "محمد مكتبة الرياض البطاش", "model": "577 Hp", "phone": "01112279974", "address": "البطاش شارع مكه", "counter": "402549"}, "9363277698V": {"customer": "ام مصطفى", "model": "3501 Mpc", "phone": "01026565253", "address": "أمام مدرسة شباب المستقبل", "counter": "141577"}, "4010561C3X": {"customer": "مكتبة الاستاذ هنوفيل", "model": "5290 Ep", "phone": "01229002561", "address": "الهانوفيل عند شركة الكهرباء", "counter": "216343"}, "9402769RGT": {"customer": "مكتبة الاستاذ هنوفيل", "model": "ci 2507", "phone": "01229002561", "address": "الهانوفيل عند شركة الكهرباء", "counter": "98649"}, "400621H588T": {"customer": "لؤي الهانوفيل", "model": "5420 Sp", "phone": "01279107627", "address": "الهانوفيل", "counter": "240919"}, "4409208186V": {"customer": "محمد سعيد الخلفاء ep", "model": "477 Hp", "phone": "01289050156", "address": "الهانوفيل شارع الخلفاء", "counter": "214335"}, "700061K683W": {"customer": "تبع اسلام المربع الذهبي", "model": "3352 Mp", "phone": "01271187338", "address": "الحديد والصلب", "counter": "165622"}, "7313700286S": {"customer": "محمد قبيصي", "model": "300 Mpc", "phone": "01200798230", "address": "", "counter": "192422"}}, "total_records": 153};
@@ -28387,13 +28665,13 @@ function _wsSort(k){_ws.sort=k;_wsRender();}
 function openWholesale(){
   if(!_wsGuard())return;
   _ws={from:'',to:'',sort:'total',id:''};
-  document.getElementById('modal-title').textContent='💼 الجملة — مهندسين الجملة';
+  document.getElementById('modal-title').textContent='🏷️ الجملة — مهندسين الجملة';
   document.getElementById('modal-body').innerHTML='<div id="ws-body"></div>';
   openModal();_wsRender();
 }
 function _wsRender(){
   var el=document.getElementById('ws-body');if(!el)return;_ws.id='';
-  document.getElementById('modal-title').textContent='💼 الجملة — مهندسين الجملة';
+  document.getElementById('modal-title').textContent='🏷️ الجملة — مهندسين الجملة';
   var D=_wsCompute(),t=D.tot;
   var sortB=[['total','💰 الأكثر شراءً'],['profit','📈 الأكثر ربحًا'],['remaining','⏳ الأعلى متبقي']];
   el.innerHTML=_wsFilterHtml()+
@@ -28646,7 +28924,7 @@ function openAddMovFromClient(clientId,machineIdx){
 // ========== MODULE: GUIDE ==========
 // ===== دليل الاستخدام =====
 navLabels['guide']='دليل الاستخدام';
-navIcons['guide']='📖';
+navIcons['guide']='❓';
 
 var GUIDE_SECTIONS=[
   {
@@ -31764,7 +32042,7 @@ async function __manualSyncNow(){
 function __moreSections(){
   var sectionsMap={
     myaccount:{
-      key:'myaccount',title:'👤 حسابي',icon:'👤',
+      key:'myaccount',title:'🙋 حسابي',icon:'🙋',
       // v165 — ملهاش لازمة للمالك (مهامي/أعطالي/راتبي — دي بيانات موظف مش المالك)
       items: (window.__currentProfile&&!window.__isOwner)?[
         {icon:'👤',label:'حسابي (مهامي وأعطالي وراتبي)',screen:'my-account',color:'#f5f3ff',tc:'#6d28d9'}
@@ -31791,29 +32069,29 @@ function __moreSections(){
         {icon:'📜',label:'قواعد وقوانين العمل',action:'openWorkRules()',color:'#fef3c7',tc:'#b45309'},
         {icon:'🎯',label:'الأهداف والخطط',action:'openGoals()',color:'#ccfbf1',tc:'#0f766e',ownerOnly:true},
         {icon:'💳',label:'الديون',screen:'debts',color:'#fee2e2',tc:'#dc2626'},
-        {icon:'💼',label:'الجملة (المهندسين)',action:'openWholesale()',color:'#ede9fe',tc:'#5b21b6',ownerOnly:true},
+        {icon:'🏷️',label:'الجملة (المهندسين)',action:'openWholesale()',color:'#ede9fe',tc:'#5b21b6',ownerOnly:true},
         {icon:'📣',label:'عرض لعملاء مكنة',action:'openBulkOffer()',color:'#ede9fe',tc:'#5b21b6'},
       ]
     },
     reports:{
-      key:'reports',title:'📊 كل التقارير والإحصائيات (الأساس)',icon:'📊',
+      key:'reports',title:'📈 كل التقارير والإحصائيات (الأساس)',icon:'📈',
       items:[
         {icon:'🧠',label:'مركز المعرفة (أعطال وخبرة)',action:'openKnowledgeCenter()',color:'#f5f3ff',tc:'#6d28d9'},
-        {icon:'🏭',label:'الإنتاج اليومي',action:'openDailyProduction()',color:'#ffedd5',tc:'#c2410c',ownerOnly:true},
+        {icon:'🏗️',label:'الإنتاج اليومي',action:'openDailyProduction()',color:'#ffedd5',tc:'#c2410c',ownerOnly:true},
         {icon:'👥',label:'تقرير المهندسين',action:'openEmployeesReport()',color:'#fff7ed',tc:'#c2410c',ownerOnly:true},
-        {icon:'📊',label:'تحليل مكن العملاء',action:'openMachineStats()',color:'#ecfeff',tc:'#0e7490'},
+        {icon:'🔬',label:'تحليل مكن العملاء',action:'openMachineStats()',color:'#ecfeff',tc:'#0e7490'},
         {icon:'🏢',label:'تقارير الشركات',action:'openCompaniesPicker()',color:'#eef2ff',tc:'#3730a3'},
         {icon:'🤝',label:'المستثمرين',action:'openInvestorsHub()',color:'#ecfdf5',tc:'#047857',ownerOnly:true},
-        {icon:'📒',label:'الحسابات',screen:'accounting',color:'#fdf2f8',tc:'#86198f'},
-        {icon:'🔧',label:'تقرير التحركات',screen:'movements-report',color:'#fdf2f8',tc:'#86198f'},
-        {icon:'📋',label:'تقرير المهمات',screen:'tasks-report',color:'#f0fdf4',tc:'#15803d'},
+        {icon:'🏦',label:'الحسابات',screen:'accounting',color:'#fdf2f8',tc:'#86198f'},
+        {icon:'🗂️',label:'تقرير التحركات',screen:'movements-report',color:'#fdf2f8',tc:'#86198f'},
+        {icon:'✅',label:'تقرير المهمات',screen:'tasks-report',color:'#f0fdf4',tc:'#15803d'},
       ]
     },
     admin:{
-      key:'admin',title:'⚙️ الإدارة',icon:'⚙️',
+      key:'admin',title:'🛡️ الإدارة',icon:'🛡️',
       items:[
         {icon:'⚙️',label:'الإعدادات',screen:'settings',color:'#f8fafc',tc:'#374151'},
-        {icon:'📖',label:'دليل الاستخدام',screen:'guide',color:'#fef9c3',tc:'#854d0e'},
+        {icon:'❓',label:'دليل الاستخدام',screen:'guide',color:'#fef9c3',tc:'#854d0e'},
         {icon:'🔍',label:'البحث الشامل',action:'openGlobalSearch()',color:'#f5f3ff',tc:'#6d28d9'},
         {icon:'📤',label:'تصدير نسخة',action:'exportBackup()',color:'#f0fdf4',tc:'#15803d'},
         {icon:'🔄',label:'مزامنة مع السيرفر',action:'__manualSyncNow()',color:'#eff6ff',tc:'#2563eb'},
@@ -31821,6 +32099,21 @@ function __moreSections(){
     }
   };
   return sectionsMap;
+}
+// ⚠️ v340 — فحص أيقونات التنقل والقوائم: كل عنصر في شريط التنقل وقائمة «المزيد» ليه أيقونة مختلفة (مفيش تكرار)، وأيقونات الأقسام مش بتتكرر مع عناصرها.
+// بيرجّع {dups:[{icon,items:[...]}],secDups:[...]} — لو فيه تكرار يبقى حد رجّع أيقونة مستخدمة قبل كده.
+function __iconAudit(){
+  var seen={},dups=[],secs={},secDups=[];
+  var put=function(ic,name){(seen[ic]=seen[ic]||[]).push(name);};
+  Object.keys(NAV_BAR_DEFS).forEach(function(k){put(NAV_BAR_DEFS[k].icon,'شريط: '+NAV_BAR_DEFS[k].label);});
+  var sm=__moreSections();
+  Object.keys(sm).forEach(function(k){
+    var sec=sm[k];secs[sec.icon]=(secs[sec.icon]||[]).concat([sec.title]);
+    sec.items.forEach(function(it){put(it.icon,sec.key+': '+it.label);});
+  });
+  Object.keys(seen).forEach(function(ic){if(seen[ic].length>1)dups.push({icon:ic,items:seen[ic]});});
+  Object.keys(secs).forEach(function(ic){if(secs[ic].length>1||seen[ic])secDups.push({icon:ic,secs:secs[ic],items:seen[ic]||[]});});
+  return {dups:dups,secDups:secDups};
 }
 function renderMore(){
   var el=document.getElementById('more-body');if(!el)return;
