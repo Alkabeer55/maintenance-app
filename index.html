@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v342</title>
+<title>ابو حوده الحلو الجميل v343</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -53,7 +53,7 @@ async function __netProbe(force){
   }catch(e3){}
   return ok;
 }
-/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="v342 — ٧ جمادى الآخرة ١٤٤٨ هـ";
+/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="v343 — ٨ جمادى الآخرة ١٤٤٨ هـ";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -132,6 +132,7 @@ async function __netProbe(force){
     36) ⚠️ v306 — المستثمرين: أي عملية مستثمر (إيداع/سحب/رد رأس مال/دفعة/دورة توزيع/مستثمر) لازم تعدّي بالترتيب: _invGuard(تاريخ العملية) ← _invBackup(سبب) ← التعديل ← _invAudit(...) ← persist. ممنوع تعديل نسبة أو تكلفة دفعة اتباع منها (النسبة بتتغيّر بـ pct_hist بتاريخ سريان عن طريق _invPctAt، والتكلفة بدفعة جديدة). ممنوع حذف دفعة عليها مبيعات أو مستثمر عليه حركات (أرشفة بدل الحذف). إقفال الشهر لازم يثبّت لقطة (_invTakeSnapshot) وأي دالة مستثمرين جديدة لازم تتضاف في __ONCE_GUARDED.
    ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v343: [🔄 رسالة المزامنة «محتاجة قرارك»: كانت بتقول «تعارض بعد دمج — clients» من غير ما تقول أنهي عميل ولا إيه اللي اختلف، فمكنش ينفع تقرر. دلوقتي كل تنبيه بيعرض نوع السجل واسمه + جدول بالحقول اللي اختلفت (نسختك ✔ مقابل الجهاز التاني)، وفوقه شرح بالعربي لمعنى التعارض (نفس السجل اتعدّل على جهازين قبل المزامنة؛ التطبيق دمج واحتفظ بنسختك ومفيش حاجة اتمسحت) وإيه معنى كل زر • الأزرار بقت: ✔ خلّي نسختي • ↩️ خد نسخة الجهاز التاني • 💾 ملف احتياطي • 🗑️ تجاهل التنبيه (نفس السلوك القديم بالظبط) + زر «✔ نسختي في الكل» لو أكتر من تنبيه • التعارض اللي بياناته متطابقة (فرق توقيت بس) بيتشال تلقائي • 🔒 الزر العايم بتاع المصروفات اتأكدت إنه ظاهر في تاب المصروفات بس (اختبار كل الشاشات والتابات) وزودت حارس]
 v342: [🧹 شاشة المصروفات (تصميم أ): (١) أكبر سبب للزحمة: فلتر الفترة (٤ أزرار + قايمتين + سطر) + فلتر «مين سجّل» + التابات كانوا في منطقة ثابتة (sticky) بتاكل حوالي ثلث الشاشة وإنت بتسكرول؛ دلوقتي الفترة زر واحد نحيف 📅 بيفتح نافذة (لكل تابات التقارير)، والتابات لوحدها ثابتة • (٢) المصروفات: شريط أرقام واحد (إجمالي + رواتب + دورية + معلّق) بدل ٣ كروت وزرّين كبار وفلتر حالة و٤ أزرار عرض؛ الأزرار السريعة في سطر واحد بيتحرك (أول ٦ + «⋯») من غير تكرار؛ زر عايم ＋ (مصروف جديد / مصروف ثابت)؛ 🔍 بحث؛ ⋮ نافذة فيها طريقة العرض والحالة والترتيب ومين سجّل والتحديد والعناوين والقوالب • (٣) 🌳 عرض «شجرة» افتراضي: عنوان (بنسبته وشريطه) ‹ فرع/موظف/التزام دوري ‹ المصروفات، والرواتب متجمّعة بالموظف؛ الأشكال القديمة (قايمة/مجمّعة/جدول/جدولين) لسه موجودة من ⋮ • ⚠️ شكل بس — مفيش أي حساب اتغيّر. مستوى «الجهة» الحقيقي (موظف/مورد/عميل) جاي في v344 مع عمود Supabase]
 v341: [🗂️ تنظيم العناوين والفروع (كانت كتير ومتلخبطة): (١) فورم المصروف: العناوين بقت مجمّعة ⭐ المفضلة / 🔥 الأكثر استخدامًا (٥) / 📁 الباقي أبجدي (لو أكتر من ٧)، وشرائح الفروع أول ٨ (المفضلة ثم الأكثر استخدامًا) والباقي «⋯ كمان N»؛ نفس الشيء في المصروف الدوري والدفعة والقوالب • (٢) شاشة الإدارة بقت أكورديون: كل عنوان مطوي بعدد مصروفاته، بحث، ترتيب (الأكثر استخدامًا/أبجدي)، ⭐ مفضلة لعنوان أو فرع، 📥 إخفاء بدل الحذف (مابيمسحش بيانات، وبيرجع من «المخفية»)، تنبيه «أسماء شبه بعض» (كهربا/كهرباء) بزر دمج، و«🧹 إخفاء غير المستخدم» بضغطة • الإعدادات في DB.settings.expCatsMeta (بتتزامن) وبتتنقل مع إعادة التسمية/النقل/الحذف/الدمج • ⚠️ مابتتحذفش حاجة اتستخدمت — بس بتتخفى]
 v340: [🎨 الأيقونات: كل عنصر في شريط التنقل وقائمة «المزيد» بقى له أيقونة لوحده — كان فيه تكرار (📊 لتحليل مكن العملاء ولتقرير التحركات والمهمات وزر التقارير، 📒 للحسابات ودفتر العملاء، 🏭 للإنتاج وأرشيف الموردين، 📖 للقرآن والدليل، 💼 للجملة وقسم العمليات، 🔧 و📋 لتقارير التحركات والمهمات زي شريط التنقل). الجديد: الحسابات 🏦 • تقرير التحركات 🗂️ • تقرير المهمات ✅ • تحليل مكن العملاء 🔬 • الإنتاج اليومي 🏗️ • الجملة 🏷️ • دليل الاستخدام ❓ وأقسام: حسابي 🙋 • التقارير 📈 • الإدارة 🛡️ — وعناوين الشاشات والهيدر اتحدّثت بنفس الأيقونة. + __iconAudit() بتفحص إن مفيش تكرار (لازم يرجّع dups و secDups فاضيين) • 🐛 إصلاح: هيدر شاشة «المزيد» كان بيكتب more بالإنجليزي • كشف حساب المورد 📑 بدل 📋]
@@ -5752,9 +5753,9 @@ var APP_TITLE=APP_CONFIG.name;
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=342;
+var APP_VERSION=343;
 // ⚠️ v303 — BUILD_STAMP كان مش متعرّف خالص (شاشة الإعدادات كانت بتعرض "?") — اتعرّف دلوقتي وبيتزود مع كل تحديث
-var BUILD_STAMP='v'+APP_VERSION+' — ٧ جمادى الآخرة ١٤٤٨ هـ'; // ⚠️ v331 — رقم النسخة بيتولّد من APP_VERSION (كان واقف على v323 لأن في تعريفين، والتاني بيكسب). ممنوع تكتب رقم نسخة يدوي هنا.
+var BUILD_STAMP='v'+APP_VERSION+' — ٨ جمادى الآخرة ١٤٤٨ هـ'; // ⚠️ v331 — رقم النسخة بيتولّد من APP_VERSION (كان واقف على v323 لأن في تعريفين، والتاني بيكسب). ممنوع تكتب رقم نسخة يدوي هنا.
 // ⚠️ v295 — عنوان الصفحة كان رقم نسخته ثابت ومتنسي (فضل v294 مع إن النسخة اتغيّرت). دلوقتي بياخد الرقم من APP_VERSION دايمًا.
 try{document.title=document.title.replace(/v\d+\s*$/,'v'+APP_VERSION);}catch(_eT){}
 
@@ -6574,7 +6575,85 @@ function __showNetDiag(hasQueue){
     '<div class="modal-actions"><button class="btn btn-green btn-full" onclick="__netProbe(true).then(function(){__showNetDiag('+(hasQueue?'true':'')+');})">🔎 فحص الاتصال الآن</button><button class="btn btn-outline btn-full" onclick="closeModal()">إغلاق</button></div>';
   openModal();
 }
+// ⚠️ v343 — رسالة «عمليات محتاجة قرار منك»: بقت بتقول أنهي سجل واتعدّل إيه، وبتختفي لوحدها لو مفيش فرق فعلي في البيانات.
+// المعنى: نفس السجل (عميل/مستثمر/...) اتعدّل على الجهاز ده وعلى جهاز تاني قبل المزامنة؛ التطبيق دمجهم واحتفظ بنسختك ومفيش حاجة اتمسحت.
+var __HELD_IGNORE={id:1,updated_at:1,created_at:1,updatedAt:1,createdAt:1,_dirty:1,synced:1,last_modified:1,_ts:1};
+var __HELD_LBL={name:'الاسم',phone:'التليفون',mobile:'الموبايل',address:'العنوان',notes:'ملاحظات',note:'ملاحظة',balance:'الرصيد',amount:'المبلغ',type:'النوع',status:'الحالة',pct:'النسبة',profit_share_pct:'نسبة الأرباح',capital:'رأس المال',date:'التاريخ',email:'الإيميل',title:'العنوان',label:'البيان',role:'الدور',salary:'المرتب',active:'نشط'};
+var __HELD_SUB={investors:'مستثمر',employees:'موظف',profit_cycles:'دورة توزيع',owner_withdrawals:'سحب مالك',contributions:'مساهمة',equity_adjustments:'تسوية',balance_snapshots:'لقطة'};
+function __heldRecords(h){
+  var mine=null;
+  try{
+    if(h.table==='accounts'){var arr=DB.accounts&&DB.accounts[h.sub];if(Array.isArray(arr))mine=arr.find(function(r){return r&&String(r.id)===String(h.rid);})||null;}
+    else if(h.table==='clients'){mine=(DB.clients||[]).find(function(r){return r&&String(r.id)===String(h.rid);})||null;}
+  }catch(e){}
+  return {mine:mine,server:(h.server===undefined?null:h.server)};
+}
+function __heldShort(v){
+  if(v===undefined||v===null||v==='')return '—';
+  if(Array.isArray(v))return v.length+' عنصر';
+  if(typeof v==='object'){var j=JSON.stringify(v);return j.length>38?j.slice(0,36)+'…':j;}
+  var t=String(v);return t.length>38?t.slice(0,36)+'…':t;
+}
+function __heldDiffs(m,sv){
+  var out=[];if(!m||!sv||typeof m!=='object'||typeof sv!=='object')return out;
+  var keys={};Object.keys(m).concat(Object.keys(sv)).forEach(function(k){keys[k]=1;});
+  Object.keys(keys).forEach(function(k){
+    if(__HELD_IGNORE[k])return;
+    var a=JSON.stringify(m[k]===undefined?null:m[k]),b=JSON.stringify(sv[k]===undefined?null:sv[k]);
+    if(a!==b)out.push({k:k,mine:m[k],server:sv[k]});
+  });
+  return out;
+}
+function __heldTitle(h,r){
+  var rec=r.mine||r.server||{},nm=rec.name||rec.title||rec.label||'';
+  var kind=h.table==='clients'?'عميل':(__HELD_SUB[h.sub]||(__SQ_LABELS[h.table]||h.table));
+  return {kind:kind,name:nm};
+}
+function __autoClearNoDiffHeld(){
+  var changed=false;
+  for(var i=__heldOps.length-1;i>=0;i--){
+    var h=__heldOps[i];
+    if(h&&h.kind==='blob_conflict'){
+      var r=__heldRecords(h);
+      if(r.mine&&r.server&&__heldDiffs(r.mine,r.server).length===0){__heldOps.splice(i,1);changed=true;}
+    }
+  }
+  if(changed){try{__saveHeld();}catch(e){} try{__refreshStatusBadge();}catch(e){}}
+}
+function __heldCardHtml(h,i){
+  var btn=function(label,act,col,full){return '<button onclick="__resolveHeld('+i+',\''+act+'\')" style="margin:4px 4px 0 0;background:'+col+';color:#fff;border:none;border-radius:8px;padding:7px 11px;font-size:11.5px;font-weight:800;cursor:pointer'+(full?';width:100%':'')+'">'+label+'</button>';};
+  if(h.kind!=='blob_conflict'){
+    var name=(__SQ_LABELS[h.table]||h.table),kindTxt={perm:'🚫 اتمنعت (صلاحية)',conflict:'⚠️ تعارض'};
+    return '<div style="background:#fef2f2;border:1px solid #fecaca;border-radius:10px;padding:9px 11px;margin-bottom:7px;font-size:12px;line-height:1.8"><div style="font-weight:800">'+(kindTxt[h.kind]||h.kind)+' — '+esc(name)+' <span style="font-weight:600;color:#64748b">('+(h.op==='delete'?'حذف':'إضافة/تعديل')+')</span></div><div style="color:#7f1d1d">'+esc(h.reason||'')+'</div>'+
+      (h.kind==='conflict'?btn('اعتمد نسختي','mine','#2563eb')+btn('اعتمد نسخة السيرفر','server','#16a34a'):btn('حاول تاني','retry','#2563eb'))+btn('💾 نزّل نسخة','download','#475569')+btn('🗑️ تجاهل (بعد تنزيل نسخة)','drop','#dc2626')+'</div>';
+  }
+  var r=__heldRecords(h),t=__heldTitle(h,r),diffs=__heldDiffs(r.mine,r.server),serverGone=(r.server===null||r.server===undefined);
+  var tbl='';
+  if(serverGone){tbl='<div style="background:#fff;border-radius:8px;padding:7px 9px;margin:6px 0;color:#7f1d1d">🗑️ الجهاز التاني <b>حذف</b> السجل ده، ونسختك لسه موجودة عندك.</div>';}
+  else if(!r.mine){tbl='<div style="background:#fff;border-radius:8px;padding:7px 9px;margin:6px 0;color:#7f1d1d">نسختك مش موجودة عندك دلوقتي (اتشالت)، والجهاز التاني عنده نسخة.</div>';}
+  else if(diffs.length){
+    tbl='<div style="background:#fff;border-radius:8px;padding:6px 8px;margin:6px 0"><div style="display:grid;grid-template-columns:.8fr 1.2fr 1.2fr;gap:4px;font-size:10px;color:#94a3b8;font-weight:800;padding-bottom:3px;border-bottom:1px solid #f1f5f9"><span>الحقل</span><span>نسختك ✔</span><span>الجهاز التاني</span></div>'+
+      diffs.slice(0,6).map(function(d){return '<div style="display:grid;grid-template-columns:.8fr 1.2fr 1.2fr;gap:4px;font-size:11.5px;padding:3px 0;border-bottom:1px solid #f8fafc"><span style="color:#64748b">'+esc(__HELD_LBL[d.k]||d.k)+'</span><b style="color:#1d4ed8;word-break:break-word">'+esc(__heldShort(d.mine))+'</b><span style="color:#15803d;word-break:break-word">'+esc(__heldShort(d.server))+'</span></div>';}).join('')+
+      (diffs.length>6?'<div style="font-size:10.5px;color:#94a3b8;margin-top:3px">+ '+(diffs.length-6)+' فرق تاني</div>':'')+'</div>';
+  }
+  return '<div style="background:#fef2f2;border:1px solid #fecaca;border-radius:10px;padding:9px 11px;margin-bottom:8px;font-size:12px;line-height:1.7">'+
+    '<div style="font-weight:800">⚠️ '+esc(t.kind)+(t.name?' — «'+esc(t.name)+'»':'')+'</div>'+
+    '<div style="color:#7f1d1d;font-size:11.5px">اتعدّل على الجهاز ده وعلى جهاز تاني. احتفظت بنسختك.</div>'+tbl+
+    btn('✔ خلّي نسختي','mine','#2563eb')+(serverGone?'':btn('↩️ خد نسخة الجهاز التاني','server','#16a34a'))+btn('💾 ملف احتياطي','download','#475569')+btn('🗑️ تجاهل التنبيه','drop','#dc2626')+'</div>';
+}
+function __heldSectionHtml(held){
+  if(!held.length)return '';
+  var nBlob=held.filter(function(h){return h.kind==='blob_conflict';}).length;
+  return '<div style="font-weight:800;font-size:12.5px;margin:10px 0 6px;color:#991b1b">⚠️ محتاجين قرارك ('+held.length+') — مفيش حاجة اتمسحت</div>'+
+    '<div style="background:#eff6ff;border-radius:10px;padding:9px 11px;margin-bottom:8px;font-size:11.5px;color:#1e3a8a;line-height:1.8">يعني إيه؟ نفس السجل (عميل / مستثمر…) اتعدّل <b>عندك</b> وعلى <b>جهاز تاني</b> قبل ما يتزامنوا. التطبيق دمجهم واحتفظ بنسختك.<br><b>✔ خلّي نسختي</b> = متأكد إن تعديلك هو الصح (الأغلب).<br><b>↩️ خد نسخة الجهاز التاني</b> = تعديله هو الصح.<br>لو مش متأكد: دوس <b>💾 ملف احتياطي</b> الأول، وبعدين اختار.</div>'+
+    (nBlob>1?'<div style="display:flex;gap:6px;margin-bottom:8px"><button onclick="__resolveHeldAll(\'mine\')" style="flex:1;background:#2563eb;color:#fff;border:none;border-radius:9px;padding:9px;font-size:12px;font-weight:800;cursor:pointer">✔ نسختي في الكل ('+nBlob+')</button></div>':'')+
+    held.map(__heldCardHtml).join('');
+}
+function __resolveHeldAll(act){
+  for(var i=__heldOps.length-1;i>=0;i--){var h=__heldOps[i];if(h&&h.kind==='blob_conflict'&&act==='mine'){__resolveHeld(i,'mine');}}
+}
 function __showSyncQueueDetails(){
+  try{__autoClearNoDiffHeld();}catch(e){} // ⚠️ v343 — التعارض اللي بياناته متطابقة بيتشال لوحده
   var list=__syncQueue.slice(), held=__heldOps.slice();
   var my=window.__currentProfile&&window.__currentProfile.id;
   if(!list.length&&!held.length){ __showNetDiag(); return; } // ⚠️ v326 — بدل التوست: لوحة حالة الاتصال
@@ -6596,17 +6675,7 @@ function __showSyncQueueDetails(){
         (canIgnore&&!other?'<button onclick="__ignoreSyncItem('+i+')" style="margin-top:4px;background:#fee2e2;color:#dc2626;border:none;border-radius:8px;padding:5px 10px;font-size:11px;font-weight:800;cursor:pointer">تجاهل (يفضل على جهازك بس)</button>':'')+
         '</div>';
     }).join('')+
-    (held.length?'<div style="font-weight:800;font-size:12px;margin:10px 0 6px;color:#991b1b">عمليات محتاجة قرار منك ('+held.length+') — مفيش حاجة منها اتمسحت:</div>':'')+
-    held.map(function(h,i){
-      var name=(__SQ_LABELS[h.table]||h.table);
-      var btn=function(label,act,col){return '<button onclick="__resolveHeld('+i+',\''+act+'\')" style="margin:4px 4px 0 0;background:'+col+';color:#fff;border:none;border-radius:8px;padding:6px 10px;font-size:11px;font-weight:800;cursor:pointer">'+label+'</button>';};
-      return '<div style="background:#fef2f2;border:1px solid #fecaca;border-radius:10px;padding:9px 11px;margin-bottom:7px;font-size:12px;line-height:1.8">'+
-        '<div style="font-weight:800">'+(kindTxt[h.kind]||h.kind)+' — '+esc(name)+' <span style="font-weight:600;color:#64748b">('+(h.op==='delete'?'حذف':'إضافة/تعديل')+')</span></div>'+
-        '<div style="color:#7f1d1d">'+esc(h.reason||'')+'</div>'+
-        (h.kind==='blob_conflict'?btn('تمام، نسختي صح','mine','#2563eb')+(h.server!==null&&h.server!==undefined?btn('رجّع نسخة السيرفر','server','#16a34a'):''):(h.kind==='conflict'?btn('اعتمد نسختي','mine','#2563eb')+btn('اعتمد نسخة السيرفر','server','#16a34a'):btn('حاول تاني','retry','#2563eb')))+
-        btn('نزّل نسخة','download','#475569')+btn('تجاهل (بعد تنزيل نسخة)','drop','#dc2626')+
-        '</div>';
-    }).join('')+
+    __heldSectionHtml(held)+ // ⚠️ v343
     (errs.length?'<div style="background:#fef2f2;border-radius:10px;padding:9px 11px;margin:8px 0;font-size:11px;color:#991b1b;line-height:1.7"><b>آخر أخطاء:</b><br>'+errs.map(function(e){return esc(e);}).join('<br>')+'</div>':'')+
     '<div class="modal-actions"><button class="btn btn-green btn-full" onclick="__retrySyncNow(this)">🔄 حاول تاني دلوقتي</button>'+
     '<button class="btn btn-outline btn-full" onclick="__showNetDiag(true)">📶 تشخيص الاتصال</button>'+
@@ -8515,6 +8584,7 @@ function updateMovementsBadge(){
 
 function switchReportTab(tab,el){
   currentReportTab=tab;
+  if(tab!=='expenses'){var _fw=document.getElementById('exp-fab-wrap');if(_fw)_fw.remove();} // ⚠️ v343 — الزر العايم بتاع المصروفات بس
   document.querySelectorAll('#screen-reports .tab').forEach(function(t){t.classList.remove('active');});
   if(el)el.classList.add('active');
   ['period','income','balance','cashflow','expenses','analysis','parts_sold','models','ledger'].forEach(function(t){
