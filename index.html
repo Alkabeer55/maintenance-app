@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v352</title>
+<title>ابو حوده الحلو الجميل v354</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -53,7 +53,7 @@ async function __netProbe(force){
   }catch(e3){}
   return ok;
 }
-/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="v352 — ١٢ جمادى الآخرة ١٤٤٨ هـ";
+/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="v354 — ١٣ جمادى الآخرة ١٤٤٨ هـ";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -184,11 +184,15 @@ async function __netProbe(force){
         ط) ⚠️ v348 — دمج الأصناف (execMergeProducts): إعادة الربط بتعدّي على __mergeCollect (أي productId/product_id في الجداول المذكورة في __MERGE_REF_COLS + settings.bundles) — ممنوع ترجع لحلقات يدوية لكل جدول.
            أي جدول/بلوب جديد بيخزّن مرجع لصنف لازم يتضاف في __MERGE_REF_COLS. الدمج ممنوع لو صنف أمانة أو مربوط بدفعة مستثمر. «تراجع آخر دمج» (undoLastMerge) نقطته في localStorage على نفس الجهاز بس.
            البحث في الفاتورة بيدوّر في aliases كمان (الأسماء اللي اتحفظت من الدمج).
+    42) ⚠️ v354 — الراكد = _stockIdle/isDeadStock بس (مدة القطع deadStockDays والماكينات deadMachineDays، آخر نشاط = بيع أو توريد). ممنوع تحسب راكد من آخر بيع لوحده. نصيب مستثمر البضاعة = ربح القطع الفعلي × (رأس ماله ÷ المخزون) × نسبته — ممنوع دوران سنوي ÷ ١٢. أي عرض لنصيب الشريك لازم يعدّي على _pcPartnerShare.
+    41) ⚠️ v353 — هامش بضاعة المستثمر = _btMarkup بس (قطع، بعد الخصم، بتكلفة معروفة). ممنوع (sales−cos)/cos من إجمالي الفواتير في أي حاجة بتخص مستثمر البضاعة. حاسبة الشريك: التخفيف من نصيب المالك بس (الافتراضي).
     40) ⚠️ v352 — صفحة «التحليل» (screen-analysis / renderAnalysisHub): شاشة عادية للمالك، قراءة وتحليل بس. ممنوع تضيف فيها حفظ/تعديل بيانات. المقارنة (_rmBodyHtml/_rmRender → #ah-cmp)
         والبصمات (_ahSnapHtml) والحاسبة (_pcalcBuild → #pcalc-body) أقسام جواها — أي دالة قديمة كانت بتفتح نافذة لواحدة منهم لازم تعدّي على _ahOpen(tab,sub). ممنوع ترجّع نسخة تانية من الدوران/الهامش في تاب الحسابات.
         الهامش = بعد الخصم (_anSaleF) وبالفصل قطع/خدمات، وأي بند من غير سعر تكلفة بيتحذّر منه. نصيب الشريك في دورة التوزيع = _pcPartnerShare بس (رد رأس المال + الدخول في نص الفترة)، ممنوع Math.round(profit*pct/100) مباشرة.
 ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v354: [🧮 نصيب البضاعة بالأيام الفعلية + 🐌 الراكد بمدد من الإعدادات + 🔩 الاسكراب: (١) «معاك» وحاسبة محاكاة مستثمر البضاعة: بقى نصيبه = ربح قطع الغيار الفعلي لكل شهر (بتواريخه الحقيقية) × نسبة رأس ماله من مخزونك الحالي × نسبته — من غير دوران سنوي مفترض ولا قسمة على ١٢ (أي مدة/فلتر بتتحسب من شهورها الفعلية) + شرح كل شهر • (٢) هامش وحاسبة البضاعة بياخدوا الفترة المختارة في الفلتر بأيامها الفعلية • (٣) الراكد: مدة قطع الغيار (deadStockDays) ومدة الماكينات/الاسكراب (deadMachineDays الافتراضي ١٨٠ يوم) من الإعدادات، وآخر نشاط = آخر بيع أو توريد (شراء/استخراج) مش آخر بيع بس، وماكينة الاسكراب اللي اتستخرج منها مش راكدة؛ نفس الدالة لفلتر المخزن وصفحة التحليل • (٤) عدد أيام وجود الصنف في المخزن (أقدم وحدة لسه موجودة) مكتوب جنب كل صنف في المخزن وفي جدول الدوران • (٥) قطع الاسكراب اللي تكلفتها ٠ بعد ما ثمن الماكينة اتسترد بتتحسب ربح حقيقي وبتتفصل عن «بنود من غير تكلفة» (اللي بنحذّر منها مع أسماء الأصناف) • (٦) «توزيع الربح للعلم» وربحك في الرئيسية بقوا بيطابقوا التوزيع الفعلي للشركاء • مفيش تغيير في الخزنة أو الدورات المحفوظة]
+v353: [🧮 تصحيح هامش بضاعة المستثمر + الحاسبة: (١) الهامش في الحاسبة وفي «معاك» بالمقارنة ومحاكاة «لو كان دخل قبل كده» بقى من دالة واحدة _btMarkup: قطع الغيار بس بعد الخصم ومن البنود اللي ليها سعر تكلفة — كان بيتحسب من إجمالي الفواتير شامل الصيانة فالرقم يطلع أعلى من الواقع • (٢) «معاك» في المقارنة: زرار «الرقم ده اتحسب إزاي؟» فيه المعادلة بالأرقام الحقيقية وجدول هامش كل شهر ونصيبه • (٣) حاسبة الشريك: المستثمر الجديد بينقص من نصيبك أنت بس والمستثمرين الحاليين نسبهم ثابتة (زي شغل التطبيق الفعلي) مع اختيار «يتوزع على الكل بالتناسب» + تحذير لو نسبته أكبر من نصيبك • (٤) خانة «العائد السنوي المستهدف»: مراجع حقيقية (التضخم/البنك/دهب سنة) وأزرار تحط الرقم — الحد الأدنى التضخم والمعتاد البنك + علاوة مخاطرة ٥–١٠٪ • مفيش تغيير في توزيع الأرباح الفعلي ولا الخزنة]
 v352: [🔭 صفحة «التحليل» الموحّدة + 🤝 إصلاح ثغرات توزيع الأرباح: (١) صفحة واحدة عادية (مش نافذة) من «المزيد ← التحليل» (للمالك): ملخص • الهامش • الدوران • الاستثمار (المقارنة / البصمات / حاسبة نسبة الأرباح) — قراءة وتحليل بس، مفيهاش أي حفظ لبيانات التطبيق، وأي كرت بيتضغط • (٢) الهامش اتصلّح: بقى بعد الخصم، وقطع الغيار لوحدها والخدمات لوحدها (الخدمات من غير تكلفة بضاعة كانت بترفع الهامش الإجمالي) + تحذير بالبنود اللي من غير سعر تكلفة (كانت بتبان ١٠٠٪ هامش) + هامش الأصناف بعد الخصم • (٣) البصمة: سعر الدهب/الفضة/الدولار/اليورو يوم الدخول بقى مكتوب جنب المعادل، وجنبه سعر النهارده والنسبة • (٤) المقارنة والبصمات والحاسبة اتنقلوا من نوافذ لقسم في الصفحة (openInvCompare/openSnapManager/openProfitCalc بقوا بيفتحوا الصفحة)، وتاب التحليل القديم في الحسابات بقى فيه رابط للصفحة بدل نسخة تانية من الدوران والهامش • (٥) توزيع الأرباح (شركاء): الشريك اللي رجّع رأس ماله كله مابياخدش نسبة عن اللي بعد الرد (إلا لو اخترت «يفضل ياخد نسبته» من تعديل المستثمر — الافتراضي يوقف)، والشريك اللي دخل في نص الفترة نصيبه من يوم إيداعه بس (ربح الفترة من الإيداع للنهاية ÷ ربح الفترة كلها) — المعاينة والحفظ وفحص التعديل بيستخدموا دالة واحدة _pcPartnerShare، والنسبة الفعلية وسببها بتتسجّل في الدورة (eff_pct/note)، ولو الشريك كان موجود ورأس ماله كامل طول الفترة الحساب زي ما هو بالظبط • مفيش أي تغيير في معادلات الربح أو الخزنة أو الدورات القديمة]
 v351: [📈 التحليل المالي — دوران المخزون وهامش الربح بالتفصيل: ⏱️ اختيار فترة التحليل (٣٠ يوم/٣ شهور/٦/سنة/كل الوقت) • 🔄 الدوران صح: تكلفة مبيعات الفترة ÷ متوسط المخزون وبيتحوّل لسنوي + أيام التخزين + رأس المال المحبوس (القديم كان بيقسم تكلفة كل المبيعات من أول يوم على المخزون الحالي = رقم مضلل) + شرح الحساب خطوة خطوة • 🗂️ تصنيف كل صنف (🟢سريع/🟡عادي/🟠بطيء/🔴راكد/⚪نافذ) بفلتر بالضغط وجدول (مباع/مخزون بالتكلفة/دوران/يغطي كام يوم) + دوران حسب الشركة • 💹 كرت هامش الربح: هامش إجمالي على المبيعات + الزيادة على التكلفة (Markup) + صافي، قطع مقابل خدمات وخصومات، حسب الشهر الهجري، أعلى الأصناف ربحًا وأقلها هامشًا • نصايح ذكية جديدة • الدستور: ك]
 v350: [📊 مقارنة بدائل الاستثمار + 📸 بصمة الدخول: (١) مدة حرة: ٣ شهور/٦/سنة/سنتين/٣ سنين/٥ سنين + «مخصص» من تاريخ لتاريخ (هجري) — الأسعار بين نقاط الجدول بتتقدّر وبتتعلّم «تقريبي» • (٢) المبالغ بالتفصيل بدل الملخص: المبلغ المستثمر كبير فوق، جدول (القيمة الآن/الربح بالجنيه/٪)، وكل بديل فيه الكمية × سعر الشراء × سعر النهارده • (٣) 📸 بصمة الدخول: أول ما مستثمر يدخل أو يضيف مبلغ (شريك/بضاعة) بتتسجّل لوحدها أسعار الدهب ٢١ والفضة والدولار واليورو يومها (وتقدر تضيف أي أصل تاني وتعدّل الأسعار) وتفضل محفوظة للمقارنة بعد كده؛ إدارة كاملة (عرض/تعديل/حذف/تسجيل للإيداعات القديمة) • (٤) المقارنة من «يوم دخول المستثمر» بأسعار بصمته الحقيقية، ومعاها يورو وفضة وأصول تانية • (٥) 📝 تحليل سريع مكتوب + زر «📋 نسخ للتحليل» تبعته لـClaude لتحليل مفصل • (٦) الدخول أسهل: زرار «📊 مقارنة بدائل الاستثمار» و«📸 بصمات الدخول» ظاهرين مباشرة في شاشة المستثمرين (كانوا مخفيين جوه «أدوات وإعدادات») • (٧) أسعار حيّة لليورو والفضة • الدستور: ي]
@@ -5863,9 +5867,9 @@ var APP_TITLE=APP_CONFIG.name;
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=352;
+var APP_VERSION=354;
 // ⚠️ v303 — BUILD_STAMP كان مش متعرّف خالص (شاشة الإعدادات كانت بتعرض "?") — اتعرّف دلوقتي وبيتزود مع كل تحديث
-var BUILD_STAMP='v'+APP_VERSION+' — ١٢ جمادى الآخرة ١٤٤٨ هـ'; // ⚠️ v331 — رقم النسخة بيتولّد من APP_VERSION (كان واقف على v323 لأن في تعريفين، والتاني بيكسب). ممنوع تكتب رقم نسخة يدوي هنا.
+var BUILD_STAMP='v'+APP_VERSION+' — ١٣ جمادى الآخرة ١٤٤٨ هـ'; // ⚠️ v331 — رقم النسخة بيتولّد من APP_VERSION (كان واقف على v323 لأن في تعريفين، والتاني بيكسب). ممنوع تكتب رقم نسخة يدوي هنا.
 // ⚠️ v295 — عنوان الصفحة كان رقم نسخته ثابت ومتنسي (فضل v294 مع إن النسخة اتغيّرت). دلوقتي بياخد الرقم من APP_VERSION دايمًا.
 try{document.title=document.title.replace(/v\d+\s*$/,'v'+APP_VERSION);}catch(_eT){}
 
@@ -5968,6 +5972,7 @@ function loadDB(){
     if(!DB.settings.quickAmounts||!DB.settings.quickAmounts.length) DB.settings.quickAmounts=[50,100,150,200,300,500]; // v158 — اختصارات إدخال مبلغ سريع
     if(!DB.settings.bundles) DB.settings.bundles=[];
     if(!DB.settings.deadStockDays) DB.settings.deadStockDays=30;
+    if(!DB.settings.deadMachineDays) DB.settings.deadMachineDays=180; // ⚠️ v354 — مدة الراكد للماكينات/الاسكراب
     if(DB.settings.activity_log_retention_days===undefined) DB.settings.activity_log_retention_days=null; // v129 — null = للأبد
     if(!DB.settings.expenseTemplates) DB.settings.expenseTemplates=[
       {name:'بنزين',category:'مصاريف تشغيل',sub:'',amount:100},
@@ -8983,8 +8988,9 @@ function renderHome(){
   totalProfit+=extraIncome;
   // لو فيه مستثمرين نشطين، نخصم حصتهم من الربح عشان نعرض "صافي ربحك أنت" الفعلي
   var activeInv=((DB.accounts&&DB.accounts.investors)||[]).filter(function(i){return i.status!=='inactive';});
-  var ownerPct=activeInv.length?(100-activeInv.reduce(function(s,i){return s+i.profit_share_pct;},0))/100:1;
-  var profit=Math.round(totalProfit*ownerPct);
+  var _hpr={from:hMonthRange.start,to:hMonthRange.end}; // ⚠️ v354 — نصيب الشركاء الفعلي (رد رأس المال / الدخول في نص الشهر) مش النسبة الأصلية
+  var ownerPct=activeInv.length?(100-activeInv.reduce(function(s,i){return s+_pcPartnerShare(i,totalProfit,_hpr).eff;},0))/100:1;
+  var profit=Math.round(totalProfit-activeInv.reduce(function(s,i){return s+_pcPartnerShare(i,totalProfit,_hpr).amount;},0));
   // احتياجك من الربح: الالتزام الشهري (ثابت+رواتب) اللي لسه معلّق، مقارنة بصافي ربحك الحالي
   var pendingList=_pendingFixedCommitments();
   var pendingTotal=pendingList.reduce(function(s,p){return s+p.amount;},0);
@@ -9116,19 +9122,54 @@ function setInvStockFilter(f){_invStockFilter=(_invStockFilter===f)?'available':
 // ⚠️ v127 — "راكد": صنف موجود بالمخزون (كمية > 0) ومحصلش عليه أي حركة بيع من مدة طويلة —
 // إما إنه اتسجل من مدة ولسه معملش أول عملية بيع، أو آخر مرة اتباع فيها كانت من زمان.
 // المدة قابلة للتحكم من الإعدادات (افتراضي 30 يوم)
-function isDeadStock(p){
-  if(!p||p.qty<=0)return false;
-  var days=(DB.settings&&DB.settings.deadStockDays)||30;
-  var cutoff=new Date(Date.now()-days*86400000).toISOString().split('T')[0];
-  var lastSale=null;
-  DB.sales.forEach(function(s){
-    (s.items||[]).forEach(function(it){
-      if((it.productId===p.id||normalizeAr(it.name)===normalizeAr(p.name))&&(!lastSale||s.date>lastSale))lastSale=s.date;
+// ⚠️ v354 — «راكد» بمدة من الإعدادات: قطع الغيار (deadStockDays) والماكينات/الاسكراب (deadMachineDays، الافتراضي ١٨٠ يوم).
+// آخر نشاط = آخر بيع أو توريد (شراء / استخراج من اسكراب) أو تاريخ الإنشاء — مش آخر بيع بس (كان أي صنف اتشترى من جديد ومتباعش بيبان راكد).
+// ماكينة الاسكراب اللي اتستخرج منها قطع من قريب = مش راكدة. نفس الدالة بتخدم فلتر المخزن وصفحة التحليل (الدستور ١٣).
+var _smC={k:'',m:null};
+function _stockMetaMap(){
+  var k=DB.sales.length+':'+(DB.purchases||[]).length+':'+DB.products.length+':'+(DB.scrap_machines||[]).length+':'+today();
+  if(_smC.k===k&&_smC.m)return _smC.m;
+  var m={},bn={};
+  DB.products.forEach(function(p){var o={lastSale:'',lastIn:'',lastExtract:'',ins:[]};m[p.id]=o;var n=normalizeAr(p.name||'');if(n&&!bn[n])bn[n]=o;});
+  var get=function(id,name){return (id&&id!=='__new__'&&m[id])||bn[normalizeAr(name||'')]||null;};
+  DB.sales.forEach(function(s){if(!s.date)return;(s.items||[]).forEach(function(it){var o=get(it.productId,it.name);if(o&&s.date>o.lastSale)o.lastSale=s.date;});});
+  var addIn=function(o,d,q){if(!o||!d)return;if(d>o.lastIn)o.lastIn=d;o.ins.push({d:d,q:+q||0});};
+  (DB.purchases||[]).forEach(function(pu){(pu.items||[]).forEach(function(it){addIn(get(it.productId,it.name),pu.date,it.qty);});});
+  (DB.scrap_machines||[]).forEach(function(sm){
+    var mp=null;try{mp=_scrapMachineProd(sm);}catch(e){}
+    (sm.parts_extracted||[]).forEach(function(pp){
+      var d=pp.added_date;if(!d)return;
+      if(mp&&m[mp.id]&&d>m[mp.id].lastExtract)m[mp.id].lastExtract=d;
+      addIn(get(pp.productId,pp.name),d,pp.qty);
     });
   });
-  var lastActivity=lastSale||p.created_at||null;
-  if(!lastActivity)return false; // صنف قديم من غير تاريخ ولا مبيعات — ملناش معلومة كافية نحكم بيها، منعتبروش راكد افتراضيًا
-  return lastActivity<cutoff;
+  _smC={k:k,m:m};return m;
+}
+function _stockIdle(p){
+  if(!p)return null;
+  var o=_stockMetaMap()[p.id]||{lastSale:'',lastIn:'',lastExtract:'',ins:[]};
+  var last=[o.lastSale,o.lastIn,o.lastExtract,p.created_at||''].reduce(function(a,b){return b>a?b:a;},'');
+  var isM=p.category==='machine',st=DB.settings||{};
+  var thr=isM?(st.deadMachineDays||180):(st.deadStockDays||30);
+  var qty=+p.qty||0,acc=0,oldest='',ins=o.ins.slice().sort(function(a,b){return a.d<b.d?1:a.d>b.d?-1:0;});
+  for(var i=0;i<ins.length;i++){acc+=ins[i].q;oldest=ins[i].d;if(acc>=qty-0.0001)break;} // أقدم وحدة لسه موجودة: من أحدث توريد لورا لحد ما نغطي الكمية الحالية
+  var approx=false;
+  if(!ins.length)oldest=p.created_at||'';
+  else if(acc<qty-0.0001){if(p.created_at&&p.created_at<oldest)oldest=p.created_at;else approx=true;}
+  var td=today(),dd=function(d){return d?Math.max(0,Math.round((Date.parse(td)-Date.parse(d))/864e5)):null;};
+  var idle=dd(last);
+  return {idle:idle,thr:thr,age:dd(oldest),approx:approx,sinceSale:dd(o.lastSale),last:last,isMachine:isM,dead:(qty>0&&idle!=null&&idle>thr)};
+}
+function isDeadStock(p){
+  if(!p||p.qty<=0)return false;
+  var s=_stockIdle(p);
+  return !!(s&&s.last&&s.dead); // صنف قديم من غير تاريخ ولا حركة — منعتبروش راكد افتراضيًا
+}
+function _invIdleBadge(p){
+  if(!p||!(p.qty>0))return '';
+  var s=_stockIdle(p);if(!s||s.age==null)return '';
+  var N=function(x){return x.toLocaleString('ar-EG');};
+  return '<div style="font-size:10.5px;margin-top:3px;color:'+(s.dead?'#b91c1c':'#64748b')+';font-weight:'+(s.dead?'800':'600')+'">⏳ في المخزن '+(s.approx?'+':'')+N(s.age)+' يوم'+(s.dead?' • 🐌 راكد (آخر بيع/توريد قبل '+N(s.idle)+' يوم، الحد '+N(s.thr)+')':'')+'</div>';
 }
 
 // ⚠️ v198 — تجميع "الأكثر مبيعًا": بيدور في كل الفواتير القديمة (مش بس المنتجات
@@ -9340,7 +9381,7 @@ function renderInventory(){
       (p.scrap_price?'<span style="background:#fef9c3;color:#ca8a04;border-radius:6px;padding:1px 7px;font-size:10px;font-weight:700">اسكراب: '+p.scrap_price+' ج</span>':'')+
       (p.consignment==='in'?'<span style="background:#fce7f3;color:#be185d;border-radius:6px;padding:1px 7px;font-size:10px;font-weight:700">📥 أمانة من '+esc(p.consignment_party||'')+'</span>':'')+
       (p.consignment==='out'?'<span style="background:#e0f2fe;color:#0369a1;border-radius:6px;padding:1px 7px;font-size:10px;font-weight:700">📤 أمانة عند '+esc(p.consignment_party||'')+'</span>':'')+
-      '</div>'+(_srcMap&&_srcMap[p.id]?'<div style="font-size:11px;font-weight:700;color:'+(_srcMap[p.id].resid>0?'#b45309':'#dc2626')+';margin-top:3px">'+(_srcMap[p.id].resid>0?'🕳️ دخل بدون شراء':'👻 ناقص بدون بيع')+' '+fmtQty(Math.round(Math.abs(_srcMap[p.id].qty)*100)/100)+' وحدة'+'<div style="font-weight:500;color:#64748b;font-size:10.5px;line-height:1.6">المسجّل: افتتاحي '+fmtQty(_srcMap[p.id].d.o)+' + مشترى '+fmtQty(_srcMap[p.id].d.p)+(_srcMap[p.id].d.x?' + تفكيك اسكراب '+fmtQty(_srcMap[p.id].d.x):'')+' − مباع '+fmtQty(_srcMap[p.id].d.s)+(_srcMap[p.id].d.w?' − مسحوب '+fmtQty(_srcMap[p.id].d.w):'')+(_srcMap[p.id].d.k?' ± جرد '+fmtQty(_srcMap[p.id].d.k):'')+' = '+fmtQty(_srcMap[p.id].d.exp)+' • الفعلي '+fmtQty(_srcMap[p.id].d.cur)+'</div></div>':'')+'</div>'+
+      '</div>'+_invIdleBadge(p)+(_srcMap&&_srcMap[p.id]?'<div style="font-size:11px;font-weight:700;color:'+(_srcMap[p.id].resid>0?'#b45309':'#dc2626')+';margin-top:3px">'+(_srcMap[p.id].resid>0?'🕳️ دخل بدون شراء':'👻 ناقص بدون بيع')+' '+fmtQty(Math.round(Math.abs(_srcMap[p.id].qty)*100)/100)+' وحدة'+'<div style="font-weight:500;color:#64748b;font-size:10.5px;line-height:1.6">المسجّل: افتتاحي '+fmtQty(_srcMap[p.id].d.o)+' + مشترى '+fmtQty(_srcMap[p.id].d.p)+(_srcMap[p.id].d.x?' + تفكيك اسكراب '+fmtQty(_srcMap[p.id].d.x):'')+' − مباع '+fmtQty(_srcMap[p.id].d.s)+(_srcMap[p.id].d.w?' − مسحوب '+fmtQty(_srcMap[p.id].d.w):'')+(_srcMap[p.id].d.k?' ± جرد '+fmtQty(_srcMap[p.id].d.k):'')+' = '+fmtQty(_srcMap[p.id].d.exp)+' • الفعلي '+fmtQty(_srcMap[p.id].d.cur)+'</div></div>':'')+'</div>'+
       '<div class="inv-q" style="background:'+qBg+';color:'+qFg+'"><div style="font-size:18px;line-height:1.1">'+fmtQty(p.qty)+'</div><div style="font-size:9px;font-weight:700">'+(isOut?'نفذ 🚫':isLow?'منخفض ⚠️':'متاح')+'</div></div></div>'+
       '<div style="font-size:12px;color:#64748b;margin-top:6px">'+(_invShowCost?'شراء <b>'+p.buy_price+'</b>'+
       (p.landed_cost&&Math.round(p.landed_cost)!==Math.round(p.buy_price)?' <span style="color:#ea580c">(بعد التكاليف: <b>'+Math.round(p.landed_cost)+'</b>)</span>':'')+' · ':'')+
@@ -13967,12 +14008,14 @@ function openPurchImportKeyModal(){
   openModal();
 }
 async function changeDeadStockDays(){
-  var days=+v('dead-stock-days-input');
-  if(!days||days<1)return showToast('⚠️ اكتب رقم أيام صحيح','#dc2626');
+  var days=+v('dead-stock-days-input'),md=+v('dead-machine-days-input');
+  if(!days||days<1)return showToast('⚠️ اكتب عدد أيام صحيح لقطع الغيار','#dc2626');
+  if(!md||md<1)return showToast('⚠️ اكتب عدد أيام صحيح للماكينات','#dc2626');
   DB.settings.deadStockDays=Math.round(days);
+  DB.settings.deadMachineDays=Math.round(md); // ⚠️ v354
   await persist();
   renderSettings();
-  showToast('✅ اتحفظت — راكد دلوقتي يعني أكتر من '+DB.settings.deadStockDays+' يوم','#16a34a');
+  showToast('✅ اتحفظت — راكد: قطع '+DB.settings.deadStockDays+' يوم، ماكينات '+DB.settings.deadMachineDays+' يوم','#16a34a');
 }
 
 async function savePurchImportKey(){
@@ -18862,7 +18905,10 @@ function _invProfitSplit(net,ps){
   if(!_invList().length&&!regs.length)return '';
   var bs=_invSalesShare(ps||[]),ex=_invExclOn(),bsh=bs.share;
   var dist=ex?net-bsh:net;
-  var totalPct=regs.reduce(function(s,i){return s+(+i.profit_share_pct||0);},0),ownerPct=100-totalPct;
+  // ⚠️ v354 — نفس نصيب التوزيع الفعلي (رد رأس المال / الدخول في نص الفترة) مش النسبة الأصلية
+  var _pr={from:'',to:''};(ps||[]).forEach(function(s){if(s.date){if(!_pr.from||s.date<_pr.from)_pr.from=s.date;if(!_pr.to||s.date>_pr.to)_pr.to=s.date;}});
+  var _shs={};regs.forEach(function(i){_shs[i.id]=_pcPartnerShare(i,dist,_pr);});
+  var totalPct=regs.reduce(function(s,i){return s+_shs[i.id].eff;},0),ownerPct=100-totalPct;
   function row(l,v,c,bold){return '<div style="display:flex;justify-content:space-between;gap:8px;font-size:12px;padding:3px 0'+(bold?';font-weight:900;border-top:1px dashed #cbd5e1;margin-top:3px;padding-top:5px':'')+'"><span>'+l+'</span><b style="color:'+(c||'#0f172a')+'">'+fmt(v)+'</b></div>';}
   var h='<div style="border:1.5px solid #bbf7d0;background:#f0fdf4;border-radius:12px;padding:10px 12px;margin-top:10px">'+
     '<div style="font-size:12px;font-weight:900;color:#166534;margin-bottom:4px">📊 توزيع الربح <span style="font-weight:500;color:#15803d">(للعلم — صافي الربح المحاسبي ما بيتغيّرش)</span></div>'+
@@ -18873,8 +18919,8 @@ function _invProfitSplit(net,ps){
     h+=row('• نصيب المشروع من بضاعتهم',bs.profit-bs.share,'#047857',false);
   }
   h+=row('الربح المتاح للتوزيع'+(ex?'':' (بدون خصم نصيب مستثمري البضاعة)'),dist,'#2563eb',true);
-  regs.forEach(function(i){h+=row(esc(i.name)+' — مستثمر عادي ('+i.profit_share_pct+'%)',Math.round(dist*i.profit_share_pct/100),'#7c3aed',false);});
-  h+=row('حصة المالك ('+ownerPct.toFixed(1)+'%)',Math.round(dist*ownerPct/100),'#2563eb',false);
+  regs.forEach(function(i){var x=_shs[i.id];h+=row(esc(i.name)+' — مستثمر عادي ('+(Math.round(x.eff*10)/10)+'%'+(x.why?' ⚙️':'')+')',x.amount,'#7c3aed',false);});
+  h+=row('حصة المالك ('+ownerPct.toFixed(1)+'%)',Math.round(dist-regs.reduce(function(s,i){return s+_shs[i.id].amount;},0)),'#2563eb',false);
   h+='<div style="font-size:10.5px;color:#15803d;margin-top:4px;line-height:1.7">'+(bsh?(ex?'نصيب مستثمري البضاعة بيتشال من الأساس، فمتتوزعش مرتين على المستثمرين العاديين.':'⚠️ الخصم موقوف: نصيب مستثمري البضاعة داخل أساس توزيع المستثمرين العاديين.'):'مفيش بضاعة مستثمرين اتباعت في الفترة دي.')+'</div></div>';
   return h;
 }
@@ -22628,12 +22674,14 @@ function _anProducts(r){
     var since=m.last?(Date.parse(r.to)-Date.parse(m.last))/864e5:Infinity;
     m.stock=qty*(p.buy_price||0);m.cover=cover;m.since=since;
     m.turns=m.stock>0?(m.cogs*365/r.days)/m.stock:null;
-    m.cls=qty<=0?'out':(m.units>0&&cover<=30?'fast':(m.units>0&&cover<=90?'normal':((since>90||cover>365)?'dead':'slow')));
+    var _si=_stockIdle(p)||{};m.idle=_si.idle;m.age=_si.age;m.approx=_si.approx;m.sinceSale=_si.sinceSale;m.thr=_si.thr;
+    // ⚠️ v354 — راكد = حسب مدة الإعدادات (بيع/توريد/استخراج) بنفس دالة فلتر المخزن — كان أي صنف ما اتباعش بيبان راكد حتى لو لسه داخل المخزن
+    m.cls=qty<=0?'out':(_si.dead?'dead':(m.units>0&&cover<=30?'fast':(m.units>0&&cover<=90?'normal':'slow')));
     rows.push(m);
   });
   return rows;
 }
-var _AN_CLS={fast:['🟢','سريع','يغطي ≤ ٣٠ يوم','#15803d','#dcfce7'],normal:['🟡','عادي','٣٠–٩٠ يوم','#a16207','#fef9c3'],slow:['🟠','بطيء','٩٠–٣٦٥ يوم','#c2410c','#ffedd5'],dead:['🔴','راكد','مفيش بيع +٩٠ يوم أو يغطي +سنة','#b91c1c','#fee2e2'],out:['⚪','نافذ','رصيد صفر','#475569','#f1f5f9']};
+var _AN_CLS={fast:['🟢','سريع','يغطي ≤ ٣٠ يوم','#15803d','#dcfce7'],normal:['🟡','عادي','٣٠–٩٠ يوم','#a16207','#fef9c3'],slow:['🟠','بطيء','٩٠–٣٦٥ يوم','#c2410c','#ffedd5'],dead:['🔴','راكد','مفيش بيع ولا توريد أكتر من المدة في الإعدادات','#b91c1c','#fee2e2'],out:['⚪','نافذ','رصيد صفر','#475569','#f1f5f9']};
 function _anTurnCard(r,currentInv){
   var Nf=function(x){return Math.round(x).toLocaleString('ar-EG');},Q1=function(x){return (Math.round(x*10)/10).toLocaleString('ar-EG');};
   var sales=DB.sales.filter(function(s){return _anInRange(s.date,r);});
@@ -22652,7 +22700,7 @@ function _anTurnCard(r,currentInv){
   var list=rows.filter(function(m){return _an.turn==='all'?(m.units>0||m.stock>0):m.cls===_an.turn;}).sort(function(a,b){return _an.turn==='all'?(b.cogs-a.cogs):(b.stock-a.stock);});
   var lim=_an.all?list.length:15;
   var tbl=list.length?'<div style="border:1.5px solid #e2e8f0;border-radius:11px;overflow:hidden;font-size:11px"><div style="display:grid;grid-template-columns:1.7fr .6fr .9fr .8fr .8fr;gap:3px;background:#f1f5f9;padding:5px 8px;font-weight:800;color:#475569"><span>الصنف</span><span>مباع</span><span>مخزون بالتكلفة</span><span>دوران/سنة</span><span>يغطي (يوم)</span></div>'+
-    list.slice(0,lim).map(function(m){var c=_AN_CLS[m.cls];return '<div onclick="navigate(\'inventory\')" style="cursor:pointer;display:grid;grid-template-columns:1.7fr .6fr .9fr .8fr .8fr;gap:3px;padding:5px 8px;border-top:1px solid #f1f5f9;align-items:center"><span style="font-weight:700;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+c[0]+' '+esc(m.p.name)+'</span><span>'+fmtQty(m.units)+'</span><span>'+Nf(m.stock)+'</span><span>'+(m.turns==null?'—':Q1(m.turns)+'×')+'</span><span>'+(isFinite(m.cover)?Nf(m.cover):'∞')+'</span></div>';}).join('')+'</div>'+
+    list.slice(0,lim).map(function(m){var c=_AN_CLS[m.cls];return '<div onclick="navigate(\'inventory\')" style="cursor:pointer;display:grid;grid-template-columns:1.7fr .6fr .9fr .8fr .8fr;gap:3px;padding:5px 8px;border-top:1px solid #f1f5f9;align-items:center"><span style="min-width:0"><span style="font-weight:700;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+c[0]+' '+esc(m.p.name)+'</span><span style="font-size:9.5px;color:'+(m.cls==='dead'?'#b91c1c':'#94a3b8')+';font-weight:600">'+(m.stock>0&&m.age!=null?'⏳ في المخزن '+(m.approx?'+':'')+m.age.toLocaleString('ar-EG')+' يوم':'')+(m.sinceSale!=null?' • آخر بيع قبل '+m.sinceSale.toLocaleString('ar-EG')+' يوم':' • ما اتباعش')+'</span></span><span>'+fmtQty(m.units)+'</span><span>'+Nf(m.stock)+'</span><span>'+(m.turns==null?'—':Q1(m.turns)+'×')+'</span><span>'+(isFinite(m.cover)?Nf(m.cover):'∞')+'</span></div>';}).join('')+'</div>'+
     (list.length>15?'<button class="btn btn-outline btn-full" style="margin-top:6px;font-size:12px" onclick="_anSet(\'all\','+(!_an.all)+')">'+(_an.all?'عرض أقل':'عرض كل الأصناف ('+list.length+')')+'</button>':''):'<div class="empty" style="padding:10px 0">مفيش أصناف في التصنيف ده</div>';
   // حسب الشركة
   var by={};rows.forEach(function(m){var k=m.p.company||'—';var o=by[k]||(by[k]={cogs:0,stock:0,n:0});o.cogs+=m.cogs;o.stock+=m.stock;o.n++;});
@@ -22673,7 +22721,8 @@ function _anMarginCard(r){
   // + تحذير بالبنود اللي مالهاش سعر تكلفة (هامشها بيبان ١٠٠٪ غلط). قراءة بس — مفيش أي حفظ.
   var Nf=function(x){return Math.round(x).toLocaleString('ar-EG');},P=function(x){return x==null?'—':(Math.round(x*10)/10).toLocaleString('ar-EG')+'٪';},col=function(x){return x<0?'#dc2626':'#15803d';};
   var sales=DB.sales.filter(function(s){return _anInRange(s.date,r);});
-  var rev=0,partsNet=0,srvNet=0,otherRev=0,noCostRev=0,noCostN=0,discTot=0;
+  var rev=0,partsNet=0,srvNet=0,otherRev=0,noCostRev=0,noCostN=0,discTot=0,scrapFreeRev=0,scrapFreeN=0,noNames={},_pm={};
+  DB.products.forEach(function(p){_pm[p.id]=p;});
   sales.forEach(function(s){
     var parts=0,srv=0,tot=+s.total||0;
     (s.items||[]).forEach(function(i){parts+=(+i.qty||0)*(+i.price||0);});
@@ -22681,7 +22730,8 @@ function _anMarginCard(r){
     var sub=parts+srv,f=sub>0?tot/sub:1;
     rev+=tot;
     if(sub>0){partsNet+=parts*f;srvNet+=srv*f;discTot+=Math.max(0,sub-tot);}else otherRev+=tot;
-    (s.items||[]).forEach(function(i){if((+i.qty||0)>0&&!(i.buyPrice||i.buy_price)){noCostRev+=(+i.qty||0)*(+i.price||0)*f;noCostN++;}});
+    // ⚠️ v354 — قطعة اسكراب تكلفتها ٠ (ثمن الماكينة اتسترد) ربحها حقيقي ومحسوب؛ أي بند تاني من غير تكلفة = بيانات ناقصة بنحذّر منها
+    (s.items||[]).forEach(function(i){if((+i.qty||0)>0&&!(i.buyPrice||i.buy_price)){var pp=i.productId&&_pm[i.productId],rv0=(+i.qty||0)*(+i.price||0)*f;if(pp&&(pp.scrap_source||pp.unit==='اسكراب')){scrapFreeRev+=rv0;scrapFreeN++;}else{noCostRev+=rv0;noCostN++;var nn=i.name||(pp&&pp.name)||'—';noNames[nn]=(noNames[nn]||0)+rv0;}}});
   });
   var cogs=salesCost(sales);
   var exp=(DB.expenses||[]).filter(function(e){return _anInRange(e.date,r);}).reduce(function(t,e){return t+(+e.amount||0);},0);
@@ -22698,7 +22748,9 @@ function _anMarginCard(r){
   var prods=_anProducts(r).filter(function(m){return m.units>0;}).map(function(m){m.gp=m.rev-m.cogs;m.m=m.rev>0?m.gp/m.rev*100:0;return m;});
   var top=prods.slice().sort(function(a,b){return b.gp-a.gp;}).slice(0,8),low=prods.filter(function(m){return m.rev>0;}).sort(function(a,b){return a.m-b.m;}).slice(0,5);
   var pl=function(arr){return arr.map(function(m){return '<div onclick="navigate(\'inventory\')" style="cursor:pointer;display:flex;justify-content:space-between;gap:6px;font-size:11px;padding:4px 0;border-bottom:1px solid #f8fafc"><span style="font-weight:700;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(m.p.name)+' <span style="color:#94a3b8">×'+fmtQty(m.units)+'</span></span><span>ربح <b style="color:'+col(m.gp)+'">'+Nf(m.gp)+'</b> • هامش <b style="color:'+col(m.m)+'">'+P(m.m)+'</b></span></div>';}).join('');};
-  var warn=noCostN>0?'<div style="background:#fff7ed;border:1.5px solid #fed7aa;border-radius:10px;padding:8px 11px;margin-bottom:8px;font-size:11.5px;line-height:1.9;color:#9a3412">⚠️ <b>'+noCostN.toLocaleString('ar-EG')+'</b> بند مبيعات (<b>'+Nf(noCostRev)+' ج</b>) من غير سعر تكلفة — هامشها بيبان ١٠٠٪ وده غلط، فهامش القطع الظاهر فوق أعلى من الحقيقي.'+(knownM!=null?'<br>هامش القطع من غيرها: <b>'+P(knownM)+'</b>':'')+'</div>':'';
+  var _nk=Object.keys(noNames).sort(function(a,b){return noNames[b]-noNames[a];}).slice(0,5);
+  var warn=(noCostN>0?'<div onclick="navigate(\'inventory\')" style="cursor:pointer;background:#fff7ed;border:1.5px solid #fed7aa;border-radius:10px;padding:8px 11px;margin-bottom:8px;font-size:11.5px;line-height:1.9;color:#9a3412">⚠️ <b>'+noCostN.toLocaleString('ar-EG')+'</b> بند مبيعات (<b>'+Nf(noCostRev)+' ج</b>) من غير سعر تكلفة — هامشها بيبان ١٠٠٪ وده غلط، فهامش القطع الظاهر فوق أعلى من الحقيقي.'+(knownM!=null?'<br>هامش القطع من غيرها: <b>'+P(knownM)+'</b>':'')+(_nk.length?'<br>أكتر الأصناف: <b>'+_nk.map(esc).join('، ')+'</b> — حدّد لها سعر تكلفة من المخزن ←':'')+'</div>':'')+
+    (scrapFreeN>0?'<div style="background:#eff6ff;border-radius:10px;padding:8px 11px;margin-bottom:8px;font-size:11.5px;line-height:1.9;color:#1e40af">🔩 <b>'+scrapFreeN.toLocaleString('ar-EG')+'</b> بند (<b>'+Nf(scrapFreeRev)+' ج</b>) من قطع اسكراب تكلفتها ٠ لأن ثمن الماكينة اتسترد — ربحها حقيقي ومحسوب في الهامش.</div>':'');
   var html='<div style="font-size:11px;color:#64748b;margin-bottom:8px;line-height:1.8">الفترة: <b>'+esc(fmtDate(r.from))+'</b> → <b>'+esc(fmtDate(r.to))+'</b> ('+r.days.toLocaleString('ar-EG')+' يوم) • '+sales.length.toLocaleString('ar-EG')+' فاتورة • كل الأرقام بعد الخصم</div>'+
     '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px">'+
     kpi('هامش القطع',P(partsM),partsM==null?'#64748b':col(partsM),partsM!=null&&partsM<0?'#fee2e2':'#dcfce7')+
@@ -24189,11 +24241,11 @@ function renderSettings(){
     '</div>'+
     '<div class="card">'+
     '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:4px;padding-bottom:8px;border-bottom:2px solid #e2e8f0">🐌 مدة اعتبار الصنف "راكد"</div>'+
-    '<div style="font-size:11px;color:#94a3b8;margin-bottom:10px">أي صنف موجود بالمخزون ومحدش اشتراه لمدة أطول من المدة دي، هيظهر في كرت "راكد 🐌" بشاشة المخزون. حاليًا: <b>'+(DB.settings.deadStockDays||30)+' يوم</b>.</div>'+
-    '<div style="display:flex;gap:8px">'+
-    '<input id="dead-stock-days-input" type="number" step="any" value="'+(DB.settings.deadStockDays||30)+'" style="flex:1;padding:9px 12px;border:2px solid #e2e8f0;border-radius:9px;font-family:inherit;font-size:13px">'+
-    '<button onclick="changeDeadStockDays()" style="padding:9px 16px;background:#7c3aed;color:#fff;border:none;border-radius:9px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer">💾 حفظ</button>'+
-    '</div></div>'+
+    '<div style="font-size:11px;color:#94a3b8;margin-bottom:10px;line-height:1.8">الصنف بيتحسب راكد لو مفيش عليه <b>بيع ولا توريد</b> (شراء أو استخراج من اسكراب) لمدة أطول من المدة اللي تختارها. بيظهر في فلتر «راكد» بالمخزن وفي صفحة التحليل. حاليًا: قطع الغيار <b>'+(DB.settings.deadStockDays||30)+' يوم</b> • الماكينات والاسكراب <b>'+(DB.settings.deadMachineDays||180)+' يوم</b> (ماكينة الاسكراب اللي اتستخرج منها قطع مش راكدة).</div>'+
+    '<div style="display:flex;gap:8px;margin-bottom:8px"><div style="flex:1"><div style="font-size:10.5px;color:#64748b;font-weight:700;margin-bottom:3px">قطع الغيار (يوم)</div><input id="dead-stock-days-input" type="number" step="any" value="'+(DB.settings.deadStockDays||30)+'" style="width:100%;padding:9px 12px;border:2px solid #e2e8f0;border-radius:9px;font-family:inherit;font-size:13px"></div>'+
+    '<div style="flex:1"><div style="font-size:10.5px;color:#64748b;font-weight:700;margin-bottom:3px">الماكينات والاسكراب (يوم)</div><input id="dead-machine-days-input" type="number" step="any" value="'+(DB.settings.deadMachineDays||180)+'" style="width:100%;padding:9px 12px;border:2px solid #e2e8f0;border-radius:9px;font-family:inherit;font-size:13px"></div></div>'+
+    '<button onclick="changeDeadStockDays()" style="width:100%;padding:10px 16px;background:#7c3aed;color:#fff;border:none;border-radius:9px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer">💾 حفظ</button>'+
+    '</div>'+
     '<div class="card">'+
     '<div style="font-weight:900;font-size:14px;color:#0f172a;margin-bottom:4px;padding-bottom:8px;border-bottom:2px solid #e2e8f0">🖨️ عائلات وموديلات المكن</div>'+
     '<div style="font-size:11px;color:#94a3b8;margin-bottom:10px">اجمع الموديلات المتشابهة (زي "1102" و"1102w") تحت عائلة واحدة عشان الإحصائيات تبقى دقيقة.</div>'+
@@ -30456,18 +30508,18 @@ function _pcalcAvgCap(ev,from,to){ // متوسط رأس المال المرجّ�
   area+=bal*(((t-cur)/864e5)+1);
   return area/days;
 }
-var _pcalcType='partner';
+var _pcalcType='partner',_pcalcDil='owner'; // ⚠️ v353 — owner = المستثمر الجديد بياخد من نصيبي أنا بس (زي ما التطبيق شغال فعلاً)
 function openProfitCalc(){_pcalcPeriod=_makePeriodState();_pcalcType='partner';_ahOpen('inv','calc');} // ⚠️ v352 — الحاسبة بقت قسم في صفحة التحليل
 function _pcalcSetType(t){_pcalcType=t;_pcalcBuild();}
 function _pcalcGoodsDefaults(){
-  var t=today(),d0=new Date(t+'T00:00:00');d0.setDate(d0.getDate()-365);var from=localISO_(d0);
+  var rg=_anRange(),t=rg.to,from=rg.from; // ⚠️ v354 — الفترة = اللي إنت مختارها فوق (٣٠ يوم/٣/٦ شهور/سنة/كل الوقت) وبأيامها الفعلية
   var ps=(DB.sales||[]).filter(function(x){return x.date>=from&&x.date<=t;});
   if(!ps.length)return null;
-  var first=ps.reduce(function(m,x){return x.date<m?x.date:m;},t),days=Math.max(30,Math.round((Date.parse(t)-Date.parse(first))/864e5)+1);
-  var rev=ps.reduce(function(sm,x){return sm+(+x.total||0);},0),cos=salesCost(ps),bs=null;
+  var days=Math.max(30,rg.days);
+  var b=_btMarkup(from,t),bs=null; // ⚠️ v353 — هامش القطع بعد الخصم (مش إجمالي الفواتير شامل الصيانة)
   try{bs=_computeBalanceSheet();}catch(e){}
   var inv=bs?(+bs.inventory||0):0;
-  return {markup:cos>0?Math.round((rev-cos)/cos*1000)/10:0,turns:(inv>0&&cos>0)?Math.round(cos*(365/days)/inv*10)/10:0,days:days,rev:rev,cos:cos,inv:inv};
+  return {markup:Math.round(b.mk*1000)/10,turns:(inv>0&&b.cos>0)?Math.round(b.cos*(365/days)/inv*10)/10:0,days:days,rev:b.net,cos:b.cos,inv:inv,noCost:b.noCost};
 }
 function _pcalcBuild(){
   var seg=function(k,l){var a=_pcalcType===k;return '<button type="button" onclick="_pcalcSetType(\''+k+'\')" style="flex:1;padding:9px 4px;border:none;border-radius:10px;font-family:inherit;font-size:12.5px;font-weight:800;cursor:pointer;background:'+(a?'#0f172a':'#f1f5f9')+';color:'+(a?'#fff':'#64748b')+'">'+l+'</button>';};
@@ -30493,9 +30545,9 @@ function _pcalcBuild(){
     var d=_pcalcGoodsDefaults();
     body.innerHTML=warn+
       '<div style="background:#ecfdf5;border-radius:10px;padding:9px 12px;margin-bottom:10px;font-size:11.5px;color:#065f46;line-height:1.85"><b>📘 الأساس المحاسبي (مستثمر بضاعة):</b> مستثمر البضاعة <b>مش شريك في الملكية</b> — بيمّول مخزون وياخد نسبة من (سعر البيع − التكلفة) لبضاعته بس، ورأس ماله دين مستحق له. فنسبته العادلة مش «حصة ملكية»، هي <b>العائد على رأس ماله</b>:<br>العائد السنوي = <b>نسبته × هامش الربح على التكلفة × عدد مرات دوران المخزون في السنة</b>.<br>'+
-      (d?'الهامش والدوران اتحسبوا تلقائي من مبيعاتك آخر '+d.days+' يوم (مبيعات '+fmt(Math.round(d.rev))+' − تكلفة '+fmt(Math.round(d.cos))+'، والمخزون الحالي '+fmt(Math.round(d.inv))+') وتقدر تعدّلهم.':'مفيش مبيعات كفاية في آخر سنة — اكتب الهامش والدوران بإيدك.')+'</div>'+
+      (d?'الهامش والدوران اتحسبوا تلقائي من الفترة المختارة فوق (<b>'+d.days+' يوم فعلي</b>): <b>مبيعات قطع الغيار بس (من غير الصيانة) بعد الخصم</b> '+fmt(Math.round(d.rev))+' − تكلفتها '+fmt(Math.round(d.cos))+' ← هامش '+_pctTxt(d.markup)+'، والمخزون الحالي '+fmt(Math.round(d.inv))+' ← دوران '+N1b(d.turns)+' مرة/سنة.'+(d.noCost>0?' <span style="color:#b45309">(⚠️ '+fmt(Math.round(d.noCost))+' مبيعات من غير سعر تكلفة اتستبعدت)</span>':'')+' وتقدر تعدّلهم.':'مفيش مبيعات كفاية في آخر سنة — اكتب الهامش والدوران بإيدك.')+'</div>'+
       lab('رأس مال المستثمر (ج)')+'<input id="pcalc-gcap" type="number" inputmode="decimal" oninput="_pcalcRender()" style="'+sty+'">'+
-      lab('العائد السنوي المستهدف له (%)')+'<input id="pcalc-gtarget" type="number" inputmode="decimal" value="20" oninput="_pcalcRender()" style="'+sty+'">'+
+      lab('العائد السنوي المستهدف له (%)')+'<input id="pcalc-gtarget" type="number" inputmode="decimal" value="20" oninput="_pcalcRender()" style="'+sty+'">'+_pcalcTargetBasis()+
       lab('هامش الربح على التكلفة (%)')+'<input id="pcalc-gmk" type="number" inputmode="decimal" value="'+(d&&d.markup>0?d.markup:'')+'" oninput="_pcalcRender()" style="'+sty+'">'+
       lab('دوران المخزون (مرة في السنة)')+'<input id="pcalc-gturn" type="number" inputmode="decimal" value="'+(d&&d.turns>0?d.turns:'')+'" oninput="_pcalcRender()" style="'+sty+'">'+
       '<div id="pcalc-g"></div><div id="pcalc-gex"></div>'+_pcalcBtInputs();
@@ -30504,6 +30556,18 @@ function _pcalcBuild(){
 }
 // ⚠️ v335 — محاكاة «لو كان دخل قبل كده»: بتحسب نصيبه شهر بشهر وسنة بسنة (هجري) على أرقام المركز الفعلية من أول مبيعة (أو من تاريخ تختاره).
 // المعادلة = نفس معادلة التوزيع: مبيعات − تكلفة − مصروفات − نصيب مستثمري البضاعة (لو الخصم شغال). للقراءة بس: مابتغيّرش أي بيانات.
+// ⚠️ v353 — هامش بضاعة المستثمر الحقيقي (مصدر واحد للحاسبة والمقارنة والمحاكاة): قطع الغيار بس (مش الصيانة/الخدمات)، بعد الخصم،
+// ومن البنود اللي ليها سعر تكلفة بس. كان بيتحسب (إجمالي الفواتير − تكلفة القطع) ÷ التكلفة فالخدمات كانت بتتحسب ربح ١٠٠٪ والرقم بيطلع أعلى من الواقع.
+function _btInvBase(){var bs=null;try{bs=_computeBalanceSheet();}catch(e){}return bs?(+bs.inventory||0):0;}
+function _btCapFrac(cap){var inv=_btInvBase();return inv>0?Math.min(1,cap/inv):0;}
+function _btMarkup(from,to){
+  var net=0,cos=0,noCost=0,n=0;
+  (DB.sales||[]).forEach(function(s){
+    if(!(s.date>=from&&s.date<=to))return;n++;var f=_anSaleF(s);
+    (s.items||[]).forEach(function(i){var q=+i.qty||0;if(q<=0)return;var bp=+(i.buyPrice||i.buy_price)||0,rv=q*(+i.price||0)*f;if(bp>0){net+=rv;cos+=q*bp;}else noCost+=rv;});
+  });
+  return {mk:cos>0?(net-cos)/cos:0,net:net,cos:cos,noCost:noCost,n:n};
+}
 function _btFirstSale(){var d='';(DB.sales||[]).forEach(function(x){if(x.date&&(!d||x.date<d))d=x.date;});return d;}
 function _btProfit(from,to){
   var ps=(DB.sales||[]).filter(function(x){return x.date>=from&&x.date<=to;}),pe=(DB.expenses||[]).filter(function(x){return x.date>=from&&x.date<=to;});
@@ -30594,11 +30658,17 @@ function _rmStatusHtml(){
 }
 function _rmStatus(){var el=document.getElementById('rm-status');if(el)el.innerHTML=_rmStatusHtml();}
 function _rmWithUs(cap,pct,turn,startIso,endIso){
-  var first=_btFirstSale();if(!first||!(cap>0)||!(pct>0)||!(turn>0))return null;
-  var st=startIso>first?startIso:first;if(endIso&&st>endIso)return null;
-  var months=_btMonths(st,endIso),gain=0;
-  months.forEach(function(mo){var p=_btProfit(mo.from,mo.to),mk=p.cos>0?(p.sales-p.cos)/p.cos:0;gain+=cap*turn/12*mk*mo.frac*pct/100;});
-  return {gain:gain,covered:st,gap:first>startIso,months:months.length};
+  // ⚠️ v354 — نصيب مستثمر البضاعة من أرباح قطع الغيار الفعلية لكل شهر (بالتواريخ الحقيقية) × نسبة رأس ماله من مخزونك الحالي × نسبته.
+  // مفيش دوران سنوي مفترض ولا قسمة على ١٢ — أي مدة (٦ شهور، سنة، أي فلتر) بتتحسب من الشهور الفعلية اللي فيها مبيعات.
+  var first=_btFirstSale();if(!first||!(cap>0)||!(pct>0))return null;
+  var inv=_btInvBase();if(!(inv>0))return null;
+  var fr=Math.min(1,cap/inv),st=startIso>first?startIso:first;if(endIso&&st>endIso)return null;
+  var months=_btMonths(st,endIso),gain=0,rows=[];
+  months.forEach(function(mo){
+    var b=_btMarkup(mo.from,mo.to),pf=b.net-b.cos,g=fr*pf*pct/100;gain+=g;
+    rows.push({y:mo.y,m:mo.m,mk:b.mk,net:b.net,cos:b.cos,profit:pf,frac:mo.frac,gain:g});
+  });
+  return {gain:gain,covered:st,gap:first>startIso,months:months.length,rows:rows,fr:fr,inv:inv,over:cap>inv};
 }
 
 // ===== بصمة الدخول + مقارنة بدائل الاستثمار المطوّرة (⚠️ v350) =====
@@ -30760,7 +30830,7 @@ function _rmCalc2(){
     if(allLegs.some(function(l){return Date.parse(l.from)===toTs;}))return {same:true,legs:allLegs,to:to,cap:allLegs.reduce(function(t,l){return t+l.cap;},0)}; // مستثمر دخل النهارده: نعرض معادل مبلغه بدل رسالة خطأ
     return {err:'تاريخ النهاية لازم يبقى بعد تاريخ البداية'};
   }
-  var A={},order=[],approx=false,pending={},totCap=0,yW=0,infW=0,usGain=0,usMonths=0,usNeed=0,usOk=false,usFrom='',from0='';
+  var A={},order=[],approx=false,pending={},totCap=0,yW=0,infW=0,usGain=0,usMonths=0,usNeed=0,usOk=false,usFrom='',from0='',usLegs=[];
   function get(k,meta){if(!A[k]){A[k]=Object.assign({k:k,cost:0,qty:0,v:0},meta);order.push(k);}return A[k];}
   legs.forEach(function(l){
     var cap=l.cap,F=l.from,sn=l.snap||null,yrs=(toTs-Date.parse(F))/(365.25*864e5);
@@ -30785,18 +30855,37 @@ function _rmCalc2(){
       });
     }
     var us=_rmWithUs(cap,+_rm.pct||0,+_rm.turn||0,F,isNow?null:to);
-    if(us){usOk=true;usGain+=us.gain;usMonths+=us.months;usFrom=(usFrom&&usFrom<us.covered)?usFrom:us.covered;}
+    if(us){usOk=true;usGain+=us.gain;usMonths+=us.months;usFrom=(usFrom&&usFrom<us.covered)?usFrom:us.covered;usLegs.push({cap:cap,from:F,gain:us.gain,rows:us.rows,fr:us.fr,inv:us.inv,over:us.over});}
     usNeed+=(toTs-Date.parse(F))/(30.4375*864e5);
   });
   var yEff=yW/totCap,infF=infW/totCap,out=order.map(function(k){return A[k];}),us2=null;
   if(usOk){
-    var cov=usMonths/Math.max(usNeed,1e-9),o2={k:'us',ico:'📦',name:'معاك (تقدير)',sub:'رأس المال + نصيبه من أرباحك من غير إعادة استثمار',cost:totCap,v:totCap+usGain,qty:0,unit:''};
+    var cov=usMonths/Math.max(usNeed,1e-9),o2={k:'us',ico:'📦',name:'معاك (تقدير)',sub:'رأس المال + نصيبه من أرباح بضاعته من غير إعادة استثمار',cost:totCap,v:totCap+usGain,qty:0,unit:'',legs:usLegs};
     if(cov<0.9){o2.incomplete=true;o2.cov=usMonths;o2.of=Math.round(usNeed);o2.from=usFrom;us2=o2;}else out.push(o2);
   }
   var fin=function(o){o.gain=o.v-o.cost;o.pct=o.cost>0?o.gain/o.cost*100:0;o.ann=(yEff>=0.16&&o.cost>0)?(Math.pow(Math.max(o.v,1e-9)/o.cost,1/yEff)-1)*100:null;o.real=o.cost>0?(o.v/o.cost/infF-1)*100:0;if(o.qty>0)o.p0=o.cost/o.qty;o.partialCost=o.cost<totCap*0.999;};
   out.forEach(fin);out.sort(function(a,b){return b.pct-a.pct;});
   if(us2){fin(us2);out.push(us2);}
   return {items:out,cap:totCap,from:from0,to:to,now:now,isNow:isNow,infF:infF,infPct:(infF-1)*100,yEff:yEff,approx:approx,pending:pending,legs:legs};
+}
+// ⚠️ v353 — «الرقم ده جه منين؟»: معادلة «معاك» بالأرقام الحقيقية، وتفصيل كل شهر (هامش القطع الفعلي من فواتيرك)
+function _rmUsDerive(o){
+  // ⚠️ v354 — «الرقم ده جه منين؟» بالأرقام الحقيقية: ربح القطع الفعلي لكل شهر × نسبة رأس المال من مخزونك × نسبته
+  var N=function(x){return Math.round(x).toLocaleString('ar-EG');},P=function(x){return (Math.round(x*1000)/10).toLocaleString('ar-EG')+'٪';};
+  var pct=+_rm.pct||0,rows=[],fr=0,inv=0,over=false;
+  (o.legs||[]).forEach(function(l){(l.rows||[]).forEach(function(r){rows.push(r);});fr=l.fr||fr;inv=l.inv||inv;over=over||l.over;});
+  var tn=rows.reduce(function(s,r){return s+r.net;},0),tc=rows.reduce(function(s,r){return s+r.cos;},0);
+  return '<details style="margin-top:6px"><summary style="cursor:pointer;font-size:11.5px;font-weight:800;color:#4338ca">🔍 الرقم ده اتحسب إزاي؟</summary>'+
+    '<div style="font-size:11px;color:#334155;line-height:1.95;margin-top:5px;background:#eef2ff;border-radius:9px;padding:8px 10px">'+
+    '<b>نصيبه في الشهر</b> = ربح قطع الغيار الفعلي في الشهر ده × نسبة رأس ماله من مخزونك ('+N(o.cost)+' ÷ '+N(inv)+' = <b>'+P(fr)+'</b>) × نسبته ('+pct.toLocaleString('ar-EG')+'٪)<br>'+
+    '• ربح القطع = (مبيعات القطع بعد الخصم − تكلفتها) من فواتيرك الفعلية — <b>من غير الصيانة والخدمات</b> ومن غير البنود اللي مالهاش سعر تكلفة.<br>'+
+    '• بيتحسب على <b>الشهور الفعلية في المدة المختارة</b> بتواريخها الحقيقية (من غير ضرب في دوران ولا قسمة على ١٢).<br>'+
+    (rows.length?'• على '+rows.length.toLocaleString('ar-EG')+' شهر: مبيعات قطع '+N(tn)+' ج − تكلفة '+N(tc)+' ج = ربح <b>'+N(tn-tc)+' ج</b><br>':'')+
+    (over?'<span style="color:#b45309">⚠️ مبلغه أكبر من مخزونك الحالي، فاتحسب له أقصى نسبة (١٠٠٪ من ربح القطع).</span><br>':'')+
+    '• مخزونك الحالي بالتكلفة ('+N(inv)+' ج) تقريب لمخزون الفترة — بيتغير مع الوقت.<br>'+
+    '<div style="display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:3px;font-weight:800;color:#64748b;border-bottom:1px solid #c7d2fe;padding-bottom:2px;margin-top:4px"><span>الشهر</span><span>مبيعات قطع</span><span>ربح القطع</span><span>نصيبه</span></div>'+
+    rows.slice(-24).reverse().map(function(r){return '<div style="display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:3px;border-bottom:1px solid #e0e7ff;padding:2px 0"><span>'+HIJRI_MONTH_NAMES[r.m-1]+' '+r.y.toLocaleString('ar-EG',{useGrouping:false})+(r.frac<1?'*':'')+'</span><span>'+N(r.net)+'</span><span>'+N(r.profit)+'</span><b>'+N(r.gain)+'</b></div>';}).join('')+
+    '<div style="color:#94a3b8;margin-top:3px">* شهر جزئي (من يوم البداية أو لحد النهارده). تقدير بافتراض إن بضاعته اتوزعت على المخزون بنفس النسبة.</div></div></details>';
 }
 function _rmSign(x){return (x<0?'−':'+')+Math.abs(Math.round(x*10)/10).toLocaleString('ar-EG')+'٪';}
 function _rmNarr(r){
@@ -30835,7 +30924,7 @@ function _rmResHtml(){
     if(o.incomplete)return '<div style="background:#f8fafc;border:1.5px dashed #cbd5e1;border-radius:12px;padding:10px 12px;margin-bottom:8px;opacity:.92"><div style="font-weight:900;font-size:13.5px">'+o.ico+' '+esc(o.name)+' — غير مكتمل</div><div style="font-size:11px;color:#64748b;line-height:1.7;margin-top:3px">بيانات مبيعاتك المسجّلة بتغطي <b>'+o.cov+'</b> شهر بس من <b>'+o.of+'</b> — فمش بيتقارن عشان ما يطلعش رقم مضلل. التقدير الجزئي: '+N(o.v)+' ج ('+_rmSign(o.pct)+').</div></div>';
     if(o.qty>0)det='<div style="font-size:11.5px;color:#334155;line-height:1.9;margin-top:6px;padding-top:6px;border-top:1px dashed #e2e8f0">• اشتريت: <b>'+Q(o.qty)+'</b> '+o.unit+' × '+Q(o.p0)+' ج = '+N(o.cost)+' ج<br>• النهارده: <b>'+Q(o.qty)+'</b> '+o.unit+' × '+Q(o.p1)+' ج = <b>'+N(o.v)+' ج</b></div>';
     else if(o.k==='bank')det='<div style="font-size:11.5px;color:#334155;line-height:1.9;margin-top:6px;padding-top:6px;border-top:1px dashed #e2e8f0">• رأس المال '+N(o.cost)+' ج + فايدة مركّبة <b>'+N(o.gain)+' ج</b> = <b>'+N(o.v)+' ج</b></div>';
-    else if(o.k==='us')det='<div style="font-size:11.5px;color:#334155;line-height:1.9;margin-top:6px;padding-top:6px;border-top:1px dashed #e2e8f0">• رأس المال '+N(o.cost)+' ج + نصيبه من أرباحك <b>'+N(o.gain)+' ج</b> = <b>'+N(o.v)+' ج</b></div>';
+    else if(o.k==='us')det='<div style="font-size:11.5px;color:#334155;line-height:1.9;margin-top:6px;padding-top:6px;border-top:1px dashed #e2e8f0">• رأس المال '+N(o.cost)+' ج + نصيبه من أرباح بضاعته <b>'+N(o.gain)+' ج</b> = <b>'+N(o.v)+' ج</b></div>'+_rmUsDerive(o);
     return '<div style="background:'+(best?'#f0fdf4':'#f8fafc')+';border:'+(best?'2px solid #86efac':'1px solid #e2e8f0')+';border-radius:12px;padding:10px 12px;margin-bottom:8px">'+
       '<div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><div style="min-width:0"><div style="font-weight:900;font-size:13.5px">'+(best?'🏆 ':'')+o.ico+' '+esc(o.name)+'</div><div style="font-size:10.5px;color:#94a3b8;line-height:1.5">'+esc(o.sub)+(o.partialCost?' — محسوب على '+N(o.cost)+' ج من الإجمالي (باقي الإيداعات مفيهاش بصمة بالأصل ده)':'')+'</div></div>'+
       '<div style="text-align:left;flex-shrink:0"><div style="font-weight:900;font-size:15px">'+N(o.v)+' ج</div><div style="font-size:11.5px;font-weight:800;color:'+col(o.gain)+'">'+_rmSign(o.pct)+' ('+(o.gain<0?'−':'+')+N(Math.abs(o.gain))+' ج)</div></div></div>'+det+
@@ -30852,7 +30941,7 @@ function _rmSummaryText(){
   var L=[];
   L.push('=== ملخص مقارنة بدائل الاستثمار (للتحليل) — ابو حوده الحلو الجميل ===');
   L.push('الفترة: '+r.from+' إلى '+r.to+' ('+Math.round((Date.parse(r.to)-Date.parse(r.from))/864e5)+' يوم) — هجري: '+fmtDate(r.from)+' → '+fmtDate(r.to));
-  L.push('المبلغ المستثمر: '+N(r.cap)+' ج • نسبة المستثمر من الربح: '+(+_rm.pct||0)+'% • دوران البضاعة/سنة: '+(+_rm.turn||0));
+  L.push('المبلغ المستثمر: '+N(r.cap)+' ج • نسبة المستثمر من الربح: '+(+_rm.pct||0)+'% • مخزونك الحالي بالتكلفة: '+N(_btInvBase())+' ج');
   L.push('التضخم في الفترة: '+P(r.infPct));
   L.push('');L.push('--- الإيداعات وبصمة الأسعار ---');
   r.legs.forEach(function(l){var s=l.snap||{};L.push('• '+(l.name||'مبلغ حر')+' | '+l.from+' | '+N(l.cap)+' ج'+(l.snap?' | دهب21='+(s.gold||'-')+' فضة='+(s.silver||'-')+' دولار='+(s.usd||'-')+' يورو='+(s.eur||'-')+(((s.other||[]).length)?' | أصول تانية: '+s.other.map(function(o){return o.n+'='+o.p;}).join('، '):'')+' | مصدر الأسعار: '+(s.src||'-'):' | بدون بصمة (أسعار من الجدول التاريخي)'));});
@@ -30912,7 +31001,7 @@ function _rmBodyHtml(){
   var _html=
     '<div style="font-size:11.5px;color:#64748b;line-height:1.8;margin-bottom:8px">لو حط نفس المبلغ في بنك أو دهب أو دولار أو معاك — بأسعار حقيقية من الماضي لحد النهارده.'+(_rm.inv?' <b>('+esc((_invById(_rm.inv)||{}).name||'')+')</b>':'')+'</div>'+
     sel+
-    '<div style="display:flex;gap:8px;margin-bottom:8px">'+inp('rm-cap','المبلغ (ج)'+(entry?' — من البصمات':''),'cap',1.4,entry)+inp('rm-pct','نسبته من الربح %','pct',1)+inp('rm-turn','دوران بضاعته/سنة','turn',1)+'</div>'+
+    '<div style="display:flex;gap:8px;margin-bottom:8px">'+inp('rm-cap','المبلغ (ج)'+(entry?' — من البصمات':''),'cap',1.4,entry)+inp('rm-pct','نسبته من الربح %','pct',1)+'<div style="flex:1;min-width:0"><div style="font-size:10.5px;color:#64748b;font-weight:700;margin-bottom:3px">مخزونك الحالي (بالتكلفة)</div><div style="padding:11px 8px;background:#f1f5f9;border-radius:11px;text-align:center;font-weight:800;font-size:13px">'+Math.round(_btInvBase()).toLocaleString('ar-EG')+' ج</div></div>'+'</div>'+
     dur+
     '<div style="display:flex;align-items:flex-start;gap:8px;background:#f8fafc;border-radius:10px;padding:8px 10px;margin:8px 0 10px;font-size:11.5px;line-height:1.6"><div id="rm-status" style="flex:1;min-width:0">'+_rmStatusHtml()+'</div><button type="button" onclick="_rmSess.lock=false;_rmRefreshLive(true)" title="تحديث" style="background:#e0f2fe;border:none;border-radius:8px;padding:6px 10px;cursor:pointer;font-size:14px">🔄</button></div>'+
     '<div id="rm-res">'+_rmResHtml()+'</div>'+
@@ -30973,13 +31062,14 @@ function _pcalcBtRender(){
   if(!pct&&!goods){var amt=+v('pcalc-amt')||0,val=+v('pcalc-val')||0;if(amt>0&&val>0){pct=amt/(val+amt)*100;hint='النسبة المستخدمة '+_pctTxt(Math.round(pct*10)/10)+' (من حاسبة «شريك جديد» فوق) — اكتب نسبة تانية لو عايز.';}}
   var cap=+v('pcalc-gcap')||0,tn=+v('pcalc-gturn')||0;
   if(!(pct>0))return empty('اكتب النسبة عشان تظهر المحاكاة');
-  if(goods&&!(cap>0&&tn>0))return empty('اكتب رأس مال المستثمر ودوران المخزون فوق عشان نقدّر ربح بضاعته');
+  if(goods&&!(cap>0))return empty('اكتب رأس مال المستثمر فوق عشان نقدّر ربح بضاعته');
   var first=_btFirstSale();if(!first)return empty('مفيش مبيعات مسجّلة — مفيش أرقام نحاكي عليها');
   var fromIn=v('pcalc-bt-from')||'',start=(fromIn&&fromIn>first)?fromIn:first;
   var months=_btMonths(start);if(!months.length)return empty('مفيش شهور في الفترة دي');
+  var _fr=goods?_btCapFrac(cap):0;
   var rows=months.map(function(mo){
     var p=_btProfit(mo.from,mo.to),base,share;
-    if(goods){var mk=p.cos>0?(p.sales-p.cos)/p.cos:0;base=cap*tn/12*mk*mo.frac;share=base*pct/100;}
+    if(goods){var b2=_btMarkup(mo.from,mo.to);base=_fr*(b2.net-b2.cos);share=base*pct/100;} // ⚠️ v354 — ربح القطع الفعلي في الشهر × نسبة رأس ماله من المخزون
     else{base=p.net;share=base*pct/100;}
     return {mo:mo,base:base,share:share};
   });
@@ -31002,6 +31092,20 @@ function _pcalcBtRender(){
 }
 function N1b(x){return Math.round((+x||0)*10)/10;}
 function _pcalcRender(){if(_pcalcType==='goods')_pcalcRenderGoods();else _pcalcRenderPartner();_pcalcBtRender();}
+// ⚠️ v353 — «العائد السنوي المستهدف على أساس إيه؟»: مراجع حقيقية من السوق بنختار منها (دوس على أي واحد يتحط في الخانة)
+function _pcalcTargetBasis(){
+  var now=null;try{now=_rmNow();}catch(e){}var pts=REF_MARKET.pts,last=pts[pts.length-1];
+  var bank=now?now.dep:last.dep,inf=last.inf||0,g1=null;
+  try{var p0=_rmInterp(_rmMonthsAgo(12),'gold').v;if(p0>0&&now&&now.gold>0)g1=(now.gold/p0-1)*100;}catch(e){}
+  var N=function(x){return Math.round(x*10)/10;};
+  var chip=function(l,v){return '<button type="button" onclick="document.getElementById(\'pcalc-gtarget\').value='+N(v)+';_pcalcRender()" style="padding:6px 9px;border:1.5px solid #bbf7d0;background:#fff;border-radius:9px;font-family:inherit;font-size:11px;font-weight:800;color:#065f46;cursor:pointer">'+l+' = '+_pctTxt(N(v))+'</button>';};
+  return '<div style="background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:10px;padding:8px 11px;margin:-2px 0 10px;font-size:11px;line-height:1.85;color:#14532d">'+
+    '<b>تحدّد النسبة على أساس إيه؟</b> قارن بأحسن بديل قدّام المستثمر، وزوّد علاوة على مخاطرة البضاعة (ممكن تركد أو تتباع بخسارة):<br>'+
+    '• <b>الحد الأدنى = التضخم</b> ('+_pctTxt(N(inf))+') — أقل منه يبقى فلوسه بتخسر قوتها الشرائية.<br>'+
+    '• <b>البنك</b> ('+_pctTxt(N(bank))+') — لو ما كسبش أكتر منه مفيش سبب يخاطر معاك.<br>'+
+    '• <b>المعتاد: البنك + علاوة مخاطرة ٥–١٠٪</b>'+(g1!=null?'<br>• دهب العيار ٢١ زاد '+_pctTxt(N(g1))+' في آخر سنة (للمقارنة بس).':'')+
+    '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px">'+chip('📉 التضخم',inf)+chip('🏦 البنك',bank)+chip('🏦+٥٪',bank+5)+chip('🏦+١٠٪',bank+10)+'</div></div>';
+}
 function _pcalcRenderGoods(){
   var el=document.getElementById('pcalc-g'),ex=document.getElementById('pcalc-gex');if(!el||!ex)return;
   var cap=+v('pcalc-gcap')||0,tg=+v('pcalc-gtarget')||0,mk=+v('pcalc-gmk')||0,tn=+v('pcalc-gturn')||0,N1=function(x){return Math.round(x*10)/10;};
@@ -31044,12 +31148,15 @@ function _pcalcRenderPartner(){
       (pB!==null?'• <b>برأس المال فقط</b> ('+fmt(totalCap)+'): نسبته <b style="color:#0e7490">'+_pctTxt(N1(pB))+'</b><br>':'')+
       '<span style="color:#64748b;font-size:11px">الأولى بتحسب الأرباح المتراكمة والأصول (الأعدل لو المركز اشتغل فترة). التانية بتتجاهلهم.</span></div>';
     if(use!==null){
-      var f=(100-use)/100;
-      h+='<div style="font-size:12px;font-weight:800;margin-bottom:4px">أثر الدخول على النسب'+(pA!==null?' (بطريقة قيمة المركز)':'')+'</div>'+
+      var f=(100-use)/100,own=(_pcalcDil==='owner'),ownP=P[0].pct;
+      var seg2=function(k,l){var a=_pcalcDil===k;return '<button type="button" onclick="_pcalcDil=\''+k+'\';_pcalcRender()" style="flex:1;padding:7px 4px;border:none;border-radius:9px;font-family:inherit;font-size:11px;font-weight:800;cursor:pointer;background:'+(a?'#0f172a':'#f1f5f9')+';color:'+(a?'#fff':'#64748b')+'">'+l+'</button>';};
+      h+='<div style="font-size:12px;font-weight:800;margin-bottom:4px">أثر الدخول على النسب</div>'+
+        '<div style="display:flex;gap:6px;margin-bottom:6px">'+seg2('owner','من نصيبي أنا بس')+seg2('all','يتوزع على الكل بالتناسب')+'</div>'+
         '<div style="display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:4px;font-size:10.5px;color:#94a3b8;font-weight:800;padding-bottom:3px;border-bottom:2px solid #e2e8f0"><span>الطرف</span><span>الحالية</span><span>بعد الدخول</span></div>'+
-        P.map(function(x){return '<div style="display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:4px;font-size:12px;padding:4px 0;border-bottom:1px solid #f1f5f9"><span style="font-weight:700">'+esc(x.name)+'</span><span>'+_pctTxt(N1(x.pct))+'</span><span style="color:#c2410c">'+_pctTxt(N1(x.pct*f))+'</span></div>';}).join('')+
+        P.map(function(x){var after=own?(x.owner?Math.max(0,x.pct-use):x.pct):x.pct*f,ch=Math.abs(after-x.pct)>0.04;return '<div style="display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:4px;font-size:12px;padding:4px 0;border-bottom:1px solid #f1f5f9"><span style="font-weight:700">'+esc(x.name)+'</span><span>'+_pctTxt(N1(x.pct))+'</span><span style="color:'+(ch?'#c2410c':'#64748b')+';font-weight:'+(ch?'900':'500')+'">'+_pctTxt(N1(after))+(ch?' ▼':' (ثابتة)')+'</span></div>';}).join('')+
         '<div style="display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:4px;font-size:12px;padding:4px 0;font-weight:900;color:#15803d"><span>🆕 المستثمر الجديد</span><span>—</span><span>'+_pctTxt(N1(use))+'</span></div>'+
-        '<div style="font-size:10.5px;color:#94a3b8;margin-top:4px">التخفيف نسبي (بيحافظ على علاقة القدامى ببعض). النسب دي للأرباح من تاريخ دخوله بس.</div>';
+        (own&&use>ownP?'<div style="font-size:11px;color:#dc2626;margin-top:4px">⚠️ نسبته ('+_pctTxt(N1(use))+') أكبر من نصيبك الحالي ('+_pctTxt(N1(ownP))+') — مش هينفع تتاخد من نصيبك بس، لازم تخفّف حد من المستثمرين.</div>':'')+
+        '<div style="font-size:10.5px;color:#94a3b8;margin-top:4px;line-height:1.7">'+(own?'نسب المستثمرين الحاليين ثابتة في التطبيق (كل واحد له نسبته المكتوبة) ونصيبك أنت هو الباقي، فالمستثمر الجديد بينقص منك أنت بس.':'التخفيف نسبي (بيحافظ على علاقة القدامى ببعض) — لازم تعدّل نسبهم بإيدك في التطبيق لو اخترت ده.')+' النسب دي للأرباح من تاريخ دخوله بس.</div>';
     }
   }else{h='<div class="empty" style="font-size:12px">اكتب مبلغ المستثمر الجديد عشان تظهر النسبة</div>';}
   nEl.innerHTML=h;
@@ -33402,7 +33509,7 @@ function renderAnalysisHub(){
   }else if(tab==='turn'){
     body=_anPeriodChips()+T.html;
   }else{
-    body=_ah.sub==='cmp'?'<div id="ah-cmp"></div>':(_ah.sub==='snap'?_ahSnapHtml():'<div id="pcalc-seg"></div><div id="pcalc-body"></div>');
+    body=_ah.sub==='cmp'?'<div id="ah-cmp"></div>':(_ah.sub==='snap'?_ahSnapHtml():_anPeriodChips()+'<div id="pcalc-seg"></div><div id="pcalc-body"></div>');
   }
   el.innerHTML=head+'<div id="ah-body">'+body+'</div>';
   if(tab==='inv'){
