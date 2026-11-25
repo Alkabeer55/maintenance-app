@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v361</title>
+<title>ابو حوده الحلو الجميل v364</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -53,7 +53,7 @@ async function __netProbe(force){
   }catch(e3){}
   return ok;
 }
-/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="v361 — ١٥ جمادى الآخرة ١٤٤٨ هـ";
+/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="v364 — ١٥ جمادى الآخرة ١٤٤٨ هـ";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -193,6 +193,9 @@ async function __netProbe(force){
         الهامش = بعد الخصم (_anSaleF) وبالفصل قطع/خدمات، وأي بند من غير سعر تكلفة بيتحذّر منه. نصيب الشريك في دورة التوزيع = _pcPartnerShare بس (رد رأس المال + الدخول في نص الفترة)، ممنوع Math.round(profit*pct/100) مباشرة.
 ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v364: [💳 خصم الفاتورة من رصيد العميل: في فاتورة جديدة لو العميل له رصيد عندنا (دين له علينا: «رصيد له» من مرتجع أو دين مورد بنفس الاسم) بيظهر تحت الدفع «💳 العميل له رصيد X — اخصم الفاتورة منه» بمبلغ قابل للتعديل (أقصاه أقل من الرصيد والإجمالي). النتيجة: الفاتورة مدفوعة عادي (المديونيات والتقارير زي ما هي) + سداد على رصيده بنفس المبلغ بتاريخ الفاتورة فالكاش صافيه صفر. حذف الفاتورة بيرجّع رصيده. الأثر متسجّل جوه دفعة الدين (sale_id) — مفيش عمود جديد في المبيعات ومفيش SQL. في التعديل: بيظهر المبلغ اللي اتخصم بس (لتغييره احذف وسجّل من جديد).]
+v363: [🧮 كرت مستثمر البضاعة + ربط قائمة الدخل: (١) شاشة المستثمرين ← بضاعة: كرت «له» (كان شامل رأس المال) اتبدّل بكرت «🧮 أرباح مستحقة» (نصيبه من الأرباح − اللي اتسحب) في نفس المكان؛ باقي الكروت زي ما هي • (٢) في ملخص قائمة الدخل: كرت «🤝 بضاعة المستثمرين في الفترة دي» بقى قابل للضغط ويفتح شاشة المستثمرين على تاب بضاعة. مفيش تغيير في أي حساب.]
+v362: [🛡️ حماية المستثمرين من الضياع (سبب حقيقي اتصلّح): كان لما نسخة جهاز/ملف محلي (توقيتها المحلي أحدث) تتزامن، بتحتفظ بقايمتها كلها وترفعها فوق السيرفر — فمستثمرين مضافين من جهاز تاني بيختفوا. دلوقتي: (١) المستثمرين والدفعات دايمًا بدمج 3-way آمن عند السحب (مفيش «المحلي أحدث فيكسب») (٢) قبل أي رفع بنقرا نسخة السيرفر وندمج — ومستحيل نرفع قايمة ناقصة؛ ولو السيرفر مردّش مبنرفعش (٣) لو التطبيق مفتوح من ملف (file://): ممنوع أي رفع قبل ما يتسحب من السيرفر أول مرة + شارة «💻 نسخة ملف» في شريط الحالة + تنبيه مرة في الجلسة (٤) نسخة احتياطية محلية تلقائية قبل أي دمج. مفيش تغيير في الشاشات أو المحاسبة ومفيش SQL. نصيحة: افتح التطبيق من الرابط مش من الملف.]
 v361: [🎧 القرآن: (١) التكملة بعد انتهاء السورة بقت موثوقة: الصوت بيبدأ فورًا (كان بيستنى تحميل النص فبيفشل أحيانًا) + أزرار التالية/السابقة في شاشة القفل والإشعارات (Media Session) + زرار ⏭️ التالية • (٢) ⏲️ عدّاد إيقاف: ١٠/١٥/٣٠/٤٥/٦٠/٩٠ دقيقة أو «بعد ما السورة تخلص» مع إلغاء • (٣) 📥 قايمة المتنزّل مقسّمة حسب الشيخ بأسماء السور، ▶️ تشغيل أي سورة أو تشغيل متواصل لشيخ، 🗑️ حذف • (٤) علامة ✅📥 جنب كل سورة متنزّلة للشيخ الحالي + زرار «✅ المتنزّل» يعرضهم بس؛ ولما مفيش نت بيعرض ويشغّل المتنزّل بس تلقائي والتكملة تختار من المتنزّل • (٥) 📋 نسخ الآية من نافذة الآية. مفيش تغيير في المحاسبة ولا SQL. لسه: تنزيل مجموعة سور مرة واحدة.]
 v360: [🛠️ الصيانة الدورية — شاشة جديدة (المزيد ← العمليات): لكل ماكينة عميل تذكير بعدد الورق وبالمدة معًا (أيهما أقرب) • افتراضي (٥٠٠٠ ورقة / ٣ شهور) من زرار ⚙️ وتقدر تغيّره لكل ماكينة أو توقف التذكير ليها • الحالة: 🔴 متأخرة / 🟡 قربت / 🟢 تمام / ⚪ من غير بيانات — الكروت اللي فوق قابلة للضغط وبتفلتر + بحث • مرجع آخر صيانة = آخر فاتورة/تحرك للماكينة أو زرار «✅ تمت الصيانة» • استهلاك الورق: بين آخر قراءتين نعرف المعدل ونقدّر لحد النهاردة (مكتوب «تقديري») • من كارت الماكينة: تحرك / فاتورة مباشرة. البيانات جوه الماكينة نفسها في دفتر العملاء (بتتزامن)، مفيش SQL ومفيش تغيير في المحاسبة.]
 v359: [🔒 شرح «قفل الدفعة» + 🚚 مصاريف النقل في تعديل المشتريات: (١) المستثمرين: زرار «ℹ️» جنب «🔒 قفل الدفعة» بيشرح معناه، وسطر توضيح على الدفعة المقفولة. (٢) تعديل مشترى قديم وتغيير مصاريف النقل بقى بيتحسب على تكلفة الصنف (landed_cost) لقدّام بس على الكمية اللي لسه في المخزن — كان بيتسجّل في المشترى من غير ما يأثر على تكلفة المنتج. (تأكيد: تعديل الكميات بيعدّل المخزون من v104، وتعديل السعر من v356.) مفيش تغيير في الدورات المحفوظة ولا المبيعات القديمة.]
@@ -4724,6 +4727,8 @@ async function __pullAllFromServer(){
       __BIZ_BLOBS.forEach(function(b){ __queueForSync('__bizblob__', b.id, b.id); });
       return;
     }
+    // ⚠️ v362 — لو التطبيق مفتوح كملف (file://) النسخة المحلية ممكن تكون قديمة جدًا: ممنوع نرفع أي حاجة قبل ما نسحب من السيرفر الأول
+    if(location.protocol==='file:'&&!window.__bizPulled){ __BIZ_BLOBS.forEach(function(x){ __queueForSync('__bizblob__', x.id, x.id); }); return; }
     for(var i=0;i<__BIZ_BLOBS.length;i++){
       var b = __BIZ_BLOBS[i];
       // ⚠️ v207 — إصلاح باج حقيقي: كل عنصر هنا بياخد await (نداء سيرفر)، وده بيدّي فرصة
@@ -4743,6 +4748,24 @@ async function __pullAllFromServer(){
       if(__isLww){ // v254 — ما نرفعش قايمة ما اتغيّرتش من آخر رفع (عشان ما نكتبش فوق تعديل جهاز تاني بنسخة قديمة)
         var __pushed=LS.get('mc8_biz_pushed',{})||{};
         if(__pushed[b.key]===JSON.stringify(DB[b.key]||__bizBlank(b.key))){ __dequeueSync('__bizblob__', b.id); continue; } // ⚠️ v263 — ماتغيّرتش = السيرفر عنده نفس النسخة → نشيلها من الطابور (كانت بتفضل عالقة للأبد)
+      }
+      // ⚠️ v362 — حماية المستثمرين/الدفعات قبل الرفع: نقرا نسخة السيرفر الأول وندمج (3-way) — مستحيل نرفع قايمة ناقصة فوق قايمة السيرفر.
+      // (السبب الحقيقي لاختفاء مستثمرين: نسخة قديمة من ملف محلي رفعت قايمتها فوق السيرفر.) لو مقدرناش نتأكد من السيرفر → مبنرفعش.
+      if(b.key==='investors'||b.key==='inv_batches'){
+        try{
+          var __gr=await sb.from('business_state').select('data').eq('id',b.id).maybeSingle();
+          if(__gr.error){ __queueForSync('__bizblob__', b.id, b.id); continue; }
+          if(__gr.data&&Array.isArray(__gr.data.data)){
+            var __gs=__invSafeAdopt(b.key,__gr.data.data);
+            if(JSON.stringify(__gs.rows)!==JSON.stringify(DB[b.key]||[])){
+              try{ if(typeof _invBackup==='function')_invBackup('قبل الرفع: دمج مع السيرفر ('+b.key+')'); }catch(eB){}
+              DB[b.key]=__gs.rows;
+              try{ __bizTouch(); }catch(eT){}
+              try{ if(__gs.conflicts.length&&typeof _invAudit==='function')_invAudit('sync_conflict','push-guard',b.key,{rows:__gs.conflicts.slice(0,20)}); }catch(eA){}
+              try{ showToast('🛡️ اتدمجت بيانات المستثمرين مع السيرفر قبل الحفظ (حماية من الضياع)','#0891b2'); }catch(eS){}
+            }
+          }
+        }catch(eG){ __queueForSync('__bizblob__', b.id, b.id); continue; }
       }
       try{
         var payload = {
@@ -4780,7 +4803,7 @@ async function __pullAllFromServer(){
         }else if(__LWW_KEYS.indexOf(b.key)!==-1){
           // ⚠️ v254 — آخر تعديل يكسب
           var __ts=__bizTs(), __sig=__bizSig(), __lts=__ts[b.key]||'', __sts=(res.data.updated_at||'');
-          if(__lts && __lts > __sts){
+          if(__lts && __lts > __sts && b.key!=='investors' && b.key!=='inv_batches'){ // ⚠️ v362 — المستثمرين/الدفعات دايمًا بدمج آمن (نسخة جهاز قديمة بتوقيت أحدث كانت بتكتب فوق السيرفر وتمسح مستثمرين)
             // تعديلنا المحلي أحدث من السيرفر → نحتفظ بيه وهيترفع
             var __pu=LS.get('mc8_biz_pushed',{})||{}; delete __pu[b.key]; LS.set('mc8_biz_pushed',__pu);
           }else if(!__lts){
@@ -4806,7 +4829,7 @@ async function __pullAllFromServer(){
               try{ __queueForSync('__bizblob__', b.id, b.id); }catch(eQ){}
               setTimeout(function(){ try{ __scheduleBizBlobPush(); }catch(ePu){} },800);
             }else{
-              DB[b.key] = __safe ? __safe.rows : serverData;
+              if(__safe||!(__lts&&__lts>__sts&&(b.key==='investors'||b.key==='inv_batches')))DB[b.key] = __safe ? __safe.rows : serverData; // ⚠️ v362 — لو الدمج فشل والمحلي أحدث: منستبدلش
               __ts[b.key]=__sts; __sig[b.key]=JSON.stringify(serverData); LS.set('mc8_biz_ts',__ts); LS.set('mc8_biz_sig',__sig);
               var __pu2=LS.get('mc8_biz_pushed',{})||{}; __pu2[b.key]=JSON.stringify(serverData); LS.set('mc8_biz_pushed',__pu2);
             }
@@ -4818,6 +4841,8 @@ async function __pullAllFromServer(){
       }
     }
     try{ __pruneScheduled(); }catch(ePr){}
+    var __firstPull=!window.__bizPulled;window.__bizPulled=true; // ⚠️ v362 — اتسحب من السيرفر مرة على الأقل في الجلسة دي
+    if(__firstPull&&location.protocol==='file:'){ setTimeout(function(){ try{ __scheduleBizBlobPush(); }catch(e){} },1500); }
     // v158 — الإعدادات، الأرشيف، وعداد التحركات (دمج مخصص لكل واحد)
     try{
       var setRes = await sb.from('business_state').select('data').eq('id','settings').maybeSingle();
@@ -5880,7 +5905,7 @@ var APP_TITLE=APP_CONFIG.name;
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=361;
+var APP_VERSION=364;
 // ⚠️ v303 — BUILD_STAMP كان مش متعرّف خالص (شاشة الإعدادات كانت بتعرض "?") — اتعرّف دلوقتي وبيتزود مع كل تحديث
 var BUILD_STAMP='v'+APP_VERSION+' — ١٥ جمادى الآخرة ١٤٤٨ هـ'; // ⚠️ v331 — رقم النسخة بيتولّد من APP_VERSION (كان واقف على v323 لأن في تعريفين، والتاني بيكسب). ممنوع تكتب رقم نسخة يدوي هنا.
 // ⚠️ v295 — عنوان الصفحة كان رقم نسخته ثابت ومتنسي (فضل v294 مع إن النسخة اتغيّرت). دلوقتي بياخد الرقم من APP_VERSION دايمًا.
@@ -6904,6 +6929,7 @@ function __refreshStatusBadge(){
   else if(__netBadgeState==='weak'){ txt='⚠️ النت ضعيف'; bg='#d97706'; }
   else { txt='✅ متصل بالسيرفر'; bg='#16a34a'; }
   if(window.__permState==='offline' && !window.__isOwner){ txt+=' • صلاحيات موثوقة لحد '+new Date(window.__permOfflineUntil).toLocaleTimeString('ar-EG',{hour:'2-digit',minute:'2-digit'}); }
+  if(location.protocol==='file:'){ txt+=' • 💻 نسخة ملف'; } // ⚠️ v362
   if(c.recs||c.blocks){ txt+=' • 🔄 '+(c.recs?c.recs+' عملية':'')+(c.blocks?((c.recs?' + ':'')+'إعدادات'):'')+' بانتظار المزامنة'; if(bg==='#16a34a') bg='#d97706'; }
   if(c.held){ txt+=' • ⚠️ '+c.held+' محتاجة قرارك'; bg='#dc2626'; }
   el.textContent=txt; el.style.background=bg; el.style.cursor='pointer';
@@ -6921,6 +6947,10 @@ if(typeof window!=='undefined'){
   if(__navOffline()){ __setNetBadge('offline'); }
 }
 
+// ⚠️ v362 — تنبيه مرة في الجلسة لو التطبيق مفتوح من ملف على الجهاز (تخزينه منفصل عن الرابط، وممكن يبقى أقدم من السيرفر)
+if(typeof window!=='undefined'&&location.protocol==='file:'){
+  window.addEventListener('load',function(){ setTimeout(function(){ try{ if(!sessionStorage.getItem('mc8_file_warn')){ sessionStorage.setItem('mc8_file_warn','1'); showToast('💻 إنت فاتح التطبيق من ملف على الجهاز — بياناته منفصلة عن الرابط. الأفضل تفتحه من الرابط. (محمي من مسح البيانات)','#d97706'); } }catch(e){} },4000); });
+}
 // ===== Stubs بسيطة — كل عملية بتعمل persist تلقائي =====
 // جداول مسموح مزامنتها فعليًا مع السيرفر (بيتزاد فيها جدول جديد كل ما نوصل قسم جديد)
 var __SYNCED_TABLES = {products:true, movements:true, sales:true, expenses:true, part_withdrawals:true, debts:true, purchases:true, tasks:true};
@@ -11314,7 +11344,7 @@ var _saleNextSameCustomer=false; // v232
 var _salePayMethod='كاش'; // الافتراضي كاش
 
 function openSaleModal(id){
-  _saleId=id||null;_saleWS=null; // v248
+  _saleId=id||null;_saleWS=null;_saleCreditOn=false;_saleCreditAmt=0; // v248 / v364
   var s=id?DB.sales.find(function(x){return x.id===id;}):null;
   if(s&&_isReturnSale(s)){showToast('↩️ ده مرتجع — مش بيتعدّل. لو فيه غلط ألغيه (🗑️) وسجّله من جديد','#d97706');return;} // ⚠️ v356
   // ⚠️ إصلاح جذري v104 — السبب الحقيقي لمشكلة "تعديل المبيعات المخزن مش بيرجع تاني، بتفضل
@@ -11482,7 +11512,7 @@ function renderSaleBody(s){
     '<div class="field"><label>خصم (ج)</label><input id="sale-discount" type="number" inputmode="decimal" step="any" value="'+((s&&s.discount)||'')+'" placeholder="0" min="0" style="'+_inpStyle+'" oninput="updateSaleDiscount()"></div>'+
     '<div class="field"><label>خصم %</label><input id="sale-discount-pct" type="number" inputmode="decimal" step="any" value="" placeholder="0" min="0" max="100" style="'+_inpStyle+'" oninput="updateSaleDiscountPct()"></div>'+
     '<div class="field"><label>💵 المدفوع (ج)</label><input id="sale-paid" type="number" inputmode="decimal" step="any" value="'+esc(s?s.paid:'')+'" oninput="onPaidManualEdit()" style="'+_inpStyle+'"></div>'+
-    '</div>'+payMethodsHtml+'</div>'+
+    '</div>'+payMethodsHtml+'<div id="sale-credit-box"></div></div>'+
 
     // ===== ٤) تفاصيل إضافية (ملاحظة • صورة • التاريخ) =====
     '<details class="sale-more" id="sale-more" ontoggle="_saleMoreOpen=this.open"'+(_moreOpen?' open':'')+'>'+
@@ -11737,6 +11767,54 @@ function _saleSec(n,title,inner){
   return '<div class="sale-sec"><div class="sale-sec-h"><span class="sale-sec-n">'+n+'</span>'+title+'</div>'+inner+'</div>';
 }
 // ⚠️ v304 — الشريط الثابت (الإجمالي/المدفوع/المتبقي) — بيتحدّث من هنا بس، بعد أي تغيير في البنود/الخصم/المدفوع
+
+// ===== 💳 خصم الفاتورة من رصيد العميل (v364) =====
+// لو العميل له رصيد عندنا (دين له علينا: مرتجع «رصيد له» أو دين مورد بنفس الاسم) — وقت تسجيل فاتورة جديدة تقدر تختار تخصمها منه بدل الكاش.
+// المحاسبة: الفاتورة بتتسجّل مدفوعة عادي (التقارير والمديونيات مبتتأثرش) + سداد على دينه علينا بنفس المبلغ بتاريخ الفاتورة، فالكاش صافيه صفر.
+// الأثر متسجّل جوه دفعة الدين (sale_id) — الحذف بيعكسه، ومفيش عمود جديد في المبيعات ولا SQL.
+var _saleCreditOn=false,_saleCreditAmt=0;
+function _custCreditDebts(name){var n=normalizeAr(name||'');return n?DB.debts.filter(function(d){return d.type==='supplier'&&normalizeAr(d.name||'')===n&&(d.total-(d.paid||0))>0.005;}).sort(function(a,b){return String(a.date||'')<String(b.date||'')?-1:1;}):[];}
+function _custCreditTotal(name){return money(_custCreditDebts(name).reduce(function(t,d){return t+(d.total-(d.paid||0));},0));}
+function _saleCreditUsed(saleId){var t=0;(DB.debts||[]).forEach(function(d){(d.payments||[]).forEach(function(p){if(p.credit_offset&&p.sale_id===saleId)t+=(+p.amount||0);});});return money(t);}
+function _saleCreditMax(){
+  var cust=(v('sale-customer')||'').trim(),credit=_custCreditTotal(cust);
+  var sub=saleItemsSubtotal(_saleItems)+_saleServices.reduce(function(t,sv){return t+sv.price;},0);
+  var total=Math.max(0,money(sub-(+v('sale-discount')||0)));
+  return {credit:credit,total:total,max:money(Math.min(credit,total))};
+}
+function _saleCreditRefresh(){
+  var box=document.getElementById('sale-credit-box');if(!box)return;
+  var cEl=document.getElementById('sale-customer');
+  if(cEl&&!cEl.dataset.crb){cEl.dataset.crb='1';cEl.addEventListener('input',_saleCreditRefresh);cEl.addEventListener('change',_saleCreditRefresh);}
+  if(_saleId){var u=_saleCreditUsed(_saleId);var h0=u>0?'<div style="background:#ecfeff;border-radius:10px;padding:7px 10px;font-size:12px;color:#0e7490;font-weight:700;margin-top:8px">💳 اتخصم '+fmt(u)+' من رصيد العميل مع الفاتورة دي</div>':'';if(box.dataset.sig!==h0){box.dataset.sig=h0;box.innerHTML=h0;}return;}
+  var m=_saleCreditMax();
+  if(!(m.credit>0.005)){_saleCreditOn=false;if(box.dataset.sig!==''){box.dataset.sig='';box.innerHTML='';}return;}
+  if(_saleCreditOn&&_saleCreditAmt>m.max)_saleCreditAmt=m.max;
+  if(_saleCreditOn&&!(_saleCreditAmt>0))_saleCreditAmt=m.max;
+  var sig=[m.credit,m.max,_saleCreditOn?1:0,_saleCreditAmt].join('|');
+  if(box.dataset.sig===sig)return;
+  box.dataset.sig=sig;
+  box.innerHTML='<div style="background:#ecfeff;border:1.5px solid #67e8f9;border-radius:12px;padding:9px 11px;margin-top:8px">'+
+    '<label style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:800;color:#0e7490;cursor:pointer"><input type="checkbox" '+(_saleCreditOn?'checked':'')+' onchange="_saleCreditToggle(this.checked)"> 💳 العميل له رصيد عندنا '+fmt(m.credit)+' — اخصم الفاتورة منه</label>'+
+    (_saleCreditOn?'<div style="display:flex;align-items:center;gap:8px;margin-top:7px"><span style="font-size:12px;color:#155e75">المبلغ المخصوم:</span><input type="number" inputmode="decimal" step="any" value="'+_saleCreditAmt+'" min="0" max="'+m.max+'" onchange="_saleCreditAmtSet(this.value)" style="flex:1;padding:7px 10px;border:2px solid #a5f3fc;border-radius:9px;font-family:inherit;font-size:13px"><span style="font-size:11px;color:#64748b">حد أقصى '+fmt(m.max)+'</span></div><div style="font-size:10.5px;color:#0e7490;margin-top:5px">الفاتورة بتتحسب مدفوعة، ورصيده بينقص بنفس المبلغ — مفيش كاش بيدخل الخزنة.</div>':'')+'</div>';
+}
+function _saleCreditToggle(on){
+  _saleCreditOn=!!on;var m=_saleCreditMax();_saleCreditAmt=on?m.max:0;
+  if(on){var pe=document.getElementById('sale-paid');if(pe&&(+pe.value||0)<m.max-0.005)pe.value=Math.max(m.max,+pe.value||0);}
+  _saleBarUpdate();
+}
+function _saleCreditAmtSet(val){var m=_saleCreditMax(),x=Math.max(0,Math.min(+val||0,m.max));_saleCreditAmt=money(x);var pe=document.getElementById('sale-paid');if(pe&&(+pe.value||0)<_saleCreditAmt-0.005)pe.value=_saleCreditAmt;_saleBarUpdate();}
+// عكس الخصم لما الفاتورة تتحذف
+async function _creditUndoForSale(saleId){
+  var list=(DB.debts||[]).filter(function(d){return (d.payments||[]).some(function(p){return p.credit_offset&&p.sale_id===saleId;});});
+  for(var i=0;i<list.length;i++){
+    var d=list[i],gone=0,pays=(d.payments||[]).filter(function(p){if(p.credit_offset&&p.sale_id===saleId){gone+=(+p.amount||0);return false;}return true;});
+    var upd={paid:money(Math.max(0,(d.paid||0)-gone)),payments:pays};
+    DB.debts=patchRow(DB.debts,d.id,upd);try{await dbUpdate('debts',d.id,upd);}catch(e){}
+  }
+  return list.length;
+}
+
 function _saleBarUpdate(){
   var bar=document.getElementById('sale-bar');if(!bar)return;
   var sub=saleItemsSubtotal(_saleItems)+_saleServices.reduce(function(t,sv){return t+sv.price;},0);
@@ -11750,6 +11828,7 @@ function _saleBarUpdate(){
   else if(rem<-0.005){set('sale-bar-remlbl','زيادة');set('sale-bar-rem',fmt(-rem));if(b)b.style.color='#ca8a04';if(w)w.style.background='#fefce8';}
   else{set('sale-bar-remlbl','المتبقي');set('sale-bar-rem',total>0?'✓ مسدّد':fmt(0));if(b)b.style.color='#16a34a';if(w)w.style.background=total>0?'#f0fdf4':'#f1f5f9';}
   try{_saleSplitSync();}catch(_e){} // ⚠️ v349
+  try{_saleCreditRefresh();}catch(_e){} // ⚠️ v364
 }
 function autoFillPaid(){
   var subtotal=saleItemsSubtotal(_saleItems)+
@@ -12450,6 +12529,11 @@ async function saveSale(){
   var paid=+v('sale-paid')||0;
   var isVisitOnly=!_saleItems.length&&!_saleServices.length&&!paid; // سجل زيارة بدون بيع
   if(!_saleItems.length&&!_saleServices.length&&paid)total=paid;
+  var __credit=0;
+  if(!__editingSale&&_saleCreditOn){ // ⚠️ v364 — خصم من رصيد العميل
+    var __cm=_saleCreditMax();__credit=money(Math.min(_saleCreditAmt,__cm.credit,total));
+    if(__credit>0.005&&paid+0.005<__credit)return showToast('⚠️ المدفوع لازم يشمل المبلغ المخصوم من رصيده ('+fmt(__credit)+')','#dc2626');
+  }
   var _invErr=_invValidateSale();if(_invErr&&!confirm(_invErr+'\nالمخزون واحد — تكمل البيع برضه؟'))return; // v256/v258 تحذير بدل منع
   var status=isVisitOnly?'زيارة':(isPaidUp(paid,total)?'مدفوع':paid>0?'جزئي':'غير مدفوع'); // v266 — سماحية نص قرش
   var pm=v('sale-payment-method')||_salePayMethod||'كاش';
@@ -12559,6 +12643,17 @@ async function saveSale(){
           await dbUpdate('products',item.productId,{qty:newQty});
           await _handleConsignmentInSale(prod,item.qty,obj.id); // ⚠️ v200/v205 — دين المورد التلقائي لو العنصر أمانة مستلمة، مربوط بالفاتورة
         }
+      }
+      if(__credit>0.005){ // ⚠️ v364 — سداد على دينه علينا بنفس مبلغ الخصم (الكاش صافيه صفر)
+        var __left=__credit,__crs=_custCreditDebts(customer);
+        for(var __k=0;__k<__crs.length&&__left>0.005;__k++){
+          var __d=__crs[__k],__rem=__d.total-(__d.paid||0),__take=money(Math.min(__rem,__left));
+          var __pays=(__d.payments||[]).concat([{amount:__take,date:v('sale-date'),note:'خصم من رصيده — فاتورة #'+_saleNo(obj),sale_id:obj.id,credit_offset:true}]);
+          var __upd={paid:money((__d.paid||0)+__take),payments:__pays};
+          DB.debts=patchRow(DB.debts,__d.id,__upd);try{await dbUpdate('debts',__d.id,__upd);}catch(eCr){}
+          __left=money(__left-__take);
+        }
+        _saleCreditOn=false;_saleCreditAmt=0;
       }
       if(total>0&&paid<total){
         var debt={id:genId(),type:'customer',name:customer,
@@ -13284,6 +13379,7 @@ async function saveRemindPhone(clientId){
 // أي فاتورة بتتحذف، بنودها لازم ترجع تزوّد المخزون تاني (كأنها اترجعت)
 // وأي قطعة اسكراب فيها ترجع تزوّد سجل الماكينة كمان
 async function _restoreStockFromSale(sale){
+  try{if(sale&&sale.id)await _creditUndoForSale(sale.id);}catch(eU){} // ⚠️ v364 — يعكس الخصم من رصيد العميل لو الفاتورة كانت متخصومة منه
   if(!sale||!sale.items||!sale.items.length)return;
   // ⚠️ v209 — باج جذري: كانت بترجّع الكمية محليًا بس (DB.products.map) من غير ما تنادي
   // dbUpdate خالص، يعني حذف فاتورة كان بيرجّع الكمية على جهازك بس، والسيرفر يفضل بالرقم
@@ -18732,11 +18828,13 @@ async function _invSetSaleMode(m,fromSale){
 // (صافي الربح نفسه ما بيتغيّرش — بيتسجّل كامل زي أي بيع). المستثمرين "العاديين" (حسابات ← مستثمرين، نسبة من صافي الربح) بيتحسبوا
 // على الصافي بعد خصم نصيب مستثمري البضاعة (لأنه فلوس مستحقة لحد تاني)، وده بيتقفل/يتفتح من شاشة المستثمرين.
 function _invExclOn(){return !(DB.settings&&DB.settings.invExcludeBatchShare===false);}
+// ⚠️ v363 — من ملخص قائمة الدخل: ضغطة على كرت «بضاعة المستثمرين» تفتح شاشة المستثمرين (تاب المستثمرون ← بضاعة)
+function _invGoGoods(){try{_invsTab='people';_invsPeople='goods';navigate('accounting');switchAccTab('investors',null);}catch(e){console.warn(e);}}
 function _invBatchNote(ps){
   var r=_invSalesShare(ps);if(!(r.share>0)||!_invList().length)return '';
   var ex=_invExclOn();
-  return '<div style="background:#ecfdf5;border:1.5px solid #6ee7b7;border-radius:11px;padding:9px 12px;margin-top:10px;font-size:12px;color:#065f46;line-height:1.9">'+
-    '<div style="font-weight:900">🤝 بضاعة المستثمرين في الفترة دي</div>'+
+  return '<div onclick="_invGoGoods()" style="cursor:pointer;background:#ecfdf5;border:1.5px solid #6ee7b7;border-radius:11px;padding:9px 12px;margin-top:10px;font-size:12px;color:#065f46;line-height:1.9">'+
+    '<div style="font-weight:900;display:flex;justify-content:space-between">🤝 بضاعة المستثمرين في الفترة دي<span style="color:#059669;font-size:11px">فتح المستثمرين ◂</span></div>'+
     '<div style="display:flex;justify-content:space-between"><span>ربح بضاعتهم (داخل صافي الربح)</span><b>'+fmt(r.profit)+'</b></div>'+
     Object.keys(r.byInv).map(function(k){var o=r.byInv[k];return '<div style="display:flex;justify-content:space-between"><span>• نصيب '+esc(o.name)+' (مستحق له)</span><b style="color:#7c3aed">'+fmt(o.share)+'</b></div>';}).join('')+
     '<div style="display:flex;justify-content:space-between;border-top:1px dashed #6ee7b7;margin-top:3px;padding-top:3px"><span>ربحي أنا من بضاعتهم</span><b>'+fmt(r.profit-r.share)+'</b></div>'+
@@ -31755,7 +31853,7 @@ function _invGoodsTabHtml(){
       '<div style="display:flex;justify-content:space-between;align-items:center;gap:6px"><div onclick="openInvestor('+jsStr(n.id)+')" style="cursor:pointer;min-width:0"><b style="font-size:14px">'+esc(n.name)+'</b> <span style="background:#d1fae5;color:#047857;border-radius:6px;padding:1px 8px;font-size:11px;font-weight:800">'+fmtQty(n.pct||0)+'% من ربح دفعاته</span>'+
       '<div style="font-size:10.5px;color:#64748b;margin-top:2px">'+(o?'💼 شريك كمان • ':'')+(cli?'👤 عميل • ':'')+(emp?'🧑‍💼 موظف • ':'')+(n.archived?'📦 مؤرشف':'مستثمر بضاعة')+'</div></div>'+
       '<button class="btn-ic" style="background:#eef2ff" onclick="_invOpts(\'new\','+jsStr(n.id)+')">⚙️</button></div>'+
-      '<div onclick="openInvestor('+jsStr(n.id)+')" style="cursor:pointer;display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:8px">'+_invMini('متاح للشراء',T.capCash,T.capCash<-0.001?'#dc2626':'#047857',T.capCash<-0.001?'#fee2e2':'#d1fae5')+_invMini('في بضاعة',T.remCost,'#c2410c','#ffedd5')+_invMini('له',T.owed,'#0f172a','#e2e8f0')+'</div></div>';
+      '<div onclick="openInvestor('+jsStr(n.id)+')" style="cursor:pointer;display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:8px">'+_invMini('متاح للشراء',T.capCash,T.capCash<-0.001?'#dc2626':'#047857',T.capCash<-0.001?'#fee2e2':'#d1fae5')+_invMini('في بضاعة',T.remCost,'#c2410c','#ffedd5')+_invMini('🧮 أرباح مستحقة',T.profRem,'#6d28d9','#ede9fe')+'</div></div>'; // ⚠️ v363 — بدل «له» الشامل لرأس المال
   };
   return '<button class="btn btn-full" style="background:#ecfdf5;color:#047857;border:none;margin-bottom:12px" onclick="_invForm(null)">📜 + مستثمر بضاعة (عقد)</button>'+
     (news.length?news.map(card).join(''):'<div class="empty">مفيش مستثمرين بضاعة</div>')+
