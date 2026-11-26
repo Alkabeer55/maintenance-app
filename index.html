@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v364</title>
+<title>ابو حوده الحلو الجميل v366</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -53,7 +53,7 @@ async function __netProbe(force){
   }catch(e3){}
   return ok;
 }
-/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="v364 — ١٥ جمادى الآخرة ١٤٤٨ هـ";
+/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="v366 — ١٥ جمادى الآخرة ١٤٤٨ هـ";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -193,6 +193,8 @@ async function __netProbe(force){
         الهامش = بعد الخصم (_anSaleF) وبالفصل قطع/خدمات، وأي بند من غير سعر تكلفة بيتحذّر منه. نصيب الشريك في دورة التوزيع = _pcPartnerShare بس (رد رأس المال + الدخول في نص الفترة)، ممنوع Math.round(profit*pct/100) مباشرة.
 ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v366: [🧾 ضبط صفحة المبيعات (من لقطات الشاشة): (١) الهيدر الثابت كان واخد أكتر من ٣٠٪ من الشاشة (الفترة + مين سجّل + ٨ شرائح حالة على صفين + البحث + الترتيب) فمساحة القايمة صغيرة جدًا — دلوقتي اللي ثابت البحث والترتيب بس، والفلاتر بتسكرول مع الصفحة • (٢) شرائح الحالة في صف واحد قابل للسحب أفقيًا بدل صفين • (٣) كارت الفاتورة: الأزرار (✏️ ↩️ 🖨️ 🗑️) نقلتها لصف واحد تحت الكارت بدل عمود جنب كان بياخد ٤٠٪ من العرض ويقسّم اسم العميل على ٣ سطور — الاسم والسيريال والقطع بقوا بعرض كامل تقريبًا والكارت أقصر. مفيش تغيير في أي وظيفة أو حساب. (شريط «مفيش نت» العلوي والكبسولة السفلية بتوع المزامنة ما اتغيّروش.)]
+v365: [📈 نسبة المستثمر الشريك بتاريخ سريانها + سجل التغييرات (مشكلة حقيقية اتصلّحت): كان تغيير النسبة بيتطبق بأثر رجعي على الشهور القديمة في تقرير الدخل ومعاينة التوزيع. دلوقتي (١) تعديل المستثمر فيه «تسري من تاريخ» (الافتراضي النهارده) والنسبة القديمة بتفضل للفترات اللي قبل التاريخ؛ الفترة اللي فيها تغيير بتتحسب بمتوسط مرجّح بالأيام (٢) سجل تغيير النسبة ظاهر في نافذة تعديل المستثمر وفي «السجل» بالتقارير (سطر 📈 تغيير نسبة + فلتر) (٣) الدورات المحفوظة متجمدة زي ما هي، والدورة الجديدة بتسجّل النسبة الفعلية للفترة. بيانات المستثمرين الحاليين من غير pct_hist بتشتغل بنسبتها الحالية زي الأول. مفيش SQL.]
 v364: [💳 خصم الفاتورة من رصيد العميل: في فاتورة جديدة لو العميل له رصيد عندنا (دين له علينا: «رصيد له» من مرتجع أو دين مورد بنفس الاسم) بيظهر تحت الدفع «💳 العميل له رصيد X — اخصم الفاتورة منه» بمبلغ قابل للتعديل (أقصاه أقل من الرصيد والإجمالي). النتيجة: الفاتورة مدفوعة عادي (المديونيات والتقارير زي ما هي) + سداد على رصيده بنفس المبلغ بتاريخ الفاتورة فالكاش صافيه صفر. حذف الفاتورة بيرجّع رصيده. الأثر متسجّل جوه دفعة الدين (sale_id) — مفيش عمود جديد في المبيعات ومفيش SQL. في التعديل: بيظهر المبلغ اللي اتخصم بس (لتغييره احذف وسجّل من جديد).]
 v363: [🧮 كرت مستثمر البضاعة + ربط قائمة الدخل: (١) شاشة المستثمرين ← بضاعة: كرت «له» (كان شامل رأس المال) اتبدّل بكرت «🧮 أرباح مستحقة» (نصيبه من الأرباح − اللي اتسحب) في نفس المكان؛ باقي الكروت زي ما هي • (٢) في ملخص قائمة الدخل: كرت «🤝 بضاعة المستثمرين في الفترة دي» بقى قابل للضغط ويفتح شاشة المستثمرين على تاب بضاعة. مفيش تغيير في أي حساب.]
 v362: [🛡️ حماية المستثمرين من الضياع (سبب حقيقي اتصلّح): كان لما نسخة جهاز/ملف محلي (توقيتها المحلي أحدث) تتزامن، بتحتفظ بقايمتها كلها وترفعها فوق السيرفر — فمستثمرين مضافين من جهاز تاني بيختفوا. دلوقتي: (١) المستثمرين والدفعات دايمًا بدمج 3-way آمن عند السحب (مفيش «المحلي أحدث فيكسب») (٢) قبل أي رفع بنقرا نسخة السيرفر وندمج — ومستحيل نرفع قايمة ناقصة؛ ولو السيرفر مردّش مبنرفعش (٣) لو التطبيق مفتوح من ملف (file://): ممنوع أي رفع قبل ما يتسحب من السيرفر أول مرة + شارة «💻 نسخة ملف» في شريط الحالة + تنبيه مرة في الجلسة (٤) نسخة احتياطية محلية تلقائية قبل أي دمج. مفيش تغيير في الشاشات أو المحاسبة ومفيش SQL. نصيحة: افتح التطبيق من الرابط مش من الملف.]
@@ -5676,8 +5678,8 @@ async function __pushBlobSafe(id){
       <div id="sales-tab-invoices">
         <!-- ⚠️ v237 — شريط البحث + الفلاتر بقى ثابت (sticky) أعلى الشاشة وانت بتسحب لتحت،
              مش محتاج ترجع لفوق كل مرة عشان تدور أو تغيّر فلتر -->
+        <div id="sales-period-filter"></div> <!-- ⚠️ v366 — الفلاتر بقت بتسكرول مع الصفحة (كانت ثابتة وواخدة أكتر من ٣٠٪ من الشاشة) -->
         <div style="position:sticky;top:0;z-index:5;background:#f1f5f9;padding-top:2px;margin-top:-2px">
-        <div id="sales-period-filter"></div>
         <input type="text" class="search-input" placeholder="🔍 بحث بالاسم أو السيريال..." id="sales-search" oninput="_salesPage=0;renderSales()">
         <div id="sales-sort-bar"></div>
         </div>
@@ -5905,7 +5907,7 @@ var APP_TITLE=APP_CONFIG.name;
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=364;
+var APP_VERSION=366;
 // ⚠️ v303 — BUILD_STAMP كان مش متعرّف خالص (شاشة الإعدادات كانت بتعرض "?") — اتعرّف دلوقتي وبيتزود مع كل تحديث
 var BUILD_STAMP='v'+APP_VERSION+' — ١٥ جمادى الآخرة ١٤٤٨ هـ'; // ⚠️ v331 — رقم النسخة بيتولّد من APP_VERSION (كان واقف على v323 لأن في تعريفين، والتاني بيكسب). ممنوع تكتب رقم نسخة يدوي هنا.
 // ⚠️ v295 — عنوان الصفحة كان رقم نسخته ثابت ومتنسي (فضل v294 مع إن النسخة اتغيّرت). دلوقتي بياخد الرقم من APP_VERSION دايمًا.
@@ -11109,7 +11111,7 @@ function _saleNo(x){var d=String((x&&x.date)||'').replace(/-/g,'').slice(2),id=S
 function _salesStatusChips(){
   var o=[['all','الكل'],['مدفوع','✅ مدفوع'],['جزئي','🟡 جزئي'],['غير مدفوع','🔴 آجل'],['زيارة','🚗 زيارة'],['مرتجع','↩️ مرتجع']];
   var _nsN=DB.sales.filter(_saleHasNoStock).length;o.push(['nostock','⚠️ بدون رصيد'+(_nsN?' ('+_nsN+')':'')]);var _ncN=DB.sales.filter(_saleNoCounter).length;o.push(['nocounter','⚫ بدون عداد'+(_ncN?' ('+_ncN+')':'')]); // ⚠️ v357 // ⚠️ v347 — شارة التحذير الدائمة قابلة للفلترة
-  return '<div style="display:flex;gap:5px;margin:8px 0;flex-wrap:wrap">'+o.map(function(x){var a=_salesStatus===x[0];return '<button type="button" onclick="_salesStatus=\''+x[0]+'\';_salesPage=0;renderSales()" style="padding:6px 11px;border:none;border-radius:9px;font-family:inherit;font-size:11.5px;font-weight:800;cursor:pointer;background:'+(a?'#0f172a':'#f1f5f9')+';color:'+(a?'#fff':'#64748b')+'">'+x[1]+'</button>';}).join('')+'</div>';
+  return '<div style="display:flex;gap:5px;margin:8px 0;overflow-x:auto;padding-bottom:4px">'+o.map(function(x){var a=_salesStatus===x[0];return '<button type="button" onclick="_salesStatus=\''+x[0]+'\';_salesPage=0;renderSales()" style="flex-shrink:0;white-space:nowrap;padding:6px 11px;border:none;border-radius:9px;font-family:inherit;font-size:11.5px;font-weight:800;cursor:pointer;background:'+(a?'#0f172a':'#f1f5f9')+';color:'+(a?'#fff':'#64748b')+'">'+x[1]+'</button>';}).join('')+'</div>';
 }
 var _salesSort='newest';
 
@@ -11315,16 +11317,18 @@ function renderSales(){
         '</div>':'')+
       (s.note&&!__hNote?'<div style="font-size:11px;color:#94a3b8;margin-top:2px">📝 '+esc(s.note)+'</div>':'')+
       '</div>'+
-      '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0">'+
+      '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex-shrink:0">'+
       (__hTot?'':'<div style="font-weight:900;font-size:16px;color:#0f172a">'+fmt(s.total)+'</div>')+
       (rem>0&&!__hTot?'<div style="font-size:11px;color:#dc2626;font-weight:700">متبقي: '+fmt(rem)+'</div>':'')+
       (s.discount&&!__hDisc?'<div style="font-size:10px;color:#ca8a04">خصم: '+fmt(s.discount)+'</div>':'')+
-      '<div style="display:flex;gap:4px;margin-top:2px">'+
-      (_isReturnSale(s)?'':'<button class="btn-ic" style="background:#dbeafe;padding:5px 8px" onclick="openSaleModal(\''+s.id+'\')">✏️</button>')+
-      (_isReturnSale(s)?'':'<button class="btn-ic" style="background:#ede9fe;padding:5px 8px" onclick="openReturnModal(\''+s.id+'\')" title="مرتجع">↩️</button>')+
-      '<button class="btn-ic" style="background:#f0fdf4;padding:5px 8px" onclick="printInvoice(\''+s.id+'\')">🖨️</button>'+
-      '<button class="btn-ic" style="background:#fee2e2;padding:5px 8px" onclick="openDeleteSaleModal(\''+s.id+'\')">🗑️</button>'+
-      '</div></div></div>';
+      '</div></div>'+
+      // ⚠️ v366 — الأزرار في صف واحد تحت الكارت بعرض كامل (كانت عمود جنب بياخد ٤٠٪ من العرض ويضغط الاسم)
+      '<div style="display:flex;justify-content:flex-end;gap:6px;margin-top:6px;padding-top:6px;border-top:1px solid #f1f5f9">'+
+      (_isReturnSale(s)?'':'<button class="btn-ic" style="background:#dbeafe;padding:5px 14px" onclick="openSaleModal(\''+s.id+'\')">✏️</button>')+
+      (_isReturnSale(s)?'':'<button class="btn-ic" style="background:#ede9fe;padding:5px 14px" onclick="openReturnModal(\''+s.id+'\')" title="مرتجع">↩️</button>')+
+      '<button class="btn-ic" style="background:#f0fdf4;padding:5px 14px" onclick="printInvoice(\''+s.id+'\')">🖨️</button>'+
+      '<button class="btn-ic" style="background:#fee2e2;padding:5px 14px" onclick="openDeleteSaleModal(\''+s.id+'\')">🗑️</button>'+
+      '</div>';
     return msCard(s.id,inner);
   }).join('')+(totalPages>1?
     '<div style="display:flex;justify-content:center;align-items:center;gap:10px;padding:12px 0">'+
@@ -21250,6 +21254,12 @@ function renderFinancialLedger(){
     if(!cy.date_created||!inRange(cy.date_created))return;
     if(cy.owner_draw)events.push({date:cy.date_created,icon:'📊',type:'سحب أرباح (مالك)',desc:'دورة توزيع '+esc(fmtDate(cy.date_from))+' ← '+esc(fmtDate(cy.date_to)),amount:cy.owner_draw,sign:-1,note:'⚠️ ده سحب فعلي من الكاش، مش مصروف — ما بيأثرش على صافي الربح في قائمة الدخل',nav:'openOwnerTimeline()'});
   });
+  (DB.accounts.investors||[]).forEach(function(inv){ // ⚠️ v365 — سجل تغيير نسبة الأرباح
+    (inv.pct_hist||[]).forEach(function(h){
+      if(!h.from||!inRange(h.from))return;
+      events.push({date:h.from,icon:'📈',type:'تغيير نسبة',desc:esc(inv.name)+': '+(h.prev!=null?(+h.prev)+'% ← ':'')+(+h.pct)+'%',amount:0,amtTxt:(+h.pct)+'%',sign:0,sub:'نسبة الشريك من صافي الربح — تسري من التاريخ ده',nav:'openEditInvestorModal('+jsStr(inv.id)+')'});
+    });
+  });
   // ⚠️ v358 — توزيع الأرباح بالتفصيل في السجل (للعلم بس: sign=0 فمش داخل في إجمالي الداخل/الخارج — سحب المالك ليه سطره فوق)
   (DB.accounts.profit_cycles||[]).forEach(function(cy){
     if(!cy.date_created||!inRange(cy.date_created))return;
@@ -21269,7 +21279,7 @@ function renderFinancialLedger(){
   var totalOut=events.filter(function(e){return e.sign<0;}).reduce(function(s,e){return s+e.amount;},0);
 
   var filterHtml='<div style="display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap">'+
-    ['all','بيع','شراء','مصروف','راتب','سلفة','سداد لمورد','تحصيل من عميل','رأس مال','سحب أرباح (مالك)','توزيع أرباح'].map(function(t){
+    ['all','بيع','شراء','مصروف','راتب','سلفة','سداد لمورد','تحصيل من عميل','رأس مال','سحب أرباح (مالك)','توزيع أرباح','تغيير نسبة'].map(function(t){
       var active=(_ledgerTypeFilter||'all')===t;
       return '<button onclick="_ledgerTypeFilter='+jsStr(t)+';renderFinancialLedger()" style="padding:5px 10px;border-radius:8px;border:1.5px solid '+(active?'#0f172a':'#e2e8f0')+';background:'+(active?'#0f172a':'#fff')+';color:'+(active?'#fff':'#64748b')+';font-size:11px;font-weight:700;font-family:inherit;cursor:pointer">'+(t==='all'?'الكل':t)+'</button>';
     }).join('')+'</div>';
@@ -21293,7 +21303,7 @@ function renderFinancialLedger(){
           '<div style="display:flex;justify-content:space-between;align-items:center">'+
           '<div style="min-width:0;flex:1"><span style="font-size:13px;font-weight:700">'+e.icon+' '+esc(e.type)+'</span>'+
           '<div style="font-size:11px;color:#64748b;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(e.desc)+' — '+esc(fmtDate(e.date))+'</div></div>'+
-          '<b style="font-size:14px;color:'+(e.sign>0?'#15803d':e.sign<0?'#dc2626':'#64748b')+';flex-shrink:0;margin-right:8px">'+(e.sign>0?'+':e.sign<0?'−':'')+fmt(e.amount)+'</b>'+
+          '<b style="font-size:14px;color:'+(e.sign>0?'#15803d':e.sign<0?'#dc2626':'#64748b')+';flex-shrink:0;margin-right:8px">'+(e.amtTxt?e.amtTxt:((e.sign>0?'+':e.sign<0?'−':'')+fmt(e.amount)))+'</b>'+
           '</div>'+
           (e.sub?'<div style="font-size:10.5px;color:#94a3b8;margin-top:2px">'+esc(e.sub)+'</div>':'')+
           (e.note?'<div style="font-size:10.5px;color:#ca8a04;margin-top:2px">'+esc(e.note)+'</div>':'')+
@@ -32694,6 +32704,7 @@ function openEditInvestorModal(id){
     fld('einv-name','الاسم','text',inv.name,'',true)+
     fld('einv-phone','الهاتف','tel',inv.phone||'')+
     fld('einv-pct','نسبة الأرباح %','number',inv.profit_share_pct,'',true)+
+    fld('einv-pct-from','لو غيّرت النسبة: تسري من تاريخ','date',today(),'')+'<div style="font-size:11px;color:#64748b;margin:-4px 0 6px">الشهور اللي قبل التاريخ ده بتفضل بالنسبة القديمة في تقرير الدخل ومعاينة التوزيع. الدورات المحفوظة متجمدة أصلًا.</div>'+_oiPctHistHtml(inv)+
     '<div class="field"><label>بعد ما يرجّع رأس ماله كله…</label><select id="einv-keep" style="width:100%;padding:10px 13px;border:2px solid #e2e8f0;border-radius:11px;font-size:14px;font-family:inherit"><option value="0"'+(inv.keep_share_after_return?'':' selected')+'>يوقف نصيبه من الأرباح (الافتراضي)</option><option value="1"'+(inv.keep_share_after_return?' selected':'')+'>يفضل ياخد نسبته من الأرباح</option></select><div style="font-size:10.5px;color:#64748b;margin-top:3px;line-height:1.7">بيسري على دورات التوزيع الجاية بس — الدورات اللي اتوزّعت قبل كده ما بتتغيّرش. (⚠️ v352)</div></div>'+
     fld('einv-notes','ملاحظات','text',inv.notes||'')+
     '<div class="field"><label>الحالة</label>'+
@@ -32730,10 +32741,17 @@ async function saveEditInvestor(id){
   if(existingPct+pct>=100)return showToast('⚠️ مجموع النسب هيتجاوز 100%','#dc2626');
   var _oi=(DB.accounts.investors||[]).find(function(i){return i.id===id;});
   _invBackup('قبل تعديل مستثمر (شراكة)');
+  var _pctFrom=(v('einv-pct-from')||today()).slice(0,10);
   DB.accounts.investors=DB.accounts.investors.map(function(i){
-    return i.id!==id?i:Object.assign({},i,{name:name,phone:v('einv-phone'),profit_share_pct:pct,notes:v('einv-notes'),status:v('einv-status'),keep_share_after_return:v('einv-keep')==='1'});
+    if(i.id!==id)return i;
+    var oldPct=+i.profit_share_pct||0,hist=(i.pct_hist&&i.pct_hist.length)?i.pct_hist.slice():[{from:'',pct:oldPct}];
+    if(Math.abs(pct-oldPct)>0.0001){ // ⚠️ v365 — تغيير نسبة بتاريخ سريان + سجل
+      hist=hist.filter(function(e){return String(e.from||'')!==_pctFrom||!e.from;});
+      hist.push({from:_pctFrom,pct:pct,prev:oldPct,at:new Date().toISOString()});
+    }
+    return Object.assign({},i,{name:name,phone:v('einv-phone'),profit_share_pct:pct,pct_hist:hist,notes:v('einv-notes'),status:v('einv-status'),keep_share_after_return:v('einv-keep')==='1'});
   });
-  _invAudit('old_investor_edit','old',id,{before:_oi?{name:_oi.name,pct:_oi.profit_share_pct,status:_oi.status,keep_after_return:!!_oi.keep_share_after_return}:null,after:{name:name,pct:pct,status:v('einv-status'),keep_after_return:v('einv-keep')==='1'},note:'النسبة الجديدة تسري على الدورات الجاية بس — الدورات السابقة متجمدة'});
+  _invAudit('old_investor_edit','old',id,{before:_oi?{name:_oi.name,pct:_oi.profit_share_pct,status:_oi.status,keep_after_return:!!_oi.keep_share_after_return}:null,after:{name:name,pct:pct,status:v('einv-status'),keep_after_return:v('einv-keep')==='1'},note:'النسبة الجديدة تسري من '+_pctFrom+' — الفترات قبلها والدورات المحفوظة بنسبتها القديمة'});
   await persist();closeModal();renderAccounting();
   showToast('✅ تم التعديل','#16a34a');
 }
@@ -32850,8 +32868,36 @@ function _pcPartnerWindow(i,to){
   });
   return {start:first,zero:zero};
 }
+
+// ===== 📈 نسبة المستثمر الشريك بتاريخ سريانها (v365) =====
+// قبل كده: تغيير النسبة كان بيتطبق بأثر رجعي على أي فترة قديمة في تقرير الدخل ومعاينة التوزيع. دلوقتي كل تغيير بيتسجّل في pct_hist
+// [{from:'' (الأصلية) أو تاريخ السريان, pct, prev, at}] والحسبة بتاخد نسبة كل يوم في الفترة (متوسط مرجّح بالأيام). الدورات المحفوظة متجمدة زي ما هي.
+function _oiPctHistSorted(i){return (i.pct_hist||[]).slice().sort(function(a,b){return String(a.from||'')<String(b.from||'')?-1:String(a.from||'')>String(b.from||'')?1:0;});}
+function _oiPctAt(i,date){
+  var h=_oiPctHistSorted(i);if(!h.length)return +i.profit_share_pct||0;
+  var d=String(date||today()).slice(0,10),p=+h[0].pct||0;
+  h.forEach(function(e){if(!e.from||String(e.from)<=d)p=+e.pct||0;});
+  return p;
+}
+function _oiPctForPeriod(i,from,to){
+  var h=i.pct_hist;if(!h||h.length<2)return +i.profit_share_pct||0;
+  to=String(to||today()).slice(0,10);from=from?String(from).slice(0,10):'';
+  if(!from||from>=to)return _oiPctAt(i,to);
+  var days=_pmDiff(from,to)+1;if(!(days>0))return _oiPctAt(i,to);
+  if(days>2000)from=new Date(Date.parse(to+'T00:00:00')-1999*864e5).toISOString().slice(0,10),days=2000;
+  var acc=0,t=Date.parse(from+'T00:00:00');
+  for(var k=0;k<days;k++){var d=new Date(t+k*864e5).toISOString().slice(0,10);acc+=_oiPctAt(i,d);}
+  return Math.round(acc/days*1000)/1000;
+}
+function _oiPctHistHtml(inv){
+  var h=_oiPctHistSorted(inv);
+  if(h.length<2)return '<div style="font-size:11px;color:#94a3b8;margin:4px 0 10px">📜 مفيش تغييرات سابقة في النسبة (النسبة الحالية '+(+inv.profit_share_pct||0)+'%)</div>';
+  return '<div style="background:#f8fafc;border-radius:10px;padding:8px 10px;margin:4px 0 10px"><div style="font-size:12px;font-weight:800;margin-bottom:4px">📜 سجل تغيير النسبة</div>'+
+    h.map(function(e,idx){return '<div style="display:flex;justify-content:space-between;font-size:12px;padding:2px 0;color:#475569"><span>'+(e.from?'من '+esc(fmtDate(e.from)):'الأصلية')+'</span><b>'+(+e.pct)+'%'+(idx>0&&e.prev!=null?' <span style="font-weight:600;color:#94a3b8">(كانت '+(+e.prev)+'%)</span>':'')+'</b></div>';}).join('')+'</div>';
+}
 function _pcPartnerShare(i,profit,pr){
-  var pct=+i.profit_share_pct||0,to=pr.to||today(),from=pr.from||'';
+  var to=pr.to||today(),from=pr.from||'';
+  var pct=_oiPctForPeriod(i,from,to); // ⚠️ v365 — نسبة الفترة نفسها (مش النسبة الحالية)
   var out={amount:Math.round(profit*pct/100),pct:pct,eff:pct,ratio:1,why:''};
   var w=_pcPartnerWindow(i,to);
   if(!w)return out;
@@ -33167,7 +33213,7 @@ async function saveProfitCycle(skipOverlap){
 
   // توزيع المستثمرين
   var distributions=activeInv.map(function(i){
-    var s0=_sh[i.id],d0={investor_id:i.id,share_pct:i.profit_share_pct,amount:s0.amount,withdrawn:0,retained:s0.amount};
+    var s0=_sh[i.id],d0={investor_id:i.id,share_pct:(s0.pct!=null?s0.pct:i.profit_share_pct),amount:s0.amount,withdrawn:0,retained:s0.amount}; // ⚠️ v365 — النسبة الفعلية للفترة
     if(s0.why){d0.eff_pct=s0.eff;d0.note=s0.why;} // ⚠️ v352 — النسبة الفعلية وسببها بتتسجّل مع الدورة (الدورات القديمة من غيرها = النسبة العادية)
     return d0;
   });
