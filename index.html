@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v370</title>
+<title>ابو حوده الحلو الجميل v371</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -53,7 +53,7 @@ async function __netProbe(force){
   }catch(e3){}
   return ok;
 }
-/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="v370 — ١٦ جمادى الآخرة ١٤٤٨ هـ";
+/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="v371 — ١٧ جمادى الآخرة ١٤٤٨ هـ";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -193,6 +193,7 @@ async function __netProbe(force){
         الهامش = بعد الخصم (_anSaleF) وبالفصل قطع/خدمات، وأي بند من غير سعر تكلفة بيتحذّر منه. نصيب الشريك في دورة التوزيع = _pcPartnerShare بس (رد رأس المال + الدخول في نص الفترة)، ممنوع Math.round(profit*pct/100) مباشرة.
 ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v371: [↩️ زرار استرجاع تعديل المشترى: كارت «تعديل مشترى» في السجل بيفتح تفاصيل التعديل (اللي اتغيّر + الأثر على كل صنف) وفيه «↩️ استرجاع النسخة القديمة» مع شرح اللي هيحصل — بيفتح المشترى بقيمه القديمة وتدوس حفظ فيظهر تأكيد بملخص الأثر على المخزن، والاسترجاع نفسه بيتسجّل • 📊 سجل نسبة المستثمر: سبب ظهور نسبة قديمة غلط (اتغيّرت قبل v365 من غير سجل فاتسجّلت النسبة القديمة كأصل) — أضفت 🗑️ حذف سطر و«🧹 مسح السجل: النسبة الحالية ثابتة على كل الشهور» (بتأكيد ونسخة احتياطية)، والحفظ بقى بينضّف السجل (سطر نسبته زي اللي قبله بيتشال) • 🧾 صفحة الفاتورة: الشريط السفلي مضغوط (سطر واحد للإجماليات وأزرار أصغر) وبيتقلّص لزرار الحفظ بس لما الكيبورد يفتح، وبحث القطع بيطلع لفوق عشان النتايج تاخد المساحة • 🧾 كارت المبيعات أقصر: التاريخ جنب الاسم والشارات وأزرار أصغر • مفيش أي تغيير في معادلات الربح أو الخزنة]
 v370: [🛒 مراجعة تكلفة تعديل المشتريات: (١) حساب تكلفة موحّد (سعر الشراء + مصاريف النقل + الكمية) على متوسط تكلفة المخزن — الوحدات اللي اتزودت أو اتضاف صنفها في التعديل بتدخل بمتوسط مرجّح زي المشترى الجديد (كانت بتدخل بالكمية بس والتكلفة ثابتة)، وتغيير المصاريف بقى بيشمل البنود القديمة غير المربوطة (كان بيتخطاها) • (٢) كل تعديل مشترى بيتسجّل في «السجل» بأثره على كل صنف (كمية/سعر شراء/تكلفة/بيع/جملة قبل ← بعد) + نسخة المشترى القديم كاملة محفوظة في السجل للاسترجاع، ورسالة التأكيد بتعرض أثر التكلفة كمان • 📊 نسبة المستثمر في قائمة الدخل: التقرير بقى بيستخدم بداية ونهاية الفترة نفسها (كان بيستخدم أول/آخر فاتورة)، فالشهر الخالص بيظهر بنسبته والشهر الحالي بالنسبة المحددة دلوقتي في الإعدادات • 🧾 شاشة المبيعات بنمط المخزون: عنوان + «+ فاتورة» + «⋯ المزيد» (تحديد متعدد، طباعة الكل)، بحث + «🎚️ فلتر» (الفترة، مين سجّل، الحالة، الترتيب، تثبيت افتراضي جوه الورقة)، وسطر عدد الفواتير + شرايح الفلاتر النشطة (كل واحدة بتتشال بضغطة) • مفيش أي تغيير في معادلات الربح أو الخزنة]
 v369: [🧾 ضبط شاشة المبيعات: (١) كروت المبلغ الأربعة (العدد/الإجمالي/المحصّل/المتبقي) اتشالت وبقت سطر صغير واحد بنفس الأرقام (٢) تثبيت فلتر المبيعات الافتراضي (الحالة + الترتيب) زي المخزون: زرار «📌 تثبيت الفلتر» و«🗑️ إلغاء»، بيتحفظ في الإعدادات ويفضل بعد إعادة فتح التطبيق • مفيش أي تغيير في أرقام أو معادلات الفواتير]
 v368: [🛒 إصلاح تعديل المشتريات (مشكلة حقيقية اتصلّحت): (١) سعر البيع/الجملة اللي بتغيّره في تعديل مشترى كان بيتحفظ في المشترى بس ومش بيوصل للمخزن — دلوقتي بيتطبّق على المنتج (والمعروض في التعديل بقى السعر الحالي في المخزن مش القديم المتخزّن) • (٢) بنود قديمة اتضافت للمخزن قبل ما الربط يتسجّل (productId=__new__) كانت تعديلات كميتها مش بتأثر على المخزن — دلوقتي بتتربط بمنتجها بالاسم (لو منتج واحد بس بنفس الاسم) وفرق الكمية بيتطبّق ومفيش منتج مكرر بيتعمل • (٣) تأكيد قبل الحفظ بملخص بالأرقام لأي تعديل بيغيّر المخزن (كمية/بند اتشال/صنف جديد/سعر بيع أو جملة) — مفيش أي تغيير في معادلات الربح أو الخزنة]
@@ -2159,6 +2160,16 @@ input[type=number]{direction:ltr;text-align:center}
 #sale-browse .prod-search-results{max-height:240px;margin:6px 0 0}
 .sp-chips button{flex:0 0 auto}
 .sale-shell .items-list{margin-bottom:6px;padding:4px 8px}
+/* ⚠️ v371 — شريط الفاتورة السفلي مضغوط (سطر واحد للإجماليات + أزرار أصغر) وبيتقلّص لزرار الحفظ بس لما الكيبورد يفتح، عشان قايمة القطع تاخد المساحة */
+#modal-overlay.sale-page #sale-bar .sale-sum{gap:4px;margin-bottom:5px}
+#modal-overlay.sale-page #sale-bar .sale-sum>div{padding:3px 7px;display:flex;justify-content:space-between;align-items:baseline;gap:4px;border-radius:8px}
+#modal-overlay.sale-page #sale-bar .sale-sum small{display:inline;font-size:10px}
+#modal-overlay.sale-page #sale-bar .sale-sum b{font-size:13px}
+#modal-overlay.sale-page #sale-bar .btn{padding:8px 4px!important;font-size:13px!important}
+#modal-overlay.sale-page.sale-kb #sale-bar{padding:4px 10px}
+#modal-overlay.sale-page.sale-kb #sale-bar .sale-sum,#modal-overlay.sale-page.sale-kb #sale-bar .btn-outline{display:none}
+#modal-overlay.sale-page.sale-kb #sale-bar .btn-green{flex:1}
+#modal-overlay.sale-page.sale-kb .modal-header{padding:4px 12px}
 .sale-shell .items-list-row{padding:4px 0}
 @media (min-width:900px){
   #modal-overlay.sale-page{background:rgba(0,0,0,.55);align-items:center}
@@ -5909,9 +5920,9 @@ var APP_TITLE=APP_CONFIG.name;
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=370;
+var APP_VERSION=371;
 // ⚠️ v303 — BUILD_STAMP كان مش متعرّف خالص (شاشة الإعدادات كانت بتعرض "?") — اتعرّف دلوقتي وبيتزود مع كل تحديث
-var BUILD_STAMP='v'+APP_VERSION+' — ١٦ جمادى الآخرة ١٤٤٨ هـ'; // ⚠️ v331 — رقم النسخة بيتولّد من APP_VERSION (كان واقف على v323 لأن في تعريفين، والتاني بيكسب). ممنوع تكتب رقم نسخة يدوي هنا.
+var BUILD_STAMP='v'+APP_VERSION+' — ١٧ جمادى الآخرة ١٤٤٨ هـ'; // ⚠️ v331 — رقم النسخة بيتولّد من APP_VERSION (كان واقف على v323 لأن في تعريفين، والتاني بيكسب). ممنوع تكتب رقم نسخة يدوي هنا.
 // ⚠️ v295 — عنوان الصفحة كان رقم نسخته ثابت ومتنسي (فضل v294 مع إن النسخة اتغيّرت). دلوقتي بياخد الرقم من APP_VERSION دايمًا.
 try{document.title=document.title.replace(/v\d+\s*$/,'v'+APP_VERSION);}catch(_eT){}
 
@@ -7549,6 +7560,7 @@ function __fitModalToViewport(){
   var vv=window.visualViewport;
   ov.style.height=vv.height+'px';
   ov.style.top=vv.offsetTop+'px';
+  ov.classList.toggle('sale-kb',ov.classList.contains('sale-page')&&(window.innerHeight-vv.height)>120); // ⚠️ v371 — الكيبورد مفتوح → شريط الفاتورة يتقلّص
   // ⚠️ v237 — max-height:92vh بتحسب من ارتفاع الشاشة الكامل (مش الظاهر فوق الكيبورد)
   // في متصفحات كتير، فكان ده سبب إن السحب/السكرول جوه المودال مبيشتغلش صح والكيبورد فاتح.
   // بنظبط ارتفاع صندوق المودال نفسه على المساحة الظاهرة فعليًا عشان السكرول يبقى سليم.
@@ -7582,6 +7594,7 @@ document.addEventListener('focusin', function(e){
       __fitModalToViewport();
       var sc=document.getElementById('sale-scroll');if(!sc)return;
       var r=t.getBoundingClientRect(),sr=sc.getBoundingClientRect();
+      if(t.id==='prod-search'){sc.scrollTop+=(r.top-sr.top)-4;return;} // ⚠️ v371 — بحث القطع يطلع لفوق عشان النتايج تاخد المساحة كلها
       if(r.bottom>sr.bottom-10||r.top<sr.top+10)sc.scrollTop+=(r.top-sr.top)-sr.height/3;
     },320);
     return;
@@ -11357,17 +11370,17 @@ function renderSales(){
       '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">'+
       '<span title="رقم الفاتورة" style="background:#0f172a;color:#fff;border-radius:4px;padding:1px 5px;font-size:9.5px;font-weight:800;flex-shrink:0;margin-top:2px;direction:ltr">#'+_saleNo(s)+'</span>'+
       '<div style="flex:1;min-width:0">'+
-      '<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:3px">'+
+      '<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:2px">'+
       (__hC?'<span style="font-weight:900;font-size:14px;color:#94a3b8">🔒 عميل</span>':'<span style="font-weight:900;font-size:14px;cursor:pointer;color:#0f172a" onclick="openLedger('+jsStr(s.customer)+')">'+clientDisp(s.customer,s.serial)+'</span>')+
       (__hSt?'':'<span style="font-size:10px;background:'+sb+';color:'+sc+';border-radius:6px;padding:2px 8px;font-weight:700">'+_saleStatusOf(s)+'</span>')+
       (__hPm?'':'<span style="font-size:10px;background:#f1f5f9;color:#374151;border-radius:6px;padding:2px 6px">'+pmIcon(pm)+' '+pm+'</span>')+
       ((s.items||[]).some(function(i){return i.inv_batch;})?'<span style="font-size:10px;background:#d1fae5;color:#047857;border-radius:6px;padding:2px 7px;font-weight:800">🤝 مستثمر</span>':'')+_saleNoStockBadge(s)+_saleNoCounterBadge(s)+
-      '</div>'+
-      '<div style="font-size:11px;color:#94a3b8;margin-bottom:4px">'+esc(fmtDate(s.date))+
-      (window.__isOwner&&s.created_by&&s.created_by!==window.__currentProfile.id?' <span style="background:#ede9fe;color:#6d28d9;border-radius:6px;padding:1px 6px;font-weight:700">👤 '+esc(_employeeNameById(s.created_by)||'موظف')+'</span>':'')+
+      // ⚠️ v371 — التاريخ بقى في نفس سطر الاسم والشارات (كان سطر لوحده) والأزرار أصغر عشان الكارت يبقى أقصر
+      '<span style="font-size:10.5px;color:#94a3b8">'+esc(fmtDate(s.date))+
+      (window.__isOwner&&s.created_by&&s.created_by!==window.__currentProfile.id?' <span style="background:#ede9fe;color:#6d28d9;border-radius:6px;padding:1px 6px;font-weight:700">👤 '+esc(_employeeNameById(s.created_by)||'موظف')+'</span>':'')+'</span>'+
       '</div>'+
       ((s.serial||s.model)&&!__hSer?
-        '<div style="background:#f8fafc;border-radius:7px;padding:4px 8px;margin-bottom:4px;font-size:12px;display:flex;gap:8px;flex-wrap:wrap">'+
+        '<div style="padding:0;margin-bottom:2px;font-size:12px;display:flex;gap:10px;flex-wrap:wrap">'+
         (s.serial?'<span>🔢 <b>'+esc(s.serial)+'</b></span>':'')+
         (s.model?'<span>🖨️ '+esc(s.model)+'</span>':'')+
         '</div>':'')+
@@ -11385,11 +11398,11 @@ function renderSales(){
       (s.discount&&!__hDisc?'<div style="font-size:10px;color:#ca8a04">خصم: '+fmt(s.discount)+'</div>':'')+
       '</div></div>'+
       // ⚠️ v366 — الأزرار في صف واحد تحت الكارت بعرض كامل (كانت عمود جنب بياخد ٤٠٪ من العرض ويضغط الاسم)
-      '<div style="display:flex;justify-content:flex-end;gap:6px;margin-top:6px;padding-top:6px;border-top:1px solid #f1f5f9">'+
-      (_isReturnSale(s)?'':'<button class="btn-ic" style="background:#dbeafe;padding:5px 14px" onclick="openSaleModal(\''+s.id+'\')">✏️</button>')+
-      (_isReturnSale(s)?'':'<button class="btn-ic" style="background:#ede9fe;padding:5px 14px" onclick="openReturnModal(\''+s.id+'\')" title="مرتجع">↩️</button>')+
-      '<button class="btn-ic" style="background:#f0fdf4;padding:5px 14px" onclick="printInvoice(\''+s.id+'\')">🖨️</button>'+
-      '<button class="btn-ic" style="background:#fee2e2;padding:5px 14px" onclick="openDeleteSaleModal(\''+s.id+'\')">🗑️</button>'+
+      '<div style="display:flex;justify-content:flex-end;gap:6px;margin-top:4px;padding-top:4px;border-top:1px solid #f1f5f9">'+
+      (_isReturnSale(s)?'':'<button class="btn-ic" style="background:#dbeafe;padding:3px 14px" onclick="openSaleModal(\''+s.id+'\')">✏️</button>')+
+      (_isReturnSale(s)?'':'<button class="btn-ic" style="background:#ede9fe;padding:3px 14px" onclick="openReturnModal(\''+s.id+'\')" title="مرتجع">↩️</button>')+
+      '<button class="btn-ic" style="background:#f0fdf4;padding:3px 14px" onclick="printInvoice(\''+s.id+'\')">🖨️</button>'+
+      '<button class="btn-ic" style="background:#fee2e2;padding:3px 14px" onclick="openDeleteSaleModal(\''+s.id+'\')">🗑️</button>'+
       '</div>';
     return msCard(s.id,inner);
   }).join('')+(totalPages>1?
@@ -13770,6 +13783,51 @@ function _purchCostPlan(oldP,newItems,newExtra){
 }
 // ⚠️ v370 — لقطة المنتج (للسجل: قبل/بعد التعديل)
 function _pSnap(pid){var p=DB.products.find(function(x){return x.id===pid;});return p?{n:p.name,q:+p.qty||0,b:+p.buy_price||0,l:(+p.landed_cost||0)||(+p.buy_price||0),s:+p.sell_price||0,w:+p.wholesale_price||0}:null;}
+// ⚠️ v371 — تفاصيل سجل تعديل (مشترى/فاتورة) + زرار استرجاع النسخة القديمة للمشتريات (مع التوضيح والتأكيد)
+function openEditAuditModal(aid){
+  var a=_invAuditList().find(function(x){return x.id===aid;});if(!a)return;
+  var isP=a.action==='purchase_edit',dt=a.details||{},b=dt.before||{},af=dt.after||{};
+  var cur=(isP?DB.purchases:DB.sales).find(function(x){return x.id===a.ref;});
+  var newer=_invAuditList().filter(function(x){return x.action===a.action&&x.ref===a.ref&&String(x.at||'')>String(a.at||'');}).length;
+  var diff=_editDiffText(b,af),fxT=(dt.fx||[]).map(function(e){return _editFxText([e]);}).filter(Boolean);
+  var h='<div style="font-size:13px;line-height:1.9">'+
+    '<div style="font-weight:800;margin-bottom:6px">'+(isP?'🛒 مشترى':'🧾 فاتورة')+': '+esc(af.party||b.party||'—')+'</div>'+
+    '<div style="color:#64748b;font-size:12px">'+fmtDate(a.date||String(a.at||'').slice(0,10))+(a.by_name?' — '+esc(a.by_name):'')+'</div>'+
+    (diff?'<div style="background:#f8fafc;border-radius:10px;padding:8px 10px;margin:8px 0"><b>اللي اتغيّر:</b><br>'+esc(diff).replace(/ • /g,'<br>')+'</div>':'')+
+    (fxT.length?'<div style="background:#f5f3ff;border-radius:10px;padding:8px 10px;margin:8px 0"><b>الأثر على المخزن:</b><br>'+fxT.map(esc).join('<br>')+'</div>':'')+'</div>';
+  var canRestore=isP&&dt.old&&cur;
+  if(canRestore){
+    h+='<div style="background:#ecfdf5;border-radius:10px;padding:9px 11px;margin:8px 0;font-size:12px;line-height:1.8;color:#065f46">'+
+      '<b>↩️ إيه اللي بيحصل لو استرجعت؟</b><br>• المشترى بيرجع لنسخته قبل التعديل (البنود، مصاريف النقل، المدفوع).<br>• المخزن بيتعدّل بنفس الحسبة: الكميات والتكلفة بترجع، وأسعار البيع/الجملة بترجع لو لسه زي ما سابها التعديل.<br>• المبيعات اللي حصلت بعد التعديل مش هتتلمس.<br>• لو التعديل أضاف صنف جديد للمخزن: كميته بتتصفّر (ومش بيتمسح).<br>• هيفتحلك المشترى بالقيم القديمة وإنت تراجع وتدوس حفظ، وهيظهرلك تأكيد بملخص أثره على المخزن قبل التنفيذ. والاسترجاع نفسه بيتسجّل في السجل.'+
+      (newer?'<br><b style="color:#b45309">⚠️ فيه '+newer+' تعديل أحدث على نفس المشترى بعد ده — الأفضل ترجّع الأحدث الأول.</b>':'')+'</div>';
+  }else if(isP&&!cur){h+='<div style="font-size:12px;color:#b91c1c;margin:8px 0">المشترى ده اتمسح — مفيش استرجاع.</div>';}
+  else if(!isP){h+='<div style="font-size:11px;color:#64748b;margin:8px 0">الاسترجاع متاح لتعديلات المشتريات (الفواتير بتتسجّل قبل/بعد للعلم).</div>';}
+  h+='<div class="modal-actions">'+(canRestore?'<button class="btn btn-green" style="flex:2" onclick="restorePurchaseEdit(\''+aid+'\')">↩️ استرجاع النسخة القديمة</button>':'')+
+    (cur?'<button class="btn btn-outline" style="flex:1" onclick="closeModal();'+(isP?'openPurchaseModal':'openSaleModal')+'(\''+a.ref+'\')">📂 فتح</button>':'')+
+    '<button class="btn btn-outline" style="flex:1" onclick="closeModal()">إغلاق</button></div>';
+  document.getElementById('modal-title').textContent='✏️ تفاصيل التعديل';
+  document.getElementById('modal-body').innerHTML=h;openModal();
+}
+function restorePurchaseEdit(aid){
+  var a=_invAuditList().find(function(x){return x.id===aid;});if(!a||!a.details||!a.details.old)return;
+  var cur=DB.purchases.find(function(x){return x.id===a.ref;});if(!cur)return showToast('⚠️ المشترى اتمسح','#dc2626');
+  var old=a.details.old,fxm={};(a.details.fx||[]).forEach(function(e){fxm[e.pid]=e;});
+  openPurchaseModal(a.ref);
+  _purchItems=(old.items||[]).map(function(it){return Object.assign({},it);});
+  _purchBase=new WeakMap();
+  _purchItems.forEach(function(it){
+    var pid=(it.productId&&it.productId!=='__new__')?it.productId:_purchLegacyPid(it);
+    var pr=pid?DB.products.find(function(x){return x.id===pid;}):null;if(!pr)return;
+    var e=fxm[pid],s0=+pr.sell_price||0,w0=+pr.wholesale_price||0;
+    it.sellPrice=(e&&e.a&&e.b&&e.b.s===s0)?e.a.s:s0;it.wholesalePrice=(e&&e.a&&e.b&&e.b.w===w0)?e.a.w:w0;
+    _purchBase.set(it,{s:s0,w:w0});
+  });
+  var pOld=Object.assign({},cur,{supplier:old.supplier,date:old.date,paid:old.paid,extra_cost:old.extra_cost,total:old.total});
+  renderPurchBody(pOld);
+  document.getElementById('modal-title').textContent='↩️ استرجاع مشترى — راجع واضغط حفظ';
+  var mb=document.getElementById('modal-body');
+  if(mb)mb.insertAdjacentHTML('afterbegin','<div style="background:#ecfdf5;border-radius:10px;padding:8px 10px;margin-bottom:8px;font-size:12px;color:#065f46;line-height:1.7">↩️ ده المشترى بنسخته <b>قبل التعديل</b>. راجع البنود والمصاريف والمدفوع، وبعدين دوس «حفظ» — هيظهرلك ملخص أثره على المخزن للتأكيد.</div>');
+}
 function _editFxText(fx){
   var f=function(x){return typeof fmt==='function'?fmt(x):String(x);};
   return (fx||[]).map(function(e){
@@ -21523,7 +21581,7 @@ function renderFinancialLedger(){
     var d=a.date||String(a.at||'').slice(0,10);if(!d||!inRange(d))return;
     var isS=a.action==='sale_edit',dt=a.details||{},b=dt.before||{},af=dt.after||{};
     var exists=(isS?DB.sales:DB.purchases).some(function(x){return x.id===a.ref;});
-    events.push({date:d,icon:'✏️',type:isS?'تعديل فاتورة':'تعديل مشترى',desc:(af.party||b.party||'—')+(a.by_name?' — '+a.by_name:''),amount:af.total||0,amtTxt:fmt(af.total||0),sign:0,sub:[_editDiffText(b,af),_editFxText(dt.fx)].filter(Boolean).join(' ┃ '),nav:exists?((isS?'openSaleModal(':'openPurchaseModal(')+jsStr(a.ref)+')'):''});
+    events.push({date:d,icon:'✏️',type:isS?'تعديل فاتورة':'تعديل مشترى',desc:(af.party||b.party||'—')+(a.by_name?' — '+a.by_name:''),amount:af.total||0,amtTxt:fmt(af.total||0),sign:0,sub:[_editDiffText(b,af),_editFxText(dt.fx)].filter(Boolean).join(' ┃ '),nav:'openEditAuditModal('+jsStr(a.id)+')'});
   });
   events.sort(function(a,b){return a.date<b.date?1:a.date>b.date?-1:0;});
   var totalIn=events.filter(function(e){return e.sign>0;}).reduce(function(s,e){return s+e.amount;},0);
@@ -32999,6 +33057,10 @@ async function saveEditInvestor(id){
     if(Math.abs(pct-oldPct)>0.0001){ // ⚠️ v365 — تغيير نسبة بتاريخ سريان + سجل
       hist=hist.filter(function(e){return String(e.from||'')!==_pctFrom||!e.from;});
       hist.push({from:_pctFrom,pct:pct,prev:oldPct,at:new Date().toISOString()});
+      // ⚠️ v371 — تنظيف السجل: أي سطر نسبته زي اللي قبله بيتشال، ولو فضل سطر واحد النسبة تبقى ثابتة (بدون سجل)
+      var _hs=_oiPctHistSorted({pct_hist:hist}),_ho=[];
+      _hs.forEach(function(e,k){if(k>0&&+e.pct===+_ho[_ho.length-1].pct)return;_ho.push(e);});
+      hist=_ho.length<2?[]:_ho;
     }
     return Object.assign({},i,{name:name,phone:v('einv-phone'),profit_share_pct:pct,pct_hist:hist,notes:v('einv-notes'),status:v('einv-status'),keep_share_after_return:v('einv-keep')==='1'});
   });
@@ -33142,9 +33204,31 @@ function _oiPctForPeriod(i,from,to){
 }
 function _oiPctHistHtml(inv){
   var h=_oiPctHistSorted(inv);
-  if(h.length<2)return '<div style="font-size:11px;color:#94a3b8;margin:4px 0 10px">📜 مفيش تغييرات سابقة في النسبة (النسبة الحالية '+(+inv.profit_share_pct||0)+'%)</div>';
-  return '<div style="background:#f8fafc;border-radius:10px;padding:8px 10px;margin:4px 0 10px"><div style="font-size:12px;font-weight:800;margin-bottom:4px">📜 سجل تغيير النسبة</div>'+
-    h.map(function(e,idx){return '<div style="display:flex;justify-content:space-between;font-size:12px;padding:2px 0;color:#475569"><span>'+(e.from?'من '+esc(fmtDate(e.from)):'الأصلية')+'</span><b>'+(+e.pct)+'%'+(idx>0&&e.prev!=null?' <span style="font-weight:600;color:#94a3b8">(كانت '+(+e.prev)+'%)</span>':'')+'</b></div>';}).join('')+'</div>';
+  if(h.length<2)return '<div style="font-size:11px;color:#94a3b8;margin:4px 0 10px">📜 مفيش تغييرات سابقة في النسبة (النسبة الحالية '+(+inv.profit_share_pct||0)+'% على كل الشهور)</div>';
+  // ⚠️ v371 — أدوات تصحيح السجل: حذف سطر غلط، أو مسح السجل كله (النسبة الحالية تبقى ثابتة على كل الشهور)
+  return '<div style="background:#f8fafc;border-radius:10px;padding:8px 10px;margin:4px 0 10px"><div style="font-size:12px;font-weight:800;margin-bottom:4px">📜 سجل تغيير النسبة <span style="font-weight:600;color:#94a3b8">(الحالية '+(+inv.profit_share_pct||0)+'%)</span></div>'+
+    h.map(function(e,idx){return '<div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:3px 0;color:#475569"><span>'+(e.from?'من '+esc(fmtDate(e.from)):'الأصلية (قبل أي تغيير)')+'</span><span><b>'+(+e.pct)+'%'+(idx>0&&e.prev!=null?' <span style="font-weight:600;color:#94a3b8">(كانت '+(+e.prev)+'%)</span>':'')+'</b> <button type="button" onclick="_oiPctHistDel(\''+inv.id+'\','+idx+')" style="border:none;background:#fee2e2;color:#b91c1c;border-radius:7px;padding:2px 7px;font-size:11px;cursor:pointer">🗑️</button></span></div>';}).join('')+
+    '<button type="button" onclick="_oiPctHistClear(\''+inv.id+'\')" style="width:100%;margin-top:6px;padding:7px;border:none;border-radius:9px;background:#fef9c3;color:#854d0e;font-family:inherit;font-size:11.5px;font-weight:800;cursor:pointer">🧹 مسح السجل: النسبة الحالية ('+(+inv.profit_share_pct||0)+'%) ثابتة على كل الشهور</button></div>';
+}
+function _oiPctHistDel(id,idx){
+  var inv=(DB.accounts.investors||[]).find(function(i){return i.id===id;});if(!inv)return;
+  var h=_oiPctHistSorted(inv),e=h[idx];if(!e||h.length<2)return;
+  var after=h.filter(function(x,k){return k!==idx;});
+  setTimeout(function(){confirmAction('🗑️ حذف سطر «'+(e.from?'من '+fmtDate(e.from):'الأصلية')+' — '+(+e.pct)+'%»؟\n\n'+(after.length<2?'بعد الحذف النسبة هتبقى ثابتة '+(+inv.profit_share_pct||0)+'% على كل الشهور.':'تقرير الدخل هيحسب من السجل المتبقي.')+'\nالدورات المحفوظة مش هتتأثر.',async function(){
+    _invBackup('قبل حذف سطر من سجل نسبة مستثمر');
+    inv.pct_hist=after.length<2?[]:after;
+    _invAudit('old_investor_edit','old',id,{note:'حذف سطر من سجل النسبة',removed:e});
+    await persist();openEditInvestorModal(id);showToast('✅ اتحذف السطر','#16a34a');renderAccounting();
+  });},0);
+}
+function _oiPctHistClear(id){
+  var inv=(DB.accounts.investors||[]).find(function(i){return i.id===id;});if(!inv)return;
+  setTimeout(function(){confirmAction('🧹 مسح سجل تغيير النسبة؟\n\nالنسبة الحالية ('+(+inv.profit_share_pct||0)+'%) هتتحسب على كل الشهور (القديمة والجديدة).\nالدورات المحفوظة مش هتتأثر.',async function(){
+    _invBackup('قبل مسح سجل نسبة مستثمر');
+    var old=inv.pct_hist;inv.pct_hist=[];
+    _invAudit('old_investor_edit','old',id,{note:'مسح سجل تغيير النسبة',removed:old});
+    await persist();openEditInvestorModal(id);showToast('✅ اتمسح السجل — النسبة ثابتة','#16a34a');renderAccounting();
+  });},0);
 }
 function _pcPartnerShare(i,profit,pr){
   var to=pr.to||today(),from=pr.from||'';
