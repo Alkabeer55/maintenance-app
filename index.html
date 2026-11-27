@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v371</title>
+<title>ابو حوده الحلو الجميل v373</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -53,7 +53,7 @@ async function __netProbe(force){
   }catch(e3){}
   return ok;
 }
-/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="v371 — ١٧ جمادى الآخرة ١٤٤٨ هـ";
+/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="v373 — ١٧ جمادى الآخرة ١٤٤٨ هـ";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -193,6 +193,8 @@ async function __netProbe(force){
         الهامش = بعد الخصم (_anSaleF) وبالفصل قطع/خدمات، وأي بند من غير سعر تكلفة بيتحذّر منه. نصيب الشريك في دورة التوزيع = _pcPartnerShare بس (رد رأس المال + الدخول في نص الفترة)، ممنوع Math.round(profit*pct/100) مباشرة.
 ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v373: [🔍 بند ١٦ (الخطوة الأولى): زرار «🔍 فحص الأساسيين» في شاشة العملاء (بدل «📥 استيراد») بيفحص العملاء والماكينات المدمجين في الملف مقابل عملائك الحقيقيين ويقولك لو فيه ناقص (وبيعرض زرار «📥 استيراد الناقصين»)، وقبل ما نشيل بيانات العملاء من الملف في النسخة الجاية • مفيش أي تغيير في بياناتك]
+v372: [🧩 الأطقم (بند ١٢): الطقم = حزمة فيها صنفين أو أكتر. (١) البيع: بيتفك لسطور في الفاتورة (كل مكوّن بسعره) من الحزم الموجودة • (٢) الشراء: في شاشة المشتريات «🧩 أطقم» — اختار الطقم + العدد + سعر الطقم فيدخل المخزن مكونات منفصلة وسعر الطقم بيتوزّع عليهم بنسبة تكلفة كل واحد • (٣) المزيد بالمخزون ← «🧩 الأطقم»: اربط صنف الطقم في المخزن، وبعدين «🔧 فكّ طقم» (الطقم يتحوّل لمكوناته بتكلفته موزّعة) أو «🧩 تجميع طقم» (المكونات تتحوّل لطقم بتكلفتها)، بمعاينة وتأكيد وتسجيل في «السجل» (فلتر «طقم») وزرار «↩️ عكس العملية» • مفيش أي تغيير في معادلات الربح أو الخزنة]
 v371: [↩️ زرار استرجاع تعديل المشترى: كارت «تعديل مشترى» في السجل بيفتح تفاصيل التعديل (اللي اتغيّر + الأثر على كل صنف) وفيه «↩️ استرجاع النسخة القديمة» مع شرح اللي هيحصل — بيفتح المشترى بقيمه القديمة وتدوس حفظ فيظهر تأكيد بملخص الأثر على المخزن، والاسترجاع نفسه بيتسجّل • 📊 سجل نسبة المستثمر: سبب ظهور نسبة قديمة غلط (اتغيّرت قبل v365 من غير سجل فاتسجّلت النسبة القديمة كأصل) — أضفت 🗑️ حذف سطر و«🧹 مسح السجل: النسبة الحالية ثابتة على كل الشهور» (بتأكيد ونسخة احتياطية)، والحفظ بقى بينضّف السجل (سطر نسبته زي اللي قبله بيتشال) • 🧾 صفحة الفاتورة: الشريط السفلي مضغوط (سطر واحد للإجماليات وأزرار أصغر) وبيتقلّص لزرار الحفظ بس لما الكيبورد يفتح، وبحث القطع بيطلع لفوق عشان النتايج تاخد المساحة • 🧾 كارت المبيعات أقصر: التاريخ جنب الاسم والشارات وأزرار أصغر • مفيش أي تغيير في معادلات الربح أو الخزنة]
 v370: [🛒 مراجعة تكلفة تعديل المشتريات: (١) حساب تكلفة موحّد (سعر الشراء + مصاريف النقل + الكمية) على متوسط تكلفة المخزن — الوحدات اللي اتزودت أو اتضاف صنفها في التعديل بتدخل بمتوسط مرجّح زي المشترى الجديد (كانت بتدخل بالكمية بس والتكلفة ثابتة)، وتغيير المصاريف بقى بيشمل البنود القديمة غير المربوطة (كان بيتخطاها) • (٢) كل تعديل مشترى بيتسجّل في «السجل» بأثره على كل صنف (كمية/سعر شراء/تكلفة/بيع/جملة قبل ← بعد) + نسخة المشترى القديم كاملة محفوظة في السجل للاسترجاع، ورسالة التأكيد بتعرض أثر التكلفة كمان • 📊 نسبة المستثمر في قائمة الدخل: التقرير بقى بيستخدم بداية ونهاية الفترة نفسها (كان بيستخدم أول/آخر فاتورة)، فالشهر الخالص بيظهر بنسبته والشهر الحالي بالنسبة المحددة دلوقتي في الإعدادات • 🧾 شاشة المبيعات بنمط المخزون: عنوان + «+ فاتورة» + «⋯ المزيد» (تحديد متعدد، طباعة الكل)، بحث + «🎚️ فلتر» (الفترة، مين سجّل، الحالة، الترتيب، تثبيت افتراضي جوه الورقة)، وسطر عدد الفواتير + شرايح الفلاتر النشطة (كل واحدة بتتشال بضغطة) • مفيش أي تغيير في معادلات الربح أو الخزنة]
 v369: [🧾 ضبط شاشة المبيعات: (١) كروت المبلغ الأربعة (العدد/الإجمالي/المحصّل/المتبقي) اتشالت وبقت سطر صغير واحد بنفس الأرقام (٢) تثبيت فلتر المبيعات الافتراضي (الحالة + الترتيب) زي المخزون: زرار «📌 تثبيت الفلتر» و«🗑️ إلغاء»، بيتحفظ في الإعدادات ويفضل بعد إعادة فتح التطبيق • مفيش أي تغيير في أرقام أو معادلات الفواتير]
@@ -5920,7 +5922,7 @@ var APP_TITLE=APP_CONFIG.name;
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=371;
+var APP_VERSION=373;
 // ⚠️ v303 — BUILD_STAMP كان مش متعرّف خالص (شاشة الإعدادات كانت بتعرض "?") — اتعرّف دلوقتي وبيتزود مع كل تحديث
 var BUILD_STAMP='v'+APP_VERSION+' — ١٧ جمادى الآخرة ١٤٤٨ هـ'; // ⚠️ v331 — رقم النسخة بيتولّد من APP_VERSION (كان واقف على v323 لأن في تعريفين، والتاني بيكسب). ممنوع تكتب رقم نسخة يدوي هنا.
 // ⚠️ v295 — عنوان الصفحة كان رقم نسخته ثابت ومتنسي (فضل v294 مع إن النسخة اتغيّرت). دلوقتي بياخد الرقم من APP_VERSION دايمًا.
@@ -9555,6 +9557,7 @@ function openInvMore(){
   var untagged=DB.products.filter(function(p){return !p.company;}).length;
   var h='';
   h+=row('🔩','تفكيك اسكراب','فك ماكينة واستخراج قطع ليها',"navigate('scrap')",'#fee2e2');
+  if(__hasPerm('products','can_update'))h+=row('🧩','الأطقم','تجميع وفكّ أطقم (طقم حبر = ٤ ألوان)',"openKitsModal()",'#f5f3ff');
   h+=row('📋','جرد المخزون','جرد فعلي ومطابقة الكميات',"switchInvTab('stocktake')",'#dcfce7');
   h+=row('📅','مقارنة فترات','قارن المخزون بين تاريخين',"switchInvTab('compare')",'#cffafe');
   h+=row('📊','إحصائيات المخزون','قيم وتوزيع الأصناف',"switchInvTab('stats')",'#ede9fe');
@@ -12257,6 +12260,138 @@ function addBundleToSale(idx){
   else showToast('✅ اتضافت حزمة: '+b.name,'#16a34a');
 }
 
+// ===== ⚠️ v372 — الأطقم (🧩): طقم = حزمة (≥٢ صنف) — البيع بيتفك لسطور في الفاتورة (الحزم)، والشراء بيدخل المخزن قطع منفصلة بتكلفة موزّعة، وكمان تجميع/فكّ طقم كصنف في المخزن =====
+function _kits(){return (DB.settings.bundles||[]).map(function(b,i){return {i:i,b:b};}).filter(function(x){return (x.b.items||[]).length>=2;});}
+function _kitCost(pr){return (+pr.landed_cost||0)||(+pr.buy_price||0);}
+// توزيع قيمة (تكلفة/سعر) على مكونات الطقم بنسبة تكلفة كل مكوّن (أو بالتساوي لو مفيش تكلفة)
+function _kitWeights(items){
+  var ws=items.map(function(it){var pr=DB.products.find(function(x){return x.id===it.productId;});return (+it.qty||1)*(pr?_kitCost(pr):0);});
+  var tot=ws.reduce(function(a,b){return a+b;},0);
+  if(!(tot>0)){ws=items.map(function(it){return +it.qty||1;});tot=ws.reduce(function(a,b){return a+b;},0);}
+  return ws.map(function(w){return w/tot;});
+}
+function _kitPlan(kit,mode,n){
+  var r2=function(x){return Math.round(x*100)/100;},res={ok:false,err:'',rows:[]};
+  n=+n;if(!(n>0))return Object.assign(res,{err:'اكتب عدد الأطقم'});
+  var kp=kit.kitProductId?DB.products.find(function(x){return x.id===kit.kitProductId;}):null;
+  if(!kp)return Object.assign(res,{err:'اربط صنف الطقم في المخزن الأول'});
+  var items=kit.items||[],comps=[];
+  for(var k=0;k<items.length;k++){var pr=DB.products.find(function(x){return x.id===items[k].productId;});if(!pr)return Object.assign(res,{err:'المكوّن «'+(items[k].name||'')+'» اتمسح من المخزن'});comps.push(pr);}
+  if(mode==='break'){
+    if((+kp.qty||0)<n)return Object.assign(res,{err:'رصيد الطقم في المخزن '+(+kp.qty||0)+' بس'});
+    var KL=_kitCost(kp),KB=+kp.buy_price||0,ws=_kitWeights(items);
+    res.rows.push({pid:kp.id,n:kp.name,q0:+kp.qty||0,q1:roundQty((+kp.qty||0)-n),b0:+kp.buy_price||0,b1:+kp.buy_price||0,l0:KL,l1:KL});
+    comps.forEach(function(pr,i){
+      var q=+items[i].qty||1,add=n*q,Qb=Math.max(0,+pr.qty||0),uL=KL*ws[i]/q,uB=KB*ws[i]/q,L0=_kitCost(pr),B0=+pr.buy_price||0;
+      res.rows.push({pid:pr.id,n:pr.name,q0:+pr.qty||0,q1:roundQty((+pr.qty||0)+add),b0:B0,b1:r2((Qb*B0+add*uB)/(Qb+add)),l0:L0,l1:r2((Qb*L0+add*uL)/(Qb+add))});
+    });
+  }else{
+    var uL2=0,uB2=0;
+    for(var j=0;j<comps.length;j++){
+      var q2=+items[j].qty||1,need=n*q2;
+      if((+comps[j].qty||0)<need)return Object.assign(res,{err:'رصيد «'+comps[j].name+'» '+(+comps[j].qty||0)+' والمطلوب '+need});
+      uL2+=q2*_kitCost(comps[j]);uB2+=q2*(+comps[j].buy_price||0);
+    }
+    var Kq=Math.max(0,+kp.qty||0),KL0=_kitCost(kp),KB0=+kp.buy_price||0;
+    res.rows.push({pid:kp.id,n:kp.name,q0:+kp.qty||0,q1:roundQty((+kp.qty||0)+n),b0:KB0,b1:r2((Kq*KB0+n*uB2)/(Kq+n)),l0:KL0,l1:r2((Kq*KL0+n*uL2)/(Kq+n))});
+    comps.forEach(function(pr,i){var q=+items[i].qty||1;res.rows.push({pid:pr.id,n:pr.name,q0:+pr.qty||0,q1:roundQty((+pr.qty||0)-n*q),b0:+pr.buy_price||0,b1:+pr.buy_price||0,l0:_kitCost(pr),l1:_kitCost(pr)});});
+  }
+  res.ok=true;return res;
+}
+function _kitPlanText(plan){
+  return plan.rows.map(function(r){var t=['المخزون '+fmtQty(r.q0)+' ← '+fmtQty(r.q1)];if(Math.abs(r.l1-r.l0)>=0.005)t.push('التكلفة '+fmt(r.l0)+' ← '+fmt(r.l1));return '📦 '+r.n+': '+t.join(' • ');}).join('\n');
+}
+function openKitsModal(){
+  var ks=_kits(),h='<div style="font-size:12px;color:#64748b;line-height:1.8;margin-bottom:8px">الطقم = حزمة فيها صنفين أو أكتر (مثلًا طقم حبر ٤ ألوان). <b>🔧 فكّ</b> بيحوّل طقم في المخزن لقطعه، و<b>🧩 تجميع</b> بيعمل العكس. وبتتسجّل في «السجل». لو الطقم بتشتريه من المورد جاهز استخدم «🧩 أطقم» في شاشة المشتريات.</div>';
+  if(!ks.length)h+='<div style="text-align:center;color:#94a3b8;padding:16px;font-size:13px">مفيش أطقم لسه — اعمل حزمة فيها صنفين أو أكتر.</div>';
+  ks.forEach(function(x){
+    var kp=x.b.kitProductId?DB.products.find(function(p){return p.id===x.b.kitProductId;}):null;
+    h+='<div style="background:#f8fafc;border-radius:12px;padding:10px 12px;margin-bottom:8px"><div style="font-weight:800;font-size:14px">🧩 '+esc(x.b.name)+'</div>'+
+      '<div style="font-size:11px;color:#64748b;margin:3px 0">'+(x.b.items||[]).map(function(it){return esc(it.name||'')+' ×'+(+it.qty||1);}).join(' • ')+'</div>'+
+      '<div style="font-size:11.5px;margin-bottom:6px">'+(kp?'📦 الطقم في المخزن: <b>'+esc(kp.name)+'</b> (رصيد '+fmtQty(+kp.qty||0)+')':'<span style="color:#b45309">⚠️ مفيش صنف للطقم في المخزن (للتجميع والفكّ)</span>')+' <button type="button" onclick="kitLinkPick('+x.i+')" style="border:none;background:#e0e7ff;color:#3730a3;border-radius:7px;padding:2px 8px;font-size:11px;cursor:pointer">'+(kp?'تغيير':'🔗 اربط')+'</button></div>'+
+      (kp?'<div style="display:flex;gap:6px"><button class="btn btn-outline" style="flex:1;font-size:13px" onclick="kitOpModal('+x.i+',\'break\')">🔧 فكّ طقم</button><button class="btn btn-outline" style="flex:1;font-size:13px" onclick="kitOpModal('+x.i+',\'assemble\')">🧩 تجميع طقم</button></div>':'')+'</div>';
+  });
+  h+='<button class="btn btn-outline btn-full" onclick="openAddBundleModal()">➕ حزمة / طقم جديد</button>';
+  document.getElementById('modal-title').textContent='🧩 الأطقم';
+  document.getElementById('modal-body').innerHTML=h;openModal();
+}
+function kitLinkPick(i){
+  document.getElementById('modal-title').textContent='🔗 اربط صنف الطقم';
+  document.getElementById('modal-body').innerHTML='<div style="font-size:12px;color:#64748b;margin-bottom:6px">اختار الصنف اللي بيمثّل الطقم كامل في المخزن (مثلًا «طقم حبر HP»).</div><input id="kit-link-q" type="text" class="search-input" placeholder="🔍 اسم الصنف..." oninput="kitLinkSearch('+i+')" autocomplete="off"><div id="kit-link-res"></div><button class="btn btn-outline btn-full" style="margin-top:8px" onclick="openKitsModal()">رجوع</button>';
+  kitLinkSearch(i);
+}
+function kitLinkSearch(i){
+  var q=normalizeAr((document.getElementById('kit-link-q')||{}).value||'');
+  var list=DB.products.filter(function(p){return !q||normalizeAr(p.name||'').indexOf(q)>=0;}).slice(0,15);
+  document.getElementById('kit-link-res').innerHTML=list.map(function(p){return '<div class="prod-result-item" onclick="kitSetLink('+i+',\''+p.id+'\')"><div style="font-weight:700">'+esc(p.name)+'</div><div style="font-size:12px;color:#94a3b8">رصيد: '+fmtQty(+p.qty||0)+'</div></div>';}).join('')||'<div style="color:#94a3b8;padding:10px;font-size:12px">مفيش نتايج</div>';
+}
+async function kitSetLink(i,pid){
+  var b=(DB.settings.bundles||[])[i];if(!b)return;
+  if((b.items||[]).some(function(it){return it.productId===pid;}))return showToast('⚠️ الصنف ده من مكوّنات الطقم نفسه','#dc2626');
+  b.kitProductId=pid;persist();showToast('✅ اتربط','#16a34a');openKitsModal();
+}
+var _kitOp={i:-1,mode:'break'};
+function kitOpModal(i,mode){
+  _kitOp={i:i,mode:mode};var b=(DB.settings.bundles||[])[i];if(!b)return;
+  document.getElementById('modal-title').textContent=(mode==='break'?'🔧 فكّ طقم: ':'🧩 تجميع طقم: ')+b.name;
+  document.getElementById('modal-body').innerHTML='<div class="field"><label>عدد الأطقم</label><input id="kit-n" type="number" min="1" value="1" oninput="kitOpPreview()"></div><div id="kit-prev" style="background:#f5f3ff;border-radius:10px;padding:9px 11px;font-size:12px;line-height:1.9;white-space:pre-line;margin-bottom:8px"></div>'+
+    '<div class="modal-actions"><button class="btn btn-green" style="flex:2" onclick="kitOpConfirm()">'+(mode==='break'?'🔧 فكّ':'🧩 تجميع')+'</button><button class="btn btn-outline" style="flex:1" onclick="openKitsModal()">رجوع</button></div>';
+  kitOpPreview();
+}
+function kitOpPreview(){
+  var b=(DB.settings.bundles||[])[_kitOp.i];if(!b)return;var n=+(document.getElementById('kit-n')||{}).value||0,pl=_kitPlan(b,_kitOp.mode,n),el=document.getElementById('kit-prev');if(!el)return;
+  el.style.color=pl.ok?'#0f172a':'#b91c1c';el.textContent=pl.ok?'اللي هيحصل:\n'+_kitPlanText(pl):'⚠️ '+pl.err;
+}
+function kitOpConfirm(){
+  if(!__hasPerm('products','can_update')){showToast('🚫 مفيش صلاحية تعديل المخزن. كلم المالك.','#dc2626');return;}
+  var b=(DB.settings.bundles||[])[_kitOp.i];if(!b)return;var n=+(document.getElementById('kit-n')||{}).value||0,pl=_kitPlan(b,_kitOp.mode,n);
+  if(!pl.ok)return showToast('⚠️ '+pl.err,'#dc2626');
+  var mode=_kitOp.mode,idx=_kitOp.i;
+  setTimeout(function(){confirmAction('⚠️ تأكيد '+(mode==='break'?'فكّ':'تجميع')+' '+n+' طقم «'+b.name+'» — هيغيّر المخزن:\n'+_kitPlanText(pl)+'\n\nتكمّل؟',async function(){await kitOpExec(idx,mode,n);});},0);
+}
+async function kitOpExec(i,mode,n){
+  var b=(DB.settings.bundles||[])[i];if(!b)return;var pl=_kitPlan(b,mode,n);if(!pl.ok)return showToast('⚠️ '+pl.err,'#dc2626');
+  var fx=[];
+  for(var k=0;k<pl.rows.length;k++){
+    var r=pl.rows[k],pr=DB.products.find(function(x){return x.id===r.pid;});if(!pr)continue;
+    var a={n:pr.name,q:+pr.qty||0,b:+pr.buy_price||0,l:_kitCost(pr),s:+pr.sell_price||0,w:+pr.wholesale_price||0};
+    var up={qty:r.q1};if(Math.abs(r.b1-r.b0)>=0.005)up.buy_price=r.b1;if(Math.abs(r.l1-r.l0)>=0.005)up.landed_cost=r.l1;
+    DB.products=patchRow(DB.products,pr.id,up);await dbUpdate('products',pr.id,up);
+    fx.push({pid:pr.id,n:pr.name,a:a,b:{n:pr.name,q:r.q1,b:up.buy_price!==undefined?up.buy_price:a.b,l:up.landed_cost!==undefined?up.landed_cost:a.l,s:a.s,w:a.w}});
+  }
+  var p=window.__currentProfile||{};
+  _invAuditList().push({id:genId(),at:new Date().toISOString(),date:today(),action:'kit_op',kind:'kit',ref:b.name,by:p.id||'',by_name:p.full_name||p.name||'',details:{mode:mode,n:n,kit:b.name,bundleIdx:i,fx:fx}});
+  persist();showToast('✅ '+(mode==='break'?'اتفكّ':'اتجمّع')+' '+n+' طقم','#16a34a');
+  try{renderInventory();}catch(e){}
+  openKitsModal();
+}
+// ⚠️ v372 — شراء طقم جاهز من المورد: بيدخل المخزن قطع منفصلة وسعر الطقم بيتوزّع على المكونات بنسبة تكلفة كل واحد
+function purchKitChips(){
+  var ks=_kits().filter(function(x){return x.b.items.every(function(it){return DB.products.some(function(p){return p.id===it.productId;});});});
+  if(!ks.length)return '';
+  return '<div class="field"><label>🧩 أطقم (شراء طقم جاهز)</label><div style="display:flex;gap:6px;flex-wrap:wrap">'+ks.map(function(x){return '<button type="button" onclick="purchKitPanel('+x.i+')" style="padding:6px 11px;background:#f5f3ff;border:1.5px solid #ddd6fe;border-radius:8px;font-family:inherit;font-size:12px;font-weight:700;color:#5b21b6;cursor:pointer">🧩 '+esc(x.b.name)+'</button>';}).join('')+'</div><div id="purch-kit-panel"></div></div>';
+}
+function purchKitPanel(i){
+  var b=(DB.settings.bundles||[])[i];if(!b)return;var el=document.getElementById('purch-kit-panel');if(!el)return;
+  el.innerHTML='<div style="background:#f5f3ff;border-radius:10px;padding:9px 10px;margin-top:6px"><div style="font-size:12px;font-weight:800;margin-bottom:6px">🧩 '+esc(b.name)+' <span style="font-weight:600;color:#64748b">('+b.items.map(function(it){return esc(it.name||'')+'×'+(+it.qty||1);}).join('، ')+')</span></div>'+
+    '<div style="display:flex;gap:6px"><input id="purch-kit-n" type="number" min="1" value="1" placeholder="عدد الأطقم" style="flex:1;padding:8px;border:2px solid #ddd6fe;border-radius:8px;font-family:inherit"><input id="purch-kit-price" type="number" step="any" placeholder="سعر الطقم (ج)" style="flex:1;padding:8px;border:2px solid #ddd6fe;border-radius:8px;font-family:inherit"></div>'+
+    '<div style="font-size:10.5px;color:#7c3aed;margin:5px 0">سعر الطقم هيتوزّع على المكونات بنسبة تكلفة كل واحد، وكل مكوّن بيدخل المخزن لوحده.</div>'+
+    '<button type="button" class="btn btn-purple btn-full" onclick="purchAddKit('+i+')">➕ ضيف الأطقم للمشترى</button></div>';
+}
+function purchAddKit(i){
+  var b=(DB.settings.bundles||[])[i];if(!b)return;var n=+v('purch-kit-n')||0,P=+v('purch-kit-price')||0;
+  if(!(n>0))return showToast('⚠️ اكتب عدد الأطقم','#dc2626');if(!(P>0))return showToast('⚠️ اكتب سعر الطقم','#dc2626');
+  var ws=_kitWeights(b.items),st0=_purchSaveState();
+  b.items.forEach(function(it,k){
+    var pr=DB.products.find(function(x){return x.id===it.productId;});if(!pr)return;
+    var q=+it.qty||1,qty=roundQty(n*q),price=Math.round(P*ws[k]/q*100)/100;
+    var ex=_purchItems.find(function(x){return x.productId===pr.id;});
+    if(ex){var tot=ex.qty*ex.price+qty*price;ex.qty=roundQty(ex.qty+qty);ex.price=Math.round(tot/ex.qty*100)/100;}
+    else _purchItems.push({productId:pr.id,name:pr.name,qty:qty,price:price});
+  });
+  var st=_purchSaveState(),pur=_purchId?DB.purchases.find(function(x){return x.id===_purchId;}):null;
+  _purchRestoreState(st,pur);showToast('✅ اتضاف '+n+' طقم «'+b.name+'» ('+b.items.length+' أصناف)','#16a34a');
+}
 var _bundleDraftItems=[];
 function openBundlesSettings(){
   var list=DB.settings.bundles||[];
@@ -13786,6 +13921,13 @@ function _pSnap(pid){var p=DB.products.find(function(x){return x.id===pid;});ret
 // ⚠️ v371 — تفاصيل سجل تعديل (مشترى/فاتورة) + زرار استرجاع النسخة القديمة للمشتريات (مع التوضيح والتأكيد)
 function openEditAuditModal(aid){
   var a=_invAuditList().find(function(x){return x.id===aid;});if(!a)return;
+  if(a.action==='kit_op'){
+    var kd=a.details||{},kb=(DB.settings.bundles||[])[kd.bundleIdx],kok=kb&&kb.name===kd.kit;
+    document.getElementById('modal-title').textContent='🧩 تفاصيل عملية طقم';
+    document.getElementById('modal-body').innerHTML='<div style="font-size:13px;line-height:1.9"><div style="font-weight:800">'+(kd.mode==='break'?'🔧 فكّ ':'🧩 تجميع ')+(+kd.n||0)+' طقم «'+esc(kd.kit||'')+'»</div><div style="color:#64748b;font-size:12px">'+fmtDate(a.date||String(a.at||'').slice(0,10))+(a.by_name?' — '+esc(a.by_name):'')+'</div><div style="background:#f5f3ff;border-radius:10px;padding:8px 10px;margin:8px 0"><b>الأثر على المخزن:</b><br>'+(kd.fx||[]).map(function(e){return esc(_editFxText([e]));}).filter(Boolean).join('<br>')+'</div></div>'+
+      '<div class="modal-actions">'+(kok?'<button class="btn btn-green" style="flex:2" onclick="kitOpModal('+kd.bundleIdx+',\''+(kd.mode==='break'?'assemble':'break')+'\');document.getElementById(\'kit-n\').value='+(+kd.n||1)+';kitOpPreview()">↩️ عكس العملية</button>':'')+'<button class="btn btn-outline" style="flex:1" onclick="closeModal()">إغلاق</button></div>';
+    openModal();return;
+  }
   var isP=a.action==='purchase_edit',dt=a.details||{},b=dt.before||{},af=dt.after||{};
   var cur=(isP?DB.purchases:DB.sales).find(function(x){return x.id===a.ref;});
   var newer=_invAuditList().filter(function(x){return x.action===a.action&&x.ref===a.ref&&String(x.at||'')>String(a.at||'');}).length;
@@ -13981,6 +14123,7 @@ function renderPurchBody(p){
   document.getElementById('modal-body').innerHTML=
     acField('purch-supplier','المورد','text',p?p.supplier:'','','suppliers',true)+
 
+    purchKitChips()+
     // ===== خانة واحدة موحدة لإضافة منتج (موجود أو جديد) =====
     '<div class="field"><label>📦 أضف منتج (اكتب الاسم — موجود أو جديد)</label>'+
     '<input id="purch-prod-input" type="text" placeholder="اكتب اسم المنتج..." oninput="filterPurchProds()" autocomplete="off" style="width:100%;padding:10px 13px;border:2px solid #3b82f6;border-radius:11px;font-size:14px;font-family:inherit;direction:rtl;background:#f8fafc;outline:none;margin-bottom:6px">'+
@@ -21577,6 +21720,11 @@ function renderFinancialLedger(){
 
   // ⚠️ v367 — تعديلات الفواتير والمشتريات (للعلم بس: sign=0 فمش داخلة في إجمالي الداخل/الخارج)
   _invAuditList().forEach(function(a){
+    if(a.action==='kit_op'){
+      var kd=a.date||String(a.at||'').slice(0,10);if(!kd||!inRange(kd))return;var kdt=a.details||{};
+      events.push({date:kd,icon:'🧩',type:'طقم',desc:(kdt.mode==='break'?'فكّ ':'تجميع ')+(+kdt.n||0)+' طقم «'+(kdt.kit||a.ref||'')+'»'+(a.by_name?' — '+a.by_name:''),amount:0,amtTxt:'×'+(+kdt.n||0),sign:0,sub:_editFxText(kdt.fx),nav:'openEditAuditModal('+jsStr(a.id)+')'});
+      return;
+    }
     if(a.action!=='sale_edit'&&a.action!=='purchase_edit')return;
     var d=a.date||String(a.at||'').slice(0,10);if(!d||!inRange(d))return;
     var isS=a.action==='sale_edit',dt=a.details||{},b=dt.before||{},af=dt.after||{};
@@ -21588,7 +21736,7 @@ function renderFinancialLedger(){
   var totalOut=events.filter(function(e){return e.sign<0;}).reduce(function(s,e){return s+e.amount;},0);
 
   var filterHtml='<div style="display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap">'+
-    ['all','بيع','شراء','مصروف','راتب','سلفة','سداد لمورد','تحصيل من عميل','رأس مال','سحب أرباح (مالك)','توزيع أرباح','تغيير نسبة','تعديل فاتورة','تعديل مشترى'].map(function(t){
+    ['all','بيع','شراء','مصروف','راتب','سلفة','سداد لمورد','تحصيل من عميل','رأس مال','سحب أرباح (مالك)','توزيع أرباح','تغيير نسبة','تعديل فاتورة','تعديل مشترى','طقم'].map(function(t){
       var active=(_ledgerTypeFilter||'all')===t;
       return '<button onclick="_ledgerTypeFilter='+jsStr(t)+';renderFinancialLedger()" style="padding:5px 10px;border-radius:8px;border:1.5px solid '+(active?'#0f172a':'#e2e8f0')+';background:'+(active?'#0f172a':'#fff')+';color:'+(active?'#fff':'#64748b')+';font-size:11px;font-weight:700;font-family:inherit;cursor:pointer">'+(t==='all'?'الكل':t)+'</button>';
     }).join('')+'</div>';
@@ -28920,6 +29068,24 @@ function printClient(id){
   ]);
 }
 
+// ⚠️ v373 — فحص العملاء الأساسيين المدمجين في الملف: كلهم موجودين في «العملاء» (بالاسم) وماكيناتهم (بالسيريال)؟ قبل ما نشيلهم من الملف
+function baseClientsAudit(){
+  var base=CLIENTS_BASE_DATA.customers||[],names={},sers={};
+  DB.clients.forEach(function(c){names[normalizeAr(c.name)]=1;(c.machines||[]).forEach(function(m){if(m.serial)sers[normalizeAr(String(m.serial).toUpperCase())]=1;});});
+  var missC=[],missM=[],totM=0;
+  base.forEach(function(c){
+    var cm=!names[normalizeAr(c.name)];if(cm)missC.push(c.name);
+    (c.machines||[]).forEach(function(m){if(!m.serial)return;totM++;if(!sers[normalizeAr(String(m.serial).toUpperCase())])missM.push(c.name+' — '+(m.model||'')+' ('+m.serial+')');});
+  });
+  var ok=!missC.length&&!missM.length;
+  var h='<div style="font-size:13px;line-height:1.9"><div>العملاء الأساسيين في الملف: <b>'+base.length+'</b> • ماكيناتهم (بسيريال): <b>'+totM+'</b></div><div>عملاؤك دلوقتي: <b>'+DB.clients.length+'</b></div>'+
+    '<div style="margin:8px 0;padding:9px 11px;border-radius:10px;background:'+(ok?'#dcfce7':'#fef9c3')+';font-weight:800;color:'+(ok?'#166534':'#854d0e')+'">'+(ok?'✅ كلهم موجودين عندك (العملاء والماكينات) — آمن تشيلهم من الملف':'⚠️ ناقص: '+missC.length+' عميل و'+missM.length+' ماكينة')+'</div>';
+  if(missC.length)h+='<div style="font-size:12px"><b>عملاء ناقصين:</b><br>'+missC.slice(0,20).map(esc).join('<br>')+(missC.length>20?'<br>… و'+(missC.length-20)+' كمان':'')+'</div>';
+  if(missM.length)h+='<div style="font-size:12px;margin-top:6px"><b>ماكينات ناقصة:</b><br>'+missM.slice(0,20).map(esc).join('<br>')+(missM.length>20?'<br>… و'+(missM.length-20)+' كمان':'')+'</div>';
+  h+='<div class="modal-actions" style="margin-top:10px">'+(missC.length?'<button class="btn btn-green" style="flex:2" onclick="closeModal();importBaseClients()">📥 استيراد الناقصين ('+missC.length+')</button>':'')+'<button class="btn btn-outline" style="flex:1" onclick="closeModal()">إغلاق</button></div></div>';
+  document.getElementById('modal-title').textContent='🔍 فحص العملاء الأساسيين';
+  document.getElementById('modal-body').innerHTML=h;openModal();
+}
 function importBaseClients(){
   if(DB.clients.length > 0){
     showToast('⚠️ الداتا مستوردة مسبقاً — سيُضاف فقط الجديد', '#ca8a04');
@@ -29129,7 +29295,7 @@ function _renderClientsHeader(el){
     '<button style="'+_bs+';background:#15803d" onclick="openAddClientModal()">+ عميل</button>'+
     '<button style="'+_bs+';background:#4338ca" onclick="openAddCompanyModal()">🏢 شركة</button>'+
     '<button style="'+_bs+';background:#ea580c" onclick="openMergeClientsModal()">🔀 دمج</button>'+
-    (CLIENTS_BASE_DATA.customers.length?'<button style="'+_bs+';background:#2563eb" onclick="importBaseClients()">📥 استيراد</button>':'')+
+    (CLIENTS_BASE_DATA.customers.length?'<button style="'+_bs+';background:#2563eb" onclick="baseClientsAudit()">🔍 فحص الأساسيين</button>':'')+
     '</div>'+
     '<div style="display:flex;gap:4px;margin-bottom:8px" id="clients-status-filters">'+
     _chip('all','👥',allC.length,'الكل','#334155','#e2e8f0')+
