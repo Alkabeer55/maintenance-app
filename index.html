@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v376</title>
+<title>ابو حوده الحلو الجميل v377</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -53,7 +53,7 @@ async function __netProbe(force){
   }catch(e3){}
   return ok;
 }
-/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="v376 — ١٨ جمادى الآخرة ١٤٤٨ هـ";
+/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="v377 — ١٨ جمادى الآخرة ١٤٤٨ هـ";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -193,6 +193,7 @@ async function __netProbe(force){
         الهامش = بعد الخصم (_anSaleF) وبالفصل قطع/خدمات، وأي بند من غير سعر تكلفة بيتحذّر منه. نصيب الشريك في دورة التوزيع = _pcPartnerShare بس (رد رأس المال + الدخول في نص الفترة)، ممنوع Math.round(profit*pct/100) مباشرة.
 ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v377: [🔒 قفل السيرفر لدور المطبعة: التطبيق بيمتنع عن أي رفع على business_state (blobs/إعدادات/أرشيف/عداد/اسكراب/شواهد حذف) لدور operator_print عشان سياسة RLS الجديدة (print_lockdown_v377.sql) ما تعملش خطأ 42501 وتسجيل خروج إجباري. القراءة بترجع فاضية من السيرفر نفسه. ⚠️ لازم يفضل: أي دالة رفع جديدة على business_state تبدأ بـ __bsWriteBlocked(). مش مغطّى: الأدوار القديمة (مهندس/مخازن/خدمة عملاء) لسه تقدر تقرا/تكتب كل business_state — محتاج قرار.]
 v376: [قرارات المالك لموظف المطبعة: اسم العميل ورقمه مخفيين افتراضيًا (يشوف كود الشغلانة والسعر بس، التكلفة والربح مقفولين)، الحذف للمالك بس (افتراضي دور المطبعة من غير حذف)، والمالك يفتح/يقفل أي حاجة من شاشة الصلاحيات (دور أو موظف أو حقل). ⚠️ مطلوب في شاشة أمر الشغل لما تتبني: حالة الدفع لكل أمر (مدفوع/آجل/جزء) والمبلغ المحصّل يتسجل في حساب الموظف.]
 v375: [🖨️ وحدة المطبعة — الصلاحيات (وثيقة التصميم §5): (١) دور جديد operator_print «مسؤول مطبعة» في ٤ أماكن أسماء الأدوار (فيه اختبار آلي بيعدّها) • (٢) ٩ أقسام صلاحيات (jobs/quotes/counters/materials/waste/machines/pricing/costs/reports _print) بنفس الإجراءات الأربعة، بتظهر تلقائيًا في شاشة صلاحيات المالك (دور + موظف) تحت عنوان «المطبعة»، وزرار «للافتراضي» لدور المطبعة بيرجّع الافتراضي الموصى بيه مش «كله مقفول» (الأدوار القديمة زي ما هي) • (٣) حقول المطبعة (أوامر الشغل ٩، ماكينات ٤، مخزن ٣) والتكلفة/الربح/سعر الشراء/تكلفة الصفحة/الإهلاك مقفولة افتراضيًا — __defaultHiddenFields مصدر واحد (كان متكرر في مكانين) • (٤) وضع «مطبعة فقط» (__isPrintOnly): الشاشات المسموحة الرئيسية/المزيد/حسابي/المطبعة بس، الشريط السفلي، الرئيسية (كروت المطبعة بس، الباقي مخفي بكلاس body.print-only)، المزيد، القايمة الجانبية بالديسكتوب • (٥) هب مطبعة (screen-print) «قيد التجهيز» — قسم المطبعة يظهر بصلاحية «عرض» (§5.8)، وفشل/تحميل الصلاحيات = منع • 🛡️ إصلاحات ثغرات قديمة اتلاقت في الفحص: البحث الشامل بقى بيتفلتر بصلاحية «عرض» لكل مصدر (كان بيسرّب فواتير/ديون/عملاء/تحركات/مهام لأي موظف) • شاشتا clients (دفتر العملاء) وscrap (الاسكراب) كانوا مفتوحين لأي موظف — بقوا مربوطين بـ clients_ledger وproducts • زرار «رجوع» كان بيفتح الشاشة السابقة من غير __canOpenScreen • دوال openSaleModal/openMovementModal/openTaskModal/openExpenseModal (اختصارات Alt+N/M/T/E وزراير الرئيسية) كانت بتفتح من غير فحص — دلوقتي «جديد» يحتاج إضافة وفتح سجل موجود يحتاج عرض • القايمة الجانبية بالديسكتوب كانت بتعرض ٤ عناصر لكل الموظفين • BUILD_STAMP الحرفي أول الملف والـ<title> كانوا واقفين على نسخة قديمة. ⚠️ لازم يفضلوا: أي شاشة/دالة مطبعة جديدة تتضاف في __PRINT_SCREEN_PERM وأي دالة كتابة في __PERM_MAP؛ وكل قسم مطبعة جديد يتضاف في __PRINT_PERM_TABLES بس. الاختبارات في tests/ (٧٧ اختبار). مش مغطّى: RLS على السيرفر (ملف SQL منفصل، لازم يتجرّب على Supabase) ومزامنة business_state للموظفين.]
 v374: [🛡️ فحص شامل للنسخة: (١) إصلاح: LS.set كان بيبلع خطأ امتلاء الذاكرة بصمت (٣٤ استدعاء للإعدادات) — دلوقتي بيظهر تنبيه واضح مرة كل ٣٠ ثانية بدل ما الإعداد يضيع من غير ما حد يعرف • الفحص الباقي (نحو ٧ سكريبتات، تشغيل موبايل/ديسكتوب، handlers، IDs مكررة، XSS) سليم — مفيش أي تغيير في بياناتك]
@@ -2452,6 +2453,9 @@ body.print-only #pc-side .ps-foot>div,body.print-only #pc-side .ps-foot>span{dis
       return {role_id:roleId, table_name:t.id, can_select:f.indexOf('s')!==-1, can_insert:f.indexOf('i')!==-1, can_update:f.indexOf('u')!==-1, can_delete:f.indexOf('d')!==-1};
     });
   }
+  // ⚠️ v377 — دور المطبعة ممنوع يكتب في business_state على السيرفر (سياسة RLS في print_lockdown_v377.sql بترفضه برسالة 42501 اللي كانت بتعمل تسجيل خروج إجباري).
+  // فالتطبيق نفسه بيمتنع عن الرفع للدور ده. القراءة مش محتاجة بوابة: RLS بيرجّع صفوف فاضية من غير خطأ.
+  function __bsWriteBlocked(){ var p=window.__currentProfile; return !!(p&&p.role_id==='operator_print'&&!window.__isOwner); }
   function __permReadyNow(){ var st=window.__permState; return st==='ready'||st==='offline'; }
   // قسم مطبعة ظاهر = المالك، أو «عرض» مفعّلة (§5.8: لما المالك يقفل «عرض» القسم يختفي من الشريط والرئيسية والبحث)
   function __printSectionVisible(id){
@@ -4580,7 +4584,7 @@ function __tombAdd(table,id){
   setTimeout(function(){ try{ __tombFlush(); }catch(e){} },30);
 }
 async function __tombFlush(){
-  if(__tombBusy) return;
+  if(__tombBusy||__bsWriteBlocked()) return; // v377
   var pend=__tombPending();
   if(!pend.length||typeof sb==='undefined'||!window.__currentProfile||(__navOffline())) return;
   __tombBusy=true;
@@ -4860,6 +4864,7 @@ async function __pullAllFromServer(){
     __bizBlobPushTimer = setTimeout(__pushBizBlobsToServer, 1200);
   }
   async function __pushBizBlobsToServer(){
+    if(__bsWriteBlocked()) return; // ⚠️ v377
     if(!window.__currentProfile || typeof sb === 'undefined') return;
     if(__navOffline()){
       __BIZ_BLOBS.forEach(function(b){ __queueForSync('__bizblob__', b.id, b.id); });
@@ -5008,6 +5013,7 @@ async function __pullAllFromServer(){
     __settingsPushTimer = setTimeout(__pushSettingsToServer, 1200);
   }
   async function __pushSettingsToServer(){
+    if(__bsWriteBlocked()) return; // ⚠️ v377
     if(!window.__currentProfile || typeof sb === 'undefined') return;
     if(__navOffline()){ __queueForSync('__settings__','settings','settings'); return; }
     try{
@@ -5023,6 +5029,7 @@ async function __pullAllFromServer(){
     __archivePushTimer = setTimeout(__pushArchiveToServer, 1200);
   }
   async function __pushArchiveToServer(){
+    if(__bsWriteBlocked()) return; // ⚠️ v377
     if(!window.__currentProfile || typeof sb === 'undefined') return;
     if(__navOffline()){ __queueForSync('__archive__','archive','archive'); return; }
     try{
@@ -5038,6 +5045,7 @@ async function __pullAllFromServer(){
     __movCounterPushTimer = setTimeout(__pushMovCounterToServer, 1200);
   }
   async function __pushMovCounterToServer(){
+    if(__bsWriteBlocked()) return; // ⚠️ v377
     if(!window.__currentProfile || typeof sb === 'undefined') return;
     if(__navOffline()){ __queueForSync('__mov_counter__','mov_counter','mov_counter'); return; }
     try{
@@ -5227,6 +5235,7 @@ function __holdBlobConflicts(id,rep){
 }
 // بترجّع true لو الرفع نجح، false لو استنفدنا المحاولات، وبترمي خطأ لو في مشكلة اتصال/صلاحيات (الاستدعاء بيحطها في الطابور)
 async function __pushBlobSafe(id){
+  if(__bsWriteBlocked()) return true; // ⚠️ v377
   if(window.__dbLoadFailed) throw new Error('الرفع متوقف: بيانات الجهاز المحلية تالفة (لازم تتسترجع من السيرفر الأول)'); // ⚠️ v311
   var cfg=__BLOB3[id]; var uid=window.__currentProfile.id;
   for(var attempt=0;attempt<4;attempt++){
@@ -5326,6 +5335,7 @@ async function __pushBlobSafe(id){
     __scrapPushTimer = setTimeout(__pushScrapToServer, 1200);
   }
   async function __pushScrapToServer(){
+    if(__bsWriteBlocked()) return; // ⚠️ v377
     if(!window.__currentProfile || typeof sb === 'undefined') return;
     if(__navOffline()){
       __queueForSync('__scrap__', 'scrap_machines', 'scrap_machines');
@@ -6044,7 +6054,7 @@ var APP_TITLE=APP_CONFIG.name;
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=376;
+var APP_VERSION=377;
 // ⚠️ v303 — BUILD_STAMP كان مش متعرّف خالص (شاشة الإعدادات كانت بتعرض "?") — اتعرّف دلوقتي وبيتزود مع كل تحديث
 var BUILD_STAMP='v'+APP_VERSION+' — ١٨ جمادى الآخرة ١٤٤٨ هـ'; // ⚠️ v331 — رقم النسخة بيتولّد من APP_VERSION (كان واقف على v323 لأن في تعريفين، والتاني بيكسب). ممنوع تكتب رقم نسخة يدوي هنا.
 // ⚠️ v295 — عنوان الصفحة كان رقم نسخته ثابت ومتنسي (فضل v294 مع إن النسخة اتغيّرت). دلوقتي بياخد الرقم من APP_VERSION دايمًا.
