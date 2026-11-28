@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v373</title>
+<title>ابو حوده الحلو الجميل v376</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -53,7 +53,7 @@ async function __netProbe(force){
   }catch(e3){}
   return ok;
 }
-/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="v373 — ١٧ جمادى الآخرة ١٤٤٨ هـ";
+/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="v376 — ١٨ جمادى الآخرة ١٤٤٨ هـ";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -193,6 +193,9 @@ async function __netProbe(force){
         الهامش = بعد الخصم (_anSaleF) وبالفصل قطع/خدمات، وأي بند من غير سعر تكلفة بيتحذّر منه. نصيب الشريك في دورة التوزيع = _pcPartnerShare بس (رد رأس المال + الدخول في نص الفترة)، ممنوع Math.round(profit*pct/100) مباشرة.
 ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v376: [قرارات المالك لموظف المطبعة: اسم العميل ورقمه مخفيين افتراضيًا (يشوف كود الشغلانة والسعر بس، التكلفة والربح مقفولين)، الحذف للمالك بس (افتراضي دور المطبعة من غير حذف)، والمالك يفتح/يقفل أي حاجة من شاشة الصلاحيات (دور أو موظف أو حقل). ⚠️ مطلوب في شاشة أمر الشغل لما تتبني: حالة الدفع لكل أمر (مدفوع/آجل/جزء) والمبلغ المحصّل يتسجل في حساب الموظف.]
+v375: [🖨️ وحدة المطبعة — الصلاحيات (وثيقة التصميم §5): (١) دور جديد operator_print «مسؤول مطبعة» في ٤ أماكن أسماء الأدوار (فيه اختبار آلي بيعدّها) • (٢) ٩ أقسام صلاحيات (jobs/quotes/counters/materials/waste/machines/pricing/costs/reports _print) بنفس الإجراءات الأربعة، بتظهر تلقائيًا في شاشة صلاحيات المالك (دور + موظف) تحت عنوان «المطبعة»، وزرار «للافتراضي» لدور المطبعة بيرجّع الافتراضي الموصى بيه مش «كله مقفول» (الأدوار القديمة زي ما هي) • (٣) حقول المطبعة (أوامر الشغل ٩، ماكينات ٤، مخزن ٣) والتكلفة/الربح/سعر الشراء/تكلفة الصفحة/الإهلاك مقفولة افتراضيًا — __defaultHiddenFields مصدر واحد (كان متكرر في مكانين) • (٤) وضع «مطبعة فقط» (__isPrintOnly): الشاشات المسموحة الرئيسية/المزيد/حسابي/المطبعة بس، الشريط السفلي، الرئيسية (كروت المطبعة بس، الباقي مخفي بكلاس body.print-only)، المزيد، القايمة الجانبية بالديسكتوب • (٥) هب مطبعة (screen-print) «قيد التجهيز» — قسم المطبعة يظهر بصلاحية «عرض» (§5.8)، وفشل/تحميل الصلاحيات = منع • 🛡️ إصلاحات ثغرات قديمة اتلاقت في الفحص: البحث الشامل بقى بيتفلتر بصلاحية «عرض» لكل مصدر (كان بيسرّب فواتير/ديون/عملاء/تحركات/مهام لأي موظف) • شاشتا clients (دفتر العملاء) وscrap (الاسكراب) كانوا مفتوحين لأي موظف — بقوا مربوطين بـ clients_ledger وproducts • زرار «رجوع» كان بيفتح الشاشة السابقة من غير __canOpenScreen • دوال openSaleModal/openMovementModal/openTaskModal/openExpenseModal (اختصارات Alt+N/M/T/E وزراير الرئيسية) كانت بتفتح من غير فحص — دلوقتي «جديد» يحتاج إضافة وفتح سجل موجود يحتاج عرض • القايمة الجانبية بالديسكتوب كانت بتعرض ٤ عناصر لكل الموظفين • BUILD_STAMP الحرفي أول الملف والـ<title> كانوا واقفين على نسخة قديمة. ⚠️ لازم يفضلوا: أي شاشة/دالة مطبعة جديدة تتضاف في __PRINT_SCREEN_PERM وأي دالة كتابة في __PERM_MAP؛ وكل قسم مطبعة جديد يتضاف في __PRINT_PERM_TABLES بس. الاختبارات في tests/ (٧٧ اختبار). مش مغطّى: RLS على السيرفر (ملف SQL منفصل، لازم يتجرّب على Supabase) ومزامنة business_state للموظفين.]
+v374: [🛡️ فحص شامل للنسخة: (١) إصلاح: LS.set كان بيبلع خطأ امتلاء الذاكرة بصمت (٣٤ استدعاء للإعدادات) — دلوقتي بيظهر تنبيه واضح مرة كل ٣٠ ثانية بدل ما الإعداد يضيع من غير ما حد يعرف • الفحص الباقي (نحو ٧ سكريبتات، تشغيل موبايل/ديسكتوب، handlers، IDs مكررة، XSS) سليم — مفيش أي تغيير في بياناتك]
 v373: [🔍 بند ١٦ (الخطوة الأولى): زرار «🔍 فحص الأساسيين» في شاشة العملاء (بدل «📥 استيراد») بيفحص العملاء والماكينات المدمجين في الملف مقابل عملائك الحقيقيين ويقولك لو فيه ناقص (وبيعرض زرار «📥 استيراد الناقصين»)، وقبل ما نشيل بيانات العملاء من الملف في النسخة الجاية • مفيش أي تغيير في بياناتك]
 v372: [🧩 الأطقم (بند ١٢): الطقم = حزمة فيها صنفين أو أكتر. (١) البيع: بيتفك لسطور في الفاتورة (كل مكوّن بسعره) من الحزم الموجودة • (٢) الشراء: في شاشة المشتريات «🧩 أطقم» — اختار الطقم + العدد + سعر الطقم فيدخل المخزن مكونات منفصلة وسعر الطقم بيتوزّع عليهم بنسبة تكلفة كل واحد • (٣) المزيد بالمخزون ← «🧩 الأطقم»: اربط صنف الطقم في المخزن، وبعدين «🔧 فكّ طقم» (الطقم يتحوّل لمكوناته بتكلفته موزّعة) أو «🧩 تجميع طقم» (المكونات تتحوّل لطقم بتكلفتها)، بمعاينة وتأكيد وتسجيل في «السجل» (فلتر «طقم») وزرار «↩️ عكس العملية» • مفيش أي تغيير في معادلات الربح أو الخزنة]
 v371: [↩️ زرار استرجاع تعديل المشترى: كارت «تعديل مشترى» في السجل بيفتح تفاصيل التعديل (اللي اتغيّر + الأثر على كل صنف) وفيه «↩️ استرجاع النسخة القديمة» مع شرح اللي هيحصل — بيفتح المشترى بقيمه القديمة وتدوس حفظ فيظهر تأكيد بملخص الأثر على المخزن، والاسترجاع نفسه بيتسجّل • 📊 سجل نسبة المستثمر: سبب ظهور نسبة قديمة غلط (اتغيّرت قبل v365 من غير سجل فاتسجّلت النسبة القديمة كأصل) — أضفت 🗑️ حذف سطر و«🧹 مسح السجل: النسبة الحالية ثابتة على كل الشهور» (بتأكيد ونسخة احتياطية)، والحفظ بقى بينضّف السجل (سطر نسبته زي اللي قبله بيتشال) • 🧾 صفحة الفاتورة: الشريط السفلي مضغوط (سطر واحد للإجماليات وأزرار أصغر) وبيتقلّص لزرار الحفظ بس لما الكيبورد يفتح، وبحث القطع بيطلع لفوق عشان النتايج تاخد المساحة • 🧾 كارت المبيعات أقصر: التاريخ جنب الاسم والشارات وأزرار أصغر • مفيش أي تغيير في معادلات الربح أو الخزنة]
@@ -2292,6 +2295,11 @@ input:checked+.slider:before{transform:translateX(-20px)}
 }
 </style>
 <script>(function(){try{var st=document.createElement('style');st.textContent='html.dark{filter:invert(1) hue-rotate(180deg);background:#fff}html.dark img,html.dark video,html.dark canvas,html.dark iframe{filter:invert(1) hue-rotate(180deg)}';document.head.appendChild(st);window.__applyTheme=function(){var m=localStorage.getItem('ahTheme')||'light';var d=(m==='dark')||(m==='auto'&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',!!d);};window.__applyTheme();}catch(e){}})();</script>
+<style id="print-only-css">
+/* ⚠️ v375 — وضع «مطبعة فقط»: الرئيسية تعرض كروت المطبعة بس. بنخفي بـ CSS على body.print-only عشان أي دالة رندر تانية تغيّر display مترجّعش حاجة ظاهرة */
+body.print-only #home-quick-actions,body.print-only #mov-summary-card,body.print-only #home-fin-wrap,body.print-only #home-employee-personal,body.print-only #home-nostock-card{display:none!important}
+body.print-only #pc-side .ps-foot>div,body.print-only #pc-side .ps-foot>span{display:none!important} /* تلميحات اختصارات الفاتورة/التحرك/المهمة/المصروف */
+</style>
 </head>
 <body>
 
@@ -2393,7 +2401,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
     var el = document.getElementById('home-user-name');
     if(!el) return;
     if(window.__currentProfile && window.__currentProfile.full_name){
-      var roleNames = {owner:'المالك', warehouse:'مسؤول مخازن', engineer:'مهندس', customer_service:'خدمة عملاء'};
+      var roleNames = {owner:'المالك', warehouse:'مسؤول مخازن', engineer:'مهندس', customer_service:'خدمة عملاء', operator_print:'مسؤول مطبعة'};
       var roleLabel = roleNames[window.__currentProfile.role_id] || '';
       el.textContent = '👤 '+window.__currentProfile.full_name+(roleLabel?' — '+roleLabel:'');
     } else {
@@ -2404,8 +2412,73 @@ input:checked+.slider:before{transform:translateX(-20px)}
   var __PERM_ROLES = [
     {id:'warehouse', name:'مسؤول مخازن'},
     {id:'engineer', name:'مهندس'},
-    {id:'customer_service', name:'خدمة عملاء'}
+    {id:'customer_service', name:'خدمة عملاء'},
+    {id:'operator_print', name:'🖨️ مسؤول مطبعة'} // ⚠️ v375 — دور المطبعة (وثيقة التصميم §5.2)
   ];
+
+  // ===== ⚠️ v375 — وحدة المطبعة: الصلاحيات (وثيقة التصميم §5) =====
+  // الأقسام التسعة بنفس نمط الأقسام الحالية (عرض/إضافة/تعديل/حذف). أي قسم جديد للمطبعة يتضاف هنا بس.
+  var __PRINT_PERM_TABLES = [
+    {id:'jobs_print',      name:'أوامر الشغل (استلام، طباعة، تسليم)', icon:'📥'},
+    {id:'quotes_print',    name:'عروض الأسعار', icon:'💬'},
+    {id:'counters_print',  name:'الإغلاق اليومي وعدّادات الماكينات', icon:'🔢'},
+    {id:'materials_print', name:'مخزن الحبر والورق والمستهلكات', icon:'🧴'},
+    {id:'waste_print',     name:'الهدر والإعادة والانحشار', icon:'♻️'},
+    {id:'machines_print',  name:'بيانات الماكينات وإعداداتها', icon:'🖨️'},
+    {id:'pricing_print',   name:'قوائم الأسعار والشرائح والخصومات', icon:'🏷️'},
+    {id:'costs_print',     name:'التكلفة الفعلية والربح لكل شغلانة', icon:'💰'},
+    {id:'reports_print',   name:'تقارير المطبعة المالية والأرباح', icon:'📈'}
+  ];
+  // الصلاحيات الافتراضية لدور «مسؤول مطبعة» (§5.3). s=عرض i=إضافة u=تعديل d=حذف. اللي مش مذكور = مقفول.
+  var __PRINT_ROLE_DEFAULTS = {
+    operator_print: {jobs_print:'siu', quotes_print:'si', counters_print:'si', materials_print:'s', waste_print:'si', machines_print:'s'}
+  };
+  // حقول مخفية افتراضيًا (§5.4): أي رقم يكشف التكلفة أو الربح أو سعر الشراء مقفول لحد ما المالك يفتحه صراحة
+  var __PRINT_DEFAULT_HIDDEN = {
+    jobs_print:['cost','profit','customer_name','customer_phone'], // v376 — موظف المطبعة يشوف كود الشغلانة والسعر بس، من غير اسم/رقم العميل ولا ربح (قرار المالك)
+    machines_print:['page_cost','depreciation'],
+    materials_print:['buy_price']
+  };
+  function __defaultHiddenFields(table){
+    if(__PRINT_DEFAULT_HIDDEN[table]) return __PRINT_DEFAULT_HIDDEN[table].slice();
+    return table==='products'?['buy_price']:[]; // السلوك الافتراضي القديم (نفس القديم بالظبط)
+  }
+  function __printTableIds(){ return __PRINT_PERM_TABLES.map(function(t){return t.id;}); }
+  function __isPrintTable(id){ return __printTableIds().indexOf(id)!==-1; }
+  function __roleDefaultRows(roleId){
+    var d=(__PRINT_ROLE_DEFAULTS[roleId])||{};
+    return __PERM_TABLES.map(function(t){
+      var f=d[t.id]||'';
+      return {role_id:roleId, table_name:t.id, can_select:f.indexOf('s')!==-1, can_insert:f.indexOf('i')!==-1, can_update:f.indexOf('u')!==-1, can_delete:f.indexOf('d')!==-1};
+    });
+  }
+  function __permReadyNow(){ var st=window.__permState; return st==='ready'||st==='offline'; }
+  // قسم مطبعة ظاهر = المالك، أو «عرض» مفعّلة (§5.8: لما المالك يقفل «عرض» القسم يختفي من الشريط والرئيسية والبحث)
+  function __printSectionVisible(id){
+    if(window.__isOwner) return true;
+    return __hasPerm(id,'can_select');
+  }
+  function __printVisibleSections(){ return __PRINT_PERM_TABLES.filter(function(t){return __printSectionVisible(t.id);}); }
+  // عنده أي إجراء (حتى لو بدون عرض) في أي قسم مطبعة؟ (بيُستخدم للكشف عن «مطبعة فقط» مش للعرض)
+  function __hasAnyPrintAction(){
+    if(window.__isOwner||!__permReadyNow()) return false;
+    return __printTableIds().some(function(id){return __hasPerm(id,'can_select')||__hasPerm(id,'can_insert')||__hasPerm(id,'can_update')||__hasPerm(id,'can_delete');});
+  }
+  function __hasAnyCoreAction(){
+    if(window.__isOwner) return true;
+    if(!__permReadyNow()) return false;
+    return __CORE_PERM_TABLES.some(function(t){return __hasPerm(t.id,'can_select')||__hasPerm(t.id,'can_insert')||__hasPerm(t.id,'can_update')||__hasPerm(t.id,'can_delete');});
+  }
+  // وضع «مطبعة فقط» (§5.5): صلاحياته كلها محصورة في أقسام *_print (والمالك عمره ما يدخل الوضع ده)
+  function __isPrintOnly(){
+    if(window.__isOwner) return false;
+    return __hasAnyPrintAction() && !__hasAnyCoreAction();
+  }
+  // الشاشات العامة المسموحة في وضع «مطبعة فقط» (الرئيسية + حسابي + المزيد + هب المطبعة). الإعدادات مقفولة.
+  var __PRINT_ONLY_GENERAL = {home:true, more:true, 'my-account':true, print:true};
+  // شاشات المطبعة → القسم المسؤول (الشاشات الفعلية هتتضاف في المراحل الجاية وهتلاقي صلاحياتها جاهزة)
+  var __PRINT_SCREEN_PERM = {'print-jobs':'jobs_print','print-quotes':'quotes_print','print-counters':'counters_print','print-materials':'materials_print','print-waste':'waste_print','print-machines':'machines_print','print-pricing':'pricing_print','print-costs':'costs_print','print-reports':'reports_print'};
+
 
   // ===== إنفاذ فعلي للصلاحيات (كانت شكلية بس قبل كده وبتتحفظ من غير ما حد
   // يستخدمها). بيتحمّل ملف صلاحيات دور المستخدم الحالي مرة واحدة عند الدخول
@@ -2654,7 +2727,8 @@ input:checked+.slider:before{transform:translateX(-20px)}
     products:'المخازن (قطع غيار)', movements:'الأعطال/الصيانة', sales:'الفواتير',
     expenses:'المصاريف', part_withdrawals:'سحب قطع الغيار', debts:'الديون',
     purchases:'المشتريات', tasks:'المهام', accounting:'الحسابات',
-    auth:'الدخول والخروج', permissions:'الصلاحيات', employees:'الموظفين (حساب/وظيفة)'
+    auth:'الدخول والخروج', permissions:'الصلاحيات', employees:'الموظفين (حساب/وظيفة)',
+    jobs_print:'المطبعة — أوامر الشغل', quotes_print:'المطبعة — عروض الأسعار', counters_print:'المطبعة — العدّادات والإغلاق', materials_print:'المطبعة — المخزن', waste_print:'المطبعة — الهدر', machines_print:'المطبعة — الماكينات', pricing_print:'المطبعة — الأسعار', costs_print:'المطبعة — التكلفة والربح', reports_print:'المطبعة — التقارير'
   };
   var __ACTIVITY_ACTION_NAMES = {insert:'➕ إضافة', update:'✏️ تعديل', delete:'🗑️ حذف', login:'🔓 دخول', logout:'🔒 خروج'};
   var __ACTIVITY_LOG_TABLE_MISSING = false; // لو الجدول لسه مش متعمول على Supabase، منوقفش نحاول تاني كل شوية
@@ -2713,7 +2787,24 @@ input:checked+.slider:before{transform:translateX(-20px)}
 
   // ⚠️ v121 — إخفاء زرار "تقارير" (والشاشات التانية اللي معندوش عرضها) من الشريط السفلي
   // نفسه، مش بس منعها لو ضغط عليها — عشان الموظف مايشوفش خيارات ملوش صلاحية فيها أصلاً
+  window.__navPrintOnlyRendered = false;
+  // ⚠️ v375 — وضع «مطبعة فقط»: كلاس على body (للإخفاء بـ CSS ما بيتغيّرش بتغيّر أي دالة رندر) + إعادة بناء الشريط السفلي لما الوضع يتبدّل
+  function __syncPrintOnlyUi(){
+    var po=__isPrintOnly();
+    document.body.classList.toggle('print-only',po);
+    if(po!==window.__navPrintOnlyRendered){
+      window.__navPrintOnlyRendered=po;
+      if(typeof renderNavBar==='function'){
+        renderNavBar();
+        var cs=(typeof currentScreen!=='undefined')?currentScreen:'home';
+        document.querySelectorAll('.nav-btn').forEach(function(b){b.classList.toggle('active',b.dataset.screen===cs);});
+        try{ if(typeof updateAllBadges==='function') updateAllBadges(); }catch(_eb){}
+      }
+    }
+    try{ if(typeof renderHomePrintCards==='function') renderHomePrintCards(); }catch(_ep){}
+  }
   function __applyPermVisibility(){
+    try{ __syncPrintOnlyUi(); }catch(_eps){ console.warn('print-only sync',_eps); }
     document.querySelectorAll('.nav-btn[data-screen]').forEach(function(b){
       var s=b.dataset.screen;
       b.style.display=__canOpenScreen(s)?'':'none';
@@ -2764,7 +2855,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
       __openJoinPanel();
     }catch(e){ showToast('❌ خطأ: '+e.message, '#dc2626'); }
   }
-  var __PERM_TABLES = [
+  var __CORE_PERM_TABLES = [
     {id:'products', name:'المخازن (قطع غيار)'},
     {id:'movements', name:'الأعطال / الصيانة'},
     {id:'sales', name:'الفواتير'},
@@ -2777,6 +2868,8 @@ input:checked+.slider:before{transform:translateX(-20px)}
     {id:'accounting', name:'الحسابات (رواتب موظفين، رأس مال، مستثمرين)'},
     {id:'clients_ledger', name:'📒 دفتر العملاء (قائمة كل عميل وتفاصيله)'} // v160 — 2.1
   ];
+  // ⚠️ v375 — أقسام المطبعة بتتضاف تحت الأقسام الأساسية، وكل واجهات الصلاحيات (دور/موظف/إرجاع للافتراضي) بتقرا __PERM_TABLES فبتشملها تلقائيًا
+  var __PERM_TABLES = __CORE_PERM_TABLES.concat(__PRINT_PERM_TABLES.map(function(t){return {id:t.id, name:t.icon+' '+t.name, group:'print'};}));
   var __PERM_ACTIONS = [
     {id:'can_select', name:'عرض 👁️'},
     {id:'can_insert', name:'إضافة ➕'},
@@ -2848,8 +2941,8 @@ input:checked+.slider:before{transform:translateX(-20px)}
   }
 
   async function __resetRoleToDefault(roleId){
-    confirmAction('هترجع كل صلاحيات دور "'+(__ROLE_NAMES[roleId]||roleId)+'" للافتراضي (كل حاجة ممنوعة، وتديها بعدين براحتك). هيأثر على كل الموظفين في الدور ده اللي معندهمش تخصيص فردي. تكمل؟',async function(){
-      var rows=__PERM_TABLES.map(function(t){return {role_id:roleId, table_name:t.id, can_select:false, can_insert:false, can_update:false, can_delete:false};});
+    confirmAction('هترجع كل صلاحيات دور "'+(__ROLE_NAMES[roleId]||roleId)+'" للافتراضي ('+(__PRINT_ROLE_DEFAULTS[roleId]?'الصلاحيات الافتراضية الموصى بيها لدور المطبعة، وأي قسم تاني ممنوع':'كل حاجة ممنوعة، وتديها بعدين براحتك')+'). هيأثر على كل الموظفين في الدور ده اللي معندهمش تخصيص فردي. تكمل؟',async function(){
+      var rows=__roleDefaultRows(roleId); // ⚠️ v375 — دور المطبعة بيرجع لصلاحياته الافتراضية (§5.3) مش «كله مقفول»
       var res=await sb.from('role_permissions').upsert(rows, {onConflict:'role_id,table_name'});
       if(res.error){ showToast('❌ فشل: '+res.error.message,'#dc2626'); return; }
       __logActivity('update', 'permissions', roleId, {event:'إرجاع صلاحيات دور للافتراضي', role:roleId});
@@ -2870,6 +2963,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
           return '<button onclick="__resetRoleToDefault(\''+role.id+'\')" style="background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:6px 10px;font-size:11px;font-weight:700;cursor:pointer;color:#dc2626">↩️ '+role.name+' للافتراضي</button>';
         }).join('')+'</div>';
       __PERM_TABLES.forEach(function(t){
+        if(t.id==='jobs_print') html += '<div style="margin:22px 0 12px;padding:10px 12px;background:#ecfeff;border:1.5px solid #67e8f9;border-radius:10px;font-weight:900;font-size:13px;color:#0e7490">🖨️ صلاحيات المطبعة (وحدة المطبعة)</div>';
         html += '<div style="margin-bottom:16px"><div style="font-weight:800;font-size:14px;margin-bottom:8px;color:#0f172a">'+t.name+'</div>';
         html += '<table style="width:100%;border-collapse:collapse;font-size:12px">';
         html += '<tr style="color:#64748b"><td></td>' + __PERM_ACTIONS.map(function(a){return '<td style="text-align:center;padding:4px">'+a.name+'</td>';}).join('') + '</tr>';
@@ -2896,7 +2990,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
   // ===== v122 — صلاحيات مخصصة لكل موظف شخصيًا (تغلب على صلاحيات دوره العامة) =====
   // ===== v123 — + تغيير وظيفة الموظف + حظر/تفعيل دخوله من نفس المكان =====
   var _permSelectedEmp=null;
-  var __ROLE_NAMES = {owner:'المالك', warehouse:'مسؤول مخازن', engineer:'مهندس', customer_service:'خدمة عملاء'};
+  var __ROLE_NAMES = {owner:'المالك', warehouse:'مسؤول مخازن', engineer:'مهندس', customer_service:'خدمة عملاء', operator_print:'مسؤول مطبعة'};
   // ===== v273 — فلاتر قائمة الموظفين: الكل / نشط / موقوف / مؤرشف + بحث بالاسم (الموظف المختار مابيختفيش من القايمة) =====
   var _permEmpFilter='all',_permEmpQ='';
   function __empStatus(e){return e.archived_at?'archived':(e.is_active===false?'blocked':'active');}
@@ -3015,12 +3109,36 @@ input:checked+.slider:before{transform:translateX(-20px)}
       {key:'address',label:'العنوان'},
       {key:'machines',label:'مكن العميل (الموديل/السيريال)'},
       {key:'debt',label:'رصيد الدين على العميل'}
+    ],
+    // ⚠️ v375 — حقول المطبعة (§5.4). أي رقم يكشف التكلفة/الربح/سعر الشراء مقفول افتراضيًا (__PRINT_DEFAULT_HIDDEN)
+    jobs_print: [
+      {key:'customer_name',label:'اسم العميل'},
+      {key:'customer_phone',label:'رقم العميل'},
+      {key:'price',label:'السعر'},
+      {key:'paid',label:'المدفوع'},
+      {key:'discount',label:'الخصم'},
+      {key:'cost',label:'التكلفة'},
+      {key:'profit',label:'الربح'},
+      {key:'internal_notes',label:'الملاحظات الداخلية'},
+      {key:'customer_file',label:'ملف العميل'}
+    ],
+    machines_print: [
+      {key:'counter',label:'العدّاد'},
+      {key:'ink_pct',label:'نسبة الحبر'},
+      {key:'page_cost',label:'تكلفة الصفحة'},
+      {key:'depreciation',label:'إهلاك الماكينة'}
+    ],
+    materials_print: [
+      {key:'qty_available',label:'الكمية المتاحة'},
+      {key:'buy_price',label:'سعر الشراء'},
+      {key:'supplier',label:'المورد'}
     ]
   };
   var __FIELD_PERMS_TABLE_NAMES = {
     products:'📦 المخزون', sales:'🧾 الفواتير', purchases:'🛒 المشتريات',
     movements:'🔧 التحركات/الأعطال', expenses:'💵 المصاريف', debts:'💳 الديون', tasks:'📋 المهام',
-    stocktakes:'📊 الجرد', clients:'📇 دفتر العملاء'
+    stocktakes:'📊 الجرد', clients:'📇 دفتر العملاء',
+    jobs_print:'🖨️ المطبعة — أوامر الشغل', machines_print:'🖨️ المطبعة — الماكينات', materials_print:'🖨️ المطبعة — المخزن'
   };
   function __getMyHiddenFields(table){
     if(window.__isOwner)return [];
@@ -3028,7 +3146,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
     var pid=window.__currentProfile&&window.__currentProfile.id;
     var emp=(DB.accounts&&DB.accounts.employees||[]).find(function(e){return e.linked_profile_id===pid;});
     if(emp&&emp.hidden_fields&&emp.hidden_fields[table]!==undefined)return emp.hidden_fields[table];
-    return table==='products'?['buy_price']:[]; // السلوك الافتراضي القديم لو محدش ظبط حاجة صراحة
+    return __defaultHiddenFields(table); // ⚠️ v375 — مصدر واحد للافتراضي (كان متكرر في مكانين)
   }
   function __isFieldHidden(table,field){ return __getMyHiddenFields(table).indexOf(field)!==-1; }
 
@@ -3117,7 +3235,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
       Object.keys(__FIELD_PERMS_CONFIG).forEach(function(table){
         var fields=__FIELD_PERMS_CONFIG[table];
         var hf=linkedRec.hidden_fields&&linkedRec.hidden_fields[table];
-        var defaultHidden=table==='products'?['buy_price']:[];
+        var defaultHidden=__defaultHiddenFields(table);
         var hiddenList=hf!==undefined?hf:defaultHidden;
         var hiddenCount=hiddenList.length;
         var accKey='fp_'+table+'_'+emp.id;
@@ -3606,6 +3724,7 @@ input:checked+.slider:before{transform:translateX(-20px)}
       }
       var effMap=hasCustom?userMap:roleMap;
       __PERM_TABLES.forEach(function(t){
+        if(t.id==='jobs_print') html += '<div style="margin:22px 0 12px;padding:10px 12px;background:#ecfeff;border:1.5px solid #67e8f9;border-radius:10px;font-weight:900;font-size:13px;color:#0e7490">🖨️ صلاحيات المطبعة (وحدة المطبعة)</div>';
         html += '<div style="margin-bottom:14px"><div style="font-weight:800;font-size:13px;margin-bottom:6px;color:#0f172a">'+t.name+'</div>';
         html += '<div style="display:flex;gap:10px;flex-wrap:wrap">';
         var existing = effMap[t.id] || {can_select:false,can_insert:false,can_update:false,can_delete:false};
@@ -5591,11 +5710,12 @@ async function __pushBlobSafe(id){
         <div id="home-user-name" style="font-size:13px;font-weight:700;opacity:.85;margin-bottom:2px"></div>
         <div id="today-date" style="font-size:12px;opacity:.6"></div>
       </div>
+      <div id="home-print-cards"></div>
       <div id="home-verse"></div>
       <div id="home-prayer-times"></div>
       <div id="home-nostock-card"></div>
       <div id="home-attendance-top"></div>
-      <div style="display:flex;gap:8px;margin-bottom:14px">
+      <div id="home-quick-actions" style="display:flex;gap:8px;margin-bottom:14px">
         <button class="quick-action-btn" style="background:#dbeafe;color:#1e40af" onclick="openSaleModal()"><span style="font-size:22px">🧾</span><span style="font-size:10px;font-weight:800">فاتورة</span></button>
         <button class="quick-action-btn" style="background:#fdf2f8;color:#86198f" onclick="openMovementModal()"><span style="font-size:22px">🔧</span><span style="font-size:10px;font-weight:800">تحرك</span></button>
         <button class="quick-action-btn" style="background:#dcfce7;color:#166534" onclick="openTaskModal()"><span style="font-size:22px">📋</span><span style="font-size:10px;font-weight:800">مهمة</span></button>
@@ -5618,7 +5738,7 @@ async function __pushBlobSafe(id){
         </div>
         <div id="today-sched-list" style="margin-top:8px"></div>
       </div>
-      <div style="position:relative">
+      <div id="home-fin-wrap" style="position:relative">
       <div id="home-fin-summary" style="filter:blur(7px);transition:filter .2s">
       <div class="stats-row">
         <div class="stat-card" style="background:#2563eb;cursor:pointer" onclick="navigate('reports')">
@@ -5668,6 +5788,8 @@ async function __pushBlobSafe(id){
         <div id="inv-stocktake-body"></div>
       </div>
     </div>
+
+    <div id="screen-print" class="screen"><div id="print-body"></div></div>
 
     <div id="screen-scrap" class="screen"><div id="scrap-body"></div></div>
 
@@ -5922,9 +6044,9 @@ var APP_TITLE=APP_CONFIG.name;
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=373;
+var APP_VERSION=376;
 // ⚠️ v303 — BUILD_STAMP كان مش متعرّف خالص (شاشة الإعدادات كانت بتعرض "?") — اتعرّف دلوقتي وبيتزود مع كل تحديث
-var BUILD_STAMP='v'+APP_VERSION+' — ١٧ جمادى الآخرة ١٤٤٨ هـ'; // ⚠️ v331 — رقم النسخة بيتولّد من APP_VERSION (كان واقف على v323 لأن في تعريفين، والتاني بيكسب). ممنوع تكتب رقم نسخة يدوي هنا.
+var BUILD_STAMP='v'+APP_VERSION+' — ١٨ جمادى الآخرة ١٤٤٨ هـ'; // ⚠️ v331 — رقم النسخة بيتولّد من APP_VERSION (كان واقف على v323 لأن في تعريفين، والتاني بيكسب). ممنوع تكتب رقم نسخة يدوي هنا.
 // ⚠️ v295 — عنوان الصفحة كان رقم نسخته ثابت ومتنسي (فضل v294 مع إن النسخة اتغيّرت). دلوقتي بياخد الرقم من APP_VERSION دايمًا.
 try{document.title=document.title.replace(/v\d+\s*$/,'v'+APP_VERSION);}catch(_eT){}
 
@@ -7404,7 +7526,7 @@ function startAutoBackup(){
 
 var LS={
   get:function(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(e){return d;}},
-  set:function(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+  set:function(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true;}catch(e){/* v374: كان بيبلع خطأ امتلاء الذاكرة بصمت (إعدادات/بيانات بتضيع من غير ما حد يعرف) — دلوقتي بيبلّغ مرة كل ٣٠ ثانية */try{var _n=Date.now();if(!LS._w||_n-LS._w>30000){LS._w=_n;if(typeof showToast==='function')showToast((e&&e.name==='QuotaExceededError'?'❌ الذاكرة امتلأت — إعداد ('+k+') ما اتحفظش! صدّر نسخة واحذف بيانات قديمة':'⚠️ تعذّر حفظ إعداد ('+k+') على الجهاز'),'#dc2626');}}catch(_e){}return false;}}
 };
 
 
@@ -8642,11 +8764,12 @@ function _wireReportTabsDrag(bar){
   });
 }
 var _navHistory=['home'];
-var navLabels={home:'الرئيسية',inventory:'مخزون',sales:'مبيعات',purchases:'مشتريات',debts:'الديون',reports:'التقارير',tasks:'المهمات',settings:'إعدادات',movements:'التحركات','movements-report':'تقرير التحركات','tasks-report':'تقرير المهمات',ledger:'سجل العميل',quran:'القرآن الكريم',analysis:'التحليل','eng-report':'تقرير المهندسين'};
-var navIcons={home:'🏠',inventory:'📦',sales:'🧾',purchases:'🛒',debts:'💳',reports:'📊',tasks:'📋',settings:'⚙️',movements:'🔧','movements-report':'🗂️','tasks-report':'✅',ledger:'👤',quran:'📖',analysis:'🔭','eng-report':'🧑‍🔧'};
+var navLabels={print:'المطبعة',home:'الرئيسية',inventory:'مخزون',sales:'مبيعات',purchases:'مشتريات',debts:'الديون',reports:'التقارير',tasks:'المهمات',settings:'إعدادات',movements:'التحركات','movements-report':'تقرير التحركات','tasks-report':'تقرير المهمات',ledger:'سجل العميل',quran:'القرآن الكريم',analysis:'التحليل','eng-report':'تقرير المهندسين'};
+var navIcons={print:'🖨️',home:'🏠',inventory:'📦',sales:'🧾',purchases:'🛒',debts:'💳',reports:'📊',tasks:'📋',settings:'⚙️',movements:'🔧','movements-report':'🗂️','tasks-report':'✅',ledger:'👤',quran:'📖',analysis:'🔭','eng-report':'🧑‍🔧'};
 // ⚠️ v243 — شريط التنقل السفلي بقى بيتبني ديناميكيًا من ترتيب مخزّن (DB.settings.navOrder)
 // بدل ما يكون ثابت في الـHTML، عشان يبقى قابل لإعادة الترتيب من الإعدادات. الترتيب
 // الافتراضي الجديد: تقارير قبل مهمات (بطلب العميل).
+var __NAV_PRINT_DEF={icon:'🖨️',label:'المطبعة'}; // ⚠️ v375 — زرار المطبعة بيظهر في الشريط لوضع «مطبعة فقط» بس (مش في NAV_BAR_DEFS عشان ميظهرش في ترتيب الشريط ولا يتكرر في فحص الأيقونات)
 var NAV_BAR_DEFS={
   home:{icon:'🏠',label:'الرئيسية'},
   movements:{icon:'🔧',label:'تحركات',badge:'movements-badge'},
@@ -8663,8 +8786,8 @@ function _navOrder(){
 }
 function renderNavBar(){
   var el=document.getElementById('nav');if(!el)return;
-  el.innerHTML=_navOrder().map(function(id){
-    var d=NAV_BAR_DEFS[id];if(!d)return '';
+  el.innerHTML=(__isPrintOnly()?['home','print','more']:_navOrder()).map(function(id){
+    var d=NAV_BAR_DEFS[id]||(id==='print'?__NAV_PRINT_DEF:null);if(!d)return '';
     return '<button class="nav-btn'+(id==='home'?' active':'')+'" data-screen="'+id+'" onclick="navigate(\''+id+'\')" style="position:relative">'+
       '<span class="nav-icon">'+d.icon+'</span><span class="nav-label">'+d.label+'</span>'+
       (d.badge?'<span id="'+d.badge+'" style="display:none;position:absolute;top:6px;right:6px;background:'+(id==='tasks'?'#dc2626':'#86198f')+';color:#fff;border-radius:50%;width:15px;height:15px;font-size:9px;font-weight:900;align-items:center;justify-content:center"></span>':'')+
@@ -8680,11 +8803,16 @@ var __SCREEN_PERM_MAP={
   inventory:'products', sales:'sales', purchases:'purchases', debts:'debts',
   reports:'reports', tasks:'tasks', 'tasks-report':'tasks', movements:'movements',
   'movements-report':'movements', accounting:'accounting', ledger:'clients_ledger', // v160 — 2.1: كانت 'sales'، فأي حد عنده صلاحية فواتير كان يشوف دفتر العملاء تلقائي
-  suppliers:'purchases', 'supplier-ledger':'purchases', pm:'movements' // ⚠️ v360 — الصيانة الدورية تابعة لصلاحية التحركات • v203 — أرشيف الموردين تابع لنفس صلاحية المشتريات
+  suppliers:'purchases', 'supplier-ledger':'purchases', pm:'movements',
+  clients:'clients_ledger', scrap:'products' // ⚠️ v375 — ثغرة قديمة: شاشتي «دفتر العملاء» (clients) و«الاسكراب» (scrap) كانوا مفتوحين لأي موظف من غير أي فحص (فيهم تليفونات وأسعار شراء) // ⚠️ v360 — الصيانة الدورية تابعة لصلاحية التحركات • v203 — أرشيف الموردين تابع لنفس صلاحية المشتريات
 };
 function __canOpenScreen(screen){
   if(window.__isOwner) return true;
   if(screen==='analysis'||screen==='eng-report') return false; // ⚠️ v352 — صفحة التحليل (ربح/استثمار) للمالك بس
+  // ⚠️ v375 — وحدة المطبعة (§5.5): هب المطبعة وشاشاتها بتتفتح بصلاحية «عرض» في القسم المقابل، ووضع «مطبعة فقط» بيقفل أي شاشة غير العامة
+  if(screen==='print') return __permReadyNow() && __printVisibleSections().length>0;
+  if(__PRINT_SCREEN_PERM[screen]) return __permReadyNow() && __printSectionVisible(__PRINT_SCREEN_PERM[screen]);
+  if(__isPrintOnly()) return !!__PRINT_ONLY_GENERAL[screen];
   // v134 — خصوصية بيانات الموظفين: التقارير والحسابات فيها أرقام مالية إجمالية عن الشركة
   // كلها، مش بس بيانات الموظف نفسه. الحظر ده افتراضي لكل الموظفين (حتى لو صلاحية الدور
   // العامة فاتحة)، إلا لو المالك بنفسه دخل شاشة "حسب الموظف نفسه" وفعّل "عرض" لموظف بعينه
@@ -8738,6 +8866,7 @@ function navigateBack(){
     // إزالة السكرين الحالي من الـ history قبل الانتقال
     var scEl=document.getElementById('screen-'+prev);
     if(!scEl)prev='home';
+    if(!__canOpenScreen(prev))prev='home'; // ⚠️ v375 — ثغرة قديمة: «رجوع» كان بيفتح الشاشة السابقة من غير فحص الصلاحية (لو الصلاحيات اتغيّرت أو الوضع اتبدّل)
     // انتقال مباشر بدون إضافة للـ history
     document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
     document.getElementById('screen-'+prev).classList.add('active');
@@ -8769,6 +8898,7 @@ function renderScreen(s){
   else if(s==='analysis')renderAnalysisHub();
   else if(s==='pm')renderPM(); // ⚠️ v360
   else if(s==='eng-report')renderEngReport();
+  else if(s==='print')renderPrintHub(); // ⚠️ v375
   else if(s==='ledger')renderLedger(_currentLedgerCustomer);
   if(typeof __renderErrorBanner==='function' && __errLog.length) setTimeout(__renderErrorBanner, 0);
 }
@@ -8862,13 +8992,15 @@ function _customerCounterDiff(customerName,fromDate,toDate,manualFromId,manualTo
 }
 var _gTimer=null;
 var _gsPeriod={from:'',to:''}; // فلتر مدة اختياري من قائمة "المزيد"
+// ⚠️ v375 — ثغرة قديمة: البحث الشامل كان بيعرض عملاء/فواتير/ديون/تحركات/مهام لأي موظف مهما كانت صلاحياته. دلوقتي كل مصدر بيتفلتر بصلاحية «عرض» في قسمه (المالك مش متأثر)
+function __gsCan(t){ return __hasPerm(t,'can_select'); }
 function renderGlobalSearch(){
   var el=document.getElementById('global-results');if(!el)return;
   var q=v('global-search-input')||'';
   if(!q.trim()){el.innerHTML='<div class="empty">اكتب للبحث</div>';return;}
   var qn=normalizeAr(q),results=[];
   var from=_gsPeriod.from||null,to=_gsPeriod.to||null;
-  DB.clients.forEach(function(c){
+  (__gsCan('clients_ledger')?DB.clients:[]).forEach(function(c){
     if(normalizeAr(c.name).includes(qn)){
       var _ds=_customerCounterDiffBySerial(c.name,from,to);
       var counterSub='';
@@ -8880,20 +9012,20 @@ function renderGlobalSearch(){
       results.push({icon:'📊',label:'تقرير عميل',title:esc(c.name),sub:'عرض التقرير الشامل (فواتير، صيانة، ديون)'+counterSub,action:'openLedger(decodeURIComponent(\''+encodeURIComponent(c.name)+'\'))'});
     }
   });
-  DB.sales.forEach(function(s){
+  (__gsCan('sales')?DB.sales:[]).forEach(function(s){
     if(from&&(s.date||'')<from)return;
     if(to&&(s.date||'')>to)return;
     if(normalizeAr(s.customer).includes(qn)||normalizeAr(s.serial||'').includes(qn)||normalizeAr(s.model||'').includes(qn)||s.items.some(function(i){return normalizeAr(i.name).includes(qn);}))
       results.push({icon:'🧾',label:'فاتورة',title:esc(s.customer),sub:fmt(s.total)+' — '+fmtDate(s.date),action:'openSaleModal(\''+s.id+'\')'});
   });
-  DB.products.forEach(function(p){
+  (__gsCan('products')?DB.products:[]).forEach(function(p){
     if(normalizeAr(p.name).includes(qn))
       results.push({icon:'📦',label:'منتج',title:esc(p.name),sub:'الكمية: '+p.qty,action:'navigate(\'inventory\')'});
   });
   // نجمع كل ديون نفس الاسم مع بعض (زي شاشة الديون بالظبط) بدل ما نعرض كل سجل دين لوحده —
   // وإلا لو العميل عنده أكتر من دين، هيظهر مكرر بأرقام متضاربة
   var debtGroups={};
-  DB.debts.forEach(function(d){
+  (__gsCan('debts')?DB.debts:[]).forEach(function(d){
     if(!normalizeAr(d.name).includes(qn))return;
     var key=normalizeAr(d.name)+'|||'+d.type;
     if(!debtGroups[key])debtGroups[key]={name:d.name,type:d.type,total:0,paid:0};
@@ -8905,13 +9037,13 @@ function renderGlobalSearch(){
     if(Math.round(rem*100)/100<=0.001)return; // مسدّد بالكامل — مش محتاج نعرضه كنتيجة بحث دين
     results.push({icon:'💳',label:g.type==='supplier'?'دين (مورد)':'دين (عميل)',title:esc(g.name),sub:'متبقي: '+fmt(rem),action:'navigate(\'debts\')'});
   });
-  (DB.movements||[]).forEach(function(m){
+  (__gsCan('movements')?(DB.movements||[]):[]).forEach(function(m){
     if(from&&(m.opened_at||'')<from)return;
     if(to&&(m.opened_at||'')>to)return;
     if(normalizeAr(m.customer).includes(qn)||normalizeAr(m.device||'').includes(qn)||normalizeAr(m.serial||'').includes(qn))
       results.push({icon:'🔧',label:'تحرك',title:esc(m.customer),sub:esc(m.fault_type)+' — '+esc(m.status),action:'navigate(\'movements\')'});
   });
-  DB.tasks.forEach(function(t){
+  (__gsCan('tasks')?DB.tasks:[]).forEach(function(t){
     if(normalizeAr(t.title).includes(qn))
       results.push({icon:'📋',label:'مهمة',title:esc(t.title),sub:t.status==='done'?'✅ منجزة':t.priority,action:'navigate(\'tasks\')'});
   });
@@ -8998,6 +9130,7 @@ function _applyFinSummaryReveal(){
 // ===== HOME =====
 // ===== HOME =====
 function renderHome(){
+  try{ renderHomePrintCards(); }catch(_ehp){} // ⚠️ v375
   // ⚠️ v220 — "آية اليوم" بقت فوق الشاشة (زي ما طلب العميل)، والاختيار بقى عشوائي مش
   // بالتسلسل (نفس الآية ثابتة طول اليوم، وبتتغيّر عشوائي بكرة).
   var verseEl=document.getElementById('home-verse');
@@ -34175,7 +34308,7 @@ function _buildAttendanceCardHTML(prof){
 // (اللي بقى منفصل وبيتحط أول حاجة في الرئيسية بمفرده)
 function _buildMyAccountBodyHTML(prof){
   if(!prof)return '';
-  var roleNames={owner:'المالك',warehouse:'مسؤول مخازن',engineer:'مهندس',customer_service:'خدمة عملاء'};
+  var roleNames={owner:'المالك',warehouse:'مسؤول مخازن',engineer:'مهندس',customer_service:'خدمة عملاء', operator_print:'مسؤول مطبعة'};
   var myTasks=_visFilter((DB.tasks||[]).filter(function(t){return t.assigned_to===prof.id;}));
   var pendingTasks=myTasks.filter(function(t){return t.status!=='done';});
   var doneTasks=myTasks.filter(function(t){return t.status==='done';});
@@ -34284,6 +34417,12 @@ function __moreSections(){
       // v165 — ملهاش لازمة للمالك (مهامي/أعطالي/راتبي — دي بيانات موظف مش المالك)
       items: (window.__currentProfile&&!window.__isOwner)?[
         {icon:'👤',label:'حسابي (مهامي وأعطالي وراتبي)',screen:'my-account',color:'#f5f3ff',tc:'#6d28d9'}
+      ]:[]
+    },
+    print:{
+      key:'print',title:'🖨️ المطبعة',icon:'📠', // ⚠️ v375 — أيقونة القسم مختلفة عن أيقونة العنصر (فحص v340)
+      items:(window.__isOwner||(__permReadyNow()&&__printVisibleSections().length))?[
+        {icon:'🖨️',label:'المطبعة',screen:'print',color:'#ecfeff',tc:'#0e7490'}
       ]:[]
     },
     faith:{
@@ -34850,16 +34989,51 @@ async function _pmSaveDefaults(){
   await persist();closeModal();renderPM();showToast('✅ اتحفظ الافتراضي','#16a34a');
 }
 
+// ⚠️ v375 — هب المطبعة (وثيقة التصميم §5.5): بيعرض الأقسام المسموحة بس. شاشات التشغيل الفعلية بتتضاف في مراحل المطبعة الجاية
+// وهتلاقي الصلاحيات/الحقول/الشريط جاهزين (راجع __PRINT_SCREEN_PERM).
+function __printCardsHtml(compact){
+  var secs=__printVisibleSections();
+  if(!secs.length) return '<div class="card" style="text-align:center;color:#64748b;font-size:13px;padding:18px">مفيش أقسام مطبعة متاحة ليك دلوقتي. كلّم المالك لو محتاج صلاحية.</div>';
+  return '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;margin-bottom:12px">'+secs.map(function(t){ // ⚠️ v375 — عمود واحد على الموبايل (العمودين كانوا بيكسّروا النص ويلزقوا في حافة الشاشة)
+    var chips=[['can_insert','➕ إضافة'],['can_update','✏️ تعديل'],['can_delete','🗑️ حذف']].filter(function(a){return __hasPerm(t.id,a[0]);}).map(function(a){
+      return '<span style="background:#ecfeff;color:#0e7490;border-radius:6px;padding:1px 6px;font-size:10px;font-weight:700;margin-left:4px;display:inline-block">'+a[1]+'</span>';
+    }).join('');
+    return '<div class="card" data-print-section="'+t.id+'" style="margin:0;display:flex;align-items:center;gap:10px;min-width:0">'+
+      '<span style="font-size:26px">'+t.icon+'</span>'+
+      '<div style="flex:1;min-width:0"><div style="font-weight:800;font-size:13px">'+esc(t.name)+'</div><div style="margin-top:4px">'+(chips||'<span style="font-size:10px;color:#64748b">عرض فقط</span>')+'</div></div>'+
+      '<span style="font-size:10px;background:#fef3c7;color:#b45309;border-radius:6px;padding:2px 7px;font-weight:700;flex-shrink:0">قيد التجهيز</span></div>';
+  }).join('')+'</div>';
+}
+function renderPrintHub(){
+  var el=document.getElementById('print-body');if(!el)return;
+  el.innerHTML='<div class="card" style="background:#ecfeff;border:1.5px solid #67e8f9;margin-bottom:12px"><div style="font-weight:900;font-size:15px;color:#0e7490">🖨️ وحدة المطبعة</div>'+
+    '<div style="font-size:12px;color:#155e75;margin-top:4px">الأقسام اللي ظاهرة هنا هي اللي المالك فتحها ليك بس.</div></div>'+__printCardsHtml(false);
+}
+function renderHomePrintCards(){
+  var el=document.getElementById('home-print-cards');if(!el)return;
+  el.innerHTML=__isPrintOnly()?('<div style="font-weight:900;font-size:14px;margin:6px 2px 10px">🖨️ المطبعة</div>'+__printCardsHtml(true)):'';
+}
+function __moreItemAllowed(it){
+  if(it.ownerOnly&&!window.__isOwner) return false;
+  if(__isPrintOnly()) return !!it.screen&&__canOpenScreen(it.screen); // ⚠️ v375 — «مطبعة فقط»: مفيش أي إجراء (action) بدون شاشة مسموحة
+  return !it.screen||__canOpenScreen(it.screen);
+}
+function __sideBasics(){
+  var all=[['🏠','الرئيسية','home',null],['🔧','تحركات','movements','movements-badge'],['📊','تقارير','reports',null],['📋','مهمات','tasks','tasks-badge']]
+    .filter(function(x){return __canOpenScreen(x[2]);}); // ⚠️ v375 — القايمة الجانبية كانت بتعرض الأربعة لكل الموظفين مهما كانت صلاحياتهم
+  return all; // ⚠️ v375 — زرار المطبعة بييجي من قسم «المطبعة» في القايمة (كان بيتكرر مرتين)
+}
+
 function renderMore(){
   var el=document.getElementById('more-body');if(!el)return;
   var sectionsMap=__moreSections();
   // ⚠️ v120 — شيلنا الأسهم ▲▼ خالص (كانت وحشة في الترتيب حسب ملاحظتك). دلوقتي ترتيب ثابت
   // ومنطقي: العمليات (اللي بتستخدمها يوميًا) أول حاجة، بعدين التقارير، وآخر حاجة الإدارة.
-  var order=['myaccount','faith','ops','reports','admin'];
+  var order=['myaccount','print','faith','ops','reports','admin'];
 
   el.innerHTML=order.map(function(key){
     var sec=sectionsMap[key];if(!sec)return'';
-    var items=sec.items.filter(function(item){return (!item.screen||__canOpenScreen(item.screen))&&(!item.ownerOnly||window.__isOwner);});
+    var items=sec.items.filter(__moreItemAllowed);
     if(!items.length)return'';
     return '<div style="margin-bottom:18px">'+
       '<div style="font-size:14px;font-weight:900;color:#0f172a;margin-bottom:9px">'+sec.title+'</div>'+
@@ -35030,6 +35204,25 @@ var __ONCE_GUARDED=["_snapSave", "_snapBackfillAll", "_snapBackfillOne", "markSa
 // بسبب الصلاحية، فكان الموظف من غير صلاحية بيشوف الحذف "ينجح" محليًا والمخزون يتلخبط. هنا الفحص بيحصل قبل أي تعديل.
 // 'ins' = إضافة أو تعديل (زي dbUpsert بالظبط) · 'upd' = تعديل · 'del' = حذف. المالك بيعدّي دايمًا (__hasPerm).
 // قاعدة: أي دالة جديدة بتعدّل DB.x محليًا قبل db*() لازم تتضاف هنا (الدستور #21).
+// ⚠️ v375 — ثغرة قديمة: دوال فتح نماذج (فاتورة/تحرك/مهمة/مصروف) كانت مفتوحة لأي موظف من اختصارات الديسكتوب (Alt+N/M/T/E) وزراير الرئيسية من غير أي فحص —
+// الحفظ كان بيترفض بس الفورم نفسه (قوائم الأصناف/العملاء/الأسعار) كان بيتفتح. دلوقتي: فتح «جديد» لازم «إضافة»، وفتح سجل موجود لازم «عرض» (أو «تعديل» للمصروف).
+(function(){
+  [['openSaleModal','sales'],['openMovementModal','movements'],['openTaskModal','tasks'],['openExpenseModal','expenses']].forEach(function(p){
+    var name=p[0],table=p[1],orig=window[name];
+    if(typeof orig!=='function'||orig.__v375guard) return;
+    var g=function(a){
+      if(!window.__isOwner){
+        var need;
+        if(name==='openExpenseModal') need=(a&&a.editId)?'can_update':'can_insert';
+        else need=a?'can_select':'can_insert';
+        if(!__hasPerm(table,need)){ __permDeny(table,need); return; }
+      }
+      return orig.apply(this,arguments);
+    };
+    g.__v375guard=true;
+    window[name]=g;
+  });
+})();
 var __PERM_MAP={
   openDeleteSaleModal:[['sales','del']], deleteSaleOnly:[['sales','del']], deleteSaleAndDebt:[['sales','del'],['debts','del']],
   deleteArchivedDebtGroup:[['debts','del']], deleteAllArchivedDebts:[['debts','del']],
@@ -35287,19 +35480,19 @@ if('serviceWorker' in navigator){
   }
   function build(){
     var side=document.getElementById('pc-side');if(!side||typeof __moreSections!=='function')return;
-    var key=(window.__isOwner?'o':'e')+'|'+((window.__currentProfile&&window.__currentProfile.id)||'');
+    var key=(window.__isOwner?'o':'e')+'|'+((window.__currentProfile&&window.__currentProfile.id)||'')+'|'+(__isPrintOnly()?'p':'n')+'|'+(window.__permState||''); // ⚠️ v375 — القايمة تتبني من جديد لما الصلاحيات/الوضع يتغيروا
     if(key===sideKey&&side.children.length)return;
     sideKey=key;side.innerHTML='';
     var br=mk('div','ps-brand');var sp=mk('span','', '🔧 '+(window.APP_TITLE||'ابو حوده')+' v'+(window.APP_VERSION||''));br.appendChild(sp);
     var sm=mk('small','','نسخة الكمبيوتر');br.appendChild(sm);side.appendChild(br);
     side.appendChild(mk('div','ps-title','الأساسي'));
-    [['🏠','الرئيسية','home',null],['🔧','تحركات','movements','movements-badge'],['📊','تقارير','reports',null],['📋','مهمات','tasks','tasks-badge']].forEach(function(x){
+    __sideBasics().forEach(function(x){
       side.appendChild(item(x[0],x[1],"navigate('"+x[2]+"')",x[2],x[3]));
     });
     var secs=__moreSections();
-    ['myaccount','faith','ops','reports','admin'].forEach(function(k){
+    ['myaccount','print','faith','ops','reports','admin'].forEach(function(k){
       var sec=secs[k];if(!sec)return;
-      var items=sec.items.filter(function(it){return (!it.screen||__canOpenScreen(it.screen))&&(!it.ownerOnly||window.__isOwner);});
+      var items=sec.items.filter(__moreItemAllowed);
       if(!items.length)return;
       side.appendChild(mk('div','ps-title',sec.title.replace(/\s*\(.*\)/,'')));
       items.forEach(function(it){side.appendChild(item(it.icon,it.label,it.screen?"navigate('"+it.screen+"')":it.action,it.screen||null));});
