@@ -1,4 +1,5 @@
-// Service Worker لتطبيق ابو حوده — v20 (منطق v4 كما هو؛ اتغيّر رقم الكاش بس مع إصدار التطبيق v323)
+// Service Worker للتطبيق — v21 (v381: بيخزّن config.js مع الصفحة عشان الهوية والاتصال يفضلوا شغّالين أوفلاين من أول فتحة). المنطق الباقي زي v20 بالظبط.
+// (النسخة الأصلية): Service Worker لتطبيق ابو حوده — v20 (منطق v4 كما هو؛ اتغيّر رقم الكاش بس مع إصدار التطبيق v323)
 // الهدف: تخزين صفحة التطبيق (index.html) ومكتبة Supabase والخطوط عشان التطبيق يفتح أوفلاين وبنفس الشكل.
 // البيانات نفسها في localStorage جوه التطبيق، مش هنا.
 // ⚠️ لازم اسم ملف التطبيق يكون index.html بالظبط (الملف ده بيخزّنه ويفتحه بالاسم ده) ويتحط sw.js جنبه في نفس المجلد.
@@ -19,7 +20,7 @@
 //     الصوت/Range/Supabase API/أي موقع تاني من غير تدخّل، النت الأول بمهلة ٤ ثواني ثم الكاش.
 
 var SHELL_PREFIX = 'maintenance-app-shell-';
-var CACHE_NAME = SHELL_PREFIX + 'v20'; // ⚠️ v315 (كان v11 في v314) — رفع رقم الكاش مع كل إصدار كبير عشان activate يمسح كاش الشل القديم (النسخة v307 وما قبلها). باقي المنطق بدون أي تغيير.
+var CACHE_NAME = SHELL_PREFIX + 'v21'; // ⚠️ v315 (كان v11 في v314) — رفع رقم الكاش مع كل إصدار كبير عشان activate يمسح كاش الشل القديم (النسخة v307 وما قبلها). باقي المنطق بدون أي تغيير.
 var FONT_CACHE = 'mc8-fonts-v1';   // اسمه مش بيبدأ بـ SHELL_PREFIX → activate مابيمسحوش
 var SDK_URL = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
 var FONT_HOSTS = ['fonts.googleapis.com', 'fonts.gstatic.com'];
@@ -33,6 +34,7 @@ self.addEventListener('install', function(event){
       // عنصر واحد يفشل مايوقفش الباقي
       return Promise.all([
         cache.add(INDEX_URL).catch(function(){}),
+        cache.add(new URL('./config.js', self.location).href).catch(function(){}),   // v21 — ملف الإعدادات (لو موجود)
         cache.add(new Request(SDK_URL, {mode:'cors', credentials:'omit'})).catch(function(){})
       ]);
     })
