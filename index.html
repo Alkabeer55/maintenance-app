@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ابو حوده الحلو الجميل v377</title>
+<title>ابو حوده الحلو الجميل v378</title>
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -53,7 +53,7 @@ async function __netProbe(force){
   }catch(e3){}
   return ok;
 }
-/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="v377 — ١٨ جمادى الآخرة ١٤٤٨ هـ";
+/*APP_CONFIG_START*/var APP_CONFIG={"name":"ابو حوده الحلو الجميل","short":"ابو حوده","business":"مركز صيانة كامل أبو حودة","desc":"تطبيق إدارة أعمال متجر صيانة وإصلاح الطابعات","theme":"#0f172a","sbUrl":"https://simqakfxywglgevhcgbr.supabase.co","sbKey":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbXFha2Z4eXdnbGdldmhjZ2JyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NTY4NzEsImV4cCI6MjA5NTEzMjg3MX0.KKny5yIrw94YVlR6IcrdQltHvnoCzsOsLidVbKYv1ho","salaryFallbackName":"البراء"};/*APP_CONFIG_END*/document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll("[data-appname]").forEach(function(e){e.textContent=APP_CONFIG.name;});});var BUILD_STAMP="v378 — ١٨ جمادى الآخرة ١٤٤٨ هـ";
 /* ============================================================
    📜 الدستور — القواعد الثابتة للتطوير (اسمها المختصر: "الدستور")
    تُراعى إلزاميًا في أي تحديث جديد — قول "زي الدستور" وأنا هرجع للبلوك ده قبل أي تعديل
@@ -193,6 +193,7 @@ async function __netProbe(force){
         الهامش = بعد الخصم (_anSaleF) وبالفصل قطع/خدمات، وأي بند من غير سعر تكلفة بيتحذّر منه. نصيب الشريك في دورة التوزيع = _pcPartnerShare بس (رد رأس المال + الدخول في نص الفترة)، ممنوع Math.round(profit*pct/100) مباشرة.
 ============================================================ */
 /* ===== سجل التعديلات (Changelog) =====
+v378: [📥 أمر الشغل (أول شاشة مطبعة فعلية): جدولين على السيرفر print_jobs وprint_job_payments (print_jobs_v378.sql) مش في localStorage، والصلاحيات (jobs_print) بتتفحص على السيرفر. كود تلقائي P-00001، المراحل استلام←تصميم←طباعة←تشطيب←تسليم + إلغاء/استرجاع، حالة الدفع (مدفوع/آجل/جزء) محسوبة من دفعات إضافة-فقط كل واحدة باسم اللي حصّلها، و«محصّل منك النهارده». اسم/رقم العميل والسعر والمدفوع والخصم والملاحظات الداخلية بتتخفي حسب صلاحيات الحقول (افتراضي المطبعة: اسم/رقم العميل مخفي). الحذف لـ can_delete (المالك بس افتراضيًا). ⚠️ إخفاء الحقول على مستوى الشاشة بس (السيرفر بيرجّع الأعمدة كلها). ⚠️ لازم يفضل: أي شاشة مطبعة جديدة تتسجّل في __PRINT_SCREEN_PERM وتقرا الحقول بـ __isFieldHidden. مش مغطّى: ملف العميل (customer_file) ولسه مفيش طباعة إيصال/باركود.]
 v377: [🔒 قفل السيرفر لدور المطبعة: التطبيق بيمتنع عن أي رفع على business_state (blobs/إعدادات/أرشيف/عداد/اسكراب/شواهد حذف) لدور operator_print عشان سياسة RLS الجديدة (print_lockdown_v377.sql) ما تعملش خطأ 42501 وتسجيل خروج إجباري. القراءة بترجع فاضية من السيرفر نفسه. ⚠️ لازم يفضل: أي دالة رفع جديدة على business_state تبدأ بـ __bsWriteBlocked(). مش مغطّى: الأدوار القديمة (مهندس/مخازن/خدمة عملاء) لسه تقدر تقرا/تكتب كل business_state — محتاج قرار.]
 v376: [قرارات المالك لموظف المطبعة: اسم العميل ورقمه مخفيين افتراضيًا (يشوف كود الشغلانة والسعر بس، التكلفة والربح مقفولين)، الحذف للمالك بس (افتراضي دور المطبعة من غير حذف)، والمالك يفتح/يقفل أي حاجة من شاشة الصلاحيات (دور أو موظف أو حقل). ⚠️ مطلوب في شاشة أمر الشغل لما تتبني: حالة الدفع لكل أمر (مدفوع/آجل/جزء) والمبلغ المحصّل يتسجل في حساب الموظف.]
 v375: [🖨️ وحدة المطبعة — الصلاحيات (وثيقة التصميم §5): (١) دور جديد operator_print «مسؤول مطبعة» في ٤ أماكن أسماء الأدوار (فيه اختبار آلي بيعدّها) • (٢) ٩ أقسام صلاحيات (jobs/quotes/counters/materials/waste/machines/pricing/costs/reports _print) بنفس الإجراءات الأربعة، بتظهر تلقائيًا في شاشة صلاحيات المالك (دور + موظف) تحت عنوان «المطبعة»، وزرار «للافتراضي» لدور المطبعة بيرجّع الافتراضي الموصى بيه مش «كله مقفول» (الأدوار القديمة زي ما هي) • (٣) حقول المطبعة (أوامر الشغل ٩، ماكينات ٤، مخزن ٣) والتكلفة/الربح/سعر الشراء/تكلفة الصفحة/الإهلاك مقفولة افتراضيًا — __defaultHiddenFields مصدر واحد (كان متكرر في مكانين) • (٤) وضع «مطبعة فقط» (__isPrintOnly): الشاشات المسموحة الرئيسية/المزيد/حسابي/المطبعة بس، الشريط السفلي، الرئيسية (كروت المطبعة بس، الباقي مخفي بكلاس body.print-only)، المزيد، القايمة الجانبية بالديسكتوب • (٥) هب مطبعة (screen-print) «قيد التجهيز» — قسم المطبعة يظهر بصلاحية «عرض» (§5.8)، وفشل/تحميل الصلاحيات = منع • 🛡️ إصلاحات ثغرات قديمة اتلاقت في الفحص: البحث الشامل بقى بيتفلتر بصلاحية «عرض» لكل مصدر (كان بيسرّب فواتير/ديون/عملاء/تحركات/مهام لأي موظف) • شاشتا clients (دفتر العملاء) وscrap (الاسكراب) كانوا مفتوحين لأي موظف — بقوا مربوطين بـ clients_ledger وproducts • زرار «رجوع» كان بيفتح الشاشة السابقة من غير __canOpenScreen • دوال openSaleModal/openMovementModal/openTaskModal/openExpenseModal (اختصارات Alt+N/M/T/E وزراير الرئيسية) كانت بتفتح من غير فحص — دلوقتي «جديد» يحتاج إضافة وفتح سجل موجود يحتاج عرض • القايمة الجانبية بالديسكتوب كانت بتعرض ٤ عناصر لكل الموظفين • BUILD_STAMP الحرفي أول الملف والـ<title> كانوا واقفين على نسخة قديمة. ⚠️ لازم يفضلوا: أي شاشة/دالة مطبعة جديدة تتضاف في __PRINT_SCREEN_PERM وأي دالة كتابة في __PERM_MAP؛ وكل قسم مطبعة جديد يتضاف في __PRINT_PERM_TABLES بس. الاختبارات في tests/ (٧٧ اختبار). مش مغطّى: RLS على السيرفر (ملف SQL منفصل، لازم يتجرّب على Supabase) ومزامنة business_state للموظفين.]
@@ -5800,6 +5801,7 @@ async function __pushBlobSafe(id){
     </div>
 
     <div id="screen-print" class="screen"><div id="print-body"></div></div>
+    <div id="screen-print-jobs" class="screen"><div id="print-jobs-body"></div></div>
 
     <div id="screen-scrap" class="screen"><div id="scrap-body"></div></div>
 
@@ -6054,7 +6056,7 @@ var APP_TITLE=APP_CONFIG.name;
 // ⚠️ v173 — إصلاح: الرقم ده كان مجمّد على 143 من فترة طويلة بينما رقم الإصدار الحقيقي
 // (العنوان + BUILD_STAMP + الـ Changelog) وصل لـ v172 — يعني المستخدم كان شايف رقمين
 // مختلفين للإصدار حسب مكان العرض في نفس التطبيق. من دلوقتي لازم يتزود مع كل تحديث فعلي.
-var APP_VERSION=377;
+var APP_VERSION=378;
 // ⚠️ v303 — BUILD_STAMP كان مش متعرّف خالص (شاشة الإعدادات كانت بتعرض "?") — اتعرّف دلوقتي وبيتزود مع كل تحديث
 var BUILD_STAMP='v'+APP_VERSION+' — ١٨ جمادى الآخرة ١٤٤٨ هـ'; // ⚠️ v331 — رقم النسخة بيتولّد من APP_VERSION (كان واقف على v323 لأن في تعريفين، والتاني بيكسب). ممنوع تكتب رقم نسخة يدوي هنا.
 // ⚠️ v295 — عنوان الصفحة كان رقم نسخته ثابت ومتنسي (فضل v294 مع إن النسخة اتغيّرت). دلوقتي بياخد الرقم من APP_VERSION دايمًا.
@@ -8774,8 +8776,8 @@ function _wireReportTabsDrag(bar){
   });
 }
 var _navHistory=['home'];
-var navLabels={print:'المطبعة',home:'الرئيسية',inventory:'مخزون',sales:'مبيعات',purchases:'مشتريات',debts:'الديون',reports:'التقارير',tasks:'المهمات',settings:'إعدادات',movements:'التحركات','movements-report':'تقرير التحركات','tasks-report':'تقرير المهمات',ledger:'سجل العميل',quran:'القرآن الكريم',analysis:'التحليل','eng-report':'تقرير المهندسين'};
-var navIcons={print:'🖨️',home:'🏠',inventory:'📦',sales:'🧾',purchases:'🛒',debts:'💳',reports:'📊',tasks:'📋',settings:'⚙️',movements:'🔧','movements-report':'🗂️','tasks-report':'✅',ledger:'👤',quran:'📖',analysis:'🔭','eng-report':'🧑‍🔧'};
+var navLabels={'print-jobs':'أوامر الشغل',print:'المطبعة',home:'الرئيسية',inventory:'مخزون',sales:'مبيعات',purchases:'مشتريات',debts:'الديون',reports:'التقارير',tasks:'المهمات',settings:'إعدادات',movements:'التحركات','movements-report':'تقرير التحركات','tasks-report':'تقرير المهمات',ledger:'سجل العميل',quran:'القرآن الكريم',analysis:'التحليل','eng-report':'تقرير المهندسين'};
+var navIcons={'print-jobs':'📥',print:'🖨️',home:'🏠',inventory:'📦',sales:'🧾',purchases:'🛒',debts:'💳',reports:'📊',tasks:'📋',settings:'⚙️',movements:'🔧','movements-report':'🗂️','tasks-report':'✅',ledger:'👤',quran:'📖',analysis:'🔭','eng-report':'🧑‍🔧'};
 // ⚠️ v243 — شريط التنقل السفلي بقى بيتبني ديناميكيًا من ترتيب مخزّن (DB.settings.navOrder)
 // بدل ما يكون ثابت في الـHTML، عشان يبقى قابل لإعادة الترتيب من الإعدادات. الترتيب
 // الافتراضي الجديد: تقارير قبل مهمات (بطلب العميل).
@@ -8909,6 +8911,7 @@ function renderScreen(s){
   else if(s==='pm')renderPM(); // ⚠️ v360
   else if(s==='eng-report')renderEngReport();
   else if(s==='print')renderPrintHub(); // ⚠️ v375
+  else if(s==='print-jobs')renderPrintJobs(); // ⚠️ v378
   else if(s==='ledger')renderLedger(_currentLedgerCustomer);
   if(typeof __renderErrorBanner==='function' && __errLog.length) setTimeout(__renderErrorBanner, 0);
 }
@@ -35008,10 +35011,11 @@ function __printCardsHtml(compact){
     var chips=[['can_insert','➕ إضافة'],['can_update','✏️ تعديل'],['can_delete','🗑️ حذف']].filter(function(a){return __hasPerm(t.id,a[0]);}).map(function(a){
       return '<span style="background:#ecfeff;color:#0e7490;border-radius:6px;padding:1px 6px;font-size:10px;font-weight:700;margin-left:4px;display:inline-block">'+a[1]+'</span>';
     }).join('');
-    return '<div class="card" data-print-section="'+t.id+'" style="margin:0;display:flex;align-items:center;gap:10px;min-width:0">'+
+    var live=(t.id==='jobs_print'); // ⚠️ v378 — أوامر الشغل أول قسم شغّال
+    return '<div class="card" data-print-section="'+t.id+'" '+(live?'onclick="navigate(\'print-jobs\')"':'')+' style="margin:0;display:flex;align-items:center;gap:10px;min-width:0;'+(live?'cursor:pointer':'')+'">'+
       '<span style="font-size:26px">'+t.icon+'</span>'+
       '<div style="flex:1;min-width:0"><div style="font-weight:800;font-size:13px">'+esc(t.name)+'</div><div style="margin-top:4px">'+(chips||'<span style="font-size:10px;color:#64748b">عرض فقط</span>')+'</div></div>'+
-      '<span style="font-size:10px;background:#fef3c7;color:#b45309;border-radius:6px;padding:2px 7px;font-weight:700;flex-shrink:0">قيد التجهيز</span></div>';
+      (live?'<span style="font-size:10px;background:#dcfce7;color:#166534;border-radius:6px;padding:2px 7px;font-weight:700;flex-shrink:0">شغّال ›</span>':'<span style="font-size:10px;background:#fef3c7;color:#b45309;border-radius:6px;padding:2px 7px;font-weight:700;flex-shrink:0">قيد التجهيز</span>')+'</div>';
   }).join('')+'</div>';
 }
 function renderPrintHub(){
@@ -35023,6 +35027,231 @@ function renderHomePrintCards(){
   var el=document.getElementById('home-print-cards');if(!el)return;
   el.innerHTML=__isPrintOnly()?('<div style="font-weight:900;font-size:14px;margin:6px 2px 10px">🖨️ المطبعة</div>'+__printCardsHtml(true)):'';
 }
+// ===== ⚠️ v378 — أوامر الشغل (jobs_print): أول شاشة تشغيل فعلية للمطبعة =====
+// البيانات على السيرفر مباشرة (جدولي print_jobs / print_job_payments) مش في localStorage (حدّه ٥ ميجا) ومش في business_state،
+// والصلاحيات بتتفحص على السيرفر بقسم jobs_print (print_jobs_v378.sql). التطبيق بيخفي الحقول حسب صلاحيات الحقول (اسم/رقم العميل/السعر/المدفوع/الخصم/ملاحظات داخلية).
+var __PJ_STAGES=[['received','📥 استلام'],['design','🎨 تصميم'],['printing','🖨️ طباعة'],['finishing','✂️ تشطيب'],['delivered','✅ تسليم']];
+var __pjSt={rows:[],loaded:false,loading:false,err:'',filter:'open',q:'',busy:false};
+function __pjHide(f){ return __isFieldHidden('jobs_print',f); }
+function __pjCan(a){ return __hasPerm('jobs_print',a); }
+function __pjMoney(){ return !__pjHide('price'); }
+function __pjPaidOn(){ return __pjMoney()&&!__pjHide('paid'); }
+function __pjStageLabel(k){ if(k==='cancelled') return '🚫 ملغي'; for(var i=0;i<__PJ_STAGES.length;i++){ if(__PJ_STAGES[i][0]===k) return __PJ_STAGES[i][1]; } return String(k||''); }
+function __pjDue(r){ return Math.max(0,money((+r.price||0)-(+r.discount||0))); }
+function __pjPaid(r){ return money((r.print_job_payments||[]).reduce(function(a,p){return a+(+p.amount||0);},0)); }
+function __pjPayKey(r){ var d=__pjDue(r),p=__pjPaid(r); if(d<=0) return 'none'; if(p>=d) return 'paid'; if(p<=0) return 'deferred'; return 'partial'; }
+var __PJ_PAY={paid:['✅ مدفوع','#dcfce7','#166534'],deferred:['⏳ آجل','#fee2e2','#991b1b'],partial:['🟡 جزء','#fef3c7','#92400e']};
+function __pjPayChip(r){ var k=__pjPayKey(r); var c=__PJ_PAY[k]; return c?'<span style="background:'+c[1]+';color:'+c[2]+';border-radius:6px;padding:2px 7px;font-size:11px;font-weight:800">'+c[0]+'</span>':''; }
+function __pjErrMsg(err){
+  var m=(err&&err.message)||String(err||''); var code=(err&&err.code)||'';
+  if(/does not exist|schema cache|relation/i.test(m)) return 'جدول أوامر الشغل لسه مش متعمل على السيرفر — شغّل ملف print_jobs_v378.sql في Supabase';
+  if(code==='42501'||/row-level security|permission denied/i.test(m)) return 'السيرفر رفض العملية (مفيش صلاحية)';
+  return m;
+}
+function __pjFind(id){ for(var i=0;i<__pjSt.rows.length;i++){ if(__pjSt.rows[i].id===id) return __pjSt.rows[i]; } return null; }
+function __pjOpenStage(r){ return r.stage!=='delivered'&&r.stage!=='cancelled'; }
+
+async function __pjLoad(){
+  if(__pjSt.loading) return;
+  if(typeof sb==='undefined'||!window.__currentProfile){ __pjSt.err='لازم تسجّل دخول الأول'; __pjRender(); return; }
+  if(__navOffline()){ __pjSt.err='مفيش نت — أوامر الشغل بتتحمّل من السيرفر مباشرة'; __pjRender(); return; }
+  __pjSt.loading=true; __pjRender();
+  try{
+    var r=await sb.from('print_jobs').select('*, print_job_payments(*)').order('created_at',{ascending:false}).limit(300);
+    if(r.error){ __pjSt.err=__pjErrMsg(r.error); }
+    else{ __pjSt.rows=r.data||[]; __pjSt.err=''; __pjSt.loaded=true; }
+  }catch(e){ __pjSt.err=__pjErrMsg(e); }
+  __pjSt.loading=false; __pjRender();
+}
+function renderPrintJobs(){ __pjRender(); __pjLoad(); }
+
+function __pjRender(){
+  var el=document.getElementById('print-jobs-body'); if(!el) return;
+  var h='<div style="display:flex;gap:8px;margin-bottom:10px">'+
+    (__pjCan('can_insert')?'<button class="btn btn-full" id="pj-new" onclick="__pjForm()">➕ أمر شغل جديد</button>':'')+
+    '<button class="btn btn-outline" onclick="__pjLoad()" title="تحديث">🔄</button></div>';
+  if(__pjSt.err) h+='<div class="card" style="background:#fef2f2;border:1.5px solid #fecaca;color:#991b1b;font-size:13px;margin-bottom:10px">⚠️ '+esc(__pjSt.err)+'</div>';
+  if(__pjSt.loading) h+='<div style="text-align:center;color:#64748b;font-size:12px;margin-bottom:8px">⏳ بيتحمّل…</div>';
+  if(__pjPaidOn()&&__pjSt.loaded){
+    var uid=window.__currentProfile&&window.__currentProfile.id, td=new Date().toDateString(), mine=0, mineAll=0;
+    __pjSt.rows.forEach(function(r){ (r.print_job_payments||[]).forEach(function(p){ if(p.by_user===uid){ mineAll+=(+p.amount||0); if(new Date(p.created_at).toDateString()===td) mine+=(+p.amount||0); } }); });
+    h+='<div class="card" id="pj-mine" style="background:#ecfeff;border:1.5px solid #67e8f9;margin-bottom:10px;font-size:13px">💵 محصّل منك النهارده: <b>'+fmt(mine)+'</b> <span style="color:#64748b;font-size:11px">(إجمالي تحصيلك: '+fmt(mineAll)+')</span></div>';
+  }
+  var chips=[['open','مفتوحة'],['unpaid','عليها متبقي'],['done','مسلّمة'],['all','الكل']].filter(function(c){ return c[0]!=='unpaid'||__pjPaidOn(); });
+  h+='<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">'+chips.map(function(c){
+    var on=__pjSt.filter===c[0]; return '<button class="btn '+(on?'':'btn-outline')+'" data-pj-filter="'+c[0]+'" style="padding:6px 12px;font-size:12px" onclick="__pjSt.filter=\''+c[0]+'\';__pjRender()">'+c[1]+'</button>'; }).join('')+'</div>';
+  h+='<div class="field" style="margin-bottom:10px"><input id="pj-q" type="text" placeholder="🔍 ابحث بالكود أو الوصف" value="'+esc(__pjSt.q)+'" oninput="__pjSt.q=this.value;__pjRenderList()"></div>';
+  h+='<div id="pj-list"></div>';
+  el.innerHTML=h; __pjRenderList();
+}
+function __pjRenderList(){
+  var box=document.getElementById('pj-list'); if(!box) return;
+  var q=normalizeAr(__pjSt.q||'');
+  var rows=__pjSt.rows.filter(function(r){
+    var open=__pjOpenStage(r), pk=__pjPayKey(r), f=__pjSt.filter;
+    if(f==='open'&&!open) return false;
+    if(f==='done'&&r.stage!=='delivered') return false;
+    if(f==='unpaid'&&!(r.stage!=='cancelled'&&(pk==='deferred'||pk==='partial'))) return false;
+    if(q){ var hay=normalizeAr((r.code||'')+' '+(r.description||'')+' '+(__pjHide('customer_name')?'':(r.customer_name||''))); if(hay.indexOf(q)===-1) return false; }
+    return true;
+  });
+  if(!rows.length){ box.innerHTML='<div style="text-align:center;color:#94a3b8;padding:26px 0;font-size:13px">'+(__pjSt.loaded?'مفيش أوامر شغل هنا':'')+'</div>'; return; }
+  var today=new Date().toISOString().slice(0,10);
+  box.innerHTML=rows.map(function(r){
+    var late=r.due_date&&__pjOpenStage(r)&&r.due_date<today;
+    return '<div class="card pj-card" data-pj="'+r.id+'" onclick="__pjOpen(\''+r.id+'\')" style="margin-bottom:8px;cursor:pointer">'+
+      '<div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><b style="font-size:14px">'+esc(r.code)+'</b>'+
+      '<span style="font-size:11px;background:#f1f5f9;border-radius:6px;padding:2px 8px;font-weight:700">'+__pjStageLabel(r.stage)+'</span></div>'+
+      '<div style="font-size:13px;margin-top:4px;color:#334155">'+esc(r.description)+' <span style="color:#64748b">× '+esc(r.qty)+'</span></div>'+
+      '<div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;font-size:12px;color:#64748b">'+
+      '<span>'+(r.due_date?((late?'<b style="color:#dc2626">⏰ متأخر — </b>':'📅 ')+esc(r.due_date)):'')+'</span>'+
+      '<span>'+(__pjMoney()&&r.stage!=='cancelled'?('<b style="color:#0f172a">'+fmt(__pjDue(r))+'</b> '+(__pjPaidOn()?__pjPayChip(r):'')):'')+'</span></div></div>';
+  }).join('');
+}
+
+function __pjOpen(id){
+  var r=__pjFind(id); if(!r) return;
+  var idx=-1; for(var i=0;i<__PJ_STAGES.length;i++){ if(__PJ_STAGES[i][0]===r.stage) idx=i; }
+  var canU=__pjCan('can_update'), openS=__pjOpenStage(r);
+  var h='<div style="font-size:12px;color:#64748b;margin-bottom:8px">'+(r.created_by_name?('استلمه: '+esc(r.created_by_name)+' — '):'')+esc(new Date(r.created_at).toLocaleString('ar-EG'))+'</div>';
+  h+='<div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:12px">'+__PJ_STAGES.map(function(s,k){
+    var on=(k===idx), done=(idx>=0&&k<idx); return '<span style="font-size:11px;padding:3px 8px;border-radius:6px;font-weight:700;background:'+(on?'#0e7490':done?'#cffafe':'#f1f5f9')+';color:'+(on?'#fff':done?'#0e7490':'#94a3b8')+'">'+s[1]+'</span>'; }).join('')+
+    (r.stage==='cancelled'?'<span style="font-size:11px;padding:3px 8px;border-radius:6px;font-weight:700;background:#fee2e2;color:#991b1b">🚫 ملغي</span>':'')+'</div>';
+  h+='<div class="card" style="margin-bottom:10px;font-size:13px"><b>'+esc(r.description)+'</b> <span style="color:#64748b">× '+esc(r.qty)+'</span>'+
+    (r.due_date?'<div style="margin-top:4px">📅 التسليم: '+esc(r.due_date)+'</div>':'')+
+    (!__pjHide('customer_name')&&r.customer_name?'<div style="margin-top:4px">👤 '+esc(r.customer_name)+'</div>':'')+
+    (!__pjHide('customer_phone')&&r.customer_phone?'<div style="margin-top:4px">📞 '+esc(r.customer_phone)+'</div>':'')+
+    (!__pjHide('internal_notes')&&r.internal_notes?'<div style="margin-top:6px;color:#64748b;font-size:12px">📝 '+esc(r.internal_notes)+'</div>':'')+'</div>';
+  if(__pjMoney()){
+    var due=__pjDue(r), paid=__pjPaid(r), rem=money(due-paid);
+    h+='<div class="card" id="pj-money" style="margin-bottom:10px;font-size:13px">'+
+      '<div style="display:flex;justify-content:space-between"><span>السعر</span><b>'+fmt(r.price)+'</b></div>'+
+      (!__pjHide('discount')&&(+r.discount>0)?'<div style="display:flex;justify-content:space-between"><span>الخصم</span><b>'+fmt(r.discount)+'</b></div>':'')+
+      (__pjPaidOn()?'<div style="display:flex;justify-content:space-between"><span>المدفوع</span><b>'+fmt(paid)+'</b></div>'+
+        '<div style="display:flex;justify-content:space-between"><span>المتبقي</span><b style="color:'+(rem>0?'#dc2626':'#166534')+'">'+fmt(rem)+'</b></div>'+
+        '<div style="margin-top:6px">'+__pjPayChip(r)+'</div>':'')+'</div>';
+    if(__pjPaidOn()){
+      var pays=(r.print_job_payments||[]).slice().sort(function(a,b){return String(a.created_at)<String(b.created_at)?-1:1;});
+      if(pays.length) h+='<div style="font-size:12px;color:#64748b;margin-bottom:8px">'+pays.map(function(p){ return '💵 '+fmt(p.amount)+' — '+esc(p.by_name||'')+' — '+esc(new Date(p.created_at).toLocaleDateString('ar-EG')); }).join('<br>')+'</div>';
+      if(canU&&r.stage!=='cancelled'&&rem>0) h+='<div style="display:flex;gap:8px;margin-bottom:10px"><input id="pj-pay-amt" type="number" step="any" placeholder="مبلغ التحصيل" style="flex:1"><button class="btn" id="pj-pay-btn" onclick="__pjAddPay(\''+r.id+'\')">💵 تحصيل</button></div>';
+    }
+  }
+  if(canU&&openS){
+    var nxt=__PJ_STAGES[idx+1], prv=__PJ_STAGES[idx-1];
+    h+='<div style="display:flex;gap:8px;margin-bottom:8px">'+(prv?'<button class="btn btn-outline" onclick="__pjMove(\''+r.id+'\',-1)">↩️ '+prv[1]+'</button>':'')+
+       (nxt?'<button class="btn btn-full" id="pj-next" onclick="__pjMove(\''+r.id+'\',1)">⏭ '+nxt[1]+'</button>':'')+'</div>';
+  }
+  var acts='';
+  if(canU&&openS) acts+='<button class="btn btn-outline" id="pj-edit" onclick="__pjForm(\''+r.id+'\')">✏️ تعديل</button>';
+  if(canU&&openS) acts+='<button class="btn btn-outline" id="pj-cancel" onclick="__pjCancel(\''+r.id+'\')">🚫 إلغاء الأمر</button>';
+  if(canU&&r.stage==='cancelled') acts+='<button class="btn btn-outline" id="pj-reopen" onclick="__pjSetStage(\''+r.id+'\',\'received\')">♻️ استرجاع</button>';
+  if(__pjCan('can_delete')) acts+='<button class="btn" id="pj-del" style="background:#fee2e2;color:#991b1b" onclick="__pjDelete(\''+r.id+'\')">🗑️ حذف</button>';
+  if(acts) h+='<div style="display:flex;gap:8px;flex-wrap:wrap">'+acts+'</div>';
+  document.getElementById('modal-title').textContent='📥 '+r.code;
+  document.getElementById('modal-body').innerHTML=h; openModal();
+}
+
+async function __pjSetStage(id,stage){
+  if(!__pjCan('can_update')){ __permDeny('jobs_print','can_update'); return; }
+  if(__pjSt.busy) return; __pjSt.busy=true; var ok=false;
+  try{
+    var now=new Date().toISOString(); var upd={stage:stage,updated_at:now,delivered_at:(stage==='delivered'?now:null)};
+    var r=await sb.from('print_jobs').update(upd).eq('id',id);
+    if(r.error) showToast('❌ '+__pjErrMsg(r.error),'#dc2626'); else{ ok=true; try{__logActivity('update','jobs_print',id,{stage:stage});}catch(e){} }
+  }catch(e){ showToast('❌ '+__pjErrMsg(e),'#dc2626'); }
+  __pjSt.busy=false;
+  await __pjLoad(); if(ok&&__pjFind(id)) __pjOpen(id);
+}
+function __pjMove(id,dir){
+  var r=__pjFind(id); if(!r) return;
+  var idx=-1; for(var i=0;i<__PJ_STAGES.length;i++){ if(__PJ_STAGES[i][0]===r.stage) idx=i; }
+  var t=__PJ_STAGES[idx+dir]; if(!t) return;
+  if(t[0]==='delivered'&&__pjPaidOn()){
+    var rem=money(__pjDue(r)-__pjPaid(r));
+    if(rem>0){ confirmAction('فيه متبقي '+fmt(rem)+' على الأمر ده. تسلّمه آجل؟',function(){ __pjSetStage(id,t[0]); }); return; }
+  }
+  __pjSetStage(id,t[0]);
+}
+function __pjCancel(id){ if(!__pjCan('can_update')){ __permDeny('jobs_print','can_update'); return; } confirmAction('تلغي أمر الشغل ده؟ (تقدر ترجّعه بعدين)',function(){ __pjSetStage(id,'cancelled'); }); }
+function __pjDelete(id){
+  if(!__pjCan('can_delete')){ __permDeny('jobs_print','can_delete'); return; }
+  var r=__pjFind(id); if(!r) return;
+  confirmAction('حذف نهائي لأمر الشغل '+r.code+' ومدفوعاته؟ مينفعش يترجّع.',async function(){
+    try{
+      var x=await sb.from('print_jobs').delete().eq('id',id);
+      if(x.error){ showToast('❌ '+__pjErrMsg(x.error),'#dc2626'); return; }
+      try{__logActivity('delete','jobs_print',id,{code:r.code,price:r.price});}catch(e){}
+      closeModal(); await __pjLoad();
+    }catch(e){ showToast('❌ '+__pjErrMsg(e),'#dc2626'); }
+  });
+}
+async function __pjAddPay(id){
+  if(!__pjCan('can_update')){ __permDeny('jobs_print','can_update'); return; }
+  var r=__pjFind(id); if(!r||!__pjPaidOn()) return;
+  var amt=money(parseFloat((document.getElementById('pj-pay-amt')||{}).value)); var rem=money(__pjDue(r)-__pjPaid(r));
+  if(!(amt>0)){ showToast('اكتب مبلغ صحيح','#dc2626'); return; }
+  if(amt>rem+0.001){ showToast('المبلغ أكبر من المتبقي ('+fmt(rem)+')','#dc2626'); return; }
+  if(__pjSt.busy) return; __pjSt.busy=true; var ok=false;
+  try{
+    var p=window.__currentProfile;
+    var x=await sb.from('print_job_payments').insert({job_id:id,amount:amt,by_user:p.id,by_name:p.full_name||''});
+    if(x.error) showToast('❌ '+__pjErrMsg(x.error),'#dc2626'); else{ ok=true; try{__logActivity('insert','jobs_print',id,{payment:amt});}catch(e){} }
+  }catch(e){ showToast('❌ '+__pjErrMsg(e),'#dc2626'); }
+  __pjSt.busy=false;
+  await __pjLoad(); if(ok&&__pjFind(id)) __pjOpen(id);
+}
+
+function __pjForm(id){
+  var r=id?__pjFind(id):null;
+  if(r?!__pjCan('can_update'):!__pjCan('can_insert')){ __permDeny('jobs_print',r?'can_update':'can_insert'); return; }
+  var h=fld('pj-desc','وصف الشغل','text',r?r.description:'','مثال: ٥٠٠ كارت شخصي',true)+fld('pj-qty','الكمية','number',r?r.qty:1,'')+fld('pj-due','تاريخ التسليم','date',r?(r.due_date||''):'','');
+  if(!__pjHide('customer_name')) h+=fld('pj-cname','اسم العميل','text',r?(r.customer_name||''):'','');
+  if(!__pjHide('customer_phone')) h+=fld('pj-cphone','رقم العميل','tel',r?(r.customer_phone||''):'','');
+  if(__pjMoney()){ h+=fld('pj-price','السعر','number',r?r.price:'','0'); if(!__pjHide('discount')) h+=fld('pj-disc','الخصم','number',r?r.discount:'','0'); if(!r&&__pjPaidOn()) h+=fld('pj-paynow','المدفوع دلوقتي','number','','0'); }
+  if(!__pjHide('internal_notes')) h+=fld('pj-notes','ملاحظات داخلية','text',r?(r.internal_notes||''):'','');
+  h+='<button class="btn btn-full" id="pj-save" onclick="__pjSave('+(r?'\''+r.id+'\'':'null')+')">'+(r?'💾 حفظ التعديل':'💾 حفظ أمر الشغل')+'</button>';
+  document.getElementById('modal-title').textContent=r?('✏️ '+r.code):'➕ أمر شغل جديد';
+  document.getElementById('modal-body').innerHTML=h; openModal();
+}
+function __pjVal(i){ var e=document.getElementById(i); return e?String(e.value||'').trim():null; }
+async function __pjSave(id){
+  var r=id?__pjFind(id):null;
+  if(r?!__pjCan('can_update'):!__pjCan('can_insert')){ __permDeny('jobs_print',r?'can_update':'can_insert'); return; }
+  var desc=__pjVal('pj-desc'); if(!desc){ showToast('اكتب وصف الشغل','#dc2626'); return; }
+  var qty=parseFloat(__pjVal('pj-qty')); if(!(qty>0)) qty=1;
+  var row={description:desc,qty:qty,due_date:__pjVal('pj-due')||null};
+  var cn=__pjVal('pj-cname'); if(cn!==null) row.customer_name=cn||null;
+  var cp=__pjVal('pj-cphone'); if(cp!==null) row.customer_phone=cp||null;
+  var nt=__pjVal('pj-notes'); if(nt!==null) row.internal_notes=nt||null;
+  var pr=__pjVal('pj-price'), dc=__pjVal('pj-disc'), pn=__pjVal('pj-paynow');
+  var price=pr===null?(r?(+r.price||0):0):money(parseFloat(pr)||0), disc=dc===null?(r?(+r.discount||0):0):money(parseFloat(dc)||0);
+  if(pr!==null) row.price=price; if(dc!==null) row.discount=disc;
+  if(disc>price){ showToast('الخصم أكبر من السعر','#dc2626'); return; }
+  var payNow=pn===null?0:money(parseFloat(pn)||0);
+  if(payNow>money(price-disc)+0.001){ showToast('المدفوع أكبر من المطلوب','#dc2626'); return; }
+  if(r&&pr!==null){ var paidSoFar=__pjPaid(r); if(money(price-disc)+0.001<paidSoFar){ showToast('السعر بعد الخصم أقل من المدفوع فعلًا ('+fmt(paidSoFar)+')','#dc2626'); return; } }
+  if(__pjSt.busy) return; __pjSt.busy=true; var okId=null;
+  try{
+    var p=window.__currentProfile;
+    if(r){
+      row.updated_at=new Date().toISOString();
+      var u=await sb.from('print_jobs').update(row).eq('id',r.id);
+      if(u.error) showToast('❌ '+__pjErrMsg(u.error),'#dc2626'); else{ okId=r.id; try{__logActivity('update','jobs_print',r.id,{edit:true});}catch(e){} }
+    }else{
+      row.created_by=p.id; row.created_by_name=p.full_name||'';
+      var ins=await sb.from('print_jobs').insert(row).select().single();
+      if(ins.error||!ins.data) showToast('❌ '+__pjErrMsg(ins.error||'فشل الحفظ'),'#dc2626');
+      else{
+        okId=ins.data.id; try{__logActivity('insert','jobs_print',okId,{code:ins.data.code,price:price});}catch(e){}
+        if(payNow>0){ var py=await sb.from('print_job_payments').insert({job_id:okId,amount:payNow,by_user:p.id,by_name:p.full_name||''}); if(py.error) showToast('⚠️ الأمر اتحفظ لكن التحصيل فشل: '+__pjErrMsg(py.error),'#d97706'); }
+        showToast('✅ اتحفظ — الكود '+ins.data.code,'#16a34a');
+      }
+    }
+  }catch(e){ showToast('❌ '+__pjErrMsg(e),'#dc2626'); }
+  __pjSt.busy=false;
+  if(okId){ closeModal(); await __pjLoad(); }
+}
+
 function __moreItemAllowed(it){
   if(it.ownerOnly&&!window.__isOwner) return false;
   if(__isPrintOnly()) return !!it.screen&&__canOpenScreen(it.screen); // ⚠️ v375 — «مطبعة فقط»: مفيش أي إجراء (action) بدون شاشة مسموحة
